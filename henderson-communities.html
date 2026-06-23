@@ -1591,10 +1591,10 @@
   </script>
   <script src="https://api.mapbox.com/mapbox-gl-js/v3.4.0/mapbox-gl.js"></script>
   <script>
-  (function () {
+  (async function () {
     'use strict';
 
-    const MAPBOX_TOKEN = "MAPBOX_TOKEN_PLACEHOLDER";
+    const { token: MAPBOX_TOKEN } = await fetch('/api/mapbox-token').then(r => r.json()).catch(() => ({ token: '' }));
 
     var OVERVIEW = {
       isOverview: true,

@@ -4447,7 +4447,7 @@ let _ciCity    = 'henderson';
 let _ciData    = {};
 let _ciCards   = [];
 let _ciMapAreas = [];
-const MAP_PREVIEW_TOKEN = 'MAPBOX_TOKEN_PLACEHOLDER';
+let MAP_PREVIEW_TOKEN = '';
 let _adminMapGl = null;
 let _adminMapGlLoaded = false;
 let _adminMapMarkers = [];
@@ -4948,11 +4948,14 @@ function initAdminMapPreview() {
   }
 }
 
-function _renderAdminMapPreview() {
+async function _renderAdminMapPreview() {
   const container = document.getElementById('cmMapPreview');
   if(!container || !window.mapboxgl) return;
   container.innerHTML = '<div id="adminMapCanvas" style="width:100%;height:100%"></div>';
   if(_adminMapGl) { try { _adminMapGl.remove(); } catch(e){} _adminMapGl = null; }
+  if(!MAP_PREVIEW_TOKEN) {
+    MAP_PREVIEW_TOKEN = await fetch('/api/mapbox-token').then(r=>r.json()).then(d=>d.token).catch(()=>'');
+  }
   mapboxgl.accessToken = MAP_PREVIEW_TOKEN;
   const lng  = parseFloat(document.getElementById('cmMapCenterLng')?.value) || -115.19;
   const lat  = parseFloat(document.getElementById('cmMapCenterLat')?.value) || 36.13;
