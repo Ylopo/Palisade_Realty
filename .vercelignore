@@ -1,0 +1,6 @@
+# Sanity Studio — deploy separately via `cd studio && npm run deploy`
+studio/
+
+# Local environment variables — never deploy
+.env.local
+.env

@@ -1,0 +1,1649 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%23b89a5e'/><text x='50%25' y='62%25' text-anchor='middle' font-family='serif' font-size='20' fill='white'>C</text></svg>">
+  <title>Anthem Country Club Homes for Sale | Henderson NV | Palisade Realty</title>
+  <meta name="description" content="Explore Anthem Country Club in Henderson, NV — a guard-gated golf community with championship amenities, scenic views, and custom homes from the $600s to $1.5M+. Guided by the Palisade Realty.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Manrope:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── DESIGN TOKENS ─────────────────────────────────────────────── */
+    :root {
+      --gold:        #b89a5e;
+      --gold-hover:  #cbb278;
+      --black:       #000000;
+      --near-black:  #212121;
+      --off-white:   #f5f5f5;
+      --white:       #ffffff;
+      --light-gray:  #b8b8b8;
+      --font-display: 'Italiana', Georgia, serif;
+      --font-body:    'Manrope', system-ui, sans-serif;
+      --font-label:   'Inter', system-ui, sans-serif;
+      --pad-x:  80px;
+      --pad-y:  100px;
+      --radius: 4px;
+      --gap-sm: 20px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); color: var(--near-black); background: var(--white); overflow-x: hidden; }
+    img  { display: block; max-width: 100%; }
+    a    { color: inherit; text-decoration: none; }
+    button { background: none; border: none; cursor: pointer; font: inherit; }
+    ul, ol { list-style: none; }
+
+    /* ── SCROLL REVEAL ─────────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s cubic-bezier(0.22, 0.61, 0.36, 1),
+                  transform 0.75s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+    .reveal.visible        { opacity: 1; transform: translateY(0); }
+    .stagger-1             { transition-delay: 0.1s; }
+    .stagger-2             { transition-delay: 0.2s; }
+    .stagger-3             { transition-delay: 0.3s; }
+    .stagger-4             { transition-delay: 0.4s; }
+
+    /* ── SHARED TYPOGRAPHY ────────────────────────────────────────── */
+    .eyebrow {
+      font-family: var(--font-label);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      text-align: center;
+    }
+
+    /* ── BUTTONS ───────────────────────────────────────────────────── */
+    .btn-gold {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 16px 36px; background: var(--gold); border-radius: 50px;
+      font-family: var(--font-body); font-size: 14px; font-weight: 500;
+      color: var(--white); letter-spacing: 0.04em; cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    }
+    .btn-gold:hover { background: var(--gold-hover); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(184,154,94,0.38); }
+    .btn-outline-white {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 16px 36px; border: 1px solid var(--white); border-radius: 50px;
+      font-family: var(--font-body); font-size: 14px; font-weight: 500;
+      color: var(--white); letter-spacing: 0.04em; cursor: pointer;
+      transition: background 0.25s ease, transform 0.25s ease;
+    }
+    .btn-outline-white:hover { background: rgba(255,255,255,0.12); transform: translateY(-2px); }
+    .btn-outline-gold {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 14px 32px; border: 1px solid var(--gold); border-radius: 50px;
+      font-family: var(--font-body); font-size: 13px; font-weight: 500;
+      color: var(--gold); letter-spacing: 0.04em; cursor: pointer;
+      transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+    }
+    .btn-outline-gold:hover { background: var(--gold); color: var(--white); transform: translateY(-2px); }
+
+    /* ── NAVIGATION ────────────────────────────────────────────────── */
+    .site-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 24px var(--pad-x);
+      background: rgba(0,0,0,0.31);
+      transition: background 0.35s ease, backdrop-filter 0.35s ease, padding 0.35s ease;
+    }
+    .site-nav.scrolled {
+      background: rgba(0,0,0,0.88);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      padding-top: 16px; padding-bottom: 16px;
+    }
+    .nav-logo { display: flex; align-items: center; }
+    .nav-logo img { height: 36px; width: auto; }
+    .nav-links-list { display: flex; align-items: center; gap: 40px; }
+    .nav-links-list a { font-family: var(--font-body); font-size: 14px; color: var(--white); opacity: 0.9; transition: color 0.2s, opacity 0.2s; }
+    .nav-links-list a:hover { color: var(--gold); opacity: 1; }
+    .nav-connect {
+      display: inline-flex; align-items: center; padding: 12px 24px;
+      border: 1px solid var(--gold); border-radius: 50px;
+      font-family: var(--font-body); font-size: 13px; font-weight: 500;
+      color: var(--gold); letter-spacing: 0.02em;
+      transition: background 0.25s, color 0.25s;
+    }
+    .nav-connect:hover { background: var(--gold); color: var(--white); }
+    /* ── NAV DROPDOWN ──────────────────────────────────────────── */
+    .nav-has-dropdown { position: relative; }
+    .nav-dropdown-trigger {
+      display: flex; align-items: center; gap: 5px;
+      font-family: var(--font-body); font-size: 14px;
+      color: var(--white); opacity: 0.9;
+      background: none; border: none; padding: 0; cursor: pointer;
+      transition: color 0.2s, opacity 0.2s;
+    }
+    .nav-dropdown-trigger:hover,
+    .nav-has-dropdown:hover .nav-dropdown-trigger { color: var(--gold); opacity: 1; }
+    .nav-dropdown-trigger .dd-chevron { transition: transform 0.25s ease; }
+    .nav-has-dropdown:hover .dd-chevron { transform: rotate(180deg); }
+    .nav-dropdown {
+      position: absolute;
+      top: calc(100% + 16px);
+      left: 50%;
+      transform: translateX(-50%) translateY(-8px);
+      width: 420px;
+      background: #1a1916;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px;
+      padding: 10px;
+      display: flex;
+      gap: 8px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.22s ease, transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.55), 0 4px 16px rgba(0,0,0,0.22);
+      z-index: 200;
+    }
+    .nav-dropdown::before {
+      content: ''; position: absolute;
+      top: -16px; left: 0; right: 0; height: 16px;
+    }
+    .nav-has-dropdown:hover .nav-dropdown {
+      opacity: 1; pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+    .nav-dd-card {
+      flex: 1; position: relative; height: 200px;
+      border-radius: 10px; overflow: hidden;
+      display: flex; flex-direction: column; justify-content: flex-end;
+    }
+    .nav-dd-card img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .nav-dd-card:hover img { transform: scale(1.06); }
+    .nav-dd-card::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.12) 55%, transparent 100%);
+    }
+    .nav-dd-card-inner { position: relative; z-index: 2; padding: 14px 16px; }
+    .nav-dd-card-label {
+      font-family: var(--font-label); font-size: 9px; font-weight: 700;
+      letter-spacing: 0.13em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 4px;
+    }
+    .nav-dd-card-name {
+      font-family: var(--font-display); font-size: 20px; font-weight: 400;
+      color: var(--white); letter-spacing: -0.01em;
+    }
+    .mobile-nav-sub { font-size: 22px !important; padding-left: 28px !important; opacity: 0.75; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; }
+    .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-nav {
+      display: none; position: fixed; inset: 0; z-index: 190;
+      background: rgba(0,0,0,0.96); flex-direction: column;
+      align-items: center; justify-content: center; gap: 36px; padding: 40px;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a { font-family: var(--font-display); font-size: 32px; color: var(--white); transition: color 0.2s; }
+    .mobile-nav a:hover { color: var(--gold); }
+
+    /* ── HERO ──────────────────────────────────────────────────────── */
+    .hero-section { position: relative; height: 700px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; }
+    .hero-bg img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(170deg, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0.60) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; align-items: center; gap: 28px;
+      text-align: center; padding: 0 40px; padding-top: 80px;
+    }
+    .hero-eyebrow { font-family: var(--font-label); font-weight: 500; font-size: 14px; letter-spacing: 0.18em; color: var(--gold); text-transform: uppercase; }
+    .hero-heading { font-family: var(--font-display); font-size: clamp(52px, 6.6vw, 96px); font-weight: 400; line-height: 1.0; letter-spacing: -0.02em; color: var(--white); }
+    .hero-sub { font-family: var(--font-body); font-size: 17px; color: rgba(255,255,255,0.76); max-width: 560px; line-height: 1.65; }
+    .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+
+    /* ── BREADCRUMB BAR ────────────────────────────────────────────── */
+    .breadcrumb-bar {
+      background: var(--off-white); padding: 16px var(--pad-x);
+      display: flex; align-items: center; gap: 8px;
+      font-family: var(--font-label); font-size: 12px; color: #888;
+    }
+    .breadcrumb-bar a { color: var(--gold); transition: opacity 0.2s; }
+    .breadcrumb-bar a:hover { opacity: 0.75; }
+    .breadcrumb-sep { color: #ccc; }
+
+    /* ── INTRO ─────────────────────────────────────────────────────── */
+    .intro-section {
+      padding: 80px var(--pad-x) 60px; background: var(--white);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    .intro-eyebrow { font-family: var(--font-label); font-size: 11px; font-weight: 500; color: var(--gold); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 16px; }
+    .intro-heading { font-family: var(--font-display); font-size: clamp(36px, 4vw, 58px); font-weight: 400; line-height: 1.08; letter-spacing: -0.02em; color: var(--black); margin-bottom: 20px; }
+    .intro-body { font-family: var(--font-body); font-size: 15px; line-height: 1.75; color: #555; }
+    .intro-body p + p { margin-top: 14px; }
+    .intro-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .intro-stat-card { background: var(--off-white); border-radius: 12px; padding: 28px 24px; display: flex; flex-direction: column; gap: 6px; }
+    .intro-stat-num { font-family: var(--font-display); font-size: 44px; color: var(--gold); line-height: 1; letter-spacing: -0.02em; }
+    .intro-stat-lbl { font-family: var(--font-body); font-size: 13px; color: #777; line-height: 1.45; }
+
+    /* ── FEATURED LISTINGS ─────────────────────────────────────────── */
+    .listings-section {
+      padding: var(--pad-y) var(--pad-x);
+      background: var(--white);
+    }
+    .listings-section .section-header { margin-bottom: 8px; text-align: center; }
+    .listings-section .section-title { font-size: clamp(40px, 4.5vw, 64px); }
+    .listings-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--gap-sm);
+      margin-top: 32px;
+    }
+    .prop-card {
+      position: relative;
+      height: 520px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      cursor: pointer;
+    }
+    .prop-card .p-bg { position: absolute; inset: 0; }
+    .prop-card .p-bg img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.55s ease;
+    }
+    .prop-card:hover .p-bg img { transform: scale(1.05); }
+    .prop-card .p-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.35) 45%, transparent 100%);
+    }
+    .prop-card .p-info {
+      position: relative; z-index: 1;
+      padding: 16px 20px 20px;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .prop-badge {
+      display: inline-flex; padding: 4px 10px;
+      background: var(--gold);
+      font-family: var(--font-label); font-size: 11px; font-weight: 500;
+      color: var(--white); letter-spacing: 0.06em; text-transform: uppercase;
+      width: fit-content;
+    }
+    .prop-address {
+      font-family: var(--font-body); font-weight: 600; font-size: 16px;
+      line-height: 1.4; color: var(--white);
+    }
+    .prop-details {
+      display: flex; align-items: center; flex-wrap: wrap; gap: 4px 14px;
+      font-family: var(--font-body); font-size: 12px;
+      color: var(--light-gray); letter-spacing: 0.02em;
+    }
+    .prop-detail-item { display: flex; align-items: center; gap: 5px; }
+    .prop-detail-item svg { width: 13px; height: 13px; flex-shrink: 0; opacity: 0.7; }
+    .prop-detail-sep { color: rgba(255,255,255,0.2); font-size: 10px; }
+    .prop-price {
+      font-family: var(--font-body); font-weight: 600; font-size: 20px;
+      color: var(--white); letter-spacing: -0.005em;
+    }
+    .listings-cta { display: flex; justify-content: center; margin-top: 32px; }
+
+    /* ── BUYER GUIDE (STICKY SCROLL) ──────────────────────────────── */
+    .buyer-guide-section {
+      background: #faf9f7;
+      padding: var(--pad-y) 0;
+    }
+    .buyer-guide-header {
+      padding: 0 var(--pad-x);
+      margin-bottom: 56px;
+      text-align: center;
+    }
+    .buyer-guide-header .section-title { font-size: clamp(40px, 4.5vw, 64px); }
+    .buyer-guide-wrap {
+      display: flex;
+      align-items: flex-start;
+      padding: 0 var(--pad-x);
+      gap: 0;
+    }
+    .buyer-guide-imgs {
+      flex: 0 0 52%;
+      max-width: 52%;
+    }
+    .buyer-guide-img-item {
+      height: 72vh;
+      position: relative;
+      overflow: hidden;
+      border-radius: 14px;
+      margin-bottom: 28px;
+    }
+    .buyer-guide-img-item:last-child { margin-bottom: 0; }
+    .buyer-guide-img-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transform: scale(1.06);
+      transition: transform 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .buyer-guide-img-item.is-active img { transform: scale(1.0); }
+    .buyer-guide-list {
+      flex: 0 0 48%;
+      max-width: 48%;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 0 0 64px;
+      overflow: hidden;
+    }
+    .buyer-guide-label {
+      font-family: var(--font-label);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+    }
+    .buyer-guide-entries { display: flex; flex-direction: column; }
+    .buyer-guide-entry {
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+      cursor: pointer;
+      opacity: 0.22;
+      transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .buyer-guide-entry:first-child { border-top: 1px solid rgba(0,0,0,0.07); }
+    .buyer-guide-entry.is-active { opacity: 1; }
+    .buyer-guide-entry-head {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+    .buyer-guide-entry-num {
+      font-family: var(--font-display);
+      font-size: 16px;
+      color: var(--gold);
+      line-height: 1;
+      flex-shrink: 0;
+      opacity: 0.75;
+      letter-spacing: 0.02em;
+    }
+    .buyer-guide-entry-name {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 400;
+      color: var(--black);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+    }
+    .buyer-guide-entry-detail {
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transition: max-height 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+                  opacity 0.38s ease;
+    }
+    .buyer-guide-entry.is-active .buyer-guide-entry-detail {
+      max-height: 480px;
+      opacity: 1;
+    }
+    .buyer-guide-entry-desc {
+      font-family: var(--font-body);
+      font-size: 13px;
+      line-height: 1.7;
+      color: #666;
+      padding: 10px 0 8px;
+    }
+    .buyer-guide-entry-bullets {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding-bottom: 10px;
+    }
+    .buyer-guide-entry-bullets li {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      line-height: 1.55;
+      color: #777;
+    }
+    .buyer-guide-entry-bullets li::before {
+      content: '';
+      display: block;
+      flex-shrink: 0;
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--gold);
+      opacity: 0.7;
+      margin-top: 7px;
+    }
+
+    /* ── FAQ SECTION ───────────────────────────────────────────────── */
+    .faq-section {
+      padding: var(--pad-y) var(--pad-x);
+      background: var(--near-black);
+    }
+    .faq-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .faq-header .section-title { color: var(--white); font-size: clamp(40px, 4.5vw, 64px); }
+    .faq-list { max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; }
+    .faq-item {
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .faq-item:first-child { border-top: 1px solid rgba(255,255,255,0.1); }
+    .faq-question {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      padding: 24px 0;
+      cursor: pointer;
+      text-align: left;
+      font-family: var(--font-body);
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--white);
+      transition: color 0.2s;
+    }
+    .faq-question:hover { color: var(--gold); }
+    .faq-icon {
+      flex-shrink: 0;
+      width: 28px; height: 28px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.2s, transform 0.3s;
+    }
+    .faq-icon svg { width: 13px; height: 13px; stroke: var(--white); transition: stroke 0.2s; }
+    .faq-item.open .faq-icon { border-color: var(--gold); transform: rotate(45deg); }
+    .faq-item.open .faq-icon svg { stroke: var(--gold); }
+    .faq-answer {
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1), opacity 0.35s ease;
+    }
+    .faq-item.open .faq-answer { max-height: 300px; opacity: 1; }
+    .faq-answer p {
+      font-family: var(--font-body);
+      font-size: 14px;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.6);
+      padding-bottom: 24px;
+    }
+
+    /* ── TESTIMONIALS ──────────────────────────────────────────────── */
+    .testimonials-section {
+      padding: var(--pad-y) var(--pad-x);
+      background: var(--off-white);
+    }
+    .testimonials-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .testimonials-header .section-title { font-size: clamp(40px, 4.5vw, 64px); }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .testimonial-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 40px 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      box-shadow: 0 2px 24px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .testimonial-stars {
+      display: flex;
+      gap: 4px;
+    }
+    .testimonial-stars svg {
+      width: 16px; height: 16px;
+      fill: var(--gold);
+    }
+    .testimonial-quote {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 400;
+      line-height: 1.45;
+      color: var(--black);
+      letter-spacing: -0.01em;
+    }
+    .testimonial-author {
+      font-family: var(--font-label);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ── NEARBY COMMUNITIES (HOVER-FOCUSED CAROUSEL) ──────────────── */
+    .nearby-section {
+      padding: var(--pad-y) 0;
+      background: var(--white);
+    }
+    .nearby-header {
+      text-align: center;
+      margin-bottom: 48px;
+      padding: 0 var(--pad-x);
+    }
+    .nearby-header .section-title { font-size: clamp(36px, 4vw, 56px); }
+    .nearby-carousel-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 0 var(--pad-x);
+    }
+    .nearby-arrow {
+      flex-shrink: 0;
+      width: 52px; height: 52px;
+      border: 1px solid rgba(0,0,0,0.14);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--white);
+      cursor: pointer;
+      transition: border-color 0.22s ease, background 0.22s ease, transform 0.22s ease,
+                  opacity 0.22s ease;
+    }
+    .nearby-arrow svg { width: 18px; height: 18px; }
+    .nearby-arrow svg path { stroke: var(--near-black); transition: stroke 0.22s; }
+    .nearby-arrow:hover {
+      border-color: var(--gold);
+      background: var(--gold);
+      transform: scale(1.07);
+    }
+    .nearby-arrow:hover svg path { stroke: var(--white); }
+    .nearby-arrow:disabled { opacity: 0.28; pointer-events: none; }
+    .nearby-cards {
+      flex: 1;
+      display: flex;
+      gap: 6px;
+      height: 560px;
+      overflow: hidden;
+    }
+    .nearby-card {
+      position: relative;
+      flex: 1 0 0;
+      min-width: 0;
+      overflow: hidden;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: flex 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .nearby-card.is-active { flex: 4.5 0 0; }
+    .nearby-card-bg { position: absolute; inset: 0; }
+    .nearby-card-bg img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+    }
+    .nearby-card:hover .nearby-card-bg img { transform: scale(1.04); }
+    .nearby-card-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to top,
+        rgba(0,0,0,0.88) 0%,
+        rgba(0,0,0,0.25) 55%,
+        rgba(0,0,0,0.08) 100%
+      );
+      opacity: 0.6;
+      transition: opacity 0.45s ease;
+    }
+    .nearby-card.is-active .nearby-card-bg::after { opacity: 1; }
+    /* Vertical label — visible on collapsed cards */
+    .nearby-card-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-90deg);
+      white-space: nowrap;
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.8);
+      letter-spacing: 0.03em;
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity 0.25s ease;
+    }
+    .nearby-card.is-active .nearby-card-label { opacity: 0; }
+    /* Content — revealed when card is active */
+    .nearby-card-content {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 32px 28px;
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.38s ease 0.18s,
+                  transform 0.45s cubic-bezier(0.4, 0, 0.2, 1) 0.18s;
+    }
+    .nearby-card.is-active .nearby-card-content {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .nearby-card-eyebrow {
+      font-family: var(--font-label);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .nearby-card-name {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 2.2vw, 34px);
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      margin-bottom: 10px;
+    }
+    .nearby-card-desc {
+      font-family: var(--font-body);
+      font-size: 13px;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.68);
+      margin-bottom: 22px;
+      max-width: 340px;
+    }
+    .nearby-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--font-label);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      color: var(--white);
+      border-bottom: 1px solid rgba(255,255,255,0.35);
+      padding-bottom: 3px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .nearby-card-link:hover { border-color: var(--gold); color: var(--gold); }
+    .nearby-card-link svg { width: 11px; height: 11px; transition: transform 0.2s; }
+    .nearby-card-link:hover svg { transform: translateX(3px); }
+
+    /* ── CTA BANNER ────────────────────────────────────────────────── */
+    .cta-section {
+      position: relative; padding: 140px var(--pad-x);
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; overflow: hidden;
+    }
+    .cta-bg { position: absolute; inset: 0; }
+    .cta-bg img { width: 100%; height: 100%; object-fit: cover; }
+    .cta-bg::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.62); }
+    .cta-content {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; align-items: center; gap: 24px;
+    }
+    .cta-heading { font-family: var(--font-display); font-size: clamp(48px, 5.5vw, 80px); font-weight: 400; line-height: 1.08; letter-spacing: -0.02em; color: var(--white); }
+    .cta-btns { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+
+    /* ── FOOTER ────────────────────────────────────────────────────── */
+    .site-footer { background: var(--black); padding: 64px var(--pad-x) 40px; display: flex; flex-direction: column; gap: 40px; }
+    .footer-top { display: flex; justify-content: space-between; align-items: center; }
+    .footer-logo img { height: 52px; width: auto; }
+    .footer-nav-list { display: flex; gap: 40px; }
+    .footer-nav-list a { font-family: var(--font-body); font-size: 16px; color: var(--light-gray); transition: color 0.2s; }
+    .footer-nav-list a:hover { color: var(--white); }
+    .footer-divider { height: 1px; background: var(--near-black); opacity: 0.4; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-family: var(--font-label); font-size: 13px; color: var(--light-gray); }
+    .footer-email { font-family: var(--font-label); font-size: 13px; color: var(--gold); text-decoration: underline; transition: opacity 0.2s; }
+    .footer-email:hover { opacity: 0.75; }
+
+    /* ── RESPONSIVE ────────────────────────────────────────────────── */
+    @media (max-width: 1100px) {
+      :root { --pad-x: 48px; --pad-y: 80px; }
+      .intro-section { gap: 48px; }
+      .listings-grid { grid-template-columns: repeat(2, 1fr); }
+      .buyer-guide-list { padding-left: 40px; }
+      .buyer-guide-entry-name { font-size: 22px; }
+    }
+    @media (max-width: 768px) {
+      :root { --pad-x: 24px; --pad-y: 60px; }
+      .nav-links-list, .nav-connect { display: none; }
+      .nav-hamburger { display: flex; }
+      .intro-section { grid-template-columns: 1fr; }
+      .intro-stats { grid-template-columns: 1fr 1fr; }
+      .hero-section { height: 560px; }
+      .listings-grid { grid-template-columns: 1fr; }
+      .prop-card { height: 440px; }
+      .buyer-guide-wrap { flex-direction: column; }
+      .buyer-guide-imgs { flex: 0 0 100%; max-width: 100%; display: none; }
+      .buyer-guide-list { flex: 0 0 100%; max-width: 100%; position: static; height: auto; padding: 0; }
+      .buyer-guide-entry { opacity: 1; }
+      .buyer-guide-entry-detail { max-height: 600px; opacity: 1; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .footer-top { flex-direction: column; align-items: flex-start; gap: 28px; }
+      .footer-nav-list { flex-wrap: wrap; gap: 20px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+      /* nearby carousel mobile */
+      .nearby-carousel-wrapper { gap: 12px; padding: 0 20px; }
+      .nearby-cards { height: 420px; }
+      .nearby-card { display: none; }
+      .nearby-card.is-active { display: block; flex: 1 0 100%; }
+      .nearby-card-label { display: none; }
+      .nearby-card-content { opacity: 1; transform: translateY(0); transition: none; }
+    }
+    @media (max-width: 500px) {
+      .intro-stats { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── FIXED NAV ────────────────────────────────────────────────── -->
+  <nav class="site-nav" id="mainNav" role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="nav-logo">
+      <img src="https://www.figma.com/api/mcp/asset/8b09036c-cbfe-4a42-9de8-0eba8d7cbdb9" alt="Palisade Realty" loading="eager">
+    </a>
+    <ul class="nav-links-list" role="list">
+      <li class="nav-has-dropdown">
+        <button class="nav-dropdown-trigger" aria-haspopup="true">
+          Communities
+          <svg class="dd-chevron" width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 4.5L6 8.5L10 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav-dropdown" role="menu">
+          <a href="index.html" class="nav-dd-card" role="menuitem">
+            <img src="images/las vegas.jpg" alt="Las Vegas communities">
+            <div class="nav-dd-card-inner">
+              <p class="nav-dd-card-label">Communities</p>
+              <p class="nav-dd-card-name">Las Vegas</p>
+            </div>
+          </a>
+          <a href="henderson-communities.html" class="nav-dd-card" role="menuitem">
+            <img src="images/henderson.jpg" alt="Henderson communities">
+            <div class="nav-dd-card-inner">
+              <p class="nav-dd-card-label">Communities</p>
+              <p class="nav-dd-card-name">Henderson</p>
+            </div>
+          </a>
+        </div>
+      </li>
+      <li><a href="index.html#listings">Properties</a></li>
+      <li><a href="index.html#team">Our Team</a></li>
+      <li><a href="index.html#blog">Blog</a></li>
+    </ul>
+    <a href="index.html#cta" class="nav-connect">Let's Connect</a>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-nav" id="mobileNav" role="dialog" aria-modal="true" aria-label="Mobile menu">
+    <a href="henderson-communities.html" class="js-close-mobile">Communities</a>
+    <a href="index.html" class="js-close-mobile mobile-nav-sub">Las Vegas</a>
+    <a href="henderson-communities.html" class="js-close-mobile mobile-nav-sub">Henderson</a>
+    <a href="index.html#listings"      class="js-close-mobile">Properties</a>
+    <a href="index.html#team"          class="js-close-mobile">Our Team</a>
+    <a href="index.html#blog"          class="js-close-mobile">Blog</a>
+    <a href="index.html#cta"           class="js-close-mobile">Let's Connect</a>
+  </div>
+
+  <!-- ── HERO ─────────────────────────────────────────────────────── -->
+  <section class="hero-section" id="hero" aria-label="Hero">
+    <div class="hero-bg" aria-hidden="true">
+      <img src="images/henderson-communities/anthem-country-club.jpg" alt="" fetchpriority="high">
+    </div>
+    <div class="hero-content">
+      <p class="hero-eyebrow reveal">Henderson, Nevada</p>
+      <h1 class="hero-heading reveal stagger-1">Anthem<br>Country Club</h1>
+      <p class="hero-sub reveal stagger-2">A guard-gated golf community in the Henderson foothills — where privacy, scenic views, and country club living define everyday life.</p>
+      <div class="hero-ctas reveal stagger-3">
+        <a href="https://search.palisaderealty.com/search/map?s%5Blocations%5D%5B0%5D%5BpostalCode%5D=89052&s%5Blocations%5D%5B0%5D%5Bstate%5D=NV&s%5Blocations%5D%5B1%5D%5Bcommunity%5D=Anthem%20Country%20Club&s%5Blocations%5D%5B1%5D%5Bstate%5D=NV&s%5BorderBy%5D=sourceCreationDate%2Cdesc&s%5Bpage%5D=1" target="_blank" class="btn-gold">View Homes for Sale</a>
+        <a href="https://www.palisaderealty.com/contact-us" target="_blank" class="btn-outline-white">Schedule a Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── BREADCRUMB ───────────────────────────────────────────────── -->
+  <div class="breadcrumb-bar" aria-label="Breadcrumb">
+    <a href="index.html">Home</a>
+    <span class="breadcrumb-sep">›</span>
+    <a href="henderson-communities.html">Henderson Communities</a>
+    <span class="breadcrumb-sep">›</span>
+    <span>Anthem Country Club</span>
+  </div>
+
+  <!-- ── INTRO ────────────────────────────────────────────────────── -->
+  <section class="intro-section" aria-label="About Anthem Country Club">
+    <div class="intro-text-block reveal">
+      <p class="intro-eyebrow">Guard-Gated Golf Community</p>
+      <h2 class="intro-heading">Private Living in the Henderson Foothills</h2>
+      <div class="intro-body">
+        <p>Anthem Country Club offers a lifestyle defined by privacy, scenic views, and a sense of calm that's hard to find elsewhere in the Las Vegas Valley. Tucked into the foothills of Henderson, this guard-gated community is known for its championship golf course setting, elevated terrain, and thoughtfully designed neighborhoods.</p>
+        <p>With a mix of custom homes, panoramic views, and country club amenities, Anthem Country Club attracts buyers looking for a more refined residential experience without sacrificing everyday convenience.</p>
+      </div>
+    </div>
+    <div class="intro-stats reveal stagger-1">
+      <div class="intro-stat-card">
+        <span class="intro-stat-num">$600k+</span>
+        <span class="intro-stat-lbl">Starting price range for mid-range homes</span>
+      </div>
+      <div class="intro-stat-card">
+        <span class="intro-stat-num">Guard-Gated</span>
+        <span class="intro-stat-lbl">Controlled access with HOA-maintained standards</span>
+      </div>
+      <div class="intro-stat-card">
+        <span class="intro-stat-num">18-Hole</span>
+        <span class="intro-stat-lbl">Championship golf course at the heart of the community</span>
+      </div>
+      <div class="intro-stat-card">
+        <span class="intro-stat-num">89052</span>
+        <span class="intro-stat-lbl">One of Henderson's most desirable zip codes</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FEATURED LISTINGS ─────────────────────────────────────────── -->
+  <section class="listings-section" id="listings" aria-label="Anthem Country Club listings">
+    <div class="section-header">
+      <p class="eyebrow reveal">More Recent Home Sales</p>
+      <h2 class="section-title reveal stagger-1">Featured Listings</h2>
+    </div>
+    <div class="listings-grid">
+
+      <article class="prop-card reveal stagger-1">
+        <div class="p-bg" aria-hidden="true">
+          <img src="images/anthem-country-club/golf-course.jpg" alt="Anthem Country Club golf course home">
+        </div>
+        <div class="p-info">
+          <span class="prop-badge">For Sale</span>
+          <p class="prop-address">1 Augusta Ct, Henderson, NV 89052</p>
+          <p class="prop-details">
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20V9a2 2 0 012-2h16a2 2 0 012 2v11M2 20h20M2 13h20"/><rect x="6" y="4" width="5" height="5" rx="1"/></svg>4 Bed</span>
+            <span class="prop-detail-sep">·</span>
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16v4a4 4 0 01-4 4H8a4 4 0 01-4-4v-4z"/><path d="M6 12V6a3 3 0 016 0v6"/><path d="M4 20v1M20 20v1"/></svg>4 Bath</span>
+            <span class="prop-detail-sep">·</span>
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="8" width="20" height="13" rx="1"/><path d="M2 11h20M8 21v-3a4 4 0 018 0v3"/><path d="M2 8l10-5 10 5"/></svg>3 Garage</span>
+            <span class="prop-detail-sep">·</span>
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M3 10l9-7 9 7"/><path d="M9 21V14h6v7"/></svg>4,100 SQ.FT</span>
+          </p>
+          <p class="prop-price">$1,195,000</p>
+        </div>
+      </article>
+
+      <article class="prop-card reveal stagger-2">
+        <div class="p-bg" aria-hidden="true">
+          <img src="images/henderson-communities/anthem-country-club.jpg" alt="Anthem Country Club home">
+        </div>
+        <div class="p-info">
+          <span class="prop-badge">For Sale</span>
+          <p class="prop-address">25 Anthem Club Dr, Henderson, NV 89052</p>
+          <p class="prop-details">
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20V9a2 2 0 012-2h16a2 2 0 012 2v11M2 20h20M2 13h20"/><rect x="6" y="4" width="5" height="5" rx="1"/></svg>5 Bed</span>
+            <span class="prop-detail-sep">·</span>
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16v4a4 4 0 01-4 4H8a4 4 0 01-4-4v-4z"/><path d="M6 12V6a3 3 0 016 0v6"/><path d="M4 20v1M20 20v1"/></svg>5.5 Bath</span>
+            <span class="prop-detail-sep">·</span>
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="8" width="20" height="13" rx="1"/><path d="M2 11h20M8 21v-3a4 4 0 018 0v3"/><path d="M2 8l10-5 10 5"/></svg>3 Garage</span>
+            <span class="prop-detail-sep">·</span>
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M3 10l9-7 9 7"/><path d="M9 21V14h6v7"/></svg>5,800 SQ.FT</span>
+          </p>
+          <p class="prop-price">$2,250,000</p>
+        </div>
+      </article>
+
+      <article class="prop-card reveal stagger-3">
+        <div class="p-bg" aria-hidden="true">
+          <img src="images/anthem-country-club/entrance.jpg" alt="Anthem Country Club entrance home">
+        </div>
+        <div class="p-info">
+          <span class="prop-badge">For Sale</span>
+          <p class="prop-address">9 Brassie Dr, Henderson, NV 89052</p>
+          <p class="prop-details">
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20V9a2 2 0 012-2h16a2 2 0 012 2v11M2 20h20M2 13h20"/><rect x="6" y="4" width="5" height="5" rx="1"/></svg>3 Bed</span>
+            <span class="prop-detail-sep">·</span>
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16v4a4 4 0 01-4 4H8a4 4 0 01-4-4v-4z"/><path d="M6 12V6a3 3 0 016 0v6"/><path d="M4 20v1M20 20v1"/></svg>3.5 Bath</span>
+            <span class="prop-detail-sep">·</span>
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="8" width="20" height="13" rx="1"/><path d="M2 11h20M8 21v-3a4 4 0 018 0v3"/><path d="M2 8l10-5 10 5"/></svg>2 Garage</span>
+            <span class="prop-detail-sep">·</span>
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M3 10l9-7 9 7"/><path d="M9 21V14h6v7"/></svg>3,200 SQ.FT</span>
+          </p>
+          <p class="prop-price">$875,000</p>
+        </div>
+      </article>
+
+      <article class="prop-card reveal stagger-1">
+        <div class="p-bg" aria-hidden="true">
+          <img src="images/henderson-communities/macdonald-highlands.jpg" alt="Anthem Country Club luxury home">
+        </div>
+        <div class="p-info">
+          <span class="prop-badge">For Sale</span>
+          <p class="prop-address">7 Trophy Club Dr, Henderson, NV 89052</p>
+          <p class="prop-details">
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20V9a2 2 0 012-2h16a2 2 0 012 2v11M2 20h20M2 13h20"/><rect x="6" y="4" width="5" height="5" rx="1"/></svg>5 Bed</span>
+            <span class="prop-detail-sep">·</span>
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16v4a4 4 0 01-4 4H8a4 4 0 01-4-4v-4z"/><path d="M6 12V6a3 3 0 016 0v6"/><path d="M4 20v1M20 20v1"/></svg>6 Bath</span>
+            <span class="prop-detail-sep">·</span>
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="8" width="20" height="13" rx="1"/><path d="M2 11h20M8 21v-3a4 4 0 018 0v3"/><path d="M2 8l10-5 10 5"/></svg>4 Garage</span>
+            <span class="prop-detail-sep">·</span>
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M3 10l9-7 9 7"/><path d="M9 21V14h6v7"/></svg>6,200 SQ.FT</span>
+          </p>
+          <p class="prop-price">$1,875,000</p>
+        </div>
+      </article>
+
+      <article class="prop-card reveal stagger-2">
+        <div class="p-bg" aria-hidden="true">
+          <img src="images/henderson-communities/seven-hills.jpg" alt="Anthem Country Club home">
+        </div>
+        <div class="p-info">
+          <span class="prop-badge">For Sale</span>
+          <p class="prop-address">14 Iron Horse Ct, Henderson, NV 89052</p>
+          <p class="prop-details">
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20V9a2 2 0 012-2h16a2 2 0 012 2v11M2 20h20M2 13h20"/><rect x="6" y="4" width="5" height="5" rx="1"/></svg>3 Bed</span>
+            <span class="prop-detail-sep">·</span>
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16v4a4 4 0 01-4 4H8a4 4 0 01-4-4v-4z"/><path d="M6 12V6a3 3 0 016 0v6"/><path d="M4 20v1M20 20v1"/></svg>3 Bath</span>
+            <span class="prop-detail-sep">·</span>
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="8" width="20" height="13" rx="1"/><path d="M2 11h20M8 21v-3a4 4 0 018 0v3"/><path d="M2 8l10-5 10 5"/></svg>2 Garage</span>
+            <span class="prop-detail-sep">·</span>
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M3 10l9-7 9 7"/><path d="M9 21V14h6v7"/></svg>2,800 SQ.FT</span>
+          </p>
+          <p class="prop-price">$729,000</p>
+        </div>
+      </article>
+
+      <article class="prop-card reveal stagger-3">
+        <div class="p-bg" aria-hidden="true">
+          <img src="images/henderson-communities/anthem-highlands.jpg" alt="Anthem Country Club home">
+        </div>
+        <div class="p-info">
+          <span class="prop-badge">For Sale</span>
+          <p class="prop-address">22 Birdie Way, Henderson, NV 89052</p>
+          <p class="prop-details">
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20V9a2 2 0 012-2h16a2 2 0 012 2v11M2 20h20M2 13h20"/><rect x="6" y="4" width="5" height="5" rx="1"/></svg>4 Bed</span>
+            <span class="prop-detail-sep">·</span>
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16v4a4 4 0 01-4 4H8a4 4 0 01-4-4v-4z"/><path d="M6 12V6a3 3 0 016 0v6"/><path d="M4 20v1M20 20v1"/></svg>3.5 Bath</span>
+            <span class="prop-detail-sep">·</span>
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="8" width="20" height="13" rx="1"/><path d="M2 11h20M8 21v-3a4 4 0 018 0v3"/><path d="M2 8l10-5 10 5"/></svg>3 Garage</span>
+            <span class="prop-detail-sep">·</span>
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M3 10l9-7 9 7"/><path d="M9 21V14h6v7"/></svg>3,400 SQ.FT</span>
+          </p>
+          <p class="prop-price">$895,000</p>
+        </div>
+      </article>
+
+      <article class="prop-card reveal stagger-1">
+        <div class="p-bg" aria-hidden="true">
+          <img src="images/henderson-communities/ascaya.jpg" alt="Anthem Country Club luxury estate">
+        </div>
+        <div class="p-info">
+          <span class="prop-badge">For Sale</span>
+          <p class="prop-address">31 Anthem Country Club Dr, Henderson, NV 89052</p>
+          <p class="prop-details">
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20V9a2 2 0 012-2h16a2 2 0 012 2v11M2 20h20M2 13h20"/><rect x="6" y="4" width="5" height="5" rx="1"/></svg>4 Bed</span>
+            <span class="prop-detail-sep">·</span>
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16v4a4 4 0 01-4 4H8a4 4 0 01-4-4v-4z"/><path d="M6 12V6a3 3 0 016 0v6"/><path d="M4 20v1M20 20v1"/></svg>4.5 Bath</span>
+            <span class="prop-detail-sep">·</span>
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="8" width="20" height="13" rx="1"/><path d="M2 11h20M8 21v-3a4 4 0 018 0v3"/><path d="M2 8l10-5 10 5"/></svg>3 Garage</span>
+            <span class="prop-detail-sep">·</span>
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M3 10l9-7 9 7"/><path d="M9 21V14h6v7"/></svg>3,900 SQ.FT</span>
+          </p>
+          <p class="prop-price">$1,125,000</p>
+        </div>
+      </article>
+
+      <article class="prop-card reveal stagger-2">
+        <div class="p-bg" aria-hidden="true">
+          <img src="images/henderson-communities/green-valley-ranch.jpg" alt="Anthem Country Club home">
+        </div>
+        <div class="p-info">
+          <span class="prop-badge">For Sale</span>
+          <p class="prop-address">6 Club House Dr, Henderson, NV 89052</p>
+          <p class="prop-details">
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20V9a2 2 0 012-2h16a2 2 0 012 2v11M2 20h20M2 13h20"/><rect x="6" y="4" width="5" height="5" rx="1"/></svg>3 Bed</span>
+            <span class="prop-detail-sep">·</span>
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16v4a4 4 0 01-4 4H8a4 4 0 01-4-4v-4z"/><path d="M6 12V6a3 3 0 016 0v6"/><path d="M4 20v1M20 20v1"/></svg>2.5 Bath</span>
+            <span class="prop-detail-sep">·</span>
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="8" width="20" height="13" rx="1"/><path d="M2 11h20M8 21v-3a4 4 0 018 0v3"/><path d="M2 8l10-5 10 5"/></svg>2 Garage</span>
+            <span class="prop-detail-sep">·</span>
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M3 10l9-7 9 7"/><path d="M9 21V14h6v7"/></svg>2,600 SQ.FT</span>
+          </p>
+          <p class="prop-price">$679,000</p>
+        </div>
+      </article>
+
+      <article class="prop-card reveal stagger-3">
+        <div class="p-bg" aria-hidden="true">
+          <img src="images/henderson-communities/green-valley-cc-estates.jpg" alt="Anthem Country Club estate home">
+        </div>
+        <div class="p-info">
+          <span class="prop-badge">For Sale</span>
+          <p class="prop-address">19 Par Dr, Henderson, NV 89052</p>
+          <p class="prop-details">
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20V9a2 2 0 012-2h16a2 2 0 012 2v11M2 20h20M2 13h20"/><rect x="6" y="4" width="5" height="5" rx="1"/></svg>5 Bed</span>
+            <span class="prop-detail-sep">·</span>
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16v4a4 4 0 01-4 4H8a4 4 0 01-4-4v-4z"/><path d="M6 12V6a3 3 0 016 0v6"/><path d="M4 20v1M20 20v1"/></svg>5 Bath</span>
+            <span class="prop-detail-sep">·</span>
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="8" width="20" height="13" rx="1"/><path d="M2 11h20M8 21v-3a4 4 0 018 0v3"/><path d="M2 8l10-5 10 5"/></svg>4 Garage</span>
+            <span class="prop-detail-sep">·</span>
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M3 10l9-7 9 7"/><path d="M9 21V14h6v7"/></svg>5,200 SQ.FT</span>
+          </p>
+          <p class="prop-price">$1,650,000</p>
+        </div>
+      </article>
+
+      <article class="prop-card reveal stagger-1">
+        <div class="p-bg" aria-hidden="true">
+          <img src="images/henderson-communities/lake-las-vegas.jpg" alt="Anthem Country Club view home">
+        </div>
+        <div class="p-info">
+          <span class="prop-badge">For Sale</span>
+          <p class="prop-address">11 Eagle Trace Dr, Henderson, NV 89052</p>
+          <p class="prop-details">
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20V9a2 2 0 012-2h16a2 2 0 012 2v11M2 20h20M2 13h20"/><rect x="6" y="4" width="5" height="5" rx="1"/></svg>4 Bed</span>
+            <span class="prop-detail-sep">·</span>
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16v4a4 4 0 01-4 4H8a4 4 0 01-4-4v-4z"/><path d="M6 12V6a3 3 0 016 0v6"/><path d="M4 20v1M20 20v1"/></svg>4 Bath</span>
+            <span class="prop-detail-sep">·</span>
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="8" width="20" height="13" rx="1"/><path d="M2 11h20M8 21v-3a4 4 0 018 0v3"/><path d="M2 8l10-5 10 5"/></svg>3 Garage</span>
+            <span class="prop-detail-sep">·</span>
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M3 10l9-7 9 7"/><path d="M9 21V14h6v7"/></svg>4,200 SQ.FT</span>
+          </p>
+          <p class="prop-price">$1,290,000</p>
+        </div>
+      </article>
+
+      <article class="prop-card reveal stagger-2">
+        <div class="p-bg" aria-hidden="true">
+          <img src="images/henderson-communities/tuscany-village.jpg" alt="Anthem Country Club home">
+        </div>
+        <div class="p-info">
+          <span class="prop-badge">For Sale</span>
+          <p class="prop-address">3 Sandtrap Ct, Henderson, NV 89052</p>
+          <p class="prop-details">
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20V9a2 2 0 012-2h16a2 2 0 012 2v11M2 20h20M2 13h20"/><rect x="6" y="4" width="5" height="5" rx="1"/></svg>3 Bed</span>
+            <span class="prop-detail-sep">·</span>
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16v4a4 4 0 01-4 4H8a4 4 0 01-4-4v-4z"/><path d="M6 12V6a3 3 0 016 0v6"/><path d="M4 20v1M20 20v1"/></svg>3 Bath</span>
+            <span class="prop-detail-sep">·</span>
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="8" width="20" height="13" rx="1"/><path d="M2 11h20M8 21v-3a4 4 0 018 0v3"/><path d="M2 8l10-5 10 5"/></svg>2 Garage</span>
+            <span class="prop-detail-sep">·</span>
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M3 10l9-7 9 7"/><path d="M9 21V14h6v7"/></svg>2,450 SQ.FT</span>
+          </p>
+          <p class="prop-price">$639,000</p>
+        </div>
+      </article>
+
+      <article class="prop-card reveal stagger-3">
+        <div class="p-bg" aria-hidden="true">
+          <img src="images/anthem-country-club/sign.jpg" alt="Anthem Country Club home">
+        </div>
+        <div class="p-info">
+          <span class="prop-badge">For Sale</span>
+          <p class="prop-address">18 Fairway Ct, Henderson, NV 89052</p>
+          <p class="prop-details">
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20V9a2 2 0 012-2h16a2 2 0 012 2v11M2 20h20M2 13h20"/><rect x="6" y="4" width="5" height="5" rx="1"/></svg>4 Bed</span>
+            <span class="prop-detail-sep">·</span>
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16v4a4 4 0 01-4 4H8a4 4 0 01-4-4v-4z"/><path d="M6 12V6a3 3 0 016 0v6"/><path d="M4 20v1M20 20v1"/></svg>4 Bath</span>
+            <span class="prop-detail-sep">·</span>
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="8" width="20" height="13" rx="1"/><path d="M2 11h20M8 21v-3a4 4 0 018 0v3"/><path d="M2 8l10-5 10 5"/></svg>3 Garage</span>
+            <span class="prop-detail-sep">·</span>
+            <span class="prop-detail-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M3 10l9-7 9 7"/><path d="M9 21V14h6v7"/></svg>4,400 SQ.FT</span>
+          </p>
+          <p class="prop-price">$1,350,000</p>
+        </div>
+      </article>
+
+    </div>
+    <div class="listings-cta reveal stagger-4">
+      <a href="https://search.palisaderealty.com/search/map?s%5Blocations%5D%5B0%5D%5BpostalCode%5D=89052&s%5Blocations%5D%5B0%5D%5Bstate%5D=NV&s%5Blocations%5D%5B1%5D%5Bcommunity%5D=Anthem%20Country%20Club&s%5Blocations%5D%5B1%5D%5Bstate%5D=NV&s%5BorderBy%5D=sourceCreationDate%2Cdesc&s%5Bpage%5D=1" target="_blank" class="btn-outline-gold">View All Anthem CC Listings</a>
+    </div>
+  </section>
+
+  <!-- ── BUYER GUIDE (STICKY SCROLL) ─────────────────────────────── -->
+  <section class="buyer-guide-section" id="buyer-tips" aria-label="5 Things Every Buyer Should Know">
+    <div class="buyer-guide-header">
+      <p class="eyebrow reveal">Buyer's Guide</p>
+      <h2 class="section-title reveal stagger-1">5 Things Every Home Buyer<br>Should Know</h2>
+    </div>
+    <div class="buyer-guide-wrap">
+
+      <!-- LEFT: scrolling images -->
+      <div class="buyer-guide-imgs" id="buyerGuideImgs" aria-hidden="true">
+        <div class="buyer-guide-img-item is-active" data-img="lifestyle">
+          <img src="images/anthem-country-club/golf-course.jpg" alt="Anthem Country Club golf course" loading="lazy">
+        </div>
+        <div class="buyer-guide-img-item" data-img="schools">
+          <img src="images/anthem-country-club/entrance.jpg" alt="Anthem Country Club entrance" loading="lazy">
+        </div>
+        <div class="buyer-guide-img-item" data-img="real-estate">
+          <img src="images/henderson-communities/anthem-country-club.jpg" alt="Anthem Country Club aerial view" loading="lazy">
+        </div>
+        <div class="buyer-guide-img-item" data-img="location">
+          <img src="images/henderson-communities/anthem-highlands.jpg" alt="Henderson NV elevated community" loading="lazy">
+        </div>
+        <div class="buyer-guide-img-item" data-img="dining">
+          <img src="images/anthem-country-club/sign.jpg" alt="Anthem Country Club community sign" loading="lazy">
+        </div>
+      </div>
+
+      <!-- RIGHT: sticky list -->
+      <div class="buyer-guide-list" id="buyerGuideList">
+        <p class="buyer-guide-label">5 Things to Know</p>
+        <div class="buyer-guide-entries">
+
+          <div class="buyer-guide-entry is-active" data-key="lifestyle">
+            <div class="buyer-guide-entry-head">
+              <span class="buyer-guide-entry-num">01</span>
+              <div class="buyer-guide-entry-name">Lifestyle &amp; Community Atmosphere</div>
+            </div>
+            <div class="buyer-guide-entry-detail">
+              <p class="buyer-guide-entry-desc">A guard-gated community built around privacy, security, and an upscale environment — attracting executives, retirees, and relocation buyers who value a refined lifestyle.</p>
+              <ul class="buyer-guide-entry-bullets">
+                <li>Championship golf course at Anthem Country Club</li>
+                <li>Fitness center and wellness facilities</li>
+                <li>Tennis and pickleball courts</li>
+                <li>Resort-style pool and dining events</li>
+                <li>Active social calendar for residents</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="buyer-guide-entry" data-key="schools">
+            <div class="buyer-guide-entry-head">
+              <span class="buyer-guide-entry-num">02</span>
+              <div class="buyer-guide-entry-name">Schools Serving Anthem Country Club</div>
+            </div>
+            <div class="buyer-guide-entry-detail">
+              <p class="buyer-guide-entry-desc">Served by Clark County School District with well-regarded public options and strong private and charter alternatives. Coronado High School is particularly known for academics and athletics.</p>
+              <ul class="buyer-guide-entry-bullets">
+                <li>Frank Lamping &amp; Wallin Elementary Schools</li>
+                <li>Del E. Webb Middle School</li>
+                <li>Coronado High School (AP programs)</li>
+                <li>Pinecrest Academy of Nevada (private)</li>
+                <li>Henderson International &amp; Coral Academy</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="buyer-guide-entry" data-key="real-estate">
+            <div class="buyer-guide-entry-head">
+              <span class="buyer-guide-entry-num">03</span>
+              <div class="buyer-guide-entry-name">Real Estate Market &amp; Home Styles</div>
+            </div>
+            <div class="buyer-guide-entry-detail">
+              <p class="buyer-guide-entry-desc">Primarily single-family semi-custom and custom homes. Established inventory and limited supply mean well-presented homes attract strong buyer interest.</p>
+              <ul class="buyer-guide-entry-bullets">
+                <li>Mid-range homes from the $600,000s</li>
+                <li>Larger homes $800,000 to $1.5M+</li>
+                <li>Golf course &amp; custom homes exceed $1.5M</li>
+                <li>City, Strip, and mountain view lots</li>
+                <li>Golf course frontage vs. interior lots</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="buyer-guide-entry" data-key="location">
+            <div class="buyer-guide-entry-head">
+              <span class="buyer-guide-entry-num">04</span>
+              <div class="buyer-guide-entry-name">Location &amp; Accessibility</div>
+            </div>
+            <div class="buyer-guide-entry-detail">
+              <p class="buyer-guide-entry-desc">Private residential feel with easy access to Henderson's medical corridor, shopping, and the Las Vegas Strip via Eastern Ave, St. Rose Pkwy, and I-215.</p>
+              <ul class="buyer-guide-entry-bullets">
+                <li>Harry Reid International Airport ~20 min</li>
+                <li>Las Vegas Strip ~20–25 min</li>
+                <li>Henderson medical corridor ~10–15 min</li>
+                <li>The District at Green Valley Ranch ~15 min</li>
+                <li>Grocery, fitness &amp; medical offices nearby</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="buyer-guide-entry" data-key="dining">
+            <div class="buyer-guide-entry-head">
+              <span class="buyer-guide-entry-num">05</span>
+              <div class="buyer-guide-entry-name">Dining, Shopping &amp; Local Favorites</div>
+            </div>
+            <div class="buyer-guide-entry-detail">
+              <p class="buyer-guide-entry-desc">Minutes from Henderson's top restaurants, The District at Green Valley Ranch, and outdoor parks — with the community's own club dining right at the doorstep.</p>
+              <ul class="buyer-guide-entry-bullets">
+                <li>Ventano Italian Grill &amp; Seafood (Strip views)</li>
+                <li>Settebello Pizzeria &amp; North Italia</li>
+                <li>Echo &amp; Rig Steakhouse</li>
+                <li>The District at Green Valley Ranch</li>
+                <li>Anthem Hills Park &amp; Henderson trail network</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ──────────────────────────────────────────────────────── -->
+  <section class="faq-section" id="faq" aria-label="Frequently Asked Questions" style="display:none">
+    <div class="faq-header">
+      <p class="eyebrow reveal" style="color:var(--gold);">Common Questions</p>
+      <h2 class="section-title reveal stagger-1">Frequently Asked<br>Questions</h2>
+    </div>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Is Anthem Country Club a good place to live?
+          <span class="faq-icon" aria-hidden="true">
+            <svg viewBox="0 0 14 14" fill="none" stroke-width="1.5" stroke-linecap="round"><path d="M7 2v10M2 7h10"/></svg>
+          </span>
+        </button>
+        <div class="faq-answer">
+          <p>Anthem Country Club is considered one of Henderson's most desirable communities due to its guard-gated setting, golf course environment, and access to amenities. The elevated terrain, maintained streets, and country club lifestyle make it a consistently sought-after address for buyers who prioritize privacy and quality of life.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What types of homes are available in Anthem Country Club?
+          <span class="faq-icon" aria-hidden="true">
+            <svg viewBox="0 0 14 14" fill="none" stroke-width="1.5" stroke-linecap="round"><path d="M7 2v10M2 7h10"/></svg>
+          </span>
+        </button>
+        <div class="faq-answer">
+          <p>The community primarily features single-family homes, including semi-custom and custom properties with a variety of layouts, lot sizes, and views. Some homes offer golf course frontage, city and Strip views, mountain views, and private outdoor living spaces — no two properties are quite the same.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Is Anthem Country Club guard-gated?
+          <span class="faq-icon" aria-hidden="true">
+            <svg viewBox="0 0 14 14" fill="none" stroke-width="1.5" stroke-linecap="round"><path d="M7 2v10M2 7h10"/></svg>
+          </span>
+        </button>
+        <div class="faq-answer">
+          <p>Yes, Anthem Country Club is a guard-gated community with controlled access and HOA guidelines that maintain community standards. The entrance is staffed and access is restricted to residents and their guests, which contributes to the community's sense of security and exclusivity.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Do you have to join the country club?
+          <span class="faq-icon" aria-hidden="true">
+            <svg viewBox="0 0 14 14" fill="none" stroke-width="1.5" stroke-linecap="round"><path d="M7 2v10M2 7h10"/></svg>
+          </span>
+        </button>
+        <div class="faq-answer">
+          <p>Club membership is typically optional, but many residents choose to join for access to golf, dining, fitness, and social amenities. For many residents, the club becomes part of their daily routine — whether that's morning workouts, evening dinners, or weekend social events.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What price range are homes in Anthem Country Club?
+          <span class="faq-icon" aria-hidden="true">
+            <svg viewBox="0 0 14 14" fill="none" stroke-width="1.5" stroke-linecap="round"><path d="M7 2v10M2 7h10"/></svg>
+          </span>
+        </button>
+        <div class="faq-answer">
+          <p>Home prices vary based on location, views, and upgrades. Mid-range homes start in the $600,000s, with larger homes ranging from $800,000 to $1.5M+. Golf course and elevated view homes typically command higher values, and premium custom properties often exceed $1.5M.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          How competitive is the real estate market in Anthem Country Club?
+          <span class="faq-icon" aria-hidden="true">
+            <svg viewBox="0 0 14 14" fill="none" stroke-width="1.5" stroke-linecap="round"><path d="M7 2v10M2 7h10"/></svg>
+          </span>
+        </button>
+        <div class="faq-answer">
+          <p>Inventory can be limited, and well-maintained homes with desirable features often attract strong buyer interest. Because the community is established and not expanding, supply is naturally constrained — buyers who find the right home typically move with confidence and purpose.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── TESTIMONIALS ──────────────────────────────────────────────── -->
+  <section class="testimonials-section" aria-label="Client Testimonials" style="display:none">
+    <div class="testimonials-header">
+      <p class="eyebrow reveal">Client Testimonials</p>
+      <h2 class="section-title reveal stagger-1">What Our Clients Say</h2>
+    </div>
+    <div class="testimonials-grid">
+
+      <div class="testimonial-card reveal stagger-1">
+        <div class="testimonial-stars" aria-label="5 stars">
+          <svg viewBox="0 0 16 16"><path d="M8 1l1.85 3.75 4.15.6-3 2.93.71 4.12L8 10.28l-3.71 1.95.71-4.12L2 5.35l4.15-.6z"/></svg>
+          <svg viewBox="0 0 16 16"><path d="M8 1l1.85 3.75 4.15.6-3 2.93.71 4.12L8 10.28l-3.71 1.95.71-4.12L2 5.35l4.15-.6z"/></svg>
+          <svg viewBox="0 0 16 16"><path d="M8 1l1.85 3.75 4.15.6-3 2.93.71 4.12L8 10.28l-3.71 1.95.71-4.12L2 5.35l4.15-.6z"/></svg>
+          <svg viewBox="0 0 16 16"><path d="M8 1l1.85 3.75 4.15.6-3 2.93.71 4.12L8 10.28l-3.71 1.95.71-4.12L2 5.35l4.15-.6z"/></svg>
+          <svg viewBox="0 0 16 16"><path d="M8 1l1.85 3.75 4.15.6-3 2.93.71 4.12L8 10.28l-3.71 1.95.71-4.12L2 5.35l4.15-.6z"/></svg>
+        </div>
+        <p class="testimonial-quote">"We originally thought all the homes in Anthem Country Club were pretty similar, but the team walked us through the differences in location, views, and layout. That made a huge impact on what we ultimately chose, and we ended up with a home we absolutely love."</p>
+        <p class="testimonial-author">— Anthem Country Club Buyer</p>
+      </div>
+
+      <div class="testimonial-card reveal stagger-2">
+        <div class="testimonial-stars" aria-label="5 stars">
+          <svg viewBox="0 0 16 16"><path d="M8 1l1.85 3.75 4.15.6-3 2.93.71 4.12L8 10.28l-3.71 1.95.71-4.12L2 5.35l4.15-.6z"/></svg>
+          <svg viewBox="0 0 16 16"><path d="M8 1l1.85 3.75 4.15.6-3 2.93.71 4.12L8 10.28l-3.71 1.95.71-4.12L2 5.35l4.15-.6z"/></svg>
+          <svg viewBox="0 0 16 16"><path d="M8 1l1.85 3.75 4.15.6-3 2.93.71 4.12L8 10.28l-3.71 1.95.71-4.12L2 5.35l4.15-.6z"/></svg>
+          <svg viewBox="0 0 16 16"><path d="M8 1l1.85 3.75 4.15.6-3 2.93.71 4.12L8 10.28l-3.71 1.95.71-4.12L2 5.35l4.15-.6z"/></svg>
+          <svg viewBox="0 0 16 16"><path d="M8 1l1.85 3.75 4.15.6-3 2.93.71 4.12L8 10.28l-3.71 1.95.71-4.12L2 5.35l4.15-.6z"/></svg>
+        </div>
+        <p class="testimonial-quote">"We were relocating and didn't know the area well at all. The palisade-realty Team made everything feel simple and organized, from narrowing down neighborhoods to getting us through closing without any stress. We always felt like we were in good hands."</p>
+        <p class="testimonial-author">— Relocation Buyer, Henderson</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── NEARBY COMMUNITIES ────────────────────────────────────────── -->
+  <section class="nearby-section" aria-label="Explore Nearby Communities">
+    <div class="nearby-header">
+      <p class="eyebrow reveal">Explore More</p>
+      <h2 class="section-title reveal stagger-1">Nearby Henderson Communities</h2>
+    </div>
+    <div class="nearby-carousel-wrapper">
+      <button class="nearby-arrow" id="nearbyPrev" aria-label="Previous community">
+        <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11 14L6 9L11 4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div class="nearby-cards" id="nearbyCards">
+
+        <!-- Card 1: Inspirada -->
+        <div class="nearby-card" data-href="https://www.palisaderealty.com/henderson-communities/real-estate-inspirada" data-index="0">
+          <div class="nearby-card-bg">
+            <img src="images/henderson-communities/inspirada.jpg" alt="Inspirada community Henderson NV" loading="lazy">
+          </div>
+          <div class="nearby-card-label">Inspirada</div>
+          <div class="nearby-card-content">
+            <p class="nearby-card-eyebrow">Henderson, NV</p>
+            <h3 class="nearby-card-name">Inspirada</h3>
+            <p class="nearby-card-desc">A master-planned community where modern design meets family-friendly amenities, with parks, pools, and resort-style recreation throughout.</p>
+            <a href="https://www.palisaderealty.com/henderson-communities/real-estate-inspirada" target="_blank" rel="noopener" class="nearby-card-link">
+              View Community
+              <svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6.5 2.5L10 6l-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 2: MacDonald Highlands -->
+        <div class="nearby-card" data-href="https://www.palisaderealty.com/henderson-communities/real-estate-macdonald-highlands" data-index="1">
+          <div class="nearby-card-bg">
+            <img src="images/henderson-communities/macdonald-highlands.jpg" alt="MacDonald Highlands Henderson NV" loading="lazy">
+          </div>
+          <div class="nearby-card-label">MacDonald Highlands</div>
+          <div class="nearby-card-content">
+            <p class="nearby-card-eyebrow">Henderson, NV</p>
+            <h3 class="nearby-card-name">MacDonald Highlands</h3>
+            <p class="nearby-card-desc">Henderson's most prestigious guard-gated address — dramatic desert terrain, sweeping Strip views, and custom estates without equal.</p>
+            <a href="https://www.palisaderealty.com/henderson-communities/real-estate-macdonald-highlands" target="_blank" rel="noopener" class="nearby-card-link">
+              View Community
+              <svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6.5 2.5L10 6l-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 3: Anthem Highlands -->
+        <div class="nearby-card" data-href="https://www.palisaderealty.com/henderson-communities/real-estate-anthem-highlands" data-index="2">
+          <div class="nearby-card-bg">
+            <img src="images/henderson-communities/anthem-highlands.jpg" alt="Anthem Highlands Henderson NV" loading="lazy">
+          </div>
+          <div class="nearby-card-label">Anthem Highlands</div>
+          <div class="nearby-card-content">
+            <p class="nearby-card-eyebrow">Henderson, NV</p>
+            <h3 class="nearby-card-name">Anthem Highlands</h3>
+            <p class="nearby-card-desc">A sought-after guard-gated Anthem neighborhood offering upscale single-family homes with mountain views and resort-caliber amenities.</p>
+            <a href="https://www.palisaderealty.com/henderson-communities/real-estate-anthem-highlands" target="_blank" rel="noopener" class="nearby-card-link">
+              View Community
+              <svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6.5 2.5L10 6l-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 4: Ascaya -->
+        <div class="nearby-card" data-href="https://www.palisaderealty.com/henderson-communities/real-estate-ascaya" data-index="3">
+          <div class="nearby-card-bg">
+            <img src="images/henderson-communities/ascaya.jpg" alt="Ascaya Henderson NV" loading="lazy">
+          </div>
+          <div class="nearby-card-label">Ascaya</div>
+          <div class="nearby-card-content">
+            <p class="nearby-card-eyebrow">Henderson, NV</p>
+            <h3 class="nearby-card-name">Ascaya</h3>
+            <p class="nearby-card-desc">Perched 3,000 feet above the valley floor, Ascaya delivers some of Nevada's most dramatic views and architecturally striking custom estates.</p>
+            <a href="https://www.palisaderealty.com/henderson-communities/real-estate-ascaya" target="_blank" rel="noopener" class="nearby-card-link">
+              View Community
+              <svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6.5 2.5L10 6l-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 5: Hillsboro Heights -->
+        <div class="nearby-card" data-href="https://www.palisaderealty.com/henderson-communities/real-estate-hillsboro-heights" data-index="4">
+          <div class="nearby-card-bg">
+            <img src="images/henderson-communities/hillsboro-heights.jpg" alt="Hillsboro Heights Henderson NV" loading="lazy">
+          </div>
+          <div class="nearby-card-label">Hillsboro Heights</div>
+          <div class="nearby-card-content">
+            <p class="nearby-card-eyebrow">Henderson, NV</p>
+            <h3 class="nearby-card-name">Hillsboro Heights</h3>
+            <p class="nearby-card-desc">Elevated terrain and commanding valley and mountain views, with custom and semi-custom homes in southwest Henderson's finest setting.</p>
+            <a href="https://www.palisaderealty.com/henderson-communities/real-estate-hillsboro-heights" target="_blank" rel="noopener" class="nearby-card-link">
+              View Community
+              <svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6.5 2.5L10 6l-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 6: All Henderson Communities -->
+        <div class="nearby-card" data-href="henderson-communities.html" data-index="5">
+          <div class="nearby-card-bg">
+            <img src="images/henderson.jpg" alt="Henderson Nevada communities" loading="lazy">
+          </div>
+          <div class="nearby-card-label">All Communities</div>
+          <div class="nearby-card-content">
+            <p class="nearby-card-eyebrow">Henderson, NV</p>
+            <h3 class="nearby-card-name">All Henderson Communities</h3>
+            <p class="nearby-card-desc">Explore all of Henderson's finest neighborhoods — from master-planned family communities to luxury guard-gated estates with sweeping desert views.</p>
+            <a href="henderson-communities.html" class="nearby-card-link">
+              View All
+              <svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6.5 2.5L10 6l-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+      <button class="nearby-arrow" id="nearbyNext" aria-label="Next community">
+        <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 4L12 9L7 14" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ── CTA BANNER ────────────────────────────────────────────────── -->
+  <section class="cta-section" id="cta" aria-label="Call to action">
+    <div class="cta-bg" aria-hidden="true">
+      <img src="images/henderson-communities/anthem-country-club.jpg" alt="">
+    </div>
+    <div class="cta-content">
+      <p class="eyebrow reveal" style="color:var(--gold);">Ready to Explore</p>
+      <h2 class="cta-heading reveal stagger-1">Find Your Home in<br>Anthem Country Club</h2>
+      <div class="cta-btns reveal stagger-2">
+        <a href="https://search.palisaderealty.com/search/map?s%5Blocations%5D%5B0%5D%5BpostalCode%5D=89052&s%5Blocations%5D%5B0%5D%5Bstate%5D=NV&s%5Blocations%5D%5B1%5D%5Bcommunity%5D=Anthem%20Country%20Club&s%5Blocations%5D%5B1%5D%5Bstate%5D=NV&s%5BorderBy%5D=sourceCreationDate%2Cdesc&s%5Bpage%5D=1" target="_blank" class="btn-gold">View Homes for Sale</a>
+        <a href="https://www.palisaderealty.com/contact-us" target="_blank" class="btn-outline-white">Schedule a Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ────────────────────────────────────────────────────── -->
+  <footer class="site-footer" id="footer" aria-label="Site footer">
+    <div class="footer-top reveal">
+      <a href="index.html" class="footer-logo">
+        <img src="https://www.figma.com/api/mcp/asset/127867fd-25d9-4d78-8dd1-5b6f9ac82bc8" alt="Palisade Realty">
+      </a>
+      <ul class="footer-nav-list" role="list">
+        <li><a href="henderson-communities.html">Communities</a></li>
+        <li><a href="index.html#team">Our Team</a></li>
+        <li><a href="index.html#cta">Contact</a></li>
+        <li><a href="index.html#blog">Blog</a></li>
+      </ul>
+    </div>
+    <div class="footer-divider" aria-hidden="true"></div>
+    <div class="footer-bottom reveal stagger-1">
+      <p class="footer-copy">&copy; Rothwell Gornt Companies 2026. All Rights Reserved.</p>
+      <a href="mailto:Info@CRHomeTeam.com" class="footer-email">Info@CRHomeTeam.com</a>
+    </div>
+  </footer>
+
+  <!-- ── SCRIPTS ────────────────────────────────────────────────────── -->
+  <script>
+    /* ── NAV SCROLL ──────────────────────────────────────────────── */
+    const mainNav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      mainNav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    /* ── MOBILE HAMBURGER ────────────────────────────────────────── */
+    const hamburger = document.getElementById('navHamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileNav.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    document.querySelectorAll('.js-close-mobile').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileNav.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+
+    /* ── SCROLL REVEAL ───────────────────────────────────────────── */
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -32px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    /* ── BUYER GUIDE STICKY SCROLL ──────────────────────────────── */
+    (function () {
+      const imgItems = Array.from(document.querySelectorAll('.buyer-guide-img-item'));
+      const entries  = Array.from(document.querySelectorAll('.buyer-guide-entry'));
+      if (!imgItems.length) return;
+
+      function activate(key) {
+        imgItems.forEach(img => img.classList.toggle('is-active', img.dataset.img === key));
+        entries.forEach(entry => entry.classList.toggle('is-active', entry.dataset.key === key));
+      }
+
+      entries.forEach(entry => {
+        entry.addEventListener('click', () => {
+          const key = entry.dataset.key;
+          const target = document.querySelector('.buyer-guide-img-item[data-img="' + key + '"]');
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          activate(key);
+        });
+      });
+
+      const imgObserver = new IntersectionObserver(obsEntries => {
+        obsEntries.forEach(oe => {
+          if (oe.isIntersecting) activate(oe.target.dataset.img);
+        });
+      }, { threshold: 0.5 });
+
+      imgItems.forEach(img => imgObserver.observe(img));
+    })();
+
+    /* ── FAQ ACCORDION ───────────────────────────────────────────── */
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        document.querySelectorAll('.faq-question').forEach(b => b.setAttribute('aria-expanded', 'false'));
+        if (!isOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    /* ── NEARBY COMMUNITIES HOVER-FOCUSED CAROUSEL ──────────────── */
+    (function () {
+      var cards   = Array.from(document.querySelectorAll('.nearby-card'));
+      var btnPrev = document.getElementById('nearbyPrev');
+      var btnNext = document.getElementById('nearbyNext');
+      if (!cards.length) return;
+
+      var current = 0;
+
+      function setActive(idx) {
+        current = ((idx % cards.length) + cards.length) % cards.length;
+        cards.forEach(function (c, i) {
+          c.classList.toggle('is-active', i === current);
+        });
+      }
+
+      /* click a card to focus it */
+      cards.forEach(function (card, i) {
+        card.addEventListener('click', function () {
+          if (card.classList.contains('is-active')) {
+            /* already active — navigate to community page */
+            var href = card.dataset.href;
+            if (href) window.location.href = href;
+          } else {
+            setActive(i);
+          }
+        });
+      });
+
+      /* arrow buttons cycle which card is focused */
+      if (btnPrev) btnPrev.addEventListener('click', function () { setActive(current - 1); });
+      if (btnNext) btnNext.addEventListener('click', function () { setActive(current + 1); });
+
+      /* keyboard navigation */
+      document.getElementById('nearbyCards').addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft')  { e.preventDefault(); setActive(current - 1); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); setActive(current + 1); }
+      });
+
+      /* initialise first card active */
+      setActive(0);
+    })();
+  </script>
+</body>
+</html>

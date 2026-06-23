@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fluid Glass — Exceptional Glazing for Those Who Build with Vision</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --dark: #0d0d0d;
+      --light: #f2efe9;
+      --white: #ffffff;
+      --muted: rgba(255,255,255,0.42);
+      --border: rgba(255,255,255,0.11);
+      --border-dark: rgba(0,0,0,0.1);
+      --display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+      --sans: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background: var(--dark);
+      color: var(--white);
+      font-family: var(--sans);
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: var(--sans); cursor: pointer; }
+
+    /* ─── BUTTON ─── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 22px;
+      font-size: 11.5px;
+      font-family: var(--sans);
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      text-transform: none;
+      transition: opacity 0.2s;
+      border: none;
+      white-space: nowrap;
+    }
+    .btn:hover { opacity: 0.72; }
+    .btn-dark  { background: var(--dark); color: var(--white); border: 1px solid var(--border); }
+    .btn-light { background: var(--white); color: var(--dark); }
+    .btn-ghost { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.28); }
+    .btn-ghost-dark { background: transparent; color: var(--dark); border: 1px solid rgba(0,0,0,0.2); }
+
+    .btn-arrow { width: 14px; height: 11px; flex-shrink: 0; }
+
+    /* ─── SECTION LABEL ─── */
+    .label {
+      font-size: 10px;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      opacity: 0.38;
+      margin-bottom: 28px;
+      display: block;
+    }
+    .label-dark { color: var(--dark); }
+
+    /* ─── DISPLAY HEADING ─── */
+    .display {
+      font-family: var(--display);
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.06;
+      letter-spacing: -0.025em;
+    }
+
+    /* ─── HEADER ─── */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      padding: 18px 30px;
+      background: rgba(13,13,13,0.72);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border);
+      border-top: none;
+      border-radius: 0 0 20px 20px;
+    }
+    .header-brandmark { width: 24px; height: 24px; color: var(--white); }
+    .header-page { font-size: 11px; letter-spacing: 0.06em; opacity: 0.42; }
+    .header-menu {
+      margin-left: auto;
+      background: none;
+      border: none;
+      color: var(--white);
+      padding: 4px;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+    }
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(13,13,13,0.42) 0%,
+        rgba(13,13,13,0.28) 40%,
+        rgba(13,13,13,0.62) 80%,
+        rgba(13,13,13,0.9) 100%
+      );
+    }
+
+    /* Page header (wordmark + CTA) */
+    .hero-top {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 88px 48px 0;
+    }
+    .hero-wordmark {
+      width: min(440px, 78vw);
+    }
+    .hero-wordmark svg { width: 100%; height: auto; }
+    .hero-top .btn { margin-top: 28px; }
+
+    /* Hero main text */
+    .hero-body {
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 24px 100px;
+      text-align: center;
+    }
+    .hero-heading {
+      font-family: var(--display);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(2.4rem, 4.8vw, 5rem);
+      line-height: 1.06;
+      letter-spacing: -0.025em;
+      color: var(--white);
+      max-width: 840px;
+      margin: 0 auto 40px;
+    }
+
+    /* Aside info bottom-right of hero */
+    .hero-info {
+      position: absolute;
+      z-index: 2;
+      bottom: 80px;
+      right: 80px;
+      max-width: 260px;
+      text-align: right;
+    }
+    .hero-info .label { text-align: right; }
+    .hero-info .info-text {
+      font-size: 13px;
+      line-height: 1.65;
+      opacity: 0.55;
+    }
+
+    /* Scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      z-index: 2;
+      bottom: 88px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      opacity: 0.36;
+      white-space: nowrap;
+    }
+
+    /* ─── ABOUT ─── */
+    .about {
+      background: var(--light);
+      color: var(--dark);
+      padding: 120px 80px;
+    }
+    .about .inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: end;
+    }
+    .about .about-heading {
+      font-size: clamp(2rem, 4vw, 4.2rem);
+    }
+    .about .about-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+    }
+    .about .about-text {
+      font-size: 14px;
+      line-height: 1.72;
+      opacity: 0.55;
+      margin-bottom: 36px;
+    }
+
+    /* ─── COLLECTION ─── */
+    .collection {
+      background: var(--dark);
+      padding: 120px 80px;
+      overflow: hidden;
+    }
+    .collection .inner {
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+    .collection-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      margin-bottom: 72px;
+      align-items: end;
+    }
+    .collection-heading {
+      font-size: clamp(2rem, 3.5vw, 3.5rem);
+    }
+    .collection-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+    }
+    .collection-text {
+      font-size: 14px;
+      line-height: 1.72;
+      opacity: 0.45;
+      margin-bottom: 32px;
+      max-width: 380px;
+    }
+
+    /* Product grid */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      align-items: start;
+    }
+    .product-block { position: relative; display: block; overflow: hidden; }
+    .product-block:nth-child(2) { margin-top: 80px; }
+    .product-block:nth-child(3) { margin-top: -60px; }
+    .product-img {
+      aspect-ratio: 430 / 530;
+      overflow: hidden;
+      position: relative;
+    }
+    .product-img img {
+      transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .product-block:hover .product-img img { transform: scale(1.06); }
+    .product-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 50%);
+    }
+    .product-name {
+      position: absolute;
+      bottom: 18px;
+      left: 18px;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      z-index: 1;
+    }
+
+    /* ─── SHOWROOM ─── */
+    .showroom {
+      position: relative;
+      padding: 0;
+      overflow: hidden;
+      background: #080808;
+    }
+    .showroom-bg {
+      position: absolute;
+      inset: 0;
+    }
+    .showroom-bg img { opacity: 0.3; }
+    .showroom-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
+    }
+    .showroom .inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 100px 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .showroom-heading {
+      font-size: clamp(2rem, 3.5vw, 3.5rem);
+    }
+    .showroom-right { display: flex; flex-direction: column; gap: 0; }
+    .showroom-addr-title {
+      font-size: 10px;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      opacity: 0.38;
+      margin-bottom: 10px;
+    }
+    .showroom-addr {
+      font-size: 14px;
+      line-height: 1.7;
+      opacity: 0.62;
+      margin-bottom: 36px;
+    }
+
+    /* ─── PROJECTS ─── */
+    .projects {
+      background: var(--dark);
+      padding: 120px 80px;
+      border-top: 1px solid var(--border);
+    }
+    .projects .inner {
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+    .projects-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      margin-bottom: 60px;
+      align-items: end;
+    }
+    .projects-heading {
+      font-size: clamp(1.8rem, 3.2vw, 3.2rem);
+    }
+    .projects-right { display: flex; flex-direction: column; gap: 0; align-items: flex-start; }
+    .projects-text {
+      font-size: 14px;
+      line-height: 1.7;
+      opacity: 0.45;
+      margin-bottom: 32px;
+    }
+
+    .project-list { list-style: none; }
+    .project-item {
+      display: grid;
+      grid-template-columns: 1fr 48px auto;
+      align-items: center;
+      gap: 24px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--white);
+      transition: opacity 0.22s;
+    }
+    .project-item:first-child { border-top: 1px solid var(--border); }
+    .project-item:hover { opacity: 0.6; }
+    .project-title {
+      font-size: clamp(1.5rem, 2.4vw, 2.4rem);
+      font-family: var(--display);
+      font-style: italic;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+    }
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 16px;
+      margin-top: 8px;
+    }
+    .project-tag {
+      font-size: 11px;
+      opacity: 0.35;
+      letter-spacing: 0.01em;
+    }
+    .project-img-thumb {
+      width: 48px;
+      height: 60px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .project-item-arrow { flex-shrink: 0; opacity: 0.5; }
+
+    /* ─── DUO IMAGES ─── */
+    .duo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .duo-img {
+      aspect-ratio: 2160 / 3240;
+      overflow: hidden;
+    }
+
+    /* ─── REVIEWS ─── */
+    .reviews {
+      background: var(--light);
+      color: var(--dark);
+      padding: 120px 80px;
+    }
+    .reviews .inner {
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+    .reviews-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 72px;
+    }
+    .reviews-head .label-dark { margin-bottom: 0; }
+    .review-counter { font-size: 11px; opacity: 0.4; letter-spacing: 0.04em; }
+    .review-nav { display: flex; gap: 10px; }
+    .review-nav-btn {
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--border-dark);
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s;
+      color: var(--dark);
+    }
+    .review-nav-btn:hover { background: rgba(0,0,0,0.05); }
+
+    .review-active { display: block; }
+    .review-hidden { display: none; }
+    .review-quote-icon { opacity: 0.25; margin-bottom: 28px; }
+    .review-quote {
+      font-family: var(--display);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(1.6rem, 3vw, 3rem);
+      line-height: 1.18;
+      letter-spacing: -0.025em;
+      color: var(--dark);
+      margin-bottom: 48px;
+    }
+    .review-author {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .review-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .review-name { font-size: 13px; font-weight: 500; color: var(--dark); display: block; }
+    .review-role { font-size: 11.5px; opacity: 0.45; display: block; margin-top: 2px; }
+    .google-rating {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      opacity: 0.45;
+      margin-top: 56px;
+    }
+
+    /* ─── CTA ─── */
+    .cta {
+      background: var(--dark);
+      padding: 120px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta .inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+    .cta-label { margin-bottom: 28px; }
+    .cta-heading {
+      font-size: clamp(2.8rem, 5.5vw, 5.5rem);
+      max-width: 700px;
+      margin-bottom: 16px;
+    }
+    .cta-sub {
+      font-size: clamp(1.4rem, 2.4vw, 2.4rem);
+      opacity: 0.38;
+      margin-bottom: 52px;
+    }
+    .cta-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+    .cta-deco {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: min(428px, 50vw);
+      height: auto;
+      opacity: 0.1;
+      pointer-events: none;
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      background: var(--dark);
+      border-top: 1px solid var(--border);
+      padding: 80px 80px 52px;
+      position: relative;
+      overflow: hidden;
+    }
+    .footer .inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+    .footer-logo { margin-bottom: 72px; }
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .footer-copy { font-size: 11.5px; opacity: 0.34; }
+    .footer-nav { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; }
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      list-style: none;
+    }
+    .footer-links a {
+      font-size: 11.5px;
+      opacity: 0.34;
+      transition: opacity 0.2s;
+    }
+    .footer-links a:hover { opacity: 1; }
+    .footer-credit { font-size: 11.5px; opacity: 0.24; }
+    .footer-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+    .footer-bg svg {
+      width: 100%;
+      height: auto;
+      opacity: 0.055;
+      margin-bottom: -4%;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 960px) {
+      .about, .collection, .projects, .reviews, .cta, .footer { padding: 80px 32px; }
+      .showroom .inner { padding: 80px 32px; }
+      .about .inner, .collection-header, .projects-header,
+      .showroom .inner { grid-template-columns: 1fr; gap: 48px; }
+      .product-grid { grid-template-columns: repeat(2, 1fr); }
+      .product-block:nth-child(2), .product-block:nth-child(3) { margin-top: 0; }
+      .duo { grid-template-columns: 1fr; }
+      .hero-info { display: none; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+      .footer-nav { flex-direction: column; align-items: flex-start; gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ SITE HEADER ═══ -->
+  <header class="site-header">
+    <a href="https://fluid.glass/" aria-label="Home">
+      <svg viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" class="header-brandmark">
+        <path d="M42 15.1935V10.5L21 0L0 10.5V31.5L21 42L42 31.5V19.95L25.2 11.55V23.2995L37.2435 29.1795L21 37.3065L4.2 28.9065V13.0935L21 4.6935L42 15.1935Z" fill="currentcolor"/>
+        <path d="M21 13.902V9.45L8.4 15.75V20.4435L21 13.902Z" fill="currentcolor"/>
+      </svg>
+    </a>
+    <span class="header-page">Home</span>
+    <button class="header-menu" aria-label="Menu">
+      <svg viewBox="0 0 20 11" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:11px;">
+        <path d="M0 0.5H20" stroke="currentcolor" stroke-width="1"/>
+        <path d="M0 5.5H20" stroke="currentcolor" stroke-width="1"/>
+        <path d="M0 10.5H20" stroke="currentcolor" stroke-width="1"/>
+      </svg>
+    </button>
+  </header>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img src="https://a.storyblok.com/f/287789457689273/2048x1536/38cf5db74c/ashmead-barn-1.jpg/m/3840x3296/filters:format(avif,webp):quality(80)" alt="">
+    </div>
+
+    <div class="hero-top">
+      <a href="https://fluid.glass/" aria-label="Fluid Glass Home" class="hero-wordmark">
+        <svg viewBox="0 0 388 62" fill="none" xmlns="http://www.w3.org/2000/svg" style="fill:white;">
+          <path d="M0 60.9537V1.19517H38.2924V9.90284H9.85151V27.2328H33.3238V35.6844H9.85151V60.9537H0Z"/>
+          <path d="M42.332 60.9537V1.19517H51.5839V60.9537H42.332Z"/>
+          <path d="M88.1516 39.0992V17.2446H97.4035V60.9537H89.2652L88.2373 55.4047C85.496 58.7341 81.4697 61.4659 74.7021 61.4659C65.3646 61.4659 57.3978 56.5145 57.3978 41.5749V17.2446H66.6496V40.5504C66.6496 49.0874 70.0762 53.4412 76.8438 53.4412C83.8683 53.4412 88.1516 48.1483 88.1516 39.0992Z"/>
+          <path d="M108.662 11.098C105.493 11.098 103.008 8.79305 103.008 5.54901C103.008 2.30497 105.493 0 108.662 0C111.832 0 114.316 2.30497 114.316 5.54901C114.316 8.79305 111.832 11.098 108.662 11.098ZM103.951 60.9537V17.2446H113.203V60.9537H103.951Z"/>
+          <path d="M153.026 23.3058V1.19517H162.278V60.9537H154.225L153.111 54.3803C150.284 58.2219 145.744 61.4659 138.805 61.4659C126.898 61.4659 118.074 53.0997 118.074 39.0992C118.074 25.6108 126.898 16.7324 138.805 16.7324C145.487 16.7324 150.199 19.4642 153.026 23.3058ZM140.347 53.6973C148.057 53.6973 153.111 47.7215 153.111 39.2699C153.111 30.5622 148.057 24.5864 140.347 24.5864C132.637 24.5864 127.583 30.5622 127.583 39.0992C127.583 47.7215 132.637 53.6973 140.347 53.6973Z"/>
+          <path d="M215.081 61.4659C198.291 61.4659 186.726 49.2581 186.726 31.0744C186.726 12.8908 198.034 0.682956 215.852 0.682956C229.73 0.682956 239.839 8.87842 241.638 21.5131H231.444C229.645 13.9152 223.905 9.30526 215.595 9.30526C204.202 9.30526 196.835 18.269 196.835 31.0744C196.835 43.8799 204.031 52.8436 215.51 52.8436C224.762 52.8436 232.215 47.6361 232.729 37.9894V36.5381H216.109V28.2573H242.152V60.9537H234.527L233.671 52.929C230.758 57.1975 224.59 61.4659 215.081 61.4659Z"/>
+          <path d="M249.609 60.9537V1.19517H258.86V60.9537H249.609Z"/>
+          <path d="M305.451 52.929H307.336V60.9537H302.453C296.456 60.9537 294.4 58.3073 294.4 53.9534C291.488 58.3926 287.033 61.4659 279.923 61.4659C270.328 61.4659 263.646 56.7706 263.646 48.6605C263.646 39.6968 270.157 34.66 282.407 34.66H293.458V32.0135C293.458 27.1475 289.946 24.1595 283.863 24.1595C278.381 24.1595 274.697 26.7206 274.012 30.5622H264.931C265.874 22.0253 273.241 16.7324 284.292 16.7324C295.942 16.7324 302.624 22.2814 302.624 32.6111V50.1118C302.624 52.3314 303.566 52.929 305.451 52.929ZM293.458 43.0262V41.4895H281.979C276.239 41.4895 273.069 43.6237 273.069 48.063C273.069 51.7338 276.153 54.2949 281.208 54.2949C288.918 54.2949 293.372 49.7703 293.458 43.0262Z"/>
+          <path d="M307.921 46.5263H317.001C317.344 51.0509 321.284 54.2949 327.966 54.2949C333.706 54.2949 337.475 52.0753 337.475 48.5752C337.475 43.8799 333.449 43.5384 326.681 42.6847C316.658 41.4895 308.777 39.3553 308.777 30.3061C308.777 22.0253 316.23 16.647 326.767 16.7324C337.561 16.7324 345.185 21.6838 345.785 30.6476H336.704C336.19 26.6352 332.421 23.8181 326.938 23.8181C321.456 23.8181 317.858 26.0377 317.858 29.5378C317.858 33.6355 322.055 34.1477 328.395 34.8307C338.417 36.0259 346.556 38.0747 346.556 47.8068C346.556 56.173 338.589 61.4659 327.966 61.4659C316.23 61.4659 308.178 56.0023 307.921 46.5263Z"/>
+          <path d="M348.434 46.5263H357.515C357.857 51.0509 361.798 54.2949 368.48 54.2949C374.219 54.2949 377.989 52.0753 377.989 48.5752C377.989 43.8799 373.962 43.5384 367.195 42.6847C357.172 41.4895 349.291 39.3553 349.291 30.3061C349.291 22.0253 356.744 16.647 367.281 16.7324C378.074 16.7324 385.699 21.6838 386.298 30.6476H377.218C376.704 26.6352 372.935 23.8181 367.452 23.8181C361.969 23.8181 358.371 26.0377 358.371 29.5378C358.371 33.6355 362.569 34.1477 368.908 34.8307C378.931 36.0259 387.069 38.0747 387.069 47.8068C387.069 56.173 379.102 61.4659 368.48 61.4659C356.744 61.4659 348.691 56.0023 348.434 46.5263Z"/>
+        </svg>
+      </a>
+      <a href="https://fluid.glass/contact" class="btn btn-ghost" style="margin-top:32px;">
+        <svg viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="btn-arrow"><path d="M0.6 0V6H13.1" stroke="currentcolor" stroke-width="1.2"/><rect x="9.19" y="2.23" width="5.56" height="5.56" transform="rotate(45 9.19 2.23)" stroke="currentcolor" stroke-width="1.2"/></svg>
+        Get a quote
+      </a>
+    </div>
+
+    <div class="hero-body">
+      <h1 class="hero-heading">Exceptional glazing for those<br>who build with vision.</h1>
+    </div>
+
+    <div class="hero-info">
+      <span class="label" style="color:rgba(255,255,255,0.38);">Glazing specialists</span>
+      <p class="info-text">We design and install bespoke glass systems for ambitious architectural projects. Every pane reflects our commitment to clarity, quality, and collaboration.</p>
+    </div>
+
+    <span class="scroll-hint">Scroll to explore</span>
+  </section>
+
+  <!-- ═══ ABOUT ═══ -->
+  <section class="about">
+    <div class="inner">
+      <div>
+        <span class="label label-dark">About Fluid Glass</span>
+        <h2 class="display about-heading">We bring architecture to life through craft and innovation. Trusted by architects who demand precision, beauty, and care.</h2>
+      </div>
+      <div class="about-right">
+        <a href="https://fluid.glass/about" class="btn btn-dark">
+          <svg viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="btn-arrow"><path d="M0.6 0V6H13.1" stroke="currentcolor" stroke-width="1.2"/><rect x="9.19" y="2.23" width="5.56" height="5.56" transform="rotate(45 9.19 2.23)" stroke="currentcolor" stroke-width="1.2"/></svg>
+          Who we are
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PRODUCT COLLECTION ═══ -->
+  <section class="collection">
+    <div class="inner">
+      <div class="collection-header">
+        <div>
+          <span class="label">Product collection</span>
+          <h2 class="display collection-heading">Our collection</h2>
+        </div>
+        <div class="collection-right">
+          <p class="collection-text">Our <strong style="font-weight:400;">glazing collection</strong> is defined by exceptional craftsmanship, refined design, and enduring quality. Made for bold architecture and uncompromising vision.</p>
+          <a href="https://fluid.glass/collection/" class="btn btn-dark">
+            <svg viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="btn-arrow"><path d="M0.6 0V6H13.1" stroke="currentcolor" stroke-width="1.2"/><rect x="9.19" y="2.23" width="5.56" height="5.56" transform="rotate(45 9.19 2.23)" stroke="currentcolor" stroke-width="1.2"/></svg>
+            Product overview
+          </a>
+        </div>
+      </div>
+
+      <div class="product-grid">
+        <a href="https://fluid.glass/collection/" class="product-block">
+          <div class="product-img">
+            <img src="https://a.storyblok.com/f/287789457689273/2320x3500/87205dbe58/fluid-x-sliding-door-hidden-rail.jpg/m/1200x1480/filters:format(avif,webp):quality(80)" alt="Fluid Sliding Door" loading="lazy">
+          </div>
+          <span class="product-name">Doors</span>
+        </a>
+        <a href="https://fluid.glass/collection/" class="product-block">
+          <div class="product-img">
+            <img src="https://a.storyblok.com/f/287789457689273/3840x5759/685642ce45/fluid-window-showroom-8.jpg/m/1200x1480/filters:format(avif,webp):quality(80)" alt="Fluid Casement Window" loading="lazy">
+          </div>
+          <span class="product-name">Windows</span>
+        </a>
+        <a href="https://fluid.glass/collection/" class="product-block">
+          <div class="product-img">
+            <img src="https://a.storyblok.com/f/287789457689273/3000x2000/17ede1f937/fluid-blind-box-3.jpg/m/1200x1480/filters:format(avif,webp):quality(80)" alt="Fluid Blind Box" loading="lazy">
+          </div>
+          <span class="product-name">Additional</span>
+        </a>
+        <a href="https://fluid.glass/collection/" class="product-block">
+          <div class="product-img">
+            <img src="https://a.storyblok.com/f/287789457689273/2160x3240/eba376b173/hay-street-05.jpg/m/1200x1480/filters:format(avif,webp):quality(80)" alt="Structural Glazing" loading="lazy">
+          </div>
+          <span class="product-name">Structural</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SHOWROOM ═══ -->
+  <section class="showroom">
+    <div class="showroom-bg">
+      <img src="https://a.storyblok.com/f/287789457689273/3200x1800/f87985ae68/banner-showroom.jpg/m/3840x2160/filters:format(avif,webp):quality(80)" alt="" loading="lazy">
+    </div>
+    <div class="inner">
+      <div>
+        <span class="label">Showroom</span>
+        <h2 class="display showroom-heading">A place where precision and creativity connect.</h2>
+      </div>
+      <div class="showroom-right">
+        <p class="showroom-addr-title">Address</p>
+        <p class="showroom-addr">Orbital 25 Business Park, Unit 11<br>Watford WD18 9DA, UK</p>
+        <a href="https://fluid.glass/showroom" class="btn btn-ghost">
+          <svg viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="btn-arrow"><path d="M0.6 0V6H13.1" stroke="currentcolor" stroke-width="1.2"/><rect x="9.19" y="2.23" width="5.56" height="5.56" transform="rotate(45 9.19 2.23)" stroke="currentcolor" stroke-width="1.2"/></svg>
+          Showroom
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FEATURED PROJECTS ═══ -->
+  <section class="projects">
+    <div class="inner">
+      <div class="projects-header">
+        <div>
+          <span class="label">Featured projects</span>
+          <h2 class="display projects-heading">Each project tells its own story of collaboration and precision.</h2>
+        </div>
+        <div class="projects-right">
+          <a href="https://fluid.glass/projects/" class="btn btn-dark">
+            <svg viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="btn-arrow"><path d="M0.6 0V6H13.1" stroke="currentcolor" stroke-width="1.2"/><rect x="9.19" y="2.23" width="5.56" height="5.56" transform="rotate(45 9.19 2.23)" stroke="currentcolor" stroke-width="1.2"/></svg>
+            View projects
+          </a>
+        </div>
+      </div>
+
+      <ul class="project-list">
+        <li>
+          <a href="https://fluid.glass/projects/ashmead-barn" class="project-item">
+            <div>
+              <h3 class="project-title">Ashmead Barn</h3>
+              <div class="project-tags">
+                <span class="project-tag">Fluid Sliding Door</span>
+                <span class="project-tag">Fluid Glass Balustrade</span>
+                <span class="project-tag">Fluid X Pivot Door</span>
+                <span class="project-tag">Fluid Window</span>
+              </div>
+            </div>
+            <div class="project-img-thumb">
+              <img src="https://a.storyblok.com/f/287789457689273/2048x1536/38cf5db74c/ashmead-barn-1.jpg/m/580x728/filters:format(avif,webp):quality(80)" alt="Ashmead Barn" loading="lazy">
+            </div>
+            <svg viewBox="0 0 15 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="project-item-arrow" style="width:15px;height:11px;"><path d="M1.18 0V5.53H11.98L9.18 2.86L9.12 2.8L9.18 2.74L9.83 2.03L9.89 1.96L9.96 2.02L14.15 6.03L14.22 6.09L14.15 6.16L9.96 10.16L9.89 10.22L9.83 10.15L9.18 9.44L9.12 9.38L9.18 9.32L11.98 6.65H0V0H1.18Z" fill="currentcolor"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="https://fluid.glass/projects/keepers-cottage" class="project-item">
+            <div>
+              <h3 class="project-title">Keepers Cottage</h3>
+              <div class="project-tags">
+                <span class="project-tag">Fluid Sliding Door</span>
+                <span class="project-tag">Fluid Window</span>
+                <span class="project-tag">Fluid X Vertical</span>
+                <span class="project-tag">Fluid Glass Skylight</span>
+              </div>
+            </div>
+            <div class="project-img-thumb">
+              <img src="https://a.storyblok.com/f/287789457689273/2743x3840/11bbc6c231/keepers-cottage-4.jpg/m/580x728/filters:format(avif,webp):quality(80)" alt="Keepers Cottage" loading="lazy">
+            </div>
+            <svg viewBox="0 0 15 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="project-item-arrow" style="width:15px;height:11px;"><path d="M1.18 0V5.53H11.98L9.18 2.86L9.12 2.8L9.18 2.74L9.83 2.03L9.89 1.96L9.96 2.02L14.15 6.03L14.22 6.09L14.15 6.16L9.96 10.16L9.89 10.22L9.83 10.15L9.18 9.44L9.12 9.38L9.18 9.32L11.98 6.65H0V0H1.18Z" fill="currentcolor"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="https://fluid.glass/projects/sea-breeze" class="project-item">
+            <div>
+              <h3 class="project-title">Sea Breeze</h3>
+              <div class="project-tags">
+                <span class="project-tag">Fluid X Vertical</span>
+                <span class="project-tag">Fluid X Sliding Door</span>
+                <span class="project-tag">Fluid Window</span>
+              </div>
+            </div>
+            <div class="project-img-thumb">
+              <img src="https://a.storyblok.com/f/287789457689273/3273x3840/07b2b36c8f/fluid-glass-sea-breeze-5.jpg/m/580x728/filters:format(avif,webp):quality(80)" alt="Sea Breeze" loading="lazy">
+            </div>
+            <svg viewBox="0 0 15 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="project-item-arrow" style="width:15px;height:11px;"><path d="M1.18 0V5.53H11.98L9.18 2.86L9.12 2.8L9.18 2.74L9.83 2.03L9.89 1.96L9.96 2.02L14.15 6.03L14.22 6.09L14.15 6.16L9.96 10.16L9.89 10.22L9.83 10.15L9.18 9.44L9.12 9.38L9.18 9.32L11.98 6.65H0V0H1.18Z" fill="currentcolor"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="https://fluid.glass/projects/rusty-house" class="project-item">
+            <div>
+              <h3 class="project-title">Rusty House</h3>
+              <div class="project-tags">
+                <span class="project-tag">Fluid Window</span>
+                <span class="project-tag">Fluid X Vertical</span>
+                <span class="project-tag">Fluid X Sliding Door</span>
+              </div>
+            </div>
+            <div class="project-img-thumb">
+              <img src="https://a.storyblok.com/f/287789457689273/1756x2164/f5cebacfa7/rusty-house-header.jpg/m/580x728/filters:format(avif,webp):quality(80)" alt="Rusty House" loading="lazy">
+            </div>
+            <svg viewBox="0 0 15 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="project-item-arrow" style="width:15px;height:11px;"><path d="M1.18 0V5.53H11.98L9.18 2.86L9.12 2.8L9.18 2.74L9.83 2.03L9.89 1.96L9.96 2.02L14.15 6.03L14.22 6.09L14.15 6.16L9.96 10.16L9.89 10.22L9.83 10.15L9.18 9.44L9.12 9.38L9.18 9.32L11.98 6.65H0V0H1.18Z" fill="currentcolor"/></svg>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══ DUO IMAGES ═══ -->
+  <div class="duo">
+    <div class="duo-img">
+      <img src="https://a.storyblok.com/f/287789457689273/2160x3240/9a76d4e4d6/hay-street-21.jpg/m/1920x0/filters:format(webp):quality(80)" alt="Hay Street project">
+    </div>
+    <div class="duo-img">
+      <img src="https://a.storyblok.com/f/287789457689273/2160x3240/eba376b173/hay-street-05.jpg/m/1920x0/filters:format(webp):quality(80)" alt="Hay Street project">
+    </div>
+  </div>
+
+  <!-- ═══ CLIENT STORIES ═══ -->
+  <section class="reviews">
+    <div class="inner">
+      <div class="reviews-head">
+        <span class="label label-dark" style="margin-bottom:0;">Client stories</span>
+        <div style="display:flex;align-items:center;gap:24px;">
+          <span class="review-counter" id="reviewCounter">01 / 05</span>
+          <div class="review-nav">
+            <button class="review-nav-btn" aria-label="Previous" onclick="changeReview(-1)">
+              <svg viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:13px;height:8px;transform:rotate(180deg)"><path d="M0 3.57H10.8L8 0.9L7.94 0.84L8 0.77L8.65 0.07L8.71 0L8.78 0.06L12.97 4.06L13.04 4.13L12.97 4.2L8.78 8.19L8.71 8.26L8.65 8.19L8 7.48L7.94 7.42L8 7.36L10.8 4.69H0V3.57Z" fill="currentcolor"/></svg>
+            </button>
+            <button class="review-nav-btn" aria-label="Next" onclick="changeReview(1)">
+              <svg viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:13px;height:8px;"><path d="M0 3.57H10.8L8 0.9L7.94 0.84L8 0.77L8.65 0.07L8.71 0L8.78 0.06L12.97 4.06L13.04 4.13L12.97 4.2L8.78 8.19L8.71 8.26L8.65 8.19L8 7.48L7.94 7.42L8 7.36L10.8 4.69H0V3.57Z" fill="currentcolor"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Review 1 -->
+      <div class="review-active" id="review-0">
+        <svg viewBox="0 0 27 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="review-quote-icon" style="width:27px;height:20px;"><path d="M27 20H15.286V11.2929L20.3288 0H24.9514L20.8541 10.4485H27V20ZM11.7665 20H0V11.2929L5.09533 0H9.7179L5.62062 10.4485H11.7665V20Z" fill="#0d0d0d"/></svg>
+        <blockquote class="review-quote">Unrivaled customer service, cutting edge design and quality. Fluid Glass is firmly lodged in our list of preferred suppliers of glazing products.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">
+            <img src="https://a.storyblok.com/f/287789457689273/3741x5612/436c6748ad/vaidas-vileikis.jpg/m/552x0/filters:format(avif,webp):quality(80)" alt="Vaidas Vileikis" loading="lazy">
+          </div>
+          <div>
+            <span class="review-name">Vaidas Vileikis</span>
+            <span class="review-role">Founder, Name Architects</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Review 2 -->
+      <div class="review-hidden" id="review-1">
+        <svg viewBox="0 0 27 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="review-quote-icon" style="width:27px;height:20px;"><path d="M27 20H15.286V11.2929L20.3288 0H24.9514L20.8541 10.4485H27V20ZM11.7665 20H0V11.2929L5.09533 0H9.7179L5.62062 10.4485H11.7665V20Z" fill="#0d0d0d"/></svg>
+        <blockquote class="review-quote">The customer service provided by Fluid Glass is about the best I have encountered in the industry.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">
+            <img src="https://a.storyblok.com/f/287789457689273/346x426/3cd30edf9a/review-1.jpg/m/552x0/filters:format(avif,webp):quality(80)" alt="Owen Davies-Small" loading="lazy">
+          </div>
+          <div>
+            <span class="review-name">Owen Davies-Small</span>
+            <span class="review-role">Founder, Davies-Small Architects</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Review 3 -->
+      <div class="review-hidden" id="review-2">
+        <svg viewBox="0 0 27 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="review-quote-icon" style="width:27px;height:20px;"><path d="M27 20H15.286V11.2929L20.3288 0H24.9514L20.8541 10.4485H27V20ZM11.7665 20H0V11.2929L5.09533 0H9.7179L5.62062 10.4485H11.7665V20Z" fill="#0d0d0d"/></svg>
+        <blockquote class="review-quote">Fluid Glass are great. We have finalised a few projects with them in London and abroad, and always had very professional, punctual service from them. Would recommend to all other professionals and clients.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">
+            <img src="https://a.storyblok.com/f/287789457689273/1707x2560/1ea33e10fe/andreja-beric-review.webp/m/552x0/filters:format(avif,webp):quality(80)" alt="Andreja Beric" loading="lazy">
+          </div>
+          <div>
+            <span class="review-name">Andreja Beric</span>
+            <span class="review-role">Founder, Twist In Architecture</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Review 4 -->
+      <div class="review-hidden" id="review-3">
+        <svg viewBox="0 0 27 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="review-quote-icon" style="width:27px;height:20px;"><path d="M27 20H15.286V11.2929L20.3288 0H24.9514L20.8541 10.4485H27V20ZM11.7665 20H0V11.2929L5.09533 0H9.7179L5.62062 10.4485H11.7665V20Z" fill="#0d0d0d"/></svg>
+        <blockquote class="review-quote">The service from Fluid Glass has been excellent. Before, during and after installation of our glazing the team demonstrated professionalism and a high standard of execution. We would have no hesitation in recommending Fluid Glass.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">
+            <img src="https://a.storyblok.com/f/287789457689273/724x724/f4995c59b4/devon-mothersille.jpeg/m/552x0/filters:format(avif,webp):quality(80)" alt="Devon Mothersille" loading="lazy">
+          </div>
+          <div>
+            <span class="review-name">Devon Mothersille</span>
+            <span class="review-role">Homeowner</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Review 5 -->
+      <div class="review-hidden" id="review-4">
+        <svg viewBox="0 0 27 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="review-quote-icon" style="width:27px;height:20px;"><path d="M27 20H15.286V11.2929L20.3288 0H24.9514L20.8541 10.4485H27V20ZM11.7665 20H0V11.2929L5.09533 0H9.7179L5.62062 10.4485H11.7665V20Z" fill="#0d0d0d"/></svg>
+        <blockquote class="review-quote">What a superb company! Our experience has been superb. They offer a superb service, selection and pricing. They also have a new showroom where clients can visit which is really well laid out and comprehensive.</blockquote>
+        <div class="review-author">
+          <div>
+            <span class="review-name">Steven Goode</span>
+            <span class="review-role">Homeowner</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="google-rating">
+        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px;"><path d="M6.72 0.55C4.7 1.25 2.96 2.58 1.75 4.34C0.55 6.1 -0.07 8.21 0.01 10.34C0.09 12.48 0.85 14.53 2.18 16.21C3.51 17.88 5.34 19.08 7.4 19.64C9.08 20.07 10.83 20.09 12.51 19.69C14.04 19.35 15.45 18.62 16.6 17.57C17.81 16.44 18.68 15.01 19.13 13.42C19.62 11.69 19.7 9.88 19.38 8.12H9.99V12.02H15.43C15.32 12.64 15.09 13.23 14.74 13.76C14.4 14.29 13.95 14.74 13.43 15.1C12.77 15.54 12.02 15.83 11.23 15.97C10.44 16.11 9.63 16.11 8.85 15.97C8.05 15.8 7.29 15.47 6.63 14.998C5.56 14.24 4.76 13.17 4.34 11.93C3.91 10.67 3.91 9.3 4.34 8.04C4.64 7.16 5.13 6.36 5.79 5.69C6.54 4.91 7.48 4.36 8.53 4.09C9.57 3.81 10.67 3.83 11.7 4.15C12.51 4.39 13.24 4.83 13.85 5.41C14.47 4.8 15.08 4.19 15.69 3.57C16.01 3.24 16.35 2.93 16.66 2.59C15.73 1.72 14.64 1.05 13.45 0.61C11.28 -0.18 8.9 -0.2 6.72 0.55Z" fill="white"/></svg>
+        Google review score: 5.0 of 5
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA BANNER ═══ -->
+  <section class="cta">
+    <div class="inner">
+      <span class="label cta-label">Where vision meets execution</span>
+      <h2 class="display cta-heading">Every great build begins with understanding</h2>
+      <div class="cta-buttons">
+        <a href="https://fluid.glass/approach" class="btn btn-dark">
+          <svg viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="btn-arrow"><path d="M0.6 0V6H13.1" stroke="currentcolor" stroke-width="1.2"/><rect x="9.19" y="2.23" width="5.56" height="5.56" transform="rotate(45 9.19 2.23)" stroke="currentcolor" stroke-width="1.2"/></svg>
+          Our approach
+        </a>
+        <a href="https://fluid.glass/contact" class="btn btn-ghost">
+          <svg viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="btn-arrow"><path d="M0.6 0V6H13.1" stroke="currentcolor" stroke-width="1.2"/><rect x="9.19" y="2.23" width="5.56" height="5.56" transform="rotate(45 9.19 2.23)" stroke="currentcolor" stroke-width="1.2"/></svg>
+          Get in touch
+        </a>
+      </div>
+    </div>
+    <svg viewBox="0 0 428 610" fill="none" xmlns="http://www.w3.org/2000/svg" class="cta-deco">
+      <path d="M239.6 -1.5L0.6 118V610.5" stroke="currentcolor" stroke-width="1.2"/>
+      <path d="M427.6 224.5L283.1 296.5V611M427.6 535L281.1 611" stroke="currentcolor" stroke-width="1.2"/>
+    </svg>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer">
+    <div class="footer-bg">
+      <svg viewBox="0 0 388 62" fill="none" xmlns="http://www.w3.org/2000/svg" style="fill:white;">
+        <path d="M0 60.9537V1.19517H38.2924V9.90284H9.85151V27.2328H33.3238V35.6844H9.85151V60.9537H0Z"/>
+        <path d="M42.332 60.9537V1.19517H51.5839V60.9537H42.332Z"/>
+        <path d="M88.1516 39.0992V17.2446H97.4035V60.9537H89.2652L88.2373 55.4047C85.496 58.7341 81.4697 61.4659 74.7021 61.4659C65.3646 61.4659 57.3978 56.5145 57.3978 41.5749V17.2446H66.6496V40.5504C66.6496 49.0874 70.0762 53.4412 76.8438 53.4412C83.8683 53.4412 88.1516 48.1483 88.1516 39.0992Z"/>
+        <path d="M108.662 11.098C105.493 11.098 103.008 8.79305 103.008 5.54901C103.008 2.30497 105.493 0 108.662 0C111.832 0 114.316 2.30497 114.316 5.54901C114.316 8.79305 111.832 11.098 108.662 11.098ZM103.951 60.9537V17.2446H113.203V60.9537H103.951Z"/>
+        <path d="M153.026 23.3058V1.19517H162.278V60.9537H154.225L153.111 54.3803C150.284 58.2219 145.744 61.4659 138.805 61.4659C126.898 61.4659 118.074 53.0997 118.074 39.0992C118.074 25.6108 126.898 16.7324 138.805 16.7324C145.487 16.7324 150.199 19.4642 153.026 23.3058ZM140.347 53.6973C148.057 53.6973 153.111 47.7215 153.111 39.2699C153.111 30.5622 148.057 24.5864 140.347 24.5864C132.637 24.5864 127.583 30.5622 127.583 39.0992C127.583 47.7215 132.637 53.6973 140.347 53.6973Z"/>
+        <path d="M215.081 61.4659C198.291 61.4659 186.726 49.2581 186.726 31.0744C186.726 12.8908 198.034 0.682956 215.852 0.682956C229.73 0.682956 239.839 8.87842 241.638 21.5131H231.444C229.645 13.9152 223.905 9.30526 215.595 9.30526C204.202 9.30526 196.835 18.269 196.835 31.0744C196.835 43.8799 204.031 52.8436 215.51 52.8436C224.762 52.8436 232.215 47.6361 232.729 37.9894V36.5381H216.109V28.2573H242.152V60.9537H234.527L233.671 52.929C230.758 57.1975 224.59 61.4659 215.081 61.4659Z"/>
+        <path d="M249.609 60.9537V1.19517H258.86V60.9537H249.609Z"/>
+        <path d="M305.451 52.929H307.336V60.9537H302.453C296.456 60.9537 294.4 58.3073 294.4 53.9534C291.488 58.3926 287.033 61.4659 279.923 61.4659C270.328 61.4659 263.646 56.7706 263.646 48.6605C263.646 39.6968 270.157 34.66 282.407 34.66H293.458V32.0135C293.458 27.1475 289.946 24.1595 283.863 24.1595C278.381 24.1595 274.697 26.7206 274.012 30.5622H264.931C265.874 22.0253 273.241 16.7324 284.292 16.7324C295.942 16.7324 302.624 22.2814 302.624 32.6111V50.1118C302.624 52.3314 303.566 52.929 305.451 52.929ZM293.458 43.0262V41.4895H281.979C276.239 41.4895 273.069 43.6237 273.069 48.063C273.069 51.7338 276.153 54.2949 281.208 54.2949C288.918 54.2949 293.372 49.7703 293.458 43.0262Z"/>
+        <path d="M307.921 46.5263H317.001C317.344 51.0509 321.284 54.2949 327.966 54.2949C333.706 54.2949 337.475 52.0753 337.475 48.5752C337.475 43.8799 333.449 43.5384 326.681 42.6847C316.658 41.4895 308.777 39.3553 308.777 30.3061C308.777 22.0253 316.23 16.647 326.767 16.7324C337.561 16.7324 345.185 21.6838 345.785 30.6476H336.704C336.19 26.6352 332.421 23.8181 326.938 23.8181C321.456 23.8181 317.858 26.0377 317.858 29.5378C317.858 33.6355 322.055 34.1477 328.395 34.8307C338.417 36.0259 346.556 38.0747 346.556 47.8068C346.556 56.173 338.589 61.4659 327.966 61.4659C316.23 61.4659 308.178 56.0023 307.921 46.5263Z"/>
+        <path d="M348.434 46.5263H357.515C357.857 51.0509 361.798 54.2949 368.48 54.2949C374.219 54.2949 377.989 52.0753 377.989 48.5752C377.989 43.8799 373.962 43.5384 367.195 42.6847C357.172 41.4895 349.291 39.3553 349.291 30.3061C349.291 22.0253 356.744 16.647 367.281 16.7324C378.074 16.7324 385.699 21.6838 386.298 30.6476H377.218C376.704 26.6352 372.935 23.8181 367.452 23.8181C361.969 23.8181 358.371 26.0377 358.371 29.5378C358.371 33.6355 362.569 34.1477 368.908 34.8307C378.931 36.0259 387.069 38.0747 387.069 47.8068C387.069 56.173 379.102 61.4659 368.48 61.4659C356.744 61.4659 348.691 56.0023 348.434 46.5263Z"/>
+      </svg>
+    </div>
+    <div class="inner">
+      <div class="footer-logo">
+        <a href="https://fluid.glass/" aria-label="Fluid Glass">
+          <svg viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:28px;height:28px;color:white;">
+            <path d="M42 15.1935V10.5L21 0L0 10.5V31.5L21 42L42 31.5V19.95L25.2 11.55V23.2995L37.2435 29.1795L21 37.3065L4.2 28.9065V13.0935L21 4.6935L42 15.1935Z" fill="currentcolor"/>
+            <path d="M21 13.902V9.45L8.4 15.75V20.4435L21 13.902Z" fill="currentcolor"/>
+          </svg>
+        </a>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">©2026, Fluid Glass</span>
+        <div class="footer-nav">
+          <ul class="footer-links">
+            <li><a href="https://www.instagram.com/fluidglassuk/" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="https://www.youtube.com/@fluidglassuk/videos" target="_blank" rel="noopener">YouTube</a></li>
+            <li><a href="https://www.linkedin.com/company/fluidglassuk/" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a href="https://x.com/fluidglassuk/" target="_blank" rel="noopener">X</a></li>
+          </ul>
+          <ul class="footer-links">
+            <li><a href="https://fluid.glass/privacy-policy">Privacy policy</a></li>
+            <li><a href="https://fluid.glass/terms-conditions">Terms &amp; conditions</a></li>
+          </ul>
+        </div>
+        <a href="https://www.exoape.com/" target="_blank" rel="noopener" class="footer-credit">Crafted by Exo Ape</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    let current = 0;
+    const total = 5;
+
+    function changeReview(dir) {
+      document.getElementById('review-' + current).className = 'review-hidden';
+      current = (current + dir + total) % total;
+      document.getElementById('review-' + current).className = 'review-active';
+      document.getElementById('reviewCounter').textContent =
+        String(current + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+    }
+  </script>
+
+</body>
+</html>
