@@ -1,7 +1,8 @@
 {
   "rewrites": [
     { "source": "/team/:slug.html",                "destination": "/team/agent.html" },
-    { "source": "/henderson-communities/:slug.html","destination": "/henderson-communities/community-detail.html" }
+    { "source": "/henderson-communities/:slug.html","destination": "/henderson-communities/community-detail.html" },
+    { "source": "/api/mapbox-token",               "destination": "/api/sections?mapboxOnly=true" }
   ],
   "functions": {
     "api/listings.js":      { "maxDuration": 10 },

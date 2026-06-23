@@ -25,8 +25,15 @@ const DEFAULT_SECTIONS = [
 ];
 
 module.exports = async function handler(req, res) {
-  res.setHeader('Cache-Control', 'no-store');
   res.setHeader('Access-Control-Allow-Origin', '*');
+
+  // Lightweight token endpoint — routed here from /api/mapbox-token
+  if (req.query.mapboxOnly) {
+    res.setHeader('Cache-Control', 's-maxage=86400, stale-while-revalidate');
+    return res.json({ token: process.env.MAPBOX_PUBLIC_TOKEN || '' });
+  }
+
+  res.setHeader('Cache-Control', 'no-store');
 
   // PUT requires auth; GET is public
   if (req.method === 'PUT' && SECRET && req.headers['x-admin-secret'] !== SECRET) {
