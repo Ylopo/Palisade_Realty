@@ -709,6 +709,65 @@
       margin-top: 32px;
     }
 
+    /* ── Search fallback (shown while YLOPO widget is not yet active) ── */
+    .search-fallback {
+      margin-top: 48px;
+      background: linear-gradient(135deg, #111111 0%, #1a1a1a 100%);
+      border: 1px solid rgba(184,154,94,0.25);
+      border-radius: 8px;
+      padding: 56px 48px;
+      text-align: center;
+    }
+    .sf-tagline {
+      font-family: var(--font-body);
+      font-size: 18px;
+      color: var(--light-gray);
+      margin: 0 auto 36px;
+      max-width: 560px;
+      line-height: 1.6;
+    }
+    .sf-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+    .sf-tag {
+      font-family: var(--font-label);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(184,154,94,0.45);
+      border-radius: 4px;
+      padding: 9px 20px;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .sf-tag:hover { background: var(--gold); color: var(--black); border-color: var(--gold); }
+    .sf-cta {
+      display: inline-block;
+      font-family: var(--font-label);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--gold);
+      color: var(--black);
+      padding: 16px 48px;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+      box-shadow: 0 4px 24px rgba(184,154,94,0.3);
+    }
+    .sf-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+    @media (max-width: 600px) {
+      .search-fallback { padding: 40px 24px; }
+      .sf-tagline { font-size: 16px; }
+    }
+
     /* ── YLOPO WIDGET — prop-card visual override ─────────────────── */
     /* Use .YLOPO_resultsWidget .YLOPO-widget prefix (3-class specificity)
        to beat the widget's own runtime CSS (.YLOPO-widget = 2-class). */
@@ -1914,6 +1973,21 @@
     </div>
     <div class="listings-grid" id="customListingsGrid" style="display:none;margin-top:32px"></div>
     <div class="YLOPO_resultsWidget" id="ylopoWidget" data-search='{"locations":[{"city":"Las Vegas","state":"NV"},{"city":"Henderson","state":"NV"}],"propertyTypes":["house","condo","townhouse"],"status":"active","limit":6}'></div>
+
+    <!-- Search-forward fallback — shown when YLOPO widget is not yet active -->
+    <div id="searchFallback" class="search-fallback" style="display:none">
+      <p class="sf-tagline">Browse thousands of active listings across Las Vegas, Henderson &amp; beyond.</p>
+      <div class="sf-filters">
+        <a href="https://search.palisaderealty.com/?city=Las+Vegas" class="sf-tag" target="_blank">Las Vegas</a>
+        <a href="https://search.palisaderealty.com/?city=Henderson" class="sf-tag" target="_blank">Henderson</a>
+        <a href="https://search.palisaderealty.com/?city=Summerlin" class="sf-tag" target="_blank">Summerlin</a>
+        <a href="https://search.palisaderealty.com/?maxPrice=500000" class="sf-tag" target="_blank">Under $500K</a>
+        <a href="https://search.palisaderealty.com/?minPrice=500000&maxPrice=1000000" class="sf-tag" target="_blank">$500K – $1M</a>
+        <a href="https://search.palisaderealty.com/?minPrice=1000000" class="sf-tag" target="_blank">Luxury $1M+</a>
+      </div>
+      <a href="https://search.palisaderealty.com" class="sf-cta" target="_blank">Search All Homes</a>
+    </div>
+
     <div class="listings-cta reveal stagger-4">
       <a href="https://search.palisaderealty.com" class="btn-outline-gold">View All Listings</a>
     </div>
@@ -3382,5 +3456,18 @@
     })();
   </script>
   <script src="https://search.palisaderealty.com/build/js/widgets-1.0.0.js" defer></script>
+  <script>
+    // Show search fallback if YLOPO widget does not render within 4 seconds
+    (function () {
+      var fallback = document.getElementById('searchFallback');
+      var widget   = document.getElementById('ylopoWidget');
+      if (!fallback || !widget) return;
+      setTimeout(function () {
+        if (!widget.querySelector('.grid-view-item, .gallery-card-b, iframe')) {
+          fallback.style.display = 'block';
+        }
+      }, 4000);
+    })();
+  </script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-﻿import { defineConfig } from 'sanity'
+import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
 import { visionTool } from '@sanity/vision'
 import { schemaTypes } from './schemas'
@@ -7,7 +7,7 @@ export default defineConfig({
   name: 'palisade-realty',
   title: 'Palisade Realty — Admin',
 
-  projectId: '6thfwh73',
+  projectId: '9senj6qp',
   dataset: 'production',
 
   plugins: [
