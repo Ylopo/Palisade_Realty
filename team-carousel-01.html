@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Team — Palisade Realty</title>
+
+  <!-- Palisade Realty brand fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Manrope:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ═══════════════════════════════════════════════════════
+       BRAND TOKENS  ·  Palisade Realty
+    ═══════════════════════════════════════════════════════ */
+    :root {
+      --gold:       #b89a5e;
+      --gold-hi:    #cbb278;
+      --gold-dim:   rgba(184,154,94,.12);
+      --near-black: #212121;
+      --white:      #ffffff;
+      --muted:      #8a8070;   /* warm-biased secondary text */
+      --border:     rgba(0,0,0,.1);
+
+      --font-disp: 'Playfair Display', serif;
+      --font-body: 'Manrope', system-ui, sans-serif;
+      --font-ui:   'Inter', system-ui, sans-serif;
+
+      --card-r:    18px;
+      --photo-r:   12px;
+
+      /* Carousel sizing — JS overrides per breakpoint */
+      --card-w:       300px;
+      --card-h:       460px;
+      --photo-h-act:  262px;   /* photo height when active */
+      --stage-h:      540px;
+      --step-px:      332;     /* unitless, JS reads this */
+    }
+
+    /* ─── Reset ─────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    body {
+      font-family: var(--font-body);
+      background: var(--white);
+      min-height: 100vh;
+    }
+    img    { display: block; }
+    a      { text-decoration: none; color: inherit; }
+    button { cursor: pointer; background: none; border: none; appearance: none; }
+
+    /* ─── Section ────────────────────────────────────── */
+    #team-carousel {
+      background: var(--white);
+      padding: 88px 0 72px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ─── Section header ─────────────────────────────── */
+    .tc-hd {
+      text-align: center;
+      padding: 0 24px;
+      margin-bottom: 52px;
+    }
+    .tc-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .tc-eyebrow::before,
+    .tc-eyebrow::after {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--gold);
+      opacity: .5;
+    }
+    .tc-title {
+      font-family: var(--font-disp);
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 400;
+      letter-spacing: -.02em;
+      line-height: 1.0;
+      color: var(--near-black);
+      text-wrap: balance;
+    }
+    .tc-title em {
+      font-style: normal;
+      color: var(--gold);
+    }
+    .tc-sub {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.75;
+      color: rgba(0,0,0,.42);
+      max-width: 380px;
+      margin: 12px auto 0;
+    }
+
+    /* ─── Carousel outer (arrows live here) ─────────── */
+    .tc-outer { position: relative; }
+
+    /* ─── Stage ──────────────────────────────────────── */
+    .tc-stage {
+      position: relative;
+      width: 100%;
+      height: var(--stage-h);
+      overflow: hidden;
+      cursor: grab;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .tc-stage.dragging { cursor: grabbing; }
+
+    /* ─── Card base ──────────────────────────────────── */
+    .tc-card {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: var(--card-w);
+      height: var(--card-h);
+      background: var(--white);
+      border-radius: var(--card-r);
+      overflow: hidden;
+      will-change: transform, opacity;
+      transition:
+        transform  .62s cubic-bezier(.4, 0, .2, 1),
+        opacity    .62s ease,
+        box-shadow .62s ease;
+    }
+
+    /* ─── Card inner layout ──────────────────────────── */
+    .card-inner {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ─── Photo area ─────────────────────────────────── */
+    /*
+       Inactive: photo fills 100% of card height — no content visible.
+       Active:   photo shrinks to var(--photo-h-act), revealing the
+                 card-body below.  Margin + radius also animate to
+                 create the "pull-inset" effect from the reference.
+    */
+    .card-photo {
+      flex-shrink: 0;
+      overflow: hidden;
+      position: relative;
+      /* Inactive: fills 100% of card, flush to edges */
+      height: 100%;
+      margin: 0;
+      border-radius: var(--card-r);
+      transition:
+        height        .62s cubic-bezier(.4, 0, .2, 1),
+        margin        .62s cubic-bezier(.4, 0, .2, 1),
+        border-radius .62s cubic-bezier(.4, 0, .2, 1);
+    }
+    /* Active: photo pulls inset + inner radius visible */
+    .tc-card.is-active .card-photo {
+      height: var(--photo-h-act);
+      margin: 8px 8px 0;
+      border-radius: var(--photo-r);
+    }
+
+    .card-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      pointer-events: none;
+      draggable: false;
+    }
+
+    /* ─── Card body ──────────────────────────────────── */
+    /*
+       Hidden on inactive (photo covers full card).
+       Fades in after photo shrinks on activation.
+    */
+    .card-body {
+      flex: 1;
+      padding: 16px 18px 18px;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: opacity .32s ease .18s;
+    }
+    .tc-card.is-active .card-body { opacity: 1; }
+
+    /* ── Name (edit in TEAM array) ── */
+    .card-name {
+      font-family: var(--font-disp);
+      font-size: 22px;
+      font-weight: 400;
+      letter-spacing: -.01em;
+      color: var(--near-black);
+      line-height: 1.1;
+      margin-bottom: 7px;
+      text-wrap: balance;
+    }
+
+    /* ── Bio description (edit in TEAM array) ── */
+    .card-bio {
+      font-family: var(--font-body);
+      font-size: 12.5px;
+      font-weight: 400;
+      line-height: 1.65;
+      color: var(--muted);
+      margin-bottom: 0;
+      flex: 1;
+    }
+
+    /* ── Bottom row: role tag + CTA button ── */
+    .card-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(0,0,0,.07);
+    }
+
+    /* Role/specialty tag pill (outlined) */
+    /* ── Edit role in TEAM array ── */
+    .card-tag {
+      font-family: var(--font-ui);
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: .05em;
+      color: var(--gold);
+      padding: 5px 12px;
+      border: 1px solid rgba(184,154,94,.45);
+      border-radius: 50px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 50%;
+    }
+
+    /* CTA button (dark pill) */
+    /* ── Edit href in TEAM array ── */
+    .card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 7px 16px;
+      border-radius: 50px;
+      background: var(--near-black);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      flex-shrink: 0;
+      transition:
+        background .22s ease,
+        transform  .16s ease;
+    }
+    .card-cta:hover  { background: #3a3a3a; transform: translateY(-1px); }
+    .card-cta:active { transform: translateY(0); }
+    .card-cta:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
+    }
+
+    /* ─── Navigation arrows ──────────────────────────── */
+    .tc-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: var(--near-black);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 30;
+      transition:
+        border-color .24s ease,
+        color        .24s ease,
+        background   .24s ease,
+        transform    .15s ease;
+    }
+    .tc-arrow:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: var(--white);
+    }
+    .tc-arrow:active  { transform: translateY(-50%) scale(.91); }
+    .tc-arrow:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
+    .tc-arrow svg { pointer-events: none; }
+    #tcPrev { left:  clamp(10px, 3vw, 52px); }
+    #tcNext { right: clamp(10px, 3vw, 52px); }
+
+    /* ─── Progress footer ────────────────────────────── */
+    .tc-foot {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      margin-top: 32px;
+      padding: 0 24px;
+    }
+    .tc-cnt {
+      font-family: var(--font-ui);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .2em;
+      min-width: 44px;
+      color: rgba(0,0,0,.3);
+    }
+    .tc-cnt-cur { text-align: right; color: rgba(0,0,0,.55); }
+    .tc-cnt-tot { text-align: left; }
+    .tc-track {
+      width: 140px;
+      max-width: 36vw;
+      height: 1px;
+      background: rgba(0,0,0,.1);
+      position: relative;
+      overflow: hidden;
+    }
+    .tc-fill {
+      position: absolute;
+      left: 0; top: 0;
+      height: 100%;
+      background: var(--gold);
+      transition: width .4s ease;
+    }
+
+    /* ─── Reduced motion ─────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      .tc-card,
+      .card-photo,
+      .card-body,
+      .card-cta,
+      .tc-arrow,
+      .tc-fill { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════
+     TEAM MEMBER CAROUSEL  ·  Palisade Realty
+     File: team-carousel-01.html
+
+     Quick edit guide:
+       • Team data  → TEAM array in <script> below
+       • Header text → .tc-hd in the HTML below
+════════════════════════════════════════════════════ -->
+<section id="team-carousel">
+
+  <!-- ── SECTION HEADER
+       Edit eyebrow, title, and subtitle here ── -->
+  <header class="tc-hd">
+    <p class="tc-eyebrow">Our Team</p>
+    <h2 class="tc-title">Meet Our <em>Agents</em></h2>
+    <p class="tc-sub">Experienced professionals dedicated to finding your perfect Las Vegas property.</p>
+  </header>
+
+  <!-- ── CAROUSEL ─────────────────────────────────── -->
+  <div class="tc-outer">
+    <div class="tc-stage" id="tcStage" role="region" aria-label="Team member carousel">
+      <!-- Cards injected by JavaScript -->
+    </div>
+
+    <button class="tc-arrow" id="tcPrev" aria-label="Previous agent">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M10 12.5 5 8l5-4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <button class="tc-arrow" id="tcNext" aria-label="Next agent">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M6 3.5 11 8l-5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- ── PROGRESS COUNTER ──────────────────────────── -->
+  <div class="tc-foot" aria-hidden="true">
+    <span class="tc-cnt tc-cnt-cur" id="tcCur">01</span>
+    <div class="tc-track"><div class="tc-fill" id="tcFill"></div></div>
+    <span class="tc-cnt tc-cnt-tot" id="tcTot">06</span>
+  </div>
+
+</section>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   TEAM DATA
+   ═══════════════════════════════════════════════════════════
+
+   Edit each object below to match your real agents.
+
+   ─ name  : Full name (Playfair Display font)
+   ─ role  : Shown as the outlined tag in the bottom row
+   ─ bio   : 1–2 sentences shown on the active card
+   ─ phone : tel: link — used for the "Call Now" button
+   ─ photo : Portrait image URL (~360×480px recommended)
+             Replace placehold.co URLs with real headshots.
+
+═══════════════════════════════════════════════════════════ */
+const TEAM = [
+  {
+    name:  'Alexandra Hartwell',
+    role:  'Principal Broker',
+    bio:   '18-year Las Vegas luxury specialist. Closed over $450M in residential transactions, known for white-glove service.',
+    phone: 'tel:+17025550101',
+    /* ── PHOTO: replace with real headshot URL ── */
+    photo: 'https://placehold.co/360x480/1c1a17/b89a5e?text=AH',
+  },
+  {
+    name:  'Marcus Chen',
+    role:  'Senior Agent',
+    bio:   'Sharp negotiator with deep Henderson and Summerlin market knowledge since 2016.',
+    phone: 'tel:+17025550102',
+    /* ── PHOTO: replace with real headshot URL ── */
+    photo: 'https://placehold.co/360x480/181613/b89a5e?text=MC',
+  },
+  {
+    name:  'Sophia Laurent',
+    role:  'Luxury Specialist',
+    bio:   'Curates Summerlin estates with a background in luxury hospitality and meticulous attention to detail.',
+    phone: 'tel:+17025550103',
+    /* ── PHOTO: replace with real headshot URL ── */
+    photo: 'https://placehold.co/360x480/1e1b17/b89a5e?text=SL',
+  },
+  {
+    name:  'James Okafor',
+    role:  "Buyer's Agent",
+    bio:   'Guides first-time and move-up buyers through the full purchase process with clarity and patience.',
+    phone: 'tel:+17025550104',
+    /* ── PHOTO: replace with real headshot URL ── */
+    photo: 'https://placehold.co/360x480/191714/b89a5e?text=JO',
+  },
+  {
+    name:  'Priya Mehta',
+    role:  'Investment Consultant',
+    bio:   "Analytical approach to investment properties. Helped clients build consistent-return portfolios across the valley.",
+    phone: 'tel:+17025550105',
+    /* ── PHOTO: replace with real headshot URL ── */
+    photo: 'https://placehold.co/360x480/181614/b89a5e?text=PM',
+  },
+  {
+    name:  'Tyler Brooks',
+    role:  'Relocation Specialist',
+    bio:   'Facilitated over 200 out-of-state relocations, making the move to Las Vegas seamless from day one.',
+    phone: 'tel:+17025550106',
+    /* ── PHOTO: replace with real headshot URL ── */
+    photo: 'https://placehold.co/360x480/1a1815/b89a5e?text=TB',
+  },
+];
+
+/* ═══════════════════════════════════════════════════════════
+   CAROUSEL ENGINE — no editing needed below this line
+═══════════════════════════════════════════════════════════ */
+(function () {
+  'use strict';
+
+  /*
+     Slot appearance per distance from active card.
+     [dist, scale, opacity, box-shadow]
+     On white bg: side cards are full-opacity — size alone creates hierarchy.
+  */
+  const SLOT_STYLES = [
+    [0,        1.00, 1.00, '0 24px 64px rgba(0,0,0,.10), 0 4px 16px rgba(0,0,0,.06)'],
+    [1,        0.88, 1.00, '0 4px 20px rgba(0,0,0,.07)'],
+    [2,        0.76, 0.55, '0 2px 8px rgba(0,0,0,.04)'],
+    [Infinity, 0.65, 0.00, 'none'],
+  ];
+
+  function slotStyle(dist) {
+    for (const [d, scale, opacity, shadow] of SLOT_STYLES) {
+      if (dist <= d) return { scale, opacity, shadow };
+    }
+    return { scale: 0.65, opacity: 0, shadow: 'none' };
+  }
+
+  /* ── Responsive CSS vars ──────────────────────────── */
+  function applyConfig() {
+    const w    = window.innerWidth;
+    const root = document.documentElement;
+    if (w <= 480) {
+      root.style.setProperty('--card-w',       '232px');
+      root.style.setProperty('--card-h',       '400px');
+      root.style.setProperty('--photo-h-act',  '222px');
+      root.style.setProperty('--stage-h',      '454px');
+      root.style.setProperty('--step-px',      '258');
+    } else if (w <= 768) {
+      root.style.setProperty('--card-w',       '262px');
+      root.style.setProperty('--card-h',       '434px');
+      root.style.setProperty('--photo-h-act',  '244px');
+      root.style.setProperty('--stage-h',      '492px');
+      root.style.setProperty('--step-px',      '294');
+    } else {
+      root.style.setProperty('--card-w',       '300px');
+      root.style.setProperty('--card-h',       '460px');
+      root.style.setProperty('--photo-h-act',  '262px');
+      root.style.setProperty('--stage-h',      '540px');
+      root.style.setProperty('--step-px',      '332');
+    }
+  }
+
+  function getStep() {
+    return (
+      parseInt(
+        getComputedStyle(document.documentElement).getPropertyValue('--step-px')
+      ) || 332
+    );
+  }
+
+  /* ── DOM refs ─────────────────────────────────────── */
+  const stage    = document.getElementById('tcStage');
+  const btnPrev  = document.getElementById('tcPrev');
+  const btnNext  = document.getElementById('tcNext');
+  const elCur    = document.getElementById('tcCur');
+  const elTot    = document.getElementById('tcTot');
+  const elFill   = document.getElementById('tcFill');
+
+  const N = TEAM.length;
+  let cur = 0;
+
+  /* ── Build card ───────────────────────────────────── */
+  function buildCard(member, idx) {
+    const el = document.createElement('div');
+    el.className = 'tc-card';
+    el.setAttribute('role', 'article');
+    el.setAttribute('aria-label', member.name + ', ' + member.role);
+
+    el.innerHTML = `
+      <div class="card-inner">
+
+        <!-- ── PHOTO
+             Replace member.photo in the TEAM array.
+             Recommended: 360×480px portrait.            ── -->
+        <div class="card-photo">
+          <img
+            src="${member.photo}"
+            alt="Headshot of ${member.name}"
+            loading="lazy"
+            draggable="false"
+          >
+        </div>
+
+        <!-- Card body — only visible on the active card -->
+        <div class="card-body">
+
+          <!-- ── Name (edit in TEAM array) ── -->
+          <h3 class="card-name">${member.name}</h3>
+
+          <!-- ── Bio (edit in TEAM array) ── -->
+          <p class="card-bio">${member.bio}</p>
+
+          <!-- ── Bottom row: role tag + call button ── -->
+          <div class="card-bottom">
+            <!-- Role tag pill (edit role in TEAM array) -->
+            <span class="card-tag">${member.role}</span>
+            <!-- CTA button (edit phone in TEAM array) -->
+            <a class="card-cta"
+               href="${member.phone}"
+               aria-label="Call ${member.name}">
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true">
+                <path d="M10.5 7.7c-.83 0-1.65-.14-2.42-.4a.56.56 0 0 0-.55.13l-1.5 1.5A8.4 8.4 0 0 1 2.08 4.47l1.5-1.5a.56.56 0 0 0 .13-.54A7.67 7.67 0 0 1 3.3.5a.56.56 0 0 0-.55-.5H.56A.56.56 0 0 0 0 .56C0 6.33 4.67 11 10.44 11c.3 0 .56-.25.56-.56V8.25a.56.56 0 0 0-.5-.55Z" fill="currentColor"/>
+              </svg>
+              Call Now
+            </a>
+          </div>
+
+        </div>
+      </div>`;
+
+    return el;
+  }
+
+  /* ── Init ─────────────────────────────────────────── */
+  applyConfig();
+  const cards = TEAM.map((m, i) => {
+    const el = buildCard(m, i);
+    stage.appendChild(el);
+    return el;
+  });
+  elTot.textContent = String(N).padStart(2, '0');
+
+  /* ── Render ───────────────────────────────────────── */
+  function render() {
+    const step = getStep();
+
+    cards.forEach((card, i) => {
+      let slot = i - cur;
+      if (slot >  N / 2) slot -= N;
+      if (slot < -N / 2) slot += N;
+
+      const dist  = Math.abs(slot);
+      const st    = slotStyle(dist);
+      const tx    = slot * step;
+
+      card.style.transform     = `translateX(calc(-50% + ${tx}px)) translateY(-50%) scale(${st.scale})`;
+      card.style.opacity       = st.opacity;
+      card.style.zIndex        = 10 - dist;
+      card.style.boxShadow     = st.shadow;
+      card.style.pointerEvents = dist <= 1 ? 'auto' : 'none';
+      card.classList.toggle('is-active', dist === 0);
+    });
+
+    elCur.textContent = String(cur + 1).padStart(2, '0');
+    elFill.style.width = ((cur + 1) / N * 100) + '%';
+  }
+
+  /* ── Navigate ─────────────────────────────────────── */
+  function go(dir) {
+    cur = (cur + dir + N) % N;
+    render();
+  }
+
+  /* ── Arrows ───────────────────────────────────────── */
+  btnPrev.addEventListener('click', () => go(-1));
+  btnNext.addEventListener('click', () => go(+1));
+
+  /* ── Click-to-focus on non-active cards ───────────── */
+  cards.forEach((card, i) => {
+    card.addEventListener('click', function (e) {
+      let slot = i - cur;
+      if (slot >  N / 2) slot -= N;
+      if (slot < -N / 2) slot += N;
+      if (Math.abs(slot) !== 0) {
+        e.preventDefault();
+        cur = i;
+        render();
+      }
+    });
+  });
+
+  /* ── Keyboard ─────────────────────────────────────── */
+  document.addEventListener('keydown', function (e) {
+    const r = stage.getBoundingClientRect();
+    if (r.bottom < 0 || r.top > window.innerHeight) return;
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); go(-1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(+1); }
+  });
+
+  /* ── Drag / swipe ─────────────────────────────────── */
+  const DRAG_MIN = 55;
+  let dragStartX = 0, dragLastX = 0, isDragging = false;
+
+  function startDrag(x) {
+    dragStartX = dragLastX = x;
+    isDragging = true;
+    stage.classList.add('dragging');
+  }
+  function moveDrag(x) { if (isDragging) dragLastX = x; }
+  function endDrag() {
+    if (!isDragging) return;
+    isDragging = false;
+    stage.classList.remove('dragging');
+    if (Math.abs(dragLastX - dragStartX) >= DRAG_MIN) go(dragLastX < dragStartX ? 1 : -1);
+  }
+
+  stage.addEventListener('mousedown',  e => startDrag(e.clientX));
+  window.addEventListener('mousemove', e => moveDrag(e.clientX));
+  window.addEventListener('mouseup',   endDrag);
+  stage.addEventListener('touchstart', e => startDrag(e.touches[0].clientX), { passive: true });
+  stage.addEventListener('touchmove',  e => moveDrag(e.touches[0].clientX),  { passive: true });
+  stage.addEventListener('touchend',   endDrag, { passive: true });
+
+  /* ── Responsive resize ────────────────────────────── */
+  let resizeTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () { applyConfig(); render(); }, 100);
+  });
+
+  /* ── Auto-advance (disabled — uncomment to enable)
+  var AUTO_MS   = 5000;
+  var autoTimer = setInterval(() => go(1), AUTO_MS);
+  stage.addEventListener('mouseenter', () => clearInterval(autoTimer));
+  stage.addEventListener('mouseleave', () => { autoTimer = setInterval(() => go(1), AUTO_MS); });
+  ── */
+
+  /* ── Initial render ───────────────────────────────── */
+  render();
+
+}());
+</script>
+
+</body>
+</html>

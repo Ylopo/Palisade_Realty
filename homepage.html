@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Palisade Realty | San Diego Luxury Real Estate</title>
+  <meta name="description" content="Experience the new way of buying and selling real estate in San Diego with Palisade Realty. Expert agents, exclusive listings, and unmatched local market knowledge.">
+  <meta property="og:title" content="Palisade Realty | San Diego Luxury Real Estate">
+  <meta property="og:description" content="Experience the new way of buying and selling real estate in San Diego's best neighborhoods.">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Mapbox GL JS -->
+  <link href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
+
+  <!-- Ylopo Widget Config -->
+  <script>
+    var YLOPO_HOSTNAME = 'search.palisaderealty.com';
+    window.YLOPO_WIDGETS = { domain: 'search.palisaderealty.com' };
+  </script>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="homepage.css">
+
+  <!-- Supplemental layout styles -->
+  <style>
+    .about-outer    { background: #f5f5f5; }
+    .about-outer .about { background: transparent; }
+    .listings-outer { background: #f5f5f5; }
+    .listings-outer .listings { background: transparent; }
+    /* Fallback so cards are visible if images are slow/missing */
+    .community-card { background: #1a0008; }
+    .blog-card-image { background: #28000c; }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<header class="site-header" id="site-header">
+
+  <!-- Left Nav -->
+  <nav class="nav-links" aria-label="Primary navigation left">
+    <a href="#listings">Buy</a>
+    <a href="#about">Sell</a>
+    <a href="#communities">Communities</a>
+    <a href="#testimonials">Testimonials</a>
+  </nav>
+
+  <!-- Center Logo -->
+  <a href="/" class="nav-logo" aria-label="Palisade Realty home">
+    <img src="images/logo.png" alt="Palisade Realty">
+  </a>
+
+  <!-- Right Nav -->
+  <nav class="nav-links nav-links--right" aria-label="Primary navigation right">
+    <a href="#about">Financing</a>
+    <a href="#team-carousel">Team</a>
+    <a href="#blog">Resources</a>
+    <a href="#cta">Contact</a>
+  </nav>
+
+  <!-- Hamburger (mobile) -->
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Open navigation menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+</header>
+
+<!-- Mobile nav drawer -->
+<div class="nav-mobile-drawer" id="nav-mobile-drawer" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+  <a href="#listings">Buy</a>
+  <a href="#about">Sell</a>
+  <a href="#communities">Communities</a>
+  <a href="#testimonials">Testimonials</a>
+  <a href="#about">Financing</a>
+  <a href="#team-carousel">Team</a>
+  <a href="#blog">Resources</a>
+  <a href="#cta">Contact</a>
+</div>
+
+<main>
+
+<!-- ============================================================
+     HERO BILLBOARD
+     ============================================================ -->
+<section class="hero" id="hero" aria-label="Hero — San Diego luxury real estate">
+
+  <!-- Background video -->
+  <div class="hero-bg" aria-hidden="true">
+    <video class="hero-video" autoplay muted loop playsinline preload="metadata">
+      <source src="assets/images/bg-video.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="hero-content">
+
+    <!-- Decorative crest -->
+    <div class="hero-crest" aria-hidden="true">
+      <img src="assets/images/graphic-logo-wht.png" alt="">
+    </div>
+
+    <h1 class="hero-title">PALISADE REALTY</h1>
+
+    <p class="hero-subtitle">
+      Experience the new way of Buying and Selling real estate<br>in today's shifting market.
+    </p>
+
+    <div class="hero-ctas">
+      <a href="https://search.palisaderealty.com/" class="btn btn-brand-lg" target="_blank" rel="noopener noreferrer">Search with HomeMatch AI</a>
+      <a href="#cta" class="btn btn-outline-white">Let's Connect</a>
+    </div>
+  </div>
+
+  <!-- Search Bar (redirects to Ylopo search site) -->
+  <form class="hero-search" id="hero-search-form" role="search" action="https://search.palisaderealty.com/" method="GET">
+
+    <!-- Col 1: City / Neighborhood -->
+    <div class="hero-search-field">
+      <label class="hero-search-label" for="hero-q">Enter City / Neighborhood</label>
+      <input
+        id="hero-q"
+        name="q"
+        class="hero-search-input"
+        type="text"
+        placeholder="City or Neighborhood"
+        autocomplete="off"
+      >
+    </div>
+
+    <!-- Col 2: Property Type -->
+    <div class="hero-search-field hero-search-field--select">
+      <label class="hero-search-label" for="hero-type">Property Type</label>
+      <div class="hero-search-select-wrap">
+        <select id="hero-type" name="propertyType" class="hero-search-select">
+          <option value="">Residential</option>
+          <option value="condo">Condo</option>
+          <option value="townhouse">Townhouse</option>
+          <option value="multi-family">Multi-Family</option>
+          <option value="land">Land</option>
+        </select>
+        <svg class="hero-search-chevron" width="14" height="9" viewBox="0 0 14 9" fill="none" aria-hidden="true">
+          <path d="M1 1l6 6 6-6" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Col 3: Price Limit -->
+    <div class="hero-search-field hero-search-field--select">
+      <label class="hero-search-label" for="hero-price">Price Limit</label>
+      <div class="hero-search-select-wrap">
+        <select id="hero-price" name="maxPrice" class="hero-search-select">
+          <option value="">Any Price</option>
+          <option value="500000">Under $500K</option>
+          <option value="1000000">Under $1M</option>
+          <option value="2000000">Under $2M</option>
+          <option value="5000000">Under $5M</option>
+          <option value="10000000">Under $10M</option>
+        </select>
+        <svg class="hero-search-chevron" width="14" height="9" viewBox="0 0 14 9" fill="none" aria-hidden="true">
+          <path d="M1 1l6 6 6-6" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Col 4: Search Button -->
+    <button class="hero-search-btn" type="submit" aria-label="Search properties">
+      <svg class="hero-search-btn-icon" width="19" height="19" viewBox="0 0 19 19" fill="none" aria-hidden="true">
+        <circle cx="8.5" cy="8.5" r="6" stroke="currentColor" stroke-width="2"/>
+        <path d="M13 13L17 17" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+      </svg>
+      SEARCH
+    </button>
+
+  </form>
+
+</section>
+
+<!-- ============================================================
+     COMMUNITIES — FLEX-EXPAND HOVER
+     ============================================================ -->
+<section class="communities" id="communities" aria-labelledby="communities-heading">
+
+  <span class="communities-eyebrow reveal">Where We Work</span>
+
+  <h2 class="communities-heading section-title reveal stagger-1" id="communities-heading">
+    Explore Our Communities
+  </h2>
+
+  <div class="communities-cards" role="list">
+
+    <!-- Downtown San Diego -->
+    <article class="community-card" role="listitem">
+      <div class="community-card-bg" aria-hidden="true">
+        <img src="assets/images/community-downtown-san-diego.jpg" alt="Downtown San Diego cityscape" loading="lazy">
+        <div class="community-card-overlay"></div>
+      </div>
+      <div class="community-card-content">
+        <h3 class="community-card-name">Downtown San Diego</h3>
+        <div class="community-card-accent"></div>
+        <p class="community-card-desc">Urban sophistication meets coastal living. World-class dining, nightlife, and walkable neighborhoods in the heart of America's Finest City.</p>
+        <a href="https://palisaderealty.com/communities/downtown-san-diego-real-estate" class="community-explore-btn" target="_blank" rel="noopener noreferrer">
+          Explore
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- La Jolla -->
+    <article class="community-card" role="listitem">
+      <div class="community-card-bg" aria-hidden="true">
+        <img src="assets/images/community-la-jolla.jpg" alt="La Jolla coastline" loading="lazy">
+        <div class="community-card-overlay"></div>
+      </div>
+      <div class="community-card-content">
+        <h3 class="community-card-name">La Jolla</h3>
+        <div class="community-card-accent"></div>
+        <p class="community-card-desc">San Diego's jewel by the sea. Cliff-top estates, pristine coves, and an unrivaled blend of luxury living and natural beauty.</p>
+        <a href="https://palisaderealty.com/communities/la-jolla-real-estate" class="community-explore-btn" target="_blank" rel="noopener noreferrer">
+          Explore
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- Coronado -->
+    <article class="community-card" role="listitem">
+      <div class="community-card-bg" aria-hidden="true">
+        <img src="assets/images/community-coronado.jpg" alt="Coronado Island" loading="lazy">
+        <div class="community-card-overlay"></div>
+      </div>
+      <div class="community-card-content">
+        <h3 class="community-card-name">Coronado</h3>
+        <div class="community-card-accent"></div>
+        <p class="community-card-desc">Island elegance and iconic sunsets. A timeless community known for its historic charm, stunning beaches, and world-famous Hotel del Coronado.</p>
+        <a href="https://palisaderealty.com/communities/coronado-real-estate" class="community-explore-btn" target="_blank" rel="noopener noreferrer">
+          Explore
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- Rancho Santa Fe -->
+    <article class="community-card" role="listitem">
+      <div class="community-card-bg" aria-hidden="true">
+        <img src="assets/images/community-rancho-santa-fe.jpg" alt="Rancho Santa Fe estate" loading="lazy">
+        <div class="community-card-overlay"></div>
+      </div>
+      <div class="community-card-content">
+        <h3 class="community-card-name">Rancho Santa Fe</h3>
+        <div class="community-card-accent"></div>
+        <p class="community-card-desc">Where privacy meets prestige. Rolling hills, equestrian estates, and some of San Diego's most exclusive addresses await discerning buyers.</p>
+        <a href="https://palisaderealty.com/communities/rancho-santa-fe-real-estate" class="community-explore-btn" target="_blank" rel="noopener noreferrer">
+          Explore
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </article>
+    <!-- Rancho Santa Fe -->
+    <article class="community-card" role="listitem">
+      <div class="community-card-bg" aria-hidden="true">
+        <img src="assets/images/community-rancho-santa-fe.jpg" alt="Rancho Santa Fe estate" loading="lazy">
+        <div class="community-card-overlay"></div>
+      </div>
+      <div class="community-card-content">
+        <h3 class="community-card-name">Rancho Santa Fe</h3>
+        <div class="community-card-accent"></div>
+        <p class="community-card-desc">Where privacy meets prestige. Rolling hills, equestrian estates, and some of San Diego's most exclusive addresses await discerning buyers.</p>
+        <a href="https://palisaderealty.com/communities/rancho-santa-fe-real-estate" class="community-explore-btn" target="_blank" rel="noopener noreferrer">
+          Explore
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </article>
+
+  </div>
+
+</section>
+
+<!-- ============================================================
+     LET'S FIND YOUR PLACE — MAPBOX
+     ============================================================ -->
+<section class="find-your-place" id="find-your-place" aria-labelledby="fyp-heading">
+
+  <div class="fyp-left">
+    <span class="eyebrow reveal">Explore the Region</span>
+    <h2 class="fyp-title reveal stagger-1" id="fyp-heading">Let's Find Your Place</h2>
+    <p class="fyp-subtitle reveal stagger-2">Click any location to dive deeper into what it's really like to live there.</p>
+
+    <ul class="lfyp-cities reveal stagger-3" aria-label="San Diego communities">
+      <li><a href="#" data-slug="downtown-san-diego"  data-city="Downtown San Diego"  tabindex="0">Downtown San Diego</a></li>
+      <li><a href="#" data-slug="mission-hills"        data-city="Mission Hills"        tabindex="0">Mission Hills</a></li>
+      <li><a href="#" data-slug="point-loma"           data-city="Point Loma"           tabindex="0">Point Loma</a></li>
+      <li><a href="#" data-slug="coronado"             data-city="Coronado"             tabindex="0">Coronado</a></li>
+      <li><a href="#" data-slug="pacific-mission-beach" data-city="Pacific &amp; Mission Beach" tabindex="0">Pacific &amp; Mission Beach</a></li>
+      <li><a href="#" data-slug="mission-valley"       data-city="Mission Valley"       tabindex="0">Mission Valley</a></li>
+      <li><a href="#" data-slug="la-jolla"             data-city="La Jolla"             tabindex="0">La Jolla</a></li>
+      <li><a href="#" data-slug="del-mar"              data-city="Del Mar"              tabindex="0">Del Mar</a></li>
+      <li><a href="#" data-slug="carmel-valley"        data-city="Carmel Valley"        tabindex="0">Carmel Valley</a></li>
+      <li><a href="#" data-slug="rancho-santa-fe"      data-city="Rancho Santa Fe"      tabindex="0">Rancho Santa Fe</a></li>
+      <li><a href="#" data-slug="solana-beach"         data-city="Solana Beach"         tabindex="0">Solana Beach</a></li>
+      <li><a href="#" data-slug="encinitas"            data-city="Encinitas"            tabindex="0">Encinitas</a></li>
+      <li><a href="#" data-slug="carlsbad"             data-city="Carlsbad"             tabindex="0">Carlsbad</a></li>
+      <li><a href="#" data-slug="oceanside"            data-city="Oceanside"            tabindex="0">Oceanside</a></li>
+      <li><a href="#" data-slug="spring-valley"        data-city="Spring Valley"        tabindex="0">Spring Valley</a></li>
+      <li><a href="#" data-slug="chula-vista"          data-city="Chula Vista"          tabindex="0">Chula Vista</a></li>
+      <li><a href="#" data-slug="la-mesa"              data-city="La Mesa"              tabindex="0">La Mesa</a></li>
+      <li><a href="#" data-slug="el-cajon"             data-city="El Cajon"             tabindex="0">El Cajon</a></li>
+      <li><a href="#" data-slug="orange-county"        data-city="Orange County"        tabindex="0">Orange County</a></li>
+    </ul>
+
+    <div class="reveal stagger-4">
+      <a href="#communities" class="btn btn-brand">See All Communities</a>
+    </div>
+  </div>
+
+  <div class="fyp-right reveal stagger-2">
+    <div class="lfyp-map-wrap">
+      <div id="lfyp-map" role="application" aria-label="Interactive San Diego communities map"></div>
+      <div class="lfyp-map-error" id="lfyp-map-error" aria-live="polite">
+        <strong>Map unavailable</strong>
+        <p>We couldn't load the interactive map. Please try refreshing, or explore communities using the list.</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ============================================================
+     ABOUT HEDDA PARASHOS
+     ============================================================ -->
+<div class="about-outer">
+<section class="about" id="about" aria-labelledby="about-heading">
+
+  <div class="about-text">
+
+    <a
+      href="https://palisaderealty.com/team-page/hedda-parashos"
+
+      class="about-name reveal"
+      id="about-heading"
+      target="_blank"
+      rel="noopener noreferrer"
+    >Hedda Parashos</a>
+
+    <p class="about-title reveal stagger-1">Principal Broker / CEO</p>
+
+    <p class="about-bio reveal stagger-2">
+      Hedda founded Palisade Realty in 2010 and has built it into one of San Diego's most trusted
+      luxury real estate firms — with a team of 60+ agents and over 15 years of market expertise.
+      Her commitment to innovative representation, deep local knowledge, and genuine care for every
+      client has positioned Palisade Realty as the go-to brokerage across the greater San Diego
+      region. From first-time buyers to seasoned investors, Hedda's team delivers the professional,
+      efficient, and rewarding experience today's market demands.
+    </p>
+
+    <div class="about-cta reveal stagger-3">
+      <a href="#team-carousel" class="btn btn-brand">Meet Our Team</a>
+    </div>
+
+  </div>
+
+  <div class="about-image">
+    <img
+      src="assets/images/Hedda_Parashos.jpg"
+      alt="Hedda Parashos, Principal Broker and CEO of Palisade Realty"
+    >
+  </div>
+
+</section>
+</div>
+
+<!-- ============================================================
+     TEAM CAROUSEL
+     ============================================================ -->
+<section id="team-carousel" aria-labelledby="tc-heading">
+
+  <div class="tc-hd">
+    <div class="tc-eyebrow" aria-hidden="true">The Palisade Realty Team</div>
+    <h2 class="tc-title" id="tc-heading">Meet Our Agents</h2>
+    <!--<p class="tc-sub">Dedicated professionals with deep San Diego market knowledge, ready to guide you home.</p>-->
+  </div>
+
+  <div class="tc-outer">
+    <button class="tc-arrow" id="tcPrev" aria-label="Previous agent">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <!-- Cards are injected here by homepage.js -->
+    <div class="tc-stage" id="tcStage" role="region" aria-label="Team members carousel"></div>
+
+    <button class="tc-arrow" id="tcNext" aria-label="Next agent">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <!--<div class="tc-foot" aria-live="polite" aria-atomic="true">
+    <span class="tc-cnt tc-cnt-cur" id="tcCur">01</span>
+    <div class="tc-track" role="progressbar" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1">
+      <div class="tc-fill" id="tcFill"></div>
+    </div>
+    <span class="tc-cnt tc-cnt-tot" id="tcTot">06</span>
+  </div>-->
+
+  <div class="team-cta-row">
+    <a href="https://palisaderealty.com/our-team/" class="btn btn-brand" target="_blank" rel="noopener noreferrer">View All Agents</a>
+  </div>
+
+</section>
+
+<!-- ============================================================
+     FEATURED LISTINGS — YLOPO IDX WIDGET
+     ============================================================ -->
+<div class="listings-outer">
+<section class="listings" id="listings" aria-labelledby="listings-heading">
+
+  <span class="listings-eyebrow reveal">Handpicked Just for You</span>
+  <h2 class="listings-heading section-title reveal stagger-1" id="listings-heading">Featured Listings</h2>
+
+  <div class="listings-widget-wrap reveal stagger-2">
+    <div
+      class="YLOPO_resultsWidget"
+      data-search='{"locations":[{"city":"San Diego","state":"CA"},{"city":"La Jolla","state":"CA"},{"city":"Coronado","state":"CA"},{"city":"Del Mar","state":"CA"},{"city":"Encinitas","state":"CA"}],"propertyTypes":["house","condo","townhouse"],"status":"active","limit":12}'
+    ></div>
+  </div>
+
+  <div class="reveal stagger-3">
+    <a href="https://search.palisaderealty.com/" class="btn btn-brand" target="_blank" rel="noopener noreferrer">View All Listings</a>
+  </div>
+
+</section>
+</div>
+
+<!-- ============================================================
+     TESTIMONIALS — AVATAR-DRIVEN CAROUSEL
+     ============================================================ -->
+<section class="testimonial" id="testimonials" aria-labelledby="testimonials-heading">
+
+  <div class="testimonial-bg" aria-hidden="true"></div>
+
+  <div class="testimonial-inner">
+
+    <p class="testimonial-eyebrow reveal">Client Reviews</p>
+    <h2 class="testimonial-heading reveal stagger-1" id="testimonials-heading">What Our Clients Say</h2>
+
+    <!-- Avatars (tablist) -->
+    <div class="testimonial-avatars reveal stagger-2" role="tablist" aria-label="Select reviewer">
+
+      <button
+        class="testimonial-avatar active"
+        role="tab"
+        aria-selected="true"
+        aria-controls="tp-slide-0"
+        tabindex="0"
+        data-index="0"
+      >
+        <div class="testimonial-avatar-initials" aria-hidden="true">C</div>
+        <span class="testimonial-avatar-name">ckvonk</span>
+      </button>
+
+      <button
+        class="testimonial-avatar"
+        role="tab"
+        aria-selected="false"
+        aria-controls="tp-slide-1"
+        tabindex="-1"
+        data-index="1"
+      >
+        <div class="testimonial-avatar-initials" aria-hidden="true">S</div>
+        <span class="testimonial-avatar-name">sdtinystar</span>
+      </button>
+
+      <button
+        class="testimonial-avatar"
+        role="tab"
+        aria-selected="false"
+        aria-controls="tp-slide-2"
+        tabindex="-1"
+        data-index="2"
+      >
+        <div class="testimonial-avatar-initials" aria-hidden="true">A</div>
+        <span class="testimonial-avatar-name">amyjcrees</span>
+      </button>
+
+      <button
+        class="testimonial-avatar"
+        role="tab"
+        aria-selected="false"
+        aria-controls="tp-slide-3"
+        tabindex="-1"
+        data-index="3"
+      >
+        <div class="testimonial-avatar-initials" aria-hidden="true">M</div>
+        <span class="testimonial-avatar-name">Michelle R</span>
+      </button>
+
+      <button
+        class="testimonial-avatar"
+        role="tab"
+        aria-selected="false"
+        aria-controls="tp-slide-4"
+        tabindex="-1"
+        data-index="4"
+      >
+        <div class="testimonial-avatar-initials" aria-hidden="true">J</div>
+        <span class="testimonial-avatar-name">Jen C</span>
+      </button>
+
+    </div><!-- /testimonial-avatars -->
+
+    <!-- Animated gold caret above slide card -->
+    <div class="tp-caret-wrap" aria-hidden="true">
+      <div class="tp-caret"></div>
+    </div>
+
+    <!-- Slides -->
+    <div class="tp-slides-wrap" role="presentation">
+
+      <div class="tp-slide is-active" id="tp-slide-0" role="tabpanel" aria-labelledby="tab-0">
+        <div class="testimonial-card">
+          <div class="testimonial-stars" aria-label="5 out of 5 stars">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="#eeca00" aria-hidden="true"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="#eeca00" aria-hidden="true"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="#eeca00" aria-hidden="true"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="#eeca00" aria-hidden="true"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="#eeca00" aria-hidden="true"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+          </div>
+          <p class="testimonial-quote">"Hedda and her team were incredible from start to finish. They guided us through every step of the process with professionalism and genuine care. We couldn't have asked for a better experience buying our first San Diego home."</p>
+          <span class="testimonial-author-name">ckvonk</span>
+          <span class="testimonial-author-detail">Bought a home in San Diego, CA</span>
+        </div>
+      </div>
+
+      <div class="tp-slide" id="tp-slide-1" role="tabpanel" aria-labelledby="tab-1">
+        <div class="testimonial-card">
+          <div class="testimonial-stars" aria-label="5 out of 5 stars">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="#eeca00" aria-hidden="true"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="#eeca00" aria-hidden="true"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="#eeca00" aria-hidden="true"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="#eeca00" aria-hidden="true"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="#eeca00" aria-hidden="true"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+          </div>
+          <p class="testimonial-quote">"Hedda is the best realtor I have ever had! She sold our La Jolla property above asking price in just 6 days. Her market knowledge, communication, and negotiating skills are absolutely unmatched."</p>
+          <span class="testimonial-author-name">sdtinystar</span>
+          <span class="testimonial-author-detail">Sold a home in La Jolla, CA</span>
+        </div>
+      </div>
+
+      <div class="tp-slide" id="tp-slide-2" role="tabpanel" aria-labelledby="tab-2">
+        <div class="testimonial-card">
+          <div class="testimonial-stars" aria-label="5 out of 5 stars">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="#eeca00" aria-hidden="true"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="#eeca00" aria-hidden="true"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="#eeca00" aria-hidden="true"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="#eeca00" aria-hidden="true"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="#eeca00" aria-hidden="true"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+          </div>
+          <p class="testimonial-quote">"Her negotiating skills were TOP NOTCH. We were competing against multiple offers and Hedda's strategy won the day — below asking price in a hot market. Absolutely phenomenal agent."</p>
+          <span class="testimonial-author-name">amyjcrees</span>
+          <span class="testimonial-author-detail">Purchased a home in Coronado, CA</span>
+        </div>
+      </div>
+
+      <div class="tp-slide" id="tp-slide-3" role="tabpanel" aria-labelledby="tab-3">
+        <div class="testimonial-card">
+          <div class="testimonial-stars" aria-label="5 out of 5 stars">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="#eeca00" aria-hidden="true"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="#eeca00" aria-hidden="true"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="#eeca00" aria-hidden="true"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="#eeca00" aria-hidden="true"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="#eeca00" aria-hidden="true"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+          </div>
+          <p class="testimonial-quote">"Our agent was truly exceptional — knowledgeable, patient, and always available to answer our questions. We couldn't be happier with our new home in La Jolla. The whole process was smooth and the team was incredibly professional."</p>
+          <span class="testimonial-author-name">Michelle R</span>
+          <span class="testimonial-author-detail">Purchased a home in 2025 in La Jolla, CA</span>
+        </div>
+      </div>
+
+      <div class="tp-slide" id="tp-slide-4" role="tabpanel" aria-labelledby="tab-4">
+        <div class="testimonial-card">
+          <div class="testimonial-stars" aria-label="5 out of 5 stars">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="#eeca00" aria-hidden="true"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="#eeca00" aria-hidden="true"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="#eeca00" aria-hidden="true"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="#eeca00" aria-hidden="true"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="#eeca00" aria-hidden="true"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+          </div>
+          <p class="testimonial-quote">"Palisade Realty made selling our home an absolute breeze. The marketing was top-notch and we received multiple offers above asking price within the first week. Couldn't have asked for a better experience!"</p>
+          <span class="testimonial-author-name">Jen C</span>
+          <span class="testimonial-author-detail">Sold a home in 2025 in Coronado, CA</span>
+        </div>
+      </div>
+
+    </div><!-- /tp-slides-wrap -->
+
+  </div><!-- /testimonial-inner -->
+
+</section>
+
+<!-- ============================================================
+     BLOG — LATEST INSIGHTS
+     ============================================================ -->
+<section class="blog" id="blog" aria-labelledby="blog-heading">
+
+  <div class="blog-header">
+    <span class="blog-eyebrow reveal">Latest Insights &amp; Market Trends</span>
+    <h2 class="blog-heading reveal stagger-1" id="blog-heading">Real Estate Tips &amp; Expert Advice</h2>
+  </div>
+
+  <div class="blog-carousel" role="region" aria-label="Blog posts carousel">
+
+    <button class="carousel-arrow" id="blog-prev" aria-label="Previous blog posts">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <div class="blog-cards-viewport">
+      <div class="blog-cards-track" id="blog-track">
+
+        <!-- Blog Card 1 -->
+        <article class="blog-card">
+          <div class="blog-card-image">
+            <img src="assets/images/blog/blog-01-sd-luxury-market.jpg" alt="San Diego luxury market 2025 overview">
+            <span class="blog-card-date">Jun 18, 2025</span>
+          </div>
+          <div class="blog-card-body">
+            <span class="blog-card-badge">MARKET</span>
+            <h3 class="blog-card-title">San Diego's Luxury Market in 2025: What Buyers and Sellers Need to Know</h3>
+            <p class="blog-card-excerpt">Inventory is shifting, days-on-market are tightening, and premium neighborhoods are holding firm. Here's the full picture heading into summer.</p>
+            <a href="https://palisaderealty.com/blog/" class="blog-card-link" target="_blank" rel="noopener noreferrer">Read More →</a>
+          </div>
+        </article>
+
+        <!-- Blog Card 2 -->
+        <article class="blog-card">
+          <div class="blog-card-image">
+            <img src="assets/images/blog/blog-02-la-jolla.jpg" alt="La Jolla San Diego's most coveted address">
+            <span class="blog-card-date">Jun 5, 2025</span>
+          </div>
+          <div class="blog-card-body">
+            <span class="blog-card-badge">COMMUNITY</span>
+            <h3 class="blog-card-title">Top 5 Reasons La Jolla Remains San Diego's Most Coveted Address</h3>
+            <p class="blog-card-excerpt">From oceanfront bluffs to world-class dining and Torrey Pines, La Jolla offers a lifestyle that justifies its premium price tag year after year.</p>
+            <a href="https://palisaderealty.com/blog/" class="blog-card-link" target="_blank" rel="noopener noreferrer">Read More →</a>
+          </div>
+        </article>
+
+        <!-- Blog Card 3 -->
+        <article class="blog-card">
+          <div class="blog-card-image">
+            <img src="assets/images/blog/blog-03-home-pricing.jpg" alt="How to price your home right the first time">
+            <span class="blog-card-date">May 22, 2025</span>
+          </div>
+          <div class="blog-card-body">
+            <span class="blog-card-badge">SELLER</span>
+            <h3 class="blog-card-title">How to Price Your Home Right the First Time</h3>
+            <p class="blog-card-excerpt">Overpricing leads to stale listings; underpricing leaves money on the table. A strategic pricing approach from day one is the single most important decision you'll make.</p>
+            <a href="https://palisaderealty.com/blog/" class="blog-card-link" target="_blank" rel="noopener noreferrer">Read More →</a>
+          </div>
+        </article>
+
+        <!-- Blog Card 4 -->
+        <article class="blog-card">
+          <div class="blog-card-image">
+            <img src="assets/images/blog/blog-04-1031-exchange.jpg" alt="1031 Exchange guide for real estate investors">
+            <span class="blog-card-date">May 10, 2025</span>
+          </div>
+          <div class="blog-card-body">
+            <span class="blog-card-badge">INVESTMENT</span>
+            <h3 class="blog-card-title">What Is a 1031 Exchange and Should Real Estate Investors Use One?</h3>
+            <p class="blog-card-excerpt">Defer capital gains taxes by rolling proceeds from one investment property into another. Here's how it works and when it makes financial sense in San Diego's market.</p>
+            <a href="https://palisaderealty.com/blog/" class="blog-card-link" target="_blank" rel="noopener noreferrer">Read More →</a>
+          </div>
+        </article>
+
+        <!-- Blog Card 5 -->
+        <article class="blog-card">
+          <div class="blog-card-image">
+            <img src="assets/images/blog/blog-05-coronado.jpg" alt="Coronado island life real estate guide">
+            <span class="blog-card-date">Apr 28, 2025</span>
+          </div>
+          <div class="blog-card-body">
+            <span class="blog-card-badge">COMMUNITY</span>
+            <h3 class="blog-card-title">Coronado Living: Why Buyers Pay a Premium for Island Life</h3>
+            <p class="blog-card-excerpt">A small-town feel, white sand beaches, and a highly-rated school district make Coronado one of the most desirable — and competitive — zip codes in Southern California.</p>
+            <a href="https://palisaderealty.com/blog/" class="blog-card-link" target="_blank" rel="noopener noreferrer">Read More →</a>
+          </div>
+        </article>
+
+        <!-- Blog Card 6 -->
+        <article class="blog-card">
+          <div class="blog-card-image">
+            <img src="assets/images/blog/blog-06-home-inspection.jpg" alt="Home inspection tips for sellers">
+            <span class="blog-card-date">Apr 14, 2025</span>
+          </div>
+          <div class="blog-card-body">
+            <span class="blog-card-badge">SELLER</span>
+            <h3 class="blog-card-title">The Home Inspection: What Sellers Should Fix Before Listing</h3>
+            <p class="blog-card-excerpt">Proactively addressing inspection items before your home goes live gives you control, prevents renegotiations, and signals confidence to buyers from the start.</p>
+            <a href="https://palisaderealty.com/blog/" class="blog-card-link" target="_blank" rel="noopener noreferrer">Read More →</a>
+          </div>
+        </article>
+
+        <!-- Blog Card 7 -->
+        <article class="blog-card">
+          <div class="blog-card-image">
+            <img src="assets/images/blog/blog-07-first-time-buyer.jpg" alt="First-time buyer guide San Diego">
+            <span class="blog-card-date">Apr 2, 2025</span>
+          </div>
+          <div class="blog-card-body">
+            <span class="blog-card-badge">BUYER</span>
+            <h3 class="blog-card-title">First-Time Buyer's Guide to the San Diego Real Estate Market</h3>
+            <p class="blog-card-excerpt">From pre-approval to closing day, here's a step-by-step breakdown of what to expect when purchasing your first home in one of California's most competitive markets.</p>
+            <a href="https://palisaderealty.com/blog/" class="blog-card-link" target="_blank" rel="noopener noreferrer">Read More →</a>
+          </div>
+        </article>
+
+        <!-- Blog Card 8 -->
+        <article class="blog-card">
+          <div class="blog-card-image">
+            <img src="assets/images/blog/blog-08-rancho-santa-fe.jpg" alt="Rancho Santa Fe vs Carmel Valley comparison">
+            <span class="blog-card-date">Mar 20, 2025</span>
+          </div>
+          <div class="blog-card-body">
+            <span class="blog-card-badge">COMMUNITY</span>
+            <h3 class="blog-card-title">Rancho Santa Fe vs. Carmel Valley: Which Fits Your Lifestyle?</h3>
+            <p class="blog-card-excerpt">Equestrian estates and old-money exclusivity versus master-planned living with top-ranked schools. We break down the key differences to help you choose.</p>
+            <a href="https://palisaderealty.com/blog/" class="blog-card-link" target="_blank" rel="noopener noreferrer">Read More →</a>
+          </div>
+        </article>
+
+        <!-- Blog Card 9 -->
+        <article class="blog-card">
+          <div class="blog-card-image">
+            <img src="assets/images/blog/blog-09-interest-rates.jpg" alt="Interest rates impact on San Diego market">
+            <span class="blog-card-date">Mar 7, 2025</span>
+          </div>
+          <div class="blog-card-body">
+            <span class="blog-card-badge">MARKET</span>
+            <h3 class="blog-card-title">How Interest Rates Are Shaping the San Diego Market in 2025</h3>
+            <p class="blog-card-excerpt">Rate movements have a direct impact on buyer purchasing power and inventory levels. Here's what the current rate environment means for your next move.</p>
+            <a href="https://palisaderealty.com/blog/" class="blog-card-link" target="_blank" rel="noopener noreferrer">Read More →</a>
+          </div>
+        </article>
+
+        <!-- Blog Card 10 -->
+        <article class="blog-card">
+          <div class="blog-card-image">
+            <img src="assets/images/blog/blog-10-smart-upgrades.jpg" alt="Smart home upgrades that increase value">
+            <span class="blog-card-date">Feb 26, 2025</span>
+          </div>
+          <div class="blog-card-body">
+            <span class="blog-card-badge">SELLER</span>
+            <h3 class="blog-card-title">5 Smart Upgrades That Increase Your Home's Value Before Selling</h3>
+            <p class="blog-card-excerpt">Not all renovations are created equal. These five targeted improvements consistently deliver the highest ROI in San Diego's luxury and move-up markets.</p>
+            <a href="https://palisaderealty.com/blog/" class="blog-card-link" target="_blank" rel="noopener noreferrer">Read More →</a>
+          </div>
+        </article>
+
+        <!-- Blog Card 11 -->
+        <article class="blog-card">
+          <div class="blog-card-image">
+            <img src="assets/images/blog/blog-11-contingencies.jpg" alt="Understanding contingencies when making an offer">
+            <span class="blog-card-date">Feb 26, 2025</span>
+          </div>
+          <div class="blog-card-body">
+            <span class="blog-card-badge">BUYER</span>
+            <h3 class="blog-card-title">Understanding Contingencies When Making an Offer on a Home</h3>
+            <p class="blog-card-excerpt">Inspection, financing, and appraisal contingencies protect buyers — but waiving them strategically can win in a multiple-offer environment. Know the trade-offs.</p>
+            <a href="https://palisaderealty.com/blog/" class="blog-card-link" target="_blank" rel="noopener noreferrer">Read More →</a>
+          </div>
+        </article>
+
+        <!-- Blog Card 12 -->
+        <article class="blog-card">
+          <div class="blog-card-image">
+            <img src="assets/images/blog/blog-12-del-mar.jpg" alt="Del Mar coastal real estate premium pricing">
+            <span class="blog-card-date">Feb 13, 2025</span>
+          </div>
+          <div class="blog-card-body">
+            <span class="blog-card-badge">COMMUNITY</span>
+            <h3 class="blog-card-title">Del Mar's Coastal Appeal: What Drives Premium Pricing Year-Round</h3>
+            <p class="blog-card-excerpt">Fairgrounds, racetrack, pristine beach, and a village walkability score that's rare in San Diego — Del Mar commands prices that rarely dip regardless of market conditions.</p>
+            <a href="https://palisaderealty.com/blog/" class="blog-card-link" target="_blank" rel="noopener noreferrer">Read More →</a>
+          </div>
+        </article>
+
+        <!-- Blog Card 13 -->
+        <article class="blog-card">
+          <div class="blog-card-image">
+            <img src="assets/images/blog/blog-13-rent-vs-buy.jpg" alt="Rent vs buy San Diego 2025 analysis">
+            <span class="blog-card-date">Jan 30, 2025</span>
+          </div>
+          <div class="blog-card-body">
+            <span class="blog-card-badge">MARKET</span>
+            <h3 class="blog-card-title">Should You Rent or Buy in San Diego? A 2025 Analysis</h3>
+            <p class="blog-card-excerpt">With rents climbing and equity still building for owners, the math increasingly favors buying — if you can qualify. Here's how to run the numbers for your situation.</p>
+            <a href="https://palisaderealty.com/blog/" class="blog-card-link" target="_blank" rel="noopener noreferrer">Read More →</a>
+          </div>
+        </article>
+
+        <!-- Blog Card 14 -->
+        <article class="blog-card">
+          <div class="blog-card-image">
+            <img src="assets/images/blog/blog-14-multiple-offers.jpg" alt="Multiple offer strategy guide for buyers">
+            <span class="blog-card-date">Jan 16, 2025</span>
+          </div>
+          <div class="blog-card-body">
+            <span class="blog-card-badge">BUYER</span>
+            <h3 class="blog-card-title">Navigating Multiple Offer Situations: A Buyer's Strategy Guide</h3>
+            <p class="blog-card-excerpt">When a home attracts five offers the first weekend, your strategy matters more than your price. Here's how Palisade Realty helps buyers win without overpaying.</p>
+            <a href="https://palisaderealty.com/blog/" class="blog-card-link" target="_blank" rel="noopener noreferrer">Read More →</a>
+          </div>
+        </article>
+
+        <!-- Blog Card 15 -->
+        <article class="blog-card">
+          <div class="blog-card-image">
+            <img src="assets/images/blog/blog-15-staging.jpg" alt="Home staging ROI for sellers">
+            <span class="blog-card-date">Jan 3, 2025</span>
+          </div>
+          <div class="blog-card-body">
+            <span class="blog-card-badge">SELLER</span>
+            <h3 class="blog-card-title">The Role of Staging in Getting Top Dollar for Your Home</h3>
+            <p class="blog-card-excerpt">Staged homes sell faster and for more money. We break down the data on staging ROI and share what professional staging actually looks like for San Diego luxury properties.</p>
+            <a href="https://palisaderealty.com/blog/" class="blog-card-link" target="_blank" rel="noopener noreferrer">Read More →</a>
+          </div>
+        </article>
+
+        <!-- Blog Card 16 -->
+        <article class="blog-card">
+          <div class="blog-card-image">
+            <img src="assets/images/blog/blog-16-school-districts.jpg" alt="San Diego school districts and home values">
+            <span class="blog-card-date">Dec 19, 2024</span>
+          </div>
+          <div class="blog-card-body">
+            <span class="blog-card-badge">COMMUNITY</span>
+            <h3 class="blog-card-title">San Diego's Best School Districts and What They Mean for Home Values</h3>
+            <p class="blog-card-excerpt">Great schools are a permanent price driver. Here's how district boundaries in Carmel Valley, Del Mar, and La Jolla correlate with sustained property appreciation.</p>
+            <a href="https://palisaderealty.com/blog/" class="blog-card-link" target="_blank" rel="noopener noreferrer">Read More →</a>
+          </div>
+        </article>
+
+        <!-- Blog Card 17 -->
+        <article class="blog-card">
+          <div class="blog-card-image">
+            <img src="assets/images/blog/blog-17-rental-property.jpg" alt="San Diego rental property investment cap rates">
+            <span class="blog-card-date">Dec 5, 2024</span>
+          </div>
+          <div class="blog-card-body">
+            <span class="blog-card-badge">INVESTMENT</span>
+            <h3 class="blog-card-title">Cap Rates and Cash Flow: Investing in San Diego Rental Properties</h3>
+            <p class="blog-card-excerpt">San Diego's appreciation story is compelling, but cash flow is thin. Here's how investors structure deals to make the numbers work in a high-priced coastal market.</p>
+            <a href="https://palisaderealty.com/blog/" class="blog-card-link" target="_blank" rel="noopener noreferrer">Read More →</a>
+          </div>
+        </article>
+
+        <!-- Blog Card 18 -->
+        <article class="blog-card">
+          <div class="blog-card-image">
+            <img src="assets/images/blog/blog-18-driveway.jpg" alt="Good driveway curb appeal selling your home">
+            <span class="blog-card-date">Feb 26, 2025</span>
+          </div>
+          <div class="blog-card-body">
+            <span class="blog-card-badge">SELLER</span>
+            <h3 class="blog-card-title">Here's Why Having A Good Driveway Matters When Selling Your Home</h3>
+            <p class="blog-card-excerpt">If you're preparing your house to hit the market, your driveway plays a crucial role in curb appeal. Simple improvements can boost appearance, functionality, and value.</p>
+            <a href="https://palisaderealty.com/blog/" class="blog-card-link" target="_blank" rel="noopener noreferrer">Read More →</a>
+          </div>
+        </article>
+
+        <!-- Blog Card 19 -->
+        <article class="blog-card">
+          <div class="blog-card-image">
+            <img src="assets/images/blog/blog-19-landscaping.jpg" alt="Landscaping budget tips first-time home buyers">
+            <span class="blog-card-date">Feb 26, 2025</span>
+          </div>
+          <div class="blog-card-body">
+            <span class="blog-card-badge">BUYER</span>
+            <h3 class="blog-card-title">One Thing Most Home Buyers Forget to Budget For: Landscaping</h3>
+            <p class="blog-card-excerpt">Understanding the true costs of landscaping before purchasing can help first-time home buyers avoid financial surprises down the road.</p>
+            <a href="https://palisaderealty.com/blog/" class="blog-card-link" target="_blank" rel="noopener noreferrer">Read More →</a>
+          </div>
+        </article>
+
+        <!-- Blog Card 20 -->
+        <article class="blog-card">
+          <div class="blog-card-image">
+            <img src="assets/images/blog/blog-20-cash-to-close.jpg" alt="Understanding cash to close real estate transaction">
+            <span class="blog-card-date">Feb 26, 2025</span>
+          </div>
+          <div class="blog-card-body">
+            <span class="blog-card-badge">BUYER</span>
+            <h3 class="blog-card-title">Understanding Cash to Close When Purchasing A Home</h3>
+            <p class="blog-card-excerpt">Beyond the purchase price and down payment, there are dozens of smaller fees and adjustments in any real estate transaction. Here's what to expect.</p>
+            <a href="https://palisaderealty.com/blog/" class="blog-card-link" target="_blank" rel="noopener noreferrer">Read More →</a>
+          </div>
+        </article>
+
+      </div><!-- /blog-cards-track -->
+    </div><!-- /blog-cards-viewport -->
+
+    <button class="carousel-arrow" id="blog-next" aria-label="Next blog posts">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+  </div><!-- /blog-carousel -->
+
+  <div class="reveal stagger-3">
+    <a href="https://palisaderealty.com/blog/" class="btn btn-brand" target="_blank" rel="noopener noreferrer">View All Articles</a>
+  </div>
+
+</section>
+
+<!-- ============================================================
+     CTA BANNER
+     ============================================================ -->
+<section class="cta-banner" id="cta" aria-labelledby="cta-heading">
+
+  <div class="cta-banner-bg" aria-hidden="true">
+    <img
+      class="cta-banner-bg-base"
+      src="assets/images/hero-bg.jpg"
+      alt=""
+    >
+    <div class="cta-banner-bg-dark"></div>
+  </div>
+
+  <div class="cta-banner-content">
+    <p class="cta-banner-eyebrow reveal">Find Your Dream Home Today</p>
+    <h2 class="cta-banner-title reveal stagger-1" id="cta-heading">Buy, Sell &amp; Find Your Place in San Diego</h2>
+    <div class="cta-banner-btns reveal stagger-2">
+      <a href="tel:+16197940218" class="cta-banner-btn-primary">Call (619) 794-0218</a>
+      <a href="https://search.palisaderealty.com/" class="cta-banner-btn-outline" target="_blank" rel="noopener noreferrer">View Properties</a>
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="site-footer" id="footer">
+
+  <div class="footer-texture" aria-hidden="true"></div>
+
+  <!-- Brand stripe -->
+  <div class="footer-stripe" aria-hidden="true"></div>
+
+  <div class="footer-inner">
+
+    <!-- Brand Column -->
+    <div class="footer-col-brand">
+      <div class="footer-logo">
+        <img src="assets/images/logo.png" alt="Palisade Realty" style="filter: brightness(0) invert(1);">
+      </div>
+
+      <div class="footer-copy-mls-row">
+        <div>
+          <p class="footer-copy">
+            &copy;Palisade Realty, Inc. 2026<br>
+            All Rights Reserved<br><br>
+            Brokerage CA DRE #01848565<br><br>
+            Hedda Parashos<br>
+            CA DRE #01773167
+          </p>
+        </div>
+        <div class="footer-mls-badge" aria-label="MLS member">
+          <span>MLS<br>MEMBER</span>
+        </div>
+      </div>
+
+      <div class="footer-social">
+        <a href="https://www.facebook.com/PalisadeRealty/" target="_blank" rel="noopener noreferrer" aria-label="Palisade Realty on Facebook">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M15 8a7 7 0 1 0-8.094 6.915V10.3H4.947V8h1.959V6.257C6.906 4.32 8.067 3.25 9.832 3.25c.847 0 1.733.151 1.733.151v1.9h-.976c-.962 0-1.261.597-1.261 1.209V8h2.147l-.343 2.3H9.328v4.615A7.003 7.003 0 0 0 15 8z"/></svg>
+        </a>
+        <a href="https://www.pinterest.com/palisaderealty/" target="_blank" rel="noopener noreferrer" aria-label="Palisade Realty on Pinterest">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0a8 8 0 0 0-2.915 15.452c-.07-.633-.134-1.606.027-2.297.146-.625.984-4.172.984-4.172s-.252-.503-.252-1.246c0-1.167.678-2.041 1.52-2.041.717 0 1.065.539 1.065 1.184 0 .721-.46 1.801-.698 2.8-.198.835.42 1.515 1.242 1.515 1.49 0 2.638-1.571 2.638-3.836 0-2.006-1.441-3.408-3.499-3.408-2.382 0-3.78 1.787-3.78 3.634 0 .72.276 1.49.621 1.91a.25.25 0 0 1 .057.239c-.063.264-.204.835-.232.952-.037.154-.124.186-.285.112-1.05-.489-1.707-2.028-1.707-3.264 0-2.653 1.928-5.09 5.559-5.09 2.919 0 5.187 2.081 5.187 4.862 0 2.902-1.83 5.237-4.371 5.237-.854 0-1.658-.444-1.932-.967l-.525 1.958c-.19.733-.705 1.65-1.05 2.208A8.001 8.001 0 0 0 8 16a8 8 0 0 0 0-16z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/palisade_realty/" target="_blank" rel="noopener noreferrer" aria-label="Palisade Realty on Instagram">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Quick Links Column -->
+    <nav class="footer-col-links" aria-label="Quick links">
+      <span class="footer-col-title">Quick Links</span>
+      <div class="footer-links">
+        <a href="https://search.palisaderealty.com/" target="_blank" rel="noopener noreferrer">Buy a Home</a>
+        <a href="#about">Sell Your Home</a>
+        <a href="#communities">Communities</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#team-carousel">Our Team</a>
+        <a href="#cta">Contact Us</a>
+      </div>
+    </nav>
+
+    <!-- Contact Column -->
+    <address class="footer-col-contact" style="font-style:normal;">
+      <span class="footer-col-title">Contact</span>
+      <span class="footer-contact-line"><strong>3434 Grove Street</strong></span>
+      <span class="footer-contact-line"><strong>Lemon Grove, CA 91945</strong></span>
+      <a href="tel:+16197940218" class="footer-contact-line">(619) 794-0218</a>
+      <a href="mailto:contactus@palisaderealty.com" class="footer-contact-line footer-contact-line--email">contactus@palisaderealty.com</a>
+      <span class="footer-contact-line">Mon – Fri: 9:00 AM – 5:00 PM</span>
+    </address>
+
+  </div>
+
+</footer>
+
+<!-- Ylopo Widget Runtime -->
+<script src="https://d2hnwe88wt837l.cloudfront.net/build/js/widgetBuilder~runtime.js"></script>
+
+<!-- Homepage JavaScript -->
+<script src="homepage.js"></script>
+
+</body>
+</html>
