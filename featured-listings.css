@@ -1,0 +1,359 @@
+/* ============================================================
+   Featured Listings — Hero Carousel
+   Palisade Realty
+   ============================================================ */
+
+/* ── Section wrapper ── */
+.fl-wrapper {
+  position: relative;
+  background: #fff;
+}
+
+.fl-header {
+  padding: 72px 56px 36px;
+  background: #fff;
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+.fl-header-eyebrow {
+  display: block;
+  font-family: var(--font-label, 'Inter', sans-serif);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: #b89a5e;
+  margin: 0 0 14px;
+}
+
+.fl-header-title {
+  font-family: var(--font-display, 'Playfair Display', serif);
+  font-size: clamp(28px, 3.5vw, 48px);
+  font-weight: 400;
+  color: #58172a;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin: 0;
+}
+
+/* ── Carousel stage ── */
+.fl-section {
+  position: relative;
+  width: 100%;
+  height: 90vh;
+  min-height: 580px;
+  overflow: hidden;
+  background: #0a0005;
+  user-select: none;
+}
+
+/* ── Slides ── */
+.fl-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.fl-slide.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.fl-slide-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.fl-slide.is-active .fl-slide-img {
+  animation: fl-ken-burns 9s ease-out forwards;
+}
+
+@keyframes fl-ken-burns {
+  from { transform: scale(1.0); }
+  to   { transform: scale(1.09); }
+}
+
+/* ── Gradient overlay ── */
+.fl-slide-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to top,
+      rgba(8, 0, 4, 0.88) 0%,
+      rgba(8, 0, 4, 0.38) 38%,
+      rgba(8, 0, 4, 0.12) 62%,
+      transparent 100%
+    ),
+    linear-gradient(
+      to right,
+      rgba(8, 0, 4, 0.22) 0%,
+      transparent 55%
+    );
+}
+
+/* ── Slide content ── */
+.fl-slide-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0 56px 56px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  z-index: 5;
+}
+
+.fl-slide-info {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Status badge */
+.fl-status {
+  display: inline-block;
+  font-family: var(--font-label, 'Inter', sans-serif);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #fff;
+  background: #58172a;
+  padding: 4px 10px 3px;
+  margin-bottom: 14px;
+}
+
+.fl-status.fl-status--pending {
+  background: rgba(8, 68, 94, 0.92);
+}
+
+.fl-status.fl-status--sold {
+  background: rgba(30, 30, 30, 0.9);
+}
+
+/* Address */
+.fl-address {
+  font-family: var(--font-display, 'Playfair Display', serif);
+  font-size: clamp(22px, 2.8vw, 38px);
+  font-weight: 400;
+  color: #fff;
+  line-height: 1.18;
+  margin: 0 0 8px;
+  letter-spacing: -0.01em;
+}
+
+.fl-address-city {
+  display: block;
+  font-family: var(--font-label, 'Inter', sans-serif);
+  font-size: clamp(11px, 1vw, 13px);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.62);
+  margin-top: 3px;
+}
+
+/* Price */
+.fl-price {
+  font-family: var(--font-label, 'Inter', sans-serif);
+  font-size: clamp(15px, 1.5vw, 19px);
+  font-weight: 500;
+  color: #eeca00;
+  letter-spacing: 0.04em;
+  margin: 0 0 14px;
+}
+
+/* Meta row */
+.fl-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  font-family: var(--font-label, 'Inter', sans-serif);
+  font-size: 12px;
+  color: rgba(255,255,255,0.65);
+}
+
+.fl-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.fl-meta-item svg {
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.fl-meta-divider {
+  width: 1px;
+  height: 11px;
+  background: rgba(255,255,255,0.22);
+  flex-shrink: 0;
+}
+
+/* View Property button */
+.fl-view-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-label, 'Inter', sans-serif);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #fff;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.5);
+  padding: 15px 30px;
+  transition: background 0.22s ease, border-color 0.22s ease, color 0.22s ease;
+  white-space: nowrap;
+  position: relative;
+  z-index: 6;
+}
+
+.fl-view-btn:hover,
+.fl-view-btn:focus-visible {
+  background: #eeca00;
+  border-color: #eeca00;
+  color: #58172a;
+  outline: none;
+}
+
+.fl-view-btn:active {
+  opacity: 0.82;
+}
+
+/* ── Arrow navigation ── */
+.fl-arrows {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 28px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.fl-arrow {
+  pointer-events: auto;
+  width: 52px;
+  height: 52px;
+  border: 1px solid rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #fff;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.fl-arrow:hover,
+.fl-arrow:focus-visible {
+  background: rgba(255,255,255,0.16);
+  border-color: rgba(255,255,255,0.65);
+  outline: none;
+}
+
+.fl-arrow:active {
+  transform: scale(0.92);
+}
+
+.fl-arrow svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ── Dots pagination ── */
+.fl-dots {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  z-index: 10;
+}
+
+.fl-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255,255,255,0.3);
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  transition: width 0.38s cubic-bezier(0.22, 0.61, 0.36, 1), background 0.25s ease;
+}
+
+.fl-dot.is-active {
+  width: 30px;
+  background: #eeca00;
+}
+
+.fl-dot:hover:not(.is-active) {
+  background: rgba(255,255,255,0.6);
+}
+
+/* ── Slide counter ── */
+.fl-counter {
+  position: absolute;
+  top: 28px;
+  right: 56px;
+  font-family: var(--font-label, 'Inter', sans-serif);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.42);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.fl-counter-current {
+  color: rgba(255,255,255,0.85);
+  font-weight: 500;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .fl-header      { padding: 56px 36px 28px; }
+  .fl-slide-content { padding: 0 36px 52px; }
+  .fl-counter     { right: 36px; }
+}
+
+@media (max-width: 768px) {
+  .fl-header        { padding: 48px 24px 24px; }
+  .fl-section       { height: 88svh; min-height: 520px; }
+  .fl-slide-content { padding: 0 20px 80px; flex-direction: column; align-items: flex-start; gap: 20px; }
+  .fl-view-btn      { align-self: flex-start; }
+  .fl-arrows        { padding: 0 14px; }
+  .fl-arrow         { width: 42px; height: 42px; }
+  .fl-counter       { right: 24px; top: 20px; }
+}
+
+@media (max-width: 480px) {
+  .fl-address       { font-size: 20px; }
+  .fl-price         { font-size: 15px; }
+  .fl-meta          { font-size: 11px; gap: 6px 10px; }
+  .fl-view-btn      { padding: 12px 22px; font-size: 9px; }
+}
