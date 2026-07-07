@@ -1161,3 +1161,269 @@ reflect:
 - Changes to the map system or `CV_MAP_CONFIG` schema
 - New CMS sync behavior
 - New tracking or analytics integrations
+
+---
+
+---
+
+# Palisade Realty San Diego — Community Pages (2026 Adaptation)
+
+This section documents how the Shana Gates / Coachella Valley pattern
+above was adapted for **Palisade Realty**, a San Diego County brokerage
+run by Hedda Parashos. First completed page: `communities/downtown-san-diego-real-estate.html`.
+
+Repo: `jomylopo/Palisade_Realty` — Vercel auto-deploys on push to `main`.
+
+---
+
+## Key Differences vs. Shana Gates Pattern
+
+| Aspect | Shana Gates (Coachella Valley) | Palisade Realty (San Diego) |
+|---|---|---|
+| Shared CSS | `community.css` (4,368-line shared file) | Inline `<style>` per page + `../homepage.css` for nav/footer |
+| Shared map JS | `community-map.js` | `community-map.js` (same pattern, different config key) |
+| Config key | `window.CV_MAP_CONFIG` | `window.SD_COMMUNITY_CONFIG` |
+| Mapbox version | v3.4.0 | v3.3.0 (hero + lifestyle); v3.3.0 (location map) |
+| Fonts | Cormorant Garamond + Jost | Playfair Display + Manrope + Inter |
+| Roads | I-10 (blue) + Hwy 111 (bronze) | I-5 (blue `#7dbfff`) + Harbor Drive (gold `#b89a5e`) |
+| Nav style | Dropdown menus | Flat links — left `Buy · Sell · Communities · Testimonials`, right `Financing · Team · Resources · Contact` |
+| Communities hub | `index.html` communities section (anchor) | `communities.html` — dedicated hub page |
+| IDX domain | `search.searchcoachellavalleyhomes.com` | `search.palisaderealty.com` |
+| CMS overrides | Sanity + `/api/community` | None — HTML is the source of truth |
+| Blog injection | `/blog/community-posts.js` | Not implemented |
+| Tracking pixels | RAEK + OIR + MM + GA4 | None (to be added) |
+
+---
+
+## File Structure
+
+```
+Branded Sites/Palisade_Realty/
+│
+├── communities/                       ← per-community detail pages
+│   └── downtown-san-diego-real-estate.html   ← COMPLETED (July 2026)
+│
+├── communities.html                   ← Hub: 18-community grid, region filter, Mapbox map
+├── community-map.js                   ← Shared map system for all community detail pages
+├── homepage.css                       ← Base styles (nav, footer, shared utilities)
+├── homepage.js                        ← Nav scroll/mobile menu/scroll-reveal for homepage
+└── index.html                         ← Homepage
+```
+
+**Community detail pages** use:
+- `../homepage.css` for nav and footer styles
+- An inline `<style>` block for all community-specific dark-theme styles
+- `../community-map.js` for Mapbox hero + lifestyle maps + scroll reveal
+
+There is no shared `community.css` yet. Each page carries its own styles. When
+a second community page is built, extract shared rules into `community.css` and
+link it alongside `homepage.css`.
+
+---
+
+## Brand Tokens (Palisade Realty)
+
+```css
+--brand:      #58172a;   /* deep burgundy/maroon — CTAs, city stats band */
+--accent:     #eeca00;   /* bright gold — primary buttons, highlights */
+--gold:       #b89a5e;   /* warm gold — section eyebrows, road lines, borders */
+--near-black: #212121;
+--off-white:  #f5f5f5;
+
+/* Community page dark theme */
+--cd-dark:    #0b0808;
+--cd-dark-2:  #121010;
+--cd-dark-3:  #1c1818;
+--cd-dark-4:  #252020;
+--cd-cream:   #F2EDE4;
+--cd-muted:   rgba(242,237,228,0.55);
+```
+
+Fonts:
+- `'Playfair Display'` — display/headings (`--cd-serif`)
+- `'Manrope'` — body copy (`--cd-sans`)
+- `'Inter'` — labels, stats, UI text (`--cd-label`)
+
+---
+
+## Map System — `community-map.js`
+
+Same file pattern as the Shana Gates version. Each community page sets
+`window.SD_COMMUNITY_CONFIG` before loading the script.
+
+### Config Schema
+
+```js
+window.SD_COMMUNITY_CONFIG = {
+  city:          "Downtown San Diego",    // used as corner map label
+  subtitle:      "San Diego County · California",
+  lng:            -117.1590,             // map center longitude
+  lat:             32.7152,              // map center latitude
+  heroZoom:        13.5,                 // hero map zoom (non-interactive)
+  lifestyleZoom:   13.0,                 // lifestyle map zoom (interactive)
+  boundary: [                            // closed [lng,lat] polygon
+    [-117.176, 32.730], ...
+  ],
+  pois: [
+    { name: "Petco Park", desc: "…", lng: -117.1569, lat: 32.7073, icon: "⚾" },
+    // 4–6 POIs per city
+  ]
+};
+```
+
+### Map Behavior
+
+| Map | Element ID | Pitch | Bearing | Interactive | Notes |
+|---|---|---|---|---|---|
+| Hero | `#hero-map` | 45° | -10° | No | Loads immediately on page load |
+| Location (orientation) | `#location-map` | 0° | — | No | Inline per-page script; dark-v11 style |
+| Lifestyle | `#lifestyle-map` | 52° | -17° | Yes | IntersectionObserver lazy-load |
+
+Both hero and lifestyle use `mapbox://styles/mapbox/standard` + `night` light preset.
+The orientation map uses `mapbox://styles/mapbox/dark-v11` (same as the Shana
+Gates valley-location map — flat look, no 3D buildings competing with the
+current-city highlight).
+
+### Road Layers
+
+```js
+// I-5 — runs north-south through San Diego
+I5_COORDS = [
+  [-117.107, 32.671], [-117.120, 32.690], [-117.130, 32.703],
+  [-117.136, 32.718], [-117.143, 32.735], [-117.152, 32.760],
+  [-117.157, 32.783], [-117.162, 32.812], [-117.168, 32.845],
+  [-117.173, 32.877], [-117.175, 32.903]
+];
+// Glow #5ba4ff opacity 0.22 blur 5  •  Line #7dbfff opacity 0.72
+
+// Harbor Drive — bayfront waterfront corridor (west side of downtown)
+HARBOR_COORDS = [
+  [-117.136, 32.699], [-117.148, 32.706], [-117.158, 32.711],
+  [-117.163, 32.717], [-117.169, 32.722], [-117.173, 32.727],
+  [-117.175, 32.731]
+];
+// Glow #b89a5e opacity 0.20 blur 5  •  Line #b89a5e opacity 0.65
+```
+
+Boundary polygon: fill `#eeca00` opacity 0.07 · line `#eeca00` opacity 0.55 · line-width 1.5
+
+Mapbox token: `pk.eyJ1Ijoiam9tLW1hcGJveCIsImEiOiJjbXFxaGJva3AwNDVqMnBxcnlvaW54aWRoIn0.f4TeZyya7vaALl39DaWK5Q`
+
+---
+
+## Page Anatomy — Palisade Realty SD Version
+
+Same 15-section structure as Shana Gates. All section IDs below are `id=""` anchors:
+
+| # | Section ID | Palisade SD Implementation Notes |
+|---|---|---|
+| — | `<header class="site-header">` | Standard PR nav. Transparent → scrolled-dark. Dark-page overrides in inline `<style>` |
+| 1 | `community-hero` | 100svh, Mapbox `#hero-map`, gradient overlay, breadcrumb (absolute top), eyebrow + `<h1>`, 4 hero stats |
+| 2 | `location-context` | Orientation map at `#location-map` (dark-v11, county context + boundary highlight) + 4 drive-time cards |
+| 3 | `overview` | 2-col: editorial left + `.quick-facts` sticky sidebar right |
+| 4 | `demographics` | Full-width crimson-dark-3 band; 5 census stats |
+| 5 | `highlights` | 6-card grid |
+| 6 | `neighborhoods` | 8-card grid (4 cols) |
+| 7 | `city-stats` | `background: var(--cd-brand)` (#58172a) band; 5 stats in `--cd-accent` (#eeca00) |
+| 8 | `listings` | Ylopo `YLOPO_resultsWidget` div; `data-search` targets Downtown San Diego |
+| 9 | `hoa-fees` | 2-col: fee table left, "What HOAs cover" bullets right |
+| 10 | `parks-rec` | 2×2 park cards |
+| 11 | `schools` | Tabbed (Public / Private & Charter); `switchTab()` inline handler |
+| 12 | `nearby-communities` | `<table>` with 6 neighboring SD communities |
+| 13 | `faq` | 8 accordion items; `toggleFaq()` inline handler |
+| 14 | `lifestyle` | 2-col: editorial left + `#lifestyle-map` right (lazy-loaded, interactive) |
+| 15 | `community-cta` | Phone + email CTAs |
+| — | `<footer class="site-footer">` | Standard PR footer (same as homepage) |
+
+---
+
+## Script Load Order (community detail pages)
+
+```html
+<!-- 1. Ylopo widget -->
+<script src="https://search.palisaderealty.com/build/js/32e06f9e150f998b6c50.js"></script>
+<script src="https://search.palisaderealty.com/build/js/widgets-1.0.0.js" defer></script>
+
+<!-- 2. Homepage JS (handles nav scroll + mobile menu) -->
+<script src="../homepage.js"></script>
+
+<!-- 3. Mapbox GL JS v3.3.0 -->
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
+
+<!-- 4. Per-page config -->
+<script>window.SD_COMMUNITY_CONFIG = { /* ... */ };</script>
+
+<!-- 5. Shared community map system — creates hero + lifestyle maps + scroll reveal -->
+<script src="../community-map.js"></script>
+
+<!-- 6. Per-page inline location map (orientation, dark-v11, shows county context) -->
+<script>(function(){ /* ~60 lines, CURRENT_SLUG hardcoded, county boundary + current city highlighted */ })()</script>
+
+<!-- 7. FAQ accordion + Schools tabs -->
+<script>
+  function toggleFaq(btn) { /* ... */ }
+  function switchTab(tab, panelId) { /* ... */ }
+</script>
+```
+
+Note: `community-map.js` also handles the `.reveal` scroll-reveal system (adds `.visible`
+via IntersectionObserver). No separate scroll-reveal script needed.
+
+---
+
+## How to Add a New San Diego Community Page
+
+1. **Create the file** at `communities/<slug>.html` (e.g. `communities/la-jolla-real-estate.html`)
+2. **Copy** `communities/downtown-san-diego-real-estate.html` as the template
+3. **Update `<head>`** — title, description, canonical path
+4. **Update nav** — no change needed (nav links are relative to `../`)
+5. **Update `SD_COMMUNITY_CONFIG`** — city name, lng/lat, zoom, boundary polygon, POIs
+6. **Update location-map inline script** — change center coordinates + boundary polygon to match the new city
+7. **Update all 15 sections** with city-specific content (editorial, stats, neighborhoods, schools, parks, FAQ, etc.)
+8. **Add the new page to `communities.html`** — add a `.comm-card` to the grid with the correct `data-region` attribute
+9. **Update `communities.html` nav link list** (`.lfyp-cities`) if applicable
+10. `git add . && git commit -m "Add <city> community page" && git push` — Vercel auto-deploys
+
+### Community Card Template (for `communities.html` grid)
+
+```html
+<div class="comm-card" data-region="coastal">
+  <div class="comm-card-img">
+    <img src="images/communities/<city-slug>.jpg" alt="<City Name> homes" loading="lazy">
+  </div>
+  <div class="comm-card-body">
+    <h3 class="comm-card-title"><City Name></h3>
+    <p class="comm-card-meta">From $XXXk · Condos + Single-Family</p>
+    <a href="communities/<city-slug>-real-estate.html" class="comm-card-link">Explore <City Name> →</a>
+  </div>
+</div>
+```
+
+`data-region` values: `coastal` | `north-county` | `east-south`
+
+---
+
+## Completed Community Detail Pages
+
+| Page | Status | File |
+|---|---|---|
+| Downtown San Diego | ✅ Complete | `communities/downtown-san-diego-real-estate.html` |
+
+---
+
+## Communities Hub (`communities.html`)
+
+The hub page at `communities.html` serves as a browsable index of all
+18 San Diego communities Palisade Realty covers. Key elements:
+
+- **Hero** — full-bleed La Jolla background + "San Diego Communities" heading
+- **Intro stats** — 18 Communities · $700K–$5M+ · Daily Updated · Expert Local Guide
+- **Region filter tabs** — All · Coastal · North County · East & South (JS-driven `.is-hidden` toggle on `.comm-card`)
+- **18-card grid** — 4-col, each card `data-region` tagged, links to individual community pages
+- **"Find Your Place" Mapbox map** — reuses `#lfyp-map` + `homepage.js` (same map as homepage "Find Your Place" section, dark-v11 style)
+- **CTA** — links to `/#cta` on homepage
+
+The communities hub nav link (`Communities`) points to `communities.html` across
+all pages — updated in: `index.html` left-nav, `index.html` mobile drawer,
+`index.html` map section "See All Communities" button, `index.html` footer,
+and all community detail page navs.
