@@ -83,7 +83,7 @@
     }
     .tp-hero-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(155deg, rgba(40,0,12,.78) 0%, rgba(88,23,42,.52) 55%, rgba(15,0,5,.88) 100%);
+      background: rgba(0,0,0,.72);
     }
     .tp-hero-content { position: relative; z-index: 2; text-align: center; max-width: 760px; padding: 0 24px; }
     .tp-eyebrow {
@@ -172,9 +172,9 @@
     .agent-card-img { width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform .55s cubic-bezier(.22,.61,.36,1); }
     .agent-card:hover .agent-card-img { transform: scale(1.06); }
     .agent-card-body { padding: 15px 17px 17px; }
-    .agent-card-name { font-family: var(--font-display); font-size: 15px; font-weight: 500; color: var(--near-black); letter-spacing: -.01em; line-height: 1.2; margin-bottom: 4px; }
+    .agent-card-name { font-family: var(--font-display); font-size: 19px; font-weight: 500; color: var(--near-black); letter-spacing: -.01em; line-height: 1.2; margin-bottom: 4px; }
     .agent-card-role { font-family: var(--font-label); font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--brand); margin-bottom: 11px; }
-    .agent-card--leader .agent-card-role { color: #a07c3e; }
+    .agent-card--leader .agent-card-role { color: var(--brand); }
     .agent-card-link {
       display: inline-flex; align-items: center; gap: 4px;
       font-family: var(--font-label); font-size: 10px; font-weight: 700;
@@ -215,7 +215,7 @@
     .tp-why-icon {
       width: 54px; height: 54px; margin: 0 auto 18px;
       display: flex; align-items: center; justify-content: center;
-      border-radius: 50%; background: rgba(238,202,0,.12); color: var(--accent);
+      border-radius: 50%; background: var(--brand); color: #fff;
     }
     .tp-why-title { font-family: var(--font-display); font-size: 20px; font-weight: 500; color: #fff; letter-spacing: -.01em; margin-bottom: 10px; }
     .tp-why-desc { font-family: var(--font-body); font-size: 14px; line-height: 1.72; color: rgba(255,255,255,.5); }
@@ -231,15 +231,18 @@
     }
     .tp-cta::after {
       content: ''; position: absolute; inset: 0;
-      background: linear-gradient(to bottom, rgba(40,0,12,.65), rgba(40,0,12,.82));
+      background: rgba(245,245,245,.88);
     }
     .tp-cta-inner { position: relative; z-index: 2; max-width: 620px; margin: 0 auto; }
+    .tp-cta .tp-eyebrow { color: var(--brand); }
     .tp-cta-h2 {
       font-family: var(--font-display); font-size: clamp(36px,4vw,62px); font-weight: 400;
-      color: #fff; letter-spacing: -.03em; line-height: 1.05; margin-bottom: 20px;
+      color: var(--near-black); letter-spacing: -.03em; line-height: 1.05; margin-bottom: 20px;
     }
-    .tp-cta-h2 em { font-style: italic; color: var(--accent); }
-    .tp-cta-sub { font-family: var(--font-body); font-size: 16px; line-height: 1.72; color: rgba(255,255,255,.7); margin-bottom: 40px; }
+    .tp-cta-h2 em { font-style: italic; color: var(--brand); }
+    .tp-cta-sub { font-family: var(--font-body); font-size: 16px; line-height: 1.72; color: rgba(33,33,33,.65); margin-bottom: 40px; }
+    .tp-cta-btns .btn-outline-white { border-color: var(--brand); color: var(--brand); background: transparent; }
+    .tp-cta-btns .btn-outline-white:hover { background: var(--brand); color: #fff; opacity: 1; }
     .tp-cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 
     /* ── Reveal ── */
