@@ -25,7 +25,7 @@ const TEAM = [
     name:    'Erick Salgado',
     role:    'REALTOR® DRE# 01999413',
     bio:     'Dedicated buyer\'s agent with expertise in first-time and move-up purchases across San Diego communities. Clear communicator from offer to close.',
-    profile: 'https://palisaderealty.com/team-page/erick-salgado',
+    profile: '/team-page/erick-salgado.html',
     photo:   'assets/images/agent-erick-salgado.jpg',
   },
   {

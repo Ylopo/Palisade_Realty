@@ -674,6 +674,11 @@
     ['John Verdin',                '1779384387109-9UUBQ35YXO0XDCMO7RRX/172430981_john_verdin_headshot.jpg',                'john-verdin']
   ];
 
+  /* Agents with local detail pages — takes priority over the Squarespace PR base URL */
+  var OVERRIDES = {
+    'erick-salgado': '/team-page/erick-salgado.html'
+  };
+
   var ARROW_SVG = '<svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 6h8"/><path d="M6 2.5L9.5 6 6 9.5"/></svg>';
 
   function extOf(p) {
@@ -683,6 +688,8 @@
 
   function makeCard(name, imgPath, slug, title, isLeader) {
     var src = 'assets/images/agents/' + slug + extOf(imgPath);
+    var href = OVERRIDES[slug] || (PR + slug);
+    var isLocal = !!OVERRIDES[slug];
     var el = document.createElement('article');
     el.className = 'agent-card' + (isLeader ? ' agent-card--leader' : '');
     el.setAttribute('data-name', name.toLowerCase());
@@ -693,7 +700,7 @@
       '<div class="agent-card-body">' +
         '<div class="agent-card-name">' + name + '</div>' +
         '<div class="agent-card-role">' + title + '</div>' +
-        '<a href="' + PR + slug + '" class="agent-card-link" target="_blank" rel="noopener noreferrer" aria-label="View ' + name + '\'s profile">View Profile ' + ARROW_SVG + '</a>' +
+        '<a href="' + href + '" class="agent-card-link"' + (isLocal ? '' : ' target="_blank" rel="noopener noreferrer"') + ' aria-label="View ' + name + '\'s profile">View Profile ' + ARROW_SVG + '</a>' +
       '</div>';
     return el;
   }
