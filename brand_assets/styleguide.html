@@ -6,1003 +6,896 @@
   <title>Palisade Realty — Design System</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Pull tokens + component styles from the live source -->
+  <link rel="stylesheet" href="../homepage.css">
+
   <style>
-    /* ─── RESET ─────────────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Inter', system-ui, sans-serif;
-      background: #fafafa;
-      color: #212121;
-      -webkit-font-smoothing: antialiased;
-    }
+    /* ── Styleguide chrome (does NOT override homepage.css tokens) ── */
+    .sg-wrap { max-width: 1200px; margin: 0 auto; padding: 60px 48px 140px; }
 
-    /* ─── TOKENS ─────────────────────────────────────────────── */
-    :root {
-      --brand:        #58172a;
-      --brand-dark:   #4a0e1f;
-      --brand-darker: #28000c;
-      --accent:       #eeca00;
-      --gold:         #b89a5e;
-      --near-black:   #212121;
-      --off-white:    #f5f5f5;
-      --white:        #ffffff;
-      --light-gray:   #b8b8b8;
-      --mid-gray:     #5c5c5c;
-      --f2:           #f2f2f2;
-
-      --font-display: 'Playfair Display', serif;
-      --font-body:    'Manrope', system-ui, sans-serif;
-      --font-label:   'Inter', system-ui, sans-serif;
-
-      --radius-sm:   4px;
-      --radius-md:   10px;
-      --radius-lg:   20px;
-      --radius-pill: 50px;
-    }
-
-    /* ─── LAYOUT ─────────────────────────────────────────────── */
-    .sg-nav {
-      position: sticky; top: 0; z-index: 100;
+    .sg-sidenav {
+      position: fixed; left: 0; top: 0; bottom: 0;
+      width: 200px;
       background: var(--brand-darker);
+      padding: 32px 0;
+      overflow-y: auto;
+      z-index: 200;
+    }
+    .sg-sidenav-brand {
+      font-family: var(--font-display);
+      font-size: 16px; color: rgba(255,255,255,0.55);
+      padding: 0 24px 24px;
       border-bottom: 1px solid rgba(255,255,255,0.08);
-      padding: 0 40px;
-      display: flex; align-items: center; gap: 0;
+      margin-bottom: 16px;
+      line-height: 1.3;
     }
-    .sg-nav-brand {
-      font-family: var(--font-display);
-      font-size: 22px; color: #fff;
-      padding: 18px 0; margin-right: 40px;
-      letter-spacing: -0.02em;
-      white-space: nowrap;
-    }
-    .sg-nav a {
-      color: rgba(255,255,255,0.55);
+    .sg-sidenav a {
+      display: block;
+      padding: 9px 24px;
       font-family: var(--font-label);
-      font-size: 13px; font-weight: 500;
-      padding: 18px 14px;
-      letter-spacing: 0.04em;
+      font-size: 12px; font-weight: 500;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
       text-decoration: none;
-      text-transform: uppercase;
-      transition: color 0.2s;
-      white-space: nowrap;
+      transition: color 0.18s, background 0.18s;
     }
-    .sg-nav a:hover { color: #fff; }
+    .sg-sidenav a:hover { color: #fff; background: rgba(255,255,255,0.05); }
 
-    .sg-main { max-width: 1200px; margin: 0 auto; padding: 60px 40px 120px; }
+    .sg-body { margin-left: 200px; }
 
-    .sg-section { margin-bottom: 80px; }
-    .sg-section-title {
+    /* Section header */
+    .sg-section { padding: 80px 0 40px; border-bottom: 1px solid rgba(0,0,0,0.07); }
+    .sg-section:last-child { border-bottom: none; }
+    .sg-tag {
       font-family: var(--font-label);
-      font-size: 11px; font-weight: 700;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--brand); margin-bottom: 6px;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--brand); display: block; margin-bottom: 6px;
     }
-    .sg-section-heading {
+    .sg-heading {
       font-family: var(--font-display);
-      font-size: 42px; font-weight: 400;
+      font-size: 40px; font-weight: 400;
       letter-spacing: -0.02em; line-height: 1.1;
-      color: var(--near-black); margin-bottom: 32px;
+      color: var(--near-black); margin-bottom: 40px;
     }
-    .sg-divider {
-      border: none; border-top: 1px solid rgba(0,0,0,0.1);
-      margin-bottom: 32px;
-    }
-    .sg-row {
-      display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start;
-    }
+
+    /* Row helpers */
+    .sg-row { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start; }
+    .sg-col { display: flex; flex-direction: column; gap: 8px; }
     .sg-label {
       font-family: var(--font-label);
-      font-size: 11px; font-weight: 500;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--mid-gray); margin-top: 8px;
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.10em; text-transform: uppercase;
+      color: #888;
     }
-    .sg-token {
+    .sg-spec {
       font-family: 'Courier New', monospace;
-      font-size: 11px; color: var(--mid-gray);
+      font-size: 11px; color: #aaa;
     }
     .sg-card {
       background: var(--white);
       border: 1px solid rgba(0,0,0,0.08);
       border-radius: var(--radius-md);
-      padding: 28px;
+      padding: 32px;
     }
+    .sg-card--dark {
+      background: var(--brand-darker);
+      border-color: rgba(255,255,255,0.08);
+    }
+    .sg-card--offwhite { background: var(--off-white); }
 
-    /* ─── 1. COLORS ──────────────────────────────────────────── */
+    /* ── 1. COLORS ── */
     .color-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fill, minmax(130px,1fr));
+      gap: 12px;
     }
-    .color-swatch {
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
-    .color-swatch-block { height: 80px; }
-    .color-swatch-info {
-      background: var(--white);
-      padding: 12px 14px;
-      border-top: 1px solid rgba(0,0,0,0.07);
-    }
-    .color-swatch-name {
-      font-family: var(--font-label);
-      font-size: 13px; font-weight: 600;
-      color: var(--near-black); margin-bottom: 2px;
-    }
-    .color-swatch-hex {
-      font-family: 'Courier New', monospace;
-      font-size: 11px; color: var(--mid-gray);
-    }
-    .color-swatch-var {
-      font-family: 'Courier New', monospace;
-      font-size: 10px; color: var(--light-gray); margin-top: 2px;
-    }
+    .color-swatch { border-radius: var(--radius-md); overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.09); }
+    .color-swatch-block { height: 72px; }
+    .color-swatch-info { background: var(--white); padding: 10px 12px; border-top: 1px solid rgba(0,0,0,0.06); }
+    .color-swatch-name { font-family: var(--font-label); font-size: 12px; font-weight: 600; color: var(--near-black); }
+    .color-swatch-hex  { font-family: 'Courier New', monospace; font-size: 11px; color: #888; }
+    .color-swatch-var  { font-family: 'Courier New', monospace; font-size: 10px; color: #bbb; margin-top: 1px; }
 
-    /* ─── 2. TYPOGRAPHY ──────────────────────────────────────── */
+    /* ── 2. TYPOGRAPHY ── */
     .type-sample { padding: 24px 0; border-bottom: 1px solid rgba(0,0,0,0.06); }
     .type-sample:last-child { border-bottom: none; }
-    .type-meta {
-      font-family: 'Courier New', monospace;
-      font-size: 10.5px; color: var(--light-gray);
-      margin-bottom: 6px; display: block;
+    .type-meta { font-family: 'Courier New', monospace; font-size: 10.5px; color: #bbb; margin-bottom: 6px; display: block; }
+
+    /* ── 3. TOKENS TABLE ── */
+    .tokens-table { width: 100%; border-collapse: collapse; font-family: var(--font-label); font-size: 13px; }
+    .tokens-table th {
+      text-align: left; padding: 10px 14px;
+      background: var(--off-white);
+      font-size: 10px; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase;
+      color: #888; border-bottom: 2px solid rgba(0,0,0,0.08);
     }
+    .tokens-table td { padding: 10px 14px; border-bottom: 1px solid rgba(0,0,0,0.05); vertical-align: middle; }
+    .tokens-table tr:hover td { background: rgba(0,0,0,0.012); }
+    .tokens-table code { font-family: 'Courier New', monospace; font-size: 12px; background: rgba(0,0,0,0.04); padding: 2px 6px; border-radius: 3px; color: var(--brand); }
+    .tok-swatch { display: inline-block; width: 14px; height: 14px; border-radius: 3px; border: 1px solid rgba(0,0,0,0.1); vertical-align: middle; margin-right: 6px; }
 
-    /* ─── 3. BUTTONS ─────────────────────────────────────────── */
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      border-radius: var(--radius-pill);
-      font-family: var(--font-body); font-weight: 600; font-size: 15px;
-      letter-spacing: 0.04em; cursor: pointer; border: none;
-      transition: opacity 0.18s, transform 0.18s, background 0.18s;
-      text-decoration: none;
-    }
-    .btn:hover { opacity: 0.88; transform: translateY(-1px); }
-    .btn:active { transform: translateY(0); opacity: 1; }
-
-    .btn-brand     { background: var(--brand);   color: #fff; padding: 14px 28px; }
-    .btn-brand:hover { background: var(--brand-dark); opacity: 1; }
-    .btn-brand-lg  { background: var(--brand);   color: #fff; padding: 16px 36px; font-size: 18px; font-weight: 700; }
-    .btn-outline-white { border: 1px solid #fff; color: #fff; padding: 16px 40px; font-size: 18px; font-weight: 700; background: transparent; }
-    .btn-outline-brand { border: 1px solid var(--brand); color: var(--brand); padding: 14px 28px; background: transparent; }
-    .btn-gold { background: var(--accent); color: var(--near-black); padding: 14px 28px; font-size: 15px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
-    .btn-dark { background: var(--near-black); color: #fff; padding: 7px 18px; border-radius: 5px; font-size: 12px; letter-spacing: 0.05em; font-family: var(--font-label); font-weight: 500; }
-
-    .btn-demo-dark {
-      background: #1a0008; padding: 32px;
-      border-radius: var(--radius-md);
-      display: flex; gap: 16px; flex-wrap: wrap;
-    }
-
-    /* ─── 4. FIGMA 85:91 ARROW ───────────────────────────────── */
-    .arrow-btn {
-      width: 54px; height: 54px;
-      border-radius: 27px;
-      background: #f2f2f2;
-      border: 1px solid rgba(0,0,0,0.11);
-      display: inline-flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      transition: border-color 0.24s, color 0.24s, background 0.24s;
-    }
-    .arrow-btn:hover { border-color: var(--gold); color: var(--gold); background: #fff; }
-
-    /* ─── 5. SPACING & RADIUS ────────────────────────────────── */
-    .spacing-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 16px; }
+    /* ── 5. SPACING ── */
+    .spacing-row { display: flex; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
     .spacing-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
     .spacing-block { background: var(--brand); border-radius: 3px; }
-    .radius-grid { display: flex; flex-wrap: wrap; gap: 24px; align-items: center; }
+    .radius-row { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
     .radius-demo {
-      background: var(--brand);
+      background: var(--brand); color: rgba(255,255,255,0.6);
       width: 80px; height: 80px;
       display: flex; align-items: center; justify-content: center;
-    }
-    .radius-label {
-      font-family: 'Courier New', monospace;
-      font-size: 11px; color: var(--mid-gray);
-      text-align: center; margin-top: 6px;
+      font-family: 'Courier New', monospace; font-size: 10px;
     }
 
-    /* ─── 6. CARDS ───────────────────────────────────────────── */
-    /* Community card preview */
-    .community-preview {
-      position: relative;
-      width: 220px; height: 300px;
-      border-radius: 4px;
+    /* ── 6. NAV PREVIEW ── */
+    .nav-preview-wrap {
+      border-radius: var(--radius-md);
       overflow: hidden;
-      background: var(--brand-darker);
-      display: flex; flex-direction: column;
-      justify-content: flex-end;
-      padding: 20px 16px;
-      flex-shrink: 0;
+      border: 1px solid rgba(0,0,0,0.08);
+      height: 129px;
+      position: relative;
+      background: rgba(255,255,255,0.74);
     }
-    .community-preview-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(180deg, rgba(40,0,12,0.18) 0%, rgba(0,0,0,0.72) 100%);
-    }
-    .community-preview-content { position: relative; z-index: 2; }
-    .community-preview-name {
-      font-family: var(--font-body); font-size: 20px; font-weight: 600;
-      color: #fff; margin-bottom: 8px; line-height: 1.2;
-    }
-    .community-preview-accent {
-      width: 38px; height: 2px; background: var(--accent); margin-bottom: 8px;
-    }
-    .community-preview-desc {
-      font-size: 12px; color: rgba(255,255,255,0.85);
-      font-family: var(--font-body); line-height: 1.5; margin-bottom: 12px;
-    }
-    .community-preview-btn {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: var(--brand); color: #fff;
-      padding: 5px 12px; border-radius: 4px;
-      font-family: var(--font-label); font-size: 12px; font-weight: 500;
-      letter-spacing: 0.04em; text-transform: uppercase;
+    /* Override sticky/fixed within preview */
+    .nav-preview-wrap .site-header {
+      position: relative !important;
+      top: auto !important;
     }
 
-    /* Blog card preview */
-    .blog-card-preview {
+    /* ── 7. SEARCH BAR PREVIEW ── */
+    .search-preview-wrap { background: #111; border-radius: var(--radius-md); padding: 32px; }
+
+    /* ── 8. COMMUNITY CARDS ── */
+    .community-preview-wrap {
+      height: 380px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    .community-preview-wrap .communities-cards { height: 100%; }
+
+    /* ── 9. TEAM CARD ── */
+    .team-card-preview-wrap {
       width: 300px;
       background: var(--white);
-      border: 1px solid rgba(0,0,0,0.08);
-      border-radius: 4px;
+      border-radius: var(--card-r);
       overflow: hidden;
-      flex-shrink: 0;
-    }
-    .blog-card-preview-img {
-      height: 160px;
-      background: var(--brand-darker);
-      position: relative;
-    }
-    .blog-card-preview-date {
-      position: absolute; top: 12px; left: 16px;
-      font-family: var(--font-label); font-size: 11px;
-      color: rgba(255,255,255,0.55); letter-spacing: 0.04em;
-    }
-    .blog-card-preview-body { padding: 20px; }
-    .blog-card-preview-badge {
-      display: inline-block;
-      background: var(--brand); color: #fff;
-      padding: 4px 12px; border-radius: var(--radius-md);
-      font-size: 12px; font-weight: 600;
-      letter-spacing: 0.04em; margin-bottom: 10px;
-      font-family: var(--font-body);
-    }
-    .blog-card-preview-title {
-      font-family: var(--font-body); font-size: 14px; font-weight: 600;
-      color: var(--near-black); line-height: 1.5; margin-bottom: 8px;
-    }
-    .blog-card-preview-link {
-      font-family: var(--font-body); font-size: 13px; font-weight: 600;
-      color: var(--brand); text-transform: uppercase; letter-spacing: 0.03em;
-    }
-
-    /* Team card preview */
-    .team-card-preview {
-      width: 220px;
-      background: var(--white);
-      border: 1px solid rgba(0,0,0,0.08);
-      border-radius: 18px;
-      overflow: hidden;
-      flex-shrink: 0;
       box-shadow: 0 24px 64px rgba(0,0,0,0.10), 0 4px 16px rgba(0,0,0,0.06);
     }
-    .team-card-preview-photo {
-      height: 180px;
-      background: var(--brand);
+    .team-card-photo {
+      height: 262px;
       margin: 8px 8px 0;
       border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .team-card-preview-photo-initials {
-      font-family: var(--font-display); font-size: 48px;
-      color: rgba(255,255,255,0.4);
-    }
-    .team-card-preview-body { padding: 14px 16px 16px; }
-    .team-card-preview-name {
-      font-family: var(--font-display); font-size: 20px; font-weight: 400;
-      color: var(--near-black); margin-bottom: 6px;
-    }
-    .team-card-preview-bio {
-      font-family: var(--font-body); font-size: 11.5px; color: #8a8070;
-      line-height: 1.6; margin-bottom: 12px;
-    }
-    .team-card-preview-bottom {
-      display: flex; align-items: center; justify-content: space-between;
-      padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.07);
-    }
-    .team-card-preview-tag {
-      font-family: var(--font-label); font-size: 10px; font-weight: 500;
-      letter-spacing: 0.05em; color: var(--gold);
-      padding: 4px 10px; border: 1px solid rgba(184,154,94,0.45);
-      border-radius: 50px;
-    }
-    .team-card-preview-cta {
-      display: inline-flex; align-items: center; gap: 5px;
-      padding: 6px 12px; border-radius: 50px;
-      background: var(--near-black); color: #fff;
-      font-family: var(--font-body); font-size: 11px; font-weight: 500;
-    }
-
-    /* Testimonial card preview */
-    .testimonial-card-preview {
-      width: 480px;
-      background: var(--white);
-      border-radius: var(--radius-lg);
-      padding: 32px 36px;
-      flex-shrink: 0;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.10);
-    }
-    .stars-row { display: flex; gap: 3px; margin-bottom: 16px; }
-    .star { color: var(--accent); font-size: 18px; }
-    .testimonial-quote-text {
-      font-family: var(--font-body); font-size: 14.5px; line-height: 1.65;
-      color: var(--near-black); margin-bottom: 20px;
-    }
-    .testimonial-author-name {
-      font-family: var(--font-body); font-size: 14px; font-weight: 700;
-      color: var(--near-black); display: block;
-    }
-    .testimonial-author-detail {
-      font-family: var(--font-body); font-size: 12px; color: var(--mid-gray);
-      display: block; margin-top: 3px;
-    }
-
-    /* Avatar */
-    .avatar-circle {
-      width: 52px; height: 52px; border-radius: 50%;
       background: var(--brand);
-      display: inline-flex; align-items: center; justify-content: center;
-      font-family: var(--font-display); font-size: 20px;
-      color: #fff; flex-shrink: 0;
-    }
-    .avatar-circle.active {
-      border: 2px solid var(--accent);
-      box-shadow: 0 0 0 3px rgba(238,202,0,0.25);
-    }
-
-    /* ─── 7. SEARCH BAR ──────────────────────────────────────── */
-    .search-bar-demo {
-      background: #000;
-      border: 1px solid rgba(255,255,255,0.22);
-      border-radius: var(--radius-md);
-      height: 64px;
-      display: flex;
-      overflow: hidden;
-      max-width: 780px;
-      box-shadow: 0 12px 4.8px 0 rgba(0,0,0,0.25);
-    }
-    .search-bar-demo-field {
-      flex: 1; padding: 8px 20px 8px 28px;
-      border-right: 1px solid rgba(255,255,255,0.12);
-      display: flex; flex-direction: column; justify-content: center;
-    }
-    .search-bar-demo-label {
-      font-family: var(--font-body); font-weight: 700; font-size: 10px;
-      color: rgba(255,255,255,0.45); letter-spacing: 0.07em; text-transform: uppercase;
-      margin-bottom: 2px;
-    }
-    .search-bar-demo-value {
-      font-family: var(--font-body); font-weight: 700; font-size: 14px;
-      color: rgba(255,255,255,0.35); letter-spacing: 0.03em;
-    }
-    .search-bar-demo-btn {
-      flex: 0 0 160px; background: var(--accent);
       display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-body); font-weight: 700; font-size: 14px;
-      letter-spacing: 0.09em; text-transform: uppercase; color: #000;
-      border: none; cursor: pointer;
+    }
+    .team-card-photo-initials {
+      font-family: var(--font-display);
+      font-size: 56px; color: rgba(255,255,255,0.35);
     }
 
-    /* ─── 8. ANIMATION DEMOS ─────────────────────────────────── */
-    .anim-communities {
-      display: flex; gap: 4px; height: 200px; border-radius: 6px;
-      overflow: hidden; cursor: pointer;
+    /* ── 10. TESTIMONIAL ── */
+    .testimonial-preview-wrap {
+      background: var(--brand-darker);
+      border-radius: var(--radius-md);
+      padding: 48px;
     }
-    .anim-community-card {
-      flex: 1; transition: flex 0.68s cubic-bezier(0.25,0.46,0.45,0.94);
-      display: flex; flex-direction: column;
-      justify-content: flex-end;
-      padding: 14px;
-      position: relative;
+
+    /* ── 11. BLOG CARD ── */
+    .blog-card-preview-wrap {
+      display: flex; gap: 20px; flex-wrap: wrap;
+    }
+    .blog-card-preview-wrap .blog-card { width: 320px; }
+
+    /* ── 12. FOOTER ── */
+    .footer-preview-wrap {
+      border-radius: var(--radius-md);
       overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.07);
     }
-    .anim-communities:has(.anim-community-card:hover) .anim-community-card:hover { flex: 3; }
-    .anim-communities:has(.anim-community-card:hover) .anim-community-card:not(:hover) { flex: 0.7; }
-    .anim-community-accent {
+
+    /* ── 13. ANIMATIONS ── */
+    .anim-community-preview {
+      display: flex; gap: 4px; height: 220px;
+      border-radius: var(--radius-md); overflow: hidden;
+    }
+    .anim-card {
+      flex: 1;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 16px; position: relative; overflow: hidden;
+      transition: flex 0.68s var(--ease-communities);
+      cursor: pointer;
+    }
+    .anim-card:nth-child(1) { background: #28000c; }
+    .anim-card:nth-child(2) { background: #3d0916; }
+    .anim-card:nth-child(3) { background: #4a0e1f; }
+    .anim-card:nth-child(4) { background: #58172a; }
+    .anim-community-preview:has(.anim-card:hover) .anim-card:hover { flex: 3.2; }
+    .anim-community-preview:has(.anim-card:hover) .anim-card:not(:hover) { flex: 0.72; }
+    .anim-card-accent {
       width: 0; height: 2px; background: var(--accent);
       margin-bottom: 6px;
       transition: width 0.42s ease 0.08s;
     }
-    .anim-community-card:hover .anim-community-accent { width: 32px; }
-    .anim-community-name {
+    .anim-card:hover .anim-card-accent { width: 32px; }
+    .anim-card-name {
       font-family: var(--font-body); font-size: 15px; font-weight: 600;
       color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
       position: relative; z-index: 2;
     }
-    .anim-community-card:hover .anim-community-name { white-space: normal; }
-    .anim-community-gradient {
-      position: absolute; inset: 0;
-      background: linear-gradient(180deg, rgba(40,0,12,0.1) 0%, rgba(0,0,0,0.65) 100%);
-    }
-    .anim-community-card:nth-child(1) { background: #28000c; }
-    .anim-community-card:nth-child(2) { background: #3d0916; }
-    .anim-community-card:nth-child(3) { background: #4a0e1f; }
-    .anim-community-card:nth-child(4) { background: #58172a; }
+    .anim-card:hover .anim-card-name { white-space: normal; text-overflow: unset; }
+    .anim-card-gradient { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(40,0,12,0.1) 0%, rgba(0,0,0,0.65) 100%); }
 
-    /* ─── 9. CSS VARS TABLE ──────────────────────────────────── */
-    .vars-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-family: var(--font-label);
-      font-size: 13px;
+    .ease-row { display: flex; gap: 16px; flex-wrap: wrap; }
+    .ease-demo {
+      background: var(--brand); color: rgba(255,255,255,0.8);
+      height: 44px; padding: 0 20px; border-radius: 22px;
+      display: flex; align-items: center;
+      font-family: var(--font-label); font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+      transform: translateX(0);
+      cursor: pointer;
     }
-    .vars-table th {
-      text-align: left; padding: 10px 14px;
-      background: var(--off-white);
-      font-weight: 600; letter-spacing: 0.04em;
-      border-bottom: 2px solid rgba(0,0,0,0.1);
-      font-size: 11px; text-transform: uppercase;
-      color: var(--mid-gray);
-    }
-    .vars-table td {
-      padding: 10px 14px;
-      border-bottom: 1px solid rgba(0,0,0,0.06);
-      vertical-align: middle;
-    }
-    .vars-table tr:hover td { background: rgba(0,0,0,0.015); }
-    .vars-table code {
-      font-family: 'Courier New', monospace;
-      font-size: 12px;
-      background: rgba(0,0,0,0.04);
-      padding: 2px 6px; border-radius: 3px;
-      color: var(--brand);
-    }
-    .var-swatch {
-      display: inline-block;
-      width: 16px; height: 16px;
-      border-radius: 3px;
-      border: 1px solid rgba(0,0,0,0.1);
-      vertical-align: middle;
-      margin-right: 6px;
-    }
-
-    /* ─── 10. HERO TITLE PREVIEW ─────────────────────────────── */
-    .hero-preview {
-      background: var(--brand-darker);
-      border-radius: var(--radius-md);
-      padding: 60px 40px;
-      display: flex; flex-direction: column;
-      align-items: center; text-align: center;
-      gap: 16px;
-    }
-    .hero-preview-title {
-      font-family: var(--font-display);
-      font-size: 64px; font-weight: 400;
-      color: #fff; letter-spacing: -1.28px; line-height: 1;
-    }
-    .hero-preview-subtitle {
-      font-family: var(--font-label);
-      font-size: 13px; font-weight: 500;
-      color: rgba(255,255,255,0.7); letter-spacing: 0.18em;
-      max-width: 540px; line-height: 1.5;
-    }
-    .hero-preview-btns { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
+    .ease-demo:hover { transform: translateX(8px); }
+    .ease-spring { transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1); }
+    .ease-out    { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+    .ease-communities { transition: transform 0.68s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
   </style>
 </head>
 <body>
 
-<!-- Sticky navigation -->
-<nav class="sg-nav">
-  <div class="sg-nav-brand">Palisade Design System</div>
+<!-- Side nav -->
+<nav class="sg-sidenav">
+  <div class="sg-nav-brand">Palisade Realty<br>Design System</div>
   <a href="#colors">Colors</a>
   <a href="#typography">Typography</a>
-  <a href="#buttons">Buttons</a>
-  <a href="#components">Components</a>
-  <a href="#animations">Animations</a>
   <a href="#tokens">Tokens</a>
+  <a href="#buttons">Buttons</a>
+  <a href="#spacing">Spacing</a>
+  <a href="#nav">Navigation</a>
+  <a href="#search">Search Bar</a>
+  <a href="#communities">Community Cards</a>
+  <a href="#team">Team Card</a>
+  <a href="#testimonial">Testimonial</a>
+  <a href="#blog">Blog Card</a>
+  <a href="#footer">Footer</a>
+  <a href="#animations">Animations</a>
 </nav>
 
-<main class="sg-main">
+<div class="sg-body">
+<div class="sg-wrap">
 
-  <!-- ──────────────────────────────────────────────────────── -->
-  <!-- HERO PREVIEW                                             -->
-  <!-- ──────────────────────────────────────────────────────── -->
-  <div class="sg-section">
-    <div class="sg-section-title">Palisade Realty</div>
-    <div class="hero-preview">
-      <svg width="80" height="80" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M70 8L132 70L70 132L8 70Z" stroke="white" stroke-width="1.4" fill="none" opacity="0.65"/>
-        <path d="M70 22L118 70L70 118L22 70Z" stroke="white" stroke-width="0.7" fill="none" opacity="0.35"/>
-        <text x="70" y="85" text-anchor="middle" font-family="Playfair Display, serif" font-size="56" fill="white" opacity="0.88">P</text>
-      </svg>
-      <h1 class="hero-preview-title">PALISADE REALTY</h1>
-      <p class="hero-preview-subtitle">Experience the new way of Buying and Selling real estate in today's shifting market.</p>
-      <div class="hero-preview-btns">
-        <a href="#" class="btn btn-brand-lg">Search with HomeMatch AI</a>
-        <a href="#" class="btn btn-outline-white">Let's Connect</a>
-      </div>
-    </div>
+  <!-- ── HEADER ─────────────────────────────────────────────── -->
+  <div style="margin-bottom:60px;padding-bottom:40px;border-bottom:1px solid rgba(0,0,0,0.07);">
+    <img src="../images/logo.png" alt="Palisade Realty" style="height:60px;margin-bottom:20px;">
+    <p style="font-family:var(--font-body);font-size:15px;color:var(--mid-gray);line-height:1.7;max-width:600px;">
+      Live design system for <strong style="color:var(--near-black)">Palisade Realty</strong> — all styles pull directly from <code style="font-size:12px;background:rgba(0,0,0,0.05);padding:2px 6px;border-radius:3px;">homepage.css</code>. Tokens, components, and interactions are always in sync with the production site.
+    </p>
   </div>
 
-  <!-- ──────────────────────────────────────────────────────── -->
-  <!-- 1. COLORS                                                -->
-  <!-- ──────────────────────────────────────────────────────── -->
-  <div class="sg-section" id="colors">
-    <div class="sg-section-title">Section 01</div>
-    <h2 class="sg-section-heading">Colors</h2>
+  <!-- ══════════════════════════════════════════════════════════
+       1. COLORS
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="sg-section" id="colors">
+    <span class="sg-tag">Section 01</span>
+    <h2 class="sg-heading">Colors</h2>
 
-    <h3 style="font-family:var(--font-label);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--mid-gray);margin-bottom:16px;">Brand Palette</h3>
-    <div class="color-grid" style="margin-bottom:32px;">
-      <div class="color-swatch">
-        <div class="color-swatch-block" style="background:#58172a;"></div>
-        <div class="color-swatch-info">
-          <div class="color-swatch-name">Brand</div>
-          <div class="color-swatch-hex">#58172a</div>
-          <div class="color-swatch-var">--brand</div>
-        </div>
-      </div>
-      <div class="color-swatch">
-        <div class="color-swatch-block" style="background:#4a0e1f;"></div>
-        <div class="color-swatch-info">
-          <div class="color-swatch-name">Brand Dark</div>
-          <div class="color-swatch-hex">#4a0e1f</div>
-          <div class="color-swatch-var">--brand-dark</div>
-        </div>
-      </div>
-      <div class="color-swatch">
-        <div class="color-swatch-block" style="background:#28000c;"></div>
-        <div class="color-swatch-info">
-          <div class="color-swatch-name">Brand Darker</div>
-          <div class="color-swatch-hex">#28000c</div>
-          <div class="color-swatch-var">--brand-darker</div>
-        </div>
-      </div>
-      <div class="color-swatch">
-        <div class="color-swatch-block" style="background:#eeca00;"></div>
-        <div class="color-swatch-info">
-          <div class="color-swatch-name">Accent / Gold</div>
-          <div class="color-swatch-hex">#eeca00</div>
-          <div class="color-swatch-var">--accent</div>
-        </div>
-      </div>
-      <div class="color-swatch">
-        <div class="color-swatch-block" style="background:#b89a5e;"></div>
-        <div class="color-swatch-info">
-          <div class="color-swatch-name">Warm Gold</div>
-          <div class="color-swatch-hex">#b89a5e</div>
-          <div class="color-swatch-var">--gold</div>
-        </div>
-      </div>
+    <h3 style="font-family:var(--font-label);font-size:11px;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;color:#888;margin-bottom:16px;">Brand Palette</h3>
+    <div class="color-grid" style="margin-bottom:40px;">
+      <div class="color-swatch"><div class="color-swatch-block" style="background:#58172a;"></div><div class="color-swatch-info"><div class="color-swatch-name">Brand</div><div class="color-swatch-hex">#58172a</div><div class="color-swatch-var">--brand</div></div></div>
+      <div class="color-swatch"><div class="color-swatch-block" style="background:#4a0e1f;"></div><div class="color-swatch-info"><div class="color-swatch-name">Brand Dark</div><div class="color-swatch-hex">#4a0e1f</div><div class="color-swatch-var">--brand-dark</div></div></div>
+      <div class="color-swatch"><div class="color-swatch-block" style="background:#28000c;"></div><div class="color-swatch-info"><div class="color-swatch-name">Brand Darker</div><div class="color-swatch-hex">#28000c</div><div class="color-swatch-var">--brand-darker</div></div></div>
+      <div class="color-swatch"><div class="color-swatch-block" style="background:#eeca00;"></div><div class="color-swatch-info"><div class="color-swatch-name">Accent</div><div class="color-swatch-hex">#eeca00</div><div class="color-swatch-var">--accent</div></div></div>
+      <div class="color-swatch"><div class="color-swatch-block" style="background:#b89a5e;"></div><div class="color-swatch-info"><div class="color-swatch-name">Gold</div><div class="color-swatch-hex">#b89a5e</div><div class="color-swatch-var">--gold</div></div></div>
+      <div class="color-swatch"><div class="color-swatch-block" style="background:#cbb278;"></div><div class="color-swatch-info"><div class="color-swatch-name">Gold Hi</div><div class="color-swatch-hex">#cbb278</div><div class="color-swatch-var">--gold-hi</div></div></div>
     </div>
 
-    <h3 style="font-family:var(--font-label);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--mid-gray);margin-bottom:16px;">Neutrals</h3>
+    <h3 style="font-family:var(--font-label);font-size:11px;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;color:#888;margin-bottom:16px;">Neutrals</h3>
     <div class="color-grid">
-      <div class="color-swatch">
-        <div class="color-swatch-block" style="background:#000000;"></div>
-        <div class="color-swatch-info">
-          <div class="color-swatch-name">Black</div>
-          <div class="color-swatch-hex">#000000</div>
-          <div class="color-swatch-var">--black</div>
-        </div>
-      </div>
-      <div class="color-swatch">
-        <div class="color-swatch-block" style="background:#212121;"></div>
-        <div class="color-swatch-info">
-          <div class="color-swatch-name">Near Black</div>
-          <div class="color-swatch-hex">#212121</div>
-          <div class="color-swatch-var">--near-black</div>
-        </div>
-      </div>
-      <div class="color-swatch">
-        <div class="color-swatch-block" style="background:#5c5c5c;"></div>
-        <div class="color-swatch-info">
-          <div class="color-swatch-name">Mid Gray</div>
-          <div class="color-swatch-hex">#5c5c5c</div>
-          <div class="color-swatch-var">--mid-gray</div>
-        </div>
-      </div>
-      <div class="color-swatch">
-        <div class="color-swatch-block" style="background:#b8b8b8;"></div>
-        <div class="color-swatch-info">
-          <div class="color-swatch-name">Light Gray</div>
-          <div class="color-swatch-hex">#b8b8b8</div>
-          <div class="color-swatch-var">--light-gray</div>
-        </div>
-      </div>
-      <div class="color-swatch">
-        <div class="color-swatch-block" style="background:#f5f5f5;border:1px solid #e0e0e0;"></div>
-        <div class="color-swatch-info">
-          <div class="color-swatch-name">Off White</div>
-          <div class="color-swatch-hex">#f5f5f5</div>
-          <div class="color-swatch-var">--off-white</div>
-        </div>
-      </div>
-      <div class="color-swatch">
-        <div class="color-swatch-block" style="background:#f2f2f2;border:1px solid #e0e0e0;"></div>
-        <div class="color-swatch-info">
-          <div class="color-swatch-name">F2 (Arrow bg)</div>
-          <div class="color-swatch-hex">#f2f2f2</div>
-          <div class="color-swatch-var">--f2</div>
-        </div>
-      </div>
+      <div class="color-swatch"><div class="color-swatch-block" style="background:#000000;"></div><div class="color-swatch-info"><div class="color-swatch-name">Black</div><div class="color-swatch-hex">#000000</div><div class="color-swatch-var">--black</div></div></div>
+      <div class="color-swatch"><div class="color-swatch-block" style="background:#212121;"></div><div class="color-swatch-info"><div class="color-swatch-name">Near Black</div><div class="color-swatch-hex">#212121</div><div class="color-swatch-var">--near-black</div></div></div>
+      <div class="color-swatch"><div class="color-swatch-block" style="background:#5c5c5c;"></div><div class="color-swatch-info"><div class="color-swatch-name">Mid Gray</div><div class="color-swatch-hex">#5c5c5c</div><div class="color-swatch-var">--mid-gray</div></div></div>
+      <div class="color-swatch"><div class="color-swatch-block" style="background:#8a8070;"></div><div class="color-swatch-info"><div class="color-swatch-name">Muted</div><div class="color-swatch-hex">#8a8070</div><div class="color-swatch-var">--muted</div></div></div>
+      <div class="color-swatch"><div class="color-swatch-block" style="background:#b8b8b8;"></div><div class="color-swatch-info"><div class="color-swatch-name">Light Gray</div><div class="color-swatch-hex">#b8b8b8</div><div class="color-swatch-var">--light-gray</div></div></div>
+      <div class="color-swatch"><div class="color-swatch-block" style="background:#f2f2f2;border-top:1px solid rgba(0,0,0,0.07);"></div><div class="color-swatch-info"><div class="color-swatch-name">F2</div><div class="color-swatch-hex">#f2f2f2</div><div class="color-swatch-var">--f2</div></div></div>
+      <div class="color-swatch"><div class="color-swatch-block" style="background:#f5f5f5;border-top:1px solid rgba(0,0,0,0.07);"></div><div class="color-swatch-info"><div class="color-swatch-name">Off White</div><div class="color-swatch-hex">#f5f5f5</div><div class="color-swatch-var">--off-white</div></div></div>
+      <div class="color-swatch"><div class="color-swatch-block" style="background:#ffffff;border-top:1px solid rgba(0,0,0,0.07);"></div><div class="color-swatch-info"><div class="color-swatch-name">White</div><div class="color-swatch-hex">#ffffff</div><div class="color-swatch-var">--white</div></div></div>
     </div>
-  </div>
+  </section>
 
-  <!-- ──────────────────────────────────────────────────────── -->
-  <!-- 2. TYPOGRAPHY                                            -->
-  <!-- ──────────────────────────────────────────────────────── -->
-  <div class="sg-section" id="typography">
-    <div class="sg-section-title">Section 02</div>
-    <h2 class="sg-section-heading">Typography</h2>
+  <!-- ══════════════════════════════════════════════════════════
+       2. TYPOGRAPHY
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="sg-section" id="typography">
+    <span class="sg-tag">Section 02</span>
+    <h2 class="sg-heading">Typography</h2>
 
-    <!-- Playfair Display -->
+    <!-- Display / Playfair -->
     <div class="sg-card" style="margin-bottom:24px;">
-      <div class="sg-section-title" style="margin-bottom:12px;">Display — Playfair Display</div>
+      <div class="sg-label" style="margin-bottom:20px;">Playfair Display — var(--font-display) — Headings, Hero, Section Titles</div>
       <div class="type-sample">
-        <span class="type-meta">64px / weight 400 / tracking -0.02em — Hero Title</span>
-        <div style="font-family:var(--font-display);font-size:64px;font-weight:400;letter-spacing:-0.02em;line-height:1.0;color:var(--near-black);">PALISADE REALTY</div>
+        <span class="type-meta">96px / weight 400 / letter-spacing −1.92px — Hero Title</span>
+        <div style="font-family:var(--font-display);font-size:clamp(40px,6vw,96px);font-weight:400;letter-spacing:-1.92px;line-height:1;color:var(--black);">PALISADE REALTY</div>
       </div>
       <div class="type-sample">
-        <span class="type-meta">64px / weight 400 — Section Headings</span>
-        <div style="font-family:var(--font-display);font-size:64px;font-weight:400;letter-spacing:-0.01em;line-height:1.1;color:var(--near-black);">Explore Our Communities</div>
+        <span class="type-meta">64px / weight 400 / letter-spacing −0.64px — Section Heading</span>
+        <div style="font-family:var(--font-display);font-size:clamp(32px,4.5vw,64px);font-weight:400;letter-spacing:-0.64px;line-height:1.1;color:var(--black);">Find Your Perfect Community</div>
       </div>
       <div class="type-sample">
-        <span class="type-meta">42px — Team/Testimonial Section Title</span>
-        <div style="font-family:var(--font-display);font-size:42px;font-weight:400;line-height:1.1;color:var(--near-black);">Meet <span style="color:var(--gold);">Our Agents</span></div>
+        <span class="type-meta">64px / weight 500 / italic — Used in Testimonials heading</span>
+        <div style="font-family:var(--font-display);font-size:clamp(28px,4.5vw,64px);font-weight:500;font-style:italic;letter-spacing:-0.64px;line-height:1.1;color:var(--black);">What Our Clients Say</div>
       </div>
       <div class="type-sample">
-        <span class="type-meta">22px — Agent Card Name</span>
+        <span class="type-meta">50px / weight 500 — Find Your Place section</span>
+        <div style="font-family:var(--font-display);font-size:clamp(28px,4vw,50px);font-weight:500;letter-spacing:-0.5px;line-height:1.1;color:var(--black);">Explore San Diego</div>
+      </div>
+      <div class="type-sample">
+        <span class="type-meta">22px / weight 400 — Team card name</span>
         <div style="font-family:var(--font-display);font-size:22px;font-weight:400;letter-spacing:-0.01em;color:var(--near-black);">Hedda Parashos</div>
       </div>
     </div>
 
-    <!-- Manrope -->
+    <!-- Body / Manrope -->
     <div class="sg-card" style="margin-bottom:24px;">
-      <div class="sg-section-title" style="margin-bottom:12px;">Body — Manrope</div>
+      <div class="sg-label" style="margin-bottom:20px;">Manrope — var(--font-body) — Body, Nav Links, Buttons</div>
       <div class="type-sample">
-        <span class="type-meta">16px / weight 400 / line-height 1.7 — Body text</span>
-        <div style="font-family:var(--font-body);font-size:16px;font-weight:400;line-height:1.7;color:var(--near-black);max-width:600px;">Palisade Realty has grown into one of San Diego's most trusted luxury real estate firms — with a team of 60+ agents and over 15 years of market expertise.</div>
+        <span class="type-meta">16px / weight 500 / line-height 1.7 — Body copy</span>
+        <div style="font-family:var(--font-body);font-size:16px;font-weight:500;line-height:1.7;color:var(--near-black);max-width:600px;">Hedda Parashos has been helping buyers and sellers navigate the San Diego market for over 15 years. With a team of 60+ agents across Southern California, Palisade Realty delivers exceptional results for every client.</div>
       </div>
       <div class="type-sample">
-        <span class="type-meta">15px / weight 500 — Nav links</span>
-        <div style="font-family:var(--font-body);font-size:15px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--near-black);">BUY &nbsp; SELL &nbsp; COMMUNITIES &nbsp; TESTIMONIALS</div>
+        <span class="type-meta">15px / weight 400 — Nav links, subtle copy</span>
+        <div style="font-family:var(--font-body);font-size:15px;font-weight:400;letter-spacing:0.9px;text-transform:uppercase;color:var(--black);">Communities · Team · Resources</div>
       </div>
       <div class="type-sample">
-        <span class="type-meta">26px / weight 600 — Community card names</span>
-        <div style="font-family:var(--font-body);font-size:26px;font-weight:600;color:#fff;background:var(--brand-darker);padding:16px 20px;border-radius:6px;display:inline-block;">La Jolla</div>
+        <span class="type-meta">16px / weight 400 / line-height 1.65 — Testimonial quote</span>
+        <div style="font-family:var(--font-body);font-size:16px;font-weight:400;line-height:1.65;color:var(--black);max-width:580px;">"Hedda and her team were incredible from start to finish. Her negotiating skills were TOP NOTCH and made selling our home an absolute breeze."</div>
       </div>
     </div>
 
-    <!-- Inter -->
+    <!-- Label / Inter -->
     <div class="sg-card">
-      <div class="sg-section-title" style="margin-bottom:12px;">Label — Inter</div>
+      <div class="sg-label" style="margin-bottom:20px;">Inter — var(--font-label) — Eyebrows, Labels, UI Text</div>
       <div class="type-sample">
-        <span class="type-meta">20px / weight 500 / tracking 2.4px — Eyebrow labels</span>
-        <div style="font-family:var(--font-label);font-size:20px;font-weight:500;letter-spacing:2.4px;text-transform:uppercase;color:var(--brand);">Where We Work</div>
-      </div>
-      <div class="type-sample">
-        <span class="type-meta">16px / weight 500 / tracking 0.64px — Section eyebrows</span>
-        <div style="font-family:var(--font-label);font-size:16px;font-weight:500;letter-spacing:0.64px;color:var(--brand);">Client Reviews</div>
+        <span class="type-meta">20px / weight 500 / letter-spacing 2.4px / uppercase — Eyebrow</span>
+        <div style="font-family:var(--font-label);font-size:20px;font-weight:500;letter-spacing:2.4px;text-transform:uppercase;color:var(--brand);">San Diego Communities</div>
       </div>
       <div class="type-sample">
-        <span class="type-meta">11px / weight 500 / tracking 0.16em — Team carousel eyebrow</span>
-        <div style="font-family:var(--font-label);font-size:11px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);">The Palisade Realty Team</div>
+        <span class="type-meta">16px / weight 500 / letter-spacing 0.64px — Smaller eyebrow</span>
+        <div style="font-family:var(--font-label);font-size:16px;font-weight:500;letter-spacing:0.64px;color:var(--brand);">Featured Listings</div>
+      </div>
+      <div class="type-sample">
+        <span class="type-meta">14px / weight 700 / letter-spacing 0.13em / uppercase — Search button</span>
+        <div style="font-family:var(--font-label);font-size:14px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:var(--near-black);">Search Homes</div>
+      </div>
+      <div class="type-sample">
+        <span class="type-meta">11px / weight 500 / uppercase — Search field label</span>
+        <div style="font-family:var(--font-label);font-size:11px;font-weight:500;letter-spacing:0.09em;text-transform:uppercase;color:#A0A0A0;">Location</div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- ──────────────────────────────────────────────────────── -->
-  <!-- 3. BUTTONS                                               -->
-  <!-- ──────────────────────────────────────────────────────── -->
-  <div class="sg-section" id="buttons">
-    <div class="sg-section-title">Section 03</div>
-    <h2 class="sg-section-heading">Buttons</h2>
-
-    <div class="sg-row" style="margin-bottom:24px;">
-      <div>
-        <a href="#" class="btn btn-brand">Brand Fill</a>
-        <div class="sg-label">btn-brand</div>
-        <div class="sg-token">bg: #58172a · color: #fff · pad: 14/24px · radius: 50px</div>
-      </div>
-      <div>
-        <a href="#" class="btn btn-brand-lg">Brand Large</a>
-        <div class="sg-label">btn-brand-lg</div>
-        <div class="sg-token">18px / 700 · pad: 16/36px</div>
-      </div>
-      <div>
-        <a href="#" class="btn btn-gold">Search</a>
-        <div class="sg-label">btn-gold (Search)</div>
-        <div class="sg-token">bg: #eeca00 · color: #000 · uppercase</div>
-      </div>
-      <div>
-        <a href="#" class="btn btn-outline-brand">View All</a>
-        <div class="sg-label">btn-outline-brand</div>
-        <div class="sg-token">border: 1px solid #58172a · transparent bg</div>
-      </div>
-      <div>
-        <span class="btn btn-dark">SELLER</span>
-        <div class="sg-label">btn-dark (Badge)</div>
-        <div class="sg-token">bg: #212121 · radius: 5px · 12px</div>
-      </div>
-    </div>
-
-    <div class="btn-demo-dark">
-      <a href="#" class="btn btn-brand-lg">Search with HomeMatch AI</a>
-      <a href="#" class="btn btn-outline-white">Let's Connect</a>
-    </div>
-    <div class="sg-label" style="margin-top:8px;">Hero button pair on dark background</div>
-
-    <hr class="sg-divider" style="margin-top:24px;">
-
-    <!-- Figma 85:91 Carousel Arrow -->
-    <h3 style="font-family:var(--font-label);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--mid-gray);margin-bottom:16px;">Carousel Arrow — Figma Node 85:91</h3>
-    <div class="sg-row" style="align-items:center;gap:24px;">
-      <div>
-        <button class="arrow-btn" aria-label="Previous">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <button class="arrow-btn" aria-label="Next" style="margin-left:8px;">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <div class="sg-label" style="margin-top:8px;">Resting (hover to preview gold)</div>
-      </div>
-      <div class="sg-card" style="font-family:'Courier New',monospace;font-size:12px;line-height:1.7;color:var(--mid-gray);max-width:340px;">
-        background: #f2f2f2<br>
-        border: 1px solid rgba(0,0,0,0.11)<br>
-        border-radius: 27px<br>
-        width: 54px · height: 54px<br>
-        <span style="color:var(--brand);">hover:</span> border-color: #b89a5e · color: #b89a5e
-      </div>
-    </div>
-  </div>
-
-  <!-- ──────────────────────────────────────────────────────── -->
-  <!-- 4. COMPONENTS                                            -->
-  <!-- ──────────────────────────────────────────────────────── -->
-  <div class="sg-section" id="components">
-    <div class="sg-section-title">Section 04</div>
-    <h2 class="sg-section-heading">Components</h2>
-
-    <!-- Search Bar -->
-    <h3 style="font-family:var(--font-label);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--mid-gray);margin-bottom:16px;">Hero Search Bar</h3>
-    <div class="search-bar-demo" style="margin-bottom:8px;">
-      <div class="search-bar-demo-field">
-        <div class="search-bar-demo-label">Enter City / Neighborhood</div>
-        <div class="search-bar-demo-value">La Jolla, Coronado, Del Mar…</div>
-      </div>
-      <button class="search-bar-demo-btn">SEARCH</button>
-    </div>
-    <div class="sg-token">bg: #000 · height: 64px · radius: 10px · action: GET https://search.palisaderealty.com/ · input name="q"</div>
-
-    <hr class="sg-divider" style="margin-top:32px;">
-
-    <!-- Community Cards -->
-    <h3 style="font-family:var(--font-label);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--mid-gray);margin-bottom:16px;">Community Card</h3>
-    <div class="sg-row" style="margin-bottom:8px;">
-      <div class="community-preview">
-        <div class="community-preview-overlay"></div>
-        <div class="community-preview-content">
-          <div class="community-preview-name">Downtown San Diego</div>
-          <div class="community-preview-accent"></div>
-          <div class="community-preview-desc">Urban sophistication meets coastal living.</div>
-          <a href="#" class="community-preview-btn">Explore →</a>
-        </div>
-      </div>
-      <div style="font-family:'Courier New',monospace;font-size:11.5px;line-height:2;color:var(--mid-gray);max-width:340px;align-self:center;">
-        flex: 1 → hover: 3.2<br>
-        siblings: flex: 0.72 on hover<br>
-        transition: 0.68s cubic-bezier(0.25, 0.46, 0.45, 0.94)<br>
-        overlay: linear-gradient(180deg, rgba(40,0,12,0.18), rgba(0,0,0,0.72))<br>
-        gold accent bar: width 0 → 38px (delay 0.08s)<br>
-        desc: opacity 0→1 (delay 0.18s)<br>
-        btn: opacity 0→1 (delay 0.25s)
-      </div>
-    </div>
-
-    <hr class="sg-divider">
-
-    <!-- Blog Card -->
-    <h3 style="font-family:var(--font-label);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--mid-gray);margin-bottom:16px;">Blog Card</h3>
-    <div class="sg-row" style="margin-bottom:8px;">
-      <div class="blog-card-preview">
-        <div class="blog-card-preview-img">
-          <div class="blog-card-preview-date">Feb 26, 2025</div>
-        </div>
-        <div class="blog-card-preview-body">
-          <div class="blog-card-preview-badge">SELLER</div>
-          <div class="blog-card-preview-title">Here's Why Having A Good Driveway Matters When Selling Your Home</div>
-          <div class="blog-card-preview-link">Read More →</div>
-        </div>
-      </div>
-      <div class="blog-card-preview">
-        <div class="blog-card-preview-img" style="background:var(--brand);">
-          <div class="blog-card-preview-date">Feb 26, 2025</div>
-        </div>
-        <div class="blog-card-preview-body">
-          <div class="blog-card-preview-badge">BUYER</div>
-          <div class="blog-card-preview-title">One Thing Most Home Buyers Forget to Budget For: Landscaping</div>
-          <div class="blog-card-preview-link">Read More →</div>
-        </div>
-      </div>
-    </div>
-
-    <hr class="sg-divider">
-
-    <!-- Team Card -->
-    <h3 style="font-family:var(--font-label);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--mid-gray);margin-bottom:16px;">Team Agent Card</h3>
-    <div class="sg-row" style="margin-bottom:8px;">
-      <div class="team-card-preview">
-        <div class="team-card-preview-photo">
-          <div class="team-card-preview-photo-initials">HP</div>
-        </div>
-        <div class="team-card-preview-body">
-          <div class="team-card-preview-name">Hedda Parashos</div>
-          <div class="team-card-preview-bio">Founder and CEO of Palisade Realty since 2010. San Diego luxury specialist with 15+ years experience.</div>
-          <div class="team-card-preview-bottom">
-            <div class="team-card-preview-tag">Principal Broker</div>
-            <a href="#" class="team-card-preview-cta">Call Now</a>
-          </div>
-        </div>
-      </div>
-      <div style="font-family:'Courier New',monospace;font-size:11.5px;line-height:2;color:var(--mid-gray);max-width:320px;align-self:center;">
-        Card: 300×460px (desktop) · radius 18px<br>
-        SLOT_STYLES progression:<br>
-        &nbsp;slot 0 (active): scale 1.00 · opacity 1.00<br>
-        &nbsp;slot 1: scale 0.88 · opacity 1.00<br>
-        &nbsp;slot 2: scale 0.76 · opacity 0.55<br>
-        &nbsp;slot 3+: scale 0.65 · opacity 0.00<br>
-        Arrows: Figma 85:91 style (applied via .tc-arrow)<br>
-        Progress bar fill: --tc-gold (#b89a5e)
-      </div>
-    </div>
-
-    <hr class="sg-divider">
-
-    <!-- Testimonial -->
-    <h3 style="font-family:var(--font-label);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--mid-gray);margin-bottom:16px;">Testimonial Card + Avatar Row</h3>
-    <div style="background:var(--brand-darker);border-radius:var(--radius-md);padding:40px;margin-bottom:8px;">
-      <div style="display:flex;gap:0;margin-bottom:12px;">
-        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;width:88px;opacity:1;">
-          <div class="avatar-circle active">C</div>
-          <span style="font-family:var(--font-body);font-size:10px;font-weight:600;color:#fff;text-align:center;">ckvonk</span>
-        </div>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;width:88px;opacity:0.45;">
-          <div class="avatar-circle">S</div>
-          <span style="font-family:var(--font-body);font-size:10px;font-weight:600;color:#fff;text-align:center;">sdtinystar</span>
-        </div>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;width:88px;opacity:0.45;">
-          <div class="avatar-circle">A</div>
-          <span style="font-family:var(--font-body);font-size:10px;font-weight:600;color:#fff;text-align:center;">amyjcrees</span>
-        </div>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;width:88px;opacity:0.45;">
-          <div class="avatar-circle">M</div>
-          <span style="font-family:var(--font-body);font-size:10px;font-weight:600;color:#fff;text-align:center;">Michelle R</span>
-        </div>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;width:88px;opacity:0.45;">
-          <div class="avatar-circle">J</div>
-          <span style="font-family:var(--font-body);font-size:10px;font-weight:600;color:#fff;text-align:center;">Jen C</span>
-        </div>
-      </div>
-      <div style="position:relative;height:14px;width:440px;margin-bottom:16px;">
-        <div style="position:absolute;bottom:0;width:0;height:0;border-left:10px solid transparent;border-right:10px solid transparent;border-bottom:14px solid #fff;left:34px;"></div>
-      </div>
-      <div class="testimonial-card-preview">
-        <div class="stars-row">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-        </div>
-        <p class="testimonial-quote-text">"Hedda and her team were incredible from start to finish. They guided us through every step of the process with professionalism and genuine care."</p>
-        <span class="testimonial-author-name">ckvonk</span>
-        <span class="testimonial-author-detail">Bought a home in San Diego, CA</span>
-      </div>
-    </div>
-    <div class="sg-token">Gold caret: getBoundingClientRect() per active avatar · auto-rotate: 5500ms · entry: opacity + translateY(10px→0) 0.38s</div>
-  </div>
-
-  <!-- ──────────────────────────────────────────────────────── -->
-  <!-- 5. ANIMATIONS                                            -->
-  <!-- ──────────────────────────────────────────────────────── -->
-  <div class="sg-section" id="animations">
-    <div class="sg-section-title">Section 05</div>
-    <h2 class="sg-section-heading">Animations</h2>
-
-    <h3 style="font-family:var(--font-label);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--mid-gray);margin-bottom:12px;">Communities — Flex-Expand Hover (Live Demo)</h3>
-    <p style="font-family:var(--font-label);font-size:13px;color:var(--mid-gray);margin-bottom:16px;">Hover any card to see the flex-expand effect:</p>
-    <div class="anim-communities" style="margin-bottom:8px;">
-      <div class="anim-community-card">
-        <div class="anim-community-gradient"></div>
-        <div style="position:relative;z-index:2;">
-          <div class="anim-community-accent"></div>
-          <div class="anim-community-name">Downtown San Diego</div>
-        </div>
-      </div>
-      <div class="anim-community-card">
-        <div class="anim-community-gradient"></div>
-        <div style="position:relative;z-index:2;">
-          <div class="anim-community-accent"></div>
-          <div class="anim-community-name">La Jolla</div>
-        </div>
-      </div>
-      <div class="anim-community-card">
-        <div class="anim-community-gradient"></div>
-        <div style="position:relative;z-index:2;">
-          <div class="anim-community-accent"></div>
-          <div class="anim-community-name">Coronado</div>
-        </div>
-      </div>
-      <div class="anim-community-card">
-        <div class="anim-community-gradient"></div>
-        <div style="position:relative;z-index:2;">
-          <div class="anim-community-accent"></div>
-          <div class="anim-community-name">Rancho Santa Fe</div>
-        </div>
-      </div>
-    </div>
-    <div class="sg-token" style="margin-bottom:32px;">flex: 1 → hover: 3 · siblings: 0.7 · 0.68s cubic-bezier(0.25, 0.46, 0.45, 0.94)</div>
-
-    <hr class="sg-divider">
-
-    <h3 style="font-family:var(--font-label);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--mid-gray);margin-bottom:12px;">Scroll Reveal</h3>
-    <div class="sg-card">
-      <p style="font-family:var(--font-body);font-size:14px;color:var(--mid-gray);line-height:1.6;margin-bottom:12px;">Elements below the fold are observed via IntersectionObserver. When they enter the viewport, <code>will-animate</code> is added, then <code>visible</code> via double-RAF — ensuring elements are never invisible on initial render (important for screenshot compatibility).</p>
-      <pre style="font-family:'Courier New',monospace;font-size:12px;color:var(--near-black);background:var(--off-white);padding:16px;border-radius:6px;overflow-x:auto;line-height:1.7;">.reveal.will-animate {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 500ms cubic-bezier(0.22, 0.61, 0.36, 1),
-              transform 500ms cubic-bezier(0.22, 0.61, 0.36, 1);
-}
-.reveal.will-animate.visible { opacity: 1; transform: translateY(0); }
-.will-animate.stagger-1 { transition-delay:  80ms; }
-.will-animate.stagger-2 { transition-delay: 160ms; }
-.will-animate.stagger-3 { transition-delay: 240ms; }
-.will-animate.stagger-4 { transition-delay: 320ms; }
-.will-animate.stagger-5 { transition-delay: 400ms; }</pre>
-    </div>
-  </div>
-
-  <!-- ──────────────────────────────────────────────────────── -->
-  <!-- 6. TOKENS REFERENCE                                      -->
-  <!-- ──────────────────────────────────────────────────────── -->
-  <div class="sg-section" id="tokens">
-    <div class="sg-section-title">Section 06</div>
-    <h2 class="sg-section-heading">CSS Variables Reference</h2>
+  <!-- ══════════════════════════════════════════════════════════
+       3. DESIGN TOKENS
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="sg-section" id="tokens">
+    <span class="sg-tag">Section 03</span>
+    <h2 class="sg-heading">Design Tokens</h2>
 
     <div class="sg-card">
-      <table class="vars-table">
+      <table class="tokens-table">
         <thead>
-          <tr>
-            <th>Variable</th>
-            <th>Value</th>
-            <th>Usage</th>
-          </tr>
+          <tr><th>Token</th><th>Value</th><th>Usage</th></tr>
         </thead>
         <tbody>
-          <tr><td><code>--brand</code></td><td><span class="var-swatch" style="background:#58172a;"></span>#58172a</td><td>Primary brand color — buttons, accents, borders</td></tr>
-          <tr><td><code>--brand-dark</code></td><td><span class="var-swatch" style="background:#4a0e1f;"></span>#4a0e1f</td><td>Hover state of brand-colored elements</td></tr>
-          <tr><td><code>--brand-darker</code></td><td><span class="var-swatch" style="background:#28000c;"></span>#28000c</td><td>Hero/testimonials backgrounds, deep shadow fills</td></tr>
-          <tr><td><code>--accent</code></td><td><span class="var-swatch" style="background:#eeca00;"></span>#eeca00</td><td>Search button, community gold bar, active avatar ring</td></tr>
-          <tr><td><code>--gold</code></td><td><span class="var-swatch" style="background:#b89a5e;"></span>#b89a5e</td><td>Team carousel gold (warm/muted) — tag text, progress bar</td></tr>
-          <tr><td><code>--near-black</code></td><td><span class="var-swatch" style="background:#212121;border:1px solid #ccc;"></span>#212121</td><td>Body text, headings on light backgrounds</td></tr>
-          <tr><td><code>--off-white</code></td><td><span class="var-swatch" style="background:#f5f5f5;border:1px solid #e0e0e0;"></span>#f5f5f5</td><td>Section backgrounds (about, listings, blog)</td></tr>
-          <tr><td><code>--f2</code></td><td><span class="var-swatch" style="background:#f2f2f2;border:1px solid #e0e0e0;"></span>#f2f2f2</td><td>Figma 85:91 carousel arrow resting background</td></tr>
-          <tr><td><code>--font-display</code></td><td colspan="2"><code>'Playfair Display'</code>, serif — hero, section headings, agent names, about name</td></tr>
-          <tr><td><code>--font-body</code></td><td colspan="2"><code>'Manrope'</code>, system-ui, sans-serif — body text, card text, nav links, testimonials</td></tr>
-          <tr><td><code>--font-label</code></td><td colspan="2"><code>'Inter'</code>, system-ui, sans-serif — eyebrows, badges, tags, table labels</td></tr>
-          <tr><td><code>--ease-spring</code></td><td colspan="2"><code>cubic-bezier(0.22, 0.61, 0.36, 1)</code> — default scroll reveal easing</td></tr>
-          <tr><td><code>--ease-communities</code></td><td colspan="2"><code>cubic-bezier(0.25, 0.46, 0.45, 0.94)</code> — communities flex-expand timing</td></tr>
-          <tr><td><code>--radius-sm</code></td><td>4px</td><td>Community cards, blog cards, explore buttons</td></tr>
-          <tr><td><code>--radius-md</code></td><td>10px</td><td>Search bar, map container, section backgrounds</td></tr>
-          <tr><td><code>--radius-lg</code></td><td>20px</td><td>Map container, testimonial cards</td></tr>
-          <tr><td><code>--radius-pill</code></td><td>50px</td><td>All rounded buttons (brand, outline, gold)</td></tr>
-          <tr><td><code>--card-w</code></td><td>300px / 262px / 232px</td><td>Team carousel card width — set by JS per breakpoint (desktop/tablet/mobile)</td></tr>
-          <tr><td><code>--pad-x</code></td><td>80px → 48px → 32px → 20px</td><td>Horizontal section padding across breakpoints</td></tr>
-          <tr><td><code>MAPBOX_TOKEN</code></td><td colspan="2">pk.eyJ1Ijoiam9tLW1hcGJveCIsImEiOiJjbXFxaGJva3AwNDVqMnBxcnlvaW54aWRoIn0… style: mapbox://styles/mapbox/dark-v11 · center [-117.35, 33.10] · zoom 9.0</td></tr>
+          <tr><td><code>--brand</code></td><td><span class="tok-swatch" style="background:#58172a;"></span>#58172a</td><td>Primary CTA buttons, links, eyebrows</td></tr>
+          <tr><td><code>--brand-dark</code></td><td><span class="tok-swatch" style="background:#4a0e1f;"></span>#4a0e1f</td><td>Button hover state</td></tr>
+          <tr><td><code>--brand-darker</code></td><td><span class="tok-swatch" style="background:#28000c;"></span>#28000c</td><td>Testimonial background, footer</td></tr>
+          <tr><td><code>--accent</code></td><td><span class="tok-swatch" style="background:#eeca00;"></span>#eeca00</td><td>Community card accent bar, avatar active border</td></tr>
+          <tr><td><code>--gold</code></td><td><span class="tok-swatch" style="background:#b89a5e;"></span>#b89a5e</td><td>Team carousel tag, warm gold accents</td></tr>
+          <tr><td><code>--gold-hi</code></td><td><span class="tok-swatch" style="background:#cbb278;"></span>#cbb278</td><td>Team carousel gold highlight</td></tr>
+          <tr><td><code>--muted</code></td><td><span class="tok-swatch" style="background:#8a8070;"></span>#8a8070</td><td>Team card bio text</td></tr>
+          <tr><td><code>--near-black</code></td><td><span class="tok-swatch" style="background:#212121;"></span>#212121</td><td>Body text, headings on white</td></tr>
+          <tr><td><code>--off-white</code></td><td><span class="tok-swatch" style="background:#f5f5f5;border:1px solid #e0e0e0;"></span>#f5f5f5</td><td>Section background alternates</td></tr>
+          <tr><td><code>--font-display</code></td><td>Playfair Display</td><td>Hero title, section headings, names</td></tr>
+          <tr><td><code>--font-body</code></td><td>Manrope</td><td>Body copy, nav links, buttons</td></tr>
+          <tr><td><code>--font-label</code></td><td>Inter</td><td>Eyebrows, labels, search UI</td></tr>
+          <tr><td><code>--pad-x</code></td><td>80px</td><td>Horizontal section padding</td></tr>
+          <tr><td><code>--pad-y</code></td><td>100px</td><td>Vertical section padding</td></tr>
+          <tr><td><code>--radius-sm</code></td><td>4px</td><td>Community cards, blog cards</td></tr>
+          <tr><td><code>--radius-md</code></td><td>10px</td><td>Map wrap, search bar</td></tr>
+          <tr><td><code>--radius-lg</code></td><td>20px</td><td>Testimonial card, map container</td></tr>
+          <tr><td><code>--radius-pill</code></td><td>50px</td><td>Buttons</td></tr>
+          <tr><td><code>--ease-spring</code></td><td>cubic-bezier(0.22, 0.61, 0.36, 1)</td><td>Scroll reveals, general transitions</td></tr>
+          <tr><td><code>--ease-out</code></td><td>cubic-bezier(0.16, 1, 0.3, 1)</td><td>Search bar animation, map hover</td></tr>
+          <tr><td><code>--ease-communities</code></td><td>cubic-bezier(0.25, 0.46, 0.45, 0.94)</td><td>Community card flex-expand</td></tr>
+          <tr><td><code>--dur-fast</code></td><td>180ms</td><td>Hover color changes</td></tr>
+          <tr><td><code>--dur-base</code></td><td>300ms</td><td>Nav scroll, slide transitions</td></tr>
+          <tr><td><code>--dur-slow</code></td><td>500ms</td><td>Scroll reveal, blog card hover</td></tr>
         </tbody>
       </table>
     </div>
-  </div>
+  </section>
 
-</main>
+  <!-- ══════════════════════════════════════════════════════════
+       4. BUTTONS
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="sg-section" id="buttons">
+    <span class="sg-tag">Section 04</span>
+    <h2 class="sg-heading">Buttons</h2>
+
+    <!-- Light background -->
+    <div class="sg-card" style="margin-bottom:16px;">
+      <div class="sg-label" style="margin-bottom:20px;">On White Background</div>
+      <div class="sg-row" style="align-items:center;">
+        <div class="sg-col">
+          <a href="#" class="btn btn-brand">Search Homes</a>
+          <span class="sg-spec">.btn-brand · 14px 24px</span>
+        </div>
+        <div class="sg-col">
+          <a href="#" class="btn btn-brand-lg">Search with HomeMatch AI</a>
+          <span class="sg-spec">.btn-brand-lg · 16px 36px · 20px/700</span>
+        </div>
+        <div class="sg-col">
+          <a href="#" class="btn btn-outline-brand" style="color:var(--brand);">Let's Connect</a>
+          <span class="sg-spec">.btn-outline-brand · border brand</span>
+        </div>
+        <div class="sg-col">
+          <a href="#" class="btn btn-dark">View All</a>
+          <span class="sg-spec">.btn-dark · 11px pill · near-black bg</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dark background -->
+    <div class="sg-card sg-card--dark" style="margin-bottom:16px;">
+      <div class="sg-label" style="margin-bottom:20px;color:rgba(255,255,255,0.4);">On Dark Background</div>
+      <div class="sg-row" style="align-items:center;">
+        <div class="sg-col">
+          <a href="#" class="btn btn-brand-lg">Search with HomeMatch AI</a>
+          <span class="sg-spec" style="color:rgba(255,255,255,0.3);">.btn-brand-lg</span>
+        </div>
+        <div class="sg-col">
+          <a href="#" class="btn btn-outline-white">Let's Connect</a>
+          <span class="sg-spec" style="color:rgba(255,255,255,0.3);">.btn-outline-white · 16px 55px · 20px/700</span>
+        </div>
+        <div class="sg-col">
+          <a href="#" class="cta-banner-btn-primary">Schedule a Consultation</a>
+          <span class="sg-spec" style="color:rgba(255,255,255,0.3);">.cta-banner-btn-primary</span>
+        </div>
+        <div class="sg-col">
+          <a href="#" class="cta-banner-btn-outline">Learn More</a>
+          <span class="sg-spec" style="color:rgba(255,255,255,0.3);">.cta-banner-btn-outline</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Carousel arrow (Figma node 85:91) -->
+    <div class="sg-card">
+      <div class="sg-label" style="margin-bottom:16px;">Carousel Arrow — Figma Node 85:91 — .tc-arrow / .carousel-arrow</div>
+      <div class="sg-row" style="align-items:center;">
+        <button class="carousel-arrow" aria-label="Previous">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 4L6 9L11 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="carousel-arrow" aria-label="Next">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M7 4L12 9L7 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <span class="sg-spec">54×54px · border-radius 27px · bg #f2f2f2 · border rgba(0,0,0,0.11) · hover: border/color = --gold</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       5. SPACING & RADIUS
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="sg-section" id="spacing">
+    <span class="sg-tag">Section 05</span>
+    <h2 class="sg-heading">Spacing &amp; Radius</h2>
+
+    <div class="sg-label" style="margin-bottom:16px;">Spacing Scale</div>
+    <div class="spacing-row" style="margin-bottom:40px;">
+      <div class="spacing-item"><div class="spacing-block" style="width:4px;height:4px;"></div><span class="sg-spec">4</span></div>
+      <div class="spacing-item"><div class="spacing-block" style="width:8px;height:8px;"></div><span class="sg-spec">8</span></div>
+      <div class="spacing-item"><div class="spacing-block" style="width:12px;height:12px;"></div><span class="sg-spec">12</span></div>
+      <div class="spacing-item"><div class="spacing-block" style="width:16px;height:16px;"></div><span class="sg-spec">16</span></div>
+      <div class="spacing-item"><div class="spacing-block" style="width:20px;height:20px;"></div><span class="sg-spec">20</span></div>
+      <div class="spacing-item"><div class="spacing-block" style="width:24px;height:24px;"></div><span class="sg-spec">24</span></div>
+      <div class="spacing-item"><div class="spacing-block" style="width:32px;height:32px;"></div><span class="sg-spec">32</span></div>
+      <div class="spacing-item"><div class="spacing-block" style="width:40px;height:40px;"></div><span class="sg-spec">40</span></div>
+      <div class="spacing-item"><div class="spacing-block" style="width:48px;height:48px;"></div><span class="sg-spec">48</span></div>
+      <div class="spacing-item"><div class="spacing-block" style="width:64px;height:64px;"></div><span class="sg-spec">64</span></div>
+      <div class="spacing-item"><div class="spacing-block" style="width:80px;height:80px;"></div><span class="sg-spec">80 (--pad-x)</span></div>
+      <div class="spacing-item"><div class="spacing-block" style="width:100px;height:100px;"></div><span class="sg-spec">100 (--pad-y)</span></div>
+    </div>
+
+    <div class="sg-label" style="margin-bottom:16px;">Border Radius</div>
+    <div class="radius-row">
+      <div class="sg-col"><div class="radius-demo" style="border-radius:4px;">--sm</div><span class="sg-spec" style="text-align:center;">4px</span></div>
+      <div class="sg-col"><div class="radius-demo" style="border-radius:10px;">--md</div><span class="sg-spec" style="text-align:center;">10px</span></div>
+      <div class="sg-col"><div class="radius-demo" style="border-radius:18px;">card-r</div><span class="sg-spec" style="text-align:center;">18px</span></div>
+      <div class="sg-col"><div class="radius-demo" style="border-radius:20px;">--lg</div><span class="sg-spec" style="text-align:center;">20px</span></div>
+      <div class="sg-col"><div class="radius-demo" style="border-radius:50px;">--pill</div><span class="sg-spec" style="text-align:center;">50px</span></div>
+      <div class="sg-col"><div class="radius-demo" style="border-radius:50%;">circle</div><span class="sg-spec" style="text-align:center;">50%</span></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       6. NAVIGATION
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="sg-section" id="nav">
+    <span class="sg-tag">Section 06</span>
+    <h2 class="sg-heading">Navigation</h2>
+
+    <div class="sg-label" style="margin-bottom:12px;">Default (page top) — height 129px · bg rgba(255,255,255,0.74)</div>
+    <div class="nav-preview-wrap" style="margin-bottom:24px;">
+      <header class="site-header" style="position:relative;width:100%;">
+        <nav class="nav-links" aria-label="Left nav">
+          <a href="#">Buy</a>
+          <a href="#">Sell</a>
+          <a href="#">Communities</a>
+          <a href="#">Testimonials</a>
+        </nav>
+        <a href="#" class="nav-logo" style="pointer-events:none;">
+          <img src="../images/logo.png" alt="Palisade Realty">
+        </a>
+        <nav class="nav-links nav-links--right" aria-label="Right nav">
+          <a href="#">Financing</a>
+          <a href="#">Team</a>
+          <a href="#">Resources</a>
+          <a href="#">Contact</a>
+        </nav>
+      </header>
+    </div>
+
+    <div class="sg-label" style="margin-bottom:12px;">Scrolled state — height 72px · bg white · box-shadow</div>
+    <div class="nav-preview-wrap" style="height:72px;">
+      <header class="site-header scrolled" style="position:relative;width:100%;height:72px;background:var(--white);box-shadow:0 2px 20px rgba(0,0,0,0.08);">
+        <nav class="nav-links" aria-label="Left nav scrolled">
+          <a href="#">Buy</a>
+          <a href="#">Sell</a>
+          <a href="#">Communities</a>
+          <a href="#">Testimonials</a>
+        </nav>
+        <a href="#" class="nav-logo" style="height:72px;pointer-events:none;">
+          <img src="../images/logo.png" alt="Palisade Realty">
+        </a>
+        <nav class="nav-links nav-links--right" aria-label="Right nav scrolled">
+          <a href="#">Financing</a>
+          <a href="#">Team</a>
+          <a href="#">Resources</a>
+          <a href="#">Contact</a>
+        </nav>
+      </header>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       7. SEARCH BAR
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="sg-section" id="search">
+    <span class="sg-tag">Section 07</span>
+    <h2 class="sg-heading">Hero Search Bar</h2>
+    <p style="font-family:var(--font-body);font-size:14px;color:var(--mid-gray);margin-bottom:24px;line-height:1.6;">Height 86px · bg #000 · border rgba(255,255,255,0.16) · border-radius 18px · button bg #F5C400</p>
+
+    <div class="search-preview-wrap">
+      <form class="hero-search" style="position:relative;bottom:auto;left:auto;transform:none;width:100%;animation:none;" action="https://search.palisaderealty.com/" method="GET">
+        <div class="hero-search-field">
+          <div class="hero-search-label">Location</div>
+          <input class="hero-search-input" type="text" name="q" placeholder="City, neighborhood, ZIP…">
+        </div>
+        <div class="hero-search-field hero-search-select-wrap">
+          <div class="hero-search-label">Property Type</div>
+          <select class="hero-search-select">
+            <option>Any Type</option>
+            <option>Single Family</option>
+            <option>Condo</option>
+            <option>Townhouse</option>
+          </select>
+          <svg class="hero-search-chevron" width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1L6 7L11 1" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="hero-search-field hero-search-select-wrap">
+          <div class="hero-search-label">Price Range</div>
+          <select class="hero-search-select">
+            <option>Any Price</option>
+            <option>Under $500K</option>
+            <option>$500K – $1M</option>
+            <option>$1M+</option>
+          </select>
+          <svg class="hero-search-chevron" width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1L6 7L11 1" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <button type="submit" class="hero-search-btn">
+          <svg class="hero-search-btn-icon" width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="7.5" cy="7.5" r="5" stroke="currentColor" stroke-width="1.6"/><path d="M13 13L11 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          Search
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       8. COMMUNITY CARDS
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="sg-section" id="communities">
+    <span class="sg-tag">Section 08</span>
+    <h2 class="sg-heading">Community Cards</h2>
+    <p style="font-family:var(--font-body);font-size:14px;color:var(--mid-gray);margin-bottom:24px;line-height:1.6;">Hover a card to see flex-expand. Active card grows to flex: 3.2, siblings shrink to flex: 0.72. Transition: 0.68s var(--ease-communities).</p>
+
+    <div class="community-preview-wrap">
+      <div class="communities-cards">
+        <div class="community-card" style="background:linear-gradient(180deg,#28000c,#4a0e1f);">
+          <div class="community-card-overlay"></div>
+          <div class="community-card-content">
+            <div class="community-card-name">Downtown San Diego</div>
+            <div class="community-card-accent"></div>
+            <div class="community-card-desc">Urban energy, historic Gaslamp, waterfront dining, and walkable streets steps from Petco Park.</div>
+            <a href="#" class="community-explore-btn">Explore ↗</a>
+          </div>
+        </div>
+        <div class="community-card" style="background:linear-gradient(180deg,#2d0510,#58172a);">
+          <div class="community-card-overlay"></div>
+          <div class="community-card-content">
+            <div class="community-card-name">La Jolla</div>
+            <div class="community-card-accent"></div>
+            <div class="community-card-desc">Oceanfront estates, boutique dining on Prospect Street, world-class snorkeling at La Jolla Cove.</div>
+            <a href="#" class="community-explore-btn">Explore ↗</a>
+          </div>
+        </div>
+        <div class="community-card" style="background:linear-gradient(180deg,#1a000a,#3d0916);">
+          <div class="community-card-overlay"></div>
+          <div class="community-card-content">
+            <div class="community-card-name">Coronado</div>
+            <div class="community-card-accent"></div>
+            <div class="community-card-desc">Island luxury with Del Hotel history, pristine beaches, and the iconic Silver Strand.</div>
+            <a href="#" class="community-explore-btn">Explore ↗</a>
+          </div>
+        </div>
+        <div class="community-card" style="background:linear-gradient(180deg,#2a0a12,#58172a);">
+          <div class="community-card-overlay"></div>
+          <div class="community-card-content">
+            <div class="community-card-name">Rancho Santa Fe</div>
+            <div class="community-card-accent"></div>
+            <div class="community-card-desc">Equestrian estates, gated enclaves, and top-rated schools in the most prestigious zip code in San Diego.</div>
+            <a href="#" class="community-explore-btn">Explore ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       9. TEAM CARD
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="sg-section" id="team">
+    <span class="sg-tag">Section 09</span>
+    <h2 class="sg-heading">Team Card</h2>
+    <p style="font-family:var(--font-body);font-size:14px;color:var(--mid-gray);margin-bottom:24px;line-height:1.6;">300×460px · border-radius 18px · box-shadow layered. Active card shows photo at 262px height with 8px margin and 12px radius. Inactive cards show photo full-height.</p>
+
+    <div class="sg-row">
+      <!-- Active card -->
+      <div>
+        <div class="sg-label" style="margin-bottom:12px;">Active (.is-active)</div>
+        <div class="team-card-preview-wrap">
+          <div class="card-inner" style="height:460px;display:flex;flex-direction:column;">
+            <div class="card-photo" style="height:262px;margin:8px 8px 0;border-radius:12px;overflow:hidden;background:var(--brand);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <span style="font-family:var(--font-display);font-size:56px;color:rgba(255,255,255,0.3);">H</span>
+            </div>
+            <div class="card-body" style="opacity:1;padding:16px 18px 18px;display:flex;flex-direction:column;flex:1;">
+              <div class="card-name">Hedda Parashos</div>
+              <div class="card-bio">CEO &amp; Principal Broker. Over 15 years helping buyers and sellers across Greater San Diego.</div>
+              <div class="card-bottom">
+                <span class="card-tag">Principal Broker</span>
+                <a href="#" class="card-cta">Connect →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Inactive card -->
+      <div>
+        <div class="sg-label" style="margin-bottom:12px;">Inactive (full-height photo)</div>
+        <div class="team-card-preview-wrap" style="overflow:hidden;">
+          <div class="card-photo" style="height:460px;border-radius:18px;background:var(--brand-dark);display:flex;align-items:center;justify-content:center;">
+            <span style="font-family:var(--font-display);font-size:56px;color:rgba(255,255,255,0.25);">T</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       10. TESTIMONIAL
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="sg-section" id="testimonial">
+    <span class="sg-tag">Section 10</span>
+    <h2 class="sg-heading">Testimonial</h2>
+
+    <div class="testimonial-preview-wrap">
+      <!-- Avatars -->
+      <div style="display:flex;gap:20px;justify-content:center;margin-bottom:24px;">
+        <div class="testimonial-avatar active" style="cursor:default;">
+          <div class="testimonial-avatar-initials">ck</div>
+          <span class="testimonial-avatar-name">ckvonk</span>
+        </div>
+        <div class="testimonial-avatar" style="cursor:default;">
+          <div class="testimonial-avatar-initials">sd</div>
+          <span class="testimonial-avatar-name">sdtinystar</span>
+        </div>
+        <div class="testimonial-avatar" style="cursor:default;">
+          <div class="testimonial-avatar-initials">aj</div>
+          <span class="testimonial-avatar-name">amyjcrees</span>
+        </div>
+        <div class="testimonial-avatar" style="cursor:default;">
+          <div class="testimonial-avatar-initials">M</div>
+          <span class="testimonial-avatar-name">Michelle R</span>
+        </div>
+        <div class="testimonial-avatar" style="cursor:default;">
+          <div class="testimonial-avatar-initials">J</div>
+          <span class="testimonial-avatar-name">Jen C</span>
+        </div>
+      </div>
+
+      <!-- Card -->
+      <div style="max-width:720px;margin:0 auto;">
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.12 4.3L16 6.7l-3.5 3.41.83 4.82L9 12.77l-4.33 2.16.83-4.82L2 6.7l4.88-.9L9 1.5z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.12 4.3L16 6.7l-3.5 3.41.83 4.82L9 12.77l-4.33 2.16.83-4.82L2 6.7l4.88-.9L9 1.5z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.12 4.3L16 6.7l-3.5 3.41.83 4.82L9 12.77l-4.33 2.16.83-4.82L2 6.7l4.88-.9L9 1.5z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.12 4.3L16 6.7l-3.5 3.41.83 4.82L9 12.77l-4.33 2.16.83-4.82L2 6.7l4.88-.9L9 1.5z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.12 4.3L16 6.7l-3.5 3.41.83 4.82L9 12.77l-4.33 2.16.83-4.82L2 6.7l4.88-.9L9 1.5z"/></svg>
+          </div>
+          <p class="testimonial-quote">"Hedda and her team were incredible from start to finish. Her negotiating skills were TOP NOTCH and made the entire process seamless. I couldn't have asked for a better experience — they truly go above and beyond for every client."</p>
+          <span class="testimonial-author-name">ckvonk</span>
+          <span class="testimonial-author-detail">Verified Google Review</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       11. BLOG CARD
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="sg-section" id="blog">
+    <span class="sg-tag">Section 11</span>
+    <h2 class="sg-heading">Blog Card</h2>
+    <p style="font-family:var(--font-body);font-size:14px;color:var(--mid-gray);margin-bottom:24px;line-height:1.6;">Width: calc((100% − 40px) / 3) in a 3-card track. border-radius: 4px (--radius-sm). Hover: translateY(−4px).</p>
+
+    <div class="sg-card sg-card--offwhite">
+      <div class="blog-card-preview-wrap">
+        <div class="blog-card">
+          <div class="blog-card-image">
+            <img src="https://placehold.co/320x240/58172a/ffffff?text=Blog" alt="Blog post">
+            <span class="blog-card-date">Jun 15, 2025</span>
+          </div>
+          <div class="blog-card-body">
+            <span class="blog-card-badge">Market Update</span>
+            <p class="blog-card-title">San Diego Home Prices Hold Strong Into Summer Despite Rate Headwinds</p>
+            <p class="blog-card-excerpt">Inventory remains tight across coastal communities while buyers adjust expectations — here's what the data shows.</p>
+            <a href="#" class="blog-card-link">Read More →</a>
+          </div>
+        </div>
+        <div class="blog-card">
+          <div class="blog-card-image">
+            <img src="https://placehold.co/320x240/4a0e1f/ffffff?text=Blog" alt="Blog post">
+            <span class="blog-card-date">May 28, 2025</span>
+          </div>
+          <div class="blog-card-body">
+            <span class="blog-card-badge">Buyer Guide</span>
+            <p class="blog-card-title">First-Time Buyers in San Diego: What to Know Before You Offer</p>
+            <p class="blog-card-excerpt">From HomeMatch AI to closing costs, our agents break down the process step by step.</p>
+            <a href="#" class="blog-card-link">Read More →</a>
+          </div>
+        </div>
+        <div class="blog-card">
+          <div class="blog-card-image">
+            <img src="https://placehold.co/320x240/28000c/ffffff?text=Blog" alt="Blog post">
+            <span class="blog-card-date">May 10, 2025</span>
+          </div>
+          <div class="blog-card-body">
+            <span class="blog-card-badge">Neighborhoods</span>
+            <p class="blog-card-title">Mission Hills vs. North Park: Which Neighborhood Is Right for You?</p>
+            <p class="blog-card-excerpt">Both offer Craftsman charm and walkability, but they attract very different buyers. We compare the two.</p>
+            <a href="#" class="blog-card-link">Read More →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       12. FOOTER
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="sg-section" id="footer">
+    <span class="sg-tag">Section 12</span>
+    <h2 class="sg-heading">Footer</h2>
+
+    <div class="footer-preview-wrap">
+      <footer class="site-footer" style="position:relative;">
+        <div class="footer-stripe"></div>
+        <div class="footer-inner" style="flex-wrap:wrap;">
+          <div class="footer-col-brand">
+            <div class="footer-logo">
+              <img src="../images/logo.png" alt="Palisade Realty">
+            </div>
+            <p class="footer-copy">Palisade Realty is a full-service real estate brokerage serving Greater San Diego. CA DRE #01848565.</p>
+            <div class="footer-social">
+              <a href="#" aria-label="Facebook">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+              </a>
+              <a href="#" aria-label="Pinterest">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.236 2.636 7.855 6.356 9.312-.088-.791-.167-2.005.035-2.868.181-.78 1.172-4.97 1.172-4.97s-.299-.598-.299-1.482c0-1.388.806-2.428 1.808-2.428.853 0 1.267.64 1.267 1.408 0 .858-.546 2.141-.828 3.33-.236.995.499 1.806 1.476 1.806 1.772 0 3.137-1.868 3.137-4.566 0-2.386-1.715-4.054-4.163-4.054-2.837 0-4.5 2.127-4.5 4.326 0 .856.33 1.773.741 2.274a.3.3 0 01.069.284c-.076.313-.243.995-.276 1.134-.044.183-.146.222-.336.134-1.249-.581-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.473 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.966-.527-2.292-1.148l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.937.29 1.931.446 2.962.446 5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+              </a>
+              <a href="#" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor" stroke="none"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="footer-col-links">
+            <span class="footer-col-title">Quick Links</span>
+            <div class="footer-links">
+              <a href="#">Buy</a>
+              <a href="#">Sell</a>
+              <a href="#">Communities</a>
+              <a href="#">Team</a>
+              <a href="#">Resources</a>
+              <a href="#">Contact</a>
+            </div>
+          </div>
+          <div class="footer-col-contact">
+            <span class="footer-col-title">Contact</span>
+            <span class="footer-contact-line">(619) 794-0218</span>
+            <span class="footer-contact-line footer-contact-line--email">contactus@palisaderealty.com</span>
+            <span class="footer-contact-line">3434 Grove Street</span>
+            <span class="footer-contact-line">Lemon Grove, CA 91945</span>
+            <span class="footer-contact-line" style="margin-top:8px;font-size:12px;color:#888;">Hedda Parashos CA DRE #01773167</span>
+          </div>
+        </div>
+        <div style="text-align:center;padding:16px 80px 0;font-family:var(--font-body);font-size:12px;color:#888;">© 2025 Palisade Realty. All rights reserved. CA DRE #01848565</div>
+      </footer>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       13. ANIMATIONS & EASING
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="sg-section" id="animations">
+    <span class="sg-tag">Section 13</span>
+    <h2 class="sg-heading">Animations &amp; Easing</h2>
+
+    <div class="sg-label" style="margin-bottom:12px;">Community Card Flex-Expand — hover to see</div>
+    <div class="anim-community-preview" style="margin-bottom:40px;">
+      <div class="anim-card"><div class="anim-card-gradient"></div><div class="anim-card-accent"></div><div class="anim-card-name">Downtown</div></div>
+      <div class="anim-card"><div class="anim-card-gradient"></div><div class="anim-card-accent"></div><div class="anim-card-name">La Jolla</div></div>
+      <div class="anim-card"><div class="anim-card-gradient"></div><div class="anim-card-accent"></div><div class="anim-card-name">Coronado</div></div>
+      <div class="anim-card"><div class="anim-card-gradient"></div><div class="anim-card-accent"></div><div class="anim-card-name">Rancho Santa Fe</div></div>
+    </div>
+
+    <div class="sg-label" style="margin-bottom:12px;">Easing Curves — hover pills to compare</div>
+    <div class="ease-row" style="margin-bottom:32px;">
+      <div class="sg-col">
+        <div class="ease-demo ease-spring">--ease-spring</div>
+        <span class="sg-spec">cubic-bezier(0.22, 0.61, 0.36, 1)</span>
+        <span class="sg-label">Scroll reveals, general transitions</span>
+      </div>
+      <div class="sg-col">
+        <div class="ease-demo ease-out">--ease-out</div>
+        <span class="sg-spec">cubic-bezier(0.16, 1, 0.3, 1)</span>
+        <span class="sg-label">Search bar, hero animations</span>
+      </div>
+      <div class="sg-col">
+        <div class="ease-demo ease-communities">--ease-communities</div>
+        <span class="sg-spec">cubic-bezier(0.25, 0.46, 0.45, 0.94)</span>
+        <span class="sg-label">Community card flex-expand</span>
+      </div>
+    </div>
+
+    <div class="sg-label" style="margin-bottom:12px;">Scroll Reveal — .reveal.will-animate → .visible</div>
+    <div class="sg-card">
+      <p style="font-family:var(--font-body);font-size:14px;color:var(--mid-gray);line-height:1.7;">Elements get <code style="font-size:12px;background:rgba(0,0,0,0.05);padding:2px 6px;border-radius:3px;">.will-animate</code> on DOMContentLoaded (opacity 0, translateY 28px). IntersectionObserver adds <code style="font-size:12px;background:rgba(0,0,0,0.05);padding:2px 6px;border-radius:3px;">.visible</code> when in view → opacity 1, translateY 0. Stagger classes add 80ms/160ms/240ms/320ms/400ms delays. Transition: 500ms var(--ease-spring).</p>
+    </div>
+  </section>
+
+</div><!-- /.sg-wrap -->
+</div><!-- /.sg-body -->
 
 </body>
 </html>

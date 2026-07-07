@@ -22,13 +22,10 @@
   <script>
     var YLOPO_HOSTNAME = 'search.palisaderealty.com';
     window.YLOPO_WIDGETS = { domain: 'search.palisaderealty.com' };
-    window.YLOPO_WIDGETS.primaryDomain = 'palisaderealty.com';
-    window.YLOPO_WIDGETS.sitewide_domain = 'search.palisaderealty.com';
   </script>
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="homepage.css">
-  <link rel="stylesheet" href="featured-listings.css">
 
   <!-- Supplemental layout styles -->
   <style>
@@ -39,104 +36,6 @@
     /* Fallback so cards are visible if images are slow/missing */
     .community-card { background: #1a0008; }
     .blog-card-image { background: #28000c; }
-
-    /* ── Listings fallback card grid ── */
-    .listings-fallback { width: 100%; }
-    .lf-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      width: 100%;
-    }
-    .lf-card {
-      background: #fff;
-      border-radius: 12px;
-      overflow: hidden;
-      text-decoration: none;
-      color: inherit;
-      box-shadow: 0 2px 12px rgba(88,23,42,0.06), 0 1px 3px rgba(0,0,0,0.05);
-      transition: transform 280ms cubic-bezier(0.22,0.61,0.36,1), box-shadow 280ms cubic-bezier(0.22,0.61,0.36,1);
-      display: flex;
-      flex-direction: column;
-    }
-    .lf-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(88,23,42,0.12), 0 2px 8px rgba(0,0,0,0.07);
-    }
-    .lf-img-wrap {
-      aspect-ratio: 3/2;
-      overflow: hidden;
-      background: #1a0008;
-    }
-    .lf-img-wrap img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      transition: transform 560ms cubic-bezier(0.22,0.61,0.36,1);
-    }
-    .lf-card:hover .lf-img-wrap img { transform: scale(1.04); }
-    .lf-body {
-      padding: 20px 22px 22px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .lf-badge {
-      display: inline-block;
-      font-family: var(--font-label, 'Inter', sans-serif);
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #fff;
-      background: #58172a;
-      padding: 3px 9px 2px;
-      border-radius: 2px;
-      margin-bottom: 8px;
-      width: fit-content;
-    }
-    .lf-badge--pending { background: #1a5a6e; }
-    .lf-address {
-      font-family: var(--font-display, 'Playfair Display', serif);
-      font-size: 18px;
-      font-weight: 400;
-      color: #212121;
-      line-height: 1.25;
-      margin: 0;
-    }
-    .lf-city {
-      font-family: var(--font-label, 'Inter', sans-serif);
-      font-size: 12px;
-      color: rgba(33,33,33,0.5);
-      margin: 0;
-    }
-    .lf-price {
-      font-family: var(--font-label, 'Inter', sans-serif);
-      font-size: 17px;
-      font-weight: 600;
-      color: #58172a;
-      margin: 6px 0 0;
-    }
-    .lf-meta {
-      display: flex;
-      gap: 14px;
-      font-family: var(--font-label, 'Inter', sans-serif);
-      font-size: 12px;
-      color: rgba(33,33,33,0.55);
-      margin-top: 8px;
-      padding-top: 10px;
-      border-top: 1px solid rgba(0,0,0,0.07);
-    }
-    .lf-disclaimer {
-      text-align: center;
-      font-family: var(--font-label, 'Inter', sans-serif);
-      font-size: 12px;
-      color: rgba(33,33,33,0.4);
-      margin: 24px 0 0;
-    }
-    .lf-disclaimer a { color: #58172a; text-decoration: underline; }
-    @media (max-width: 1024px) { .lf-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 640px)  { .lf-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -150,7 +49,7 @@
   <nav class="nav-links" aria-label="Primary navigation left">
     <a href="#listings">Buy</a>
     <a href="#about">Sell</a>
-    <a href="communities.html">Communities</a>
+    <a href="#communities">Communities</a>
     <a href="#testimonials">Testimonials</a>
   </nav>
 
@@ -164,7 +63,7 @@
     <a href="#about">Financing</a>
     <a href="#team-carousel">Team</a>
     <a href="#blog">Resources</a>
-    <a href="contact.html">Contact</a>
+    <a href="#cta">Contact</a>
   </nav>
 
   <!-- Hamburger (mobile) -->
@@ -178,12 +77,12 @@
 <div class="nav-mobile-drawer" id="nav-mobile-drawer" role="dialog" aria-modal="true" aria-label="Mobile navigation">
   <a href="#listings">Buy</a>
   <a href="#about">Sell</a>
-  <a href="communities.html">Communities</a>
+  <a href="#communities">Communities</a>
   <a href="#testimonials">Testimonials</a>
   <a href="#about">Financing</a>
   <a href="#team-carousel">Team</a>
   <a href="#blog">Resources</a>
-  <a href="contact.html">Contact</a>
+  <a href="#cta">Contact</a>
 </div>
 
 <main>
@@ -365,6 +264,22 @@
         </a>
       </div>
     </article>
+    <!-- Rancho Santa Fe -->
+    <article class="community-card" role="listitem">
+      <div class="community-card-bg" aria-hidden="true">
+        <img src="assets/images/community-rancho-santa-fe.jpg" alt="Rancho Santa Fe estate" loading="lazy">
+        <div class="community-card-overlay"></div>
+      </div>
+      <div class="community-card-content">
+        <h3 class="community-card-name">Rancho Santa Fe</h3>
+        <div class="community-card-accent"></div>
+        <p class="community-card-desc">Where privacy meets prestige. Rolling hills, equestrian estates, and some of San Diego's most exclusive addresses await discerning buyers.</p>
+        <a href="https://palisaderealty.com/communities/rancho-santa-fe-real-estate" class="community-explore-btn" target="_blank" rel="noopener noreferrer">
+          Explore
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </article>
 
   </div>
 
@@ -399,10 +314,11 @@
       <li><a href="#" data-slug="chula-vista"          data-city="Chula Vista"          tabindex="0">Chula Vista</a></li>
       <li><a href="#" data-slug="la-mesa"              data-city="La Mesa"              tabindex="0">La Mesa</a></li>
       <li><a href="#" data-slug="el-cajon"             data-city="El Cajon"             tabindex="0">El Cajon</a></li>
+      <li><a href="#" data-slug="orange-county"        data-city="Orange County"        tabindex="0">Orange County</a></li>
     </ul>
 
     <div class="reveal stagger-4">
-      <a href="communities.html" class="btn btn-brand">See All Communities</a>
+      <a href="#communities" class="btn btn-brand">See All Communities</a>
     </div>
   </div>
 
@@ -511,81 +427,13 @@
 <section class="listings" id="listings" aria-labelledby="listings-heading">
 
   <span class="listings-eyebrow reveal">Handpicked Just for You</span>
-  <h2 class="listings-heading section-title reveal stagger-1" id="listings-heading">Our Listings</h2>
+  <h2 class="listings-heading section-title reveal stagger-1" id="listings-heading">Featured Listings</h2>
 
   <div class="listings-widget-wrap reveal stagger-2">
-    <!-- Ylopo IDX widget — renders on registered domain only -->
     <div
       class="YLOPO_resultsWidget"
-      id="ylopo-widget"
       data-search='{"locations":[{"city":"San Diego","state":"CA"},{"city":"La Jolla","state":"CA"},{"city":"Coronado","state":"CA"},{"city":"Del Mar","state":"CA"},{"city":"Encinitas","state":"CA"}],"propertyTypes":["house","condo","townhouse"],"status":"active","limit":12}'
     ></div>
-    <!-- Fallback cards — hidden once Ylopo injects content -->
-    <div class="listings-fallback" id="listings-fallback" aria-hidden="true">
-      <div class="lf-grid">
-        <a class="lf-card" href="https://search.palisaderealty.com/" target="_blank" rel="noopener noreferrer">
-          <div class="lf-img-wrap"><img src="https://placehold.co/480x320/1a0008/f5f5f5?text=La+Jolla" alt="La Jolla listing" loading="lazy"></div>
-          <div class="lf-body">
-            <span class="lf-badge">For Sale</span>
-            <p class="lf-address">1254 Prospect Street</p>
-            <p class="lf-city">La Jolla, CA 92037</p>
-            <p class="lf-price">$4,250,000</p>
-            <div class="lf-meta"><span>5 bd</span><span>4.5 ba</span><span>4,820 sf</span></div>
-          </div>
-        </a>
-        <a class="lf-card" href="https://search.palisaderealty.com/" target="_blank" rel="noopener noreferrer">
-          <div class="lf-img-wrap"><img src="https://placehold.co/480x320/1a0008/f5f5f5?text=Coronado" alt="Coronado listing" loading="lazy"></div>
-          <div class="lf-body">
-            <span class="lf-badge">For Sale</span>
-            <p class="lf-address">456 Ocean Boulevard</p>
-            <p class="lf-city">Coronado, CA 92118</p>
-            <p class="lf-price">$3,895,000</p>
-            <div class="lf-meta"><span>4 bd</span><span>3.5 ba</span><span>3,650 sf</span></div>
-          </div>
-        </a>
-        <a class="lf-card" href="https://search.palisaderealty.com/" target="_blank" rel="noopener noreferrer">
-          <div class="lf-img-wrap"><img src="https://placehold.co/480x320/1a0008/f5f5f5?text=Del+Mar" alt="Del Mar listing" loading="lazy"></div>
-          <div class="lf-body">
-            <span class="lf-badge">For Sale</span>
-            <p class="lf-address">789 Camino Del Mar</p>
-            <p class="lf-city">Del Mar, CA 92014</p>
-            <p class="lf-price">$5,100,000</p>
-            <div class="lf-meta"><span>6 bd</span><span>5 ba</span><span>5,420 sf</span></div>
-          </div>
-        </a>
-        <a class="lf-card" href="https://search.palisaderealty.com/" target="_blank" rel="noopener noreferrer">
-          <div class="lf-img-wrap"><img src="https://placehold.co/480x320/1a0008/f5f5f5?text=Rancho+Santa+Fe" alt="Rancho Santa Fe listing" loading="lazy"></div>
-          <div class="lf-body">
-            <span class="lf-badge lf-badge--pending">Pending</span>
-            <p class="lf-address">2200 Via de la Valle</p>
-            <p class="lf-city">Rancho Santa Fe, CA 92067</p>
-            <p class="lf-price">$6,750,000</p>
-            <div class="lf-meta"><span>7 bd</span><span>6 ba</span><span>7,200 sf</span></div>
-          </div>
-        </a>
-        <a class="lf-card" href="https://search.palisaderealty.com/" target="_blank" rel="noopener noreferrer">
-          <div class="lf-img-wrap"><img src="https://placehold.co/480x320/1a0008/f5f5f5?text=Point+Loma" alt="Point Loma listing" loading="lazy"></div>
-          <div class="lf-body">
-            <span class="lf-badge">For Sale</span>
-            <p class="lf-address">3820 Sunset Cliffs Blvd</p>
-            <p class="lf-city">Point Loma, CA 92107</p>
-            <p class="lf-price">$2,850,000</p>
-            <div class="lf-meta"><span>4 bd</span><span>3 ba</span><span>3,100 sf</span></div>
-          </div>
-        </a>
-        <a class="lf-card" href="https://search.palisaderealty.com/" target="_blank" rel="noopener noreferrer">
-          <div class="lf-img-wrap"><img src="https://placehold.co/480x320/1a0008/f5f5f5?text=Downtown+SD" alt="Downtown San Diego listing" loading="lazy"></div>
-          <div class="lf-body">
-            <span class="lf-badge">For Sale</span>
-            <p class="lf-address">550 Front Street #2105</p>
-            <p class="lf-city">Downtown San Diego, CA 92101</p>
-            <p class="lf-price">$1,295,000</p>
-            <div class="lf-meta"><span>2 bd</span><span>2 ba</span><span>1,480 sf</span></div>
-          </div>
-        </a>
-      </div>
-      <p class="lf-disclaimer">Sample listings shown. <a href="https://search.palisaderealty.com/" target="_blank" rel="noopener noreferrer">Search all active listings →</a></p>
-    </div>
   </div>
 
   <div class="reveal stagger-3">
@@ -1087,17 +935,17 @@
   <div class="cta-banner-bg" aria-hidden="true">
     <img
       class="cta-banner-bg-base"
-      src="assets/images/cta-background.jpg"
+      src="assets/images/hero-bg.jpg"
       alt=""
     >
     <div class="cta-banner-bg-dark"></div>
   </div>
 
   <div class="cta-banner-content">
-    <p class="cta-banner-eyebrow reveal">Work With Us</p>
-    <h2 class="cta-banner-title reveal stagger-1" id="cta-heading">Find Your Dream Home Today</h2>
+    <p class="cta-banner-eyebrow reveal">Find Your Dream Home Today</p>
+    <h2 class="cta-banner-title reveal stagger-1" id="cta-heading">Buy, Sell &amp; Find Your Place in San Diego</h2>
     <div class="cta-banner-btns reveal stagger-2">
-      <a href="tel:+16197940218" class="cta-banner-btn-primary">Let's Connect</a>
+      <a href="tel:+16197940218" class="cta-banner-btn-primary">Call (619) 794-0218</a>
       <a href="https://search.palisaderealty.com/" class="cta-banner-btn-outline" target="_blank" rel="noopener noreferrer">View Properties</a>
     </div>
   </div>
@@ -1121,7 +969,7 @@
     <!-- Brand Column -->
     <div class="footer-col-brand">
       <div class="footer-logo">
-        <img src="images/logo.png" alt="Palisade Realty">
+        <img src="assets/images/logo.png" alt="Palisade Realty" style="filter: brightness(0) invert(1);">
       </div>
 
       <div class="footer-copy-mls-row">
@@ -1134,8 +982,8 @@
             CA DRE #01773167
           </p>
         </div>
-        <div class="footer-mls-badge" aria-label="Move Safe Certified by HomeLight">
-          <img src="assets/images/move-safe-offsite-stacked.png" alt="Move Safe Certified by HomeLight">
+        <div class="footer-mls-badge" aria-label="MLS member">
+          <span>MLS<br>MEMBER</span>
         </div>
       </div>
 
@@ -1158,10 +1006,10 @@
       <div class="footer-links">
         <a href="https://search.palisaderealty.com/" target="_blank" rel="noopener noreferrer">Buy a Home</a>
         <a href="#about">Sell Your Home</a>
-        <a href="communities.html">Communities</a>
+        <a href="#communities">Communities</a>
         <a href="#testimonials">Testimonials</a>
         <a href="#team-carousel">Our Team</a>
-        <a href="contact.html">Contact Us</a>
+        <a href="#cta">Contact Us</a>
       </div>
     </nav>
 
@@ -1179,34 +1027,8 @@
 
 </footer>
 
-<!-- Hide fallback cards once Ylopo widget injects real content -->
-<script>
-(function () {
-  function checkYlopo() {
-    var widget = document.getElementById('ylopo-widget');
-    var fallback = document.getElementById('listings-fallback');
-    if (!widget || !fallback) return;
-    if (widget.children.length > 0) {
-      fallback.style.display = 'none';
-    }
-  }
-  /* Poll for 8 seconds after load, then give up */
-  window.addEventListener('load', function () {
-    checkYlopo();
-    var attempts = 0;
-    var timer = setInterval(function () {
-      checkYlopo();
-      if (++attempts >= 16) clearInterval(timer);
-    }, 500);
-  });
-})();
-</script>
-
-<!-- Ylopo Widget Script (stable CDN — does not render on localhost, only on registered domain) -->
+<!-- Ylopo Widget Runtime -->
 <script src="https://d2hnwe88wt837l.cloudfront.net/build/js/widgetBuilder~runtime.js"></script>
-
-<!-- Featured Listings Carousel -->
-<script src="featured-listings.js"></script>
 
 <!-- Homepage JavaScript -->
 <script src="homepage.js"></script>
