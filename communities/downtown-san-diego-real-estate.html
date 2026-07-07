@@ -40,67 +40,50 @@
      Dark theme layer on top of homepage.css base
      ═══════════════════════════════════════════════════════════════════════ */
 
-  /* ── Dark body override ─────────────────────────────────────────────── */
+  /* ── Body ──────────────────────────────────────────────────────────── */
   body.comm-detail {
-    background: #0b0808;
-    color: #f2ede4;
+    background: #ffffff;
+    color: #212121;
   }
 
-  /* Override homepage.css nav for dark backgrounds */
+  /* Nav — transparent over dark hero, standard white when scrolled */
   body.comm-detail .site-header {
     background: transparent;
   }
   body.comm-detail .site-header.scrolled {
-    background: rgba(11,8,8,0.92);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+    background: #ffffff;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.08);
   }
+  /* White links over the dark hero map */
   body.comm-detail .site-header .nav-links a,
-  body.comm-detail .site-header .nav-logo,
   body.comm-detail .site-header .nav-hamburger span {
     color: #f2ede4;
   }
   body.comm-detail .site-header .nav-hamburger span {
     background: #f2ede4;
   }
+  /* Dark links after scrolling (white nav background) */
+  body.comm-detail .site-header.scrolled .nav-links a {
+    color: #212121;
+  }
+  body.comm-detail .site-header.scrolled .nav-hamburger span {
+    background: #212121;
+  }
   body.comm-detail .nav-mobile-drawer {
-    background: #0b0808;
+    background: #ffffff;
   }
   body.comm-detail .nav-mobile-drawer a {
-    color: #f2ede4;
-    border-bottom-color: rgba(255,255,255,0.08);
-  }
-
-  /* Dark footer overrides */
-  body.comm-detail .site-footer {
-    background: #060404;
-  }
-  body.comm-detail .footer-copy { color: rgba(242,237,228,0.55); }
-  body.comm-detail .footer-col-title { color: #c9a96e; }
-  body.comm-detail .footer-links a,
-  body.comm-detail .footer-links span { color: rgba(242,237,228,0.75); text-decoration: none; }
-  body.comm-detail .footer-links a:hover { color: #c9a96e; opacity: 1; }
-  body.comm-detail .footer-contact-line { color: rgba(242,237,228,0.75); }
-  body.comm-detail .footer-contact-line--email { color: #c9a96e; }
-  body.comm-detail .footer-social a {
-    background: rgba(255,255,255,0.07);
-    color: rgba(242,237,228,0.80);
-  }
-  body.comm-detail .footer-social a:hover {
-    background: #58172a;
-    color: #fff;
-    transform: translateY(-1px);
+    color: #212121;
   }
 
   /* ── CSS variables (community scope) ─────────────────────────────────── */
   .comm-detail {
-    --cd-dark:    #0b0808;
-    --cd-dark-2:  #121010;
-    --cd-dark-3:  #1c1818;
-    --cd-dark-4:  #252020;
-    --cd-cream:   #F2EDE4;
-    --cd-muted:   rgba(242,237,228,0.55);
+    --cd-dark:    #ffffff;
+    --cd-dark-2:  #f5f5f5;
+    --cd-dark-3:  #ebebeb;
+    --cd-dark-4:  #e2e2e2;
+    --cd-cream:   #212121;
+    --cd-muted:   rgba(33,33,33,0.55);
     --cd-gold:    #b89a5e;
     --cd-accent:  #eeca00;
     --cd-brand:   #58172a;
@@ -197,10 +180,10 @@
     text-transform: uppercase;
     padding: 14px 28px;
     border-radius: 40px;
-    border: 1.5px solid rgba(242,237,228,0.35);
+    border: 1.5px solid rgba(33,33,33,0.28);
     transition: border-color var(--cd-dur) var(--cd-ease), transform var(--cd-dur) var(--cd-ease);
   }
-  .btn-outline:hover { border-color: rgba(242,237,228,0.8); transform: translateY(-2px); }
+  .btn-outline:hover { border-color: rgba(33,33,33,0.70); transform: translateY(-2px); }
 
   .btn-text {
     font-family: var(--cd-label);
@@ -384,7 +367,7 @@
   }
   .location-drive-card {
     background: var(--cd-dark-3);
-    border: 1px solid rgba(255,255,255,0.06);
+    border: 1px solid rgba(0,0,0,0.08);
     border-radius: var(--cd-radius);
     padding: 20px 16px;
     text-align: center;
@@ -447,7 +430,7 @@
 
   .quick-facts {
     background: var(--cd-dark-3);
-    border: 1px solid rgba(255,255,255,0.06);
+    border: 1px solid rgba(0,0,0,0.10);
     border-radius: var(--cd-radius);
     padding: 32px 28px;
     position: sticky;
@@ -462,7 +445,7 @@
     color: var(--cd-gold);
     margin-bottom: 20px;
     padding-bottom: 16px;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(0,0,0,0.10);
   }
   .quick-fact {
     display: flex;
@@ -470,7 +453,7 @@
     align-items: baseline;
     gap: 12px;
     padding: 10px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(0,0,0,0.07);
   }
   .quick-fact:last-child { border-bottom: none; }
   .fact-label {
@@ -514,7 +497,7 @@
   .demo-stat {
     text-align: center;
     padding: 20px 12px;
-    border-right: 1px solid rgba(255,255,255,0.07);
+    border-right: 1px solid rgba(0,0,0,0.09);
   }
   .demo-stat:last-child { border-right: none; }
   .demo-value {
@@ -549,7 +532,7 @@
   }
   .highlight-card {
     background: var(--cd-dark-3);
-    border: 1px solid rgba(255,255,255,0.06);
+    border: 1px solid rgba(0,0,0,0.08);
     border-radius: var(--cd-radius);
     padding: 32px 28px;
     transition: border-color var(--cd-dur);
@@ -595,7 +578,7 @@
   }
   .neighborhood-card {
     background: var(--cd-dark-3);
-    border: 1px solid rgba(255,255,255,0.06);
+    border: 1px solid rgba(0,0,0,0.08);
     border-radius: var(--cd-radius);
     padding: 22px 18px;
     transition: transform var(--cd-dur) var(--cd-ease),
@@ -716,11 +699,11 @@
     text-transform: uppercase;
     color: var(--cd-cream);
     padding: 14px 32px;
-    border: 1.5px solid rgba(242,237,228,0.25);
+    border: 1.5px solid rgba(33,33,33,0.25);
     border-radius: 40px;
     transition: border-color var(--cd-dur), transform var(--cd-dur) var(--cd-ease);
   }
-  .btn-view-all:hover { border-color: rgba(242,237,228,0.7); transform: translateY(-2px); }
+  .btn-view-all:hover { border-color: rgba(33,33,33,0.65); transform: translateY(-2px); }
 
   /* ═══════════════════════════════════════════════════════════
      9. HOA FEES
@@ -744,12 +727,12 @@
     text-transform: uppercase;
     color: var(--cd-gold);
     padding: 0 12px 14px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.10);
+    border-bottom: 1px solid rgba(0,0,0,0.12);
     text-align: left;
   }
   .hoa-table td {
     padding: 12px 12px 12px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(0,0,0,0.07);
     color: var(--cd-muted);
     vertical-align: top;
   }
@@ -763,7 +746,7 @@
     font-family: var(--cd-sans);
     font-size: 12px;
     line-height: 1.65;
-    color: rgba(242,237,228,0.40);
+    color: rgba(33,33,33,0.45);
     margin-top: 16px;
   }
   .hoa-aside-heading {
@@ -791,7 +774,7 @@
     font-size: 13px;
     color: var(--cd-muted);
     padding: 7px 0 7px 20px;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(0,0,0,0.07);
     position: relative;
   }
   .hoa-covers-list li:last-child { border-bottom: none; }
@@ -818,7 +801,7 @@
   }
   .park-card {
     background: var(--cd-dark-3);
-    border: 1px solid rgba(255,255,255,0.06);
+    border: 1px solid rgba(0,0,0,0.08);
     border-radius: var(--cd-radius);
     padding: 28px 24px;
     transition: border-color var(--cd-dur);
@@ -844,7 +827,7 @@
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--cd-dark);
+    color: #1a1008;
     background: var(--cd-gold);
     padding: 3px 10px;
     border-radius: 3px;
@@ -860,7 +843,7 @@
     color: var(--cd-muted);
     padding: 5px 0 5px 16px;
     position: relative;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(0,0,0,0.07);
   }
   .park-amenities li:last-child { border-bottom: none; }
   .park-amenities li::before {
@@ -885,7 +868,7 @@
   .schools-tabs {
     display: flex;
     gap: 0;
-    border-bottom: 1px solid rgba(255,255,255,0.10);
+    border-bottom: 1px solid rgba(0,0,0,0.12);
     margin-bottom: 28px;
   }
   .schools-tab {
@@ -922,12 +905,12 @@
     text-transform: uppercase;
     color: var(--cd-gold);
     padding: 0 16px 14px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.10);
+    border-bottom: 1px solid rgba(0,0,0,0.12);
     text-align: left;
   }
   .schools-table td {
     padding: 13px 16px 13px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(0,0,0,0.07);
     color: var(--cd-muted);
   }
   .schools-table td:first-child { color: var(--cd-cream); font-weight: 500; }
@@ -936,10 +919,10 @@
     font-family: var(--cd-sans);
     font-size: 12px;
     line-height: 1.65;
-    color: rgba(242,237,228,0.35);
+    color: rgba(33,33,33,0.45);
     margin-top: 20px;
     padding-top: 16px;
-    border-top: 1px solid rgba(255,255,255,0.06);
+    border-top: 1px solid rgba(0,0,0,0.08);
   }
 
   /* ═══════════════════════════════════════════════════════════
@@ -969,12 +952,12 @@
     text-transform: uppercase;
     color: var(--cd-gold);
     padding: 0 16px 14px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.10);
+    border-bottom: 1px solid rgba(0,0,0,0.12);
     text-align: left;
   }
   .nearby-table td {
     padding: 16px 16px 16px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(0,0,0,0.07);
     color: var(--cd-muted);
     vertical-align: top;
   }
@@ -1016,7 +999,7 @@
     margin: 0 auto;
   }
   .faq-item {
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(0,0,0,0.10);
   }
   .faq-question {
     display: flex;
@@ -1032,7 +1015,7 @@
     font-family: var(--cd-sans);
     font-size: 16px;
     font-weight: 500;
-    color: rgba(242,237,228,0.82);
+    color: rgba(33,33,33,0.85);
     line-height: 1.45;
     transition: color var(--cd-dur);
   }
@@ -1041,7 +1024,7 @@
     width: 28px;
     height: 28px;
     background: var(--cd-dark-3);
-    border: 1px solid rgba(255,255,255,0.10);
+    border: 1px solid rgba(0,0,0,0.12);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -1100,7 +1083,7 @@
     font-size: 14px;
     color: var(--cd-muted);
     padding: 9px 0 9px 22px;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(0,0,0,0.07);
     position: relative;
   }
   .lifestyle-bullets li:last-child { border-bottom: none; }
