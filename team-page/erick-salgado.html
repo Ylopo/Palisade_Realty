@@ -13,13 +13,8 @@
   <link rel="stylesheet" href="../featured-listings.css">
   <link href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet">
   <script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
-  <!-- Ylopo widget config — uses Erick's agent subdomain for agent-scoped listings -->
-  <script>
-    var YLOPO_HOSTNAME = 'search.palisaderealty.com';
-    window.YLOPO_WIDGETS = { domain: 'search.palisaderealty.com' };
-    window.YLOPO_WIDGETS.primaryDomain = 'palisaderealty.com';
-    window.YLOPO_WIDGETS.sitewide_domain = 'search.palisaderealty.com';
-  </script>
+  <!-- Ylopo Widget Config -->
+  <script>window.YLOPO_WIDGETS = {"domain": "search.palisaderealty.com"}</script>
   <style>
     /* ── Nav ── */
     .nav-links a.is-active { color: var(--brand); }
@@ -868,72 +863,7 @@
       <p class="ap-all-listings-sub reveal reveal-d2">Browse current properties represented by Erick Salgado across San Diego County.</p>
     </div>
     <div class="ap-all-listings-widget reveal reveal-d3">
-      <div class="lf-grid">
-        <a class="lf-card" href="https://erick.palisaderealty.com/" target="_blank" rel="noopener noreferrer">
-          <div class="lf-img-wrap"><img src="https://placehold.co/480x320/1a0008/f5f5f5?text=La+Jolla" alt="La Jolla listing" loading="lazy"></div>
-          <div class="lf-body">
-            <span class="lf-badge">For Sale</span>
-            <p class="lf-address">1254 Prospect Street</p>
-            <p class="lf-city">La Jolla, CA 92037</p>
-            <p class="lf-price">$4,250,000</p>
-            <div class="lf-meta"><span>5 bd</span><span>4.5 ba</span><span>4,820 sf</span></div>
-          </div>
-        </a>
-        <a class="lf-card" href="https://erick.palisaderealty.com/" target="_blank" rel="noopener noreferrer">
-          <div class="lf-img-wrap"><img src="https://placehold.co/480x320/1a0008/f5f5f5?text=Coronado" alt="Coronado listing" loading="lazy"></div>
-          <div class="lf-body">
-            <span class="lf-badge">For Sale</span>
-            <p class="lf-address">456 Ocean Boulevard</p>
-            <p class="lf-city">Coronado, CA 92118</p>
-            <p class="lf-price">$3,895,000</p>
-            <div class="lf-meta"><span>4 bd</span><span>3.5 ba</span><span>3,650 sf</span></div>
-          </div>
-        </a>
-        <a class="lf-card" href="https://erick.palisaderealty.com/" target="_blank" rel="noopener noreferrer">
-          <div class="lf-img-wrap"><img src="https://placehold.co/480x320/1a0008/f5f5f5?text=Del+Mar" alt="Del Mar listing" loading="lazy"></div>
-          <div class="lf-body">
-            <span class="lf-badge">For Sale</span>
-            <p class="lf-address">789 Camino Del Mar</p>
-            <p class="lf-city">Del Mar, CA 92014</p>
-            <p class="lf-price">$5,100,000</p>
-            <div class="lf-meta"><span>6 bd</span><span>5 ba</span><span>5,420 sf</span></div>
-          </div>
-        </a>
-        <a class="lf-card" href="https://erick.palisaderealty.com/" target="_blank" rel="noopener noreferrer">
-          <div class="lf-img-wrap"><img src="https://placehold.co/480x320/1a0008/f5f5f5?text=Rancho+Santa+Fe" alt="Rancho Santa Fe listing" loading="lazy"></div>
-          <div class="lf-body">
-            <span class="lf-badge lf-badge--sold">Sold</span>
-            <p class="lf-address">2200 Via de la Valle</p>
-            <p class="lf-city">Rancho Santa Fe, CA 92067</p>
-            <p class="lf-price">$6,750,000</p>
-            <div class="lf-meta"><span>7 bd</span><span>6 ba</span><span>7,200 sf</span></div>
-          </div>
-        </a>
-        <a class="lf-card" href="https://erick.palisaderealty.com/" target="_blank" rel="noopener noreferrer">
-          <div class="lf-img-wrap"><img src="https://placehold.co/480x320/1a0008/f5f5f5?text=Point+Loma" alt="Point Loma listing" loading="lazy"></div>
-          <div class="lf-body">
-            <span class="lf-badge">For Sale</span>
-            <p class="lf-address">3820 Sunset Cliffs Blvd</p>
-            <p class="lf-city">Point Loma, CA 92107</p>
-            <p class="lf-price">$2,850,000</p>
-            <div class="lf-meta"><span>4 bd</span><span>3 ba</span><span>3,100 sf</span></div>
-          </div>
-        </a>
-        <a class="lf-card" href="https://erick.palisaderealty.com/" target="_blank" rel="noopener noreferrer">
-          <div class="lf-img-wrap"><img src="https://placehold.co/480x320/1a0008/f5f5f5?text=Downtown+SD" alt="Downtown San Diego listing" loading="lazy"></div>
-          <div class="lf-body">
-            <span class="lf-badge">For Sale</span>
-            <p class="lf-address">550 Front Street #2105</p>
-            <p class="lf-city">Downtown San Diego, CA 92101</p>
-            <p class="lf-price">$1,295,000</p>
-            <div class="lf-meta"><span>2 bd</span><span>2 ba</span><span>1,480 sf</span></div>
-          </div>
-        </a>
-      </div>
-      <p class="lf-disclaimer">Sample listings shown. <a href="https://erick.palisaderealty.com/" target="_blank" rel="noopener noreferrer">Search all active listings on Erick's site →</a></p>
-      <div class="lf-cta-wrap">
-        <a href="https://erick.palisaderealty.com/" class="ap-hero-cta ap-hero-cta--primary" target="_blank" rel="noopener noreferrer">View All Listings</a>
-      </div>
+      <div class="YLOPO_resultsWidget" data-search='{"locations":[{"city":"San Diego","state":"CA"},{"city":"La Jolla","state":"CA"},{"city":"Coronado","state":"CA"},{"city":"Del Mar","state":"CA"},{"city":"Encinitas","state":"CA"},{"city":"Carlsbad","state":"CA"},{"city":"Oceanside","state":"CA"},{"city":"Solana Beach","state":"CA"},{"city":"Chula Vista","state":"CA"}]}'></div>
     </div>
   </div>
 </section>
@@ -1144,7 +1074,7 @@
 </footer>
 
 <!-- Ylopo widget loader (only renders on registered domain, not localhost) -->
-<script src="https://d2hnwe88wt837l.cloudfront.net/build/js/widgetBuilder~runtime.js"></script>
+<script src="https://search.palisaderealty.com/build/js/widgets-1.0.0.js" defer></script>
 <script src="../homepage.js"></script>
 <script src="../featured-listings.js"></script>
 
