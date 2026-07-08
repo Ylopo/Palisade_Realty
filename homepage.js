@@ -11,112 +11,112 @@ const TEAM = [
     name:    'Hedda Parashos',
     role:    'Principal Broker / CEO',
     bio:     'Founder and CEO of Palisade Realty since 2010. San Diego luxury specialist with 15+ years experience and a team of 60+ agents delivering exceptional results.',
-    profile: 'https://palisaderealty.com/team-page/hedda-parashos',
+    profile: 'team-page/hedda-parashos.html',
     photo:   'assets/images/agents/Hedda_Parashos.jpg',
   },
   {
     name:    'Tom Parashos',
     role:    'Broker',
     bio:     'Expert negotiator with deep San Diego North County market knowledge. Known for finding off-market opportunities and closing complex transactions.',
-    profile: 'https://palisaderealty.com/team-page/tom-parashos',
+    profile: 'team-page/tom-parashos.html',
     photo:   'assets/images/agent-tom-parashos.jpg',
   },
   {
     name:    'Erick Salgado',
     role:    'REALTOR® DRE# 01999413',
     bio:     'Dedicated buyer\'s agent with expertise in first-time and move-up purchases across San Diego communities. Clear communicator from offer to close.',
-    profile: '/team-page/erick-salgado.html',
+    profile: 'team-page/erick-salgado.html',
     photo:   'assets/images/agent-erick-salgado.jpg',
   },
   {
     name:    'Melissa Maxwell',
     role:    'REALTOR® DRE# 01952672',
     bio:     'Strategic listing specialist known for precision pricing, professional staging coordination, and record-setting results in La Jolla and Coronado.',
-    profile: 'https://palisaderealty.com/team-page/melissa-maxwell',
+    profile: 'team-page/melissa-maxwell.html',
     photo:   'assets/images/agent-melissa-maxwell.jpg',
   },
   {
     name:    'Britney Bartlett',
     role:    'Office Manager DRE# 02025963',
     bio:     'Streamlines out-of-state and corporate relocations to San Diego. Expert in short timelines, virtual tours, and seamless transition planning.',
-    profile: 'https://palisaderealty.com/team-page/britney-bartlett',
+    profile: 'team-page/britney-bartlett.html',
     photo:   'assets/images/agent-britney-bartlett.jpg',
   },
   {
     name:    'Michael DiVita',
     role:    'Sales & Database Manager DRE# 02192354',
     bio:     'Data-driven investment advisor specializing in San Diego rental properties and 1031 exchanges. Analytical approach to maximizing long-term portfolio returns.',
-    profile: 'https://palisaderealty.com/team-page/michael-divita',
+    profile: 'team-page/michael-divita.html',
     photo:   'assets/images/agent-michael-divita.jpg',
   },
   {
     name:    'Patty Aguilar',
     role:    'REALTOR®',
     bio:     'Client-first agent with deep roots in San Diego\'s diverse communities. Known for her warm communication style and dedication to achieving outstanding results.',
-    profile: 'https://palisaderealty.com/team-page/patty-aguilar',
+    profile: 'team-page/patty-aguilar.html',
     photo:   'assets/images/agent-patty-aguilar.jpg',
   },
   {
     name:    'Deborah Trevino',
     role:    'REALTOR®',
     bio:     'Seasoned San Diego real estate professional with a talent for guiding buyers and sellers through every step of the transaction with confidence and clarity.',
-    profile: 'https://palisaderealty.com/team-page/deborah-trevino',
+    profile: 'team-page/deborah-trevino.html',
     photo:   'assets/images/agent-deborah-trevino.jpg',
   },
   {
     name:    'Sarah Bautista',
     role:    'REALTOR®',
     bio:     'Results-driven agent committed to making every real estate transaction seamless. Specializes in first-time buyers and residential sales across San Diego County.',
-    profile: 'https://palisaderealty.com/team-page/sarah-bautista',
+    profile: 'team-page/sarah-bautista.html',
     photo:   'assets/images/agent-sarah-bautista.jpg',
   },
   {
     name:    'Piper Stein',
     role:    'REALTOR®',
     bio:     'Passionate real estate professional with a personalized approach to every client relationship. Expert in San Diego\'s coastal communities and luxury residential markets.',
-    profile: 'https://palisaderealty.com/team-page/piper-stein',
+    profile: 'team-page/piper-stein.html',
     photo:   'assets/images/agent-piper-stein.jpg',
   },
   {
     name:    'Jason Wallace',
     role:    'REALTOR®',
     bio:     'Dynamic agent with sharp negotiation skills and comprehensive knowledge of San Diego neighborhoods. Dedicated to helping clients find their perfect home at the right price.',
-    profile: 'https://palisaderealty.com/team-page/jason-wallace',
+    profile: 'team-page/jason-wallace.html',
     photo:   'assets/images/agent-jason-wallace.jpg',
   },
   {
     name:    'Mariko Tortolero',
     role:    'REALTOR®',
     bio:     'Bilingual real estate expert serving San Diego\'s diverse communities. Committed to bridging cultural and language barriers to deliver exceptional client outcomes.',
-    profile: 'https://palisaderealty.com/team-page/mariko-tortolero',
+    profile: 'team-page/mariko-tortolero.html',
     photo:   'assets/images/agent-mariko-tortolero.jpg',
   },
   {
     name:    'Eric Hayman',
     role:    'REALTOR®',
     bio:     'Experienced real estate professional with a track record of successful transactions across San Diego\'s most sought-after communities. Trusted for his market expertise.',
-    profile: 'https://palisaderealty.com/team-page/eric-hayman',
+    profile: 'team-page/eric-hayman.html',
     photo:   'assets/images/agent-eric-hayman.jpg',
   },
   {
     name:    'Keith Agnello',
     role:    'REALTOR®',
     bio:     'Strategic agent specializing in residential and investment properties throughout San Diego County. Recognized for his analytical approach and consistent client satisfaction.',
-    profile: 'https://palisaderealty.com/team-page/keith-agnello',
+    profile: 'team-page/keith-agnello.html',
     photo:   'assets/images/agent-keith-agnello.jpg',
   },
   {
     name:    'Vanda Fernandes',
     role:    'REALTOR®',
     bio:     'Multilingual real estate agent bringing an international perspective to San Diego\'s luxury market. Expert in global buyer representation and coastal property sales.',
-    profile: 'https://palisaderealty.com/team-page/vanda-fernandes',
+    profile: 'team-page/vanda-fernandes.html',
     photo:   'assets/images/agent-vanda-fernandes.jpg',
   },
   {
     name:    'Patty Samii',
     role:    'REALTOR®',
     bio:     'Highly personalized real estate advisor with a deep commitment to client success. Specializes in San Diego\'s premier neighborhoods including La Jolla and Del Mar.',
-    profile: 'https://palisaderealty.com/team-page/patty-samii',
+    profile: 'team-page/patty-samii.html',
     photo:   'assets/images/agent-patty-samii.jpg',
   },
 ];
@@ -256,6 +256,29 @@ function initScrollAnimations() {
 
   belowFold.forEach(function (el) { observer.observe(el); });
 }
+
+/* ── COMMUNITY PAGE URLS (keyed by map slug) ───────────────── */
+var COMMUNITY_URLS = {
+  'downtown-san-diego':    'communities/downtown-san-diego-real-estate.html',
+  'mission-hills':         'communities/mission-hills-real-estate.html',
+  'point-loma':            'communities/point-loma-real-estate.html',
+  'coronado':              'communities/coronado-real-estate.html',
+  'pacific-mission-beach': 'communities/pacific-mission-beach-real-estate.html',
+  'mission-valley':        'communities/mission-valley-real-estate.html',
+  'la-jolla':              'communities/la-jolla-real-estate.html',
+  'del-mar':               'communities/del-mar-real-estate.html',
+  'carmel-valley':         'communities/carmel-valley-real-estate.html',
+  'rancho-santa-fe':       'communities/rancho-santa-fe-real-estate.html',
+  'solana-beach':          'communities/solana-beach-real-estate.html',
+  'encinitas':             'communities/encinitas-real-estate.html',
+  'carlsbad':              'communities/carlsbad-real-estate.html',
+  'oceanside':             'communities/oceanside-real-estate.html',
+  'spring-valley':         'communities/spring-valley-real-estate.html',
+  'chula-vista':           'communities/chula-vista-real-estate.html',
+  'la-mesa':               'communities/la-mesa-real-estate.html',
+  'el-cajon':              'communities/el-cajon-real-estate.html',
+  'orange-county':         'communities/orange-county-real-estate.html'
+};
 
 /* ── MAPBOX ────────────────────────────────────────────────── */
 function initMapbox() {
@@ -492,7 +515,7 @@ function initMapbox() {
     link.addEventListener('click', function (e) {
       e.preventDefault();
       var feat = CITIES.features.find(function (f) { return f.id === slug; });
-      activateCity(slug, slug, name, feat ? feat.properties.center : null);
+      activateCity(slug, slug, name, feat ? feat.properties.center : null, false);
     });
     link.addEventListener('mouseenter', function () {
       link.classList.add('is-hovered');
@@ -529,12 +552,12 @@ function initMapbox() {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
         var feat2 = CITIES.features.find(function (f) { return f.id === slug; });
-        activateCity(slug, slug, name, feat2 ? feat2.properties.center : null);
+        activateCity(slug, slug, name, feat2 ? feat2.properties.center : null, false);
       }
     });
   });
 
-  function activateCity(featureId, slug, name, center) {
+  function activateCity(featureId, slug, name, center, navigate) {
     if (activeId !== null && activeId !== featureId && map.isStyleLoaded()) {
       map.setFeatureState({ source: 'cities', id: activeId }, { active: false });
     }
@@ -557,6 +580,16 @@ function initMapbox() {
       }
     }
     if (history.pushState) history.pushState(null, '', '#' + slug);
+
+    // Navigate to community page (map clicks only — list clicks pass navigate=false)
+    if (navigate !== false) {
+      var url = COMMUNITY_URLS[slug];
+      if (url) {
+        setTimeout(function () { window.location.href = url; }, 380);
+      } else {
+        console.warn('[Palisade Realty] No community page mapped for slug: ' + slug + '. Add it to COMMUNITY_URLS when the page is ready.');
+      }
+    }
   }
 
   function hoverList(slug) {
@@ -642,7 +675,7 @@ function initTeamCarousel() {
           '<p class="card-bio">' + member.bio + '</p>' +
           '<div class="card-bottom">' +
             '<span class="card-tag">' + member.role + '</span>' +
-            '<a class="card-cta" href="' + member.profile + '" target="_blank" rel="noopener noreferrer" aria-label="View Profile for ' + member.name + '">' +
+            '<a class="card-cta" href="' + member.profile + '" aria-label="View Profile for ' + member.name + '">' +
               'View Profile' +
               '<svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M1 5h8M5.5 1.5 9 5l-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
             '</a>' +
