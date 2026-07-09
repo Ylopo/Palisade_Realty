@@ -376,6 +376,44 @@
       padding: 12px 15px;
     }
 
+    /* community.css `.nav-links a` uses near-white color (invisible on white bg)
+       and 10.5px font. Restore homepage.css values. */
+    body.property-page .nav-links a {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 500;
+      font-size: 15px;
+      letter-spacing: 0.9px;
+      text-transform: uppercase;
+      color: #212121;
+      white-space: nowrap;
+      position: relative;
+      text-decoration: none;
+    }
+    body.property-page .nav-links a:hover { color: #58172a; }
+    body.property-page .nav-links a:hover::after { width: 100%; }
+
+    /* community.css `.nav-logo img { height: 44px }` shrinks the logo.
+       Restore homepage.css values so it fills the 129px logo container. */
+    body.property-page .nav-logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 9px 7px 25px;
+      width: 279px;
+      height: 129px;
+      flex-shrink: 0;
+    }
+    body.property-page .site-header.scrolled .nav-logo {
+      height: 72px;
+      padding: 8px 7px;
+    }
+    body.property-page .nav-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+    }
+
     /* Mobile */
     @media (max-width: 768px) {
       body.property-page .pp-tour { padding: 64px 20px; }
