@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Featured Listings — Palisade Admin</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px}
+body{font-family:-apple-system,'Segoe UI',system-ui,sans-serif;background:#0f1923;color:#c2d8ec;min-height:100vh;padding:0 0 60px}
+
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(100,150,200,.2);border-radius:3px}
+
+/* ── Tokens ── */
+:root{
+  --bg:#0f1923;
+  --surf:#17253a;
+  --surf2:#1d2e42;
+  --input:#0c1826;
+  --border:rgba(80,140,200,.16);
+  --border2:rgba(80,140,200,.28);
+  --text:#c2d8ec;
+  --text2:#6a8fae;
+  --label:#4d7290;
+  --blue:#3a8bdc;
+  --blue-h:#2d7acc;
+  --green:#22a55a;
+  --red:#d44040;
+  --amber:#c97a20;
+  --r:4px;
+}
+
+/* ── Page header ── */
+.page-hdr{
+  background:#111d2b;
+  border-bottom:1px solid var(--border);
+  padding:0 24px;
+  height:52px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:50;
+}
+.page-hdr h1{font-size:16px;font-weight:600;color:#e0eef8;letter-spacing:-.01em}
+.page-hdr-actions{display:flex;gap:8px;align-items:center}
+
+/* ── Buttons ── */
+.btn{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:7px 14px;border-radius:var(--r);
+  font-size:12px;font-weight:600;letter-spacing:.01em;
+  cursor:pointer;border:none;font-family:inherit;
+  transition:background .12s,opacity .12s,transform .08s;
+  white-space:nowrap;
+}
+.btn:active:not(:disabled){transform:scale(.96)}
+.btn:disabled{opacity:.38;cursor:not-allowed;transform:none!important}
+.btn-blue   {background:var(--blue);color:#fff}
+.btn-blue:hover:not(:disabled){background:var(--blue-h)}
+.btn-green  {background:var(--green);color:#fff}
+.btn-green:hover:not(:disabled){background:#1a8f4a}
+.btn-red    {background:var(--red);color:#fff}
+.btn-red:hover:not(:disabled){background:#bc3030}
+.btn-ghost  {background:transparent;color:var(--text2);border:1px solid var(--border2)}
+.btn-ghost:hover:not(:disabled){background:var(--surf2);color:var(--text)}
+.btn-dark   {background:#253548;color:var(--text);border:1px solid var(--border)}
+.btn-dark:hover:not(:disabled){background:#2e4060}
+
+/* ── Wrap ── */
+.wrap{max-width:900px;margin:0 auto;padding:24px 20px}
+
+/* ── Edit form card ── */
+.form-card{
+  background:var(--surf);
+  border:1px solid var(--border);
+  border-radius:6px;
+  margin-bottom:24px;
+  display:none;
+  scroll-margin-top:64px;
+}
+.form-card.open{display:block}
+.form-card-hdr{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 18px;
+  border-bottom:1px solid var(--border);
+}
+.form-card-hdr h2{font-size:15px;font-weight:600;color:#e0eef8}
+.btn-close{
+  background:none;border:none;cursor:pointer;
+  color:var(--text2);font-size:13px;font-weight:500;
+  display:flex;align-items:center;gap:4px;
+  padding:4px 8px;border-radius:3px;transition:color .12s,background .12s;
+}
+.btn-close:hover{background:var(--surf2);color:var(--text)}
+
+/* ── Form fields ── */
+.form-body{padding:18px}
+.frow{display:flex;gap:12px;margin-bottom:12px}
+.frow .ff{flex:1;min-width:0}
+.ff{margin-bottom:12px}
+
+.flabel{
+  display:block;font-size:10.5px;font-weight:700;
+  letter-spacing:.11em;text-transform:uppercase;color:var(--label);
+  margin-bottom:5px;
+}
+.flabel.blue{color:#4da6ff}
+
+input[type=text],input[type=number],input[type=url],select,textarea{
+  width:100%;background:var(--input);border:1px solid var(--border);
+  border-radius:var(--r);color:var(--text);
+  font-family:inherit;font-size:13px;padding:8px 10px;
+  outline:none;transition:border-color .12s;-webkit-appearance:none;
+}
+input:focus,select:focus,textarea:focus{border-color:var(--blue)}
+textarea{resize:vertical;min-height:80px;line-height:1.55}
+select{cursor:pointer}
+select option{background:#1d2e42}
+
+.input-btn{display:flex;gap:8px}
+.input-btn input{flex:1}
+
+/* ── Status checkboxes ── */
+.cbx-row{display:flex;gap:20px;flex-wrap:wrap;padding:4px 0}
+.cbx-label{
+  display:flex;align-items:center;gap:6px;
+  font-size:13px;color:var(--text);cursor:pointer;
+}
+.cbx-label input[type=checkbox]{
+  width:15px;height:15px;
+  accent-color:var(--blue);cursor:pointer;
+}
+.cbx-label.muted{color:var(--text2)}
+
+/* ── Gallery ── */
+.gallery-thumbs{
+  display:flex;flex-wrap:wrap;gap:8px;
+  margin-bottom:10px;min-height:72px;
+  padding:8px;background:var(--input);
+  border:1px solid var(--border);border-radius:var(--r);
+}
+.gallery-thumbs.drag-active{border-color:var(--blue)}
+.gallery-empty{color:var(--label);font-size:12px;align-self:center;padding:4px 0}
+
+.gthumb{
+  position:relative;width:88px;height:66px;
+  border-radius:3px;overflow:hidden;
+  border:2px solid transparent;cursor:grab;flex-shrink:0;
+  background:#192840;
+}
+.gthumb.hero-thumb{border-color:var(--blue)}
+.gthumb.dragging{opacity:.4}
+.gthumb.drop-target{border-color:var(--amber);outline:1px solid var(--amber)}
+.gthumb img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+.gthumb-hero{
+  position:absolute;bottom:2px;left:3px;
+  background:var(--blue);color:#fff;font-size:9px;font-weight:700;
+  padding:1px 4px;border-radius:2px;letter-spacing:.05em;
+  pointer-events:none;
+}
+.gthumb-del{
+  position:absolute;top:2px;right:2px;
+  background:rgba(0,0,0,.65);color:#fff;border:none;
+  width:16px;height:16px;border-radius:50%;
+  font-size:10px;line-height:1;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .12s;
+}
+.gthumb:hover .gthumb-del{opacity:1}
+.gallery-hint{font-size:11px;color:var(--label);margin-bottom:8px}
+
+/* ── PDF drop zone ── */
+.dropzone{
+  border:1.5px dashed var(--border2);border-radius:var(--r);
+  padding:24px;text-align:center;color:var(--label);font-size:13px;
+  cursor:pointer;transition:border-color .12s,background .12s;
+  background:var(--input);margin-top:8px;
+}
+.dropzone:hover{border-color:var(--blue);background:#0f1f30}
+
+/* ── Section divider ── */
+.section-div{
+  border:none;border-top:1px solid var(--border);
+  margin:20px 0;
+}
+
+/* ── Form footer ── */
+.form-footer{
+  display:flex;justify-content:flex-end;gap:10px;
+  padding:14px 18px;border-top:1px solid var(--border);
+}
+
+/* ── Listing list ── */
+.listings-hdr{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:12px;
+}
+.listings-hdr h3{font-size:13px;font-weight:600;color:var(--text2)}
+
+.listing-row{
+  background:var(--surf);border:1px solid var(--border);
+  border-radius:6px;margin-bottom:10px;
+  overflow:hidden;
+}
+.lr-main{
+  display:flex;align-items:flex-start;
+  gap:14px;padding:12px 14px;
+}
+.lr-thumb{
+  width:80px;height:60px;border-radius:3px;
+  overflow:hidden;background:var(--surf2);flex-shrink:0;
+}
+.lr-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.lr-thumb-ph{
+  width:100%;height:100%;display:flex;align-items:center;
+  justify-content:center;font-size:18px;color:var(--label);
+}
+
+.lr-info{flex:1;min-width:0}
+.lr-addr{font-size:14px;font-weight:700;color:#e0eef8;margin-bottom:3px}
+.lr-meta{font-size:12px;color:var(--text2);margin-bottom:5px}
+.lr-badges{display:flex;align-items:center;gap:8px;margin-bottom:3px}
+.lr-url{font-size:11px;color:var(--label);word-break:break-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:380px}
+
+.badge{font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:2px 7px;border-radius:3px}
+.badge-active  {background:rgba(34,165,90,.18);color:#28c96a}
+.badge-pending {background:rgba(201,122,32,.15);color:#e69030}
+.badge-sold    {background:rgba(80,180,255,.12);color:#60b0ff}
+.badge-archived{background:rgba(255,255,255,.06);color:#7a9ab8}
+.photo-ct{font-size:11px;color:var(--label)}
+
+.lr-actions{
+  display:flex;align-items:center;gap:6px;flex-shrink:0;margin-left:8px;padding-top:2px;
+}
+.lr-reorder{display:flex;flex-direction:column;gap:3px}
+.lr-reorder button{
+  background:#1e2f42;border:1px solid var(--border);
+  color:var(--text2);width:22px;height:22px;
+  border-radius:3px;cursor:pointer;font-size:11px;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .12s,color .12s;
+  font-family:inherit;
+}
+.lr-reorder button:hover:not(:disabled){background:var(--surf2);color:var(--text)}
+.lr-reorder button:disabled{opacity:.3;cursor:not-allowed}
+
+.del-confirm{
+  background:#1b1020;border-top:1px solid rgba(212,64,64,.2);
+  display:none;padding:10px 14px;
+  align-items:center;gap:10px;font-size:12px;color:var(--text2);
+}
+.del-confirm.show{display:flex}
+.del-confirm span{flex:1}
+
+/* ── Footer note ── */
+.footer-note{
+  text-align:center;font-size:11px;color:var(--label);
+  padding:24px 20px 0;max-width:900px;margin:0 auto;
+  line-height:1.6;
+}
+
+/* ── Toast ── */
+.toasts{position:fixed;bottom:20px;right:20px;z-index:999;display:flex;flex-direction:column;gap:7px;pointer-events:none}
+.toast{
+  background:#1d2e42;border:1px solid var(--border2);
+  border-radius:6px;padding:10px 14px;font-size:12.5px;font-weight:500;
+  color:var(--text);box-shadow:0 6px 20px rgba(0,0,0,.5);
+  display:flex;align-items:center;gap:8px;
+  transform:translateY(8px);opacity:0;
+  transition:transform .18s,opacity .18s;pointer-events:auto;
+}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.ok  {border-color:rgba(34,165,90,.3)}
+.toast.err {border-color:rgba(212,64,64,.3)}
+.toast.warn{border-color:rgba(201,122,32,.3)}
+.tdot{width:6px;height:6px;border-radius:50%;background:var(--label);flex-shrink:0}
+.toast.ok  .tdot{background:#28c96a}
+.toast.err .tdot{background:var(--red)}
+.toast.warn .tdot{background:var(--amber)}
+
+/* ── Loading ── */
+.loading-row{padding:40px;text-align:center;color:var(--label);font-size:13px}
+</style>
+</head>
+<body>
+
+<header class="page-hdr">
+  <h1>Featured Listings</h1>
+  <div class="page-hdr-actions">
+    <button class="btn btn-blue" onclick="openForm(-1)">+ Add New Listing</button>
+    <a href="admin.html" class="btn btn-ghost">Sign Out</a>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- ── Edit / Add Form ── -->
+  <div class="form-card" id="editForm">
+    <div class="form-card-hdr">
+      <h2 id="formTitle">Add New Listing</h2>
+      <button class="btn-close" onclick="closeForm()">× Close</button>
+    </div>
+
+    <div class="form-body">
+
+      <!-- Scrape URL -->
+      <div class="ff">
+        <label class="flabel">Listing URL (Paste to Auto-Scrape)</label>
+        <div class="input-btn">
+          <input type="url" id="fListingUrl" placeholder="https://search.palisaderealty.com/search/detail/…">
+          <button class="btn btn-dark" id="scrapeBtn" onclick="scrapeUrl()">Scrape</button>
+        </div>
+      </div>
+
+      <hr class="section-div" style="margin:14px 0 16px">
+
+      <!-- Address -->
+      <div class="frow">
+        <div class="ff" style="flex:0 0 140px">
+          <label class="flabel">Address Number</label>
+          <input type="text" id="fAddrNum" placeholder="1247" oninput="liveSlug()">
+        </div>
+        <div class="ff">
+          <label class="flabel">Street</label>
+          <input type="text" id="fStreet" placeholder="Prospect Street" oninput="liveSlug()">
+        </div>
+      </div>
+
+      <!-- City / State -->
+      <div class="frow">
+        <div class="ff">
+          <label class="flabel">City</label>
+          <input type="text" id="fCity" placeholder="La Jolla" oninput="liveSlug()">
+        </div>
+        <div class="ff" style="flex:0 0 110px">
+          <label class="flabel">State</label>
+          <input type="text" id="fState" value="CA">
+        </div>
+      </div>
+
+      <!-- ZIP / MLS -->
+      <div class="frow">
+        <div class="ff">
+          <label class="flabel">ZIP</label>
+          <input type="text" id="fZip" placeholder="92037">
+        </div>
+        <div class="ff">
+          <label class="flabel">MLS #</label>
+          <input type="text" id="fMls" placeholder="240012345SD">
+        </div>
+      </div>
+
+      <!-- Price row -->
+      <div class="frow">
+        <div class="ff">
+          <label class="flabel">Price (Numeric)</label>
+          <input type="number" id="fPrice" placeholder="2495000" oninput="autoPrice()">
+        </div>
+        <div class="ff">
+          <label class="flabel">Price Display</label>
+          <input type="text" id="fPriceDisplay" placeholder="$2,495,000">
+        </div>
+        <div class="ff" style="flex:0 0 120px">
+          <label class="flabel">Beds</label>
+          <input type="number" id="fBeds" placeholder="4" min="0">
+        </div>
+      </div>
+
+      <!-- Baths / Sqft / Lot -->
+      <div class="frow">
+        <div class="ff" style="flex:0 0 120px">
+          <label class="flabel">Baths</label>
+          <input type="number" id="fBaths" placeholder="3" min="0">
+        </div>
+        <div class="ff">
+          <label class="flabel">SQ FT</label>
+          <input type="number" id="fSqft" placeholder="3200" min="0">
+        </div>
+        <div class="ff">
+          <label class="flabel">Lot Size</label>
+          <input type="text" id="fLotSize" placeholder="6,534 sqft">
+        </div>
+      </div>
+
+      <!-- Year Built / Neighborhood / Community -->
+      <div class="frow">
+        <div class="ff" style="flex:0 0 140px">
+          <label class="flabel">Year Built</label>
+          <input type="number" id="fYearBuilt" placeholder="2018">
+        </div>
+        <div class="ff">
+          <label class="flabel">Neighborhood</label>
+          <input type="text" id="fNeighborhood" placeholder="La Jolla Village">
+        </div>
+        <div class="ff">
+          <label class="flabel">Community</label>
+          <select id="fCommunity">
+            <option value="">— none —</option>
+            <option value="downtown-san-diego">Downtown San Diego</option>
+            <option value="mission-hills">Mission Hills</option>
+            <option value="point-loma">Point Loma</option>
+            <option value="coronado">Coronado</option>
+            <option value="pacific-mission-beach">Pacific &amp; Mission Beach</option>
+            <option value="mission-valley">Mission Valley</option>
+            <option value="la-jolla">La Jolla</option>
+            <option value="del-mar">Del Mar</option>
+            <option value="carmel-valley">Carmel Valley</option>
+            <option value="rancho-santa-fe">Rancho Santa Fe</option>
+            <option value="solana-beach">Solana Beach</option>
+            <option value="encinitas">Encinitas</option>
+            <option value="carlsbad">Carlsbad</option>
+            <option value="oceanside">Oceanside</option>
+            <option value="spring-valley">Spring Valley</option>
+            <option value="chula-vista">Chula Vista</option>
+            <option value="la-mesa">La Mesa</option>
+            <option value="el-cajon">El Cajon</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Status checkboxes -->
+      <div class="ff">
+        <label class="flabel">Status — Select All That Apply</label>
+        <div class="cbx-row">
+          <label class="cbx-label muted" title="Always on — this property is in the featured listings">
+            <input type="checkbox" checked disabled> Featured Listing
+          </label>
+          <label class="cbx-label">
+            <input type="checkbox" id="fOffMarket"> Off Market
+          </label>
+          <label class="cbx-label">
+            <input type="checkbox" id="fActive"> Active
+          </label>
+        </div>
+      </div>
+
+      <!-- Tagline -->
+      <div class="ff">
+        <label class="flabel">Tagline (Short Hover Sentence)</label>
+        <input type="text" id="fTagline" placeholder="A coastal contemporary masterpiece steps from La Jolla Cove…">
+      </div>
+
+      <!-- Description -->
+      <div class="ff">
+        <label class="flabel">Description</label>
+        <textarea id="fDescription" rows="6" placeholder="Full property description…"></textarea>
+      </div>
+
+      <!-- Features -->
+      <div class="ff">
+        <label class="flabel">Features (One Per Line)</label>
+        <textarea id="fFeatures" rows="6" placeholder="Panoramic ocean views&#10;Chef's kitchen with Thermador appliances&#10;Primary suite with private deck"></textarea>
+      </div>
+
+      <!-- Gallery -->
+      <div class="ff">
+        <label class="flabel">Gallery Photos</label>
+        <p class="gallery-hint">First photo = hero (●) &nbsp;·&nbsp; Drag to reorder</p>
+        <div class="gallery-thumbs" id="galleryThumbs" ondragover="gDragOver(event)" ondrop="gDrop(event)">
+          <span class="gallery-empty" id="galleryEmpty">No photos yet</span>
+        </div>
+        <div class="input-btn" style="margin-bottom:8px">
+          <input type="text" id="fPhotoUrl" placeholder="Paste photo URL…">
+          <button class="btn btn-dark" onclick="addPhotoUrl()">Add URL</button>
+        </div>
+        <button class="btn btn-dark" onclick="document.getElementById('fileUpload').click()">Upload Photo(s)</button>
+        <input type="file" id="fileUpload" accept="image/*" multiple style="display:none" onchange="handleUpload(this)">
+      </div>
+
+      <hr class="section-div">
+
+      <!-- Property Documents -->
+      <div class="ff">
+        <label class="flabel blue">Property Documents (PDF)</label>
+        <div class="ff" style="max-width:300px">
+          <label class="flabel">Add a Document</label>
+          <select id="fDocType">
+            <option>Spec Sheet</option>
+            <option>Floor Plan</option>
+            <option>HOA Documents</option>
+            <option>Disclosure Package</option>
+            <option>Inspection Report</option>
+          </select>
+        </div>
+        <div class="dropzone" onclick="toast('PDF upload requires server configuration','warn')">
+          Drop PDF here or click to browse
+        </div>
+      </div>
+
+      <hr class="section-div">
+
+      <!-- Advanced (slug, listed by) -->
+      <div class="frow">
+        <div class="ff">
+          <label class="flabel">URL Slug</label>
+          <input type="text" id="fSlug" placeholder="la-jolla-prospect-street">
+        </div>
+        <div class="ff">
+          <label class="flabel">Agent</label>
+          <input type="text" id="fAgent" value="Hedda Parashos">
+        </div>
+        <div class="ff">
+          <label class="flabel">Brokerage</label>
+          <input type="text" id="fBrokerage" value="Palisade Realty">
+        </div>
+      </div>
+
+      <div class="ff" style="display:flex;align-items:center;gap:8px">
+        <label class="cbx-label">
+          <input type="checkbox" id="fDetailPage" checked> Has detail page
+        </label>
+      </div>
+
+    </div><!-- /form-body -->
+
+    <div class="form-footer">
+      <button class="btn btn-ghost" onclick="closeForm()">Cancel</button>
+      <button class="btn btn-blue" id="saveBtn" onclick="saveProp()">Save &amp; Commit to GitHub</button>
+    </div>
+  </div><!-- /form-card -->
+
+  <!-- ── Listings List ── -->
+  <div id="listingsWrap">
+    <div class="listings-hdr">
+      <h3 id="listCount"></h3>
+    </div>
+    <div id="listingsList">
+      <div class="loading-row">Loading listings…</div>
+    </div>
+  </div>
+
+</div><!-- /wrap -->
+
+<p class="footer-note" id="footerNote">
+  Changes are committed to GitHub and deploy automatically (~30 seconds via Vercel).
+  The Scrape button requires a running local dev server at http://localhost:3000.
+</p>
+
+<div class="toasts" id="toasts"></div>
+
+<script>
+let listings = [];
+let editIdx = -1;
+let editGallery = [];
+let gDragIdx = null;
+let autoSlugMode = true;
+
+/* ──────────────── LOAD ──────────────── */
+async function load() {
+  try {
+    const r = await fetch('/data/featured-properties.json?t=' + Date.now());
+    if (!r.ok) throw new Error(r.status);
+    listings = await r.json();
+    renderList();
+  } catch {
+    document.getElementById('listingsList').innerHTML =
+      '<div class="loading-row">Could not load /data/featured-properties.json — make sure the dev server is running.</div>';
+  }
+}
+
+/* ──────────────── RENDER LIST ──────────────── */
+function renderList() {
+  const el = document.getElementById('listingsList');
+  document.getElementById('listCount').textContent =
+    listings.length + ' listing' + (listings.length !== 1 ? 's' : '');
+
+  if (!listings.length) {
+    el.innerHTML = '<div class="loading-row">No listings yet — click "+ Add New Listing" to create one.</div>';
+    return;
+  }
+  el.innerHTML = listings.map(row).join('');
+}
+
+function row(p, i) {
+  const s = p.status || 'active';
+  const sl = { active:'Active', pending:'Off Market', sold:'Sold', archived:'Archived' }[s] || s;
+  const addr = p.address || [p.addressNumber, p.street].filter(Boolean).join(' ') || '—';
+  const meta = [
+    [p.city, p.state, p.zip].filter(Boolean).join(', '),
+    p.priceDisplay || (p.price ? '$' + (+p.price).toLocaleString() : ''),
+    p.beds && p.baths ? p.beds + ' bd / ' + p.baths + ' ba' : '',
+    p.sqft ? p.sqft.toLocaleString() + ' ft²' : ''
+  ].filter(Boolean).join(' · ');
+
+  const thumb = (p.heroImage || (p.gallery && p.gallery[0]))
+    ? `<img src="${esc(p.heroImage || p.gallery[0])}" alt="" onerror="thmbErr(this)">`
+    : `<div class="lr-thumb-ph">🏠</div>`;
+
+  const archiveBtn = s === 'archived'
+    ? `<button class="btn btn-green" onclick="restoreListing(${i})">Restore</button>`
+    : `<button class="btn btn-dark" onclick="archiveListing(${i})">Archive</button>`;
+
+  const photoCount = (p.gallery || []).length || (p.heroImage ? 1 : 0);
+
+  return `<div class="listing-row" id="lr${i}">
+    <div class="lr-main">
+      <div class="lr-thumb">${thumb}</div>
+      <div class="lr-info">
+        <div class="lr-addr">${esc(addr)}</div>
+        <div class="lr-meta">${esc(meta)}</div>
+        <div class="lr-badges">
+          <span class="badge badge-${s}">${sl}</span>
+          <span class="photo-ct">${photoCount} photo${photoCount !== 1 ? 's' : ''}</span>
+        </div>
+        ${p.ylopoDetailUrl ? `<div class="lr-url"><a href="${esc(p.ylopoDetailUrl)}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;" onmouseover="this.style.color='#3a8bdc'" onmouseout="this.style.color=''">${esc(p.ylopoDetailUrl)}</a></div>` : ''}
+      </div>
+      <div class="lr-actions">
+        <button class="btn btn-blue" onclick="openForm(${i})">Edit</button>
+        ${archiveBtn}
+        <button class="btn btn-red" onclick="askDelete(${i})">Delete</button>
+        <div class="lr-reorder">
+          <button onclick="moveUp(${i})" ${i===0?'disabled':''} title="Move up">▲</button>
+          <button onclick="moveDown(${i})" ${i===listings.length-1?'disabled':''} title="Move down">▼</button>
+        </div>
+      </div>
+    </div>
+    <div class="del-confirm" id="dc${i}">
+      <span>Really delete <strong>${esc(addr)}</strong>?</span>
+      <button class="btn btn-ghost" onclick="cancelDelete(${i})">Cancel</button>
+      <button class="btn btn-red" onclick="doDelete(${i})">Yes, Delete</button>
+    </div>
+  </div>`;
+}
+
+function thmbErr(img) { img.parentNode.innerHTML = '<div class="lr-thumb-ph">🏠</div>'; }
+function esc(s) { return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+/* ──────────────── ARCHIVE / DELETE / REORDER ──────────────── */
+function archiveListing(i) { listings[i].status = 'archived'; renderList(); saveQuiet(); }
+function restoreListing(i) { listings[i].status = 'active'; renderList(); saveQuiet(); }
+
+function askDelete(i) { document.getElementById('dc'+i).classList.add('show'); }
+function cancelDelete(i) { document.getElementById('dc'+i).classList.remove('show'); }
+function doDelete(i) { listings.splice(i, 1); renderList(); saveQuiet(); toast('Listing deleted'); }
+
+function moveUp(i) {
+  if (i <= 0) return;
+  [listings[i-1], listings[i]] = [listings[i], listings[i-1]];
+  renderList(); saveQuiet();
+}
+function moveDown(i) {
+  if (i >= listings.length-1) return;
+  [listings[i], listings[i+1]] = [listings[i+1], listings[i]];
+  renderList(); saveQuiet();
+}
+
+/* ──────────────── OPEN / CLOSE FORM ──────────────── */
+function openForm(idx) {
+  editIdx = idx;
+  autoSlugMode = (idx === -1);
+  const isNew = idx === -1;
+  document.getElementById('formTitle').textContent = isNew ? 'Add New Listing' : 'Edit: ' + (listings[idx].address || listings[idx].slug || 'Listing');
+  if (isNew) { clearForm(); editGallery = []; }
+  else { fillForm(listings[idx]); editGallery = [...(listings[idx].gallery || [listings[idx].heroImage].filter(Boolean))]; }
+  renderGallery();
+  const fc = document.getElementById('editForm');
+  fc.classList.add('open');
+  setTimeout(() => fc.scrollIntoView({ behavior:'smooth', block:'start' }), 10);
+}
+
+function closeForm() {
+  document.getElementById('editForm').classList.remove('open');
+  editGallery = [];
+}
+
+/* ──────────────── FORM I/O ──────────────── */
+function clearForm() {
+  ['fListingUrl','fAddrNum','fStreet','fCity','fZip','fMls','fPriceDisplay','fLotSize',
+   'fYearBuilt','fNeighborhood','fTagline','fDescription','fFeatures','fPhotoUrl','fSlug']
+    .forEach(id => { const e=document.getElementById(id); if(e) e.value=''; });
+  ['fPrice','fBeds','fBaths','fSqft'].forEach(id => { const e=document.getElementById(id); if(e) e.value=''; });
+  sv('fState','CA'); sv('fCommunity','');
+  chk('fActive',false); chk('fOffMarket',false); chk('fDetailPage',true);
+  sv('fAgent','Hedda Parashos'); sv('fBrokerage','Palisade Realty');
+}
+
+function fillForm(p) {
+  // Split address into number + street
+  const addrMatch = (p.address||'').match(/^(\d+)\s+(.*)/);
+  sv('fAddrNum', p.addressNumber || (addrMatch ? addrMatch[1] : ''));
+  sv('fStreet',  p.street        || (addrMatch ? addrMatch[2] : p.address || ''));
+  sv('fCity',    p.city);
+  sv('fState',   p.state || 'CA');
+  sv('fZip',     p.zip);
+  sv('fMls',     p.mls);
+  sv('fPrice',   p.price || '');
+  sv('fPriceDisplay', p.priceDisplay);
+  sv('fBeds',    p.beds || '');
+  sv('fBaths',   p.baths || '');
+  sv('fSqft',    p.sqft || '');
+  sv('fLotSize', p.lotSize);
+  sv('fYearBuilt', p.yearBuilt || '');
+  sv('fNeighborhood', p.neighborhood);
+  sv('fCommunity', p.communitySlug || '');
+  sv('fTagline', p.tagline);
+  sv('fDescription', p.description);
+  sv('fFeatures', (p.features || []).join('\n'));
+  sv('fSlug',    p.slug);
+  sv('fAgent',   p.listedBy?.agent   || 'Hedda Parashos');
+  sv('fBrokerage', p.listedBy?.brokerage || 'Palisade Realty');
+  sv('fListingUrl', p.ylopoDetailUrl || '');
+  const st = p.status || 'active';
+  chk('fActive',    st === 'active');
+  chk('fOffMarket', st === 'pending');
+  chk('fDetailPage', p.hasDetailPage !== false);
+}
+
+function readForm() {
+  const g = id => (document.getElementById(id)?.value || '').trim();
+  const n = id => { const v=parseInt(g(id)); return isNaN(v)?undefined:v; };
+  const b = id => !!document.getElementById(id)?.checked;
+
+  const addrNum = g('fAddrNum');
+  const street  = g('fStreet');
+  const address = [addrNum, street].filter(Boolean).join(' ');
+
+  const active    = b('fActive');
+  const offMarket = b('fOffMarket');
+  const status = active ? 'active' : offMarket ? 'pending' : 'active';
+
+  const slug = g('fSlug') || autoSlugFrom(addrNum, street, g('fCity'));
+
+  const gallery = editGallery.filter(Boolean);
+  const heroImage = gallery[0] || '';
+
+  const p = {
+    slug,
+    address,
+    city:  g('fCity'),
+    state: g('fState') || 'CA',
+    status,
+    hasDetailPage: b('fDetailPage'),
+    listedBy: { agent: g('fAgent') || 'Hedda Parashos', brokerage: g('fBrokerage') || 'Palisade Realty' }
+  };
+  if (g('fZip'))          p.zip            = g('fZip');
+  if (g('fMls'))          p.mls            = g('fMls');
+  if (n('fPrice')!==undefined) p.price     = n('fPrice');
+  if (g('fPriceDisplay')) p.priceDisplay   = g('fPriceDisplay');
+  if (n('fBeds')!==undefined)  p.beds      = n('fBeds');
+  if (n('fBaths')!==undefined) p.baths     = n('fBaths');
+  if (n('fSqft')!==undefined)  p.sqft      = n('fSqft');
+  if (g('fLotSize'))      p.lotSize        = g('fLotSize');
+  if (n('fYearBuilt')!==undefined) p.yearBuilt = n('fYearBuilt');
+  if (g('fNeighborhood')) p.neighborhood   = g('fNeighborhood');
+  if (g('fCommunity'))    p.communitySlug  = g('fCommunity');
+  if (g('fTagline'))      p.tagline        = g('fTagline');
+  if (g('fDescription'))  p.description    = g('fDescription');
+  if (g('fListingUrl'))   p.ylopoDetailUrl = g('fListingUrl');
+  const feats = g('fFeatures');
+  if (feats) p.features = feats.split('\n').map(s=>s.trim()).filter(Boolean);
+  p.heroImage = heroImage;
+  p.gallery = gallery.length ? gallery : (heroImage ? [heroImage] : []);
+  return JSON.parse(JSON.stringify(p));
+}
+
+function validate() {
+  const addr = (document.getElementById('fAddrNum')?.value || '') + ' ' + (document.getElementById('fStreet')?.value || '');
+  if (!addr.trim()) { toast('Address is required','err'); return false; }
+  if (!document.getElementById('fCity')?.value.trim()) { toast('City is required','err'); return false; }
+  return true;
+}
+
+function saveProp() {
+  if (!validate()) return;
+  const p = readForm();
+  if (editIdx === -1) { listings.push(p); toast('Listing added — saving…','ok'); }
+  else { listings[editIdx] = p; toast('Listing updated — saving…','ok'); }
+  closeForm();
+  renderList();
+  saveToServer();
+}
+
+/* ──────────────── HELPERS ──────────────── */
+function sv(id, v) { const e=document.getElementById(id); if(e) e.value=v??''; }
+function chk(id, v) { const e=document.getElementById(id); if(e) e.checked=!!v; }
+
+function liveSlug() { if (autoSlugMode) sv('fSlug', autoSlugFrom()); }
+
+function autoSlugFrom(num, st, city) {
+  const n = num ?? (document.getElementById('fAddrNum')?.value || '');
+  const s = st  ?? (document.getElementById('fStreet')?.value  || '');
+  const c = city ?? (document.getElementById('fCity')?.value   || '');
+  const cityPart = c.toLowerCase().replace(/[^a-z0-9\s]/g,'').replace(/\s+/g,'-');
+  const streetPart = s.toLowerCase()
+    .replace(/[^a-z0-9\s]/g,'')
+    .replace(/\b(street|avenue|drive|lane|road|boulevard|way|place|court|circle|st|ave|dr|ln|rd|blvd|pl|ct)\b/g,'')
+    .replace(/\s+/g,'-').replace(/-+/g,'-').replace(/^-|-$/g,'');
+  return [cityPart, streetPart].filter(Boolean).join('-').replace(/-+/g,'-').replace(/^-|-$/g,'');
+}
+
+document.getElementById('fSlug').addEventListener('input', () => { autoSlugMode = false; });
+
+function autoPrice() {
+  const v = parseInt(document.getElementById('fPrice').value);
+  if (!isNaN(v)) sv('fPriceDisplay', '$' + v.toLocaleString('en-US'));
+}
+
+/* ──────────────── GALLERY ──────────────── */
+function renderGallery() {
+  const el = document.getElementById('galleryThumbs');
+  const emp = document.getElementById('galleryEmpty');
+  if (!editGallery.length) { el.innerHTML = ''; el.appendChild(emp || Object.assign(document.createElement('span'),{className:'gallery-empty',textContent:'No photos yet'})); return; }
+  el.innerHTML = editGallery.map((url, i) => `
+    <div class="gthumb${i===0?' hero-thumb':''}" data-gi="${i}" draggable="true"
+         ondragstart="gDragStart(event,${i})" ondragend="gDragEnd(event)">
+      <img src="${esc(url)}" alt="" onerror="this.style.opacity='.3'">
+      ${i===0 ? '<span class="gthumb-hero">HERO</span>' : ''}
+      <button class="gthumb-del" onclick="removePhoto(${i})" title="Remove">×</button>
+    </div>`).join('');
+}
+
+function addPhotoUrl() {
+  const inp = document.getElementById('fPhotoUrl');
+  const url = inp.value.trim();
+  if (!url) return;
+  if (!url.startsWith('http')) { toast('Enter a valid image URL', 'err'); return; }
+  editGallery.push(url);
+  inp.value = '';
+  renderGallery();
+}
+
+function handleUpload(input) {
+  toast('File upload requires server configuration — use Add URL instead', 'warn');
+  input.value = '';
+}
+
+function removePhoto(i) {
+  editGallery.splice(i, 1);
+  renderGallery();
+}
+
+// Gallery drag-to-reorder
+function gDragStart(e, i) { gDragIdx = i; e.currentTarget.classList.add('dragging'); e.dataTransfer.effectAllowed='move'; }
+function gDragEnd(e) { e.currentTarget.classList.remove('dragging'); document.querySelectorAll('.gthumb').forEach(t=>t.classList.remove('drop-target')); gDragIdx=null; }
+function gDragOver(e) {
+  e.preventDefault();
+  const t = e.target.closest('.gthumb');
+  if (t && gDragIdx !== null) {
+    document.querySelectorAll('.gthumb').forEach(x=>x.classList.remove('drop-target'));
+    t.classList.add('drop-target');
+  }
+}
+function gDrop(e) {
+  e.preventDefault();
+  const t = e.target.closest('.gthumb');
+  if (t && gDragIdx !== null) {
+    const di = parseInt(t.dataset.gi);
+    if (di !== gDragIdx) {
+      const moved = editGallery.splice(gDragIdx, 1)[0];
+      editGallery.splice(di, 0, moved);
+      renderGallery();
+    }
+  }
+}
+
+/* ──────────────── SCRAPE ──────────────── */
+async function scrapeUrl() {
+  const listingUrl = document.getElementById('fListingUrl').value.trim();
+  if (!listingUrl) { toast('Paste a listing URL first', 'err'); return; }
+  const btn = document.getElementById('scrapeBtn');
+  btn.textContent = 'Scraping…'; btn.disabled = true;
+  try {
+    const r = await fetch('/api/scrape-listing', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ listingUrl })
+    });
+    const j = await r.json();
+    if (j.ok && j.data && Object.keys(j.data).length > 0) {
+      populateFromScraped(j.data);
+      toast('Data scraped — review and save', 'ok');
+    } else {
+      toast('Scrape returned no data — fill in manually', 'warn');
+    }
+  } catch { toast('Scrape failed — server may not be running', 'err'); }
+  btn.textContent = 'Scrape'; btn.disabled = false;
+}
+
+function populateFromScraped(d) {
+  if (d.addressNumber) sv('fAddrNum', d.addressNumber);
+  if (d.street)        sv('fStreet',  d.street);
+  if (d.city)          sv('fCity',    d.city);
+  if (d.state)         sv('fState',   d.state);
+  if (d.zip)           sv('fZip',     d.zip);
+  if (d.mls)           sv('fMls',     d.mls);
+  if (d.price)       { sv('fPrice', d.price); autoPrice(); }
+  if (d.beds)          sv('fBeds',    d.beds);
+  if (d.baths)         sv('fBaths',   d.baths);
+  if (d.sqft)          sv('fSqft',    d.sqft);
+  if (d.lotSize)       sv('fLotSize', d.lotSize);
+  if (d.yearBuilt)     sv('fYearBuilt', d.yearBuilt);
+  if (d.description)   sv('fDescription', d.description);
+  if (d.features?.length) sv('fFeatures', d.features.join('\n'));
+  if (d.photos?.length) { editGallery = d.photos; renderGallery(); }
+  liveSlug();
+}
+
+/* ──────────────── SAVE ──────────────── */
+async function saveToServer() {
+  const btn = document.getElementById('saveBtn');
+  btn.disabled = true; btn.textContent = 'Saving…';
+  try {
+    const json = JSON.stringify(listings, null, 2);
+    const r = await fetch('/api/write-json?file=featured-properties&commit=Update%20featured%20listings%20via%20admin', {
+      method:'POST', headers:{'Content-Type':'application/json'}, body: json
+    });
+    const j = await r.json();
+    if (j.ok) {
+      if (j.pushed) toast('Saved + committed + pushed to GitHub ✓', 'ok');
+      else if (j.committed) toast('Saved + committed. Push separately to deploy.', 'ok');
+      else toast('Saved to disk. ' + (j.gitError ? 'Git: ' + j.gitError.slice(0,80) : ''), j.gitError ? 'warn' : 'ok');
+    } else { toast('Save failed: ' + (j.error || 'unknown'), 'err'); }
+  } catch { toast('Server unavailable — use Download JSON', 'err'); }
+  btn.disabled = false; btn.textContent = 'Save & Commit to GitHub';
+}
+
+async function saveQuiet() {
+  try {
+    await fetch('/api/write-json?file=featured-properties&commit=Update%20featured%20listings%20via%20admin', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(listings, null, 2)
+    });
+  } catch {}
+}
+
+function downloadJSON() {
+  const b = new Blob([JSON.stringify(listings, null, 2)], {type:'application/json'});
+  const a = document.createElement('a'); a.href=URL.createObjectURL(b); a.download='featured-properties.json'; a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+/* ──────────────── TOAST ──────────────── */
+function toast(msg, type='') {
+  const c = document.getElementById('toasts');
+  const t = document.createElement('div');
+  t.className = 'toast' + (type ? ' '+type : '');
+  t.innerHTML = '<div class="tdot"></div>' + msg;
+  c.appendChild(t);
+  requestAnimationFrame(() => requestAnimationFrame(() => t.classList.add('show')));
+  setTimeout(() => { t.classList.remove('show'); setTimeout(()=>t.remove(), 250); }, 4000);
+}
+
+/* ──────────────── INIT ──────────────── */
+load();
+</script>
+</body>
+</html>
