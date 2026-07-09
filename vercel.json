@@ -1,21 +1,4 @@
-{
-  "rewrites": [
-    { "source": "/team/:slug.html",                "destination": "/team/agent.html" },
-    { "source": "/henderson-communities/:slug.html","destination": "/henderson-communities/community-detail.html" },
-    { "source": "/api/mapbox-token",               "destination": "/api/sections?mapboxOnly=true" }
-  ],
-  "functions": {
-    "api/listings.js":      { "maxDuration": 10 },
-    "api/admin.js":         { "maxDuration": 15 },
-    "api/upload.js":        { "maxDuration": 15 },
-    "api/fetch-listing.js": { "maxDuration": 20 },
-    "api/import-image.js":  { "maxDuration": 25 },
-    "api/sections.js":      { "maxDuration": 10 },
-    "api/team.js":          { "maxDuration": 15 },
-    "api/carousel.js":      { "maxDuration": 15 },
-    "api/testimonials.js":  { "maxDuration": 15 },
-    "api/teamPage.js":      { "maxDuration": 15 },
-    "api/agentDetail.js":   { "maxDuration": 15 },
-    "api/communities.js":   { "maxDuration": 15 }
-  }
+﻿{
+  "cleanUrls": true,
+  "trailingSlash": false
 }
