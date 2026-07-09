@@ -1060,15 +1060,13 @@
         })
     }
 
-    var inlineData = window.__featuredProperties
-    if (inlineData && inlineData.length) {
-      renderCarousel(inlineData)
-    } else {
-      fetch('/data/featured-properties.json')
-        .then(function (r) { return r.json() })
-        .then(renderCarousel)
-        .catch(function (err) { console.error('[featured properties carousel]', err) })
-    }
+    fetch('/data/featured-properties.json?t=' + Date.now())
+      .then(function (r) { return r.json() })
+      .then(renderCarousel)
+      .catch(function () {
+        var inlineData = window.__featuredProperties
+        if (inlineData && inlineData.length) renderCarousel(inlineData)
+      })
   })()
 </script>
 
