@@ -325,6 +325,57 @@
       transform: translateY(0);
     }
 
+    /* ── FIX: community.css `nav {}` universal selector assigns
+       position:fixed + dark background to every <nav> on the page,
+       breaking both the site-header sub-navs and the footer nav.
+       Reset all nav elements for property pages, then restore layouts. ── */
+    body.property-page nav {
+      position: static;
+      top: auto; left: auto; right: auto; bottom: auto;
+      z-index: auto;
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border-bottom: none;
+      height: auto;
+      display: block;
+    }
+
+    /* Restore site-header 3-column flex layout */
+    body.property-page .site-header {
+      position: relative;
+      z-index: 100;
+      height: 129px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 30px;
+      background: rgba(255,255,255,0.74);
+    }
+    body.property-page .site-header.scrolled {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: #ffffff;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+      height: 72px;
+      z-index: 100;
+    }
+
+    /* Restore nav-links flex layout (community.css overwrites gap/padding/width) */
+    body.property-page .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      padding: 25px 15px;
+      width: 499px;
+    }
+    body.property-page .nav-links--right {
+      justify-content: flex-end;
+    }
+    body.property-page .site-header.scrolled .nav-links {
+      padding: 12px 15px;
+    }
+
     /* Mobile */
     @media (max-width: 768px) {
       body.property-page .pp-tour { padding: 64px 20px; }
