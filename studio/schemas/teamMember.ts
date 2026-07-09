@@ -96,6 +96,20 @@ export default defineType({
       description: 'Longer bio displayed on the Team page (optional).',
     }),
     defineField({
+      name: 'bioEs',
+      title: 'Short Bio (Spanish)',
+      type: 'text',
+      rows: 3,
+      description: 'Spanish translation of the short bio. Leave blank to fall back to English.',
+    }),
+    defineField({
+      name: 'fullBioEs',
+      title: 'Full Bio (Spanish)',
+      type: 'text',
+      rows: 5,
+      description: 'Spanish translation of the full bio. Leave blank to fall back to English.',
+    }),
+    defineField({
       name: 'showOnHomepage',
       title: 'Show on Homepage',
       type: 'boolean',

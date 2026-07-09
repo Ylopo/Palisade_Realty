@@ -7,7 +7,7 @@ const QUERY_URL  = `${BASE}/data/query/${DATASET}`;
 const MUTATE_URL = `${BASE}/data/mutate/${DATASET}`;
 const HDR        = () => ({ 'Content-Type': 'application/json', Authorization: `Bearer ${TOKEN}` });
 
-const FIELDS = `_id, name, "slug": slug.current, role, location, phone, email, bio, fullBio, linkedin, instagram, facebook, websiteUrl,
+const FIELDS = `_id, name, "slug": slug.current, role, location, phone, email, bio, bioEs, fullBio, fullBioEs, linkedin, instagram, facebook, websiteUrl,
   department, imageAlt, showOnHomepage, showOnTeamPage,
   displayOrder, active, featured,
   "photoUrl": photo.asset->url`;

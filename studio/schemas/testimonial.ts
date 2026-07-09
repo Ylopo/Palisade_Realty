@@ -64,6 +64,13 @@ export default defineType({
       initialValue: false,
       description: 'Featured testimonials are shown first on the homepage.',
     }),
+    defineField({
+      name: 'reviewEs',
+      title: 'Review Text (Spanish)',
+      type: 'text',
+      rows: 4,
+      description: 'Spanish translation of the review. Leave blank to fall back to English.',
+    }),
   ],
   preview: {
     select: {

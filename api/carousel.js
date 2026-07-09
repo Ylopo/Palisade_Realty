@@ -8,7 +8,7 @@ const MUTATE_URL = `${BASE}/data/mutate/${DATASET}`;
 const HDR        = () => ({ 'Content-Type': 'application/json', Authorization: `Bearer ${TOKEN}` });
 
 const PUBLIC_GROQ = `*[_type == "headerCarousel" && active == true] | order(displayOrder asc) {
-  _id, title, altText, caption, headline, subheadline, buttonText, buttonUrl,
+  _id, title, altText, caption, headline, headlineEs, subheadline, subheadlineEs, buttonText, buttonUrl,
   displayOrder, active,
   "imageUrl": image.asset->url
 }`;

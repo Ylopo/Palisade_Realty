@@ -9,7 +9,7 @@ const HDR        = () => ({ 'Content-Type': 'application/json', Authorization: `
 
 const PUBLIC_GROQ = `*[_type == "testimonial" && active == true]
   | order(featured desc, displayOrder asc) {
-  _id, name, title, review, rating, category, imageAlt, featured, active, displayOrder,
+  _id, name, title, review, reviewEs, rating, category, imageAlt, featured, active, displayOrder,
   "imageUrl": image.asset->url
 }`;
 

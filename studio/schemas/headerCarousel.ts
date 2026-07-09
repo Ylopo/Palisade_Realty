@@ -44,6 +44,18 @@ export default defineType({
       description: 'Overrides the hero subheadline while this slide is active (optional).',
     }),
     defineField({
+      name: 'headlineEs',
+      title: 'Slide Headline (Spanish)',
+      type: 'string',
+      description: 'Spanish translation of the slide headline (optional).',
+    }),
+    defineField({
+      name: 'subheadlineEs',
+      title: 'Slide Subheadline (Spanish)',
+      type: 'string',
+      description: 'Spanish translation of the slide subheadline (optional).',
+    }),
+    defineField({
       name: 'buttonText',
       title: 'Button Text',
       type: 'string',

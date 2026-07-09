@@ -1,0 +1,74 @@
+/* ============================================================
+   PALISADE REALTY — Language Toggle Styles
+   lang.css — loaded on every page via batch injection
+   ============================================================ */
+
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 13px;
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
+  border-radius: 50px;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  cursor: pointer;
+  transition: border-color 180ms ease, color 180ms ease, background 180ms ease;
+  flex-shrink: 0;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.lang-toggle:hover {
+  border-color: rgba(238, 202, 0, 0.55);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.lang-toggle:focus-visible {
+  outline: 2px solid rgba(238, 202, 0, 0.8);
+  outline-offset: 2px;
+}
+
+.lang-toggle:active {
+  transform: scale(0.97);
+}
+
+.lang-toggle .lang-active {
+  color: #eeca00;
+}
+
+.lang-toggle .lang-sep {
+  opacity: 0.25;
+  margin: 0 1px;
+}
+
+/* When the header has scrolled to a light background */
+.site-header.is-scrolled .lang-toggle,
+.site-header.scrolled .lang-toggle {
+  border-color: rgba(88, 23, 42, 0.2);
+  color: rgba(88, 23, 42, 0.5);
+}
+
+.site-header.is-scrolled .lang-toggle:hover,
+.site-header.scrolled .lang-toggle:hover {
+  border-color: rgba(88, 23, 42, 0.6);
+  color: rgba(88, 23, 42, 0.75);
+}
+
+.site-header.is-scrolled .lang-toggle .lang-active,
+.site-header.scrolled .lang-toggle .lang-active {
+  color: #58172a;
+}
+
+/* Mobile — keep toggle in header row */
+@media (max-width: 767px) {
+  .lang-toggle {
+    padding: 4px 10px;
+    font-size: 9px;
+  }
+}
