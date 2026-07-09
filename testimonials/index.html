@@ -1,0 +1,924 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Testimonials | Palisade Realty</title>
+  <meta name="description" content="Read what clients say about working with Palisade Realty. Real reviews from home buyers and sellers in San Diego, La Jolla, Coronado, and beyond.">
+  <meta property="og:title" content="Client Testimonials | Palisade Realty">
+  <meta property="og:description" content="Hear what our clients have to say about working with Palisade Realty.">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Shared Stylesheet -->
+  <link rel="stylesheet" href="/homepage.css">
+
+  <style>
+    /* ══════════════════════════════════════════════════════
+       PAGE TOKENS (override nav inline styles from index)
+       ══════════════════════════════════════════════════════ */
+    .nav-dropdown-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 9px 10px; border-radius: 8px;
+      font-family: var(--font-body,'Manrope',sans-serif);
+      font-size: 13px; font-weight: 500;
+      color: #212121; text-decoration: none;
+      text-transform: none !important; letter-spacing: 0 !important;
+      transition: background 150ms, color 150ms;
+      white-space: nowrap;
+    }
+    .nav-dropdown-item:hover { background: rgba(88,23,42,0.06); color: #58172a; opacity: 1 !important; }
+    .nav-dropdown-item::after { display: none !important; }
+    .nav-dropdown-dot { width: 6px; height: 6px; border-radius: 50%; background: #d0d0d0; flex-shrink: 0; }
+    .nav-dropdown-divider { height: 1px; background: rgba(0,0,0,0.07); margin-bottom: 12px; }
+    .nav-dropdown-all {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 10px 4px;
+    }
+    .nav-dropdown-all a {
+      font-family: var(--font-label,'Inter',sans-serif);
+      font-size: 12px; font-weight: 600;
+      color: #58172a !important; text-decoration: none;
+      text-transform: none !important; letter-spacing: 0 !important;
+      display: inline-flex; align-items: center; gap: 5px;
+    }
+    .nav-dropdown-all a::after { display: none !important; }
+    .nav-dropdown-all a:hover { opacity: 0.7; }
+    .mobile-communities-toggle { cursor: pointer; }
+    .mobile-communities-list {
+      display: none; flex-direction: column;
+      padding: 4px 0 4px 20px;
+    }
+    .mobile-communities-list.open { display: flex; }
+    .mobile-communities-list a {
+      font-size: 14px !important;
+      padding: 7px 0 !important;
+      color: #555 !important;
+      text-transform: none !important;
+      letter-spacing: 0 !important;
+      font-weight: 400 !important;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       HERO
+       ══════════════════════════════════════════════════════ */
+    .test-hero {
+      background: linear-gradient(160deg, #28000c 0%, #58172a 55%, #4a0e1f 100%);
+      padding: 160px clamp(20px, 5vw, 60px) 100px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .test-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 70% at 50% 100%, rgba(238,202,0,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .test-hero-inner { position: relative; z-index: 1; }
+    .test-hero-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #eeca00;
+      display: block;
+      margin-bottom: 18px;
+    }
+    .test-hero-heading {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.025em;
+      line-height: 1.08;
+      margin: 0 0 24px;
+    }
+    .test-hero-sub {
+      font-family: 'Manrope', sans-serif;
+      font-size: 1.125rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.70);
+      line-height: 1.7;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+    .test-hero-accent {
+      width: 48px;
+      height: 3px;
+      background: #eeca00;
+      border-radius: 2px;
+      margin: 36px auto 0;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       STATS BAR
+       ══════════════════════════════════════════════════════ */
+    .stats-bar {
+      background: #fff;
+      border-bottom: 1px solid rgba(88,23,42,0.07);
+    }
+    .stats-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 40px clamp(20px, 5vw, 60px);
+      display: flex;
+      justify-content: center;
+      gap: clamp(28px, 7vw, 90px);
+      flex-wrap: wrap;
+    }
+    .stat-item { text-align: center; }
+    .stat-value {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #58172a;
+      display: block;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .stat-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #aaa;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 6px;
+      display: block;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       REVIEW CARDS GALLERY
+       ══════════════════════════════════════════════════════ */
+    .review-gallery {
+      background: #f9f5f0;
+      padding: 80px clamp(20px, 5vw, 60px);
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+    .section-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #58172a;
+      display: block;
+      margin-bottom: 12px;
+    }
+    .section-heading {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.875rem, 4vw, 2.75rem);
+      font-weight: 700;
+      color: #1a0008;
+      letter-spacing: -0.02em;
+      text-wrap: balance;
+      margin: 0 0 10px;
+    }
+    .section-sub {
+      font-family: 'Manrope', sans-serif;
+      font-size: 1rem;
+      color: #666;
+      line-height: 1.65;
+    }
+    /* Masonry card grid */
+    .gallery-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      columns: 3 320px;
+      column-gap: 20px;
+    }
+    @media (max-width: 900px) { .gallery-grid { columns: 2 280px; } }
+    @media (max-width: 560px) { .gallery-grid { columns: 1; } }
+    /* ── Quote expand / collapse ─────────────────────────────────── */
+    .rg-quote-wrap {
+      position: relative;
+      margin-bottom: 22px;
+    }
+    .rg-quote-wrap .rg-quote {
+      margin-bottom: 0;
+      overflow: hidden;
+      transition: max-height 320ms ease-in-out;
+    }
+    .rg-quote-wrap.is-clamped::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: linear-gradient(to bottom, transparent 0%, #fff 88%);
+      pointer-events: none;
+      transition: opacity 300ms ease-in-out;
+    }
+    .rg-quote-wrap.is-expanded::after {
+      opacity: 0;
+    }
+    .rg-see-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      padding: 0 0 18px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: #58172a;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+      transition: color 200ms ease, opacity 200ms ease;
+      line-height: 1;
+    }
+    .rg-see-more:hover {
+      color: #4a0e1f;
+      opacity: 0.72;
+    }
+    .rg-see-more:focus-visible {
+      outline: 2px solid #58172a;
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+    .rg-card {
+      position: relative;
+      break-inside: avoid;
+      margin-bottom: 20px;
+      background: #fff;
+      border-radius: 16px;
+      border: 1px solid rgba(88,23,42,0.07);
+      padding: 28px 28px 24px;
+      box-shadow:
+        0 2px 14px rgba(88,23,42,0.07),
+        0 1px 4px rgba(0,0,0,0.04);
+      overflow: hidden;
+      transition:
+        transform 280ms cubic-bezier(0.22,0.61,0.36,1),
+        box-shadow 280ms cubic-bezier(0.22,0.61,0.36,1);
+    }
+    .rg-card:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        0 10px 28px rgba(88,23,42,0.11),
+        0 2px 6px rgba(0,0,0,0.06);
+    }
+    .rg-bigquote {
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      font-size: 68px;
+      line-height: 1;
+      color: #e2e2e2;
+      font-family: Georgia, 'Times New Roman', serif;
+      pointer-events: none;
+      user-select: none;
+    }
+    .rg-quote {
+      font-family: 'Manrope', sans-serif;
+      font-size: 16px;
+      line-height: 1.74;
+      color: #1a0008;
+      margin: 0 0 22px;
+      position: relative;
+      z-index: 1;
+    }
+    .rg-card-footer {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-top: 1px solid rgba(88,23,42,0.08);
+      padding-top: 16px;
+    }
+    .rg-agent-photo {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: top;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(88,23,42,0.15);
+    }
+    .rg-card-info {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .rg-agent-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: #888;
+      margin: 0;
+      line-height: 1.3;
+    }
+    .rg-agent-label strong {
+      color: #1a0008;
+      font-weight: 700;
+    }
+    .rg-stars-row {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .rg-stars {
+      display: flex;
+      gap: 2px;
+    }
+    .rg-rating-num {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: #1a0008;
+      margin-left: 2px;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       CTA SECTION
+       ══════════════════════════════════════════════════════ */
+    .test-cta {
+      background: linear-gradient(160deg, #28000c 0%, #58172a 55%, #4a0e1f 100%);
+      padding: 110px clamp(20px, 5vw, 60px);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .test-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 100%, rgba(238,202,0,0.07) 0%, transparent 68%);
+      pointer-events: none;
+    }
+    .test-cta-inner { position: relative; z-index: 1; }
+    .test-cta-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #eeca00;
+      display: block;
+      margin-bottom: 16px;
+    }
+    .test-cta-heading {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.022em;
+      line-height: 1.18;
+      margin: 0 0 20px;
+      text-wrap: balance;
+    }
+    .test-cta-sub {
+      font-family: 'Manrope', sans-serif;
+      font-size: 1.0625rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.7;
+      max-width: 480px;
+      margin: 0 auto 40px;
+    }
+    .test-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #eeca00;
+      color: #1a0008;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9375rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      padding: 16px 38px;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(238,202,0,0.28);
+      transition:
+        background 200ms cubic-bezier(0.22,0.61,0.36,1),
+        transform 200ms cubic-bezier(0.22,0.61,0.36,1),
+        box-shadow 200ms cubic-bezier(0.22,0.61,0.36,1);
+    }
+    .test-cta-btn:hover {
+      background: #f5d84e;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(238,202,0,0.38);
+    }
+    .test-cta-btn:active { transform: translateY(0); }
+    .test-cta-btn:focus-visible {
+      outline: 3px solid rgba(238,202,0,0.55);
+      outline-offset: 4px;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       RESPONSIVE
+       ══════════════════════════════════════════════════════ */
+    @media (max-width: 900px) {
+      .test-card--featured { padding: 36px 28px; }
+      .test-card--featured .tc-quote { font-size: 1.1rem; }
+    }
+    @media (max-width: 768px) {
+      .gallery-grid { columns: 2 140px; column-gap: 10px; }
+      .gallery-item { margin-bottom: 10px; }
+      .test-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .gallery-grid { columns: 2 110px; }
+      .stats-inner { gap: 20px; }
+      .stat-value { font-size: 2rem; }
+      .test-card--featured { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<header class="site-header" id="site-header">
+
+  <!-- Left Nav -->
+  <nav class="nav-links" aria-label="Primary navigation left">
+    <a href="https://search.palisaderealty.com/" target="_blank" rel="noopener noreferrer">Buy</a>
+    <a href="https://search.palisaderealty.com/seller" target="_blank" rel="noopener noreferrer">Sell</a>
+    <div class="nav-dropdown">
+      <a href="/communities" class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+        Communities
+        <svg class="nav-dropdown-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3.5 5 6.5 8 3.5"/></svg>
+      </a>
+      <div class="nav-dropdown-panel" role="region" aria-label="Communities menu">
+        <span class="nav-dropdown-label">San Diego Communities</span>
+        <div class="nav-dropdown-grid">
+          <a class="nav-dropdown-item" href="/communities/downtown-san-diego-real-estate"><span class="nav-dropdown-dot"></span>Downtown San Diego</a>
+          <a class="nav-dropdown-item" href="/communities/mission-hills-real-estate"><span class="nav-dropdown-dot"></span>Mission Hills</a>
+          <a class="nav-dropdown-item" href="/communities/point-loma-real-estate"><span class="nav-dropdown-dot"></span>Point Loma</a>
+          <a class="nav-dropdown-item" href="/communities/coronado-real-estate"><span class="nav-dropdown-dot"></span>Coronado</a>
+          <a class="nav-dropdown-item" href="/communities/pacific-mission-beach-real-estate"><span class="nav-dropdown-dot"></span>Pacific &amp; Mission Beach</a>
+          <a class="nav-dropdown-item" href="/communities/mission-valley-real-estate"><span class="nav-dropdown-dot"></span>Mission Valley</a>
+          <a class="nav-dropdown-item" href="/communities/la-jolla-real-estate"><span class="nav-dropdown-dot"></span>La Jolla</a>
+          <a class="nav-dropdown-item" href="/communities/del-mar-real-estate"><span class="nav-dropdown-dot"></span>Del Mar</a>
+          <a class="nav-dropdown-item" href="/communities/carmel-valley-real-estate"><span class="nav-dropdown-dot"></span>Carmel Valley</a>
+          <a class="nav-dropdown-item" href="/communities/rancho-santa-fe-real-estate"><span class="nav-dropdown-dot"></span>Rancho Santa Fe</a>
+          <a class="nav-dropdown-item" href="/communities/solana-beach-real-estate"><span class="nav-dropdown-dot"></span>Solana Beach</a>
+          <a class="nav-dropdown-item" href="/communities/encinitas-real-estate"><span class="nav-dropdown-dot"></span>Encinitas</a>
+          <a class="nav-dropdown-item" href="/communities/carlsbad-real-estate"><span class="nav-dropdown-dot"></span>Carlsbad</a>
+          <a class="nav-dropdown-item" href="/communities/oceanside-real-estate"><span class="nav-dropdown-dot"></span>Oceanside</a>
+          <a class="nav-dropdown-item" href="/communities/spring-valley-real-estate"><span class="nav-dropdown-dot"></span>Spring Valley</a>
+          <a class="nav-dropdown-item" href="/communities/chula-vista-real-estate"><span class="nav-dropdown-dot"></span>Chula Vista</a>
+          <a class="nav-dropdown-item" href="/communities/la-mesa-real-estate"><span class="nav-dropdown-dot"></span>La Mesa</a>
+          <a class="nav-dropdown-item" href="/communities/el-cajon-real-estate"><span class="nav-dropdown-dot"></span>El Cajon</a>
+        </div>
+        <div class="nav-dropdown-divider"></div>
+        <div class="nav-dropdown-all">
+          <a href="/communities">View All Communities <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 6h8"/><path d="M6 2.5 9.5 6 6 9.5"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <a href="/testimonials">Testimonials</a>
+  </nav>
+
+  <!-- Center Logo -->
+  <a href="/" class="nav-logo" aria-label="Palisade Realty home">
+    <img src="/images/logo.png" alt="Palisade Realty">
+  </a>
+
+  <!-- Right Nav -->
+  <nav class="nav-links nav-links--right" aria-label="Primary navigation right">
+    <a href="/#fl-section">Properties</a>
+    <a href="/team">Team</a>
+    <a href="/blog">Blog</a>
+    <a href="/contact">Contact</a>
+  </nav>
+
+  <!-- Hamburger (mobile) -->
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Open navigation menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+</header>
+
+<!-- Mobile nav drawer -->
+<div class="nav-mobile-drawer" id="nav-mobile-drawer" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+  <a href="https://search.palisaderealty.com/" target="_blank" rel="noopener noreferrer">Buy</a>
+  <a href="https://search.palisaderealty.com/seller" target="_blank" rel="noopener noreferrer">Sell</a>
+  <a href="/communities" class="mobile-communities-toggle" id="mobile-communities-toggle" aria-expanded="false">Communities â–¾</a>
+  <div class="mobile-communities-list" id="mobile-communities-list">
+    <a href="/communities/downtown-san-diego-real-estate">Downtown San Diego</a>
+    <a href="/communities/mission-hills-real-estate">Mission Hills</a>
+    <a href="/communities/point-loma-real-estate">Point Loma</a>
+    <a href="/communities/coronado-real-estate">Coronado</a>
+    <a href="/communities/pacific-mission-beach-real-estate">Pacific &amp; Mission Beach</a>
+    <a href="/communities/mission-valley-real-estate">Mission Valley</a>
+    <a href="/communities/la-jolla-real-estate">La Jolla</a>
+    <a href="/communities/del-mar-real-estate">Del Mar</a>
+    <a href="/communities/carmel-valley-real-estate">Carmel Valley</a>
+    <a href="/communities/rancho-santa-fe-real-estate">Rancho Santa Fe</a>
+    <a href="/communities/solana-beach-real-estate">Solana Beach</a>
+    <a href="/communities/encinitas-real-estate">Encinitas</a>
+    <a href="/communities/carlsbad-real-estate">Carlsbad</a>
+    <a href="/communities/oceanside-real-estate">Oceanside</a>
+    <a href="/communities/spring-valley-real-estate">Spring Valley</a>
+    <a href="/communities/chula-vista-real-estate">Chula Vista</a>
+    <a href="/communities/la-mesa-real-estate">La Mesa</a>
+    <a href="/communities/el-cajon-real-estate">El Cajon</a>
+  </div>
+  <a href="/testimonials">Testimonials</a>
+  <a href="/#fl-section">Properties</a>
+  <a href="/team">Team</a>
+  <a href="/blog">Blog</a>
+  <a href="/contact">Contact</a>
+</div>
+<main>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="test-hero" aria-label="Client Testimonials Hero">
+  <div class="test-hero-inner">
+    <span class="test-hero-eyebrow">Trusted by Hundreds of Families</span>
+    <h1 class="test-hero-heading">Client Testimonials</h1>
+    <p class="test-hero-sub">Hear what our clients have to say about working with Palisade Realty.</p>
+    <div class="test-hero-accent" aria-hidden="true"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     STATS BAR
+     ============================================================ -->
+<section class="stats-bar" aria-label="Client success metrics">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <span class="stat-value">500+</span>
+      <span class="stat-label">Families Helped</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-value">4.9★</span>
+      <span class="stat-label">Average Rating</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-value">15+</span>
+      <span class="stat-label">Years of Experience</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-value">60+</span>
+      <span class="stat-label">Dedicated Agents</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     REVIEW PHOTO GALLERY
+     ============================================================ -->
+<section class="review-gallery" aria-labelledby="gallery-heading">
+  <div class="section-header">
+    <span class="section-eyebrow">Client Photos</span>
+    <h2 class="section-heading" id="gallery-heading">What Our Clients Are Sharing</h2>
+    <p class="section-sub">Real moments from real clients across San Diego.</p>
+  </div>
+  <div class="gallery-grid">
+
+    <article class="rg-card">
+      <div class="rg-bigquote">&ldquo;</div>
+      <p class="rg-quote">&ldquo;My partner and I have been working with Anh for years &mdash; first in buying our home and then selling. Working with Anh was honestly one of the best decisions we made. From guiding us through the purchase of our new home and then helping us sell our home, she made the entire process as stress-free as possible. She helped us search for a home for almost an entire year and would go above and beyond making sure we had everything on our must-have list. Her knowledge of the market and outstanding communication gave us confidence every step of the way. She was always available to answer our questions, offered honest advice, and went out of her way to make sure everything stayed on track. Thanks to her expertise, our home sold as quickly as possible in this unsure market. We truly felt like she had our best interests at heart the entire time. If you&rsquo;re looking for a dedicated, professional, and genuinely caring realtor, we can&rsquo;t recommend Anh Lam highly enough.&rdquo;</p>
+      <div class="rg-card-footer">
+        <img src="/assets/images/agents/anh-lam.jpg" alt="Anh Lam" class="rg-agent-photo">
+        <div class="rg-card-info">
+          <p class="rg-agent-label">Review for: <strong>Anh Lam</strong></p>
+          <div class="rg-stars-row">
+            <div class="rg-stars">
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+            </div>
+            <span class="rg-rating-num">5.0</span>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="rg-card">
+      <div class="rg-bigquote">&ldquo;</div>
+      <p class="rg-quote">&ldquo;We worked with Wally on both the sale of our condo and the purchase of our home, and had a fantastic experience from start to finish. His attention to detail stood out throughout the process &mdash; he helped us with staging, created a professional video to boost exposure, and ensured our listing was on Zillow Showcase. What we appreciated most was his communication. He consistently provided real-time updates so we were always in the loop. Wally was also honest and transparent at every stage, which helped us feel confident in our decisions. He was not pushy &mdash; he would present the facts and respected our decisions. On top of that, his network of trusted professionals made the entire process much smoother. We would highly recommend him to anyone buying or selling a home.&rdquo;</p>
+      <div class="rg-card-footer">
+        <img src="/assets/images/agents/wally-dally.png" alt="Wally Dally" class="rg-agent-photo">
+        <div class="rg-card-info">
+          <p class="rg-agent-label">Review for: <strong>Wally Dally</strong></p>
+          <div class="rg-stars-row">
+            <div class="rg-stars">
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+            </div>
+            <span class="rg-rating-num">5.0</span>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="rg-card">
+      <div class="rg-bigquote">&ldquo;</div>
+      <p class="rg-quote">&ldquo;Five stars truly isn&rsquo;t enough to describe the experience of working with her. She brings a rare combination of deep market knowledge, flawless professionalism, and a brilliant, get-it-done attitude. Real estate transactions can be a minefield of stress, but she completely shielded me from all of it. The process was entirely seamless. She was proactively communicative, keeping me updated every step of the way and explaining everything clearly so I always felt confident in our choices. Her expertise is undeniable, but it&rsquo;s her drive and dedication to her clients that make her an absolute rockstar in her field. She handles every detail so you can just focus on the excitement of your next chapter.&rdquo;</p>
+      <div class="rg-card-footer">
+        <img src="/assets/images/agents/jennifer-crosby.jpg" alt="Jennifer Crosby" class="rg-agent-photo">
+        <div class="rg-card-info">
+          <p class="rg-agent-label">Review for: <strong>Jennifer Crosby</strong></p>
+          <div class="rg-stars-row">
+            <div class="rg-stars">
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+            </div>
+            <span class="rg-rating-num">5.0</span>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="rg-card">
+      <div class="rg-bigquote">&ldquo;</div>
+      <p class="rg-quote">&ldquo;We had a great experience working with our realtor, Taylor. She was consistently responsive, friendly, and took the time to clearly explain each step of the process, which made everything feel much less overwhelming. She was also a strong negotiator and helped us feel confident we were getting the best possible outcome. We really appreciated how quickly she answered questions and kept things moving smoothly from start to finish!&rdquo;</p>
+      <div class="rg-card-footer">
+        <img src="/assets/images/agents/taylor-schunk.jpg" alt="Taylor Schunk" class="rg-agent-photo">
+        <div class="rg-card-info">
+          <p class="rg-agent-label">Review for: <strong>Taylor Schunk</strong></p>
+          <div class="rg-stars-row">
+            <div class="rg-stars">
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+            </div>
+            <span class="rg-rating-num">5.0</span>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="rg-card">
+      <div class="rg-bigquote">&ldquo;</div>
+      <p class="rg-quote">&ldquo;We recently worked with Jeremy McHone to sell our home in Ramona, and the experience was absolutely exceptional from start to finish. Jeremy managed to help us sell our house completely off-market, which saved us an incredible amount of time and stress. What truly set him apart was his comprehensive management of the entire transaction. He flawlessly handled all the paperwork for both the sellers and the buyers, navigating the complexities of the process with total professionalism and transparency. Beyond the contracts and escrow, Jeremy went above and beyond by taking care of all interactions with the various contractors and vendors. We never had to worry about coordinating schedules or following up on progress &mdash; he handled it all. If you want a realtor who is proactive, organized, and truly takes the burden off your shoulders, we cannot recommend Jeremy highly enough!&rdquo;</p>
+      <div class="rg-card-footer">
+        <img src="/assets/images/agents/jeremy-mchone.png" alt="Jeremy McHone" class="rg-agent-photo">
+        <div class="rg-card-info">
+          <p class="rg-agent-label">Review for: <strong>Jeremy McHone</strong></p>
+          <div class="rg-stars-row">
+            <div class="rg-stars">
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+            </div>
+            <span class="rg-rating-num">5.0</span>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="rg-card">
+      <div class="rg-bigquote">&ldquo;</div>
+      <p class="rg-quote">&ldquo;Corinne went above and beyond. We had been house hunting for months and she was always available every weekend to tour whatever listing we sent her way. She did her homework before each showing to provide us with the information we needed. She listened to our needs and would send listings our way that she found. She was always quick to respond and was consistently a dream to work with. We will be sending her name around to anyone we know who is house hunting!&rdquo;</p>
+      <div class="rg-card-footer">
+        <img src="/assets/images/agents/corinne-mauro.jpg" alt="Corinne Mauro" class="rg-agent-photo">
+        <div class="rg-card-info">
+          <p class="rg-agent-label">Review for: <strong>Corinne Mauro</strong></p>
+          <div class="rg-stars-row">
+            <div class="rg-stars">
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+            </div>
+            <span class="rg-rating-num">5.0</span>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="rg-card">
+      <div class="rg-bigquote">&ldquo;</div>
+      <p class="rg-quote">&ldquo;We can&rsquo;t recommend Jodi Kirkwood highly enough! She helped us both purchase our upstairs condo and sell our existing condo, and the entire experience was exceptional from start to finish. Her knowledge of the local market is outstanding, and her advice throughout the process was invaluable. She knew exactly how to position our condo, and thanks to her expertise, we received top dollar for our sale. What impressed us most was her attention to detail, market knowledge, and ability to navigate every challenge with confidence and ease. Buying and selling at the same time can be stressful, but she made the process smooth and manageable. We are incredibly grateful for all of her help and would absolutely work with her again.&rdquo;</p>
+      <div class="rg-card-footer">
+        <img src="/assets/images/agents/jodi-kirkwood.jpg" alt="Jodi Kirkwood" class="rg-agent-photo">
+        <div class="rg-card-info">
+          <p class="rg-agent-label">Review for: <strong>Jodi Kirkwood</strong></p>
+          <div class="rg-stars-row">
+            <div class="rg-stars">
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+            </div>
+            <span class="rg-rating-num">5.0</span>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="rg-card">
+      <div class="rg-bigquote">&ldquo;</div>
+      <p class="rg-quote">&ldquo;Working with Katie was an amazing experience from start to finish. She is kind, patient, understanding, and truly listens to her clients. Throughout our home search, she took the time to understand exactly what we were looking for and never made us feel rushed or pressured. Katie was always professional, responsive, and available whenever we had questions or concerns. Her knowledge of the home-buying process gave us confidence every step of the way. What really stood out was how different she was from other realtors we had met &mdash; she genuinely cared about helping us find the right home and making sure we felt informed and supported. We would highly recommend her to anyone looking to buy or sell a home.&rdquo;</p>
+      <div class="rg-card-footer">
+        <img src="/assets/images/agents/katie-lussier.jpg" alt="Katie Lussier" class="rg-agent-photo">
+        <div class="rg-card-info">
+          <p class="rg-agent-label">Review for: <strong>Katie Lussier</strong></p>
+          <div class="rg-stars-row">
+            <div class="rg-stars">
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+            </div>
+            <span class="rg-rating-num">5.0</span>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="rg-card">
+      <div class="rg-bigquote">&ldquo;</div>
+      <p class="rg-quote">&ldquo;Chip was amazing from start to finish. He met with us ahead of listing the property and completed a very comprehensive interview about us and the property. He helped us set what turned out to be the perfect price point. He connected us with two staging resources that gave us a great ability to stage the property to reflect how much we loved it. He did a series of open houses that leveraged a great selling strategy, which was very successful and resulted in a sale in less than 3 weeks. He was a skilled negotiator with the buyer. We highly recommend Chip if you are looking for a realtor who is top shelf!&rdquo;</p>
+      <div class="rg-card-footer">
+        <img src="/assets/images/agents/chip-morgan.jpg" alt="Chip Morgan" class="rg-agent-photo">
+        <div class="rg-card-info">
+          <p class="rg-agent-label">Review for: <strong>Chip Morgan</strong></p>
+          <div class="rg-stars-row">
+            <div class="rg-stars">
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="#eeca00"><path d="M9 1.5l2.09 4.24 4.67.68-3.38 3.29.8 4.65L9 12l-4.18 2.36.8-4.65L2.24 6.42l4.67-.68z"/></svg>
+            </div>
+            <span class="rg-rating-num">5.0</span>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     CTA
+     ============================================================ -->
+<section class="test-cta" aria-label="Call to action">
+  <div class="test-cta-inner">
+    <span class="test-cta-eyebrow">Start Your Journey</span>
+    <h2 class="test-cta-heading">Ready to Experience the<br>Palisade Difference?</h2>
+    <p class="test-cta-sub">Join the hundreds of families who trusted Palisade Realty to guide them home.</p>
+    <a href="/contact" class="test-cta-btn">
+      Get in Touch
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M2 7h10M7 2.5 11.5 7 7 11.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="site-footer" id="footer">
+
+  <div class="footer-texture" aria-hidden="true"></div>
+
+  <!-- Brand stripe -->
+  <div class="footer-stripe" aria-hidden="true"></div>
+
+  <div class="footer-inner">
+
+    <!-- Brand Column -->
+    <div class="footer-col-brand">
+      <div class="footer-logo">
+        <img src="/images/logo.png" alt="Palisade Realty">
+      </div>
+
+      <div class="footer-copy-mls-row">
+        <div>
+          <p class="footer-copy">
+            &copy;Palisade Realty, Inc. 2026<br>
+            All Rights Reserved<br><br>
+            Brokerage CA DRE #01848565<br><br>
+            Hedda Parashos<br>
+            CA DRE #01773167
+          </p>
+        </div>
+        <div class="footer-mls-badge" aria-label="Move Safe Certified by HomeLight">
+          <img src="/assets/images/move-safe-offsite-stacked.png" alt="Move Safe Certified by HomeLight">
+        </div>
+      </div>
+
+      <div class="footer-social">
+        <a href="https://www.facebook.com/PalisadeRealty/" target="_blank" rel="noopener noreferrer" aria-label="Palisade Realty on Facebook">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M15 8a7 7 0 1 0-8.094 6.915V10.3H4.947V8h1.959V6.257C6.906 4.32 8.067 3.25 9.832 3.25c.847 0 1.733.151 1.733.151v1.9h-.976c-.962 0-1.261.597-1.261 1.209V8h2.147l-.343 2.3H9.328v4.615A7.003 7.003 0 0 0 15 8z"/></svg>
+        </a>
+        <a href="https://www.pinterest.com/palisaderealty/" target="_blank" rel="noopener noreferrer" aria-label="Palisade Realty on Pinterest">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0a8 8 0 0 0-2.915 15.452c-.07-.633-.134-1.606.027-2.297.146-.625.984-4.172.984-4.172s-.252-.503-.252-1.246c0-1.167.678-2.041 1.52-2.041.717 0 1.065.539 1.065 1.184 0 .721-.46 1.801-.698 2.8-.198.835.42 1.515 1.242 1.515 1.49 0 2.638-1.571 2.638-3.836 0-2.006-1.441-3.408-3.499-3.408-2.382 0-3.78 1.787-3.78 3.634 0 .72.276 1.49.621 1.91a.25.25 0 0 1 .057.239c-.063.264-.204.835-.232.952-.037.154-.124.186-.285.112-1.05-.489-1.707-2.028-1.707-3.264 0-2.653 1.928-5.09 5.559-5.09 2.919 0 5.187 2.081 5.187 4.862 0 2.902-1.83 5.237-4.371 5.237-.854 0-1.658-.444-1.932-.967l-.525 1.958c-.19.733-.705 1.65-1.05 2.208A8.001 8.001 0 0 0 8 16a8 8 0 0 0 0-16z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/palisade_realty/" target="_blank" rel="noopener noreferrer" aria-label="Palisade Realty on Instagram">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Quick Links Column -->
+    <nav class="footer-col-links" aria-label="Quick links">
+      <span class="footer-col-title">Quick Links</span>
+      <div class="footer-links">
+        <a href="https://search.palisaderealty.com/" target="_blank" rel="noopener noreferrer">Buy a Home</a>
+        <a href="https://search.palisaderealty.com/seller" target="_blank" rel="noopener noreferrer">Sell Your Home</a>
+        <a href="/communities">Communities</a>
+        <a href="/testimonials">Testimonials</a>
+        <a href="/blog">Blog</a>
+        <a href="/team">Our Team</a>
+        <a href="/contact">Contact Us</a>
+      </div>
+    </nav>
+
+    <!-- Contact Column -->
+    <address class="footer-col-contact" style="font-style:normal;">
+      <span class="footer-col-title">Contact</span>
+      <span class="footer-contact-line"><strong>3434 Grove Street</strong></span>
+      <span class="footer-contact-line"><strong>Lemon Grove, CA 91945</strong></span>
+      <a href="tel:+16197940218" class="footer-contact-line">(619) 794-0218</a>
+      <a href="mailto:contactus@palisaderealty.com" class="footer-contact-line footer-contact-line--email">contactus@palisaderealty.com</a>
+      <span class="footer-contact-line">Mon â€“ Fri: 9:00 AM â€“ 5:00 PM</span>
+    </address>
+
+  </div>
+
+</footer>
+
+<script src="/homepage.js"></script>
+
+  <script>
+  /* Review gallery — See More / See Less */
+  (function () {
+    var CLAMP = 130; // px ≈ 5-6 lines at 14px / 1.74 line-height
+
+    document.querySelectorAll('.review-gallery .rg-card').forEach(function (card, i) {
+      var quote = card.querySelector('.rg-quote');
+      if (!quote) return;
+
+      // Wrap quote in a relative container
+      var wrap = document.createElement('div');
+      wrap.className = 'rg-quote-wrap';
+      quote.parentNode.insertBefore(wrap, quote);
+      wrap.appendChild(quote);
+
+      // Measure natural height before clamping
+      var natural = quote.scrollHeight;
+
+      // Short reviews — no button needed
+      if (natural <= CLAMP + 8) return;
+
+      // Apply clamp
+      quote.style.maxHeight = CLAMP + 'px';
+      wrap.classList.add('is-clamped');
+
+      // Accessibility IDs
+      var quoteId = 'rg-q-' + i;
+      quote.id = quoteId;
+
+      // Create button
+      var btn = document.createElement('button');
+      btn.className = 'rg-see-more';
+      btn.setAttribute('type', 'button');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-controls', quoteId);
+      btn.innerHTML = 'See More <span aria-hidden="true">&#8594;</span>';
+      wrap.insertAdjacentElement('afterend', btn);
+
+      btn.addEventListener('click', function () {
+        var isExpanded = btn.getAttribute('aria-expanded') === 'true';
+
+        if (isExpanded) {
+          // Collapse
+          quote.style.maxHeight = CLAMP + 'px';
+          wrap.classList.remove('is-expanded');
+          wrap.classList.add('is-clamped');
+          btn.setAttribute('aria-expanded', 'false');
+          btn.innerHTML = 'See More <span aria-hidden="true">&#8594;</span>';
+        } else {
+          // Expand
+          quote.style.maxHeight = natural + 'px';
+          wrap.classList.remove('is-clamped');
+          wrap.classList.add('is-expanded');
+          btn.setAttribute('aria-expanded', 'true');
+          btn.innerHTML = 'See Less <span aria-hidden="true">&#8593;</span>';
+        }
+      });
+    });
+  })();
+  </script>
+</body>
+</html>

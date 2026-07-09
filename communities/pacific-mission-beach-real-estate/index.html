@@ -1,0 +1,1525 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pacific &amp; Mission Beach Homes For Sale | Palisade Realty — San Diego Real Estate</title>
+  <meta name="description" content="Explore homes for sale in Pacific &amp; Mission Beach, CA. Boardwalk living, Mission Bay, Crystal Pier, and California's most iconic shoreline communities. Hedda Parashos — Palisade Realty.">
+  <script>
+    !function(){
+      var p = location.pathname.replace(/\/index\.html$/, '/');
+      var l = document.createElement('link');
+      l.rel = 'canonical';
+      l.href = 'https://palisaderealty.com' + p;
+      document.head.appendChild(l);
+    }()
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Mapbox GL JS -->
+  <link href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet">
+
+  <!-- Ylopo Widget Config -->
+  <script>
+    var YLOPO_HOSTNAME = 'search.palisaderealty.com';
+    window.YLOPO_WIDGETS = { domain: 'search.palisaderealty.com' };
+    window.YLOPO_WIDGETS.primaryDomain = 'palisaderealty.com';
+    window.YLOPO_WIDGETS.sitewide_domain = 'search.palisaderealty.com';
+  </script>
+
+  <!-- Shared site nav/footer styles -->
+  <link rel="stylesheet" href="/homepage.css">
+
+  <style>
+  /* ═══════════════════════════════════════════════════════════════════════
+     Community Page — Point Loma
+     ═══════════════════════════════════════════════════════════════════════ */
+
+  body.comm-detail {
+    background: #ffffff;
+    color: #212121;
+  }
+
+  body.comm-detail .site-header {
+    background: #ffffff;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+  }
+  body.comm-detail .site-header .nav-links a { color: #212121; }
+  body.comm-detail .site-header .nav-hamburger span { background: #212121; }
+  body.comm-detail .nav-mobile-drawer { background: #ffffff; }
+  body.comm-detail .nav-mobile-drawer a { color: #212121; }
+
+  /* ── Communities nav dropdown ── */
+  .nav-dropdown { position: relative; }
+  .nav-dropdown-trigger {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 5px;
+    cursor: default;
+  }
+  .nav-dropdown-chevron {
+    width: 10px; height: 10px;
+    flex-shrink: 0;
+    transition: transform 220ms cubic-bezier(0.22,0.61,0.36,1);
+    opacity: 0.55;
+  }
+  .nav-dropdown.is-open .nav-dropdown-chevron { transform: rotate(180deg); }
+  .nav-dropdown-panel {
+    position: absolute;
+    top: calc(100% + 16px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-6px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 200ms cubic-bezier(0.22,0.61,0.36,1),
+                transform 200ms cubic-bezier(0.22,0.61,0.36,1);
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.13), 0 1px 4px rgba(0,0,0,0.06);
+    min-width: 480px;
+    padding: 22px 22px 18px;
+    z-index: 300;
+  }
+  .nav-dropdown-panel::before {
+    content: '';
+    position: absolute;
+    top: -5px; left: 50%;
+    width: 10px; height: 10px;
+    background: #fff;
+    transform: translateX(-50%) rotate(45deg);
+    border-radius: 2px;
+    box-shadow: -2px -2px 4px rgba(0,0,0,0.04);
+  }
+  .nav-dropdown.is-open .nav-dropdown-panel {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
+  .nav-dropdown-panel::after {
+    content: '';
+    position: absolute;
+    top: -20px; left: 0; right: 0;
+    height: 20px;
+  }
+  .nav-dropdown-label {
+    font-family: var(--font-label,'Inter',sans-serif);
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--brand,#58172a);
+    margin-bottom: 12px; display: block;
+  }
+  .nav-dropdown-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-bottom: 14px;
+  }
+  .nav-dropdown-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 9px 10px; border-radius: 8px;
+    font-family: var(--font-body,'Manrope',sans-serif);
+    font-size: 13px; font-weight: 500;
+    color: #212121; text-decoration: none;
+    text-transform: none !important; letter-spacing: 0 !important;
+    transition: background 150ms, color 150ms;
+    white-space: nowrap;
+  }
+  .nav-dropdown-item:hover { background: rgba(88,23,42,0.06); color: #58172a; opacity: 1 !important; }
+  .nav-dropdown-item::after { display: none !important; }
+  .nav-dropdown-item.is-active { background: rgba(88,23,42,0.07); color: #58172a; font-weight: 600; }
+  .nav-dropdown-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #d0d0d0; flex-shrink: 0;
+  }
+  .nav-dropdown-item.is-active .nav-dropdown-dot { background: #58172a; }
+  .nav-dropdown-divider { height: 1px; background: rgba(0,0,0,0.07); margin-bottom: 12px; }
+  .nav-dropdown-all {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 8px 10px 4px;
+  }
+  .nav-dropdown-all a {
+    font-family: var(--font-label,'Inter',sans-serif);
+    font-size: 12px; font-weight: 600;
+    color: #58172a !important; text-decoration: none;
+    text-transform: none !important; letter-spacing: 0 !important;
+    display: inline-flex; align-items: center; gap: 5px;
+  }
+  .nav-dropdown-all a::after { display: none !important; }
+  .nav-dropdown-all a:hover { opacity: 0.7; }
+
+  .mobile-communities-toggle { cursor: pointer; }
+  .mobile-communities-list {
+    display: none; flex-direction: column;
+    padding: 4px 0 4px 20px;
+  }
+  .mobile-communities-list.open { display: flex; }
+  .mobile-communities-list a {
+    font-size: 14px !important;
+    padding: 7px 0 !important;
+    color: #555 !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+    font-weight: 400 !important;
+  }
+
+  /* ── CSS variables ── */
+  .comm-detail {
+    --cd-dark:    var(--white);
+    --cd-dark-2:  var(--off-white);
+    --cd-dark-3:  #ebebeb;
+    --cd-dark-4:  #e2e2e2;
+    --cd-cream:   var(--near-black);
+    --cd-muted:   rgba(33,33,33,0.55);
+    --cd-gold:    var(--brand);
+    --cd-accent:  var(--accent);
+    --cd-brand:   var(--brand);
+    --cd-serif:   var(--font-display);
+    --cd-sans:    var(--font-body);
+    --cd-label:   var(--font-label);
+    --cd-ease:    var(--ease-spring);
+    --cd-dur:     var(--dur-base);
+    --cd-radius:  14px;
+  }
+
+  @keyframes numReveal {
+    0%   { opacity: 0; filter: blur(6px); transform: translateY(12px); }
+    40%  { opacity: 1; filter: blur(2px); transform: translateY(4px); }
+    100% { opacity: 1; filter: blur(0);   transform: translateY(0); }
+  }
+  .demo-value.counting, .city-stat-value.counting {
+    animation: numReveal 0.55s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+
+  .comm-detail .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity var(--cd-dur) var(--cd-ease),
+                transform var(--cd-dur) var(--cd-ease);
+  }
+  .comm-detail .reveal.visible { opacity: 1; transform: none; }
+  .comm-detail .reveal.reveal-delay-1 { transition-delay: 0.12s; }
+  .comm-detail .reveal.reveal-delay-2 { transition-delay: 0.22s; }
+  .comm-detail .reveal.reveal-delay-3 { transition-delay: 0.34s; }
+
+  .comm-detail .section-eyebrow {
+    display: block;
+    font-family: var(--font-label);
+    font-size: 16px; font-weight: 500;
+    letter-spacing: 0.64px; text-transform: uppercase;
+    color: var(--brand); margin-bottom: 14px;
+  }
+  .comm-detail .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 4.5vw, 64px);
+    font-weight: 400; color: var(--black);
+    letter-spacing: -0.64px; line-height: 1.1;
+    margin-bottom: 24px;
+  }
+  .comm-detail .section-title em { font-style: italic; color: var(--brand); }
+
+  .comm-section {
+    padding: 100px var(--pad-x);
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .comm-section--edge { padding: 100px var(--pad-x); max-width: none; }
+  .comm-section--dark  { background: var(--cd-dark); }
+  .comm-section--dark2 { background: var(--cd-dark-2); }
+  .comm-section--dark3 { background: var(--cd-dark-3); }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; justify-content: center;
+    gap: 10px; background: var(--brand); color: var(--white);
+    font-family: var(--font-body); font-size: 16px; font-weight: 600;
+    letter-spacing: 0.64px; padding: 14px 28px;
+    border-radius: var(--radius-pill);
+    transition: background var(--dur-fast), transform var(--dur-fast);
+  }
+  .btn-primary:hover { background: var(--brand-dark); transform: translateY(-1px); }
+  .btn-primary:active { transform: translateY(0); }
+
+  .btn-outline {
+    display: inline-flex; align-items: center; justify-content: center;
+    gap: 10px; background: transparent; color: var(--near-black);
+    font-family: var(--font-body); font-size: 16px; font-weight: 600;
+    letter-spacing: 0.64px; padding: 14px 28px;
+    border-radius: var(--radius-pill);
+    border: 1.5px solid rgba(33,33,33,0.28);
+    transition: border-color var(--dur-fast), transform var(--dur-fast);
+  }
+  .btn-outline:hover { border-color: rgba(33,33,33,0.70); transform: translateY(-1px); }
+
+  .btn-text {
+    font-family: var(--font-label); font-size: 14px; font-weight: 600;
+    letter-spacing: 0.3px; text-transform: uppercase; color: var(--brand);
+    border-bottom: 1px solid rgba(88,23,42,0.35);
+    transition: border-color var(--dur-fast), color var(--dur-fast);
+  }
+  .btn-text:hover { color: var(--brand-dark); border-color: var(--brand-dark); }
+
+  /* ── 1. HERO ── */
+  #community-hero { position: relative; height: 560px; overflow: hidden; }
+  .hero-bg-img { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .hero-bg-img img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(11,8,8,0.28) 0%, rgba(11,8,8,0.20) 50%, rgba(11,8,8,0.75) 100%);
+    z-index: 1; pointer-events: none;
+  }
+  .hero-content {
+    position: absolute; inset: 0; z-index: 2;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: flex-end;
+    padding-bottom: 72px; text-align: center;
+  }
+  .hero-breadcrumb {
+    position: absolute; top: 88px; left: 50%; transform: translateX(-50%);
+    font-family: var(--cd-label); font-size: 11px; letter-spacing: 0.2em;
+    color: rgba(242,237,228,0.50);
+    display: flex; align-items: center; gap: 8px; white-space: nowrap;
+  }
+  .hero-breadcrumb a { color: inherit; transition: color 0.2s; }
+  .hero-breadcrumb a:hover { color: rgba(242,237,228,0.9); }
+  .hero-eyebrow {
+    font-family: var(--cd-label); font-size: 11px; font-weight: 500;
+    letter-spacing: 0.32em; text-transform: uppercase;
+    color: var(--cd-gold); margin-bottom: 16px;
+  }
+  .hero-title {
+    font-family: var(--cd-serif);
+    font-size: clamp(52px, 9vw, 110px);
+    font-weight: 400; color: #fff;
+    letter-spacing: -0.035em; line-height: 0.95; margin-bottom: 44px;
+  }
+  .hero-title em { font-style: italic; color: var(--accent); }
+  .hero-stats { display: flex; align-items: center; gap: 0; }
+  .hero-stat { padding: 0 36px; text-align: center; }
+  .hero-stat:not(:last-child) { border-right: 1px solid rgba(255,255,255,0.18); }
+  .hero-stat-value {
+    display: block; font-family: var(--cd-label); font-size: 26px;
+    font-weight: 600; color: #fff; letter-spacing: -0.02em;
+    line-height: 1; margin-bottom: 5px;
+  }
+  .hero-stat-label {
+    display: block; font-family: var(--cd-label); font-size: 10px;
+    font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(255,255,255,0.50);
+  }
+
+  /* ── 2. LOCATION ── */
+  .location-wrap { background: var(--cd-dark-2); padding: 90px var(--pad-x, 56px); }
+  .location-head { text-align: center; max-width: 900px; margin: 0 auto 52px; }
+  .location-map-wrap {
+    position: relative; height: 440px;
+    border-radius: var(--cd-radius); overflow: hidden; margin-bottom: 40px;
+  }
+  #location-map { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .location-legend {
+    position: absolute; bottom: 16px; left: 16px;
+    background: rgba(11,8,8,0.78); backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.08); border-radius: 8px;
+    padding: 10px 14px; font-family: var(--cd-label); font-size: 10px;
+    color: rgba(242,237,228,0.70); z-index: 3;
+  }
+  .location-legend-row { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
+  .location-legend-row:last-child { margin-bottom: 0; }
+  .location-legend-swatch { width: 20px; height: 3px; border-radius: 2px; flex-shrink: 0; }
+  .location-drive-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .location-drive-card {
+    background: var(--cd-dark-3); border: 1px solid rgba(0,0,0,0.08);
+    border-radius: var(--cd-radius); padding: 20px 16px; text-align: center;
+  }
+  .location-card-time {
+    display: block; font-family: var(--cd-serif); font-size: 28px;
+    font-weight: 400; color: var(--cd-gold); letter-spacing: -0.02em; margin-bottom: 6px;
+  }
+  .location-card-dest { display: block; font-family: var(--cd-label); font-size: 12px; font-weight: 600; color: var(--cd-cream); margin-bottom: 4px; }
+  .location-card-via { display: block; font-family: var(--cd-label); font-size: 10px; color: var(--cd-muted); letter-spacing: 0.06em; }
+
+  /* ── 3. OVERVIEW ── */
+  .overview-inner { display: grid; grid-template-columns: 1fr 380px; gap: 72px; align-items: start; }
+  .overview-divider { width: 40px; height: 2px; background: var(--cd-gold); margin: 20px 0 28px; }
+  .overview-body { font-family: var(--cd-sans); font-size: 16px; line-height: 1.78; color: var(--cd-muted); margin-bottom: 18px; }
+  .overview-body:last-of-type { margin-bottom: 32px; }
+  .overview-cta { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; margin-top: 8px; }
+  .quick-facts {
+    background: var(--cd-dark-3); border: 1px solid rgba(0,0,0,0.10);
+    border-radius: var(--cd-radius); padding: 32px 28px;
+    position: sticky; top: 96px;
+  }
+  .quick-facts-heading {
+    font-family: var(--cd-label); font-size: 10px; font-weight: 700;
+    letter-spacing: 0.28em; text-transform: uppercase; color: var(--cd-gold);
+    margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(0,0,0,0.10);
+  }
+  .quick-fact { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.07); }
+  .quick-fact:last-child { border-bottom: none; }
+  .fact-label { font-family: var(--cd-label); font-size: 11px; color: var(--cd-muted); flex-shrink: 0; }
+  .fact-value { font-family: var(--cd-label); font-size: 12px; font-weight: 600; color: var(--cd-cream); text-align: right; }
+
+  /* ── 4. DEMOGRAPHICS ── */
+  .demographics-wrap { background: var(--cd-dark-3); padding: 64px var(--pad-x, 56px); }
+  .demo-head { text-align: center; margin-bottom: 44px; }
+  .demo-source { font-family: var(--cd-label); font-size: 10px; color: var(--cd-muted); letter-spacing: 0.06em; }
+  .demo-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; max-width: 1100px; margin: 0 auto; }
+  .demo-stat { text-align: center; padding: 20px 12px; border-right: 1px solid rgba(0,0,0,0.09); }
+  .demo-stat:last-child { border-right: none; }
+  .demo-value { display: block; font-family: var(--cd-serif); font-size: clamp(28px, 3.5vw, 42px); font-weight: 400; color: var(--cd-cream); letter-spacing: -0.03em; margin-bottom: 6px; }
+  .demo-label { display: block; font-family: var(--cd-label); font-size: 11px; font-weight: 500; color: var(--cd-gold); letter-spacing: 0.06em; }
+
+  /* ── 5. HIGHLIGHTS ── */
+  .highlights-head { text-align: center; margin-bottom: 52px; }
+  .highlights-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .highlight-card { background: var(--cd-dark-3); border: 1px solid rgba(0,0,0,0.08); border-radius: var(--cd-radius); padding: 32px 28px; transition: border-color var(--cd-dur); }
+  .highlight-card:hover { border-color: rgba(184,154,94,0.30); }
+  .highlight-icon { width: 44px; height: 44px; margin-bottom: 18px; display: block; color: var(--cd-gold); }
+  .highlight-title { font-family: var(--cd-serif); font-size: 20px; font-weight: 500; color: var(--cd-cream); letter-spacing: -0.01em; margin-bottom: 12px; }
+  .highlight-body { font-family: var(--cd-sans); font-size: 14px; line-height: 1.70; color: var(--cd-muted); }
+
+  /* ── 6. NEIGHBORHOODS ── */
+  .neighborhoods-wrap { background: var(--cd-dark-2); padding: 90px var(--pad-x, 56px); }
+  .neighborhoods-head { text-align: center; margin-bottom: 52px; }
+  .neighborhoods-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; max-width: 1400px; margin: 0 auto; }
+  .neighborhood-card { background: var(--cd-dark-3); border: 1px solid rgba(0,0,0,0.08); border-radius: var(--cd-radius); padding: 22px 18px; transition: transform var(--cd-dur) var(--cd-ease), border-color var(--cd-dur); }
+  .neighborhood-card:hover { transform: translateY(-4px); border-color: rgba(184,154,94,0.25); }
+  .neighborhood-name { font-family: var(--cd-serif); font-size: 18px; font-weight: 500; color: var(--cd-cream); letter-spacing: -0.01em; margin-bottom: 5px; }
+  .neighborhood-price { font-family: var(--cd-label); font-size: 12px; font-weight: 600; color: var(--cd-gold); margin-bottom: 8px; }
+  .neighborhood-tags { font-family: var(--cd-label); font-size: 10px; color: var(--cd-muted); letter-spacing: 0.04em; }
+
+  /* ── 7. CITY STATS ── */
+  .city-stats-wrap { background: var(--cd-brand); padding: 64px var(--pad-x, 56px); }
+  .city-stats-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; max-width: 1100px; margin: 0 auto; }
+  .city-stat { text-align: center; padding: 12px 8px; border-right: 1px solid rgba(255,255,255,0.14); }
+  .city-stat:last-child { border-right: none; }
+  .city-stat-value { display: block; font-family: var(--cd-serif); font-size: clamp(30px, 4vw, 48px); font-weight: 400; color: var(--cd-accent); letter-spacing: -0.03em; line-height: 1; margin-bottom: 8px; }
+  .city-stat-label { display: block; font-family: var(--cd-label); font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(242,237,228,0.70); }
+
+  /* ── 8. LISTINGS ── */
+  .listings-wrap { background: var(--cd-dark-2); padding: 90px var(--pad-x, 56px); }
+  .listings-header { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 40px; flex-wrap: wrap; }
+  .view-all-link { font-family: var(--cd-label); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cd-gold); white-space: nowrap; transition: opacity var(--cd-dur); }
+  .view-all-link:hover { opacity: 0.7; }
+  .listings-cta-row { margin-top: 36px; text-align: center; }
+  .btn-view-all { font-family: var(--cd-label); font-size: 13px; font-weight: 600; letter-spacing: 0.08em; color: var(--cd-gold); border-bottom: 1px solid rgba(88,23,42,0.30); padding-bottom: 2px; transition: opacity var(--cd-dur); }
+  .btn-view-all:hover { opacity: 0.7; }
+
+  /* ── 9. HOA ── */
+  .hoa-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; margin-top: 40px; }
+  .hoa-table { width: 100%; border-collapse: collapse; font-family: var(--cd-label); font-size: 13px; }
+  .hoa-table th { font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cd-gold); padding: 0 0 14px; border-bottom: 1px solid rgba(0,0,0,0.12); text-align: left; }
+  .hoa-table td { padding: 14px 0; border-bottom: 1px solid rgba(0,0,0,0.07); color: var(--cd-muted); }
+  .hoa-table tr:last-child td { border-bottom: none; }
+  .hoa-table td:last-child { font-weight: 600; color: var(--cd-cream); text-align: right; }
+  .hoa-note { font-family: var(--cd-sans); font-size: 12px; color: var(--cd-muted); margin-top: 20px; line-height: 1.6; }
+  .hoa-aside-heading { font-family: var(--cd-label); font-size: 12px; font-weight: 700; color: var(--cd-cream); letter-spacing: 0.06em; margin-bottom: 12px; }
+  .hoa-aside-note { font-family: var(--cd-sans); font-size: 14px; color: var(--cd-muted); line-height: 1.68; }
+  .hoa-covers-list { font-family: var(--cd-sans); font-size: 14px; color: var(--cd-muted); line-height: 1.8; padding-left: 18px; }
+  .hoa-covers-list li { margin-bottom: 4px; }
+
+  /* ── 10. PARKS ── */
+  .parks-wrap { background: var(--cd-dark-2); padding: 90px var(--pad-x, 56px); }
+  .parks-head { text-align: center; margin-bottom: 52px; }
+  .parks-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 1400px; margin: 0 auto; }
+  .park-card { background: var(--cd-dark-3); border: 1px solid rgba(0,0,0,0.08); border-radius: var(--cd-radius); padding: 28px 24px; }
+  .park-name { font-family: var(--cd-serif); font-size: 20px; font-weight: 500; color: var(--cd-cream); margin-bottom: 4px; }
+  .park-address { font-family: var(--cd-label); font-size: 11px; color: var(--cd-muted); margin-bottom: 10px; letter-spacing: 0.04em; }
+  .park-size { display: inline-block; font-family: var(--cd-label); font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cd-gold); background: rgba(88,23,42,0.07); border-radius: 4px; padding: 3px 8px; margin-bottom: 16px; }
+  .park-amenities { font-family: var(--cd-sans); font-size: 13px; color: var(--cd-muted); line-height: 1.75; padding-left: 16px; }
+  .park-amenities li { margin-bottom: 3px; }
+
+  /* ── 11. SCHOOLS ── */
+  .schools-head { text-align: center; margin-bottom: 16px; }
+  .schools-disclaimer-top { font-family: var(--cd-sans); font-size: 14px; color: var(--cd-muted); line-height: 1.68; max-width: 780px; margin: 0 auto 40px; text-align: center; }
+  .schools-tabs { display: flex; gap: 4px; margin-bottom: 24px; }
+  .schools-tab { font-family: var(--cd-label); font-size: 13px; font-weight: 600; padding: 9px 20px; border-radius: 8px; border: 1px solid rgba(0,0,0,0.12); background: transparent; color: var(--cd-muted); cursor: pointer; transition: background var(--cd-dur), color var(--cd-dur); }
+  .schools-tab.active, .schools-tab:hover { background: var(--cd-brand); color: #fff; border-color: var(--cd-brand); }
+  .schools-panel { display: none; }
+  .schools-panel.active { display: block; }
+  .schools-table { width: 100%; border-collapse: collapse; font-family: var(--cd-label); font-size: 13px; }
+  .schools-table th { font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cd-gold); padding: 0 12px 14px 0; border-bottom: 1px solid rgba(0,0,0,0.12); text-align: left; }
+  .schools-table td { padding: 14px 12px 14px 0; border-bottom: 1px solid rgba(0,0,0,0.07); color: var(--cd-muted); }
+  .schools-table tr:last-child td { border-bottom: none; }
+  .schools-disclaimer { font-family: var(--cd-sans); font-size: 12px; color: var(--cd-muted); line-height: 1.6; margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(0,0,0,0.08); }
+
+  /* ── 12. NEARBY ── */
+  .nearby-wrap { background: var(--cd-dark-2); padding: 90px var(--pad-x, 56px); }
+  .nearby-head { margin-bottom: 16px; }
+  .nearby-desc { font-family: var(--cd-sans); font-size: 15px; color: var(--cd-muted); margin-bottom: 40px; }
+  .nearby-table { width: 100%; border-collapse: collapse; font-family: var(--cd-label); font-size: 13px; }
+  .nearby-table th { font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cd-gold); padding: 0 16px 14px 0; border-bottom: 1px solid rgba(0,0,0,0.12); text-align: left; }
+  .nearby-table td { padding: 16px 16px 16px 0; border-bottom: 1px solid rgba(0,0,0,0.07); color: var(--cd-muted); vertical-align: top; }
+  .nearby-table tr:last-child td { border-bottom: none; }
+  .nearby-name-cell a { font-weight: 600; color: var(--cd-cream); transition: color var(--cd-dur); }
+  .nearby-name-cell a:hover { color: var(--cd-gold); }
+  .nearby-price-cell { color: var(--cd-gold) !important; font-weight: 600 !important; white-space: nowrap; }
+  .nearby-arrow-cell { color: var(--cd-gold) !important; font-size: 18px; text-align: right; opacity: 0.60; }
+
+  /* ── 13. FAQ ── */
+  .faq-head { text-align: center; margin-bottom: 12px; }
+  .faq-sub { text-align: center; font-family: var(--cd-sans); font-size: 15px; color: var(--cd-muted); margin-bottom: 48px; }
+  .faq-list { max-width: 820px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid rgba(0,0,0,0.10); }
+  .faq-question { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 22px 0; cursor: pointer; user-select: none; }
+  .faq-question:hover .faq-question-text { color: var(--cd-cream); }
+  .faq-question-text { font-family: var(--cd-sans); font-size: 16px; font-weight: 500; color: rgba(33,33,33,0.85); line-height: 1.45; transition: color var(--cd-dur); }
+  .faq-toggle { flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; background: var(--cd-dark-3); display: flex; align-items: center; justify-content: center; transition: background var(--cd-dur); }
+  .faq-item.open .faq-toggle { background: var(--cd-brand); }
+  .faq-toggle-icon { font-family: var(--cd-label); font-size: 18px; font-weight: 400; color: var(--cd-gold); line-height: 1; transition: transform var(--cd-dur), color var(--cd-dur); }
+  .faq-item.open .faq-toggle-icon { transform: rotate(45deg); color: #fff; }
+  .faq-answer { overflow: hidden; max-height: 0; transition: max-height 0.38s cubic-bezier(0.22, 0.61, 0.36, 1); }
+  .faq-item.open .faq-answer { max-height: 600px; }
+  .faq-answer-inner { font-family: var(--cd-sans); font-size: 15px; line-height: 1.72; color: var(--cd-muted); padding: 0 0 24px; }
+
+  /* ── 14. LIFESTYLE ── */
+  .lifestyle-wrap { background: var(--cd-dark-3); padding: 90px var(--pad-x, 56px); }
+  .lifestyle-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; max-width: 1400px; margin: 0 auto; }
+  .lifestyle-body { font-family: var(--cd-sans); font-size: 16px; line-height: 1.78; color: var(--cd-muted); margin-bottom: 18px; }
+  .lifestyle-bullets { font-family: var(--cd-sans); font-size: 14px; color: var(--cd-muted); line-height: 2; padding-left: 18px; margin-top: 12px; }
+  .lifestyle-map-wrap { position: relative; height: 480px; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.14); }
+  #lifestyle-map { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+  /* ── 15. CTA ── */
+  #community-cta {
+    position: relative;
+    padding: 120px var(--pad-x, 56px);
+    text-align: center;
+    overflow: hidden;
+  }
+  #community-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('/images/hero-background/hero-2.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(1.05) saturate(0.9);
+    z-index: 0;
+  }
+  #community-cta::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(245, 245, 245, 0.88);
+    z-index: 1;
+  }
+  #community-cta .cta-inner {
+    position: relative;
+    z-index: 2;
+  }
+  .cta-inner { max-width: 680px; margin: 0 auto; }
+  .cta-title { font-family: var(--cd-serif); font-size: clamp(40px, 5vw, 72px); font-weight: 400; color: var(--cd-cream); letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 24px; }
+  .cta-title em { font-style: italic; color: var(--cd-gold); }
+  .cta-btns { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
+
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .overview-inner { grid-template-columns: 1fr; }
+    .quick-facts { position: static; }
+    .hoa-inner { grid-template-columns: 1fr; }
+    .lifestyle-inner { grid-template-columns: 1fr; }
+    .parks-grid { grid-template-columns: 1fr; }
+    .neighborhoods-grid { grid-template-columns: repeat(2, 1fr); }
+    .highlights-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 768px) {
+    .demo-grid { grid-template-columns: repeat(2, 1fr); }
+    .city-stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .highlights-grid { grid-template-columns: 1fr; }
+    .neighborhoods-grid { grid-template-columns: 1fr 1fr; }
+    .location-drive-cards { grid-template-columns: 1fr 1fr; }
+    .hero-stats { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+    .hero-stat { border-right: 1px solid rgba(255,255,255,0.18) !important; padding: 0 20px; }
+    .hero-stat:last-child { border-right: none !important; }
+  }
+  @media (max-width: 480px) {
+    .location-drive-cards { grid-template-columns: 1fr; }
+  }
+  </style>
+</head>
+
+<body class="comm-detail">
+
+<!-- NAV -->
+<header class="site-header" id="site-header">
+  <nav class="nav-links" aria-label="Primary navigation left">
+    <a href="/">Buy</a>
+    <a href="/#about">Sell</a>
+    <div class="nav-dropdown">
+      <a href="/communities" class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+        Communities
+        <svg class="nav-dropdown-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3.5 5 6.5 8 3.5"/></svg>
+      </a>
+      <div class="nav-dropdown-panel" role="region" aria-label="Communities menu">
+        <span class="nav-dropdown-label">San Diego Communities</span>
+        <div class="nav-dropdown-grid">
+          <a class="nav-dropdown-item" href="downtown-san-diego-real-estate.html"><span class="nav-dropdown-dot"></span>Downtown San Diego</a>
+          <a class="nav-dropdown-item" href="mission-hills-real-estate.html"><span class="nav-dropdown-dot"></span>Mission Hills</a>
+          <a class="nav-dropdown-item" href="point-loma-real-estate.html"><span class="nav-dropdown-dot"></span>Point Loma</a>
+          <a class="nav-dropdown-item" href="coronado-real-estate.html"><span class="nav-dropdown-dot"></span>Coronado</a>
+          <a class="nav-dropdown-item" href="la-jolla-real-estate.html"><span class="nav-dropdown-dot"></span>La Jolla</a>
+          <a class="nav-dropdown-item" href="del-mar-real-estate.html"><span class="nav-dropdown-dot"></span>Del Mar</a>
+          <a class="nav-dropdown-item" href="carmel-valley-real-estate.html"><span class="nav-dropdown-dot"></span>Carmel Valley</a>
+          <a class="nav-dropdown-item" href="rancho-santa-fe-real-estate.html"><span class="nav-dropdown-dot"></span>Rancho Santa Fe</a>
+          <a class="nav-dropdown-item is-active" href="pacific-mission-beach-real-estate.html"><span class="nav-dropdown-dot"></span>Pacific &amp; Mission Beach</a>
+          <a class="nav-dropdown-item" href="mission-valley-real-estate.html"><span class="nav-dropdown-dot"></span>Mission Valley</a>
+        </div>
+        <div class="nav-dropdown-divider"></div>
+        <div class="nav-dropdown-all">
+          <a href="/communities">View All Communities
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 6h8"/><path d="M6 2.5 9.5 6 6 9.5"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <a href="/#testimonials">Testimonials</a>
+  </nav>
+
+  <a href="/" class="nav-logo" aria-label="Palisade Realty home">
+    <img src="/images/logo.png" alt="Palisade Realty">
+  </a>
+
+  <nav class="nav-links nav-links--right" aria-label="Primary navigation right">
+    <a href="/#about">Financing</a>
+    <a href="/#team-carousel">Team</a>
+    <a href="/#blog">Resources</a>
+    <a href="/contact">Contact</a>
+  </nav>
+
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Open navigation menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<div class="nav-mobile-drawer" id="nav-mobile-drawer" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+  <a href="/">Buy</a>
+  <a href="/#about">Sell</a>
+  <a href="/communities" class="mobile-communities-toggle" id="mobile-communities-toggle" aria-expanded="false">Communities ▾</a>
+  <div class="mobile-communities-list" id="mobile-communities-list">
+    <a href="downtown-san-diego-real-estate.html">Downtown San Diego</a>
+    <a href="mission-hills-real-estate.html">Mission Hills</a>
+    <a href="point-loma-real-estate.html">Point Loma</a>
+    <a href="coronado-real-estate.html">Coronado</a>
+    <a href="la-jolla-real-estate.html">La Jolla</a>
+    <a href="del-mar-real-estate.html">Del Mar</a>
+    <a href="carmel-valley-real-estate.html">Carmel Valley</a>
+    <a href="rancho-santa-fe-real-estate.html">Rancho Santa Fe</a>
+    <a href="pacific-mission-beach-real-estate.html">Pacific &amp; Mission Beach</a>
+    <a href="mission-valley-real-estate.html">Mission Valley</a>
+  </div>
+  <a href="/#testimonials">Testimonials</a>
+  <a href="/#about">Financing</a>
+  <a href="/#team-carousel">Team</a>
+  <a href="/#blog">Resources</a>
+  <a href="/contact">Contact</a>
+</div>
+
+<main>
+
+<!-- 1. HERO -->
+<section id="community-hero" aria-label="Pacific and Mission Beach hero">
+  <div class="hero-bg-img">
+    <img src="/assets/images/community-pacific-mission-beach.jpg" alt="Pacific and Mission Beach boardwalk">
+  </div>
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="hero-content">
+    <nav class="hero-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span aria-hidden="true">·</span>
+      <a href="/communities">Communities</a>
+      <span aria-hidden="true">·</span>
+      <span aria-current="page">Pacific &amp; Mission Beach</span>
+    </nav>
+    <p class="hero-eyebrow">San Diego County · California</p>
+    <h1 class="hero-title">Pacific &amp;<br><em>Mission Beach</em></h1>
+    <div class="hero-stats" role="list">
+      <div class="hero-stat" role="listitem">
+        <span class="hero-stat-value">120+</span>
+        <span class="hero-stat-label">Active Listings</span>
+      </div>
+      <div class="hero-stat" role="listitem">
+        <span class="hero-stat-value">$1.2M</span>
+        <span class="hero-stat-label">Median Price</span>
+      </div>
+      <div class="hero-stat" role="listitem">
+        <span class="hero-stat-value">3</span>
+        <span class="hero-stat-label">Property Types</span>
+      </div>
+      <div class="hero-stat" role="listitem">
+        <span class="hero-stat-value">Daily</span>
+        <span class="hero-stat-label">Updated</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. LOCATION -->
+<div class="location-wrap" id="location-context">
+  <div class="location-head reveal">
+    <span class="section-eyebrow">Location</span>
+    <h2 class="section-title">Where is <em>Pacific &amp; Mission Beach?</em></h2>
+    <p style="font-family:var(--cd-sans);font-size:15px;line-height:1.72;color:var(--cd-muted);max-width:560px;margin:0 auto;">
+      Nestled between the Pacific Ocean and Mission Bay on San Diego's central coast, Pacific Beach and Mission Beach form a 4-mile stretch of some of California's most coveted shoreline. The iconic boardwalk, world-class surf, and Mission Bay's 4,600-acre aquatic playground sit just 15 minutes from downtown San Diego and 10 minutes from the airport.
+    </p>
+  </div>
+
+  <div class="location-map-wrap reveal reveal-delay-1">
+    <div id="location-map" role="img" aria-label="San Diego County orientation map showing Pacific and Mission Beach location"></div>
+    <div class="location-legend" aria-hidden="true">
+      <div class="location-legend-row">
+        <span style="width:12px;height:12px;background:#eeca00;border-radius:2px;flex-shrink:0;"></span>
+        Pacific &amp; Mission Beach
+      </div>
+      <div class="location-legend-row">
+        <span class="location-legend-swatch" style="background:#C8C8C8;"></span>
+        Other Communities
+      </div>
+      <div class="location-legend-row">
+        <span class="location-legend-swatch" style="background:#7dbfff;"></span>
+        Mission Blvd
+      </div>
+      <div class="location-legend-row">
+        <span class="location-legend-swatch" style="background:#58172a;"></span>
+        I-8 Freeway
+      </div>
+    </div>
+  </div>
+
+  <div class="location-drive-cards reveal reveal-delay-2">
+    <div class="location-drive-card">
+      <span class="location-card-time">~15 min</span>
+      <span class="location-card-dest">to Downtown SD</span>
+      <span class="location-card-via">via I-8</span>
+    </div>
+    <div class="location-drive-card">
+      <span class="location-card-time">~10 min</span>
+      <span class="location-card-dest">to SAN Airport</span>
+      <span class="location-card-via">via I-5/I-8</span>
+    </div>
+    <div class="location-drive-card">
+      <span class="location-card-time">~20 min</span>
+      <span class="location-card-dest">to La Jolla</span>
+      <span class="location-card-via">via I-5 North</span>
+    </div>
+    <div class="location-drive-card">
+      <span class="location-card-time">~15 min</span>
+      <span class="location-card-dest">to Point Loma</span>
+      <span class="location-card-via">via I-8/I-5</span>
+    </div>
+  </div>
+</div>
+
+<!-- 3. OVERVIEW + QUICK FACTS -->
+<section id="overview" class="comm-section comm-section--dark">
+  <div class="overview-inner">
+    <div class="overview-text reveal">
+      <span class="section-eyebrow">The Boardwalk Communities</span>
+      <h2 class="section-title">Ocean Energy,<br><em>Bay Serenity</em></h2>
+      <div class="overview-divider"></div>
+      <p class="overview-body">
+        Pacific Beach and Mission Beach are San Diego's quintessential beach communities — a sun-drenched 4-mile corridor where the Pacific Ocean meets Mission Bay, and the famous boardwalk pulses with skaters, cyclists, surfers, and beachgoers year-round. These are places where California's iconic beach lifestyle isn't a postcard — it's your Tuesday morning commute.
+      </p>
+      <p class="overview-body">
+        Pacific Beach (PB) offers a vibrant mix of single-family homes, condos, and ocean-view residences spread across neighborhoods ranging from the high-energy Garnet Avenue corridor to the quieter, family-oriented Crown Point and Sail Bay enclaves along Mission Bay. Mission Beach is a narrow barrier island flanked by the ocean to the west and Mission Bay to the east — offering some of San Diego's most dramatic waterfront living with Belmont Park's historic Giant Dipper roller coaster as its landmark.
+      </p>
+      <p class="overview-body">
+        Hedda Parashos and the Palisade Realty team know the nuances of every street, view corridor, and building complex across this competitive coastal market. From beachfront condos steps from the sand to bay-view homes on Crown Point, we'll guide you to the right property at the right price.
+      </p>
+      <div class="overview-cta">
+        <a href="tel:+16197940218" class="btn-primary">Connect With Hedda</a>
+        <a href="#listings" class="btn-text">View Listings ↓</a>
+      </div>
+    </div>
+
+    <div class="quick-facts reveal reveal-delay-2" aria-label="Pacific and Mission Beach at a glance">
+      <p class="quick-facts-heading">At a Glance</p>
+      <div class="quick-fact"><span class="fact-label">City Type</span><span class="fact-value">Coastal Beach Town</span></div>
+      <div class="quick-fact"><span class="fact-label">County</span><span class="fact-value">San Diego County</span></div>
+      <div class="quick-fact"><span class="fact-label">Population</span><span class="fact-value">~50,000</span></div>
+      <div class="quick-fact"><span class="fact-label">Median Home Price</span><span class="fact-value">$1,200,000</span></div>
+      <div class="quick-fact"><span class="fact-label">Architecture</span><span class="fact-value">Condo · Cottage · SFR</span></div>
+      <div class="quick-fact"><span class="fact-label">Walk Score</span><span class="fact-value">85 / Very Walkable</span></div>
+      <div class="quick-fact"><span class="fact-label">ZIP Code</span><span class="fact-value">92109</span></div>
+      <div class="quick-fact"><span class="fact-label">Drive to LA</span><span class="fact-value">~2 hours</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. DEMOGRAPHICS -->
+<div id="demographics" class="demographics-wrap">
+  <div class="demo-head reveal">
+    <span class="section-eyebrow">Community Demographics</span>
+    <p class="demo-source">Source: U.S. Census Bureau, ACS 5-Year Estimates</p>
+  </div>
+  <div class="demo-grid">
+    <div class="demo-stat reveal">
+      <span class="demo-value">50,000</span>
+      <span class="demo-label">Population</span>
+    </div>
+    <div class="demo-stat reveal reveal-delay-1">
+      <span class="demo-value">31.2</span>
+      <span class="demo-label">Median Age</span>
+    </div>
+    <div class="demo-stat reveal reveal-delay-1">
+      <span class="demo-value">$82,400</span>
+      <span class="demo-label">Avg Household Income</span>
+    </div>
+    <div class="demo-stat reveal reveal-delay-2">
+      <span class="demo-value">22,000</span>
+      <span class="demo-label">Total Households</span>
+    </div>
+    <div class="demo-stat reveal reveal-delay-2">
+      <span class="demo-value">35%</span>
+      <span class="demo-label">Ownership Rate</span>
+    </div>
+  </div>
+</div>
+
+<!-- 5. HIGHLIGHTS -->
+<section id="highlights" class="comm-section comm-section--dark">
+  <div class="highlights-head">
+    <span class="section-eyebrow reveal">What Makes It Special</span>
+    <h2 class="section-title reveal reveal-delay-1">Living in <em>Pacific &amp; Mission Beach</em></h2>
+  </div>
+  <div class="highlights-grid">
+
+    <div class="highlight-card reveal">
+      <svg class="highlight-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 32c4-8 8-12 16-12s12 4 16 12"/><path d="M6 24c4-5 8-8 16-8s12 3 16 8"/><path d="M10 18c2-6 6-10 12-10s10 4 12 10"/></svg>
+      <h3 class="highlight-title">Pacific Beach Boardwalk</h3>
+      <p class="highlight-body">The 3.2-mile oceanfront boardwalk is the social heart of PB — a continuous promenade stretching from South Mission Beach to Crystal Pier, alive with cyclists, skaters, volleyballers, and sunset seekers every day of the year. It is as close to California's beach ideal as anywhere on earth.</p>
+    </div>
+
+    <div class="highlight-card reveal reveal-delay-1">
+      <svg class="highlight-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 36V20l14-12 14 12v16"/><path d="M16 36v-8h12v8"/><circle cx="22" cy="16" r="3"/></svg>
+      <h3 class="highlight-title">Mission Bay Park</h3>
+      <p class="highlight-body">At 4,600 acres, Mission Bay is the largest aquatic park in the United States — a stunning engineered lagoon offering sailing, kayaking, paddleboarding, windsurfing, and miles of shoreline parks. Sail Bay, Crown Point, and Fiesta Island anchor its distinct coves and attract water lovers from across Southern California.</p>
+    </div>
+
+    <div class="highlight-card reveal reveal-delay-2">
+      <svg class="highlight-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="22" cy="20" r="10"/><path d="M22 10V6"/><path d="M22 34v4"/><path d="M12 20H8"/><path d="M36 20h-4"/><path d="M14.9 12.9l-2.8-2.8"/><path d="M31.9 29.9l-2.8-2.8"/><path d="M14.9 27.1l-2.8 2.8"/><path d="M31.9 10.1l-2.8 2.8"/></svg>
+      <h3 class="highlight-title">Belmont Park &amp; Historic Pier</h3>
+      <p class="highlight-body">Belmont Park's landmark Giant Dipper roller coaster has thrilled visitors since 1925, making it one of California's oldest surviving wooden coasters. Crystal Pier — built in 1927 — offers 66 unique over-water cottage rentals, making it one of the most distinctive lodging experiences on the West Coast.</p>
+    </div>
+
+    <div class="highlight-card reveal">
+      <svg class="highlight-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 6c-8 0-14 6-14 14 0 5 2.5 9.5 6.5 12L22 38l7.5-6C33.5 29.5 36 25 36 20c0-8-6-14-14-14z"/><circle cx="22" cy="20" r="4"/></svg>
+      <h3 class="highlight-title">World-Class Surf &amp; Beach Access</h3>
+      <p class="highlight-body">Pacific Beach and Mission Beach offer consistent, beginner-to-intermediate surf breaks that have shaped generations of San Diego surfers. Law Street, Tourmaline Surfing Park, and the breaks at the south end of PB draw a dedicated local surf community while remaining accessible to newcomers learning to paddle out for the first time.</p>
+    </div>
+
+    <div class="highlight-card reveal reveal-delay-1">
+      <svg class="highlight-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 32h28"/><path d="M12 32V18l10-8 10 8v14"/><path d="M18 32v-7h8v7"/></svg>
+      <h3 class="highlight-title">Garnet Avenue Dining &amp; Nightlife</h3>
+      <p class="highlight-body">Garnet Avenue is PB's main artery — a lively stretch of chef-driven restaurants, craft beer bars, surf shops, boutiques, and coffee roasters that gives the neighborhood an urban energy. From morning burritos to late-night cocktail bars, Garnet delivers a walkable, social lifestyle unlike any other coastal neighborhood in San Diego.</p>
+    </div>
+
+    <div class="highlight-card reveal reveal-delay-2">
+      <svg class="highlight-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 8c-8 0-14 6-14 14v12h28V22c0-8-6-14-14-14z"/><path d="M14 22h16"/><path d="M18 34v4"/><path d="M26 34v4"/></svg>
+      <h3 class="highlight-title">Investment &amp; Vacation Rental Appeal</h3>
+      <p class="highlight-body">Pacific Beach and Mission Beach rank among San Diego County's strongest short-term rental markets, attracting year-round visitors drawn by the boardwalk, weather, and proximity to SeaWorld and the airport. For buyers seeking income-producing property or a second home with rental potential, few zip codes in California outperform 92109.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 6. NEIGHBORHOODS -->
+<div id="neighborhoods" class="neighborhoods-wrap">
+  <div class="neighborhoods-head">
+    <span class="section-eyebrow reveal">Explore the Area</span>
+    <h2 class="section-title reveal reveal-delay-1">Neighborhoods &amp; <em>Enclaves</em></h2>
+  </div>
+  <div class="neighborhoods-grid">
+    <div class="neighborhood-card reveal">
+      <p class="neighborhood-name">Pacific Beach (North)</p>
+      <p class="neighborhood-price">$900K – $2.5M+</p>
+      <p class="neighborhood-tags">Ocean Views · Active · Walkable</p>
+    </div>
+    <div class="neighborhood-card reveal reveal-delay-1">
+      <p class="neighborhood-name">Pacific Beach (South)</p>
+      <p class="neighborhood-price">$700K – $1.8M</p>
+      <p class="neighborhood-tags">Boardwalk Adjacent · Condo · Lively</p>
+    </div>
+    <div class="neighborhood-card reveal reveal-delay-2">
+      <p class="neighborhood-name">Mission Beach</p>
+      <p class="neighborhood-price">$1M – $3.5M+</p>
+      <p class="neighborhood-tags">Beachfront · Vacation · Boardwalk</p>
+    </div>
+    <div class="neighborhood-card reveal reveal-delay-3">
+      <p class="neighborhood-name">Crown Point</p>
+      <p class="neighborhood-price">$900K – $2M</p>
+      <p class="neighborhood-tags">Mission Bay · Quiet · Family</p>
+    </div>
+    <div class="neighborhood-card reveal">
+      <p class="neighborhood-name">Sail Bay</p>
+      <p class="neighborhood-price">$1.2M – $3M+</p>
+      <p class="neighborhood-tags">Bayfront · Boating · Serene</p>
+    </div>
+    <div class="neighborhood-card reveal reveal-delay-1">
+      <p class="neighborhood-name">Law Street Area</p>
+      <p class="neighborhood-price">$800K – $1.8M</p>
+      <p class="neighborhood-tags">Surfer · Community · Authentic</p>
+    </div>
+    <div class="neighborhood-card reveal reveal-delay-2">
+      <p class="neighborhood-name">Diamond Street</p>
+      <p class="neighborhood-price">$1M – $2.5M</p>
+      <p class="neighborhood-tags">Walkable · Central · Popular</p>
+    </div>
+    <div class="neighborhood-card reveal reveal-delay-3">
+      <p class="neighborhood-name">Mission Bay Shores</p>
+      <p class="neighborhood-price">$700K – $1.5M</p>
+      <p class="neighborhood-tags">Bay Access · Condos · Recreational</p>
+    </div>
+  </div>
+</div>
+
+<!-- 7. CITY STATS -->
+<div id="city-stats" class="city-stats-wrap">
+  <div class="city-stats-grid">
+    <div class="city-stat reveal">
+      <span class="city-stat-value">85</span>
+      <span class="city-stat-label">Walk Score</span>
+    </div>
+    <div class="city-stat reveal reveal-delay-1">
+      <span class="city-stat-value">266</span>
+      <span class="city-stat-label">Sunny Days / Year</span>
+    </div>
+    <div class="city-stat reveal reveal-delay-1">
+      <span class="city-stat-value">3.2 mi</span>
+      <span class="city-stat-label">PB Boardwalk Length</span>
+    </div>
+    <div class="city-stat reveal reveal-delay-2">
+      <span class="city-stat-value">4,600</span>
+      <span class="city-stat-label">Mission Bay Acres</span>
+    </div>
+    <div class="city-stat reveal reveal-delay-2">
+      <span class="city-stat-value">1925</span>
+      <span class="city-stat-label">Belmont Park Est.</span>
+    </div>
+  </div>
+</div>
+
+<!-- 8. LISTINGS -->
+<div id="listings" class="listings-wrap">
+  <div class="listings-header reveal">
+    <div>
+      <span class="section-eyebrow">Live MLS Data</span>
+      <h2 class="section-title" style="margin-bottom:0;">Pacific &amp; Mission Beach Homes For Sale</h2>
+    </div>
+    <a class="view-all-link"
+       href="https://search.palisaderealty.com/search?s[locations][0][city]=San+Diego&s[locations][0][state]=CA&s[locations][0][neighborhood]=Pacific+Beach"
+       target="_blank" rel="noopener noreferrer">
+      View All Listings →
+    </a>
+  </div>
+  <div class="reveal">
+    <div class="YLOPO_resultsWidget"
+         data-search='{"locations":[{"city":"San Diego","state":"CA","neighborhood":"Pacific Beach"},{"city":"San Diego","state":"CA","neighborhood":"Mission Beach"}],"propertyTypes":["house","condo","townhouse","multi_family"],"status":"active","limit":12}'></div>
+  </div>
+  <div class="listings-cta-row reveal">
+    <a class="btn-view-all"
+       href="https://search.palisaderealty.com/search?s[locations][0][city]=San+Diego&s[locations][0][state]=CA&s[locations][0][neighborhood]=Pacific+Beach"
+       target="_blank" rel="noopener noreferrer">
+      View All Pacific &amp; Mission Beach Properties →
+    </a>
+  </div>
+</div>
+
+<!-- 9. HOA FEES -->
+<section id="hoa-fees" class="comm-section comm-section--dark">
+  <span class="section-eyebrow reveal">What to Expect</span>
+  <h2 class="section-title reveal reveal-delay-1">HOA Fees in <em>Pacific &amp; Mission Beach</em></h2>
+  <div class="hoa-inner">
+    <div class="reveal reveal-delay-1">
+      <table class="hoa-table" aria-label="HOA fee ranges by community type">
+        <thead>
+          <tr><th>Community Type</th><th>Monthly HOA</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Single-family home (most areas)</td><td>$0</td></tr>
+          <tr><td>Planned community / townhome</td><td>$200 – $500</td></tr>
+          <tr><td>Condo complex (standard)</td><td>$350 – $700</td></tr>
+          <tr><td>Beachfront / boardwalk condo</td><td>$500 – $1,100+</td></tr>
+          <tr><td>Mission Bay / bayfront condo</td><td>$400 – $900+</td></tr>
+        </tbody>
+      </table>
+      <p class="hoa-note">HOA fees vary by development age, amenities, and reserve fund health. Beach and bayfront complexes often carry higher fees due to exterior maintenance demands from salt air and coastal exposure. Always review HOA financials and CC&amp;Rs with your agent before making an offer.</p>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <p class="hoa-aside-heading">Have Questions?</p>
+      <p class="hoa-aside-note">Hedda can walk you through HOA documents, special assessments, reserve fund status, and short-term rental rules — critical details in a coastal market where rental regulations directly affect investment value.</p>
+      <p class="hoa-aside-heading" style="margin-top:24px;">What HOAs Typically Cover</p>
+      <ul class="hoa-covers-list">
+        <li>Common area landscaping and maintenance</li>
+        <li>Exterior building upkeep and repairs</li>
+        <li>Community pool, spa, and amenity access</li>
+        <li>Building insurance (structure — not interior)</li>
+        <li>Trash collection and recycling</li>
+        <li>Reserve fund for major capital repairs</li>
+        <li>Property management and administration</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 10. PARKS -->
+<div id="parks-rec" class="parks-wrap">
+  <div class="parks-head">
+    <span class="section-eyebrow reveal">Outdoor Living</span>
+    <h2 class="section-title reveal reveal-delay-1">Parks &amp; Recreation<br>in <em>Pacific &amp; Mission Beach</em></h2>
+  </div>
+  <div class="parks-grid">
+    <div class="park-card reveal">
+      <p class="park-name">Mission Bay Park</p>
+      <p class="park-address">2688 E Mission Bay Dr, San Diego, CA 92109</p>
+      <span class="park-size">~4,600 Acres</span>
+      <ul class="park-amenities">
+        <li>Largest aquatic park in the United States</li>
+        <li>Sailing, kayaking, paddleboarding, and windsurfing</li>
+        <li>Miles of paved biking and walking paths</li>
+        <li>Fiesta Island off-leash dog area and events venue</li>
+        <li>Over-the-Water Park at Crown Point with picnic areas</li>
+      </ul>
+    </div>
+    <div class="park-card reveal reveal-delay-1">
+      <p class="park-name">Pacific Beach Boardwalk &amp; Promenade</p>
+      <p class="park-address">Ocean Blvd, Pacific Beach, San Diego, CA 92109</p>
+      <span class="park-size">3.2-Mile Promenade</span>
+      <ul class="park-amenities">
+        <li>Continuous oceanfront path from South Mission to Crystal Pier</li>
+        <li>Designated bike and skate lane with public restrooms</li>
+        <li>Volleyball courts along South Mission Beach</li>
+        <li>Direct beach access with lifeguard towers</li>
+        <li>World-class people-watching and sunset views</li>
+      </ul>
+    </div>
+    <div class="park-card reveal">
+      <p class="park-name">Kate Sessions Memorial Park</p>
+      <p class="park-address">5115 Soledad Rd, San Diego, CA 92109</p>
+      <span class="park-size">~80 Acres</span>
+      <ul class="park-amenities">
+        <li>Panoramic views of Mission Bay and downtown San Diego</li>
+        <li>Named for San Diego's legendary horticulturalist</li>
+        <li>Grassy hillside perfect for kite flying and picnics</li>
+        <li>Playground, tennis courts, and open recreation areas</li>
+        <li>Popular sunrise and sunset viewpoint for residents</li>
+      </ul>
+    </div>
+    <div class="park-card reveal reveal-delay-1">
+      <p class="park-name">Crown Point Shores Park</p>
+      <p class="park-address">Crown Point Dr, San Diego, CA 92109</p>
+      <span class="park-size">~27 Acres</span>
+      <ul class="park-amenities">
+        <li>Serene bayfront greenbelt with mature trees</li>
+        <li>Kayak and paddleboard launch areas</li>
+        <li>Multi-use picnic pavilions and BBQ facilities</li>
+        <li>Off-leash dog beach area on the eastern cove</li>
+        <li>Stunning views across Mission Bay at golden hour</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 11. SCHOOLS -->
+<section id="schools" class="comm-section comm-section--dark">
+  <div class="schools-head">
+    <span class="section-eyebrow reveal">Education</span>
+    <h2 class="section-title reveal reveal-delay-1">Schools Serving <em>Pacific &amp; Mission Beach</em></h2>
+  </div>
+  <p class="schools-disclaimer-top reveal">
+    Pacific Beach and Mission Beach are served by the San Diego Unified School District (SDUSD). School assignments are address-specific — contact the district to confirm enrollment boundaries before purchasing.
+  </p>
+  <div class="reveal reveal-delay-1">
+    <div class="schools-tabs" role="tablist">
+      <button class="schools-tab active" role="tab" aria-selected="true" onclick="switchTab(this,'panel-public')">Public</button>
+      <button class="schools-tab" role="tab" aria-selected="false" onclick="switchTab(this,'panel-private')">Private &amp; Charter</button>
+    </div>
+    <div id="panel-public" class="schools-panel active" role="tabpanel">
+      <table class="schools-table" aria-label="Public schools serving Pacific and Mission Beach">
+        <thead><tr><th>School Name</th><th>Grades</th><th>District</th></tr></thead>
+        <tbody>
+          <tr><td>Mission Bay Senior High School</td><td>9 – 12</td><td>SDUSD</td></tr>
+          <tr><td>Pacific Beach Middle School</td><td>6 – 8</td><td>SDUSD</td></tr>
+          <tr><td>Pacific Beach Elementary School</td><td>K – 5</td><td>SDUSD</td></tr>
+          <tr><td>Crown Point Elementary School</td><td>K – 5</td><td>SDUSD</td></tr>
+          <tr><td>Kate Sessions Elementary School</td><td>K – 5</td><td>SDUSD</td></tr>
+          <tr><td>De Anza Elementary School</td><td>K – 5</td><td>SDUSD</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div id="panel-private" class="schools-panel" role="tabpanel">
+      <table class="schools-table" aria-label="Private and charter schools near Pacific and Mission Beach">
+        <thead><tr><th>School Name</th><th>Grades</th><th>Type</th></tr></thead>
+        <tbody>
+          <tr><td>The Bishop's School</td><td>6 – 12</td><td>Independent Private</td></tr>
+          <tr><td>Pacific Beach Christian School</td><td>PK – 8</td><td>Christian Private</td></tr>
+          <tr><td>St. Brigid Catholic School</td><td>K – 8</td><td>Catholic</td></tr>
+          <tr><td>San Diego Jewish Academy</td><td>PK – 12</td><td>Jewish Day School</td></tr>
+          <tr><td>University of San Diego</td><td>College</td><td>Private University</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="schools-disclaimer">
+      School assignments are address-specific and subject to change. Verify enrollment zoning directly with San Diego Unified School District (619-725-8000) or at sandiegounified.org. This data is for informational purposes only and should not be relied upon for enrollment decisions.
+    </p>
+  </div>
+</section>
+
+<!-- 12. NEARBY COMMUNITIES -->
+<div id="nearby-communities" class="nearby-wrap">
+  <div class="nearby-head">
+    <span class="section-eyebrow reveal">Comparisons</span>
+    <h2 class="section-title reveal reveal-delay-1">Nearby Communities<br>to <em>Consider</em></h2>
+  </div>
+  <p class="nearby-desc reveal">How Pacific &amp; Mission Beach compares to neighboring areas — each with its own character, price point, and lifestyle.</p>
+  <div class="reveal">
+    <table class="nearby-table" aria-label="Nearby San Diego communities comparison">
+      <thead>
+        <tr><th>Community</th><th>Starting Price</th><th>Why Consider</th><th></th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="nearby-name-cell"><a href="point-loma-real-estate.html">Point Loma</a></td>
+          <td class="nearby-price-cell">From $800K</td>
+          <td>Sunset Cliffs, Liberty Station, and harbor views — a more established, quieter coastal alternative with strong community character just minutes south via I-8.</td>
+          <td class="nearby-arrow-cell">→</td>
+        </tr>
+        <tr>
+          <td class="nearby-name-cell"><a href="la-jolla-real-estate.html">La Jolla</a></td>
+          <td class="nearby-price-cell">From $1.2M</td>
+          <td>San Diego's luxury coastal address — cliff-top estates, world-class dining, UCSD proximity, and Torrey Pines just 20 minutes north on I-5.</td>
+          <td class="nearby-arrow-cell">→</td>
+        </tr>
+        <tr>
+          <td class="nearby-name-cell"><a href="mission-valley-real-estate.html">Mission Valley</a></td>
+          <td class="nearby-price-cell">From $550K</td>
+          <td>Central San Diego with easy freeway access, abundant shopping, and strong condo value — ideal for buyers who want proximity to PB without the premium price point.</td>
+          <td class="nearby-arrow-cell">→</td>
+        </tr>
+        <tr>
+          <td class="nearby-name-cell"><a href="downtown-san-diego-real-estate.html">Downtown San Diego</a></td>
+          <td class="nearby-price-cell">From $450K</td>
+          <td>Urban loft and condo living with Walk Score 97 — a 15-minute drive from the beach, with world-class dining, the Gaslamp Quarter, and bayfront access.</td>
+          <td class="nearby-arrow-cell">→</td>
+        </tr>
+        <tr>
+          <td class="nearby-name-cell"><a href="coronado-real-estate.html">Coronado</a></td>
+          <td class="nearby-price-cell">From $1.4M</td>
+          <td>Island resort living with one of California's finest beaches, the iconic Hotel del Coronado, and an intimate small-town feel across the bay from downtown.</td>
+          <td class="nearby-arrow-cell">→</td>
+        </tr>
+        <tr>
+          <td class="nearby-name-cell"><a href="mission-hills-real-estate.html">Mission Hills</a></td>
+          <td class="nearby-price-cell">From $900K</td>
+          <td>Historic Craftsman bungalows and tree-lined streets — the quieter, architecturally rich alternative for buyers who want coastal proximity without the beach energy.</td>
+          <td class="nearby-arrow-cell">→</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 13. FAQ -->
+<section id="faq" class="comm-section comm-section--dark">
+  <div class="faq-head">
+    <span class="section-eyebrow reveal">Common Questions</span>
+    <h2 class="section-title reveal reveal-delay-1">Frequently Asked Questions<br>About <em>Pacific &amp; Mission Beach</em></h2>
+  </div>
+  <p class="faq-sub reveal">The questions buyers ask most when exploring Pacific &amp; Mission Beach real estate.</p>
+  <div class="faq-list reveal reveal-delay-1">
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">What is the median home price in Pacific &amp; Mission Beach?</span>
+        <div class="faq-toggle"><span class="faq-toggle-icon">+</span></div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        The median home price in Pacific &amp; Mission Beach is approximately $1.2 million as of 2026. Entry-level condos in South PB and Mission Beach Shores start around $700,000–$900,000. Single-family homes in Crown Point and the Law Street area range from $1M to $2M. Beachfront and bayfront properties — especially on Mission Beach's narrow strip or along Sail Bay — can easily reach $2M–$4M+. Contact Hedda Parashos for current market conditions by specific neighborhood.
+      </div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">What is the difference between Pacific Beach and Mission Beach?</span>
+        <div class="faq-toggle"><span class="faq-toggle-icon">+</span></div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        Pacific Beach (PB) is the larger northern community — a diverse neighborhood with single-family homes, condos, and apartments spread across a wider area that includes Crown Point along Mission Bay and the Garnet Avenue commercial corridor. Mission Beach is a narrow barrier strip between the ocean and Mission Bay south of PB — denser, more vacation-oriented, and home to Belmont Park. Mission Beach properties are often on narrower lots with higher price-per-square-foot due to their unique location between two bodies of water.
+      </div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">Are short-term rentals (Airbnb/VRBO) allowed in this area?</span>
+        <div class="faq-toggle"><span class="faq-toggle-icon">+</span></div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        San Diego has a regulated short-term rental (STR) program. As of 2024, the city issues licenses for whole-home STRs on a mission-tiered basis — with Mission Beach receiving a dedicated allocation due to its historic vacation rental character. Licensing is limited and competitive, and HOAs may impose additional restrictions. Buyers interested in rental income should work with Hedda to verify a specific property's STR eligibility and review the current city licensing waitlist status before purchasing.
+      </div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">Is Pacific Beach a good place for families?</span>
+        <div class="faq-toggle"><span class="faq-toggle-icon">+</span></div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        Pacific Beach is increasingly popular with families — particularly the Crown Point, Sail Bay, and North PB enclaves, which offer quieter streets, access to Mission Bay parks, and a more residential character. Crown Point Elementary and Kate Sessions Elementary are both well-regarded. The proximity to Kate Sessions Memorial Park, Mission Bay's recreational amenities, and excellent beach access make it a genuinely appealing environment for families. South PB and Mission Beach are livelier and more suited to young professionals or investor buyers.
+      </div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">What are HOA fees like in Pacific &amp; Mission Beach?</span>
+        <div class="faq-toggle"><span class="faq-toggle-icon">+</span></div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        Single-family homes in Pacific Beach typically carry no HOA. Condo complexes range from $350–$700/month for standard complexes and $500–$1,100+/month for beachfront or bayfront properties with amenities. Mission Beach condos tend to run higher due to the intensive maintenance demands of coastal salt air exposure. Always review the reserve fund health and any pending special assessments — Hedda can help you interpret the HOA financials before you make an offer.
+      </div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">How far is Pacific Beach from downtown San Diego?</span>
+        <div class="faq-toggle"><span class="faq-toggle-icon">+</span></div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        Pacific Beach is approximately 7–9 miles from downtown San Diego — about 15 minutes via I-8, and 10 minutes from San Diego International Airport via the I-5/I-8 interchange. Traffic on I-8 heading eastbound during rush hour can extend commutes, but the overall location is remarkably central for a beach community of this quality. Mission Bay Drive also offers a scenic alternative route to the airport and Point Loma.
+      </div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">What ZIP code covers Pacific Beach and Mission Beach?</span>
+        <div class="faq-toggle"><span class="faq-toggle-icon">+</span></div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        Both Pacific Beach and Mission Beach fall within <strong>ZIP code 92109</strong> — one of San Diego County's most recognized coastal ZIP codes. This single ZIP encompasses the full range of neighborhoods from North Pacific Beach and Crown Point to the Mission Beach boardwalk strip and Sail Bay waterfront. When searching for homes, filtering by 92109 captures the complete area inventory.
+      </div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span class="faq-question-text">What property types are most common in Pacific &amp; Mission Beach?</span>
+        <div class="faq-toggle"><span class="faq-toggle-icon">+</span></div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        The market is a mix of condos and attached units (most common at ~55%), single-family homes (strong supply in North PB, Crown Point, and the Law Street area), and a small number of multi-family income properties. Mission Beach skews heavily toward condos and townhomes given its narrow lot widths. Detached single-family homes in Pacific Beach range from 1920s beach cottages to newer 3-story contemporary builds — and when they come to market with views, they move quickly.
+      </div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 14. LIFESTYLE + MAP -->
+<div id="lifestyle" class="lifestyle-wrap">
+  <div class="lifestyle-inner">
+    <div>
+      <span class="section-eyebrow reveal">The Pacific Beach Lifestyle</span>
+      <h2 class="section-title reveal reveal-delay-1">Sun, Bay, &amp;<br><em>Boardwalk Living</em></h2>
+      <p class="lifestyle-body reveal reveal-delay-1">
+        Life in Pacific and Mission Beach moves to the rhythm of the tides. Mornings start with a sunrise surf session or an oceanfront run along the boardwalk; afternoons belong to Mission Bay's kayaks and paddleboards; evenings wind down at a rooftop bar on Garnet Avenue or with a meal at one of the dozen restaurants walkable from almost any address in the neighborhood.
+      </p>
+      <p class="lifestyle-body reveal reveal-delay-2">
+        This is California beach culture at its most authentic and most accessible — without the pretension of La Jolla or the sprawl of a resort town. The community skews young and active, but Crown Point and Sail Bay are drawing a growing wave of families who want walkability, bay access, and good schools without sacrificing the energy that makes San Diego's coastline world-famous.
+      </p>
+      <ul class="lifestyle-bullets reveal reveal-delay-2">
+        <li>Over-the-Line Tournament — July at Fiesta Island (since 1954)</li>
+        <li>Pacific Beach Block Party &amp; Farmers Market — year-round on Wednesdays</li>
+        <li>Halloween on the Boardwalk — one of San Diego's biggest events</li>
+        <li>Belmont Park Summer Concert Series — Mission Beach</li>
+        <li>Mission Bay Aquatic Center — sailboat &amp; watercraft rentals</li>
+      </ul>
+    </div>
+    <div class="lifestyle-map-wrap reveal reveal-delay-2">
+      <div id="lifestyle-map" role="application" aria-label="Interactive 3D map of Pacific and Mission Beach"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 15. CTA -->
+<section id="community-cta">
+  <div class="cta-inner">
+    <span class="section-eyebrow reveal">Your Guide to Pacific &amp; Mission Beach</span>
+    <h2 class="cta-title reveal reveal-delay-1"><em>Ready to Find Your</em><br>Beach Home?</h2>
+    <p style="font-family:var(--cd-sans);font-size:16px;line-height:1.72;color:var(--cd-muted);margin-bottom:40px;" class="reveal reveal-delay-2">
+      Hedda Parashos has the local expertise, the network, and the negotiating skill to guide you to the right property at the right price — in every Pacific &amp; Mission Beach neighborhood.
+    </p>
+    <div class="cta-btns reveal reveal-delay-2">
+      <a href="tel:+16197940218" class="btn-primary">Call (619) 794-0218</a>
+      <a href="/contact" class="btn-outline">Send a Message</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer" id="footer">
+  <div class="footer-texture" aria-hidden="true"></div>
+  <div class="footer-stripe" aria-hidden="true"></div>
+  <div class="footer-inner">
+    <div class="footer-col-brand">
+      <div class="footer-logo">
+        <img src="/images/logo.png" alt="Palisade Realty">
+      </div>
+      <div class="footer-copy-mls-row">
+        <div>
+          <p class="footer-copy">
+            &copy;Palisade Realty, Inc. 2026<br>
+            All Rights Reserved<br><br>
+            Brokerage CA DRE #01848565<br><br>
+            Hedda Parashos<br>
+            CA DRE #01773167
+          </p>
+        </div>
+        <div class="footer-mls-badge">
+          <img src="/assets/images/move-safe-offsite-stacked.png" alt="Move Safe Certified by HomeLight">
+        </div>
+      </div>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/PalisadeRealty/" target="_blank" rel="noopener noreferrer" aria-label="Palisade Realty on Facebook">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M15 8a7 7 0 1 0-8.094 6.915V10.3H4.947V8h1.959V6.257C6.906 4.32 8.067 3.25 9.832 3.25c.847 0 1.733.151 1.733.151v1.9h-.976c-.962 0-1.261.597-1.261 1.209V8h2.147l-.343 2.3H9.328v4.615A7.003 7.003 0 0 0 15 8z"/></svg>
+        </a>
+        <a href="https://www.pinterest.com/palisaderealty/" target="_blank" rel="noopener noreferrer" aria-label="Palisade Realty on Pinterest">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0a8 8 0 0 0-2.915 15.452c-.07-.633-.134-1.606.027-2.297.146-.625.984-4.172.984-4.172s-.252-.503-.252-1.246c0-1.167.678-2.041 1.52-2.041.717 0 1.065.539 1.065 1.184 0 .721-.46 1.801-.698 2.8-.198.835.42 1.515 1.242 1.515 1.49 0 2.638-1.571 2.638-3.836 0-2.006-1.441-3.408-3.499-3.408-2.382 0-3.78 1.787-3.78 3.634 0 .72.276 1.49.621 1.91a.25.25 0 0 1 .057.239c-.063.264-.204.835-.232.952-.037.154-.124.186-.285.112-1.05-.489-1.707-2.028-1.707-3.264 0-2.653 1.928-5.09 5.559-5.09 2.919 0 5.187 2.081 5.187 4.862 0 2.902-1.83 5.237-4.371 5.237-.854 0-1.658-.444-1.932-.967l-.525 1.958c-.19.733-.705 1.65-1.05 2.208A8.001 8.001 0 0 0 8 16a8 8 0 0 0 0-16z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/palisade_realty/" target="_blank" rel="noopener noreferrer" aria-label="Palisade Realty on Instagram">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <nav class="footer-col-links" aria-label="Quick links">
+      <span class="footer-col-title">Communities</span>
+      <div class="footer-links">
+        <a href="downtown-san-diego-real-estate.html">Downtown San Diego</a>
+        <a href="la-jolla-real-estate.html">La Jolla</a>
+        <a href="coronado-real-estate.html">Coronado</a>
+        <a href="rancho-santa-fe-real-estate.html">Rancho Santa Fe</a>
+        <a href="del-mar-real-estate.html">Del Mar</a>
+        <a href="/communities">View All Communities →</a>
+      </div>
+    </nav>
+
+    <address class="footer-col-contact" style="font-style:normal;">
+      <span class="footer-col-title">Contact</span>
+      <span class="footer-contact-line"><strong>3434 Grove Street</strong></span>
+      <span class="footer-contact-line"><strong>Lemon Grove, CA 91945</strong></span>
+      <a href="tel:+16197940218" class="footer-contact-line">(619) 794-0218</a>
+      <a href="mailto:contactus@palisaderealty.com" class="footer-contact-line footer-contact-line--email">contactus@palisaderealty.com</a>
+      <span class="footer-contact-line">Mon – Fri: 9:00 AM – 5:00 PM</span>
+    </address>
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="https://search.palisaderealty.com/build/js/32e06f9e150f998b6c50.js"></script>
+<script src="https://search.palisaderealty.com/build/js/widgets-1.0.0.js" defer></script>
+<script src="/homepage.js"></script>
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
+
+<script>
+window.SD_COMMUNITY_CONFIG = {
+  city:          "Pacific & Mission Beach",
+  subtitle:      "San Diego County · California",
+  lng:           -117.2534,
+  lat:            32.7906,
+  heroZoom:       13.5,
+  lifestyleZoom:  13,
+
+  boundary: [
+    [-117.24, 32.8], [-117.258, 32.802], [-117.268, 32.79],
+    [-117.262, 32.77], [-117.248, 32.762], [-117.238, 32.772],
+    [-117.236, 32.787], [-117.24, 32.8]
+  ],
+
+  pois: [
+    { name: "Pacific Beach Boardwalk 🛹", desc: "3.2-mile oceanfront boardwalk — the social heart of PB", lng: -117.2574, lat: 32.7992, icon: "🛹" },
+    { name: "Mission Beach Amusement Park 🎡", desc: "Belmont Park — historic Giant Dipper roller coaster since 1925", lng: -117.253, lat: 32.7702, icon: "🎡" },
+    { name: "Crystal Pier 🎣", desc: "Historic 1927 pier with unique pier-top cottages available for rent", lng: -117.2631, lat: 32.7987, icon: "🎣" },
+    { name: "Mission Bay Park 🚣", desc: "4,600-acre aquatic park — the largest of its kind in the USA", lng: -117.228, lat: 32.7676, icon: "🚣" },
+    { name: "Garnet Ave 🍺", desc: "Pacific Beach's main dining and nightlife corridor", lng: -117.2558, lat: 32.8, icon: "🍺" }
+  ]
+};
+</script>
+
+<script src="../community-map.js"></script>
+
+<!-- Location / orientation map -->
+<script>
+(function () {
+  'use strict';
+
+  var TOKEN = 'pk.eyJ1Ijoiam9tLW1hcGJveCIsImEiOiJjbXFxaGJva3AwNDVqMnBxcnlvaW54aWRoIn0.f4TeZyya7vaALl39DaWK5Q';
+
+  var SD_COUNTY = {"type":"Polygon","coordinates":[[[-117.61054,33.33367],[-117.57153,33.3123],[-117.5496,33.29442],[-117.521,33.26887],[-117.50087,33.24215],[-117.46787,33.21249],[-117.43556,33.17751],[-117.37587,33.07522],[-117.33997,33],[-117.32328,32.90306],[-117.33966,32.85917],[-117.34213,32.82622],[-117.33447,32.79908],[-117.32094,32.68985],[-117.30924,32.6564],[-117.27694,32.62348],[-117.25201,32.61487],[-117.23353,32.61669],[-117.22332,32.62125],[-117.21411,32.59478],[-117.20505,32.52952],[-116.10619,32.61848],[-116.10567,32.7265],[-116.10316,32.72651],[-116.10325,33.07467],[-116.08115,33.07486],[-116.08509,33.42607],[-116.19774,33.42893],[-117.03089,33.42689],[-117.03085,33.42996],[-117.24136,33.43189],[-117.24151,33.44874],[-117.37081,33.49056],[-117.36418,33.50482],[-117.50975,33.50515],[-117.50909,33.47031],[-117.53879,33.45518],[-117.55961,33.45102],[-117.5785,33.4537],[-117.61054,33.33367]]]};
+
+  var PMB_BOUNDARY = [
+    [-117.24, 32.8], [-117.258, 32.802], [-117.268, 32.79],
+    [-117.262, 32.77], [-117.248, 32.762], [-117.238, 32.772],
+    [-117.236, 32.787], [-117.24, 32.8]
+  ];
+
+  var MISSION_BLVD = [[-117.245,32.772],[-117.25,32.785],[-117.255,32.796]];
+  var I8 = [[-117.185,32.757],[-117.21,32.757],[-117.23,32.757]];
+
+  function initLocationMap() {
+    if (!window.mapboxgl) return;
+    mapboxgl.accessToken = TOKEN;
+    var map = new mapboxgl.Map({
+      container: 'location-map',
+      style: 'mapbox://styles/mapbox/dark-v11',
+      center: [-116.96, 32.98],
+      zoom: 8.2,
+      pitch: 0,
+      interactive: false,
+      attributionControl: false
+    });
+    map.on('load', function () {
+      map.addSource('loc-county', { type:'geojson', data:{ type:'Feature', geometry:{ type:'Polygon', coordinates:SD_COUNTY.coordinates }}});
+      map.addLayer({ id:'loc-county-fill', type:'fill', source:'loc-county', paint:{ 'fill-color':'#C8C8C8','fill-opacity':0.06 }});
+      map.addLayer({ id:'loc-county-line', type:'line', source:'loc-county', paint:{ 'line-color':'#C8C8C8','line-width':1,'line-opacity':0.35 }});
+
+      map.addSource('loc-current', { type:'geojson', data:{ type:'Feature', geometry:{ type:'Polygon', coordinates:[PMB_BOUNDARY] }}});
+      map.addLayer({ id:'loc-current-fill', type:'fill', source:'loc-current', paint:{ 'fill-color':'#eeca00','fill-opacity':0.28 }});
+      map.addLayer({ id:'loc-current-line', type:'line', source:'loc-current', paint:{ 'line-color':'#eeca00','line-width':2,'line-opacity':0.90 }});
+
+      map.addSource('loc-mission-blvd', { type:'geojson', data:{ type:'Feature', geometry:{ type:'LineString', coordinates:MISSION_BLVD }}});
+      map.addLayer({ id:'loc-mission-blvd-glow', type:'line', source:'loc-mission-blvd', paint:{ 'line-color':'#5ba4ff','line-width':4,'line-opacity':0.20,'line-blur':4 }});
+      map.addLayer({ id:'loc-mission-blvd-line', type:'line', source:'loc-mission-blvd', paint:{ 'line-color':'#7dbfff','line-width':1.5,'line-opacity':0.65 }});
+
+      map.addSource('loc-i8', { type:'geojson', data:{ type:'Feature', geometry:{ type:'LineString', coordinates:I8 }}});
+      map.addLayer({ id:'loc-i8-glow', type:'line', source:'loc-i8', paint:{ 'line-color':'#58172a','line-width':4,'line-opacity':0.20,'line-blur':4 }});
+      map.addLayer({ id:'loc-i8-line', type:'line', source:'loc-i8', paint:{ 'line-color':'#58172a','line-width':1.5,'line-opacity':0.60 }});
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLocationMap);
+  } else {
+    initLocationMap();
+  }
+})();
+</script>
+
+<!-- Dropdown JS -->
+<script>
+(function () {
+  var dropdown = document.querySelector('.nav-dropdown');
+  var trigger  = document.querySelector('.nav-dropdown-trigger');
+  var panel    = document.querySelector('.nav-dropdown-panel');
+  var closeTimer = null;
+
+  function openDropdown() {
+    clearTimeout(closeTimer);
+    dropdown.classList.add('is-open');
+    trigger && trigger.setAttribute('aria-expanded', 'true');
+  }
+  function scheduleClose() {
+    closeTimer = setTimeout(function () {
+      dropdown.classList.remove('is-open');
+      trigger && trigger.setAttribute('aria-expanded', 'false');
+    }, 120);
+  }
+  if (dropdown && panel) {
+    dropdown.addEventListener('mouseenter', openDropdown);
+    dropdown.addEventListener('mouseleave', scheduleClose);
+    panel.addEventListener('mouseenter', openDropdown);
+    panel.addEventListener('mouseleave', scheduleClose);
+    trigger && trigger.addEventListener('click', function (e) {
+      if (!dropdown.classList.contains('is-open')) { e.preventDefault(); openDropdown(); }
+    });
+    document.addEventListener('click', function (e) {
+      if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove('is-open');
+        trigger && trigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { dropdown.classList.remove('is-open'); trigger && trigger.focus(); }
+    });
+  }
+  var mToggle = document.getElementById('mobile-communities-toggle');
+  var mList   = document.getElementById('mobile-communities-list');
+  if (mToggle && mList) {
+    mToggle.addEventListener('click', function (e) {
+      e.preventDefault();
+      var open = mList.classList.toggle('open');
+      mToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      mToggle.textContent = 'Communities ' + (open ? '▴' : '▾');
+    });
+  }
+})();
+</script>
+
+<!-- Number counter -->
+<script>
+(function () {
+  function parseNum(text) {
+    var t = text.trim();
+    var m = t.match(/^([^0-9]*)([0-9,]+\.?[0-9]*)(.*)$/);
+    if (!m) return null;
+    var raw = parseFloat(m[2].replace(/,/g, ''));
+    if (isNaN(raw)) return null;
+    return { prefix: m[1], value: raw, suffix: m[3], decimals: m[2].indexOf('.') >= 0 ? m[2].split('.')[1].length : 0, original: t };
+  }
+  function fmt(n, p) {
+    var s = p.decimals > 0 ? n.toFixed(p.decimals) : Math.round(n).toLocaleString('en-US');
+    return p.prefix + s + p.suffix;
+  }
+  function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+  function countUp(el, p, duration, delay) {
+    setTimeout(function () {
+      el.classList.add('counting');
+      var start = null;
+      function step(ts) {
+        if (!start) start = ts;
+        var progress = Math.min((ts - start) / duration, 1);
+        el.textContent = fmt(easeOutCubic(progress) * p.value, p);
+        if (progress < 1) { requestAnimationFrame(step); } else { el.textContent = p.original; }
+      }
+      requestAnimationFrame(step);
+    }, delay);
+  }
+  function init() {
+    var nodes = document.querySelectorAll('.demo-value, .city-stat-value');
+    if (!nodes.length) return;
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        obs.unobserve(el);
+        var p = parseNum(el.textContent);
+        if (!p) return;
+        var siblings = el.closest('.demo-grid, .city-stats-grid');
+        var idx = siblings ? Array.from(siblings.querySelectorAll('.demo-value, .city-stat-value')).indexOf(el) : 0;
+        countUp(el, p, 1600, idx * 90);
+      });
+    }, { threshold: 0.4 });
+    nodes.forEach(function (el) { obs.observe(el); });
+  }
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); } else { init(); }
+})();
+</script>
+
+<!-- FAQ accordion -->
+<script>
+function toggleFaq(btn) {
+  var item = btn.closest('.faq-item');
+  var isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(function(el) { el.classList.remove('open'); });
+  if (!isOpen) item.classList.add('open');
+}
+function switchTab(btn, panelId) {
+  btn.closest('.schools-tabs').querySelectorAll('.schools-tab').forEach(function(t){ t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+  btn.classList.add('active'); btn.setAttribute('aria-selected','true');
+  btn.closest('section').querySelectorAll('.schools-panel').forEach(function(p){ p.classList.remove('active'); });
+  document.getElementById(panelId).classList.add('active');
+}
+</script>
+
+</body>
+</html>

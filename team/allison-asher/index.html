@@ -1,0 +1,1324 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Allison Asher — REALTOR® | Palisade Realty San Diego</title>
+  <meta name="description" content="Allison Asher is a REALTOR® with Palisade Realty serving San Diego County. Contact us at (619) 794-0218.">
+  <link rel="canonical" href="https://palisaderealty.com/team/allison-asher">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/homepage.css">
+  <link rel="stylesheet" href="/featured-listings.css">
+  <link href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
+  <!-- Ylopo Widget Config -->
+  <script>window.YLOPO_WIDGETS = {"domain": "search.palisaderealty.com"}</script>
+  <style>
+    /* ── Nav ── */
+    .nav-links a.is-active { color: var(--brand); }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown-trigger { display: inline-flex !important; align-items: center; gap: 5px; cursor: default; }
+    .nav-dropdown-chevron { width: 10px; height: 10px; flex-shrink: 0; transition: transform 220ms cubic-bezier(0.22,0.61,0.36,1); opacity: 0.55; }
+    .nav-dropdown.is-open .nav-dropdown-chevron { transform: rotate(180deg); }
+    .nav-dropdown-panel {
+      position: absolute; top: calc(100% + 16px); left: 50%;
+      transform: translateX(-50%) translateY(-6px); opacity: 0; pointer-events: none;
+      transition: opacity 200ms cubic-bezier(0.22,0.61,0.36,1), transform 200ms cubic-bezier(0.22,0.61,0.36,1);
+      background: #fff; border-radius: 14px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.13), 0 1px 4px rgba(0,0,0,0.06);
+      min-width: 480px; padding: 22px 22px 18px; z-index: 300;
+    }
+    .nav-dropdown-panel::before {
+      content: ''; position: absolute; top: -5px; left: 50%;
+      width: 10px; height: 10px; background: #fff;
+      transform: translateX(-50%) rotate(45deg); border-radius: 2px;
+      box-shadow: -2px -2px 4px rgba(0,0,0,0.04);
+    }
+    .nav-dropdown.is-open .nav-dropdown-panel { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+    .nav-dropdown-panel::after { content: ''; position: absolute; top: -20px; left: 0; right: 0; height: 20px; }
+    .nav-dropdown-label {
+      font-family: var(--font-label,'Inter',sans-serif); font-size: 10px; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--brand,#58172a);
+      margin-bottom: 12px; display: block;
+    }
+    .nav-dropdown-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 14px; }
+    .nav-dropdown-item {
+      display: flex; align-items: center; gap: 8px; padding: 9px 10px; border-radius: 8px;
+      font-family: var(--font-body,'Manrope',sans-serif); font-size: 13px; font-weight: 500;
+      color: #212121; text-decoration: none;
+      text-transform: none !important; letter-spacing: 0 !important;
+      transition: background 150ms, color 150ms; white-space: nowrap;
+    }
+    .nav-dropdown-item:hover { background: rgba(88,23,42,0.06); color: #58172a; opacity: 1 !important; }
+    .nav-dropdown-item::after { display: none !important; }
+    .nav-dropdown-dot { width: 6px; height: 6px; border-radius: 50%; background: #d0d0d0; flex-shrink: 0; }
+    .nav-dropdown-divider { height: 1px; background: rgba(0,0,0,0.07); margin-bottom: 12px; }
+    .nav-dropdown-all { display: flex; align-items: center; justify-content: space-between; padding: 8px 10px 4px; }
+    .nav-dropdown-all a {
+      font-family: var(--font-label,'Inter',sans-serif); font-size: 12px; font-weight: 600;
+      color: #58172a !important; text-decoration: none;
+      text-transform: none !important; letter-spacing: 0 !important;
+      display: inline-flex; align-items: center; gap: 5px;
+    }
+    .nav-dropdown-all a::after { display: none !important; }
+    .nav-dropdown-all a:hover { opacity: 0.7; }
+    .mobile-communities-toggle { cursor: pointer; }
+    .mobile-communities-list { display: none; flex-direction: column; padding: 4px 0 4px 20px; }
+    .mobile-communities-list.open { display: flex; }
+    .mobile-communities-list a { font-size: 14px !important; padding: 7px 0 !important; color: #555 !important; text-transform: none !important; letter-spacing: 0 !important; font-weight: 400 !important; }
+
+    /* ── Reveal ── */
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: .12s; }
+    .reveal-d2 { transition-delay: .24s; }
+    .reveal-d3 { transition-delay: .36s; }
+
+    /* ── HERO ── */
+    .ap-hero {
+      background: var(--brand-darker, #28000c);
+      padding: 108px 80px 96px;
+      position: relative;
+      overflow: hidden;
+    }
+    .ap-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 70% at 15% 60%, rgba(88,23,42,.4) 0%, transparent 65%),
+        radial-gradient(ellipse 55% 75% at 88% 15%, rgba(184,154,94,.07) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .ap-hero-inner { position: relative; z-index: 2; max-width: 1320px; margin: 0 auto; }
+    .ap-breadcrumb {
+      font-family: var(--font-label); font-size: 10px; font-weight: 700;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: rgba(255,255,255,.3);
+      margin-bottom: 56px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .ap-breadcrumb a { color: rgba(255,255,255,.3); text-decoration: none; transition: color .18s; }
+    .ap-breadcrumb a:hover { color: rgba(255,255,255,.65); opacity: 1; }
+    .ap-breadcrumb span { opacity: .35; }
+    .ap-hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(64px, 9.5vw, 124px);
+      font-weight: 400;
+      color: #fff;
+      letter-spacing: -.04em;
+      line-height: .92;
+      margin-bottom: 30px;
+    }
+    .ap-hero-name em { font-style: italic; color: var(--accent, #eeca00); }
+    .ap-hero-gold-bar {
+      width: 52px; height: 3px;
+      background: var(--gold, #b89a5e);
+      margin-bottom: 26px;
+    }
+    .ap-hero-meta {
+      font-family: var(--font-label); font-size: 11px; font-weight: 600;
+      letter-spacing: .16em; text-transform: uppercase;
+      color: rgba(255,255,255,.5);
+      margin-bottom: 48px;
+      display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+    }
+    .ap-hero-meta-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,.2); flex-shrink: 0; }
+    .ap-hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .ap-hero-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-label); font-size: 11px; font-weight: 700;
+      letter-spacing: .11em; text-transform: uppercase;
+      padding: 13px 22px; border-radius: var(--radius-pill, 50px);
+      text-decoration: none; border: 1.5px solid transparent;
+      transition: background .22s cubic-bezier(.22,.61,.36,1), color .22s, border-color .22s, opacity .22s, transform .18s;
+    }
+    .ap-hero-btn:active { transform: translateY(1px); }
+    .ap-hero-btn--ghost {
+      background: rgba(255,255,255,.07);
+      border-color: rgba(255,255,255,.16);
+      color: rgba(255,255,255,.8);
+    }
+    .ap-hero-btn--ghost:hover {
+      background: rgba(255,255,255,.13);
+      border-color: rgba(255,255,255,.3);
+      color: #fff; opacity: 1;
+    }
+    .ap-hero-btn--gold {
+      background: var(--gold, #b89a5e);
+      border-color: var(--gold, #b89a5e);
+      color: #fff;
+    }
+    .ap-hero-btn--gold:hover {
+      background: var(--gold-hi, #cbb278);
+      border-color: var(--gold-hi, #cbb278);
+      opacity: 1;
+    }
+
+    /* ── BIO ── */
+    .ap-bio { background: #fff; padding: 96px 80px; }
+    .ap-bio-inner { max-width: 1320px; margin: 0 auto; }
+    .ap-bio-grid {
+      display: grid;
+      grid-template-columns: 240px 1fr 296px;
+      gap: 64px;
+      align-items: start;
+    }
+    .ap-bio-photo-wrap { position: relative; }
+    .ap-bio-photo {
+      width: 100%; aspect-ratio: 3/4;
+      object-fit: cover; object-position: center top;
+      border-radius: var(--radius-md, 10px);
+      display: block;
+      box-shadow: 0 20px 60px rgba(88,23,42,.2), 0 4px 16px rgba(0,0,0,.08);
+    }
+    .ap-bio-photo-badge {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: var(--brand, #58172a);
+      border-radius: 0 0 var(--radius-md, 10px) var(--radius-md, 10px);
+      padding: 12px 16px; text-align: center;
+    }
+    .ap-bio-photo-badge-name {
+      font-family: var(--font-display); font-size: 14px; font-weight: 500;
+      color: #fff; letter-spacing: -.01em; line-height: 1.2;
+    }
+    .ap-bio-photo-badge-title {
+      font-family: var(--font-label); font-size: 9px; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: rgba(255,255,255,.55); margin-top: 3px;
+    }
+    .ap-bio-eyebrow {
+      font-family: var(--font-label); font-size: 10px; font-weight: 700;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: var(--brand); margin-bottom: 14px;
+    }
+    .ap-bio-h2 {
+      font-family: var(--font-display);
+      font-size: clamp(34px, 3.2vw, 54px);
+      font-weight: 400;
+      color: var(--near-black, #212121);
+      letter-spacing: -.03em; line-height: 1.1;
+      margin-bottom: 28px;
+    }
+    .ap-bio-h2 em { font-style: italic; color: var(--brand); }
+    .ap-bio-body {
+      font-family: var(--font-body); font-size: 16px; line-height: 1.82;
+      color: rgba(33,33,33,.7); margin-bottom: 20px;
+    }
+
+    /* Contact sidebar */
+    .ap-contact-sidebar {
+      background: var(--off-white, #f5f5f5);
+      border-radius: var(--radius-md, 10px);
+      padding: 32px 28px;
+      position: sticky; top: 96px;
+    }
+    .ap-contact-sidebar-label {
+      font-family: var(--font-label); font-size: 10px; font-weight: 700;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: var(--brand); margin-bottom: 22px;
+    }
+    .ap-contact-sidebar-item { display: flex; align-items: flex-start; gap: 11px; margin-bottom: 16px; }
+    .ap-contact-sidebar-icon {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: var(--brand); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .ap-contact-sidebar-detail-label {
+      font-family: var(--font-label); font-size: 9px; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: rgba(33,33,33,.4); margin-bottom: 2px;
+    }
+    .ap-contact-sidebar-detail-val {
+      font-family: var(--font-body); font-size: 14px; font-weight: 600;
+      color: var(--near-black); text-decoration: none; display: block;
+    }
+    .ap-contact-sidebar-detail-val:hover { color: var(--brand); opacity: 1; }
+    .ap-contact-sidebar-divider { height: 1px; background: rgba(0,0,0,.08); margin: 22px 0; }
+    .ap-contact-sidebar-btn {
+      display: block; width: 100%; text-align: center;
+      font-family: var(--font-label); font-size: 11px; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: 13px 20px; border-radius: var(--radius-pill, 50px);
+      text-decoration: none; margin-bottom: 10px;
+      transition: background .22s, color .22s, opacity .22s;
+    }
+    .ap-contact-sidebar-btn--fill {
+      background: var(--brand); color: #fff; border: 1.5px solid var(--brand);
+    }
+    .ap-contact-sidebar-btn--fill:hover { background: var(--brand-dark, #4a0e1f); opacity: 1; }
+    .ap-contact-sidebar-btn--outline {
+      background: transparent; color: var(--brand); border: 1.5px solid var(--brand);
+    }
+    .ap-contact-sidebar-btn--outline:hover { background: var(--brand); color: #fff; opacity: 1; }
+
+    /* ── AWARDS ── */
+    .ap-awards { background: var(--near-black, #212121); padding: 72px 80px; }
+    .ap-awards-inner { max-width: 1320px; margin: 0 auto; }
+    .ap-awards-header { text-align: center; margin-bottom: 56px; }
+    .ap-awards-eyebrow {
+      font-family: var(--font-label); font-size: 10px; font-weight: 700;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: var(--gold, #b89a5e); margin-bottom: 14px;
+    }
+    .ap-awards-h2 {
+      font-family: var(--font-display); font-size: clamp(32px, 3vw, 50px);
+      font-weight: 400; color: #fff; letter-spacing: -.03em; line-height: 1.1;
+    }
+    .ap-awards-h2 em { font-style: italic; color: var(--gold, #b89a5e); }
+    .ap-awards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .ap-award-card {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: var(--radius-md, 10px);
+      padding: 36px 28px; text-align: center;
+      transition: background .22s;
+    }
+    .ap-award-card:hover { background: rgba(255,255,255,.07); }
+    .ap-award-year {
+      font-family: var(--font-display); font-size: 58px; font-weight: 400;
+      color: var(--gold, #b89a5e); letter-spacing: -.04em; line-height: 1;
+      margin-bottom: 12px;
+    }
+    .ap-award-name {
+      font-family: var(--font-display); font-size: 20px; font-weight: 500;
+      color: #fff; letter-spacing: -.01em; line-height: 1.2; margin-bottom: 12px;
+    }
+    .ap-award-desc {
+      font-family: var(--font-body); font-size: 13px; line-height: 1.75;
+      color: rgba(255,255,255,.38);
+    }
+
+    /* ── AREAS SERVED ── */
+    .ap-areas { background: #fff; padding: 88px 80px; border-top: 1px solid rgba(0,0,0,.07); }
+    .ap-areas-inner { max-width: 1320px; margin: 0 auto; }
+    .ap-areas-layout { display: grid; grid-template-columns: 1fr 1.15fr; gap: 56px; align-items: start; }
+    .ap-areas-header { margin-bottom: 32px; }
+    .ap-areas-eyebrow {
+      font-family: var(--font-label); font-size: 10px; font-weight: 700;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: var(--brand, #58172a); margin-bottom: 14px;
+    }
+    .ap-areas-h2 {
+      font-family: var(--font-display); font-size: clamp(32px, 3vw, 52px);
+      font-weight: 400; color: var(--near-black, #212121); letter-spacing: -.03em; line-height: 1.1;
+      margin-bottom: 14px;
+    }
+    .ap-areas-h2 em { font-style: italic; color: var(--brand, #58172a); }
+    .ap-areas-sub {
+      font-family: var(--font-body); font-size: 15px; line-height: 1.72;
+      color: rgba(0,0,0,.45);
+    }
+    .ap-areas-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; margin-top: 28px; }
+    .ap-area-chip {
+      display: flex; align-items: center; gap: 9px;
+      padding: 11px 14px;
+      border-radius: var(--radius-md, 10px);
+      background: #f7f7f7;
+      border: 1px solid rgba(0,0,0,.09);
+      text-decoration: none;
+      transition: background .22s cubic-bezier(.22,.61,.36,1), border-color .22s;
+      cursor: pointer;
+    }
+    .ap-area-chip:hover,
+    .ap-area-chip.is-hovered { background: rgba(88,23,42,.07); border-color: rgba(88,23,42,.25); opacity: 1; }
+    .ap-area-chip.is-active { background: var(--brand, #58172a); border-color: var(--brand, #58172a); }
+    .ap-area-chip-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--brand, #58172a); flex-shrink: 0; opacity: .5; }
+    .ap-area-chip.is-active .ap-area-chip-dot { background: #fff; opacity: .7; }
+    .ap-area-chip-name {
+      font-family: var(--font-body); font-size: 13px; font-weight: 500;
+      color: rgba(0,0,0,.65);
+    }
+    .ap-area-chip:hover .ap-area-chip-name,
+    .ap-area-chip.is-hovered .ap-area-chip-name { color: var(--brand, #58172a); }
+    .ap-area-chip.is-active .ap-area-chip-name { color: #fff; }
+    .ap-area-chip:focus-visible { outline: 2px solid var(--brand, #58172a); outline-offset: 2px; }
+    /* Map container */
+    .ap-areas-map-wrap {
+      position: sticky; top: 96px;
+      height: 580px;
+      border-radius: var(--radius-lg, 20px);
+      overflow: hidden;
+      box-shadow: 0 8px 48px rgba(0,0,0,.12), 0 0 0 1px rgba(0,0,0,.06);
+    }
+    #ap-areas-map { width: 100%; height: 100%; }
+    #ap-areas-map .mapboxgl-ctrl-top-left,
+    #ap-areas-map .mapboxgl-ctrl-top-right { display: none; }
+    #ap-areas-map .mapboxgl-ctrl-attrib { font-size: 9px; opacity: .45; }
+    .ap-areas-popup .mapboxgl-popup-content {
+      background: rgba(255,255,255,.96);
+      color: var(--brand, #58172a);
+      font-family: var(--font-label, 'Inter', sans-serif);
+      font-size: 10px; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      padding: 6px 12px; border-radius: 4px;
+      border: 1px solid rgba(88,23,42,.18);
+      box-shadow: 0 4px 16px rgba(0,0,0,.18);
+      pointer-events: none;
+    }
+    .ap-areas-popup .mapboxgl-popup-tip { display: none; }
+
+
+    /* ── ALL LISTINGS ── */
+    .ap-all-listings { background: var(--off-white, #f5f5f5); padding: 88px 80px; border-top: 1px solid rgba(0,0,0,.06); }
+    .ap-all-listings-inner { max-width: 1320px; margin: 0 auto; }
+    .ap-all-listings-header { text-align: center; margin-bottom: 48px; }
+    .ap-all-listings-eyebrow {
+      font-family: var(--font-label); font-size: 10px; font-weight: 700;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: var(--brand, #58172a); margin-bottom: 14px; display: block;
+    }
+    .ap-all-listings-h2 {
+      font-family: var(--font-display); font-size: clamp(32px, 3vw, 52px);
+      font-weight: 400; color: var(--near-black, #212121); letter-spacing: -.03em; line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    .ap-all-listings-h2 em { font-style: italic; color: var(--brand, #58172a); }
+    .ap-all-listings-sub {
+      font-family: var(--font-body); font-size: 16px; line-height: 1.72;
+      color: rgba(0,0,0,.45); max-width: 440px; margin: 0 auto;
+    }
+    .ap-all-listings-widget { width: 100%; }
+    .ap-all-listings-widget .YLOPO_resultsWidget { width: 100%; }
+    .lf-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      width: 100%;
+    }
+    .lf-card {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 2px 12px rgba(88,23,42,0.06), 0 1px 3px rgba(0,0,0,0.05);
+      transition: transform 280ms cubic-bezier(0.22,0.61,0.36,1), box-shadow 280ms cubic-bezier(0.22,0.61,0.36,1);
+      display: flex;
+      flex-direction: column;
+    }
+    .lf-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(88,23,42,0.12), 0 2px 8px rgba(0,0,0,0.07);
+    }
+    .lf-img-wrap { aspect-ratio: 3/2; overflow: hidden; background: #1a0008; }
+    .lf-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 560ms cubic-bezier(0.22,0.61,0.36,1); }
+    .lf-card:hover .lf-img-wrap img { transform: scale(1.04); }
+    .lf-body { padding: 20px 22px 22px; flex: 1; display: flex; flex-direction: column; gap: 4px; }
+    .lf-badge {
+      display: inline-block;
+      font-family: var(--font-label,'Inter',sans-serif); font-size: 9px; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: #fff; background: #58172a;
+      padding: 3px 9px 2px; border-radius: 2px; margin-bottom: 8px; width: fit-content;
+    }
+    .lf-badge--sold { background: #1a5a6e; }
+    .lf-address { font-family: var(--font-display,'Playfair Display',serif); font-size: 18px; font-weight: 400; color: #212121; line-height: 1.25; margin: 0; }
+    .lf-city { font-family: var(--font-label,'Inter',sans-serif); font-size: 12px; color: rgba(33,33,33,0.5); margin: 0; }
+    .lf-price { font-family: var(--font-label,'Inter',sans-serif); font-size: 17px; font-weight: 600; color: #58172a; margin: 6px 0 0; }
+    .lf-meta { display: flex; gap: 14px; font-family: var(--font-label,'Inter',sans-serif); font-size: 12px; color: rgba(33,33,33,0.55); margin-top: 8px; padding-top: 10px; border-top: 1px solid rgba(0,0,0,0.07); }
+    .lf-disclaimer { text-align: center; font-family: var(--font-label,'Inter',sans-serif); font-size: 12px; color: rgba(33,33,33,0.4); margin: 24px 0 0; }
+    .lf-disclaimer a { color: #58172a; text-decoration: underline; }
+    .lf-cta-wrap { text-align: center; margin-top: 40px; }
+    @media (max-width: 1024px) { .lf-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px)  { .lf-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 1280px) { .ap-all-listings { padding: 72px 56px; } }
+    @media (max-width: 768px)  { .ap-all-listings { padding: 56px 24px; } .ap-all-listings-header { margin-bottom: 36px; } }
+
+    /* ── CONTACT ── */
+    .ap-contact { background: #fff; padding: 88px 80px; }
+    .ap-contact-inner { max-width: 1320px; margin: 0 auto; }
+    .ap-contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .ap-contact-left-eyebrow {
+      font-family: var(--font-label); font-size: 10px; font-weight: 700;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: var(--brand); margin-bottom: 16px;
+    }
+    .ap-contact-left-h2 {
+      font-family: var(--font-display); font-size: clamp(36px, 3.5vw, 62px);
+      font-weight: 400; color: var(--near-black);
+      letter-spacing: -.03em; line-height: 1.05; margin-bottom: 22px;
+    }
+    .ap-contact-left-h2 em { font-style: italic; color: var(--brand); }
+    .ap-contact-left-body {
+      font-family: var(--font-body); font-size: 16px; line-height: 1.8;
+      color: rgba(33,33,33,.6); margin-bottom: 36px;
+    }
+    .ap-contact-info-line { display: flex; align-items: center; gap: 13px; margin-bottom: 14px; }
+    .ap-contact-info-icon {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: rgba(88,23,42,.07); color: var(--brand);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .ap-contact-info-text {
+      font-family: var(--font-body); font-size: 15px; font-weight: 500;
+      color: var(--near-black); text-decoration: none;
+    }
+    .ap-contact-info-text:hover { color: var(--brand); opacity: 1; }
+    .ap-contact-info-text--static { cursor: default; }
+    .ap-contact-info-text--static:hover { color: var(--near-black); }
+
+    /* Form */
+    .ap-form { display: flex; flex-direction: column; gap: 16px; }
+    .ap-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .ap-form-group { display: flex; flex-direction: column; gap: 6px; }
+    .ap-form-label {
+      font-family: var(--font-label); font-size: 10px; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: rgba(33,33,33,.5);
+    }
+    .ap-form-input, .ap-form-select, .ap-form-textarea {
+      width: 100%; padding: 12px 16px;
+      border: 1.5px solid rgba(0,0,0,.11); border-radius: var(--radius-md, 10px);
+      font-family: var(--font-body); font-size: 15px; color: var(--near-black);
+      background: #fff; outline: none;
+      transition: border-color .18s, box-shadow .18s;
+      box-sizing: border-box;
+    }
+    .ap-form-input:focus, .ap-form-select:focus, .ap-form-textarea:focus {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px rgba(88,23,42,.07);
+    }
+    .ap-form-textarea { min-height: 118px; resize: vertical; }
+    .ap-form-consent {
+      font-family: var(--font-body); font-size: 11px; line-height: 1.7;
+      color: rgba(33,33,33,.38);
+    }
+    .ap-form-consent a { color: var(--brand); }
+    .ap-form-submit {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-label); font-size: 11px; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: 14px 32px; border-radius: var(--radius-pill, 50px);
+      background: var(--brand); color: #fff; border: none;
+      cursor: pointer; align-self: flex-start;
+      transition: background .22s cubic-bezier(.22,.61,.36,1), transform .18s;
+    }
+    .ap-form-submit:hover { background: var(--brand-dark, #4a0e1f); transform: translateY(-1px); }
+    .ap-form-submit:active { transform: translateY(0); }
+
+    /* ── RELATED AGENTS ── */
+    .ap-related { background: var(--off-white, #f5f5f5); padding: 88px 80px; }
+    .ap-related-inner { max-width: 1320px; margin: 0 auto; }
+    .ap-related-eyebrow {
+      font-family: var(--font-label); font-size: 10px; font-weight: 700;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: var(--brand); margin-bottom: 12px;
+    }
+    .ap-related-h2 {
+      font-family: var(--font-display); font-size: clamp(28px, 2.8vw, 46px);
+      font-weight: 400; color: var(--near-black); letter-spacing: -.03em; line-height: 1.1;
+      margin-bottom: 44px;
+    }
+    .ap-related-h2 em { font-style: italic; color: var(--brand); }
+    .ap-related-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    /* Agent cards */
+    .agent-card {
+      background: #fff; border-radius: var(--radius-md, 10px); overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,.06), 0 0 0 1px rgba(0,0,0,.04);
+      transition: transform .28s cubic-bezier(.22,.61,.36,1), box-shadow .28s cubic-bezier(.22,.61,.36,1);
+    }
+    .agent-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(88,23,42,.14), 0 2px 8px rgba(0,0,0,.06); }
+    .agent-card--leader { border-top: 3px solid var(--gold, #b89a5e); }
+    .agent-card-img-wrap { overflow: hidden; aspect-ratio: 3/4; background: #ebe5e7; }
+    .agent-card-img { width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform .55s cubic-bezier(.22,.61,.36,1); }
+    .agent-card:hover .agent-card-img { transform: scale(1.06); }
+    .agent-card-body { padding: 15px 17px 17px; }
+    .agent-card-name { font-family: var(--font-display); font-size: 19px; font-weight: 500; color: var(--near-black); letter-spacing: -.01em; line-height: 1.2; margin-bottom: 4px; }
+    .agent-card-role { font-family: var(--font-label); font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--brand); margin-bottom: 11px; }
+    .agent-card-link { display: inline-flex; align-items: center; gap: 4px; font-family: var(--font-label); font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--near-black); text-decoration: none; transition: color .18s; }
+    .agent-card-link:hover { color: var(--brand); opacity: 1; }
+    .agent-card-link svg { transition: transform .18s; flex-shrink: 0; }
+    .agent-card-link:hover svg { transform: translateX(3px); }
+
+    /* ── CTA ── */
+    .tp-eyebrow {
+      font-family: var(--font-label); font-size: 11px; font-weight: 700;
+      letter-spacing: .22em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px;
+    }
+    .tp-cta { position: relative; padding: 120px 56px; text-align: center; overflow: hidden; }
+    .tp-cta::before {
+      content: ''; position: absolute; inset: 0;
+      background: url('/images/hero-background/hero-4.jpg') center/cover no-repeat;
+      filter: brightness(.38) saturate(.65);
+    }
+    .tp-cta::after { content: ''; position: absolute; inset: 0; background: rgba(245,245,245,.88); }
+    .tp-cta-inner { position: relative; z-index: 2; max-width: 620px; margin: 0 auto; }
+    .tp-cta .tp-eyebrow { color: var(--brand); }
+    .tp-cta-h2 {
+      font-family: var(--font-display); font-size: clamp(36px,4vw,62px); font-weight: 400;
+      color: var(--near-black); letter-spacing: -.03em; line-height: 1.05; margin-bottom: 20px;
+    }
+    .tp-cta-h2 em { font-style: italic; color: var(--brand); }
+    .tp-cta-sub { font-family: var(--font-body); font-size: 16px; line-height: 1.72; color: rgba(33,33,33,.65); margin-bottom: 40px; }
+    .tp-cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .tp-cta-btns .btn-outline-white { border-color: var(--brand); color: var(--brand); background: transparent; }
+    .tp-cta-btns .btn-outline-white:hover { background: var(--brand); color: #fff; opacity: 1; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1200px) {
+      .ap-hero { padding: 80px 56px 72px; }
+      .ap-bio { padding: 80px 56px; }
+      .ap-bio-grid { grid-template-columns: 210px 1fr 260px; gap: 48px; }
+      .ap-awards { padding: 72px 56px; }
+      .ap-areas { padding: 72px 56px; }
+      .ap-listings { padding: 72px 56px; }
+      .ap-contact { padding: 72px 56px; }
+      .ap-related { padding: 72px 56px; }
+    }
+    @media (max-width: 1024px) {
+      .ap-bio-grid { grid-template-columns: 1fr; gap: 40px; }
+      .ap-bio-photo-wrap { max-width: 260px; }
+      .ap-contact-sidebar { position: static; }
+      .ap-awards-grid { grid-template-columns: 1fr 1fr; }
+      .ap-areas-layout { grid-template-columns: 1fr; gap: 40px; }
+      .ap-areas-grid { grid-template-columns: repeat(3, 1fr); }
+      .ap-areas-map-wrap { position: static; height: 400px; }
+      .ap-contact-grid { grid-template-columns: 1fr; gap: 48px; }
+      .ap-related-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .ap-hero { padding: 64px 24px 56px; }
+      .ap-hero-name { font-size: clamp(48px, 12vw, 76px); }
+      .ap-bio { padding: 56px 24px; }
+      .ap-awards { padding: 56px 24px; }
+      .ap-awards-grid { grid-template-columns: 1fr; }
+      .ap-areas { padding: 56px 24px; }
+      .ap-areas-grid { grid-template-columns: repeat(2, 1fr); }
+      .ap-areas-map-wrap { height: 340px; }
+      .ap-listings { padding: 56px 24px; }
+      .ap-contact { padding: 56px 24px; }
+      .ap-related { padding: 56px 24px; }
+      .ap-related-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .ap-form-row { grid-template-columns: 1fr; }
+      .tp-cta { padding: 80px 24px; }
+    }
+    @media (max-width: 480px) {
+      .ap-areas-grid { grid-template-columns: 1fr 1fr; }
+      .ap-areas-map-wrap { height: 280px; }
+      .ap-hero-actions { gap: 8px; }
+      .ap-hero-btn { font-size: 10px; padding: 11px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<header class="site-header" id="site-header">
+
+  <!-- Left Nav -->
+  <nav class="nav-links" aria-label="Primary navigation left">
+    <a href="https://search.palisaderealty.com/" target="_blank" rel="noopener noreferrer">Buy</a>
+    <a href="https://search.palisaderealty.com/seller" target="_blank" rel="noopener noreferrer">Sell</a>
+    <div class="nav-dropdown">
+      <a href="/communities" class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+        Communities
+        <svg class="nav-dropdown-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3.5 5 6.5 8 3.5"/></svg>
+      </a>
+      <div class="nav-dropdown-panel" role="region" aria-label="Communities menu">
+        <span class="nav-dropdown-label">San Diego Communities</span>
+        <div class="nav-dropdown-grid">
+          <a class="nav-dropdown-item" href="/communities/downtown-san-diego-real-estate"><span class="nav-dropdown-dot"></span>Downtown San Diego</a>
+          <a class="nav-dropdown-item" href="/communities/mission-hills-real-estate"><span class="nav-dropdown-dot"></span>Mission Hills</a>
+          <a class="nav-dropdown-item" href="/communities/point-loma-real-estate"><span class="nav-dropdown-dot"></span>Point Loma</a>
+          <a class="nav-dropdown-item" href="/communities/coronado-real-estate"><span class="nav-dropdown-dot"></span>Coronado</a>
+          <a class="nav-dropdown-item" href="/communities/pacific-mission-beach-real-estate"><span class="nav-dropdown-dot"></span>Pacific &amp; Mission Beach</a>
+          <a class="nav-dropdown-item" href="/communities/mission-valley-real-estate"><span class="nav-dropdown-dot"></span>Mission Valley</a>
+          <a class="nav-dropdown-item" href="/communities/la-jolla-real-estate"><span class="nav-dropdown-dot"></span>La Jolla</a>
+          <a class="nav-dropdown-item" href="/communities/del-mar-real-estate"><span class="nav-dropdown-dot"></span>Del Mar</a>
+          <a class="nav-dropdown-item" href="/communities/carmel-valley-real-estate"><span class="nav-dropdown-dot"></span>Carmel Valley</a>
+          <a class="nav-dropdown-item" href="/communities/rancho-santa-fe-real-estate"><span class="nav-dropdown-dot"></span>Rancho Santa Fe</a>
+          <a class="nav-dropdown-item" href="/communities/solana-beach-real-estate"><span class="nav-dropdown-dot"></span>Solana Beach</a>
+          <a class="nav-dropdown-item" href="/communities/encinitas-real-estate"><span class="nav-dropdown-dot"></span>Encinitas</a>
+          <a class="nav-dropdown-item" href="/communities/carlsbad-real-estate"><span class="nav-dropdown-dot"></span>Carlsbad</a>
+          <a class="nav-dropdown-item" href="/communities/oceanside-real-estate"><span class="nav-dropdown-dot"></span>Oceanside</a>
+          <a class="nav-dropdown-item" href="/communities/spring-valley-real-estate"><span class="nav-dropdown-dot"></span>Spring Valley</a>
+          <a class="nav-dropdown-item" href="/communities/chula-vista-real-estate"><span class="nav-dropdown-dot"></span>Chula Vista</a>
+          <a class="nav-dropdown-item" href="/communities/la-mesa-real-estate"><span class="nav-dropdown-dot"></span>La Mesa</a>
+          <a class="nav-dropdown-item" href="/communities/el-cajon-real-estate"><span class="nav-dropdown-dot"></span>El Cajon</a>
+        </div>
+        <div class="nav-dropdown-divider"></div>
+        <div class="nav-dropdown-all">
+          <a href="/communities">View All Communities <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 6h8"/><path d="M6 2.5 9.5 6 6 9.5"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <a href="/testimonials">Testimonials</a>
+  </nav>
+
+  <!-- Center Logo -->
+  <a href="/" class="nav-logo" aria-label="Palisade Realty home">
+    <img src="/images/logo.png" alt="Palisade Realty">
+  </a>
+
+  <!-- Right Nav -->
+  <nav class="nav-links nav-links--right" aria-label="Primary navigation right">
+    <a href="/#fl-section">Properties</a>
+    <a href="/team">Team</a>
+    <a href="/blog">Blog</a>
+    <a href="/contact">Contact</a>
+  </nav>
+
+  <!-- Hamburger (mobile) -->
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Open navigation menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+</header>
+
+<!-- Mobile nav drawer -->
+<div class="nav-mobile-drawer" id="nav-mobile-drawer" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+  <a href="https://search.palisaderealty.com/" target="_blank" rel="noopener noreferrer">Buy</a>
+  <a href="https://search.palisaderealty.com/seller" target="_blank" rel="noopener noreferrer">Sell</a>
+  <a href="/communities" class="mobile-communities-toggle" id="mobile-communities-toggle" aria-expanded="false">Communities â–¾</a>
+  <div class="mobile-communities-list" id="mobile-communities-list">
+    <a href="/communities/downtown-san-diego-real-estate">Downtown San Diego</a>
+    <a href="/communities/mission-hills-real-estate">Mission Hills</a>
+    <a href="/communities/point-loma-real-estate">Point Loma</a>
+    <a href="/communities/coronado-real-estate">Coronado</a>
+    <a href="/communities/pacific-mission-beach-real-estate">Pacific &amp; Mission Beach</a>
+    <a href="/communities/mission-valley-real-estate">Mission Valley</a>
+    <a href="/communities/la-jolla-real-estate">La Jolla</a>
+    <a href="/communities/del-mar-real-estate">Del Mar</a>
+    <a href="/communities/carmel-valley-real-estate">Carmel Valley</a>
+    <a href="/communities/rancho-santa-fe-real-estate">Rancho Santa Fe</a>
+    <a href="/communities/solana-beach-real-estate">Solana Beach</a>
+    <a href="/communities/encinitas-real-estate">Encinitas</a>
+    <a href="/communities/carlsbad-real-estate">Carlsbad</a>
+    <a href="/communities/oceanside-real-estate">Oceanside</a>
+    <a href="/communities/spring-valley-real-estate">Spring Valley</a>
+    <a href="/communities/chula-vista-real-estate">Chula Vista</a>
+    <a href="/communities/la-mesa-real-estate">La Mesa</a>
+    <a href="/communities/el-cajon-real-estate">El Cajon</a>
+  </div>
+  <a href="/testimonials">Testimonials</a>
+  <a href="/#fl-section">Properties</a>
+  <a href="/team">Team</a>
+  <a href="/blog">Blog</a>
+  <a href="/contact">Contact</a>
+</div>
+<main>
+
+<!-- ══ HERO ══ -->
+<section class="ap-hero" aria-label="Allison Asher, REALTOR®">
+  <div class="ap-hero-inner">
+    <nav class="ap-breadcrumb reveal" aria-label="Breadcrumb">
+      <a href="/">Palisade Realty</a>
+      <span>/</span>
+      <a href="/team">Our Team</a>
+      <span>/</span>
+      <span style="color:rgba(255,255,255,.5)">Allison Asher</span>
+    </nav>
+    <h1 class="ap-hero-name reveal reveal-d1"><em>Allison</em> Asher</h1>
+    <div class="ap-hero-gold-bar reveal reveal-d2"></div>
+    <div class="ap-hero-meta reveal reveal-d2">
+      <span>REALTOR®</span>
+      <span class="ap-hero-meta-dot"></span>
+      <span>Palisade Realty</span>
+    </div>
+    <div class="ap-hero-actions reveal reveal-d3">
+      <a href="tel:+16197940218" class="ap-hero-btn ap-hero-btn--ghost">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.78a16 16 0 0 0 6 6l.97-.97a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 21.72 16z"/></svg>
+        Call (619) 794-0218
+      </a>
+      <a href="mailto:allison@palisaderealty.com" class="ap-hero-btn ap-hero-btn--ghost">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Send an Email
+      </a>
+      <a href="https://search.palisaderealty.com/" target="_blank" rel="noopener noreferrer" class="ap-hero-btn ap-hero-btn--gold">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        View Listings
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ BIO ══ -->
+<section class="ap-bio" id="about" aria-label="About Allison Asher">
+  <div class="ap-bio-inner">
+    <div class="ap-bio-grid">
+
+      <!-- Left: Photo -->
+      <div class="reveal">
+        <div class="ap-bio-photo-wrap">
+          <img src="/assets/images/agents/allison-asher.png"
+               alt="Allison Asher, REALTOR® at Palisade Realty"
+               class="ap-bio-photo" width="240" height="320">
+        </div>
+      </div>
+
+      <!-- Center: Bio -->
+      <div>
+        <p class="ap-bio-eyebrow reveal">Agent</p>
+        <h2 class="ap-bio-h2 reveal reveal-d1">Meet <em>Allison</em></h2>
+        <!-- TODO: Replace with Allison Asher's personal bio. -->
+        <p class="ap-bio-body reveal reveal-d2">As a REALTOR® with Palisade Realty, I am dedicated to delivering exceptional results for clients throughout San Diego County. With the support of one of the region's most trusted brokerages and access to deep local market knowledge, I guide buyers and sellers through every step of the real estate process.</p>
+        <p class="ap-bio-body reveal reveal-d2">From your first consultation to closing day, my priority is clear communication, honest advice, and results you can count on. Whether you are purchasing your first home, making an investment, or selling a treasured property, I am here to make the process as smooth and successful as possible.</p>
+      </div>
+
+      <!-- Right: Sidebar -->
+      <div class="reveal reveal-d1">
+        <div class="ap-contact-sidebar">
+          <p class="ap-contact-sidebar-label">Get in Touch</p>
+          <div class="ap-contact-sidebar-item">
+            <div class="ap-contact-sidebar-icon" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.78a16 16 0 0 0 6 6l.97-.97a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 21.72 16z"/></svg>
+            </div>
+            <div>
+              <div class="ap-contact-sidebar-detail-label">Phone</div>
+              <a href="tel:+16197940218" class="ap-contact-sidebar-detail-val">(619) 794-0218</a>
+            </div>
+          </div>
+          <div class="ap-contact-sidebar-item">
+            <div class="ap-contact-sidebar-icon" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <div class="ap-contact-sidebar-detail-label">Email</div>
+              <a href="mailto:allison@palisaderealty.com" class="ap-contact-sidebar-detail-val">allison@palisaderealty.com</a>
+            </div>
+          </div>
+          <div class="ap-contact-sidebar-divider"></div>
+          <a href="#contact" class="ap-contact-sidebar-btn ap-contact-sidebar-btn--fill">Send a Message</a>
+          <a href="https://allison.palisaderealty.com/seller" target="_blank" rel="noopener noreferrer" class="ap-contact-sidebar-btn ap-contact-sidebar-btn--outline">Get a Home Valuation</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ VALUES ══ -->
+<section class="ap-awards" aria-label="Professional values">
+  <div class="ap-awards-inner">
+    <div class="ap-awards-header">
+      <p class="ap-awards-eyebrow reveal">My Commitment</p>
+      <h2 class="ap-awards-h2 reveal reveal-d1">Built on <em>Trust</em></h2>
+    </div>
+    <div class="ap-awards-grid">
+      <div class="ap-award-card reveal"><div class="ap-award-year">SD</div><div class="ap-award-name">Local Expertise</div><div class="ap-award-desc">Deep knowledge of San Diego's diverse neighborhoods — from the coast to inland communities — gives clients a genuine advantage in every transaction.</div></div>
+      <div class="ap-award-card reveal reveal-d1"><div class="ap-award-year">CA</div><div class="ap-award-name">Licensed Professional</div><div class="ap-award-desc">A licensed California REALTOR® with Palisade Realty, Inc. — fully committed to representing your best interests from search through closing.</div></div>
+      <div class="ap-award-card reveal reveal-d2"><div class="ap-award-year">PR</div><div class="ap-award-name">Palisade Proven</div><div class="ap-award-desc">Backed by Palisade Realty's proven systems, technology, and team — delivering consistent, client-first results across San Diego County.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ AREAS SERVED ══ -->
+<section class="ap-areas" aria-label="Communities served">
+  <div class="ap-areas-inner">
+    <div class="ap-areas-layout">
+      <!-- Left: header + chips -->
+      <div class="ap-areas-left">
+        <div class="ap-areas-header">
+          <p class="ap-areas-eyebrow reveal">Coverage</p>
+          <h2 class="ap-areas-h2 reveal reveal-d1">Areas I <em>Serve</em></h2>
+          <p class="ap-areas-sub reveal reveal-d2">With deep roots across San Diego County, I bring local expertise to every corner of the region — from the coast to the inland communities.</p>
+        </div>
+        <div class="ap-areas-grid">
+          <a href="/communities/downtown-san-diego-real-estate" class="ap-area-chip reveal" data-slug="downtown-san-diego" data-city="Downtown San Diego" aria-label="View Downtown San Diego community"><span class="ap-area-chip-dot"></span><span class="ap-area-chip-name">Downtown San Diego</span></a>
+          <a href="/communities/mission-hills-real-estate" class="ap-area-chip reveal reveal-d1" data-slug="mission-hills" data-city="Mission Hills" aria-label="View Mission Hills community"><span class="ap-area-chip-dot"></span><span class="ap-area-chip-name">Mission Hills</span></a>
+          <a href="/communities/point-loma-real-estate" class="ap-area-chip reveal reveal-d2" data-slug="point-loma" data-city="Point Loma" aria-label="View Point Loma community"><span class="ap-area-chip-dot"></span><span class="ap-area-chip-name">Point Loma</span></a>
+          <a href="/communities/coronado-real-estate" class="ap-area-chip reveal" data-slug="coronado" data-city="Coronado" aria-label="View Coronado community"><span class="ap-area-chip-dot"></span><span class="ap-area-chip-name">Coronado</span></a>
+          <a href="/communities/pacific-mission-beach-real-estate" class="ap-area-chip reveal reveal-d1" data-slug="pacific-mission-beach" data-city="Pacific &amp; Mission Beach" aria-label="View Pacific &amp; Mission Beach community"><span class="ap-area-chip-dot"></span><span class="ap-area-chip-name">Pacific &amp; Mission Beach</span></a>
+          <a href="/communities/mission-valley-real-estate" class="ap-area-chip reveal reveal-d2" data-slug="mission-valley" data-city="Mission Valley" aria-label="View Mission Valley community"><span class="ap-area-chip-dot"></span><span class="ap-area-chip-name">Mission Valley</span></a>
+          <a href="/communities/la-jolla-real-estate" class="ap-area-chip reveal" data-slug="la-jolla" data-city="La Jolla" aria-label="View La Jolla community"><span class="ap-area-chip-dot"></span><span class="ap-area-chip-name">La Jolla</span></a>
+          <a href="/communities/del-mar-real-estate" class="ap-area-chip reveal reveal-d1" data-slug="del-mar" data-city="Del Mar" aria-label="View Del Mar community"><span class="ap-area-chip-dot"></span><span class="ap-area-chip-name">Del Mar</span></a>
+          <a href="/communities/carmel-valley-real-estate" class="ap-area-chip reveal reveal-d2" data-slug="carmel-valley" data-city="Carmel Valley" aria-label="View Carmel Valley community"><span class="ap-area-chip-dot"></span><span class="ap-area-chip-name">Carmel Valley</span></a>
+          <a href="/communities/solana-beach-real-estate" class="ap-area-chip reveal" data-slug="solana-beach" data-city="Solana Beach" aria-label="View Solana Beach community"><span class="ap-area-chip-dot"></span><span class="ap-area-chip-name">Solana Beach</span></a>
+          <a href="/communities/rancho-santa-fe-real-estate" class="ap-area-chip reveal reveal-d1" data-slug="rancho-santa-fe" data-city="Rancho Santa Fe" aria-label="View Rancho Santa Fe community"><span class="ap-area-chip-dot"></span><span class="ap-area-chip-name">Rancho Santa Fe</span></a>
+          <a href="/communities/encinitas-real-estate" class="ap-area-chip reveal reveal-d2" data-slug="encinitas" data-city="Encinitas" aria-label="View Encinitas community"><span class="ap-area-chip-dot"></span><span class="ap-area-chip-name">Encinitas</span></a>
+          <a href="/communities/carlsbad-real-estate" class="ap-area-chip reveal" data-slug="carlsbad" data-city="Carlsbad" aria-label="View Carlsbad community"><span class="ap-area-chip-dot"></span><span class="ap-area-chip-name">Carlsbad</span></a>
+          <a href="/communities/oceanside-real-estate" class="ap-area-chip reveal reveal-d1" data-slug="oceanside" data-city="Oceanside" aria-label="View Oceanside community"><span class="ap-area-chip-dot"></span><span class="ap-area-chip-name">Oceanside</span></a>
+          <a href="/communities/spring-valley-real-estate" class="ap-area-chip reveal reveal-d2" data-slug="spring-valley" data-city="Spring Valley" aria-label="View Spring Valley community"><span class="ap-area-chip-dot"></span><span class="ap-area-chip-name">Spring Valley</span></a>
+          <a href="/communities/chula-vista-real-estate" class="ap-area-chip reveal" data-slug="chula-vista" data-city="Chula Vista" aria-label="View Chula Vista community"><span class="ap-area-chip-dot"></span><span class="ap-area-chip-name">Chula Vista</span></a>
+          <a href="/communities/la-mesa-real-estate" class="ap-area-chip reveal reveal-d1" data-slug="la-mesa" data-city="La Mesa" aria-label="View La Mesa community"><span class="ap-area-chip-dot"></span><span class="ap-area-chip-name">La Mesa</span></a>
+          <a href="/communities/el-cajon-real-estate" class="ap-area-chip reveal reveal-d2" data-slug="el-cajon" data-city="El Cajon" aria-label="View El Cajon community"><span class="ap-area-chip-dot"></span><span class="ap-area-chip-name">El Cajon</span></a>
+        </div>
+      </div>
+      <!-- Right: map -->
+      <div class="ap-areas-map-wrap">
+        <div id="ap-areas-map"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ LISTINGS — fl-wrapper injected by featured-listings.js ══ -->
+<div class="listings-outer" id="listings"></div>
+
+<!-- ══ ALL LISTINGS — YLOPO IDX WIDGET ══ -->
+<section class="ap-all-listings" aria-labelledby="ap-all-listings-heading">
+  <div class="ap-all-listings-inner">
+    <div class="ap-all-listings-header">
+      <span class="ap-all-listings-eyebrow reveal">Palisade Realty</span>
+      <h2 class="ap-all-listings-h2 reveal reveal-d1" id="ap-all-listings-heading">All <em>Listings</em></h2>
+      <p class="ap-all-listings-sub reveal reveal-d2">Browse current properties represented by Erick Salgado across San Diego County.</p>
+    </div>
+    <div class="ap-all-listings-widget reveal reveal-d3">
+      <div class="YLOPO_resultsWidget" data-search='{"locations":[{"city":"San Diego","state":"CA"},{"city":"La Jolla","state":"CA"},{"city":"Coronado","state":"CA"},{"city":"Del Mar","state":"CA"},{"city":"Encinitas","state":"CA"},{"city":"Carlsbad","state":"CA"},{"city":"Oceanside","state":"CA"},{"city":"Solana Beach","state":"CA"},{"city":"Chula Vista","state":"CA"}]}'></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section class="ap-contact" id="contact" aria-label="Contact Allison Asher">
+  <div class="ap-contact-inner">
+    <div class="ap-contact-grid">
+
+      <!-- Left -->
+      <div>
+        <p class="ap-contact-left-eyebrow reveal">Direct Contact</p>
+        <h2 class="ap-contact-left-h2 reveal reveal-d1"><em>Contact</em> Allison</h2>
+        <p class="ap-contact-left-body reveal reveal-d2">Ready to buy, sell, or just explore your options? I'm here to guide you with honest advice, deep market knowledge, and a commitment to results at every step of the process.</p>
+        <div class="reveal reveal-d2">
+          <div class="ap-contact-info-line">
+            <div class="ap-contact-info-icon" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.78a16 16 0 0 0 6 6l.97-.97a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 21.72 16z"/></svg>
+            </div>
+            <a href="tel:+16197940218" class="ap-contact-info-text">(619) 794-0218</a>
+          </div>
+          <div class="ap-contact-info-line">
+            <div class="ap-contact-info-icon" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <a href="mailto:allison@palisaderealty.com" class="ap-contact-info-text">allison@palisaderealty.com</a>
+          </div>
+          <div class="ap-contact-info-line">
+            <div class="ap-contact-info-icon" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <span class="ap-contact-info-text ap-contact-info-text--static">3434 Grove Street, Lemon Grove, CA 91945</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Form -->
+      <div class="reveal reveal-d1">
+        <form class="ap-form" action="#" method="POST" novalidate>
+          <div class="ap-form-row">
+            <div class="ap-form-group">
+              <label class="ap-form-label" for="cf-first">First Name</label>
+              <input class="ap-form-input" type="text" id="cf-first" name="first_name" placeholder="Jane" autocomplete="given-name" required>
+            </div>
+            <div class="ap-form-group">
+              <label class="ap-form-label" for="cf-last">Last Name</label>
+              <input class="ap-form-input" type="text" id="cf-last" name="last_name" placeholder="Smith" autocomplete="family-name" required>
+            </div>
+          </div>
+          <div class="ap-form-group">
+            <label class="ap-form-label" for="cf-email">Email Address</label>
+            <input class="ap-form-input" type="email" id="cf-email" name="email" placeholder="jane@example.com" autocomplete="email" required>
+          </div>
+          <div class="ap-form-group">
+            <label class="ap-form-label" for="cf-phone">Phone Number</label>
+            <input class="ap-form-input" type="tel" id="cf-phone" name="phone" placeholder="(619) 555-0000" autocomplete="tel">
+          </div>
+          <div class="ap-form-group">
+            <label class="ap-form-label" for="cf-interest">I'm Interested In</label>
+            <select class="ap-form-select" id="cf-interest" name="interest">
+              <option value="">Select one…</option>
+              <option value="buying">Buying a Home</option>
+              <option value="selling">Selling My Home</option>
+              <option value="both">Buying &amp; Selling</option>
+              <option value="investing">Investment Property</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="ap-form-group">
+            <label class="ap-form-label" for="cf-message">Message</label>
+            <textarea class="ap-form-textarea" id="cf-message" name="message" placeholder="Tell me about your real estate goals…"></textarea>
+          </div>
+          <p class="ap-form-consent">By providing your telephone number, you are consenting to allow Palisade Realty, Inc. to contact you with informational communications via voice call, AI voice call, and/or text message for real estate services. Message and data rates may apply. Reply STOP to opt out. See our <a href="#">Privacy Policy</a>.</p>
+          <button type="submit" class="ap-form-submit">
+            Send Message
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 6h8"/><path d="M6 2.5L9.5 6 6 9.5"/></svg>
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ RELATED AGENTS ══ -->
+<section class="ap-related" aria-label="Meet the team">
+  <div class="ap-related-inner">
+    <p class="ap-related-eyebrow reveal">The Team</p>
+    <h2 class="ap-related-h2 reveal reveal-d1">Meet More of Our <em>Agents</em></h2>
+    <div class="ap-related-grid">
+      <article class="agent-card agent-card--leader reveal"><div class="agent-card-img-wrap"><img class="agent-card-img" src="/assets/images/agents/hedda-parashos.jpg" alt="Hedda Parashos, CEO &amp; Principal Broker at Palisade Realty" loading="lazy" width="300" height="400"></div><div class="agent-card-body"><div class="agent-card-name">Hedda Parashos</div><div class="agent-card-role">CEO &amp; Principal Broker</div><a href="hedda-parashos.html" class="agent-card-link">View Profile <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 6h8"/><path d="M6 2.5L9.5 6 6 9.5"/></svg></a></div></article>
+      <article class="agent-card agent-card--leader reveal reveal-d1"><div class="agent-card-img-wrap"><img class="agent-card-img" src="/assets/images/agents/tom-parashos.jpg" alt="Tom Parashos, Principal / Co-Owner at Palisade Realty" loading="lazy" width="300" height="400"></div><div class="agent-card-body"><div class="agent-card-name">Tom Parashos</div><div class="agent-card-role">Principal / Co-Owner</div><a href="tom-parashos.html" class="agent-card-link">View Profile <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 6h8"/><path d="M6 2.5L9.5 6 6 9.5"/></svg></a></div></article>
+      <article class="agent-card reveal reveal-d2"><div class="agent-card-img-wrap"><img class="agent-card-img" src="/assets/images/agents/britney-bartlett.jpg" alt="Britney Bartlett, Director of Operations at Palisade Realty" loading="lazy" width="300" height="400"></div><div class="agent-card-body"><div class="agent-card-name">Britney Bartlett</div><div class="agent-card-role">Director of Operations</div><a href="britney-bartlett.html" class="agent-card-link">View Profile <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 6h8"/><path d="M6 2.5L9.5 6 6 9.5"/></svg></a></div></article>
+      <article class="agent-card reveal reveal-d3"><div class="agent-card-img-wrap"><img class="agent-card-img" src="/assets/images/agents/erick-salgado.jpg" alt="Erick Salgado, REALTOR® at Palisade Realty" loading="lazy" width="300" height="400"></div><div class="agent-card-body"><div class="agent-card-name">Erick Salgado</div><div class="agent-card-role">REALTOR®</div><a href="erick-salgado.html" class="agent-card-link">View Profile <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 6h8"/><path d="M6 2.5L9.5 6 6 9.5"/></svg></a></div></article>
+    </div>
+    <div style="text-align:center;margin-top:44px;" class="reveal"><a href="/team" class="btn btn-outline-brand">View All Agents</a></div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section class="tp-cta" aria-label="Start working with Allison">
+  <div class="tp-cta-inner">
+    <p class="tp-eyebrow reveal">Ready to Get Started?</p>
+    <h2 class="tp-cta-h2 reveal reveal-d1"><em>Let's Find</em> Your Dream Home</h2>
+    <p class="tp-cta-sub reveal reveal-d2">Allison is ready to guide you — whether you are buying, selling, or exploring your options. Reach out today for a no-pressure conversation.</p>
+    <div class="tp-cta-btns reveal reveal-d3">
+      <a href="#contact" class="btn btn-brand">Contact Allison</a>
+      <a href="https://search.palisaderealty.com/" target="_blank" rel="noopener noreferrer" class="btn btn-outline-white">Search Properties</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ══ FOOTER ══ -->
+<footer class="site-footer" id="footer">
+
+  <div class="footer-texture" aria-hidden="true"></div>
+
+  <!-- Brand stripe -->
+  <div class="footer-stripe" aria-hidden="true"></div>
+
+  <div class="footer-inner">
+
+    <!-- Brand Column -->
+    <div class="footer-col-brand">
+      <div class="footer-logo">
+        <img src="/images/logo.png" alt="Palisade Realty">
+      </div>
+
+      <div class="footer-copy-mls-row">
+        <div>
+          <p class="footer-copy">
+            &copy;Palisade Realty, Inc. 2026<br>
+            All Rights Reserved<br><br>
+            Brokerage CA DRE #01848565<br><br>
+            Hedda Parashos<br>
+            CA DRE #01773167
+          </p>
+        </div>
+        <div class="footer-mls-badge" aria-label="Move Safe Certified by HomeLight">
+          <img src="/assets/images/move-safe-offsite-stacked.png" alt="Move Safe Certified by HomeLight">
+        </div>
+      </div>
+
+      <div class="footer-social">
+        <a href="https://www.facebook.com/PalisadeRealty/" target="_blank" rel="noopener noreferrer" aria-label="Palisade Realty on Facebook">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M15 8a7 7 0 1 0-8.094 6.915V10.3H4.947V8h1.959V6.257C6.906 4.32 8.067 3.25 9.832 3.25c.847 0 1.733.151 1.733.151v1.9h-.976c-.962 0-1.261.597-1.261 1.209V8h2.147l-.343 2.3H9.328v4.615A7.003 7.003 0 0 0 15 8z"/></svg>
+        </a>
+        <a href="https://www.pinterest.com/palisaderealty/" target="_blank" rel="noopener noreferrer" aria-label="Palisade Realty on Pinterest">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0a8 8 0 0 0-2.915 15.452c-.07-.633-.134-1.606.027-2.297.146-.625.984-4.172.984-4.172s-.252-.503-.252-1.246c0-1.167.678-2.041 1.52-2.041.717 0 1.065.539 1.065 1.184 0 .721-.46 1.801-.698 2.8-.198.835.42 1.515 1.242 1.515 1.49 0 2.638-1.571 2.638-3.836 0-2.006-1.441-3.408-3.499-3.408-2.382 0-3.78 1.787-3.78 3.634 0 .72.276 1.49.621 1.91a.25.25 0 0 1 .057.239c-.063.264-.204.835-.232.952-.037.154-.124.186-.285.112-1.05-.489-1.707-2.028-1.707-3.264 0-2.653 1.928-5.09 5.559-5.09 2.919 0 5.187 2.081 5.187 4.862 0 2.902-1.83 5.237-4.371 5.237-.854 0-1.658-.444-1.932-.967l-.525 1.958c-.19.733-.705 1.65-1.05 2.208A8.001 8.001 0 0 0 8 16a8 8 0 0 0 0-16z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/palisade_realty/" target="_blank" rel="noopener noreferrer" aria-label="Palisade Realty on Instagram">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Quick Links Column -->
+    <nav class="footer-col-links" aria-label="Quick links">
+      <span class="footer-col-title">Quick Links</span>
+      <div class="footer-links">
+        <a href="https://search.palisaderealty.com/" target="_blank" rel="noopener noreferrer">Buy a Home</a>
+        <a href="https://search.palisaderealty.com/seller" target="_blank" rel="noopener noreferrer">Sell Your Home</a>
+        <a href="/communities">Communities</a>
+        <a href="/testimonials">Testimonials</a>
+        <a href="/blog">Blog</a>
+        <a href="/team">Our Team</a>
+        <a href="/contact">Contact Us</a>
+      </div>
+    </nav>
+
+    <!-- Contact Column -->
+    <address class="footer-col-contact" style="font-style:normal;">
+      <span class="footer-col-title">Contact</span>
+      <span class="footer-contact-line"><strong>3434 Grove Street</strong></span>
+      <span class="footer-contact-line"><strong>Lemon Grove, CA 91945</strong></span>
+      <a href="tel:+16197940218" class="footer-contact-line">(619) 794-0218</a>
+      <a href="mailto:contactus@palisaderealty.com" class="footer-contact-line footer-contact-line--email">contactus@palisaderealty.com</a>
+      <span class="footer-contact-line">Mon â€“ Fri: 9:00 AM â€“ 5:00 PM</span>
+    </address>
+
+  </div>
+
+</footer>
+
+<!-- Ylopo widget loader (only renders on registered domain, not localhost) -->
+<script src="https://search.palisaderealty.com/build/js/widgets-1.0.0.js" defer></script>
+<script src="/homepage.js"></script>
+<script src="/featured-listings.js"></script>
+
+<!-- Mapbox: Areas map -->
+<script>
+(function () {
+  var MAPBOX_TOKEN = 'pk.eyJ1Ijoiam9tLW1hcGJveCIsImEiOiJjbXFxaGJva3AwNDVqMnBxcnlvaW54aWRoIn0.f4TeZyya7vaALl39DaWK5Q';
+
+  var SD_COUNTY = {"type":"Polygon","coordinates":[[[-117.61054,33.33367],[-117.57153,33.3123],[-117.5496,33.29442],[-117.521,33.26887],[-117.50087,33.24215],[-117.46787,33.21249],[-117.43556,33.17751],[-117.37587,33.07522],[-117.33997,33],[-117.32328,32.90306],[-117.33966,32.85917],[-117.34213,32.82622],[-117.33447,32.79908],[-117.32094,32.68985],[-117.30924,32.6564],[-117.27694,32.62348],[-117.25201,32.61487],[-117.23353,32.61669],[-117.22332,32.62125],[-117.21411,32.59478],[-117.20505,32.52952],[-116.10619,32.61848],[-116.10567,32.7265],[-116.10316,32.72651],[-116.10325,33.07467],[-116.08115,33.07486],[-116.08509,33.42607],[-116.19774,33.42893],[-117.03089,33.42689],[-117.03085,33.42996],[-117.24136,33.43189],[-117.24151,33.44874],[-117.37081,33.49056],[-117.36418,33.50482],[-117.50975,33.50515],[-117.50909,33.47031],[-117.53879,33.45518],[-117.55961,33.45102],[-117.5785,33.4537],[-117.61054,33.33367]]]};
+
+  var CITIES = {"type":"FeatureCollection","features":[{"type":"Feature","id":"downtown-san-diego","properties":{"name":"Downtown San Diego","slug":"downtown-san-diego","center":[-117.0823738,33.1220344]},"geometry":{"type":"Polygon","coordinates":[[[-117.09966,33.11772],[-117.09829,33.1161],[-117.0951,33.11763],[-117.08759,33.1173],[-117.08407,33.11495],[-117.0755,33.11958],[-117.07654,33.12325],[-117.07276,33.12485],[-117.07371,33.12697],[-117.07666,33.12611],[-117.07832,33.12878],[-117.08194,33.12766],[-117.08262,33.12928],[-117.09051,33.12683],[-117.08786,33.12154],[-117.08933,33.12054],[-117.09966,33.11772]]]}},{"type":"Feature","id":"mission-hills","properties":{"name":"Mission Hills","slug":"mission-hills","center":[-117.184,32.754]},"geometry":{"type":"Polygon","coordinates":[[[-117.2015,32.7445],[-117.163,32.7445],[-117.163,32.7635],[-117.2015,32.7635],[-117.2015,32.7445]]]}},{"type":"Feature","id":"point-loma","properties":{"name":"Point Loma","slug":"point-loma","center":[-117.242,32.705]},"geometry":{"type":"Polygon","coordinates":[[[-117.266,32.6628],[-117.218,32.6628],[-117.218,32.7445],[-117.266,32.7445],[-117.266,32.6628]]]}},{"type":"Feature","id":"coronado","properties":{"name":"Coronado","slug":"coronado","center":[-117.1766947,32.6915199]},"geometry":{"type":"Polygon","coordinates":[[[-117.22655,32.69039],[-117.22261,32.6867],[-117.20724,32.69031],[-117.19293,32.68791],[-117.19985,32.67543],[-117.17425,32.67554],[-117.21035,32.63871],[-117.20014,32.61879],[-117.19293,32.61856],[-117.19309,32.58597],[-117.13184,32.58562],[-117.11448,32.59326],[-117.11684,32.60529],[-117.11978,32.60526],[-117.13328,32.67596],[-117.16395,32.69327],[-117.16667,32.69835],[-117.18854,32.70591],[-117.19095,32.70539],[-117.1893,32.71302],[-117.19308,32.71608],[-117.21391,32.70913],[-117.22605,32.69591],[-117.22655,32.69039]],[[-117.14469,32.63711],[-117.14271,32.63719],[-117.13975,32.63077],[-117.13248,32.60927],[-117.13505,32.6091],[-117.14,32.62712],[-117.14469,32.63711]]]}},{"type":"Feature","id":"pacific-mission-beach","properties":{"name":"Pacific & Mission Beach","slug":"pacific-mission-beach","center":[-117.244,32.796]},"geometry":{"type":"Polygon","coordinates":[[[-117.258,32.7645],[-117.228,32.7645],[-117.228,32.8288],[-117.258,32.8288],[-117.258,32.7645]]]}},{"type":"Feature","id":"mission-valley","properties":{"name":"Mission Valley","slug":"mission-valley","center":[-117.12,32.763]},"geometry":{"type":"Polygon","coordinates":[[[-117.195,32.7478],[-117.052,32.7478],[-117.052,32.7785],[-117.195,32.7785],[-117.195,32.7478]]]}},{"type":"Feature","id":"la-jolla","properties":{"name":"La Jolla","slug":"la-jolla","center":[-117.2575702,32.8458529]},"geometry":{"type":"Polygon","coordinates":[[[-117.28226,32.83262],[-117.27989,32.82621],[-117.28103,32.82194],[-117.27387,32.81798],[-117.27346,32.8141],[-117.26834,32.80831],[-117.263,32.80574],[-117.26002,32.80664],[-117.26551,32.81012],[-117.22648,32.81946],[-117.23268,32.8272],[-117.23307,32.83391],[-117.23644,32.84242],[-117.23515,32.84955],[-117.23718,32.85465],[-117.23624,32.86419],[-117.23787,32.87175],[-117.24165,32.87009],[-117.24354,32.87146],[-117.24386,32.88611],[-117.25309,32.88612],[-117.25165,32.87597],[-117.25641,32.86003],[-117.26474,32.84888],[-117.26755,32.84859],[-117.2737,32.85137],[-117.27879,32.84776],[-117.28223,32.83999],[-117.28226,32.83262]]]}},{"type":"Feature","id":"del-mar","properties":{"name":"Del Mar","slug":"del-mar","center":[-117.2653146,32.9594891]},"geometry":{"type":"Polygon","coordinates":[[[-117.27251,32.98014],[-117.26761,32.95335],[-117.26247,32.93989],[-117.25947,32.93742],[-117.25817,32.94202],[-117.256,32.94203],[-117.25594,32.94565],[-117.26015,32.94562],[-117.26097,32.94811],[-117.25974,32.94847],[-117.2602,32.95286],[-117.25592,32.95299],[-117.25617,32.97943],[-117.27251,32.98014]]]}},{"type":"Feature","id":"carmel-valley","properties":{"name":"Carmel Valley","slug":"carmel-valley","center":[-117.2234007,32.9434117]},"geometry":{"type":"Polygon","coordinates":[[[-117.24567,32.95995],[-117.24104,32.93105],[-117.2344,32.93098],[-117.2346,32.9245],[-117.21279,32.92374],[-117.21285,32.92006],[-117.20422,32.91998],[-117.18912,32.92831],[-117.1954,32.93441],[-117.20075,32.93481],[-117.2043,32.9368],[-117.20958,32.93643],[-117.21135,32.93825],[-117.21193,32.94066],[-117.20942,32.94267],[-117.20494,32.94278],[-117.20236,32.94503],[-117.19776,32.94598],[-117.19781,32.9486],[-117.20318,32.94874],[-117.19945,32.95787],[-117.20429,32.95782],[-117.20431,32.96438],[-117.20621,32.96643],[-117.22104,32.96801],[-117.22119,32.96421],[-117.22286,32.96712],[-117.22477,32.9646],[-117.22486,32.96753],[-117.22886,32.96545],[-117.2305,32.96544],[-117.23071,32.96743],[-117.23658,32.96734],[-117.2347,32.96514],[-117.23745,32.96517],[-117.24307,32.96173],[-117.24303,32.96017],[-117.24567,32.95995]]]}},{"type":"Feature","id":"rancho-santa-fe","properties":{"name":"Rancho Santa Fe","slug":"rancho-santa-fe","center":[-117.1979781,33.0242314]},"geometry":{"type":"Polygon","coordinates":[[[-117.23012,33.01409],[-117.22562,33.00813],[-117.22177,33.00853],[-117.21922,33.00666],[-117.21069,33.005],[-117.19902,33.00511],[-117.1992,33.00387],[-117.19282,33.00768],[-117.18973,33.01267],[-117.18492,33.0132],[-117.17427,33.01046],[-117.17304,33.01237],[-117.17719,33.01535],[-117.17815,33.01918],[-117.17529,33.02325],[-117.16963,33.02436],[-117.16382,33.02842],[-117.16193,33.03412],[-117.16568,33.03663],[-117.17377,33.03452],[-117.18389,33.03561],[-117.18664,33.04356],[-117.1967,33.04164],[-117.20881,33.04457],[-117.20908,33.04122],[-117.21201,33.03777],[-117.21882,33.03384],[-117.22476,33.02463],[-117.22763,33.02297],[-117.23012,33.01409]]]}},{"type":"Feature","id":"solana-beach","properties":{"name":"Solana Beach","slug":"solana-beach","center":[-117.2678124,32.9919141]},"geometry":{"type":"Polygon","coordinates":[[[-117.27947,32.99928],[-117.27679,32.99525],[-117.27389,32.98055],[-117.25619,32.97942],[-117.25608,32.98213],[-117.24954,32.98206],[-117.2496,32.98563],[-117.23871,32.98575],[-117.2387,32.98758],[-117.24086,32.98759],[-117.24085,32.98988],[-117.23866,32.99259],[-117.23878,33.00046],[-117.23717,33.00191],[-117.2386,33.00319],[-117.23775,33.00468],[-117.2401,33.0051],[-117.241,33.00748],[-117.24443,33.00746],[-117.24552,33.00567],[-117.24552,33.00746],[-117.26148,33.00746],[-117.25928,33.00384],[-117.27364,33.0045],[-117.27494,33.00306],[-117.27538,33.00414],[-117.27626,33.00146],[-117.27947,32.99928]]]}},{"type":"Feature","id":"encinitas","properties":{"name":"Encinitas","slug":"encinitas","center":[-117.2919818,33.0369867]},"geometry":{"type":"Polygon","coordinates":[[[-117.36829,33.06011],[-117.33997,33],[-117.33928,32.99599],[-117.27947,32.99928],[-117.27626,33.00146],[-117.27538,33.00414],[-117.27494,33.00306],[-117.27364,33.0045],[-117.25928,33.00384],[-117.2612,33.0075],[-117.24552,33.00746],[-117.24447,33.00568],[-117.24282,33.00938],[-117.23931,33.00943],[-117.2428,33.01104],[-117.24284,33.01281],[-117.24691,33.01279],[-117.24694,33.0168],[-117.24433,33.01799],[-117.24431,33.02172],[-117.24699,33.02044],[-117.247,33.02182],[-117.24182,33.02178],[-117.24211,33.02683],[-117.23612,33.03227],[-117.23737,33.03374],[-117.23629,33.03697],[-117.23377,33.03632],[-117.23203,33.03819],[-117.22737,33.04851],[-117.22011,33.04648],[-117.21518,33.05092],[-117.20833,33.0483],[-117.20475,33.05038],[-117.20467,33.05471],[-117.20018,33.05383],[-117.20009,33.06557],[-117.19584,33.06555],[-117.1958,33.06742],[-117.19993,33.06924],[-117.19993,33.07305],[-117.19578,33.07297],[-117.1957,33.08042],[-117.20045,33.07905],[-117.19955,33.08045],[-117.2022,33.0806],[-117.199,33.0776],[-117.20132,33.07517],[-117.20396,33.07685],[-117.21079,33.07591],[-117.21402,33.07766],[-117.21592,33.0759],[-117.22426,33.07571],[-117.22337,33.06126],[-117.22918,33.06101],[-117.22964,33.06269],[-117.23195,33.06278],[-117.2319,33.06089],[-117.23942,33.06053],[-117.24351,33.06399],[-117.24935,33.06374],[-117.24898,33.06749],[-117.26051,33.06721],[-117.26223,33.06789],[-117.26234,33.07016],[-117.27233,33.06867],[-117.27315,33.08046],[-117.27004,33.08047],[-117.27005,33.08497],[-117.27978,33.08774],[-117.29106,33.0869],[-117.29904,33.08409],[-117.30159,33.08897],[-117.30944,33.08206],[-117.36829,33.06011]]]}},{"type":"Feature","id":"carlsbad","properties":{"name":"Carlsbad","slug":"carlsbad","center":[-117.3505966,33.1580933]},"geometry":{"type":"Polygon","coordinates":[[[-117.40957,33.13257],[-117.36829,33.06011],[-117.30944,33.08206],[-117.30159,33.08897],[-117.29904,33.08409],[-117.29106,33.0869],[-117.27978,33.08774],[-117.27005,33.08497],[-117.27004,33.08047],[-117.27315,33.08046],[-117.27233,33.06867],[-117.26234,33.07016],[-117.26223,33.06789],[-117.26051,33.06721],[-117.24898,33.06749],[-117.24935,33.06374],[-117.24351,33.06399],[-117.23942,33.06053],[-117.2319,33.06089],[-117.23195,33.06278],[-117.22964,33.06269],[-117.22918,33.06101],[-117.22337,33.06126],[-117.22426,33.07571],[-117.21593,33.07606],[-117.21671,33.09512],[-117.22103,33.09515],[-117.22118,33.10262],[-117.22458,33.10416],[-117.22574,33.10985],[-117.22795,33.11091],[-117.22821,33.1136],[-117.22979,33.11359],[-117.22992,33.13504],[-117.24601,33.13496],[-117.24674,33.14581],[-117.25326,33.1458],[-117.25323,33.15247],[-117.25565,33.15221],[-117.25688,33.15714],[-117.25922,33.15838],[-117.26187,33.1531],[-117.27066,33.1531],[-117.27098,33.17716],[-117.27958,33.17578],[-117.27958,33.17407],[-117.28304,33.17299],[-117.28393,33.17582],[-117.29889,33.17557],[-117.29943,33.18258],[-117.30971,33.17953],[-117.32319,33.18203],[-117.33136,33.17974],[-117.34412,33.17983],[-117.34431,33.17615],[-117.35284,33.1748],[-117.3528,33.16886],[-117.35973,33.16885],[-117.35736,33.16659],[-117.35803,33.16505],[-117.40957,33.13257]]]}},{"type":"Feature","id":"oceanside","properties":{"name":"Oceanside","slug":"oceanside","center":[-117.379483,33.1958696]},"geometry":{"type":"Polygon","coordinates":[[[-117.4398,33.1821],[-117.43556,33.17751],[-117.40957,33.13257],[-117.35803,33.16505],[-117.35736,33.16659],[-117.35973,33.16885],[-117.3528,33.16886],[-117.35284,33.1748],[-117.34431,33.17615],[-117.34412,33.17983],[-117.33136,33.17974],[-117.32319,33.18203],[-117.30971,33.17953],[-117.29943,33.18258],[-117.29889,33.17557],[-117.28393,33.17582],[-117.28304,33.17299],[-117.27958,33.17407],[-117.27958,33.17578],[-117.27098,33.17716],[-117.27066,33.1531],[-117.26187,33.1531],[-117.26188,33.15492],[-117.24888,33.17179],[-117.2738,33.18322],[-117.2752,33.18136],[-117.27839,33.18103],[-117.27739,33.18368],[-117.28012,33.18107],[-117.28396,33.18159],[-117.28396,33.18378],[-117.28827,33.18352],[-117.28827,33.18674],[-117.28566,33.18668],[-117.28552,33.18787],[-117.28774,33.19031],[-117.28776,33.19394],[-117.27953,33.19387],[-117.2795,33.2048],[-117.27363,33.20476],[-117.27093,33.20667],[-117.27094,33.20837],[-117.26657,33.20835],[-117.26222,33.21044],[-117.26224,33.21916],[-117.25603,33.2196],[-117.25609,33.22317],[-117.25351,33.22316],[-117.25743,33.22344],[-117.26224,33.22719],[-117.2586,33.2289],[-117.2578,33.23526],[-117.26281,33.23744],[-117.26044,33.24047],[-117.26223,33.24149],[-117.25574,33.24657],[-117.24495,33.24062],[-117.24503,33.2548],[-117.24289,33.25532],[-117.24288,33.25979],[-117.24928,33.25889],[-117.2493,33.26356],[-117.24524,33.2635],[-117.24505,33.26575],[-117.23926,33.26559],[-117.23789,33.26772],[-117.24498,33.26709],[-117.24501,33.27802],[-117.25362,33.27816],[-117.25364,33.28153],[-117.24937,33.28173],[-117.24932,33.28538],[-117.26227,33.28553],[-117.26227,33.29275],[-117.25797,33.29273],[-117.25801,33.29636],[-117.26349,33.29465],[-117.26411,33.29722],[-117.26232,33.29794],[-117.26234,33.29998],[-117.26971,33.30003],[-117.39048,33.20704],[-117.3941,33.20839],[-117.39386,33.21269],[-117.39567,33.21391],[-117.39855,33.21066],[-117.398,33.20734],[-117.40251,33.20474],[-117.40392,33.20627],[-117.4398,33.1821]]]}},{"type":"Feature","id":"spring-valley","properties":{"name":"Spring Valley","slug":"spring-valley","center":[-116.9668895,32.7295705]},"geometry":{"type":"Polygon","coordinates":[[[-117.01861,32.74451],[-117.01442,32.74037],[-117.01451,32.73463],[-117.01627,32.73464],[-117.01578,32.72899],[-117.01436,32.72875],[-117.01452,32.73038],[-117.00702,32.73051],[-117.00648,32.73617],[-117.00016,32.73617],[-117.00092,32.73524],[-116.99936,32.7338],[-117.00099,32.73233],[-116.99782,32.73128],[-116.99699,32.72919],[-116.99571,32.73137],[-116.98933,32.73124],[-116.98929,32.72697],[-116.98349,32.72725],[-116.97959,32.72017],[-116.98017,32.71821],[-116.98434,32.71946],[-116.98442,32.71472],[-116.98187,32.71567],[-116.98047,32.71314],[-116.97658,32.71454],[-116.98001,32.7115],[-116.97866,32.70794],[-116.97149,32.70929],[-116.96135,32.70429],[-116.95878,32.70551],[-116.95725,32.713],[-116.94794,32.72121],[-116.94478,32.72985],[-116.94061,32.73338],[-116.9427,32.73948],[-116.95179,32.74013],[-116.95814,32.74572],[-116.98464,32.74491],[-117.00576,32.75259],[-117.01019,32.75263],[-117.01061,32.75486],[-117.01224,32.75475],[-117.01218,32.75306],[-117.01522,32.75045],[-117.01453,32.74799],[-117.01861,32.74451]]]}},{"type":"Feature","id":"chula-vista","properties":{"name":"Chula Vista","slug":"chula-vista","center":[-117.084195,32.6400541]},"geometry":{"type":"Polygon","coordinates":[[[-117.12401,32.64637],[-117.1177,32.60754],[-117.09802,32.6131],[-117.09784,32.60508],[-117.09258,32.60461],[-117.09035,32.5961],[-117.08411,32.59482],[-117.0841,32.5912],[-117.05814,32.59104],[-117.05815,32.58744],[-117.05598,32.58743],[-117.05382,32.58743],[-117.05372,32.59106],[-117.04932,32.59107],[-117.04928,32.58738],[-117.04494,32.58742],[-117.04498,32.5912],[-117.03557,32.59116],[-117.03555,32.59006],[-117.03234,32.59123],[-117.0145,32.59109],[-117.01449,32.58364],[-117.00153,32.58312],[-116.99965,32.57797],[-116.92891,32.59855],[-116.93165,32.60517],[-116.93322,32.60473],[-116.93374,32.60632],[-116.93241,32.607],[-116.93447,32.61193],[-116.93328,32.61277],[-116.93365,32.61765],[-116.93523,32.62001],[-116.93373,32.62014],[-116.9327,32.6229],[-116.93454,32.62451],[-116.9317,32.62421],[-116.93002,32.62674],[-116.93278,32.62858],[-116.93089,32.62895],[-116.93101,32.63154],[-116.93414,32.63353],[-116.93173,32.634],[-116.93369,32.63881],[-116.93208,32.64283],[-116.93475,32.64318],[-116.93269,32.64519],[-116.93378,32.64625],[-116.93086,32.64729],[-116.93247,32.6489],[-116.94228,32.64831],[-116.93727,32.65164],[-116.93947,32.652],[-116.93686,32.65406],[-116.94097,32.65558],[-116.93683,32.65605],[-116.93836,32.65766],[-116.9366,32.65827],[-116.93665,32.66517],[-116.93437,32.66517],[-116.93438,32.66697],[-116.92774,32.66699],[-116.92783,32.68429],[-116.94499,32.68516],[-116.94511,32.6816],[-116.94082,32.68163],[-116.94084,32.67804],[-116.94956,32.678],[-116.9496,32.68542],[-116.95814,32.68562],[-116.9584,32.67813],[-116.96241,32.67633],[-116.9626,32.67203],[-116.97567,32.67256],[-116.97567,32.67073],[-116.97784,32.67071],[-116.9886,32.67787],[-116.98869,32.67429],[-116.99728,32.67426],[-116.99523,32.66734],[-116.98956,32.66388],[-116.98589,32.66643],[-116.98443,32.66528],[-116.9844,32.6673],[-116.98006,32.66727],[-116.98003,32.66134],[-116.99258,32.66026],[-116.99314,32.66171],[-117.00111,32.65945],[-117.00375,32.66644],[-117.01196,32.66418],[-117.00862,32.65556],[-117.01753,32.65838],[-117.02109,32.65761],[-117.02276,32.66205],[-117.02723,32.66059],[-117.02808,32.6627],[-117.02372,32.6658],[-117.02294,32.66873],[-117.03994,32.66512],[-117.04386,32.66003],[-117.04169,32.65863],[-117.04383,32.65845],[-117.04306,32.65642],[-117.035,32.66044],[-117.03116,32.65989],[-117.02976,32.65781],[-117.03505,32.65644],[-117.03679,32.65356],[-117.03943,32.65375],[-117.03751,32.64933],[-117.05,32.64591],[-117.04934,32.6442],[-117.05092,32.64373],[-117.05202,32.64531],[-117.05594,32.6441],[-117.05346,32.641],[-117.05673,32.64016],[-117.05829,32.6436],[-117.0587,32.6396],[-117.06084,32.639],[-117.06137,32.64022],[-117.06511,32.63812],[-117.06523,32.64036],[-117.06252,32.64037],[-117.06406,32.64218],[-117.06286,32.64588],[-117.06165,32.64573],[-117.06129,32.64783],[-117.05791,32.64739],[-117.05816,32.64841],[-117.06512,32.6503],[-117.07093,32.65681],[-117.07873,32.6571],[-117.08322,32.65891],[-117.08451,32.66103],[-117.09067,32.65742],[-117.08884,32.6527],[-117.09279,32.65161],[-117.09474,32.65624],[-117.09849,32.65414],[-117.09621,32.64826],[-117.1028,32.64639],[-117.10506,32.65058],[-117.12401,32.64637]],[[-117.02315,32.59852],[-117.0231,32.60599],[-117.01074,32.60586],[-117.01155,32.60778],[-116.99965,32.61063],[-116.99917,32.60255],[-117.00782,32.59831],[-117.02315,32.59852]]]}},{"type":"Feature","id":"la-mesa","properties":{"name":"La Mesa","slug":"la-mesa","center":[-117.0230839,32.7678288]},"geometry":{"type":"Polygon","coordinates":[[[-117.0536,32.76067],[-117.0535,32.75578],[-117.04915,32.75567],[-117.0493,32.74316],[-117.04617,32.74489],[-117.0201,32.74721],[-117.01218,32.75306],[-117.01224,32.75475],[-117.01023,32.75479],[-117.01019,32.75263],[-117.00144,32.7524],[-117.00066,32.75591],[-117.00241,32.76073],[-117.00137,32.76295],[-116.99457,32.76241],[-116.99737,32.76503],[-116.99921,32.76443],[-116.99874,32.76536],[-116.99575,32.76596],[-116.99566,32.7648],[-116.99263,32.76446],[-116.9915,32.76608],[-116.99105,32.76467],[-116.99131,32.76607],[-116.98878,32.76712],[-116.99064,32.76976],[-116.98565,32.76906],[-116.98539,32.77103],[-116.98186,32.77229],[-116.98506,32.77389],[-116.98677,32.77264],[-116.98602,32.77131],[-116.99266,32.76982],[-116.99467,32.76767],[-117.00132,32.76824],[-116.99606,32.77036],[-116.99761,32.77179],[-116.99716,32.77442],[-116.9982,32.77482],[-116.99928,32.77222],[-117.00051,32.7728],[-117.00018,32.77471],[-116.99854,32.77486],[-116.99967,32.77729],[-117.0015,32.77579],[-117.00039,32.77816],[-116.99118,32.77709],[-116.99034,32.77864],[-116.98821,32.77846],[-116.99041,32.78088],[-116.98722,32.78301],[-116.98767,32.78429],[-116.98444,32.78523],[-116.98632,32.78564],[-116.98487,32.78844],[-116.98734,32.78768],[-116.98801,32.78931],[-116.98551,32.78993],[-116.98821,32.79066],[-116.98681,32.79417],[-116.98828,32.7957],[-116.99923,32.79498],[-116.99929,32.79609],[-117.0059,32.79474],[-117.00603,32.79133],[-117.03742,32.79149],[-117.03751,32.7888],[-117.03102,32.79056],[-117.03985,32.78212],[-117.03997,32.77945],[-117.0437,32.77723],[-117.04431,32.78007],[-117.04825,32.78044],[-117.0514,32.77795],[-117.04867,32.77734],[-117.04862,32.77427],[-117.0465,32.7735],[-117.04704,32.77085],[-117.03993,32.77139],[-117.03897,32.76886],[-117.04562,32.76766],[-117.04562,32.76601],[-117.05115,32.76602],[-117.05118,32.76326],[-117.05337,32.76328],[-117.0536,32.76067]],[[-116.99233,32.77844],[-116.99211,32.77847],[-116.99217,32.77876],[-116.99192,32.7787],[-116.99233,32.77844]]]}},{"type":"Feature","id":"el-cajon","properties":{"name":"El Cajon","slug":"el-cajon","center":[-116.962526,32.7947731]},"geometry":{"type":"Polygon","coordinates":[[[-117.01122,32.82029],[-117.00999,32.81563],[-117.00597,32.81295],[-117.00604,32.79474],[-116.98828,32.7957],[-116.98681,32.79417],[-116.98821,32.79066],[-116.98551,32.78993],[-116.98801,32.78931],[-116.98734,32.78768],[-116.98487,32.78844],[-116.98632,32.78564],[-116.98444,32.78523],[-116.98767,32.78429],[-116.98722,32.78301],[-116.99041,32.78088],[-116.98821,32.77846],[-116.98169,32.77943],[-116.98113,32.77787],[-116.98041,32.7795],[-116.97698,32.77983],[-116.97762,32.77784],[-116.97411,32.77552],[-116.97568,32.77326],[-116.96878,32.77321],[-116.96774,32.77566],[-116.96659,32.77472],[-116.96776,32.7732],[-116.964,32.77317],[-116.95905,32.77569],[-116.96027,32.77314],[-116.95868,32.77311],[-116.95971,32.77223],[-116.95838,32.77122],[-116.96175,32.7712],[-116.96224,32.76804],[-116.95702,32.76772],[-116.95585,32.77793],[-116.95092,32.77876],[-116.95098,32.78041],[-116.94992,32.7786],[-116.94659,32.77969],[-116.94631,32.77823],[-116.94265,32.78056],[-116.94721,32.78512],[-116.94692,32.78663],[-116.94145,32.78672],[-116.94059,32.78547],[-116.93952,32.78695],[-116.93785,32.78475],[-116.93457,32.78472],[-116.93642,32.78164],[-116.93217,32.78109],[-116.93216,32.77823],[-116.92806,32.77824],[-116.92739,32.77606],[-116.92752,32.77942],[-116.92539,32.78136],[-116.92517,32.77909],[-116.9217,32.77983],[-116.92062,32.77872],[-116.91668,32.78184],[-116.91812,32.78207],[-116.91879,32.78552],[-116.91636,32.78863],[-116.92156,32.78947],[-116.92152,32.79275],[-116.92471,32.79274],[-116.92469,32.79649],[-116.91799,32.7964],[-116.91798,32.7945],[-116.91668,32.79451],[-116.91583,32.79641],[-116.91171,32.79764],[-116.90919,32.79606],[-116.90824,32.79714],[-116.90786,32.79545],[-116.90605,32.79743],[-116.90395,32.79566],[-116.90546,32.79484],[-116.90105,32.79397],[-116.90046,32.79664],[-116.89576,32.79969],[-116.89593,32.80168],[-116.90035,32.80324],[-116.89646,32.80638],[-116.90202,32.80821],[-116.90133,32.80325],[-116.90308,32.80476],[-116.90392,32.80373],[-116.90248,32.80285],[-116.90479,32.8009],[-116.90974,32.80223],[-116.91037,32.80022],[-116.91953,32.80021],[-116.91929,32.80237],[-116.92147,32.80179],[-116.9183,32.80927],[-116.91698,32.80737],[-116.91289,32.80785],[-116.91541,32.80975],[-116.91281,32.81071],[-116.91206,32.81272],[-116.90951,32.81224],[-116.90966,32.81399],[-116.91309,32.81597],[-116.90926,32.82056],[-116.91401,32.8213],[-116.91371,32.82293],[-116.91471,32.82145],[-116.91821,32.82256],[-116.91985,32.81994],[-116.91855,32.81802],[-116.92236,32.81863],[-116.92814,32.81696],[-116.92978,32.81314],[-116.93006,32.81546],[-116.93351,32.81707],[-116.94003,32.81686],[-116.94058,32.81393],[-116.93617,32.81395],[-116.93651,32.80922],[-116.94408,32.80835],[-116.94928,32.80852],[-116.94927,32.81513],[-116.94464,32.81591],[-116.94752,32.81687],[-116.94613,32.82175],[-116.94924,32.82295],[-116.94935,32.82138],[-116.95181,32.82137],[-116.95006,32.8169],[-116.95602,32.81525],[-116.95603,32.81335],[-116.95179,32.81333],[-116.95271,32.81051],[-116.95422,32.81179],[-116.95421,32.81052],[-116.9591,32.81153],[-116.9594,32.81035],[-116.96157,32.81234],[-116.96601,32.81108],[-116.96373,32.81687],[-116.96508,32.81855],[-116.96509,32.82442],[-116.96235,32.8245],[-116.96405,32.82957],[-116.98716,32.83098],[-116.98827,32.8284],[-116.99025,32.8284],[-116.99008,32.82629],[-116.99353,32.8263],[-116.99415,32.82901],[-116.99932,32.82901],[-117.00072,32.82778],[-116.99603,32.82587],[-117.00021,32.82547],[-116.99959,32.82179],[-117.0021,32.81965],[-117.00322,32.82078],[-117.01122,32.82029]]]}}]};
+
+  if (!mapboxgl.supported()) { return; }
+
+  mapboxgl.accessToken = MAPBOX_TOKEN;
+
+  var map = new mapboxgl.Map({
+    container: 'ap-areas-map',
+    style: 'mapbox://styles/mapbox/dark-v11',
+    center: [-117.35, 33.10],
+    zoom: 9.0,
+    minZoom: 7,
+    maxZoom: 15,
+    attributionControl: false,
+    logoPosition: 'bottom-right',
+  });
+
+  map.addControl(new mapboxgl.AttributionControl({ compact: true }), 'bottom-right');
+
+  var popup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false,
+    className: 'ap-areas-popup',
+    offset: 10,
+  });
+
+  var hoveredId = null;
+  var activeId  = null;
+
+  map.on('load', function () {
+    [
+      ['land',         'fill-color', '#0C0C0E'],
+      ['landuse',      'fill-color', '#101012'],
+      ['water',        'fill-color', '#0A1828'],
+      ['water-shadow', 'fill-color', '#0A1828'],
+    ].forEach(function (p) {
+      try { map.setPaintProperty(p[0], p[1], p[2]); } catch (e) {}
+    });
+
+    map.addSource('ap-sd-county', {
+      type: 'geojson',
+      data: { type: 'Feature', geometry: SD_COUNTY },
+    });
+    map.addLayer({ id: 'ap-sd-county-fill', type: 'fill', source: 'ap-sd-county',
+      paint: { 'fill-color': '#2A0C14', 'fill-opacity': 0.45 } });
+    map.addLayer({ id: 'ap-sd-county-border', type: 'line', source: 'ap-sd-county',
+      paint: { 'line-color': '#6B1E30', 'line-width': 1.5, 'line-opacity': 0.70 } });
+
+    map.addSource('ap-cities', { type: 'geojson', data: CITIES });
+
+    map.addLayer({
+      id: 'ap-city-fill', type: 'fill', source: 'ap-cities',
+      paint: {
+        'fill-color': ['case',
+          ['boolean', ['feature-state', 'active'], false], '#A03050',
+          ['boolean', ['feature-state', 'hover'],  false], '#ffffff',
+          '#581829'],
+        'fill-opacity': ['case',
+          ['boolean', ['feature-state', 'active'], false], 0.95,
+          ['boolean', ['feature-state', 'hover'],  false], 0.92,
+          0.72],
+        'fill-color-transition':   { duration: 220, delay: 0 },
+        'fill-opacity-transition': { duration: 220, delay: 0 },
+      },
+    });
+
+    map.addLayer({
+      id: 'ap-city-border', type: 'line', source: 'ap-cities',
+      paint: {
+        'line-color': ['case',
+          ['boolean', ['feature-state', 'active'], false], '#FFB0C8',
+          ['boolean', ['feature-state', 'hover'],  false], '#B03050',
+          '#D4607A'],
+        'line-width': ['case',
+          ['boolean', ['feature-state', 'active'], false], 2.8,
+          ['boolean', ['feature-state', 'hover'],  false], 2.2,
+          1.4],
+        'line-opacity': ['case',
+          ['boolean', ['feature-state', 'active'], false], 1.0,
+          ['boolean', ['feature-state', 'hover'],  false], 0.95,
+          0.80],
+        'line-color-transition':   { duration: 220, delay: 0 },
+        'line-width-transition':   { duration: 220, delay: 0 },
+        'line-opacity-transition': { duration: 220, delay: 0 },
+      },
+    });
+
+    map.addLayer({
+      id: 'ap-city-label', type: 'symbol', source: 'ap-cities',
+      layout: {
+        'text-field': ['upcase', ['get', 'name']],
+        'text-font': ['DIN Pro Bold', 'Arial Unicode MS Bold'],
+        'text-size': ['interpolate', ['linear'], ['zoom'], 8, 9, 10, 11, 13, 13],
+        'text-anchor': 'center',
+        'text-max-width': 7,
+        'text-allow-overlap': false,
+      },
+      paint: {
+        'text-color': ['case', ['boolean', ['feature-state', 'hover'], false], '#2A0810', '#FFECF0'],
+        'text-halo-color': '#2A0810',
+        'text-halo-width': 1.5,
+      },
+    });
+
+    /* Auto-fit */
+    (function () {
+      var minLng = Infinity, minLat = Infinity, maxLng = -Infinity, maxLat = -Infinity;
+      function scan(c) {
+        if (typeof c[0] === 'number') {
+          if (c[0] < minLng) minLng = c[0]; if (c[0] > maxLng) maxLng = c[0];
+          if (c[1] < minLat) minLat = c[1]; if (c[1] > maxLat) maxLat = c[1];
+        } else { c.forEach(scan); }
+      }
+      CITIES.features.forEach(function (f) { scan(f.geometry.coordinates); });
+      if (isFinite(minLng)) {
+        map.fitBounds([[minLng, minLat], [maxLng, maxLat]], { padding: 40, duration: 0, maxZoom: 12 });
+      }
+    })();
+
+    map.on('mousemove', 'ap-city-fill', function (e) {
+      if (!e.features || !e.features.length) return;
+      var feat = e.features[0];
+      var id = feat.id;
+      if (hoveredId !== null && hoveredId !== id) {
+        map.setFeatureState({ source: 'ap-cities', id: hoveredId }, { hover: false });
+        unhoverChips();
+      }
+      if (hoveredId !== id) {
+        hoveredId = id;
+        map.setFeatureState({ source: 'ap-cities', id: id }, { hover: true });
+        hoverChip(feat.properties.slug);
+      }
+      map.getCanvas().style.cursor = 'pointer';
+      popup.setLngLat(e.lngLat).setHTML('<span>' + feat.properties.name + '</span>').addTo(map);
+    });
+
+    map.on('mouseleave', 'ap-city-fill', function () {
+      if (hoveredId !== null) {
+        map.setFeatureState({ source: 'ap-cities', id: hoveredId }, { hover: false });
+        unhoverChips();
+        hoveredId = null;
+      }
+      map.getCanvas().style.cursor = '';
+      popup.remove();
+    });
+
+    map.on('click', 'ap-city-fill', function (e) {
+      if (!e.features || !e.features.length) return;
+      var feat = e.features[0];
+      activateCity(feat.id, feat.properties.slug, feat.properties.center);
+    });
+  });
+
+  document.querySelectorAll('.ap-area-chip[data-slug]').forEach(function (chip) {
+    var slug = chip.dataset.slug;
+
+    chip.addEventListener('click', function (e) {
+      e.preventDefault();
+      var feat = CITIES.features.find(function (f) { return f.id === slug; });
+      activateCity(slug, slug, feat ? feat.properties.center : null, false);
+    });
+
+    chip.addEventListener('mouseenter', function () {
+      chip.classList.add('is-hovered');
+      if (map.isStyleLoaded()) {
+        map.setFeatureState({ source: 'ap-cities', id: slug }, { hover: true });
+      }
+    });
+
+    chip.addEventListener('mouseleave', function () {
+      chip.classList.remove('is-hovered');
+      if (map.isStyleLoaded()) {
+        map.setFeatureState({ source: 'ap-cities', id: slug }, { hover: false });
+      }
+    });
+  });
+
+  var COMMUNITY_URLS = {
+    'downtown-san-diego':   '../communities/downtown-san-diego-real-estate.html',
+    'mission-hills':        '../communities/mission-hills-real-estate.html',
+    'point-loma':           '../communities/point-loma-real-estate.html',
+    'coronado':             '../communities/coronado-real-estate.html',
+    'pacific-mission-beach':'../communities/pacific-mission-beach-real-estate.html',
+    'pacific-beach':        '../communities/pacific-mission-beach-real-estate.html',
+    'mission-beach':        '../communities/pacific-mission-beach-real-estate.html',
+    'mission-valley':       '../communities/mission-valley-real-estate.html',
+    'la-jolla':             '../communities/la-jolla-real-estate.html',
+    'del-mar':              '../communities/del-mar-real-estate.html',
+    'carmel-valley':        '../communities/carmel-valley-real-estate.html',
+    'rancho-santa-fe':      '../communities/rancho-santa-fe-real-estate.html',
+    'solana-beach':         '../communities/solana-beach-real-estate.html',
+    'encinitas':            '../communities/encinitas-real-estate.html',
+    'carlsbad':             '../communities/carlsbad-real-estate.html',
+    'oceanside':            '../communities/oceanside-real-estate.html',
+    'spring-valley':        '../communities/spring-valley-real-estate.html',
+    'chula-vista':          '../communities/chula-vista-real-estate.html',
+    'la-mesa':              '../communities/la-mesa-real-estate.html',
+    'el-cajon':             '../communities/el-cajon-real-estate.html',
+  };
+
+  function activateCity(featureId, slug, center, navigate) {
+    if (activeId !== null && activeId !== featureId) {
+      if (map.isStyleLoaded()) {
+        map.setFeatureState({ source: 'ap-cities', id: activeId }, { active: false });
+      }
+    }
+    activeId = featureId;
+    if (map.isStyleLoaded()) {
+      map.setFeatureState({ source: 'ap-cities', id: featureId }, { active: true });
+    }
+    document.querySelectorAll('.ap-area-chip').forEach(function (c) { c.classList.remove('is-active'); });
+    var chip = document.querySelector('.ap-area-chip[data-slug="' + slug + '"]');
+    if (chip) chip.classList.add('is-active');
+    if (map.isStyleLoaded()) {
+      var flyCenter = center;
+      if (!flyCenter) {
+        var feat = CITIES.features.find(function (f) { return f.id === featureId; });
+        if (feat) flyCenter = feat.properties.center;
+      }
+      if (flyCenter) {
+        var c = typeof flyCenter === 'string' ? JSON.parse(flyCenter) : flyCenter;
+        map.flyTo({ center: c, zoom: 11.8, duration: 1000, essential: true });
+      }
+    }
+    if (navigate !== false) {
+      var url = COMMUNITY_URLS[slug];
+      if (url) {
+        setTimeout(function () { window.location.href = url; }, 380);
+      } else {
+        console.warn('[Palisade Realty] No community page mapped for slug: ' + slug + '. Add it to COMMUNITY_URLS when the page is ready.');
+      }
+    }
+  }
+
+  function hoverChip(slug) {
+    var el = document.querySelector('.ap-area-chip[data-slug="' + slug + '"]');
+    if (el) el.classList.add('is-hovered');
+  }
+
+  function unhoverChips() {
+    document.querySelectorAll('.ap-area-chip.is-hovered').forEach(function (el) {
+      el.classList.remove('is-hovered');
+    });
+  }
+})();
+</script>
+
+<script>
+(function () {
+  var els = document.querySelectorAll('.reveal');
+  if (!els.length) return;
+  /* rootMargin extends the detection zone far below the viewport so every
+     element is considered intersecting on page load — animations play
+     immediately rather than on scroll, which also makes full-page
+     screenshots capture all content correctly. */
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0, rootMargin: '0px 0px 99999px 0px' });
+  els.forEach(function (el) { io.observe(el); });
+})();
+</script>
+
+</body>
+</html>

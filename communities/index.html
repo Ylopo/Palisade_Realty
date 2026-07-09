@@ -1,0 +1,1444 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>San Diego Communities | Palisade Realty</title>
+  <meta name="description" content="Explore San Diego's finest communities with Palisade Realty. From La Jolla and Coronado to Rancho Santa Fe and beyond — find your perfect neighborhood.">
+  <meta property="og:title" content="San Diego Communities | Palisade Realty">
+  <meta property="og:description" content="Discover 18 premier San Diego communities. Coastal estates, urban living, and everything in between.">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Mapbox GL JS -->
+  <link href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
+
+  <!-- Ylopo Widget Config -->
+  <script>
+    var YLOPO_HOSTNAME = 'search.palisaderealty.com';
+    window.YLOPO_WIDGETS = { domain: 'search.palisaderealty.com' };
+    window.YLOPO_WIDGETS.primaryDomain = 'palisaderealty.com';
+    window.YLOPO_WIDGETS.sitewide_domain = 'search.palisaderealty.com';
+  </script>
+
+  <!-- Shared Stylesheet -->
+  <link rel="stylesheet" href="/homepage.css">
+
+  <!-- Communities Page Styles -->
+  <style>
+
+    /* ── HERO ─────────────────────────────────────────────── */
+    .comm-hero {
+      position: relative;
+      height: 72vh;
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .comm-hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .comm-hero-bg img {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transform: scale(1.04);
+      transition: transform 8s ease-out;
+    }
+
+    .comm-hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(10,0,5,0.72) 0%, rgba(10,0,5,0.44) 50%, rgba(10,0,5,0.68) 100%);
+    }
+
+    .comm-hero-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      padding: 0 24px;
+    }
+
+    .comm-hero-breadcrumb {
+      font-family: var(--font-label);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.52);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .comm-hero-breadcrumb a {
+      color: inherit;
+      transition: color 0.2s;
+    }
+
+    .comm-hero-breadcrumb a:hover { color: rgba(255,255,255,0.9); }
+
+    .comm-hero-eyebrow {
+      font-family: var(--font-label);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .comm-hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 6vw, 80px);
+      font-weight: 400;
+      color: #fff;
+      letter-spacing: -0.03em;
+      line-height: 1.0;
+      margin: 0;
+    }
+
+    .comm-hero-stats {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-top: 8px;
+    }
+
+    .comm-hero-stat {
+      padding: 0 28px;
+      text-align: center;
+    }
+
+    .comm-hero-stat:not(:last-child) {
+      border-right: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .comm-hero-stat-value {
+      display: block;
+      font-family: var(--font-label);
+      font-size: 22px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .comm-hero-stat-label {
+      display: block;
+      font-family: var(--font-label);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.52);
+      margin-top: 5px;
+    }
+
+    /* ── INTRO ────────────────────────────────────────────── */
+    .comm-intro {
+      background: #fff;
+      padding: 100px var(--pad-x);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .comm-intro-eyebrow {
+      font-family: var(--font-label);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--brand);
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    .comm-intro-title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 3.5vw, 52px);
+      font-weight: 400;
+      color: var(--near-black);
+      letter-spacing: -0.02em;
+      line-height: 1.08;
+      margin-bottom: 24px;
+    }
+
+    .comm-intro-body {
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--mid-gray);
+      margin-bottom: 36px;
+    }
+
+    .comm-intro-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--brand);
+      color: #fff;
+      font-family: var(--font-label);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 16px 32px;
+      border-radius: var(--radius-pill);
+      transition: background var(--dur-base) var(--ease-spring), transform var(--dur-base) var(--ease-spring);
+    }
+
+    .comm-intro-cta:hover {
+      background: var(--brand-dark);
+      transform: translateY(-2px);
+    }
+
+    .comm-intro-tiles {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .comm-intro-tile {
+      background: var(--off-white);
+      border-radius: var(--radius-md);
+      padding: 28px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .comm-intro-tile::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--brand);
+    }
+
+    .comm-intro-tile:last-child {
+      grid-column: span 2;
+    }
+
+    .comm-intro-tile-value {
+      font-family: var(--font-display);
+      font-size: 40px;
+      font-weight: 400;
+      color: var(--brand);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .comm-intro-tile-label {
+      font-family: var(--font-label);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--mid-gray);
+    }
+
+    /* ── COMMUNITIES GRID SECTION ─────────────────────────── */
+    .comm-grid-section {
+      background: var(--off-white);
+      padding: 80px var(--pad-x) 100px;
+    }
+
+    .comm-grid-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .comm-grid-eyebrow {
+      font-family: var(--font-label);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--brand);
+      display: block;
+      margin-bottom: 14px;
+    }
+
+    .comm-grid-title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4vw, 56px);
+      font-weight: 400;
+      color: var(--near-black);
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      margin-bottom: 48px;
+    }
+
+    /* Filter tabs */
+    .comm-filters {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    .comm-filter-btn {
+      font-family: var(--font-label);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 10px 22px;
+      border-radius: var(--radius-pill);
+      border: 1.5px solid rgba(88,23,42,0.18);
+      background: transparent;
+      color: var(--mid-gray);
+      cursor: pointer;
+      transition: all var(--dur-base) var(--ease-spring);
+    }
+
+    .comm-filter-btn:hover {
+      border-color: var(--brand);
+      color: var(--brand);
+    }
+
+    .comm-filter-btn.is-active {
+      background: var(--brand);
+      border-color: var(--brand);
+      color: #fff;
+    }
+
+    /* Grid */
+    .comm-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    /* Card */
+    .comm-card {
+      background: #fff;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow:
+        0 2px 8px rgba(88,23,42,0.06),
+        0 1px 2px rgba(0,0,0,0.04);
+      transition: transform var(--dur-base) var(--ease-spring),
+                  box-shadow var(--dur-base) var(--ease-spring);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .comm-card:hover {
+      transform: translateY(-6px);
+      box-shadow:
+        0 20px 48px rgba(88,23,42,0.12),
+        0 4px 12px rgba(0,0,0,0.06);
+    }
+
+    .comm-card-img-wrap {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .comm-card-img-wrap img {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s var(--ease-out);
+    }
+
+    .comm-card:hover .comm-card-img-wrap img {
+      transform: scale(1.07);
+    }
+
+    .comm-card-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      font-family: var(--font-label);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #fff;
+      background: var(--brand);
+      padding: 4px 10px 3px;
+      border-radius: 2px;
+      z-index: 2;
+    }
+
+    .comm-card-body {
+      padding: 22px 20px 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .comm-card-name {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--near-black);
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .comm-card-accent {
+      width: 24px;
+      height: 2px;
+      background: var(--accent);
+      margin-bottom: 12px;
+      transition: width 0.3s var(--ease-spring);
+    }
+
+    .comm-card:hover .comm-card-accent { width: 40px; }
+
+    .comm-card-desc {
+      font-family: var(--font-body);
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--mid-gray);
+      flex: 1;
+      margin-bottom: 20px;
+    }
+
+    .comm-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--font-label);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--brand);
+      transition: color var(--dur-fast) ease, gap var(--dur-fast) ease;
+      align-self: flex-start;
+    }
+
+    .comm-card-link:hover {
+      color: var(--brand-dark);
+      gap: 11px;
+    }
+
+    .comm-card-link svg {
+      flex-shrink: 0;
+    }
+
+    /* Card hidden state for filter */
+    .comm-card.is-hidden {
+      display: none;
+    }
+
+    /* ── MAP SECTION ──────────────────────────────────────── */
+    .comm-map-section {
+      background: #fff;
+    }
+
+    /* ── CTA ──────────────────────────────────────────────── */
+    .comm-cta {
+      position: relative;
+      overflow: hidden;
+      min-height: 480px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      padding: 120px var(--pad-x);
+      text-align: center;
+    }
+
+    .comm-cta-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .comm-cta-bg img {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+
+    .comm-cta-bg-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(10,0,5,0.55);
+    }
+
+    .comm-cta-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .comm-cta-eyebrow {
+      font-family: var(--font-label);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+    }
+
+    .comm-cta-title {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 5vw, 68px);
+      font-weight: 400;
+      color: #fff;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      max-width: 760px;
+    }
+
+    .comm-cta-btns {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .comm-cta-btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--brand);
+      color: #fff;
+      font-family: var(--font-label);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 18px 36px;
+      border-radius: var(--radius-pill);
+      transition: background var(--dur-base) var(--ease-spring), transform var(--dur-base) var(--ease-spring);
+    }
+
+    .comm-cta-btn-primary:hover {
+      background: var(--brand-dark);
+      transform: translateY(-2px);
+    }
+
+    .comm-cta-btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: #fff;
+      font-family: var(--font-label);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 18px 36px;
+      border-radius: var(--radius-pill);
+      border: 1.5px solid rgba(255,255,255,0.55);
+      transition: background var(--dur-base) var(--ease-spring), border-color var(--dur-base) var(--ease-spring), transform var(--dur-base) var(--ease-spring);
+    }
+
+    .comm-cta-btn-outline:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.9);
+      transform: translateY(-2px);
+    }
+
+    /* ── RESPONSIVE ───────────────────────────────────────── */
+    @media (max-width: 1280px) {
+      .comm-grid { grid-template-columns: repeat(3, 1fr); }
+      .comm-intro { padding: 80px 56px; gap: 56px; }
+      .comm-grid-section { padding: 80px 56px; }
+      .comm-cta { padding: 100px 56px; }
+    }
+
+    @media (max-width: 1024px) {
+      .comm-intro { grid-template-columns: 1fr; gap: 48px; padding: 72px 40px; }
+      .comm-intro-tiles { max-width: 480px; }
+      .comm-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+      .comm-grid-section { padding: 72px 40px; }
+      .comm-cta { padding: 80px 40px; }
+    }
+
+    @media (max-width: 768px) {
+      .comm-hero { height: 80svh; min-height: 480px; }
+      .comm-hero-stats { flex-direction: column; gap: 20px; }
+      .comm-hero-stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.2); padding: 0 0 20px; }
+      .comm-hero-stat:last-child { border-bottom: none; }
+      .comm-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+      .comm-grid-section { padding: 60px 24px; }
+      .comm-intro { padding: 60px 24px; }
+      .comm-cta { padding: 80px 24px; }
+      .comm-intro-tiles { grid-template-columns: 1fr 1fr; }
+      .comm-intro-tile:last-child { grid-column: span 2; }
+    }
+
+    @media (max-width: 480px) {
+      .comm-grid { grid-template-columns: 1fr; }
+      .comm-hero-stats { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 0; }
+      .comm-hero-stat { border-right: 1px solid rgba(255,255,255,0.2); border-bottom: none; padding: 0 20px; }
+      .comm-hero-stat:last-child { border-right: none; }
+      .comm-card-img-wrap { height: 180px; }
+      .comm-intro-tiles { grid-template-columns: 1fr; }
+      .comm-intro-tile:last-child { grid-column: span 1; }
+      .comm-cta-title { font-size: 32px; }
+    }
+
+    /* ── Communities nav dropdown ── */
+    .nav-dropdown { position: relative; }
+    .nav-dropdown-trigger {
+      display: inline-flex !important;
+      align-items: center;
+      gap: 5px;
+      cursor: default;
+    }
+    .nav-dropdown-chevron {
+      width: 10px; height: 10px;
+      flex-shrink: 0;
+      transition: transform 220ms cubic-bezier(0.22,0.61,0.36,1);
+      opacity: 0.55;
+    }
+    .nav-dropdown.is-open .nav-dropdown-chevron { transform: rotate(180deg); }
+    .nav-dropdown-panel {
+      position: absolute;
+      top: calc(100% + 16px);
+      left: 50%;
+      transform: translateX(-50%) translateY(-6px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 200ms cubic-bezier(0.22,0.61,0.36,1),
+                  transform 200ms cubic-bezier(0.22,0.61,0.36,1);
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.13), 0 1px 4px rgba(0,0,0,0.06);
+      min-width: 480px;
+      padding: 22px 22px 18px;
+      z-index: 300;
+    }
+    .nav-dropdown-panel::before {
+      content: '';
+      position: absolute;
+      top: -5px; left: 50%;
+      width: 10px; height: 10px;
+      background: #fff;
+      transform: translateX(-50%) rotate(45deg);
+      border-radius: 2px;
+      box-shadow: -2px -2px 4px rgba(0,0,0,0.04);
+    }
+    .nav-dropdown.is-open .nav-dropdown-panel {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+    .nav-dropdown-panel::after {
+      content: '';
+      position: absolute;
+      top: -20px; left: 0; right: 0;
+      height: 20px;
+    }
+    .nav-dropdown-label {
+      font-family: var(--font-label,'Inter',sans-serif);
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--brand,#58172a);
+      margin-bottom: 12px; display: block;
+    }
+    .nav-dropdown-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-bottom: 14px;
+    }
+    .nav-dropdown-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 9px 10px; border-radius: 8px;
+      font-family: var(--font-body,'Manrope',sans-serif);
+      font-size: 13px; font-weight: 500;
+      color: #212121; text-decoration: none;
+      text-transform: none !important; letter-spacing: 0 !important;
+      transition: background 150ms, color 150ms;
+      white-space: nowrap;
+    }
+    .nav-dropdown-item:hover { background: rgba(88,23,42,0.06); color: #58172a; opacity: 1 !important; }
+    .nav-dropdown-item::after { display: none !important; }
+    .nav-dropdown-dot { width: 6px; height: 6px; border-radius: 50%; background: #d0d0d0; flex-shrink: 0; }
+    .nav-dropdown-divider { height: 1px; background: rgba(0,0,0,0.07); margin-bottom: 12px; }
+    .nav-dropdown-all {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 10px 4px;
+    }
+    .nav-dropdown-all a {
+      font-family: var(--font-label,'Inter',sans-serif);
+      font-size: 12px; font-weight: 600;
+      color: #58172a !important; text-decoration: none;
+      text-transform: none !important; letter-spacing: 0 !important;
+      display: inline-flex; align-items: center; gap: 5px;
+    }
+    .nav-dropdown-all a::after { display: none !important; }
+    .nav-dropdown-all a:hover { opacity: 0.7; }
+    .mobile-communities-toggle { cursor: pointer; }
+    .mobile-communities-list {
+      display: none; flex-direction: column;
+      padding: 4px 0 4px 20px;
+    }
+    .mobile-communities-list.open { display: flex; }
+    .mobile-communities-list a {
+      font-size: 14px !important;
+      padding: 7px 0 !important;
+      color: #555 !important;
+      text-transform: none !important;
+      letter-spacing: 0 !important;
+      font-weight: 400 !important;
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<header class="site-header" id="site-header">
+
+  <!-- Left Nav -->
+  <nav class="nav-links" aria-label="Primary navigation left">
+    <a href="https://search.palisaderealty.com/" target="_blank" rel="noopener noreferrer">Buy</a>
+    <a href="https://search.palisaderealty.com/seller" target="_blank" rel="noopener noreferrer">Sell</a>
+    <div class="nav-dropdown">
+      <a href="/communities" class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+        Communities
+        <svg class="nav-dropdown-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3.5 5 6.5 8 3.5"/></svg>
+      </a>
+      <div class="nav-dropdown-panel" role="region" aria-label="Communities menu">
+        <span class="nav-dropdown-label">San Diego Communities</span>
+        <div class="nav-dropdown-grid">
+          <a class="nav-dropdown-item" href="/communities/downtown-san-diego-real-estate"><span class="nav-dropdown-dot"></span>Downtown San Diego</a>
+          <a class="nav-dropdown-item" href="/communities/mission-hills-real-estate"><span class="nav-dropdown-dot"></span>Mission Hills</a>
+          <a class="nav-dropdown-item" href="/communities/point-loma-real-estate"><span class="nav-dropdown-dot"></span>Point Loma</a>
+          <a class="nav-dropdown-item" href="/communities/coronado-real-estate"><span class="nav-dropdown-dot"></span>Coronado</a>
+          <a class="nav-dropdown-item" href="/communities/pacific-mission-beach-real-estate"><span class="nav-dropdown-dot"></span>Pacific &amp; Mission Beach</a>
+          <a class="nav-dropdown-item" href="/communities/mission-valley-real-estate"><span class="nav-dropdown-dot"></span>Mission Valley</a>
+          <a class="nav-dropdown-item" href="/communities/la-jolla-real-estate"><span class="nav-dropdown-dot"></span>La Jolla</a>
+          <a class="nav-dropdown-item" href="/communities/del-mar-real-estate"><span class="nav-dropdown-dot"></span>Del Mar</a>
+          <a class="nav-dropdown-item" href="/communities/carmel-valley-real-estate"><span class="nav-dropdown-dot"></span>Carmel Valley</a>
+          <a class="nav-dropdown-item" href="/communities/rancho-santa-fe-real-estate"><span class="nav-dropdown-dot"></span>Rancho Santa Fe</a>
+          <a class="nav-dropdown-item" href="/communities/solana-beach-real-estate"><span class="nav-dropdown-dot"></span>Solana Beach</a>
+          <a class="nav-dropdown-item" href="/communities/encinitas-real-estate"><span class="nav-dropdown-dot"></span>Encinitas</a>
+          <a class="nav-dropdown-item" href="/communities/carlsbad-real-estate"><span class="nav-dropdown-dot"></span>Carlsbad</a>
+          <a class="nav-dropdown-item" href="/communities/oceanside-real-estate"><span class="nav-dropdown-dot"></span>Oceanside</a>
+          <a class="nav-dropdown-item" href="/communities/spring-valley-real-estate"><span class="nav-dropdown-dot"></span>Spring Valley</a>
+          <a class="nav-dropdown-item" href="/communities/chula-vista-real-estate"><span class="nav-dropdown-dot"></span>Chula Vista</a>
+          <a class="nav-dropdown-item" href="/communities/la-mesa-real-estate"><span class="nav-dropdown-dot"></span>La Mesa</a>
+          <a class="nav-dropdown-item" href="/communities/el-cajon-real-estate"><span class="nav-dropdown-dot"></span>El Cajon</a>
+        </div>
+        <div class="nav-dropdown-divider"></div>
+        <div class="nav-dropdown-all">
+          <a href="/communities">View All Communities <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 6h8"/><path d="M6 2.5 9.5 6 6 9.5"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <a href="/testimonials">Testimonials</a>
+  </nav>
+
+  <!-- Center Logo -->
+  <a href="/" class="nav-logo" aria-label="Palisade Realty home">
+    <img src="/images/logo.png" alt="Palisade Realty">
+  </a>
+
+  <!-- Right Nav -->
+  <nav class="nav-links nav-links--right" aria-label="Primary navigation right">
+    <a href="/#fl-section">Properties</a>
+    <a href="/team">Team</a>
+    <a href="/blog">Blog</a>
+    <a href="/contact">Contact</a>
+  </nav>
+
+  <!-- Hamburger (mobile) -->
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Open navigation menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+</header>
+
+<!-- Mobile nav drawer -->
+<div class="nav-mobile-drawer" id="nav-mobile-drawer" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+  <a href="https://search.palisaderealty.com/" target="_blank" rel="noopener noreferrer">Buy</a>
+  <a href="https://search.palisaderealty.com/seller" target="_blank" rel="noopener noreferrer">Sell</a>
+  <a href="/communities" class="mobile-communities-toggle" id="mobile-communities-toggle" aria-expanded="false">Communities â–¾</a>
+  <div class="mobile-communities-list" id="mobile-communities-list">
+    <a href="/communities/downtown-san-diego-real-estate">Downtown San Diego</a>
+    <a href="/communities/mission-hills-real-estate">Mission Hills</a>
+    <a href="/communities/point-loma-real-estate">Point Loma</a>
+    <a href="/communities/coronado-real-estate">Coronado</a>
+    <a href="/communities/pacific-mission-beach-real-estate">Pacific &amp; Mission Beach</a>
+    <a href="/communities/mission-valley-real-estate">Mission Valley</a>
+    <a href="/communities/la-jolla-real-estate">La Jolla</a>
+    <a href="/communities/del-mar-real-estate">Del Mar</a>
+    <a href="/communities/carmel-valley-real-estate">Carmel Valley</a>
+    <a href="/communities/rancho-santa-fe-real-estate">Rancho Santa Fe</a>
+    <a href="/communities/solana-beach-real-estate">Solana Beach</a>
+    <a href="/communities/encinitas-real-estate">Encinitas</a>
+    <a href="/communities/carlsbad-real-estate">Carlsbad</a>
+    <a href="/communities/oceanside-real-estate">Oceanside</a>
+    <a href="/communities/spring-valley-real-estate">Spring Valley</a>
+    <a href="/communities/chula-vista-real-estate">Chula Vista</a>
+    <a href="/communities/la-mesa-real-estate">La Mesa</a>
+    <a href="/communities/el-cajon-real-estate">El Cajon</a>
+  </div>
+  <a href="/testimonials">Testimonials</a>
+  <a href="/#fl-section">Properties</a>
+  <a href="/team">Team</a>
+  <a href="/blog">Blog</a>
+  <a href="/contact">Contact</a>
+</div>
+<main>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="comm-hero" aria-label="San Diego Communities">
+
+  <div class="comm-hero-bg" aria-hidden="true">
+    <img src="/assets/images/community-la-jolla.jpg" alt="" loading="eager">
+  </div>
+
+  <div class="comm-hero-content">
+    <nav class="comm-hero-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span aria-hidden="true">·</span>
+      <span aria-current="page">Communities</span>
+    </nav>
+
+    <span class="comm-hero-eyebrow">Palisade Realty</span>
+
+    <h1 class="comm-hero-title">San Diego<br>Communities</h1>
+
+    <div class="comm-hero-stats" role="list">
+      <div class="comm-hero-stat" role="listitem">
+        <span class="comm-hero-stat-value">18</span>
+        <span class="comm-hero-stat-label">Communities</span>
+      </div>
+      <div class="comm-hero-stat" role="listitem">
+        <span class="comm-hero-stat-value">70+</span>
+        <span class="comm-hero-stat-label">Miles of Coastline</span>
+      </div>
+      <div class="comm-hero-stat" role="listitem">
+        <span class="comm-hero-stat-value">$500K–$10M+</span>
+        <span class="comm-hero-stat-label">Price Range</span>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ============================================================
+     INTRO
+     ============================================================ -->
+<section class="comm-intro" aria-labelledby="comm-intro-heading">
+
+  <div>
+    <span class="comm-intro-eyebrow reveal">Our Coverage</span>
+    <h2 class="comm-intro-title reveal stagger-1" id="comm-intro-heading">
+      Find Your Perfect Place<br>in San Diego
+    </h2>
+    <p class="comm-intro-body reveal stagger-2">
+      From oceanfront estates in La Jolla and Coronado to the rolling hills of Rancho Santa Fe,
+      Palisade Realty serves every corner of San Diego County. Our team of local experts knows
+      these neighborhoods inside and out — helping you find not just a home, but the right
+      community for your lifestyle.
+    </p>
+    <a href="tel:+16197940218" class="comm-intro-cta reveal stagger-3">
+      Talk to a Local Expert
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+
+  <div class="comm-intro-tiles reveal stagger-2">
+    <div class="comm-intro-tile">
+      <span class="comm-intro-tile-value">18</span>
+      <span class="comm-intro-tile-label">Premier Communities</span>
+    </div>
+    <div class="comm-intro-tile">
+      <span class="comm-intro-tile-value">15+</span>
+      <span class="comm-intro-tile-label">Years of Experience</span>
+    </div>
+    <div class="comm-intro-tile">
+      <span class="comm-intro-tile-value">60+</span>
+      <span class="comm-intro-tile-label">Expert Agents</span>
+    </div>
+  </div>
+
+</section>
+
+<!-- ============================================================
+     COMMUNITIES GRID
+     ============================================================ -->
+<section class="comm-grid-section" id="communities" aria-labelledby="comm-grid-heading">
+
+  <div class="comm-grid-header">
+    <span class="comm-grid-eyebrow reveal">Explore Every Area</span>
+    <h2 class="comm-grid-title reveal stagger-1" id="comm-grid-heading">
+      Our Communities
+    </h2>
+
+    <!-- Filter Tabs -->
+    <div class="comm-filters reveal stagger-2" role="tablist" aria-label="Filter communities by region">
+      <button class="comm-filter-btn is-active" data-filter="all" role="tab" aria-selected="true">All</button>
+      <button class="comm-filter-btn" data-filter="coastal" role="tab" aria-selected="false">Coastal San Diego</button>
+      <button class="comm-filter-btn" data-filter="north-county" role="tab" aria-selected="false">North County</button>
+      <button class="comm-filter-btn" data-filter="east-south" role="tab" aria-selected="false">East &amp; South County</button>
+    </div>
+  </div>
+
+  <div class="comm-grid" role="list">
+
+    <!-- Downtown San Diego -->
+    <article class="comm-card reveal" role="listitem" data-region="coastal">
+      <div class="comm-card-img-wrap">
+        <img src="/assets/images/community-downtown-san-diego.jpg" alt="Downtown San Diego skyline" loading="lazy">
+        <span class="comm-card-badge">Urban Core</span>
+      </div>
+      <div class="comm-card-body">
+        <h3 class="comm-card-name">Downtown San Diego</h3>
+        <div class="comm-card-accent"></div>
+        <p class="comm-card-desc">Urban sophistication meets coastal living. World-class dining, nightlife, and walkable neighborhoods in the heart of America's Finest City.</p>
+        <a href="/communities/downtown-san-diego-real-estate" class="comm-card-link">
+          View Community
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- Mission Hills -->
+    <article class="comm-card reveal stagger-1" role="listitem" data-region="coastal">
+      <div class="comm-card-img-wrap">
+        <img src="/assets/images/community-mission-hills.jpg" alt="Mission Hills neighborhood" loading="lazy">
+        <span class="comm-card-badge">Historic Charm</span>
+      </div>
+      <div class="comm-card-body">
+        <h3 class="comm-card-name">Mission Hills</h3>
+        <div class="comm-card-accent"></div>
+        <p class="comm-card-desc">Craftsman bungalows and tree-lined streets make Mission Hills one of San Diego's most beloved historic neighborhoods with a vibrant village character.</p>
+        <a href="/communities/mission-hills-real-estate" class="comm-card-link">
+          View Community
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- Point Loma -->
+    <article class="comm-card reveal stagger-2" role="listitem" data-region="coastal">
+      <div class="comm-card-img-wrap">
+        <img src="/assets/images/community-point-loma.jpg" alt="Point Loma coastline" loading="lazy">
+        <span class="comm-card-badge">Coastal Living</span>
+      </div>
+      <div class="comm-card-body">
+        <h3 class="comm-card-name">Point Loma</h3>
+        <div class="comm-card-accent"></div>
+        <p class="comm-card-desc">A scenic peninsula with sweeping harbor views, charming boutiques, and a laid-back coastal vibe just minutes from downtown San Diego.</p>
+        <a href="/communities/point-loma-real-estate" class="comm-card-link">
+          View Community
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- Coronado -->
+    <article class="comm-card reveal stagger-3" role="listitem" data-region="coastal">
+      <div class="comm-card-img-wrap">
+        <img src="/assets/images/community-coronado.jpg" alt="Coronado Island" loading="lazy">
+        <span class="comm-card-badge">Island Luxury</span>
+      </div>
+      <div class="comm-card-body">
+        <h3 class="comm-card-name">Coronado</h3>
+        <div class="comm-card-accent"></div>
+        <p class="comm-card-desc">Island elegance and iconic sunsets. A timeless community known for its historic charm, stunning beaches, and world-famous Hotel del Coronado.</p>
+        <a href="/communities/coronado-real-estate" class="comm-card-link">
+          View Community
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- Pacific & Mission Beach -->
+    <article class="comm-card reveal" role="listitem" data-region="coastal">
+      <div class="comm-card-img-wrap">
+        <img src="/assets/images/community-pacific-mission-beach.jpg" alt="Pacific and Mission Beach boardwalk" loading="lazy">
+        <span class="comm-card-badge">Beach Life</span>
+      </div>
+      <div class="comm-card-body">
+        <h3 class="comm-card-name">Pacific &amp; Mission Beach</h3>
+        <div class="comm-card-accent"></div>
+        <p class="comm-card-desc">The quintessential San Diego beach lifestyle. Boardwalk living, ocean breezes, and the energy of one of California's most iconic shorelines.</p>
+        <a href="/communities/pacific-mission-beach-real-estate" class="comm-card-link">
+          View Community
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- Mission Valley -->
+    <article class="comm-card reveal stagger-1" role="listitem" data-region="coastal">
+      <div class="comm-card-img-wrap">
+        <img src="/assets/images/community-mission-valley.jpg" alt="Mission Valley" loading="lazy">
+        <span class="comm-card-badge">Central Hub</span>
+      </div>
+      <div class="comm-card-body">
+        <h3 class="comm-card-name">Mission Valley</h3>
+        <div class="comm-card-accent"></div>
+        <p class="comm-card-desc">San Diego's central business and shopping corridor, offering excellent value and unmatched connectivity to every corner of the city.</p>
+        <a href="/communities/mission-valley-real-estate" class="comm-card-link">
+          View Community
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- La Jolla -->
+    <article class="comm-card reveal stagger-2" role="listitem" data-region="north-county">
+      <div class="comm-card-img-wrap">
+        <img src="/assets/images/community-la-jolla.jpg" alt="La Jolla coastline" loading="lazy">
+        <span class="comm-card-badge">Ultra-Luxury Coastal</span>
+      </div>
+      <div class="comm-card-body">
+        <h3 class="comm-card-name">La Jolla</h3>
+        <div class="comm-card-accent"></div>
+        <p class="comm-card-desc">San Diego's jewel by the sea. Cliff-top estates, pristine coves, and an unrivaled blend of luxury living and natural beauty.</p>
+        <a href="/communities/la-jolla-real-estate" class="comm-card-link">
+          View Community
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- Del Mar -->
+    <article class="comm-card reveal stagger-3" role="listitem" data-region="north-county">
+      <div class="comm-card-img-wrap">
+        <img src="/assets/images/community-del-mar.jpg" alt="Del Mar coastal bluffs" loading="lazy">
+        <span class="comm-card-badge">Coastal Luxury</span>
+      </div>
+      <div class="comm-card-body">
+        <h3 class="comm-card-name">Del Mar</h3>
+        <div class="comm-card-accent"></div>
+        <p class="comm-card-desc">Low-key coastal luxury where horseracing, fine dining, and spectacular ocean bluffs define a lifestyle of understated elegance.</p>
+        <a href="/communities/del-mar-real-estate" class="comm-card-link">
+          View Community
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- Carmel Valley -->
+    <article class="comm-card reveal" role="listitem" data-region="north-county">
+      <div class="comm-card-img-wrap">
+        <img src="/assets/images/community-carmel-valley.jpg" alt="Carmel Valley community" loading="lazy">
+        <span class="comm-card-badge">Master-Planned</span>
+      </div>
+      <div class="comm-card-body">
+        <h3 class="comm-card-name">Carmel Valley</h3>
+        <div class="comm-card-accent"></div>
+        <p class="comm-card-desc">Master-planned perfection in North County. Top-rated schools, upscale amenities, and family-friendly communities set against rolling hills.</p>
+        <a href="/communities/carmel-valley-real-estate" class="comm-card-link">
+          View Community
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- Rancho Santa Fe -->
+    <article class="comm-card reveal stagger-1" role="listitem" data-region="north-county">
+      <div class="comm-card-img-wrap">
+        <img src="/assets/images/community-rancho-santa-fe.jpg" alt="Rancho Santa Fe estate" loading="lazy">
+        <span class="comm-card-badge">Estate Country</span>
+      </div>
+      <div class="comm-card-body">
+        <h3 class="comm-card-name">Rancho Santa Fe</h3>
+        <div class="comm-card-accent"></div>
+        <p class="comm-card-desc">Where privacy meets prestige. Rolling hills, equestrian estates, and some of San Diego's most exclusive addresses await discerning buyers.</p>
+        <a href="/communities/rancho-santa-fe-real-estate" class="comm-card-link">
+          View Community
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- Solana Beach -->
+    <article class="comm-card reveal stagger-2" role="listitem" data-region="north-county">
+      <div class="comm-card-img-wrap">
+        <img src="/assets/images/community-solana-beach.jpg" alt="Solana Beach" loading="lazy">
+        <span class="comm-card-badge">Coastal Village</span>
+      </div>
+      <div class="comm-card-body">
+        <h3 class="comm-card-name">Solana Beach</h3>
+        <div class="comm-card-accent"></div>
+        <p class="comm-card-desc">A charming coastal village with world-class dining at Cedros Design District, pristine beaches, and an artsy, walkable character.</p>
+        <a href="/communities/solana-beach-real-estate" class="comm-card-link">
+          View Community
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- Encinitas -->
+    <article class="comm-card reveal stagger-3" role="listitem" data-region="north-county">
+      <div class="comm-card-img-wrap">
+        <img src="/assets/images/community-encinitas.jpg" alt="Encinitas surf town" loading="lazy">
+        <span class="comm-card-badge">Surf &amp; Style</span>
+      </div>
+      <div class="comm-card-body">
+        <h3 class="comm-card-name">Encinitas</h3>
+        <div class="comm-card-accent"></div>
+        <p class="comm-card-desc">Bohemian beaches and a thriving surf culture meet sophisticated dining and acclaimed schools in this beloved North County jewel.</p>
+        <a href="/communities/encinitas-real-estate" class="comm-card-link">
+          View Community
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- Carlsbad -->
+    <article class="comm-card reveal" role="listitem" data-region="north-county">
+      <div class="comm-card-img-wrap">
+        <img src="/assets/images/community-carlsbad.jpg" alt="Carlsbad North County" loading="lazy">
+        <span class="comm-card-badge">North Coast</span>
+      </div>
+      <div class="comm-card-body">
+        <h3 class="comm-card-name">Carlsbad</h3>
+        <div class="comm-card-accent"></div>
+        <p class="comm-card-desc">Flowering fields, a thriving tech industry, and upscale coastal living meet in this polished North County destination with resort-style communities.</p>
+        <a href="/communities/carlsbad-real-estate" class="comm-card-link">
+          View Community
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- Oceanside -->
+    <article class="comm-card reveal stagger-1" role="listitem" data-region="north-county">
+      <div class="comm-card-img-wrap">
+        <img src="/assets/images/community-oceanside.jpg" alt="Oceanside harbor" loading="lazy">
+        <span class="comm-card-badge">Emerging Coastal</span>
+      </div>
+      <div class="comm-card-body">
+        <h3 class="comm-card-name">Oceanside</h3>
+        <div class="comm-card-accent"></div>
+        <p class="comm-card-desc">North County's emerging coastal gem is redefining itself with a vibrant harbor, creative food scene, and strong investment potential.</p>
+        <a href="/communities/oceanside-real-estate" class="comm-card-link">
+          View Community
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- Spring Valley -->
+    <article class="comm-card reveal stagger-2" role="listitem" data-region="east-south">
+      <div class="comm-card-img-wrap">
+        <img src="/assets/images/community-spring-valley.jpg" alt="Spring Valley" loading="lazy">
+        <span class="comm-card-badge">East County</span>
+      </div>
+      <div class="comm-card-body">
+        <h3 class="comm-card-name">Spring Valley</h3>
+        <div class="comm-card-accent"></div>
+        <p class="comm-card-desc">An accessible and community-oriented East County neighborhood offering excellent value with close proximity to downtown San Diego.</p>
+        <a href="/communities/spring-valley-real-estate" class="comm-card-link">
+          View Community
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- Chula Vista -->
+    <article class="comm-card reveal stagger-3" role="listitem" data-region="east-south">
+      <div class="comm-card-img-wrap">
+        <img src="/assets/images/community-chula-vista.jpg" alt="Chula Vista waterfront" loading="lazy">
+        <span class="comm-card-badge">South Bay</span>
+      </div>
+      <div class="comm-card-body">
+        <h3 class="comm-card-name">Chula Vista</h3>
+        <div class="comm-card-accent"></div>
+        <p class="comm-card-desc">San Diego's second-largest city is rapidly evolving with new development, an Olympic training center, and a growing bayfront district.</p>
+        <a href="/communities/chula-vista-real-estate" class="comm-card-link">
+          View Community
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- La Mesa -->
+    <article class="comm-card reveal" role="listitem" data-region="east-south">
+      <div class="comm-card-img-wrap">
+        <img src="/assets/images/community-la-mesa.jpg" alt="La Mesa village" loading="lazy">
+        <span class="comm-card-badge">The Jewel of the Hills</span>
+      </div>
+      <div class="comm-card-body">
+        <h3 class="comm-card-name">La Mesa</h3>
+        <div class="comm-card-accent"></div>
+        <p class="comm-card-desc">Charming walkable village streets, historic character, and a welcoming community spirit make La Mesa a standout East County destination.</p>
+        <a href="/communities/la-mesa-real-estate" class="comm-card-link">
+          View Community
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- El Cajon -->
+    <article class="comm-card reveal stagger-1" role="listitem" data-region="east-south">
+      <div class="comm-card-img-wrap">
+        <img src="/assets/images/community-el-cajon.jpg" alt="El Cajon East County" loading="lazy">
+        <span class="comm-card-badge">East County Value</span>
+      </div>
+      <div class="comm-card-body">
+        <h3 class="comm-card-name">El Cajon</h3>
+        <div class="comm-card-accent"></div>
+        <p class="comm-card-desc">An affordable East County city with a growing dining and arts scene, offering excellent value for first-time buyers and savvy investors alike.</p>
+        <a href="/communities/el-cajon-real-estate" class="comm-card-link">
+          View Community
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </article>
+
+  </div>
+
+</section>
+
+<!-- ============================================================
+     MAP SECTION — reuses homepage.js initMapbox()
+     ============================================================ -->
+<section class="find-your-place comm-map-section" id="find-your-place" aria-labelledby="fyp-comm-heading">
+
+  <div class="fyp-left">
+    <span class="eyebrow reveal">Explore the Region</span>
+    <h2 class="fyp-title reveal stagger-1" id="fyp-comm-heading">Let's Find Your Place</h2>
+    <p class="fyp-subtitle reveal stagger-2">Click any location on the map to explore what it's really like to live there.</p>
+
+    <ul class="lfyp-cities reveal stagger-3" aria-label="San Diego communities">
+      <li><a href="#" data-slug="downtown-san-diego"   data-city="Downtown San Diego"       tabindex="0">Downtown San Diego</a></li>
+      <li><a href="#" data-slug="mission-hills"         data-city="Mission Hills"             tabindex="0">Mission Hills</a></li>
+      <li><a href="#" data-slug="point-loma"            data-city="Point Loma"                tabindex="0">Point Loma</a></li>
+      <li><a href="#" data-slug="coronado"              data-city="Coronado"                  tabindex="0">Coronado</a></li>
+      <li><a href="#" data-slug="pacific-mission-beach" data-city="Pacific &amp; Mission Beach" tabindex="0">Pacific &amp; Mission Beach</a></li>
+      <li><a href="#" data-slug="mission-valley"        data-city="Mission Valley"             tabindex="0">Mission Valley</a></li>
+      <li><a href="#" data-slug="la-jolla"              data-city="La Jolla"                   tabindex="0">La Jolla</a></li>
+      <li><a href="#" data-slug="del-mar"               data-city="Del Mar"                    tabindex="0">Del Mar</a></li>
+      <li><a href="#" data-slug="carmel-valley"         data-city="Carmel Valley"              tabindex="0">Carmel Valley</a></li>
+      <li><a href="#" data-slug="rancho-santa-fe"       data-city="Rancho Santa Fe"            tabindex="0">Rancho Santa Fe</a></li>
+      <li><a href="#" data-slug="solana-beach"          data-city="Solana Beach"               tabindex="0">Solana Beach</a></li>
+      <li><a href="#" data-slug="encinitas"             data-city="Encinitas"                  tabindex="0">Encinitas</a></li>
+      <li><a href="#" data-slug="carlsbad"              data-city="Carlsbad"                   tabindex="0">Carlsbad</a></li>
+      <li><a href="#" data-slug="oceanside"             data-city="Oceanside"                  tabindex="0">Oceanside</a></li>
+      <li><a href="#" data-slug="spring-valley"         data-city="Spring Valley"              tabindex="0">Spring Valley</a></li>
+      <li><a href="#" data-slug="chula-vista"           data-city="Chula Vista"                tabindex="0">Chula Vista</a></li>
+      <li><a href="#" data-slug="la-mesa"               data-city="La Mesa"                    tabindex="0">La Mesa</a></li>
+      <li><a href="#" data-slug="el-cajon"              data-city="El Cajon"                   tabindex="0">El Cajon</a></li>
+    </ul>
+
+    <div class="reveal stagger-4">
+      <a href="https://search.palisaderealty.com/" class="btn btn-brand" target="_blank" rel="noopener noreferrer">Search All Homes</a>
+    </div>
+  </div>
+
+  <div class="fyp-right">
+    <div id="lfyp-map" role="application" aria-label="Interactive San Diego communities map"></div>
+    <div id="lfyp-map-error" class="lfyp-map-error" role="alert" aria-live="polite">
+      <p>Map could not be loaded. Please try again or <a href="https://search.palisaderealty.com/">search listings directly</a>.</p>
+    </div>
+  </div>
+
+</section>
+
+<!-- ============================================================
+     CTA SECTION
+     ============================================================ -->
+<section class="comm-cta" id="cta" aria-labelledby="comm-cta-heading">
+
+  <div class="comm-cta-bg" aria-hidden="true">
+    <img src="/assets/images/cta-background.jpg" alt="">
+    <div class="comm-cta-bg-overlay"></div>
+  </div>
+
+  <div class="comm-cta-content">
+    <p class="comm-cta-eyebrow reveal">Work With Us</p>
+    <h2 class="comm-cta-title reveal stagger-1" id="comm-cta-heading">Ready to Find Your Dream Community?</h2>
+    <div class="comm-cta-btns reveal stagger-2">
+      <a href="tel:+16197940218" class="comm-cta-btn-primary">Let's Connect</a>
+      <a href="https://search.palisaderealty.com/" class="comm-cta-btn-outline" target="_blank" rel="noopener noreferrer">View Properties</a>
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="site-footer" id="footer">
+
+  <div class="footer-texture" aria-hidden="true"></div>
+
+  <!-- Brand stripe -->
+  <div class="footer-stripe" aria-hidden="true"></div>
+
+  <div class="footer-inner">
+
+    <!-- Brand Column -->
+    <div class="footer-col-brand">
+      <div class="footer-logo">
+        <img src="/images/logo.png" alt="Palisade Realty">
+      </div>
+
+      <div class="footer-copy-mls-row">
+        <div>
+          <p class="footer-copy">
+            &copy;Palisade Realty, Inc. 2026<br>
+            All Rights Reserved<br><br>
+            Brokerage CA DRE #01848565<br><br>
+            Hedda Parashos<br>
+            CA DRE #01773167
+          </p>
+        </div>
+        <div class="footer-mls-badge" aria-label="Move Safe Certified by HomeLight">
+          <img src="/assets/images/move-safe-offsite-stacked.png" alt="Move Safe Certified by HomeLight">
+        </div>
+      </div>
+
+      <div class="footer-social">
+        <a href="https://www.facebook.com/PalisadeRealty/" target="_blank" rel="noopener noreferrer" aria-label="Palisade Realty on Facebook">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M15 8a7 7 0 1 0-8.094 6.915V10.3H4.947V8h1.959V6.257C6.906 4.32 8.067 3.25 9.832 3.25c.847 0 1.733.151 1.733.151v1.9h-.976c-.962 0-1.261.597-1.261 1.209V8h2.147l-.343 2.3H9.328v4.615A7.003 7.003 0 0 0 15 8z"/></svg>
+        </a>
+        <a href="https://www.pinterest.com/palisaderealty/" target="_blank" rel="noopener noreferrer" aria-label="Palisade Realty on Pinterest">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0a8 8 0 0 0-2.915 15.452c-.07-.633-.134-1.606.027-2.297.146-.625.984-4.172.984-4.172s-.252-.503-.252-1.246c0-1.167.678-2.041 1.52-2.041.717 0 1.065.539 1.065 1.184 0 .721-.46 1.801-.698 2.8-.198.835.42 1.515 1.242 1.515 1.49 0 2.638-1.571 2.638-3.836 0-2.006-1.441-3.408-3.499-3.408-2.382 0-3.78 1.787-3.78 3.634 0 .72.276 1.49.621 1.91a.25.25 0 0 1 .057.239c-.063.264-.204.835-.232.952-.037.154-.124.186-.285.112-1.05-.489-1.707-2.028-1.707-3.264 0-2.653 1.928-5.09 5.559-5.09 2.919 0 5.187 2.081 5.187 4.862 0 2.902-1.83 5.237-4.371 5.237-.854 0-1.658-.444-1.932-.967l-.525 1.958c-.19.733-.705 1.65-1.05 2.208A8.001 8.001 0 0 0 8 16a8 8 0 0 0 0-16z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/palisade_realty/" target="_blank" rel="noopener noreferrer" aria-label="Palisade Realty on Instagram">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Quick Links Column -->
+    <nav class="footer-col-links" aria-label="Quick links">
+      <span class="footer-col-title">Quick Links</span>
+      <div class="footer-links">
+        <a href="https://search.palisaderealty.com/" target="_blank" rel="noopener noreferrer">Buy a Home</a>
+        <a href="https://search.palisaderealty.com/seller" target="_blank" rel="noopener noreferrer">Sell Your Home</a>
+        <a href="/communities">Communities</a>
+        <a href="/testimonials">Testimonials</a>
+        <a href="/blog">Blog</a>
+        <a href="/team">Our Team</a>
+        <a href="/contact">Contact Us</a>
+      </div>
+    </nav>
+
+    <!-- Contact Column -->
+    <address class="footer-col-contact" style="font-style:normal;">
+      <span class="footer-col-title">Contact</span>
+      <span class="footer-contact-line"><strong>3434 Grove Street</strong></span>
+      <span class="footer-contact-line"><strong>Lemon Grove, CA 91945</strong></span>
+      <a href="tel:+16197940218" class="footer-contact-line">(619) 794-0218</a>
+      <a href="mailto:contactus@palisaderealty.com" class="footer-contact-line footer-contact-line--email">contactus@palisaderealty.com</a>
+      <span class="footer-contact-line">Mon â€“ Fri: 9:00 AM â€“ 5:00 PM</span>
+    </address>
+
+  </div>
+
+</footer>
+
+<!-- Ylopo Widget Scripts -->
+<script src="https://search.palisaderealty.com/build/js/32e06f9e150f998b6c50.js"></script>
+<script src="https://search.palisaderealty.com/build/js/widgets-1.0.0.js"></script>
+<script src="https://search.palisaderealty.com/build/js/4a240a67e686abf4b94f.js"></script>
+
+<!-- Homepage JS (provides nav, reveal animations, and Mapbox init) -->
+<script src="/homepage.js"></script>
+
+<!-- Communities filter logic -->
+<script>
+(function () {
+  'use strict';
+
+  var filterBtns = document.querySelectorAll('.comm-filter-btn');
+  var cards      = document.querySelectorAll('.comm-card');
+
+  filterBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var filter = btn.dataset.filter;
+
+      filterBtns.forEach(function (b) {
+        b.classList.remove('is-active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('is-active');
+      btn.setAttribute('aria-selected', 'true');
+
+      cards.forEach(function (card) {
+        if (filter === 'all' || card.dataset.region === filter) {
+          card.classList.remove('is-hidden');
+        } else {
+          card.classList.add('is-hidden');
+        }
+      });
+    });
+  });
+}());
+</script>
+
+<!-- Communities Dropdown -->
+<script>
+(function() {
+  var dd = document.querySelector('.nav-dropdown');
+  if (!dd) return;
+  var trigger = dd.querySelector('.nav-dropdown-trigger');
+  var closeTimer;
+  function open() { clearTimeout(closeTimer); dd.classList.add('is-open'); trigger.setAttribute('aria-expanded','true'); }
+  function close() { closeTimer = setTimeout(function(){ dd.classList.remove('is-open'); trigger.setAttribute('aria-expanded','false'); }, 120); }
+  dd.addEventListener('mouseenter', open);
+  dd.addEventListener('mouseleave', close);
+  trigger.addEventListener('focus', open);
+  trigger.addEventListener('blur', function(e){ if (!dd.contains(e.relatedTarget)) close(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') { dd.classList.remove('is-open'); trigger.setAttribute('aria-expanded','false'); } });
+
+  var mToggle = document.getElementById('mobile-communities-toggle');
+  var mList = document.getElementById('mobile-communities-list');
+  if (mToggle && mList) {
+    mToggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      var open = mList.classList.toggle('open');
+      mToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

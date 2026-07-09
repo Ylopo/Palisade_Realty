@@ -1,21 +1,16 @@
-{
-  "rewrites": [
-    { "source": "/team/:slug.html",                "destination": "/team/agent.html" },
-    { "source": "/henderson-communities/:slug.html","destination": "/henderson-communities/community-detail.html" },
-    { "source": "/api/mapbox-token",               "destination": "/api/sections?mapboxOnly=true" }
-  ],
-  "functions": {
-    "api/listings.js":      { "maxDuration": 10 },
-    "api/admin.js":         { "maxDuration": 15 },
-    "api/upload.js":        { "maxDuration": 15 },
-    "api/fetch-listing.js": { "maxDuration": 20 },
-    "api/import-image.js":  { "maxDuration": 25 },
-    "api/sections.js":      { "maxDuration": 10 },
-    "api/team.js":          { "maxDuration": 15 },
-    "api/carousel.js":      { "maxDuration": 15 },
-    "api/testimonials.js":  { "maxDuration": 15 },
-    "api/teamPage.js":      { "maxDuration": 15 },
-    "api/agentDetail.js":   { "maxDuration": 15 },
-    "api/communities.js":   { "maxDuration": 15 }
-  }
+﻿{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/index.html",             "destination": "/",             "permanent": true },
+    { "source": "/contact.html",           "destination": "/contact",      "permanent": true },
+    { "source": "/blog.html",              "destination": "/blog",         "permanent": true },
+    { "source": "/team.html",              "destination": "/team",         "permanent": true },
+    { "source": "/testimonials.html",      "destination": "/testimonials", "permanent": true },
+    { "source": "/communities.html",       "destination": "/communities",  "permanent": true },
+    { "source": "/communities/:slug.html", "destination": "/communities/:slug", "permanent": true },
+    { "source": "/team-page/:slug.html",   "destination": "/team/:slug",   "permanent": true },
+    { "source": "/team-page/:slug",        "destination": "/team/:slug",   "permanent": true },
+    { "source": "/blog/:slug.html",        "destination": "/blog/:slug",   "permanent": true }
+  ]
 }

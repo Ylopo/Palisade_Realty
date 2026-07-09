@@ -1,0 +1,970 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | Palisade Realty — San Diego Real Estate</title>
+  <meta name="description" content="Get in touch with Palisade Realty. Call (619) 794-0218, email us, or fill out our contact form. Offices in Lemon Grove, Spring Valley, and San Diego, CA.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Shared design system -->
+  <link rel="stylesheet" href="/homepage.css">
+
+  <style>
+    /* ── Communities nav dropdown ── */
+    .nav-dropdown { position: relative; }
+    .nav-dropdown-trigger { display: inline-flex !important; align-items: center; gap: 5px; cursor: default; }
+    .nav-dropdown-chevron { width: 10px; height: 10px; flex-shrink: 0; transition: transform 220ms cubic-bezier(0.22,0.61,0.36,1); opacity: 0.55; }
+    .nav-dropdown.is-open .nav-dropdown-chevron { transform: rotate(180deg); }
+    .nav-dropdown-panel {
+      position: absolute; top: calc(100% + 16px); left: 50%;
+      transform: translateX(-50%) translateY(-6px); opacity: 0; pointer-events: none;
+      transition: opacity 200ms cubic-bezier(0.22,0.61,0.36,1), transform 200ms cubic-bezier(0.22,0.61,0.36,1);
+      background: #fff; border-radius: 14px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.13), 0 1px 4px rgba(0,0,0,0.06);
+      min-width: 480px; padding: 22px 22px 18px; z-index: 300;
+    }
+    .nav-dropdown-panel::before {
+      content: ''; position: absolute; top: -5px; left: 50%;
+      width: 10px; height: 10px; background: #fff;
+      transform: translateX(-50%) rotate(45deg); border-radius: 2px;
+      box-shadow: -2px -2px 4px rgba(0,0,0,0.04);
+    }
+    .nav-dropdown.is-open .nav-dropdown-panel { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+    .nav-dropdown-panel::after { content: ''; position: absolute; top: -20px; left: 0; right: 0; height: 20px; }
+    .nav-dropdown-label {
+      font-family: var(--font-label,'Inter',sans-serif); font-size: 10px; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--brand,#58172a);
+      margin-bottom: 12px; display: block;
+    }
+    .nav-dropdown-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 14px; }
+    .nav-dropdown-item {
+      display: flex; align-items: center; gap: 8px; padding: 9px 10px; border-radius: 8px;
+      font-family: var(--font-body,'Manrope',sans-serif); font-size: 13px; font-weight: 500;
+      color: #212121; text-decoration: none;
+      text-transform: none !important; letter-spacing: 0 !important;
+      transition: background 150ms, color 150ms; white-space: nowrap;
+    }
+    .nav-dropdown-item:hover { background: rgba(88,23,42,0.06); color: #58172a; opacity: 1 !important; }
+    .nav-dropdown-item::after { display: none !important; }
+    .nav-dropdown-dot { width: 6px; height: 6px; border-radius: 50%; background: #d0d0d0; flex-shrink: 0; }
+    .nav-dropdown-divider { height: 1px; background: rgba(0,0,0,0.07); margin-bottom: 12px; }
+    .nav-dropdown-all { display: flex; align-items: center; justify-content: space-between; padding: 8px 10px 4px; }
+    .nav-dropdown-all a {
+      font-family: var(--font-label,'Inter',sans-serif); font-size: 12px; font-weight: 600;
+      color: #58172a !important; text-decoration: none;
+      text-transform: none !important; letter-spacing: 0 !important;
+      display: inline-flex; align-items: center; gap: 5px;
+    }
+    .nav-dropdown-all a::after { display: none !important; }
+    .nav-dropdown-all a:hover { opacity: 0.7; }
+    .mobile-communities-toggle { cursor: pointer; }
+    .mobile-communities-list { display: none; flex-direction: column; padding: 4px 0 4px 20px; }
+    .mobile-communities-list.open { display: flex; }
+    .mobile-communities-list a { font-size: 14px !important; padding: 7px 0 !important; color: #555 !important; text-transform: none !important; letter-spacing: 0 !important; font-weight: 400 !important; }
+
+    /* ── Page-level nav override: always white on contact page ── */
+    .site-header {
+      background: #ffffff;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+    }
+    .site-header.scrolled {
+      position: fixed;
+    }
+
+    /* ── Hero ── */
+    .contact-hero {
+      position: relative;
+      height: 560px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      padding-top: 80px;
+    }
+    .contact-hero-bg {
+      position: absolute;
+      inset: 0;
+    }
+    .contact-hero-bg img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 60%;
+    }
+    .contact-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(10,0,5,0.62) 0%,
+        rgba(10,0,5,0.52) 50%,
+        rgba(10,0,5,0.72) 100%
+      );
+    }
+    .contact-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      padding: 0 24px;
+    }
+    .contact-hero-eyebrow {
+      display: block;
+      font-family: var(--font-label);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+    .contact-hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 7vw, 88px);
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+    .contact-hero-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .contact-hero-sub {
+      font-family: var(--font-body);
+      font-size: 18px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.65;
+      margin-bottom: 36px;
+    }
+
+    /* ── Info Cards Section ── */
+    .contact-info {
+      background: var(--off-white);
+      padding: var(--pad-y) var(--pad-x);
+    }
+    .contact-info-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .contact-info-head {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .contact-info-head .eyebrow { margin-bottom: 12px; }
+    .contact-info-head .section-title {
+      font-size: clamp(36px, 4vw, 56px);
+    }
+    .contact-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    .contact-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 36px 28px;
+      border: 1px solid rgba(0,0,0,0.07);
+      box-shadow: 0 2px 16px rgba(88,23,42,0.05), 0 1px 3px rgba(0,0,0,0.04);
+      transition: transform var(--dur-base) var(--ease-spring),
+                  box-shadow var(--dur-base) var(--ease-spring);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .contact-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(88,23,42,0.10), 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .contact-card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(88,23,42,0.07);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--brand);
+      margin-bottom: 4px;
+      flex-shrink: 0;
+    }
+    .contact-card-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+    .contact-card-label {
+      font-family: var(--font-label);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--brand);
+    }
+    .contact-card-title {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--near-black);
+      line-height: 1.2;
+    }
+    .contact-card-body {
+      font-family: var(--font-body);
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--mid-gray);
+    }
+    .contact-card-body a {
+      color: var(--brand);
+      font-weight: 500;
+      transition: opacity var(--dur-fast);
+    }
+    .contact-card-body a:hover { opacity: 0.7; }
+
+    /* ── Form + Map Two-Column ── */
+    .contact-main {
+      background: var(--white);
+      padding: var(--pad-y) var(--pad-x);
+    }
+    .contact-main-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    /* Form column */
+    .contact-form-col {}
+    .contact-form-col .eyebrow { margin-bottom: 12px; }
+    .contact-form-col .section-title {
+      font-size: clamp(32px, 3.5vw, 48px);
+      margin-bottom: 10px;
+    }
+    .contact-form-intro {
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.72;
+      color: var(--mid-gray);
+      margin-bottom: 40px;
+    }
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .form-group {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .form-group label {
+      font-family: var(--font-label);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--near-black);
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--near-black);
+      background: var(--off-white);
+      border: 1.5px solid rgba(0,0,0,0.1);
+      border-radius: 10px;
+      padding: 13px 16px;
+      outline: none;
+      transition: border-color var(--dur-fast), box-shadow var(--dur-fast), background var(--dur-fast);
+      appearance: none;
+    }
+    .form-group textarea {
+      resize: vertical;
+      min-height: 130px;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--brand);
+      background: var(--white);
+      box-shadow: 0 0 0 3px rgba(88,23,42,0.08);
+    }
+    .form-group input.error,
+    .form-group select.error,
+    .form-group textarea.error {
+      border-color: #c0392b;
+    }
+    .form-error-msg {
+      font-family: var(--font-label);
+      font-size: 11px;
+      color: #c0392b;
+      display: none;
+    }
+    .form-group.has-error .form-error-msg { display: block; }
+
+    .form-consent {
+      font-family: var(--font-label);
+      font-size: 11px;
+      line-height: 1.6;
+      color: var(--mid-gray);
+      background: var(--off-white);
+      border-radius: 8px;
+      padding: 14px 16px;
+    }
+    .form-consent a {
+      color: var(--brand);
+      text-decoration: underline;
+    }
+
+    /* Success state */
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 56px 32px;
+      border: 1.5px solid rgba(88,23,42,0.12);
+      border-radius: 16px;
+      background: rgba(88,23,42,0.03);
+    }
+    .form-success-icon {
+      width: 56px; height: 56px;
+      background: var(--brand);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      color: var(--white);
+    }
+    .form-success h3 {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--near-black);
+      margin-bottom: 10px;
+    }
+    .form-success p {
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: var(--mid-gray);
+      line-height: 1.65;
+    }
+
+    /* Map column */
+    .contact-map-col {}
+    .contact-map-col .eyebrow { margin-bottom: 12px; }
+    .contact-map-col .section-title {
+      font-size: clamp(32px, 3.5vw, 48px);
+      margin-bottom: 10px;
+    }
+    .contact-map-intro {
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.72;
+      color: var(--mid-gray);
+      margin-bottom: 32px;
+    }
+    .contact-map-wrap {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+      margin-bottom: 28px;
+    }
+    .contact-map-wrap iframe {
+      display: block;
+      width: 100%;
+      height: 380px;
+      border: none;
+    }
+    .contact-offices {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .contact-office {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 18px 20px;
+      background: var(--off-white);
+      border-radius: 12px;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+    .contact-office-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--brand);
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+    .contact-office-name {
+      font-family: var(--font-label);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--brand);
+      margin-bottom: 3px;
+    }
+    .contact-office-addr {
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--near-black);
+      line-height: 1.5;
+    }
+
+    /* ── CTA Banner ── */
+    .contact-cta {
+      position: relative;
+      overflow: hidden;
+      padding: 100px var(--pad-x);
+      text-align: center;
+      background: #000000;
+    }
+    .contact-cta-texture {
+      position: absolute;
+      inset: 0;
+      background-image: url('/images/hero-background/hero-4.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.18;
+    }
+    .contact-cta-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .contact-cta .eyebrow {
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .contact-cta-title {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+    .contact-cta-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .contact-cta-body {
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.68);
+      margin-bottom: 40px;
+    }
+    .contact-cta-btns {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .contact-cta-btns .btn {
+      padding: 16px 40px;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.64px;
+      min-width: 200px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 1200px) {
+      .contact-cards { grid-template-columns: repeat(2, 1fr); }
+      .contact-main-inner { gap: 56px; }
+    }
+    @media (max-width: 1024px) {
+      .contact-info,
+      .contact-main,
+      .contact-cta { padding: 80px 40px; }
+    }
+    @media (max-width: 900px) {
+      .contact-main-inner { grid-template-columns: 1fr; gap: 56px; }
+    }
+    @media (max-width: 768px) {
+      .contact-hero { height: 480px; }
+      .contact-info,
+      .contact-main,
+      .contact-cta { padding: 60px 24px; }
+      .contact-cards { grid-template-columns: 1fr 1fr; gap: 14px; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .contact-cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<header class="site-header" id="site-header">
+
+  <!-- Left Nav -->
+  <nav class="nav-links" aria-label="Primary navigation left">
+    <a href="https://search.palisaderealty.com/" target="_blank" rel="noopener noreferrer">Buy</a>
+    <a href="https://search.palisaderealty.com/seller" target="_blank" rel="noopener noreferrer">Sell</a>
+    <div class="nav-dropdown">
+      <a href="/communities" class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+        Communities
+        <svg class="nav-dropdown-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3.5 5 6.5 8 3.5"/></svg>
+      </a>
+      <div class="nav-dropdown-panel" role="region" aria-label="Communities menu">
+        <span class="nav-dropdown-label">San Diego Communities</span>
+        <div class="nav-dropdown-grid">
+          <a class="nav-dropdown-item" href="/communities/downtown-san-diego-real-estate"><span class="nav-dropdown-dot"></span>Downtown San Diego</a>
+          <a class="nav-dropdown-item" href="/communities/mission-hills-real-estate"><span class="nav-dropdown-dot"></span>Mission Hills</a>
+          <a class="nav-dropdown-item" href="/communities/point-loma-real-estate"><span class="nav-dropdown-dot"></span>Point Loma</a>
+          <a class="nav-dropdown-item" href="/communities/coronado-real-estate"><span class="nav-dropdown-dot"></span>Coronado</a>
+          <a class="nav-dropdown-item" href="/communities/pacific-mission-beach-real-estate"><span class="nav-dropdown-dot"></span>Pacific &amp; Mission Beach</a>
+          <a class="nav-dropdown-item" href="/communities/mission-valley-real-estate"><span class="nav-dropdown-dot"></span>Mission Valley</a>
+          <a class="nav-dropdown-item" href="/communities/la-jolla-real-estate"><span class="nav-dropdown-dot"></span>La Jolla</a>
+          <a class="nav-dropdown-item" href="/communities/del-mar-real-estate"><span class="nav-dropdown-dot"></span>Del Mar</a>
+          <a class="nav-dropdown-item" href="/communities/carmel-valley-real-estate"><span class="nav-dropdown-dot"></span>Carmel Valley</a>
+          <a class="nav-dropdown-item" href="/communities/rancho-santa-fe-real-estate"><span class="nav-dropdown-dot"></span>Rancho Santa Fe</a>
+          <a class="nav-dropdown-item" href="/communities/solana-beach-real-estate"><span class="nav-dropdown-dot"></span>Solana Beach</a>
+          <a class="nav-dropdown-item" href="/communities/encinitas-real-estate"><span class="nav-dropdown-dot"></span>Encinitas</a>
+          <a class="nav-dropdown-item" href="/communities/carlsbad-real-estate"><span class="nav-dropdown-dot"></span>Carlsbad</a>
+          <a class="nav-dropdown-item" href="/communities/oceanside-real-estate"><span class="nav-dropdown-dot"></span>Oceanside</a>
+          <a class="nav-dropdown-item" href="/communities/spring-valley-real-estate"><span class="nav-dropdown-dot"></span>Spring Valley</a>
+          <a class="nav-dropdown-item" href="/communities/chula-vista-real-estate"><span class="nav-dropdown-dot"></span>Chula Vista</a>
+          <a class="nav-dropdown-item" href="/communities/la-mesa-real-estate"><span class="nav-dropdown-dot"></span>La Mesa</a>
+          <a class="nav-dropdown-item" href="/communities/el-cajon-real-estate"><span class="nav-dropdown-dot"></span>El Cajon</a>
+        </div>
+        <div class="nav-dropdown-divider"></div>
+        <div class="nav-dropdown-all">
+          <a href="/communities">View All Communities <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 6h8"/><path d="M6 2.5 9.5 6 6 9.5"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <a href="/testimonials">Testimonials</a>
+  </nav>
+
+  <!-- Center Logo -->
+  <a href="/" class="nav-logo" aria-label="Palisade Realty home">
+    <img src="/images/logo.png" alt="Palisade Realty">
+  </a>
+
+  <!-- Right Nav -->
+  <nav class="nav-links nav-links--right" aria-label="Primary navigation right">
+    <a href="/#fl-section">Properties</a>
+    <a href="/team">Team</a>
+    <a href="/blog">Blog</a>
+    <a href="/contact">Contact</a>
+  </nav>
+
+  <!-- Hamburger (mobile) -->
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Open navigation menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+</header>
+
+<!-- Mobile nav drawer -->
+<div class="nav-mobile-drawer" id="nav-mobile-drawer" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+  <a href="https://search.palisaderealty.com/" target="_blank" rel="noopener noreferrer">Buy</a>
+  <a href="https://search.palisaderealty.com/seller" target="_blank" rel="noopener noreferrer">Sell</a>
+  <a href="/communities" class="mobile-communities-toggle" id="mobile-communities-toggle" aria-expanded="false">Communities â–¾</a>
+  <div class="mobile-communities-list" id="mobile-communities-list">
+    <a href="/communities/downtown-san-diego-real-estate">Downtown San Diego</a>
+    <a href="/communities/mission-hills-real-estate">Mission Hills</a>
+    <a href="/communities/point-loma-real-estate">Point Loma</a>
+    <a href="/communities/coronado-real-estate">Coronado</a>
+    <a href="/communities/pacific-mission-beach-real-estate">Pacific &amp; Mission Beach</a>
+    <a href="/communities/mission-valley-real-estate">Mission Valley</a>
+    <a href="/communities/la-jolla-real-estate">La Jolla</a>
+    <a href="/communities/del-mar-real-estate">Del Mar</a>
+    <a href="/communities/carmel-valley-real-estate">Carmel Valley</a>
+    <a href="/communities/rancho-santa-fe-real-estate">Rancho Santa Fe</a>
+    <a href="/communities/solana-beach-real-estate">Solana Beach</a>
+    <a href="/communities/encinitas-real-estate">Encinitas</a>
+    <a href="/communities/carlsbad-real-estate">Carlsbad</a>
+    <a href="/communities/oceanside-real-estate">Oceanside</a>
+    <a href="/communities/spring-valley-real-estate">Spring Valley</a>
+    <a href="/communities/chula-vista-real-estate">Chula Vista</a>
+    <a href="/communities/la-mesa-real-estate">La Mesa</a>
+    <a href="/communities/el-cajon-real-estate">El Cajon</a>
+  </div>
+  <a href="/testimonials">Testimonials</a>
+  <a href="/#fl-section">Properties</a>
+  <a href="/team">Team</a>
+  <a href="/blog">Blog</a>
+  <a href="/contact">Contact</a>
+</div>
+<main>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="contact-hero" aria-label="Contact Palisade Realty">
+  <div class="contact-hero-bg" aria-hidden="true">
+    <img src="/images/hero-background/hero-2.jpg" alt="San Diego skyline" loading="eager">
+  </div>
+  <div class="contact-hero-overlay" aria-hidden="true"></div>
+  <div class="contact-hero-content">
+    <span class="contact-hero-eyebrow reveal">Palisade Realty, Inc.</span>
+    <h1 class="contact-hero-title reveal reveal-delay-1">Let's <em>Connect</em></h1>
+    <p class="contact-hero-sub reveal reveal-delay-2">Whether you're buying, selling, or just exploring — our team is ready to guide you every step of the way.</p>
+    <a href="#contact-form" class="btn btn-brand reveal reveal-delay-3">Send Us a Message</a>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTACT INFO CARDS
+     ============================================================ -->
+<section class="contact-info" aria-labelledby="contact-info-heading">
+  <div class="contact-info-inner">
+
+    <div class="contact-info-head">
+      <span class="eyebrow reveal">How to Reach Us</span>
+      <h2 class="section-title reveal reveal-delay-1" id="contact-info-heading">We're Here to Help</h2>
+    </div>
+
+    <div class="contact-cards">
+
+      <!-- Address -->
+      <div class="contact-card reveal">
+        <div class="contact-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 21C12 21 5 13.5 5 8.5a7 7 0 0 1 14 0c0 5-7 12.5-7 12.5z"/>
+            <circle cx="12" cy="8.5" r="2.5"/>
+          </svg>
+        </div>
+        <span class="contact-card-label">Main Office</span>
+        <h3 class="contact-card-title">Lemon Grove</h3>
+        <p class="contact-card-body">3434 Grove Street<br>Lemon Grove, CA 91945</p>
+      </div>
+
+      <!-- Phone -->
+      <div class="contact-card reveal reveal-delay-1">
+        <div class="contact-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 5.83 5.83l.95-.95a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+        </div>
+        <span class="contact-card-label">Call Us</span>
+        <h3 class="contact-card-title">Phone</h3>
+        <p class="contact-card-body"><a href="tel:+16197940218">(619) 794-0218</a><br>Mon – Fri: 9 AM – 5 PM</p>
+      </div>
+
+      <!-- Email -->
+      <div class="contact-card reveal reveal-delay-2">
+        <div class="contact-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="m2 7 10 7 10-7"/>
+          </svg>
+        </div>
+        <span class="contact-card-label">Email Us</span>
+        <h3 class="contact-card-title">Email</h3>
+        <p class="contact-card-body"><a href="mailto:contactus@palisaderealty.com">contactus@<br>palisaderealty.com</a></p>
+      </div>
+
+      <!-- Hours -->
+      <div class="contact-card reveal reveal-delay-3">
+        <div class="contact-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M12 7v5l3 3"/>
+          </svg>
+        </div>
+        <span class="contact-card-label">Office Hours</span>
+        <h3 class="contact-card-title">Hours</h3>
+        <p class="contact-card-body">Mon – Fri: 9:00 AM – 5:00 PM<br>Sat – Sun: By Appointment</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FORM + MAP
+     ============================================================ -->
+<section class="contact-main" id="contact-form" aria-labelledby="form-heading">
+  <div class="contact-main-inner">
+
+    <!-- Contact Form -->
+    <div class="contact-form-col">
+      <span class="eyebrow reveal">Send a Message</span>
+      <h2 class="section-title reveal reveal-delay-1" id="form-heading">Talk to Our <em style="font-style:italic;color:var(--brand)">Team</em></h2>
+      <p class="contact-form-intro reveal reveal-delay-2">Fill out the form below and a member of the Palisade Realty team will reach out within one business day.</p>
+
+      <!-- Success state (shown after submit) -->
+      <div class="form-success" id="form-success" role="alert" aria-live="polite">
+        <div class="form-success-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        </div>
+        <h3>Message Received!</h3>
+        <p>Thank you for reaching out. We'll be in touch within one business day.</p>
+      </div>
+
+      <form class="contact-form reveal reveal-delay-2" id="contact-form-el" novalidate aria-label="Contact form">
+
+        <div class="form-row">
+          <div class="form-group" id="fg-first">
+            <label for="first-name">First Name <span aria-hidden="true">*</span></label>
+            <input type="text" id="first-name" name="firstName" autocomplete="given-name" required placeholder="Jane">
+            <span class="form-error-msg" id="err-first">Please enter your first name.</span>
+          </div>
+          <div class="form-group" id="fg-last">
+            <label for="last-name">Last Name <span aria-hidden="true">*</span></label>
+            <input type="text" id="last-name" name="lastName" autocomplete="family-name" required placeholder="Smith">
+            <span class="form-error-msg" id="err-last">Please enter your last name.</span>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group" id="fg-email">
+            <label for="email">Email Address <span aria-hidden="true">*</span></label>
+            <input type="email" id="email" name="email" autocomplete="email" required placeholder="jane@example.com">
+            <span class="form-error-msg" id="err-email">Please enter a valid email address.</span>
+          </div>
+          <div class="form-group" id="fg-phone">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="(619) 555-0100">
+          </div>
+        </div>
+
+        <div class="form-group" id="fg-subject">
+          <label for="subject">Subject <span aria-hidden="true">*</span></label>
+          <select id="subject" name="subject" required>
+            <option value="" disabled selected>Select a topic…</option>
+            <option value="buying">I'm interested in buying a home</option>
+            <option value="selling">I'd like to sell my home</option>
+            <option value="valuation">I want a home valuation</option>
+            <option value="communities">Community information</option>
+            <option value="financing">Financing questions</option>
+            <option value="other">Other</option>
+          </select>
+          <span class="form-error-msg" id="err-subject">Please select a subject.</span>
+        </div>
+
+        <div class="form-group" id="fg-message">
+          <label for="message">Message <span aria-hidden="true">*</span></label>
+          <textarea id="message" name="message" required placeholder="Tell us how we can help…"></textarea>
+          <span class="form-error-msg" id="err-message">Please enter a message.</span>
+        </div>
+
+        <p class="form-consent">
+          By providing your telephone number, you are consenting to allow Palisade Realty, Inc. to contact you with informational communications via voice call, AI voice call, and/or text message, or similar automated means for real estate services. To opt out you can reply "stop" at any time. Message and data rates may apply. See our <a href="https://search.palisaderealty.com/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy &amp; Terms</a>.
+        </p>
+
+        <button type="submit" class="btn btn-brand" id="form-submit-btn" aria-label="Submit contact form">
+          Send Message
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-left:8px"><path d="M2 8h12"/><path d="M8 4l4 4-4 4"/></svg>
+        </button>
+
+      </form>
+    </div>
+
+    <!-- Map + Offices -->
+    <div class="contact-map-col">
+      <span class="eyebrow reveal">Find Us</span>
+      <h2 class="section-title reveal reveal-delay-1">Our <em style="font-style:italic;color:var(--brand)">Offices</em></h2>
+      <p class="contact-map-intro reveal reveal-delay-2">We serve the greater San Diego area from three convenient locations.</p>
+
+      <div class="contact-map-wrap reveal reveal-delay-2">
+        <iframe
+          title="Palisade Realty main office location"
+          src="https://www.google.com/maps?q=3434+Grove+Street,+Lemon+Grove,+CA+91945&output=embed"
+          loading="lazy"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+          aria-label="Map showing Palisade Realty at 3434 Grove Street, Lemon Grove, CA">
+        </iframe>
+      </div>
+
+      <div class="contact-offices reveal reveal-delay-3">
+        <div class="contact-office">
+          <div class="contact-office-dot" aria-hidden="true"></div>
+          <div>
+            <p class="contact-office-name">Main Office</p>
+            <p class="contact-office-addr">3434 Grove Street<br>Lemon Grove, CA 91945</p>
+          </div>
+        </div>
+        <div class="contact-office">
+          <div class="contact-office-dot" style="background:var(--accent)" aria-hidden="true"></div>
+          <div>
+            <p class="contact-office-name" style="color:var(--mid-gray)">Spring Valley</p>
+            <p class="contact-office-addr">9847 Campo Road<br>Spring Valley, CA 91977</p>
+          </div>
+        </div>
+        <div class="contact-office">
+          <div class="contact-office-dot" style="background:var(--mid-gray)" aria-hidden="true"></div>
+          <div>
+            <p class="contact-office-name" style="color:var(--mid-gray)">San Diego</p>
+            <p class="contact-office-addr">2828 University Ave., Suite 102<br>San Diego, CA 92104</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     CTA BANNER
+     ============================================================ -->
+<section class="contact-cta" aria-labelledby="cta-heading">
+  <div class="contact-cta-texture" aria-hidden="true"></div>
+  <div class="contact-cta-inner">
+    <span class="eyebrow reveal">Your San Diego Real Estate Team</span>
+    <h2 class="contact-cta-title reveal reveal-delay-1"><em>Ready to Find</em><br>Your Dream Home?</h2>
+    <p class="contact-cta-body reveal reveal-delay-2" id="cta-heading">Hedda Parashos and the Palisade Realty team bring 15+ years of San Diego expertise to every transaction — whether you're buying your first home or your fifth.</p>
+    <div class="contact-cta-btns reveal reveal-delay-3">
+      <a href="https://search.palisaderealty.com/" class="btn btn-brand" target="_blank" rel="noopener noreferrer">Search Listings</a>
+      <a href="tel:+16197940218" class="btn btn-outline-white">(619) 794-0218</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="site-footer" id="footer">
+
+  <div class="footer-texture" aria-hidden="true"></div>
+
+  <!-- Brand stripe -->
+  <div class="footer-stripe" aria-hidden="true"></div>
+
+  <div class="footer-inner">
+
+    <!-- Brand Column -->
+    <div class="footer-col-brand">
+      <div class="footer-logo">
+        <img src="/images/logo.png" alt="Palisade Realty">
+      </div>
+
+      <div class="footer-copy-mls-row">
+        <div>
+          <p class="footer-copy">
+            &copy;Palisade Realty, Inc. 2026<br>
+            All Rights Reserved<br><br>
+            Brokerage CA DRE #01848565<br><br>
+            Hedda Parashos<br>
+            CA DRE #01773167
+          </p>
+        </div>
+        <div class="footer-mls-badge" aria-label="Move Safe Certified by HomeLight">
+          <img src="/assets/images/move-safe-offsite-stacked.png" alt="Move Safe Certified by HomeLight">
+        </div>
+      </div>
+
+      <div class="footer-social">
+        <a href="https://www.facebook.com/PalisadeRealty/" target="_blank" rel="noopener noreferrer" aria-label="Palisade Realty on Facebook">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M15 8a7 7 0 1 0-8.094 6.915V10.3H4.947V8h1.959V6.257C6.906 4.32 8.067 3.25 9.832 3.25c.847 0 1.733.151 1.733.151v1.9h-.976c-.962 0-1.261.597-1.261 1.209V8h2.147l-.343 2.3H9.328v4.615A7.003 7.003 0 0 0 15 8z"/></svg>
+        </a>
+        <a href="https://www.pinterest.com/palisaderealty/" target="_blank" rel="noopener noreferrer" aria-label="Palisade Realty on Pinterest">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0a8 8 0 0 0-2.915 15.452c-.07-.633-.134-1.606.027-2.297.146-.625.984-4.172.984-4.172s-.252-.503-.252-1.246c0-1.167.678-2.041 1.52-2.041.717 0 1.065.539 1.065 1.184 0 .721-.46 1.801-.698 2.8-.198.835.42 1.515 1.242 1.515 1.49 0 2.638-1.571 2.638-3.836 0-2.006-1.441-3.408-3.499-3.408-2.382 0-3.78 1.787-3.78 3.634 0 .72.276 1.49.621 1.91a.25.25 0 0 1 .057.239c-.063.264-.204.835-.232.952-.037.154-.124.186-.285.112-1.05-.489-1.707-2.028-1.707-3.264 0-2.653 1.928-5.09 5.559-5.09 2.919 0 5.187 2.081 5.187 4.862 0 2.902-1.83 5.237-4.371 5.237-.854 0-1.658-.444-1.932-.967l-.525 1.958c-.19.733-.705 1.65-1.05 2.208A8.001 8.001 0 0 0 8 16a8 8 0 0 0 0-16z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/palisade_realty/" target="_blank" rel="noopener noreferrer" aria-label="Palisade Realty on Instagram">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Quick Links Column -->
+    <nav class="footer-col-links" aria-label="Quick links">
+      <span class="footer-col-title">Quick Links</span>
+      <div class="footer-links">
+        <a href="https://search.palisaderealty.com/" target="_blank" rel="noopener noreferrer">Buy a Home</a>
+        <a href="https://search.palisaderealty.com/seller" target="_blank" rel="noopener noreferrer">Sell Your Home</a>
+        <a href="/communities">Communities</a>
+        <a href="/testimonials">Testimonials</a>
+        <a href="/blog">Blog</a>
+        <a href="/team">Our Team</a>
+        <a href="/contact">Contact Us</a>
+      </div>
+    </nav>
+
+    <!-- Contact Column -->
+    <address class="footer-col-contact" style="font-style:normal;">
+      <span class="footer-col-title">Contact</span>
+      <span class="footer-contact-line"><strong>3434 Grove Street</strong></span>
+      <span class="footer-contact-line"><strong>Lemon Grove, CA 91945</strong></span>
+      <a href="tel:+16197940218" class="footer-contact-line">(619) 794-0218</a>
+      <a href="mailto:contactus@palisaderealty.com" class="footer-contact-line footer-contact-line--email">contactus@palisaderealty.com</a>
+      <span class="footer-contact-line">Mon â€“ Fri: 9:00 AM â€“ 5:00 PM</span>
+    </address>
+
+  </div>
+
+</footer>
+
+<!-- Form validation + submit handler -->
+<script>
+(function () {
+  var form    = document.getElementById('contact-form-el');
+  var success = document.getElementById('form-success');
+  if (!form) return;
+
+  function validate(id, errId, check) {
+    var fg  = document.getElementById('fg-' + id);
+    var err = document.getElementById('err-' + errId);
+    var el  = document.getElementById(id === 'first' ? 'first-name' :
+                                      id === 'last'  ? 'last-name'  : id);
+    if (!fg || !el) return true;
+    var ok = check(el.value);
+    fg.classList.toggle('has-error', !ok);
+    el.classList.toggle('error', !ok);
+    if (err) err.style.display = ok ? 'none' : 'block';
+    return ok;
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var v1 = validate('first',   'first',   function(v){ return v.trim().length > 0; });
+    var v2 = validate('last',    'last',    function(v){ return v.trim().length > 0; });
+    var v3 = validate('email',   'email',   function(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); });
+    var v4 = validate('subject', 'subject', function(v){ return v !== ''; });
+    var v5 = validate('message', 'message', function(v){ return v.trim().length > 5; });
+    if (!v1 || !v2 || !v3 || !v4 || !v5) return;
+
+    /* Build mailto fallback — replace with fetch to your form backend */
+    var s = document.getElementById('subject').value;
+    var m = document.getElementById('message').value;
+    var fn = document.getElementById('first-name').value;
+    var ln = document.getElementById('last-name').value;
+    var em = document.getElementById('email').value;
+    var ph = document.getElementById('phone').value;
+    var body = 'Name: ' + fn + ' ' + ln + '\nEmail: ' + em + '\nPhone: ' + ph + '\nSubject: ' + s + '\n\n' + m;
+    window.location.href = 'mailto:contactus@palisaderealty.com?subject=' +
+      encodeURIComponent('Website Inquiry: ' + s) + '&body=' + encodeURIComponent(body);
+
+    form.style.display = 'none';
+    success.style.display = 'block';
+  });
+})();
+</script>
+
+<!-- Homepage JS (nav scroll + reveal animations) -->
+<script src="/homepage.js"></script>
+
+</body>
+</html>
