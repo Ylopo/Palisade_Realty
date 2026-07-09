@@ -562,14 +562,13 @@ const POSTS = [
 ];
 
 const PER_PAGE = 15;
-const FM_CDN = 'https://freitas-monteforte.vercel.app/_next/image?url=%2Fimages%2Fblog%2F';
 const FB_IMG = 'https://placehold.co/800x533/58172a/eeca00?text=Palisade+Realty';
 
 let currentCat = 'all';
 let currentPage = 1;
 
 function imgUrl(slug) {
-  return FM_CDN + encodeURIComponent(slug + '.jpg') + '&w=800&q=75';
+  return 'images/blog/' + slug + '.jpg';
 }
 
 function badgeClass(cat) {
