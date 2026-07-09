@@ -19,8 +19,10 @@
   <link rel="stylesheet" href="../homepage.css">
   <style>
     :root{--cat-buyer:#1a5a6e;--cat-seller:#58172a;--cat-homeowner:#3d5432;--cat-general:#6b5a2e;}
-    .bp-hero{background:linear-gradient(160deg,#28000c 0%,#58172a 55%,#4a0e1f 100%);padding:100px var(--pad-x) 64px;position:relative;overflow:hidden;}
-    .bp-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 100%,rgba(238,202,0,.07) 0%,transparent 70%);pointer-events:none;}
+
+    .bp-hero{background:linear-gradient(160deg,#28000c 0%,#58172a 55%,#4a0e1f 100%);background-size:cover;background-position:center;padding:140px var(--pad-x) 80px;position:relative;overflow:hidden;min-height:520px;display:flex;flex-direction:column;justify-content:flex-end;}
+    .bp-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.82) 0%,rgba(0,0,0,0.55) 45%,rgba(0,0,0,0.28) 100%);z-index:0;pointer-events:none;}
+    .bp-hero>*{position:relative;z-index:1;}
     .bp-breadcrumb{font-family:var(--font-label);font-size:12px;color:rgba(255,255,255,.5);margin-bottom:20px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
     .bp-breadcrumb a{color:rgba(255,255,255,.65);text-decoration:none;transition:color 200ms;}
     .bp-breadcrumb a:hover{color:#fff;}
@@ -168,7 +170,7 @@
 
 <main>
 
-<section class="bp-hero" aria-label="Blog post">
+<section class="bp-hero" aria-label="Blog post" style="background-image:url('../images/blog/moving-to-a-new-state-dont-forget-to-add-these-tasks-to-your-to-do-list.jpg')">
   <div class="bp-breadcrumb">
     <a href="../blog.html">&#8592; Blog</a>
     <span>/</span>
@@ -181,10 +183,6 @@
   <h1 class="bp-title reveal">Moving To A New State? Don't Forget These Tasks</h1>
 </section>
 
-<div class="bp-featured">
-  <img src="../images/blog/moving-to-a-new-state-dont-forget-to-add-these-tasks-to-your-to-do-list.jpg" alt="Moving To A New State? Don't Forget These Tasks" width="1200" height="800"
-       onerror="this.onerror=null;this.src='https://placehold.co/800x533/58172a/eeca00?text=Palisade+Realty'">
-</div>
 
 <div class="bp-layout">
   <div class="bp-content">
