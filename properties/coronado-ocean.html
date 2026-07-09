@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title id="pp-title">890 Ocean Boulevard, Coronado — Palisade Realty</title>
+  <title id="pp-title">Coronado Ocean — Palisade Realty</title>
   <meta id="pp-meta-desc" name="description" content="A featured San Diego property presented by Palisade Realty." />
   <link rel="icon" type="image/jpeg" href="/images/favicon.jpg" />
 
@@ -126,6 +126,209 @@
       text-transform: none !important;
       letter-spacing: 0 !important;
       font-weight: 400 !important;
+    }
+  </style>
+
+  <!-- Property Page — White Luxury Redesign (overrides community.css dark defaults) -->
+  <style>
+    /* ══════════════════════════════════════════════════════════
+       PALISADE REALTY — PROPERTY DETAIL PAGE  (white/light)
+       All selectors scoped to body.property-page so community
+       pages (dark theme) are unaffected.
+    ══════════════════════════════════════════════════════════ */
+
+    /* Tokens */
+    body.property-page {
+      --pp-white:    #ffffff;
+      --pp-cream:    #faf7f2;
+      --pp-border:   rgba(26,24,20,0.09);
+      --pp-charcoal: #1a1814;
+      --pp-mid:      #4a4540;
+      --pp-muted:    #8a8070;
+      --pp-brand:    #58172a;
+      --pp-gold:     #eeca00;
+    }
+
+    /* Base */
+    body.property-page {
+      background: var(--pp-white);
+      color: var(--pp-charcoal);
+    }
+
+    /* Attribution bar */
+    body.property-page .pp-attribution {
+      background: var(--pp-cream);
+      color: var(--pp-brand);
+      padding: 22px 24px;
+      border-bottom: 1px solid var(--pp-border);
+    }
+
+    /* Title block */
+    body.property-page .pp-title-block {
+      background: var(--pp-white);
+      border-bottom: 1px solid var(--pp-border);
+      padding: 44px 32px 52px;
+    }
+    body.property-page .pp-address {
+      color: var(--pp-charcoal);
+      font-weight: 400;
+      letter-spacing: -0.025em;
+    }
+    body.property-page .pp-locality { color: var(--pp-muted); }
+    body.property-page .pp-price    { color: var(--pp-brand); }
+    body.property-page .pp-pricecut { color: #c06030; }
+    body.property-page .pp-pricecut .prev { color: rgba(26,24,20,0.38); }
+
+    /* Stats bar */
+    body.property-page .pp-stats {
+      background: var(--pp-cream);
+      border-bottom: 1px solid var(--pp-border);
+      padding: 28px 32px;
+    }
+    body.property-page .pp-stat strong { color: var(--pp-charcoal); }
+    body.property-page .pp-stat span   { color: var(--pp-muted); }
+
+    /* Description */
+    body.property-page .pp-body {
+      color: var(--pp-mid);
+      padding-top: 64px;
+      font-size: 18px;
+      line-height: 1.8;
+    }
+    body.property-page .pp-body a { color: var(--pp-brand); }
+
+    /* Features list */
+    body.property-page .pp-features {
+      background: var(--pp-cream);
+      border-top: 1px solid var(--pp-border);
+      border-bottom: 1px solid var(--pp-border);
+      padding: 40px 32px;
+    }
+    body.property-page .pp-features h2 { color: var(--pp-brand); }
+    body.property-page .pp-features li { color: var(--pp-charcoal); }
+    body.property-page .pp-features li::before { color: var(--pp-brand); }
+
+    /* Map */
+    body.property-page .pp-map-section h2 { color: var(--pp-brand); }
+    body.property-page #pp-map { background: #e8e5e0; }
+
+    /* Neighborhood card */
+    body.property-page .pp-neighborhood-card {
+      background: var(--pp-cream);
+      border: none;
+      border-left: 3px solid var(--pp-brand);
+    }
+    body.property-page .pp-neighborhood-card .overline { color: var(--pp-brand); }
+    body.property-page .pp-neighborhood-card h3 { color: var(--pp-charcoal); }
+
+    /* Tour CTA — full-width maroon band */
+    body.property-page .pp-tour {
+      background: var(--pp-brand);
+      border: none;
+      max-width: none;
+      margin-left: 0;
+      margin-right: 0;
+      padding: 80px 32px;
+    }
+    body.property-page .pp-tour h2 { color: #ffffff; }
+    body.property-page .pp-tour p  { color: rgba(255,255,255,0.72); }
+    body.property-page .pp-tour-avatar { border-color: rgba(238,202,0,0.5); }
+    /* Invert buttons inside the dark tour band */
+    body.property-page .pp-tour .pp-cta-btn {
+      background: #ffffff;
+      color: var(--pp-brand);
+    }
+    body.property-page .pp-tour .pp-cta-btn:hover {
+      background: var(--pp-gold);
+      color: var(--pp-charcoal);
+    }
+    body.property-page .pp-tour .pp-cta-btn-outline {
+      color: #ffffff;
+      border-color: rgba(255,255,255,0.45);
+    }
+    body.property-page .pp-tour .pp-cta-btn-outline:hover {
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.8);
+      color: #ffffff;
+    }
+
+    /* Other featured listings strip */
+    body.property-page .pp-others {
+      background: var(--pp-cream);
+      max-width: none;
+      padding: 64px 48px;
+    }
+    body.property-page .pp-others h2 { color: var(--pp-brand); }
+    body.property-page .pp-others-grid {
+      scrollbar-color: rgba(26,24,20,0.18) rgba(26,24,20,0.05);
+    }
+    body.property-page .pp-others-grid::-webkit-scrollbar-track { background: rgba(26,24,20,0.04); }
+    body.property-page .pp-others-grid::-webkit-scrollbar-thumb { background: rgba(26,24,20,0.18); }
+    body.property-page .pp-others-arrow {
+      background: rgba(255,255,255,0.92);
+      border-color: rgba(26,24,20,0.18);
+      color: var(--pp-charcoal);
+    }
+    body.property-page .pp-others-arrow:hover {
+      background: var(--pp-brand);
+      border-color: var(--pp-brand);
+      color: #ffffff;
+    }
+    body.property-page .pp-others-arrow:disabled:hover {
+      background: rgba(255,255,255,0.92);
+      border-color: rgba(26,24,20,0.18);
+      color: var(--pp-charcoal);
+    }
+
+    /* Community depth section */
+    body.property-page .pp-community-title { color: var(--pp-charcoal); }
+    body.property-page .pp-community-title em { color: var(--pp-brand); }
+    body.property-page .pp-community-h3 { color: var(--pp-brand); }
+    body.property-page .pp-community-school-district { color: var(--pp-muted); }
+
+    body.property-page .pp-highlight-card {
+      background: var(--pp-cream);
+      border: 1px solid var(--pp-border);
+    }
+    body.property-page .pp-highlight-text h4 { color: var(--pp-charcoal); }
+    body.property-page .pp-highlight-text p  { color: var(--pp-muted); }
+
+    body.property-page .pp-schools-col h4 { color: var(--pp-mid); }
+    body.property-page .pp-schools-table th {
+      color: var(--pp-brand);
+      border-bottom-color: rgba(26,24,20,0.15);
+    }
+    body.property-page .pp-schools-table td {
+      color: var(--pp-mid);
+      border-bottom-color: rgba(26,24,20,0.06);
+    }
+    body.property-page .pp-schools-disclaimer { color: rgba(26,24,20,0.4); }
+
+    body.property-page .pp-park-card {
+      background: var(--pp-cream);
+      border-color: var(--pp-border);
+    }
+    body.property-page .pp-park-name { color: var(--pp-charcoal); }
+    body.property-page .pp-park-size { color: var(--pp-brand); }
+    body.property-page .pp-park-amenities { color: var(--pp-muted); }
+    body.property-page .pp-park-amenities li::before { color: var(--pp-brand); }
+
+    /* Scroll-reveal */
+    body.property-page .pp-fade {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.75s cubic-bezier(0.22,0.61,0.36,1),
+                  transform 0.75s cubic-bezier(0.22,0.61,0.36,1);
+    }
+    body.property-page .pp-fade.pp-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      body.property-page .pp-tour { padding: 64px 20px; }
+      body.property-page .pp-others { padding: 52px 20px; }
     }
   </style>
 
@@ -446,6 +649,33 @@
       mobileToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
   }
+})();
+</script>
+
+<!-- Scroll-reveal for white property page sections -->
+<script>
+(function () {
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('pp-visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  function observe () {
+    document.querySelectorAll('.pp-fade').forEach(function (el) { observer.observe(el); });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', observe);
+  } else {
+    observe();
+  }
+  // Re-observe when data binding reveals hidden sections
+  var mo = new MutationObserver(function () {
+    document.querySelectorAll('.pp-fade:not(.pp-visible)').forEach(function (el) { observer.observe(el); });
+  });
+  mo.observe(document.body, { attributes: true, attributeFilter: ['style'], subtree: true });
 })();
 </script>
 
