@@ -498,7 +498,9 @@ select option{background:#1d2e42}
         </div>
         <div class="ff">
           <label class="flabel">Agent</label>
-          <input type="text" id="fAgent" value="Hedda Parashos">
+          <select id="fAgent">
+            <option value="Hedda Parashos">Hedda Parashos</option>
+          </select>
         </div>
         <div class="ff">
           <label class="flabel">Brokerage</label>
@@ -557,6 +559,32 @@ async function load() {
   } catch {
     document.getElementById('listingsList').innerHTML =
       '<div class="loading-row">Could not load /data/featured-properties.json — make sure the dev server is running.</div>';
+  }
+}
+
+async function loadAgents() {
+  const sel = document.getElementById('fAgent');
+  if (!sel) return;
+  try {
+    const r = await fetch('/api/team');
+    if (!r.ok) throw new Error(r.status);
+    const data = await r.json();
+    const members = Array.isArray(data) ? data : (data.members || []);
+    if (!members.length) return;
+    const current = sel.value;
+    sel.innerHTML = members
+      .filter(m => m.name)
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .map(m => `<option value="${esc(m.name)}">${esc(m.name)}</option>`)
+      .join('');
+    // Restore previously selected value if it exists as an option, else default to Hedda Parashos
+    if (current && Array.from(sel.options).some(o => o.value === current)) {
+      sel.value = current;
+    } else {
+      sel.value = 'Hedda Parashos';
+    }
+  } catch {
+    // Keep the fallback option already in the HTML
   }
 }
 
@@ -951,6 +979,7 @@ function toast(msg, type='') {
 
 /* ──────────────── INIT ──────────────── */
 load();
+loadAgents();
 </script>
 </body>
 </html>
