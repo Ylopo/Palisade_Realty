@@ -1060,7 +1060,7 @@
         })
     }
 
-    fetch('/data/featured-properties.json?t=' + Date.now())
+    fetch('/api/listings')
       .then(function (r) { return r.json() })
       .then(renderCarousel)
       .catch(function () {

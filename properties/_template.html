@@ -859,7 +859,7 @@
 
     function $ (id) { return document.getElementById(id) }
 
-    fetch('/data/featured-properties.json')
+    fetch('/api/listings')
       .then(function (r) {
         if (!r.ok) throw new Error('Failed to load properties data')
         return r.json()
