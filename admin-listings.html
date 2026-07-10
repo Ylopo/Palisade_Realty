@@ -551,7 +551,8 @@ async function load() {
   try {
     const r = await fetch('/data/featured-properties.json?t=' + Date.now());
     if (!r.ok) throw new Error(r.status);
-    listings = await r.json();
+    const data = await r.json();
+    listings = Array.isArray(data) ? data : [];
     renderList();
   } catch {
     document.getElementById('listingsList').innerHTML =
