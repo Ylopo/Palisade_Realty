@@ -575,7 +575,9 @@ async function loadAgents() {
   const wrap = document.getElementById('fAgentList');
   if (!wrap) return;
   try {
-    const r = await fetch('/api/team');
+    const secret = sessionStorage.getItem('adminSecret');
+    const headers = secret ? { 'X-Admin-Secret': secret } : {};
+    const r = await fetch('/api/team?page=team', { headers });
     if (!r.ok) throw new Error(r.status);
     const data = await r.json();
     const members = Array.isArray(data) ? data : (data.members || []);
