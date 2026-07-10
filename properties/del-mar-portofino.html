@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="pp-title">Del Mar Portofino — Palisade Realty</title>
+  <meta id="pp-meta-desc" name="description" content="A featured San Diego property presented by Palisade Realty." />
+  <link rel="icon" type="image/jpeg" href="/images/favicon.jpg" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Mapbox GL JS -->
+  <link href="https://api.mapbox.com/mapbox-gl-js/v3.4.0/mapbox-gl.css" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/homepage.css" />
+  <link rel="stylesheet" href="/lang.css" />
+  <link rel="stylesheet" href="/community.css" />
+
+  <!-- Nav dropdown styles (matching index.html) -->
+  <style>
+    .nav-dropdown { position: relative; }
+    .nav-dropdown-trigger {
+      display: inline-flex !important;
+      align-items: center;
+      gap: 5px;
+      cursor: default;
+    }
+    .nav-dropdown-chevron {
+      width: 10px; height: 10px;
+      flex-shrink: 0;
+      transition: transform 220ms cubic-bezier(0.22,0.61,0.36,1);
+      opacity: 0.55;
+    }
+    .nav-dropdown.is-open .nav-dropdown-chevron { transform: rotate(180deg); }
+    .nav-dropdown-panel {
+      position: absolute;
+      top: calc(100% + 16px);
+      left: 50%;
+      transform: translateX(-50%) translateY(-6px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 200ms cubic-bezier(0.22,0.61,0.36,1),
+                  transform 200ms cubic-bezier(0.22,0.61,0.36,1);
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.13), 0 1px 4px rgba(0,0,0,0.06);
+      min-width: 480px;
+      padding: 22px 22px 18px;
+      z-index: 300;
+    }
+    .nav-dropdown-panel::before {
+      content: '';
+      position: absolute;
+      top: -5px; left: 50%;
+      width: 10px; height: 10px;
+      background: #fff;
+      transform: translateX(-50%) rotate(45deg);
+      border-radius: 2px;
+      box-shadow: -2px -2px 4px rgba(0,0,0,0.04);
+    }
+    .nav-dropdown.is-open .nav-dropdown-panel {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+    .nav-dropdown-panel::after {
+      content: '';
+      position: absolute;
+      top: -20px; left: 0; right: 0;
+      height: 20px;
+    }
+    .nav-dropdown-label {
+      font-family: var(--font-label,'Inter',sans-serif);
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: #58172a;
+      margin-bottom: 12px; display: block;
+    }
+    .nav-dropdown-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-bottom: 14px;
+    }
+    .nav-dropdown-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 9px 10px; border-radius: 8px;
+      font-family: var(--font-body,'Manrope',sans-serif);
+      font-size: 13px; font-weight: 500;
+      color: #212121; text-decoration: none;
+      text-transform: none !important; letter-spacing: 0 !important;
+      transition: background 150ms, color 150ms;
+      white-space: nowrap;
+    }
+    .nav-dropdown-item:hover { background: rgba(88,23,42,0.06); color: #58172a; opacity: 1 !important; }
+    .nav-dropdown-item::after { display: none !important; }
+    .nav-dropdown-dot { width: 6px; height: 6px; border-radius: 50%; background: #d0d0d0; flex-shrink: 0; }
+    .nav-dropdown-divider { height: 1px; background: rgba(0,0,0,0.07); margin-bottom: 12px; }
+    .nav-dropdown-all {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 10px 4px;
+    }
+    .nav-dropdown-all a {
+      font-family: var(--font-label,'Inter',sans-serif);
+      font-size: 12px; font-weight: 600;
+      color: #58172a !important; text-decoration: none;
+      text-transform: none !important; letter-spacing: 0 !important;
+      display: inline-flex; align-items: center; gap: 5px;
+    }
+    .nav-dropdown-all a::after { display: none !important; }
+    .nav-dropdown-all a:hover { opacity: 0.7; }
+    .mobile-communities-toggle { cursor: pointer; }
+    .mobile-communities-list {
+      display: none; flex-direction: column;
+      padding: 4px 0 4px 20px;
+    }
+    .mobile-communities-list.open { display: flex; }
+    .mobile-communities-list a {
+      font-size: 14px !important;
+      padding: 7px 0 !important;
+      color: #555 !important;
+      text-transform: none !important;
+      letter-spacing: 0 !important;
+      font-weight: 400 !important;
+    }
+  </style>
+
+  <!-- Property Page — White Luxury Redesign (overrides community.css dark defaults) -->
+  <style>
+    /* ══════════════════════════════════════════════════════════
+       PALISADE REALTY — PROPERTY DETAIL PAGE  (white/light)
+       All selectors scoped to body.property-page so community
+       pages (dark theme) are unaffected.
+    ══════════════════════════════════════════════════════════ */
+
+    /* Tokens */
+    body.property-page {
+      --pp-white:    #ffffff;
+      --pp-cream:    #faf7f2;
+      --pp-border:   rgba(26,24,20,0.09);
+      --pp-charcoal: #1a1814;
+      --pp-mid:      #4a4540;
+      --pp-muted:    #8a8070;
+      --pp-brand:    #58172a;
+      --pp-gold:     #eeca00;
+    }
+
+    /* Base */
+    body.property-page {
+      background: var(--pp-white);
+      color: var(--pp-charcoal);
+    }
+
+    /* Attribution bar */
+    body.property-page .pp-attribution {
+      background: var(--pp-cream);
+      color: var(--pp-brand);
+      padding: 22px 24px;
+      border-bottom: 1px solid var(--pp-border);
+    }
+
+    /* Title block */
+    body.property-page .pp-title-block {
+      background: var(--pp-white);
+      border-bottom: 1px solid var(--pp-border);
+      padding: 44px 32px 52px;
+    }
+    body.property-page .pp-address {
+      color: var(--pp-charcoal);
+      font-weight: 400;
+      letter-spacing: -0.025em;
+    }
+    body.property-page .pp-locality { color: var(--pp-muted); }
+    body.property-page .pp-price    { color: var(--pp-brand); }
+    body.property-page .pp-pricecut { color: #c06030; }
+    body.property-page .pp-pricecut .prev { color: rgba(26,24,20,0.38); }
+
+    /* Stats bar */
+    body.property-page .pp-stats {
+      background: var(--pp-cream);
+      border-bottom: 1px solid var(--pp-border);
+      padding: 28px 32px;
+    }
+    body.property-page .pp-stat strong { color: var(--pp-charcoal); }
+    body.property-page .pp-stat span   { color: var(--pp-muted); }
+
+    /* Description */
+    body.property-page .pp-body {
+      color: var(--pp-mid);
+      padding-top: 64px;
+      font-size: 18px;
+      line-height: 1.8;
+    }
+    body.property-page .pp-body a { color: var(--pp-brand); }
+
+    /* Features list */
+    body.property-page .pp-features {
+      background: var(--pp-cream);
+      border-top: 1px solid var(--pp-border);
+      border-bottom: 1px solid var(--pp-border);
+      padding: 40px 32px;
+    }
+    body.property-page .pp-features h2 { color: var(--pp-brand); }
+    body.property-page .pp-features li { color: var(--pp-charcoal); }
+    body.property-page .pp-features li::before { color: var(--pp-brand); }
+
+    /* Map */
+    body.property-page .pp-map-section h2 { color: var(--pp-brand); }
+    body.property-page #pp-map { background: #e8e5e0; }
+
+    /* Neighborhood card */
+    body.property-page .pp-neighborhood-card {
+      background: var(--pp-cream);
+      border: none;
+      border-left: 3px solid var(--pp-brand);
+    }
+    body.property-page .pp-neighborhood-card .overline { color: var(--pp-brand); }
+    body.property-page .pp-neighborhood-card h3 { color: var(--pp-charcoal); }
+
+    /* Tour CTA — full-width maroon band */
+    body.property-page .pp-tour {
+      background: var(--pp-brand);
+      border: none;
+      max-width: none;
+      margin-left: 0;
+      margin-right: 0;
+      padding: 80px 32px;
+    }
+    body.property-page .pp-tour h2 { color: #ffffff; }
+    body.property-page .pp-tour p  { color: rgba(255,255,255,0.72); }
+    body.property-page .pp-tour-avatar { border-color: rgba(238,202,0,0.5); }
+    /* Invert buttons inside the dark tour band */
+    body.property-page .pp-tour .pp-cta-btn {
+      background: #ffffff;
+      color: var(--pp-brand);
+    }
+    body.property-page .pp-tour .pp-cta-btn:hover {
+      background: var(--pp-gold);
+      color: var(--pp-charcoal);
+    }
+    body.property-page .pp-tour .pp-cta-btn-outline {
+      color: #ffffff;
+      border-color: rgba(255,255,255,0.45);
+    }
+    body.property-page .pp-tour .pp-cta-btn-outline:hover {
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.8);
+      color: #ffffff;
+    }
+
+    /* Other featured listings strip */
+    body.property-page .pp-others {
+      background: var(--pp-cream);
+      max-width: none;
+      padding: 64px 48px;
+    }
+    body.property-page .pp-others h2 { color: var(--pp-brand); }
+    body.property-page .pp-others-grid {
+      scrollbar-color: rgba(26,24,20,0.18) rgba(26,24,20,0.05);
+    }
+    body.property-page .pp-others-grid::-webkit-scrollbar-track { background: rgba(26,24,20,0.04); }
+    body.property-page .pp-others-grid::-webkit-scrollbar-thumb { background: rgba(26,24,20,0.18); }
+    body.property-page .pp-others-arrow {
+      background: rgba(255,255,255,0.92);
+      border-color: rgba(26,24,20,0.18);
+      color: var(--pp-charcoal);
+    }
+    body.property-page .pp-others-arrow:hover {
+      background: var(--pp-brand);
+      border-color: var(--pp-brand);
+      color: #ffffff;
+    }
+    body.property-page .pp-others-arrow:disabled:hover {
+      background: rgba(255,255,255,0.92);
+      border-color: rgba(26,24,20,0.18);
+      color: var(--pp-charcoal);
+    }
+
+    /* Community depth section */
+    body.property-page .pp-community-title { color: var(--pp-charcoal); }
+    body.property-page .pp-community-title em { color: var(--pp-brand); }
+    body.property-page .pp-community-h3 { color: var(--pp-brand); }
+    body.property-page .pp-community-school-district { color: var(--pp-muted); }
+
+    body.property-page .pp-highlight-card {
+      background: var(--pp-cream);
+      border: 1px solid var(--pp-border);
+    }
+    body.property-page .pp-highlight-text h4 { color: var(--pp-charcoal); }
+    body.property-page .pp-highlight-text p  { color: var(--pp-muted); }
+
+    body.property-page .pp-schools-col h4 { color: var(--pp-mid); }
+    body.property-page .pp-schools-table th {
+      color: var(--pp-brand);
+      border-bottom-color: rgba(26,24,20,0.15);
+    }
+    body.property-page .pp-schools-table td {
+      color: var(--pp-mid);
+      border-bottom-color: rgba(26,24,20,0.06);
+    }
+    body.property-page .pp-schools-disclaimer { color: rgba(26,24,20,0.4); }
+
+    body.property-page .pp-park-card {
+      background: var(--pp-cream);
+      border-color: var(--pp-border);
+    }
+    body.property-page .pp-park-name { color: var(--pp-charcoal); }
+    body.property-page .pp-park-size { color: var(--pp-brand); }
+    body.property-page .pp-park-amenities { color: var(--pp-muted); }
+    body.property-page .pp-park-amenities li::before { color: var(--pp-brand); }
+
+    /* Scroll-reveal */
+    body.property-page .pp-fade {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.75s cubic-bezier(0.22,0.61,0.36,1),
+                  transform 0.75s cubic-bezier(0.22,0.61,0.36,1);
+    }
+    body.property-page .pp-fade.pp-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── FIX: community.css `nav {}` universal selector assigns
+       position:fixed + dark background to every <nav> on the page,
+       breaking both the site-header sub-navs and the footer nav.
+       Reset all nav elements for property pages, then restore layouts. ── */
+    body.property-page nav {
+      position: static;
+      top: auto; left: auto; right: auto; bottom: auto;
+      z-index: auto;
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border-bottom: none;
+      height: auto;
+      display: block;
+    }
+
+    /* Restore site-header 3-column flex layout */
+    body.property-page .site-header {
+      position: relative;
+      z-index: 100;
+      height: 129px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 30px;
+      background: rgba(255,255,255,0.74);
+    }
+    body.property-page .site-header.scrolled {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: #ffffff;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+      height: 72px;
+      z-index: 100;
+    }
+
+    /* Restore nav-links flex layout (community.css overwrites gap/padding/width) */
+    body.property-page .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      padding: 25px 15px;
+      width: 499px;
+    }
+    body.property-page .nav-links--right {
+      justify-content: flex-end;
+    }
+    body.property-page .site-header.scrolled .nav-links {
+      padding: 12px 15px;
+    }
+
+    /* community.css `.nav-links a` uses near-white color (invisible on white bg)
+       and 10.5px font. Restore homepage.css values. */
+    body.property-page .nav-links a {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 500;
+      font-size: 15px;
+      letter-spacing: 0.9px;
+      text-transform: uppercase;
+      color: #212121;
+      white-space: nowrap;
+      position: relative;
+      text-decoration: none;
+    }
+    body.property-page .nav-links a:hover { color: #58172a; }
+    body.property-page .nav-links a:hover::after { width: 100%; }
+
+    /* community.css `.nav-logo img { height: 44px }` shrinks the logo.
+       Restore homepage.css values so it fills the 129px logo container. */
+    body.property-page .nav-logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 9px 7px 25px;
+      width: 279px;
+      height: 129px;
+      flex-shrink: 0;
+    }
+    body.property-page .site-header.scrolled .nav-logo {
+      height: 72px;
+      padding: 8px 7px;
+    }
+    body.property-page .nav-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+    }
+
+    /* ── FIX: community.css `footer {}` element selector conflicts ──
+       - adds padding: 76px 52px 40px (should be 0 / padding-bottom:40px only)
+       - adds border-top (homepage uses .footer-stripe div instead)
+       - .footer-copy  → pale near-invisible color on white
+       - .footer-links a → pale small no-underline on white                  ── */
+    body.property-page footer {
+      padding: 0;
+      padding-bottom: 40px;
+      border-top: none;
+      background: #ffffff;
+    }
+    body.property-page .footer-copy {
+      font-family: 'Manrope', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: #000000;
+      line-height: 1.6;
+      white-space: normal;
+    }
+    body.property-page .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      list-style: none;
+    }
+    body.property-page .footer-links a,
+    body.property-page .footer-links span {
+      font-family: 'Manrope', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: #58172a;
+      line-height: 33px;
+      text-decoration: underline;
+    }
+    body.property-page .footer-links a:hover { opacity: 0.7; }
+    body.property-page .footer-links span { text-decoration: none; cursor: default; }
+    body.property-page .footer-contact-line {
+      font-family: 'Manrope', sans-serif;
+      font-size: 15px;
+      line-height: 37px;
+      color: #000000;
+      display: block;
+    }
+    body.property-page .footer-contact-line--email { color: #58172a; }
+    body.property-page .footer-social a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: #f2f2f2;
+      color: #58172a;
+      text-decoration: none;
+    }
+    body.property-page .footer-social a:hover {
+      background: #58172a;
+      color: #ffffff;
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      body.property-page .pp-tour { padding: 64px 20px; }
+      body.property-page .pp-others { padding: 52px 20px; }
+    }
+  </style>
+
+  <!-- The two-line edit per property: PROPERTY_SLUG must match a slug in /data/featured-properties.json -->
+  <script>window.PROPERTY_SLUG = 'del-mar-portofino';</script>
+</head>
+<body class="property-page">
+
+<!-- NAVIGATION -->
+<header class="site-header" id="site-header">
+
+  <!-- Left Nav -->
+  <nav class="nav-links" aria-label="Primary navigation left">
+    <a href="https://search.palisaderealty.com/" target="_blank" rel="noopener noreferrer">Buy</a>
+    <a href="https://search.palisaderealty.com/seller" target="_blank" rel="noopener noreferrer">Sell</a>
+    <div class="nav-dropdown">
+      <a href="/communities.html" class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+        Communities
+        <svg class="nav-dropdown-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3.5 5 6.5 8 3.5"/></svg>
+      </a>
+      <div class="nav-dropdown-panel" role="region" aria-label="Communities menu">
+        <span class="nav-dropdown-label">San Diego Communities</span>
+        <div class="nav-dropdown-grid">
+          <a class="nav-dropdown-item" href="/communities/downtown-san-diego-real-estate.html"><span class="nav-dropdown-dot"></span>Downtown San Diego</a>
+          <a class="nav-dropdown-item" href="/communities/mission-hills-real-estate.html"><span class="nav-dropdown-dot"></span>Mission Hills</a>
+          <a class="nav-dropdown-item" href="/communities/point-loma-real-estate.html"><span class="nav-dropdown-dot"></span>Point Loma</a>
+          <a class="nav-dropdown-item" href="/communities/coronado-real-estate.html"><span class="nav-dropdown-dot"></span>Coronado</a>
+          <a class="nav-dropdown-item" href="/communities/pacific-mission-beach-real-estate.html"><span class="nav-dropdown-dot"></span>Pacific &amp; Mission Beach</a>
+          <a class="nav-dropdown-item" href="/communities/mission-valley-real-estate.html"><span class="nav-dropdown-dot"></span>Mission Valley</a>
+          <a class="nav-dropdown-item" href="/communities/la-jolla-real-estate.html"><span class="nav-dropdown-dot"></span>La Jolla</a>
+          <a class="nav-dropdown-item" href="/communities/del-mar-real-estate.html"><span class="nav-dropdown-dot"></span>Del Mar</a>
+          <a class="nav-dropdown-item" href="/communities/carmel-valley-real-estate.html"><span class="nav-dropdown-dot"></span>Carmel Valley</a>
+          <a class="nav-dropdown-item" href="/communities/rancho-santa-fe-real-estate.html"><span class="nav-dropdown-dot"></span>Rancho Santa Fe</a>
+          <a class="nav-dropdown-item" href="/communities/solana-beach-real-estate.html"><span class="nav-dropdown-dot"></span>Solana Beach</a>
+          <a class="nav-dropdown-item" href="/communities/encinitas-real-estate.html"><span class="nav-dropdown-dot"></span>Encinitas</a>
+          <a class="nav-dropdown-item" href="/communities/carlsbad-real-estate.html"><span class="nav-dropdown-dot"></span>Carlsbad</a>
+          <a class="nav-dropdown-item" href="/communities/oceanside-real-estate.html"><span class="nav-dropdown-dot"></span>Oceanside</a>
+          <a class="nav-dropdown-item" href="/communities/spring-valley-real-estate.html"><span class="nav-dropdown-dot"></span>Spring Valley</a>
+          <a class="nav-dropdown-item" href="/communities/chula-vista-real-estate.html"><span class="nav-dropdown-dot"></span>Chula Vista</a>
+          <a class="nav-dropdown-item" href="/communities/la-mesa-real-estate.html"><span class="nav-dropdown-dot"></span>La Mesa</a>
+          <a class="nav-dropdown-item" href="/communities/el-cajon-real-estate.html"><span class="nav-dropdown-dot"></span>El Cajon</a>
+        </div>
+        <div class="nav-dropdown-divider"></div>
+        <div class="nav-dropdown-all">
+          <a href="/communities.html">View All Communities <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 6h8"/><path d="M6 2.5 9.5 6 6 9.5"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <a href="/testimonials.html">Testimonials</a>
+  </nav>
+
+  <!-- Center Logo -->
+  <a href="/" class="nav-logo" aria-label="Palisade Realty home">
+    <img src="/images/logo.png" alt="Palisade Realty">
+  </a>
+
+  <!-- Right Nav -->
+  <nav class="nav-links nav-links--right" aria-label="Primary navigation right">
+    <a href="/#featured-properties">Properties</a>
+    <a href="/team.html">Team</a>
+    <a href="/blog.html">Blog</a>
+    <a href="/contact.html">Contact</a>
+    <button class="lang-toggle" id="lang-toggle" aria-label="Switch language / Cambiar idioma"><span class="lang-en lang-active">EN</span><span class="lang-sep">|</span><span class="lang-es">ES</span></button>
+  </nav>
+
+  <!-- Hamburger (mobile) -->
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Open navigation menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+</header>
+
+<!-- Mobile nav drawer -->
+<div class="nav-mobile-drawer" id="nav-mobile-drawer" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+  <a href="https://search.palisaderealty.com/" target="_blank" rel="noopener noreferrer">Buy</a>
+  <a href="https://search.palisaderealty.com/seller" target="_blank" rel="noopener noreferrer">Sell</a>
+  <a href="/communities.html" class="mobile-communities-toggle" id="mobile-communities-toggle" aria-expanded="false">Communities ▾</a>
+  <div class="mobile-communities-list" id="mobile-communities-list">
+    <a href="/communities/downtown-san-diego-real-estate.html">Downtown San Diego</a>
+    <a href="/communities/mission-hills-real-estate.html">Mission Hills</a>
+    <a href="/communities/point-loma-real-estate.html">Point Loma</a>
+    <a href="/communities/coronado-real-estate.html">Coronado</a>
+    <a href="/communities/pacific-mission-beach-real-estate.html">Pacific &amp; Mission Beach</a>
+    <a href="/communities/mission-valley-real-estate.html">Mission Valley</a>
+    <a href="/communities/la-jolla-real-estate.html">La Jolla</a>
+    <a href="/communities/del-mar-real-estate.html">Del Mar</a>
+    <a href="/communities/carmel-valley-real-estate.html">Carmel Valley</a>
+    <a href="/communities/rancho-santa-fe-real-estate.html">Rancho Santa Fe</a>
+    <a href="/communities/solana-beach-real-estate.html">Solana Beach</a>
+    <a href="/communities/encinitas-real-estate.html">Encinitas</a>
+    <a href="/communities/carlsbad-real-estate.html">Carlsbad</a>
+    <a href="/communities/oceanside-real-estate.html">Oceanside</a>
+    <a href="/communities/spring-valley-real-estate.html">Spring Valley</a>
+    <a href="/communities/chula-vista-real-estate.html">Chula Vista</a>
+    <a href="/communities/la-mesa-real-estate.html">La Mesa</a>
+    <a href="/communities/el-cajon-real-estate.html">El Cajon</a>
+  </div>
+  <a href="/testimonials.html">Testimonials</a>
+  <a href="/#featured-properties">Properties</a>
+  <a href="/team.html">Team</a>
+  <a href="/blog.html">Blog</a>
+  <a href="/contact.html">Contact</a>
+</div>
+
+<!-- HERO GALLERY -->
+<section class="pp-hero">
+  <div class="pp-hero-track" id="pp-hero-track"></div>
+  <button class="fp-arrow fp-prev" id="pp-prev" aria-label="Previous photo" style="left:24px;">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+  </button>
+  <button class="fp-arrow fp-next" id="pp-next" aria-label="Next photo" style="right:24px;">
+    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+  </button>
+  <div class="pp-counter" id="pp-counter">1 / 1</div>
+</section>
+
+<!-- OPEN HOUSE BANNER (shown only when openHouse data present) -->
+<div class="pp-openhouse-banner" id="pp-openhouse-banner" style="display:none;">
+  <span class="pp-openhouse-label">Open House</span>
+  <span class="pp-openhouse-when" id="pp-openhouse-when"></span>
+</div>
+
+<!-- ATTRIBUTION -->
+<p class="pp-attribution">Featured by Hedda Parashos &middot; Palisade Realty</p>
+
+<!-- TITLE BLOCK -->
+<header class="pp-title-block">
+  <div>
+    <h1 class="pp-address" id="pp-address">—</h1>
+    <p class="pp-locality" id="pp-locality">—</p>
+  </div>
+  <div class="pp-price-wrap">
+    <div class="pp-price" id="pp-price">—</div>
+    <div class="pp-pricecut" id="pp-pricecut" style="display:none;"></div>
+  </div>
+</header>
+
+<!-- STATS -->
+<div class="pp-stats" id="pp-stats"></div>
+
+<!-- DESCRIPTION -->
+<article class="pp-body" id="pp-body">
+  <p>Loading property details…</p>
+</article>
+
+<!-- FEATURES -->
+<section class="pp-features" id="pp-features-section" style="display:none;">
+  <h2>Property Features</h2>
+  <ul id="pp-features-list"></ul>
+</section>
+
+<!-- LOCATION MAP -->
+<section class="pp-map-section">
+  <h2>Location</h2>
+  <div id="pp-map"></div>
+</section>
+
+<!-- NEIGHBORHOOD CARD -->
+<section class="pp-neighborhood" id="pp-neighborhood-section" style="display:none;">
+  <div class="pp-neighborhood-card">
+    <div>
+      <p class="overline">Explore the Area</p>
+      <h3 id="pp-neighborhood-title">—</h3>
+    </div>
+    <a id="pp-neighborhood-link" class="pp-cta-btn-outline" href="#">Community Guide &rarr;</a>
+  </div>
+</section>
+
+<!-- LIVING IN [CITY] — community depth pulled from /data/communities.json -->
+<section class="pp-community" id="pp-community-section" style="display:none;">
+  <h2 class="pp-community-title">Living in <em id="pp-community-name">—</em></h2>
+
+  <!-- Highlights -->
+  <div class="pp-community-block" id="pp-community-highlights-block" style="display:none;">
+    <h3 class="pp-community-h3">Why You'll Love It Here</h3>
+    <div class="pp-community-highlights" id="pp-community-highlights"></div>
+  </div>
+
+  <!-- Schools -->
+  <div class="pp-community-block" id="pp-community-schools-block" style="display:none;">
+    <h3 class="pp-community-h3">Schools Serving the Area</h3>
+    <p class="pp-community-school-district" id="pp-community-school-district"></p>
+    <div class="pp-schools-grid">
+      <div class="pp-schools-col" id="pp-schools-public-col" style="display:none;">
+        <h4>Public</h4>
+        <table class="pp-schools-table" id="pp-schools-public"></table>
+      </div>
+      <div class="pp-schools-col" id="pp-schools-private-col" style="display:none;">
+        <h4>Private &amp; Charter</h4>
+        <table class="pp-schools-table" id="pp-schools-private"></table>
+      </div>
+    </div>
+    <p class="pp-schools-disclaimer">School assignments are address-specific and subject to change. Verify enrollment zoning directly with the district.</p>
+  </div>
+
+  <!-- Parks & Recreation -->
+  <div class="pp-community-block" id="pp-community-parks-block" style="display:none;">
+    <h3 class="pp-community-h3">Parks &amp; Recreation</h3>
+    <div class="pp-parks-grid" id="pp-community-parks"></div>
+  </div>
+</section>
+
+<!-- SCHEDULE A SHOWING -->
+<section class="pp-tour">
+  <img class="pp-tour-avatar" src="/images/Hedda_Parashos.jpg" alt="Hedda Parashos, Palisade Realty" />
+  <h2>Want to See This Home in Person?</h2>
+  <p>Reach out anytime — I'll set up a private tour at a time that works for you and walk through every detail of the property.</p>
+  <div class="pp-tour-buttons">
+    <a id="pp-tour-mailto" class="pp-cta-btn" href="mailto:contactus@palisaderealty.com">Request a Tour</a>
+    <a class="pp-cta-btn-outline" href="tel:+16197940218">Call (619) 794-0218</a>
+  </div>
+</section>
+
+<!-- OTHER FEATURED LISTINGS -->
+<section class="pp-others" id="pp-others-section" style="display:none;">
+  <h2>Other Featured Listings</h2>
+  <button class="pp-others-arrow pp-others-prev" id="pp-others-prev" aria-label="Scroll left" style="display:none;">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+  </button>
+  <button class="pp-others-arrow pp-others-next" id="pp-others-next" aria-label="Scroll right" style="display:none;">
+    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+  </button>
+  <div class="pp-others-grid" id="pp-others-grid"></div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer" id="footer">
+
+  <div class="footer-texture" aria-hidden="true"></div>
+  <div class="footer-stripe" aria-hidden="true"></div>
+
+  <div class="footer-inner">
+
+    <div class="footer-col-brand">
+      <div class="footer-logo">
+        <img src="/images/logo.png" alt="Palisade Realty">
+      </div>
+      <div class="footer-copy-mls-row">
+        <div>
+          <p class="footer-copy">
+            &copy;Palisade Realty, Inc. 2026<br>
+            All Rights Reserved<br><br>
+            Brokerage CA DRE #01848565<br><br>
+            Hedda Parashos<br>
+            CA DRE #01773167
+          </p>
+        </div>
+        <div class="footer-mls-badge" aria-label="Move Safe Certified by HomeLight">
+          <img src="/assets/images/move-safe-offsite-stacked.png" alt="Move Safe Certified by HomeLight">
+        </div>
+      </div>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/PalisadeRealty/" target="_blank" rel="noopener noreferrer" aria-label="Palisade Realty on Facebook">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M15 8a7 7 0 1 0-8.094 6.915V10.3H4.947V8h1.959V6.257C6.906 4.32 8.067 3.25 9.832 3.25c.847 0 1.733.151 1.733.151v1.9h-.976c-.962 0-1.261.597-1.261 1.209V8h2.147l-.343 2.3H9.328v4.615A7.003 7.003 0 0 0 15 8z"/></svg>
+        </a>
+        <a href="https://www.pinterest.com/palisaderealty/" target="_blank" rel="noopener noreferrer" aria-label="Palisade Realty on Pinterest">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0a8 8 0 0 0-2.915 15.452c-.07-.633-.134-1.606.027-2.297.146-.625.984-4.172.984-4.172s-.252-.503-.252-1.246c0-1.167.678-2.041 1.52-2.041.717 0 1.065.539 1.065 1.184 0 .721-.46 1.801-.698 2.8-.198.835.42 1.515 1.242 1.515 1.49 0 2.638-1.571 2.638-3.836 0-2.006-1.441-3.408-3.499-3.408-2.382 0-3.78 1.787-3.78 3.634 0 .72.276 1.49.621 1.91a.25.25 0 0 1 .057.239c-.063.264-.204.835-.232.952-.037.154-.124.186-.285.112-1.05-.489-1.707-2.028-1.707-3.264 0-2.653 1.928-5.09 5.559-5.09 2.919 0 5.187 2.081 5.187 4.862 0 2.902-1.83 5.237-4.371 5.237-.854 0-1.658-.444-1.932-.967l-.525 1.958c-.19.733-.705 1.65-1.05 2.208A8.001 8.001 0 0 0 8 16a8 8 0 0 0 0-16z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/palisade_realty/" target="_blank" rel="noopener noreferrer" aria-label="Palisade Realty on Instagram">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <nav class="footer-col-links" aria-label="Quick links">
+      <span class="footer-col-title">Quick Links</span>
+      <div class="footer-links">
+        <a href="https://search.palisaderealty.com/" target="_blank" rel="noopener noreferrer">Buy a Home</a>
+        <a href="https://search.palisaderealty.com/seller" target="_blank" rel="noopener noreferrer">Sell Your Home</a>
+        <a href="/communities.html">Communities</a>
+        <a href="/testimonials.html">Testimonials</a>
+        <a href="/blog.html">Blog</a>
+        <a href="/team.html">Our Team</a>
+        <a href="/contact.html">Contact Us</a>
+      </div>
+    </nav>
+
+    <address class="footer-col-contact" style="font-style:normal;">
+      <span class="footer-col-title">Contact</span>
+      <span class="footer-contact-line"><strong>3434 Grove Street</strong></span>
+      <span class="footer-contact-line"><strong>Lemon Grove, CA 91945</strong></span>
+      <a href="tel:+16197940218" class="footer-contact-line">(619) 794-0218</a>
+      <a href="mailto:contactus@palisaderealty.com" class="footer-contact-line footer-contact-line--email">contactus@palisaderealty.com</a>
+      <span class="footer-contact-line">Mon – Fri: 9:00 AM – 5:00 PM</span>
+    </address>
+
+  </div>
+
+</footer>
+
+<!-- Mapbox GL JS -->
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.4.0/mapbox-gl.js"></script>
+
+<!-- Homepage JS (nav hamburger, mobile drawer, reveal animations) -->
+<script src="/homepage.js"></script>
+
+<!-- Communities dropdown JS -->
+<script>
+(function() {
+  var dd = document.querySelector('.nav-dropdown');
+  if (!dd) return;
+  var trigger = dd.querySelector('.nav-dropdown-trigger');
+  var panel = dd.querySelector('.nav-dropdown-panel');
+  var closeTimer;
+  function open() { clearTimeout(closeTimer); dd.classList.add('is-open'); trigger.setAttribute('aria-expanded','true'); }
+  function close() { closeTimer = setTimeout(function(){ dd.classList.remove('is-open'); trigger.setAttribute('aria-expanded','false'); }, 120); }
+  dd.addEventListener('mouseenter', open);
+  dd.addEventListener('mouseleave', close);
+  trigger.addEventListener('focus', open);
+  trigger.addEventListener('blur', function(e){ if (!dd.contains(e.relatedTarget)) close(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') { dd.classList.remove('is-open'); trigger.setAttribute('aria-expanded','false'); } });
+
+  var mobileToggle = document.getElementById('mobile-communities-toggle');
+  var mobileList = document.getElementById('mobile-communities-list');
+  if (mobileToggle && mobileList) {
+    mobileToggle.addEventListener('click', function() {
+      var open = mobileList.classList.toggle('open');
+      mobileToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+})();
+</script>
+
+<!-- Scroll-reveal for white property page sections -->
+<script>
+(function () {
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('pp-visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  function observe () {
+    document.querySelectorAll('.pp-fade').forEach(function (el) { observer.observe(el); });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', observe);
+  } else {
+    observe();
+  }
+  // Re-observe when data binding reveals hidden sections
+  var mo = new MutationObserver(function () {
+    document.querySelectorAll('.pp-fade:not(.pp-visible)').forEach(function (el) { observer.observe(el); });
+  });
+  mo.observe(document.body, { attributes: true, attributeFilter: ['style'], subtree: true });
+})();
+</script>
+
+<!-- DATA BINDING -->
+<script>
+  (function () {
+    'use strict'
+
+    var COMMUNITY_NAMES = {
+      'downtown-san-diego': 'Downtown San Diego',
+      'mission-hills': 'Mission Hills',
+      'point-loma': 'Point Loma',
+      'coronado': 'Coronado',
+      'pacific-mission-beach': 'Pacific & Mission Beach',
+      'mission-valley': 'Mission Valley',
+      'la-jolla': 'La Jolla',
+      'del-mar': 'Del Mar',
+      'carmel-valley': 'Carmel Valley',
+      'rancho-santa-fe': 'Rancho Santa Fe',
+      'solana-beach': 'Solana Beach',
+      'encinitas': 'Encinitas',
+      'carlsbad': 'Carlsbad',
+      'oceanside': 'Oceanside',
+      'spring-valley': 'Spring Valley',
+      'chula-vista': 'Chula Vista',
+      'la-mesa': 'La Mesa',
+      'el-cajon': 'El Cajon'
+    }
+
+    function formatNumber (n) {
+      return n.toLocaleString('en-US')
+    }
+
+    function $ (id) { return document.getElementById(id) }
+
+    fetch('/api/listings')
+      .then(function (r) {
+        if (!r.ok) throw new Error('Failed to load properties data')
+        return r.json()
+      })
+      .then(function (all) {
+        var slug = window.PROPERTY_SLUG
+        var p = all.find(function (x) { return x.slug === slug })
+        if (!p) {
+          $('pp-body').innerHTML = '<p>Property not found. <a href="/" style="color:var(--bronze);">&larr; Back to home</a></p>'
+          return
+        }
+
+        // Title + meta
+        document.title = p.address + ' · ' + p.city + ' — Palisade Realty'
+        if (p.tagline) {
+          $('pp-meta-desc').setAttribute('content', p.tagline)
+        }
+
+        // Title block
+        $('pp-address').textContent = p.address
+        $('pp-locality').textContent = (p.neighborhood ? p.neighborhood + ' · ' : '') +
+          p.city + ', ' + p.state + (p.zip ? ' ' + p.zip : '') +
+          (p.mls ? ' · MLS ' + p.mls : '')
+        if (p.priceDisplay) {
+          $('pp-price').textContent = p.priceDisplay
+        } else {
+          $('pp-price').textContent = 'Inquire'
+        }
+
+        // Price cut
+        if (p.priceCut) {
+          var pc = $('pp-pricecut')
+          pc.innerHTML = '↓ ' + p.priceCut.amountDisplay + ' price reduction · ' + p.priceCut.dateDisplay +
+            (p.priceCut.previousPriceDisplay ? ' <span class="prev">(was ' + p.priceCut.previousPriceDisplay + ')</span>' : '')
+          pc.style.display = 'block'
+        }
+
+        // Open House banner
+        if (p.openHouse) {
+          var oh = $('pp-openhouse-banner')
+          $('pp-openhouse-when').textContent = p.openHouse.displayDate + ' · ' + p.openHouse.displayTime
+          oh.style.display = 'flex'
+        }
+
+        // Stats
+        var stats = []
+        if (p.beds) stats.push({ value: p.beds, label: 'Beds' })
+        if (p.baths) stats.push({ value: p.baths, label: 'Baths' })
+        if (p.sqft) stats.push({ value: formatNumber(p.sqft) + ' sq ft', label: 'Living Area' })
+        if (p.lotSize) stats.push({ value: p.lotSize, label: 'Lot' })
+        if (p.yearBuilt) stats.push({ value: p.yearBuilt, label: 'Built' })
+        if (stats.length) {
+          $('pp-stats').innerHTML = stats.map(function (s) {
+            return '<div class="pp-stat"><strong>' + s.value + '</strong><span>' + s.label + '</span></div>'
+          }).join('')
+        } else {
+          $('pp-stats').style.display = 'none'
+        }
+
+        // Description
+        if (p.description) {
+          var paragraphs = p.description.split(/\n\s*\n/).map(function (para) {
+            return '<p>' + para.replace(/\n/g, ' ').trim() + '</p>'
+          }).join('')
+          $('pp-body').innerHTML = paragraphs
+        } else if (p.tagline) {
+          $('pp-body').innerHTML = '<p>' + p.tagline + '</p>'
+        }
+
+        // Features
+        if (p.features && p.features.length) {
+          $('pp-features-list').innerHTML = p.features.map(function (f) {
+            return '<li>' + f + '</li>'
+          }).join('')
+          $('pp-features-section').style.display = 'block'
+        }
+
+        // Hero gallery
+        var photos = (p.gallery && p.gallery.length) ? p.gallery : [p.heroImage]
+        var track = $('pp-hero-track')
+        track.innerHTML = photos.map(function (src, i) {
+          return '<img class="pp-hero-img' + (i === 0 ? ' active' : '') + '" src="' + src + '" alt="' + p.address + ' photo ' + (i + 1) + '"' + (i > 0 ? ' loading="lazy"' : '') + ' />'
+        }).join('')
+        $('pp-counter').textContent = '1 / ' + photos.length
+        var current = 0
+        var imgs = track.querySelectorAll('.pp-hero-img')
+        var prevBtn = $('pp-prev')
+        var nextBtn = $('pp-next')
+        function go (i) {
+          imgs[current].classList.remove('active')
+          current = (i + photos.length) % photos.length
+          imgs[current].classList.add('active')
+          $('pp-counter').textContent = (current + 1) + ' / ' + photos.length
+        }
+        prevBtn.addEventListener('click', function () { go(current - 1) })
+        nextBtn.addEventListener('click', function () { go(current + 1) })
+        if (photos.length <= 1) {
+          prevBtn.style.display = 'none'
+          nextBtn.style.display = 'none'
+        }
+
+        // Map — inline init (community-map.js targets #hero-map, not #pp-map)
+        if (p.lat && p.lng && window.mapboxgl) {
+          mapboxgl.accessToken = 'pk.eyJ1Ijoiam9tLW1hcGJveCIsImEiOiJjbXFxaGJva3AwNDVqMnBxcnlvaW54aWRoIn0.f4TeZyya7vaALl39DaWK5Q'
+          var ppMap = new mapboxgl.Map({
+            container: 'pp-map',
+            style: 'mapbox://styles/mapbox/standard',
+            center: [p.lng, p.lat],
+            zoom: 14,
+            pitch: 45,
+            bearing: -10,
+            interactive: true,
+            attributionControl: false
+          })
+          ppMap.on('load', function () {
+            ppMap.setConfigProperty('basemap', 'lightPreset', 'day')
+            var pin = document.createElement('div')
+            pin.style.cssText = 'width:14px;height:14px;border-radius:50%;background:#58172a;border:3px solid #fff;box-shadow:0 2px 10px rgba(88,23,42,0.55);cursor:pointer'
+            new mapboxgl.Marker(pin).setLngLat([p.lng, p.lat]).addTo(ppMap)
+            ppMap.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'top-right')
+          })
+        }
+
+        // Neighborhood card
+        if (p.communitySlug && COMMUNITY_NAMES[p.communitySlug]) {
+          $('pp-neighborhood-title').textContent = 'Homes in ' + (p.neighborhood || COMMUNITY_NAMES[p.communitySlug])
+          $('pp-neighborhood-link').href = '/communities/' + p.communitySlug + '-real-estate.html'
+          $('pp-neighborhood-link').textContent = COMMUNITY_NAMES[p.communitySlug] + ' Community Guide →'
+          $('pp-neighborhood-section').style.display = 'block'
+        }
+
+        // Tour mailto
+        $('pp-tour-mailto').href = 'mailto:contactus@palisaderealty.com?subject=' +
+          encodeURIComponent('Showing request: ' + p.address + ', ' + p.city)
+
+        // "Living in [City]" community-depth section
+        if (p.communitySlug) {
+          fetch('/data/communities.json').then(function (r) { return r.ok ? r.json() : null }).then(function (cdata) {
+            if (!cdata) return
+            var c = cdata[p.communitySlug]
+            if (!c) return
+            $('pp-community-name').textContent = c.name
+            $('pp-community-section').style.display = 'block'
+
+            // Highlights
+            if (c.highlights && c.highlights.length) {
+              $('pp-community-highlights').innerHTML = c.highlights.map(function (h) {
+                return '<div class="pp-highlight-card">' +
+                  '<span class="pp-highlight-icon">' + (h.icon || '◆') + '</span>' +
+                  '<div class="pp-highlight-text">' +
+                    '<h4>' + h.title + '</h4>' +
+                    '<p>' + h.body + '</p>' +
+                  '</div>' +
+                '</div>'
+              }).join('')
+              $('pp-community-highlights-block').style.display = 'block'
+            }
+
+            // Schools
+            if (c.schools && (c.schools.public && c.schools.public.length || c.schools.private && c.schools.private.length)) {
+              if (c.schoolDistrict) $('pp-community-school-district').textContent = c.schoolDistrict
+              function renderSchoolRows (list) {
+                return list.map(function (s) {
+                  return '<tr><td class="school-name">' + s.name + '</td><td class="school-grades">' + s.grades + '</td><td class="school-type">' + (s.type || '') + '</td></tr>'
+                }).join('')
+              }
+              if (c.schools.public && c.schools.public.length) {
+                $('pp-schools-public').innerHTML = '<thead><tr><th>School</th><th>Grades</th><th>District</th></tr></thead><tbody>' + renderSchoolRows(c.schools.public) + '</tbody>'
+                $('pp-schools-public-col').style.display = 'block'
+              }
+              if (c.schools.private && c.schools.private.length) {
+                $('pp-schools-private').innerHTML = '<thead><tr><th>School</th><th>Grades</th><th>Type</th></tr></thead><tbody>' + renderSchoolRows(c.schools.private) + '</tbody>'
+                $('pp-schools-private-col').style.display = 'block'
+              }
+              $('pp-community-schools-block').style.display = 'block'
+            }
+
+            // Parks & Recreation
+            if (c.parks && c.parks.length) {
+              $('pp-community-parks').innerHTML = c.parks.map(function (k) {
+                var amenities = (k.amenities || []).slice(0, 4).map(function (a) { return '<li>' + a + '</li>' }).join('')
+                return '<div class="pp-park-card">' +
+                  '<div class="pp-park-name">' + k.name + '</div>' +
+                  (k.size ? '<div class="pp-park-size">' + k.size + '</div>' : '') +
+                  (amenities ? '<ul class="pp-park-amenities">' + amenities + '</ul>' : '') +
+                '</div>'
+              }).join('')
+              $('pp-community-parks-block').style.display = 'block'
+            }
+          }).catch(function () { /* graceful fail */ })
+        }
+
+        // Other featured listings — horizontally scrollable
+        var others = all.filter(function (x) { return x.slug !== p.slug && x.status === 'active' })
+        if (others.length) {
+          var grid = $('pp-others-grid')
+          grid.innerHTML = others.map(function (o) {
+            var href = o.hasDetailPage ? '/properties/' + o.slug + '.html' : (o.ylopoDetailUrl || '#')
+            var ext = o.hasDetailPage ? '' : ' target="_blank" rel="noopener"'
+            return '<a class="pp-other-card" href="' + href + '"' + ext + '>' +
+              '<img src="' + o.heroImage + '" alt="' + o.address + '" loading="lazy" />' +
+              '<div class="pp-other-overlay">' +
+                '<div><span>' + o.city + ', ' + o.state + '</span>' +
+                '<strong>' + o.address + '</strong></div>' +
+              '</div>' +
+              '</a>'
+          }).join('')
+          $('pp-others-section').style.display = 'block'
+
+          requestAnimationFrame(function () {
+            var prev = $('pp-others-prev')
+            var next = $('pp-others-next')
+            var hasOverflow = grid.scrollWidth > grid.clientWidth + 2
+            if (!hasOverflow) return
+            prev.style.display = 'flex'
+            next.style.display = 'flex'
+
+            function step () {
+              var card = grid.querySelector('.pp-other-card')
+              if (!card) return grid.clientWidth * 0.8
+              var gap = 18
+              return card.offsetWidth + gap
+            }
+            function updateArrows () {
+              var max = grid.scrollWidth - grid.clientWidth
+              prev.disabled = grid.scrollLeft <= 2
+              next.disabled = grid.scrollLeft >= max - 2
+            }
+            prev.addEventListener('click', function () { grid.scrollBy({ left: -step(), behavior: 'smooth' }) })
+            next.addEventListener('click', function () { grid.scrollBy({ left: step(), behavior: 'smooth' }) })
+            grid.addEventListener('scroll', updateArrows, { passive: true })
+            window.addEventListener('resize', updateArrows)
+            updateArrows()
+          })
+        }
+      })
+      .catch(function (err) {
+        $('pp-body').innerHTML = '<p>Couldn&rsquo;t load this property. <a href="/" style="color:var(--bronze);">&larr; Back to home</a></p>'
+        console.error('[property page]', err)
+      })
+  })()
+</script>
+
+<script src="/lang.js"></script>
+
+</body>
+</html>
