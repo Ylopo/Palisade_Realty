@@ -940,9 +940,10 @@ textarea{resize:none}
         <div id="pg-team" class="page">
           <!-- Sub-nav -->
           <div style="display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:20px">
-            <button class="tsn-btn tsn-active" data-tsn="members"  onclick="tmShowSection('members')">Team Members</button>
-            <button class="tsn-btn"            data-tsn="settings" onclick="tmShowSection('settings')">Page Settings</button>
-            <button class="tsn-btn"            data-tsn="seo"      onclick="tmShowSection('seo')">SEO</button>
+            <button class="tsn-btn tsn-active" data-tsn="members"        onclick="tmShowSection('members')">Team Members</button>
+            <button class="tsn-btn"            data-tsn="settings"       onclick="tmShowSection('settings')">Page Settings</button>
+            <button class="tsn-btn"            data-tsn="seo"            onclick="tmShowSection('seo')">SEO</button>
+            <button class="tsn-btn"            data-tsn="agent-listings" onclick="tmShowSection('agent-listings')">Agent Listings</button>
           </div>
 
           <!-- ── Members ── -->
@@ -1136,6 +1137,58 @@ textarea{resize:none}
                 </div>
               </div>
             </div>
+          </div>
+
+          <!-- ── Agent Listings Config ── -->
+          <div id="tmsec-agent-listings" style="display:none">
+
+            <!-- Main config card -->
+            <div class="dash-card" style="margin-bottom:16px">
+              <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px">
+                <div>
+                  <h3 style="font-size:14px;font-weight:600;margin-bottom:5px">Featured Listings — Per-Agent Configuration</h3>
+                  <p style="font-size:12px;color:var(--text2);line-height:1.6">Control which listings appear on each agent page carousel. By default every page shows all active featured listings.</p>
+                </div>
+                <button class="btn-purple-inline" style="flex-shrink:0;margin-left:16px" onclick="openAlcModal(null)">+ Add Override</button>
+              </div>
+
+              <div id="alcLoadingMsg" style="font-size:13px;color:var(--text2);margin-bottom:10px"></div>
+
+              <div class="tbl-wrap" style="margin-top:0">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Agent Page Slug</th>
+                      <th>Listings From</th>
+                      <th>Max</th>
+                      <th>Heading</th>
+                      <th>Enabled</th>
+                      <th style="width:120px"></th>
+                    </tr>
+                  </thead>
+                  <tbody id="alcTableBody"></tbody>
+                </table>
+              </div>
+
+              <div style="margin-top:16px;display:flex;align-items:center;gap:12px">
+                <button class="btn-purple-inline" onclick="saveAlcConfig()">Save All Changes</button>
+                <span id="alcSaveMsg" style="font-size:12px;color:var(--text2)"></span>
+              </div>
+            </div>
+
+            <!-- How it works card -->
+            <div class="dash-card">
+              <h3 style="font-size:13px;font-weight:600;margin-bottom:12px;color:var(--text2)">How It Works</h3>
+              <ul style="font-size:12px;color:var(--text2);line-height:2;padding-left:18px;list-style:disc">
+                <li>By default, every agent page shows all active featured listings from the <code style="color:var(--purple);font-size:11px">data/featured-properties.json</code> file.</li>
+                <li>Add an <strong>override</strong> for a specific agent slug to control exactly what appears on that agent's page.</li>
+                <li><strong>Listings From</strong> — set to another agent's slug to display their listings (leave empty to use the page's own agent).</li>
+                <li><strong>Manual Slugs</strong> — enter specific listing slugs to show exactly those listings, bypassing agent filtering.</li>
+                <li>Disable the toggle to hide the Featured Listings section on that page entirely.</li>
+                <li>After saving, changes go live within ~25 seconds (one Vercel build).</li>
+              </ul>
+            </div>
+
           </div>
 
         </div>
@@ -2976,7 +3029,7 @@ let _tpLoaded      = false;
 let _tmCurSection  = 'members';
 
 function tmShowSection(name){
-  ['members','settings','seo'].forEach(s=>{
+  ['members','settings','seo','agent-listings'].forEach(s=>{
     const el=document.getElementById('tmsec-'+s);
     if(el) el.style.display=s===name?'':'none';
   });
@@ -2984,8 +3037,9 @@ function tmShowSection(name){
     b.classList.toggle('tsn-active', b.dataset.tsn===name);
   });
   _tmCurSection=name;
-  if(name==='members') loadTeam();
-  else if(!_tpLoaded) loadTeamPage();
+  if(name==='members')         loadTeam();
+  else if(name==='agent-listings') loadAlcConfig();
+  else if(!_tpLoaded)          loadTeamPage();
 }
 
 async function loadTeamPage(){
@@ -3506,6 +3560,130 @@ async function saveTmMember(){
   }catch(err){
     document.getElementById('tmFormErr').textContent='Save failed: '+err.message;
   }finally{ btn.disabled=false; btn.textContent='Save Member'; }
+}
+
+/* ─────────────────── AGENT LISTINGS CONFIG ─────────────────── */
+let alcConfig    = {};
+let alcEditSlug  = null;
+
+async function loadAlcConfig(){
+  const el = document.getElementById('alcLoadingMsg');
+  if(el) el.textContent = 'Loading…';
+  try{
+    const r = await fetch('/api/listings?type=config',{headers:{'X-Admin-Secret':SECRET}});
+    alcConfig = r.ok ? await r.json() : {};
+    if(typeof alcConfig!=='object'||Array.isArray(alcConfig)) alcConfig={};
+  }catch(e){ alcConfig={}; }
+  renderAlcTable();
+  if(el) el.textContent='';
+}
+
+function renderAlcTable(){
+  const tbody=document.getElementById('alcTableBody');
+  if(!tbody) return;
+  const entries=Object.entries(alcConfig);
+  if(!entries.length){
+    tbody.innerHTML=`<tr><td colspan="6"><div class="empty-state"><h3>No overrides yet</h3><p>All agent pages show all active featured listings by default.</p></div></td></tr>`;
+    return;
+  }
+  tbody.innerHTML=entries.map(([slug,cfg])=>`
+    <tr>
+      <td><code style="font-size:11px;color:var(--purple)">${esc(slug)}</code></td>
+      <td style="font-size:13px;color:var(--text2)">${esc(cfg.listingsAgent||'(page\'s own agent)')}</td>
+      <td style="font-size:13px">${cfg.maxListings||6}</td>
+      <td style="font-size:13px;color:var(--text2);max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(cfg.heading||'Featured Properties')}</td>
+      <td>
+        <button class="vis-toggle ${cfg.enabled!==false?'on':''}"
+          onclick="alcToggleEnabled('${esc(slug)}')"
+          title="${cfg.enabled!==false?'Enabled — click to disable':'Disabled — click to enable'}"></button>
+      </td>
+      <td>
+        <button class="btn-sm btn-edit" onclick="openAlcModal('${esc(slug)}')" style="margin-right:4px">Edit</button>
+        <button class="btn-sm btn-del" onclick="alcDeleteEntry('${esc(slug)}')">Del</button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function alcToggleEnabled(slug){
+  if(!alcConfig[slug]) return;
+  alcConfig[slug].enabled = alcConfig[slug].enabled===false ? true : false;
+  renderAlcTable();
+}
+
+function alcDeleteEntry(slug){
+  if(!confirm(`Remove the override for "${slug}"?\n\nThe page will fall back to showing all active featured listings.`)) return;
+  delete alcConfig[slug];
+  renderAlcTable();
+}
+
+function openAlcModal(slug){
+  alcEditSlug=slug;
+  const cfg=slug?(alcConfig[slug]||{}):{};
+  document.getElementById('alcModalTitle').textContent=slug?`Edit Override — ${slug}`:'Add Agent Override';
+  const slugInput=document.getElementById('alcSlugInput');
+  slugInput.value=slug||'';
+  slugInput.readOnly=!!slug;
+  slugInput.style.opacity=slug?'0.55':'1';
+  document.getElementById('alcListingsAgent').value=cfg.listingsAgent||'';
+  document.getElementById('alcMaxListings').value=cfg.maxListings||6;
+  document.getElementById('alcHeading').value=cfg.heading||'';
+  document.getElementById('alcManualSlugs').value=(cfg.manualSlugs||[]).join(', ');
+  const isEnabled=cfg.enabled!==false;
+  const btn=document.getElementById('alcEnabledToggle');
+  btn.classList.toggle('on',isEnabled);
+  btn.dataset.state=isEnabled?'1':'0';
+  document.getElementById('alcFormErr').textContent='';
+  document.getElementById('alcOverlay').classList.add('open');
+}
+
+function alcToggleEnabledBtn(btn){
+  const isOn=btn.dataset.state==='1';
+  btn.dataset.state=isOn?'0':'1';
+  btn.classList.toggle('on',!isOn);
+}
+
+function closeAlcModal(){
+  document.getElementById('alcOverlay').classList.remove('open');
+  alcEditSlug=null;
+}
+
+function alcOverlayClick(e){ if(e.target.id==='alcOverlay') closeAlcModal(); }
+
+function saveAlcEntry(){
+  const rawSlug=document.getElementById('alcSlugInput').value.trim().toLowerCase().replace(/[^a-z0-9-]/g,'');
+  if(!rawSlug){ document.getElementById('alcFormErr').textContent='Agent slug is required.'; return; }
+  const manualRaw=document.getElementById('alcManualSlugs').value.trim();
+  const btn=document.getElementById('alcEnabledToggle');
+  alcConfig[rawSlug]={
+    enabled:     btn.dataset.state!=='0',
+    listingsAgent: document.getElementById('alcListingsAgent').value.trim()||null,
+    maxListings: parseInt(document.getElementById('alcMaxListings').value)||6,
+    heading:     document.getElementById('alcHeading').value.trim()||'Featured Properties',
+    manualSlugs: manualRaw?manualRaw.split(/[\s,]+/).map(s=>s.trim()).filter(Boolean):[],
+  };
+  closeAlcModal();
+  renderAlcTable();
+}
+
+async function saveAlcConfig(){
+  const msgEl=document.getElementById('alcSaveMsg');
+  if(msgEl) msgEl.textContent='Saving…';
+  try{
+    const r=await fetch('/api/write-json?file=agent-listings-config',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','X-Admin-Secret':SECRET},
+      body:JSON.stringify(alcConfig,null,2),
+    });
+    const d=await r.json();
+    if(d.ok){
+      if(msgEl){ msgEl.style.color='var(--green)'; msgEl.textContent='Saved ✓'; setTimeout(()=>{msgEl.textContent='';msgEl.style.color='';},3500); }
+    } else {
+      if(msgEl){ msgEl.style.color='var(--red)'; msgEl.textContent='Error: '+(d.error||'Unknown'); }
+    }
+  }catch(e){
+    if(msgEl){ msgEl.style.color='var(--red)'; msgEl.textContent='Save failed: '+e.message; }
+  }
 }
 
 /* ─────────────────── CAROUSEL SLIDES ─────────────────── */
@@ -6098,5 +6276,58 @@ async function handleCdAreaImgPick(e, i) {
   </div>
 </div>
   <script src="lang.js"></script>
+
+<!-- ══ AGENT LISTINGS CONFIG MODAL ══════════════════════════════════ -->
+<div id="alcOverlay" class="modal-overlay" onclick="alcOverlayClick(event)">
+  <div class="modal-panel" style="max-width:580px">
+    <div class="modal-head">
+      <h2 id="alcModalTitle" style="font-size:15px;font-weight:600;flex:1">Add Agent Override</h2>
+      <button class="drawer-close" onclick="closeAlcModal()">✕</button>
+    </div>
+    <div class="modal-body" style="gap:14px">
+
+      <div>
+        <label class="field-label">Agent Page Slug <span style="color:var(--red)">*</span></label>
+        <input type="text" id="alcSlugInput" placeholder="e.g. hedda-parashos" autocomplete="off">
+        <div style="font-size:11px;color:var(--muted);margin-top:4px">The filename of the agent's team-page (without .html). Example: <code style="color:var(--purple)">alan-luken</code></div>
+      </div>
+
+      <div class="vis-row">
+        <span class="vis-row-label" style="font-size:13px;font-weight:500">Show Featured Listings section on this page</span>
+        <button class="vis-toggle on" id="alcEnabledToggle" onclick="alcToggleEnabledBtn(this)" data-state="1" title="Toggle section visibility"></button>
+      </div>
+
+      <div>
+        <label class="field-label">Listings From (Agent Slug)</label>
+        <input type="text" id="alcListingsAgent" placeholder="e.g. hedda-parashos  — leave empty to use this page's own agent">
+        <div style="font-size:11px;color:var(--muted);margin-top:4px">Which agent's listings to display. Must match the slugified form of the agent name in <code style="color:var(--purple)">listedBy.agent</code>.</div>
+      </div>
+
+      <div class="row2">
+        <div>
+          <label class="field-label">Max Listings</label>
+          <input type="number" id="alcMaxListings" value="6" min="1" max="20">
+        </div>
+        <div>
+          <label class="field-label">Section Heading</label>
+          <input type="text" id="alcHeading" placeholder="Featured Properties">
+        </div>
+      </div>
+
+      <div>
+        <label class="field-label">Manual Listing Slugs (optional)</label>
+        <input type="text" id="alcManualSlugs" placeholder="la-jolla-prospect, del-mar-stratford, …" autocomplete="off">
+        <div style="font-size:11px;color:var(--muted);margin-top:4px">Comma-separated slugs from <code style="color:var(--purple)">featured-properties.json</code>. When set, overrides all agent-based filtering.</div>
+      </div>
+
+      <div id="alcFormErr" style="font-size:12px;color:var(--red);min-height:16px"></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-outline" onclick="closeAlcModal()">Cancel</button>
+      <button class="btn-purple-inline" onclick="saveAlcEntry()">Save Override</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>

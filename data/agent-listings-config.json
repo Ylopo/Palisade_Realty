@@ -1,0 +1,18 @@
+{
+  "default": {
+    "enabled": true,
+    "listingsAgent": null,
+    "maxListings": 6,
+    "heading": "Featured Properties",
+    "subtitle": "",
+    "manualSlugs": []
+  },
+  "hedda-parashos": {
+    "enabled": true,
+    "listingsAgent": "hedda-parashos",
+    "maxListings": 6,
+    "heading": "Featured Properties",
+    "subtitle": "",
+    "manualSlugs": []
+  }
+}
