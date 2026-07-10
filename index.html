@@ -662,292 +662,268 @@
 </section>
 
 <!-- ============================================================
-     FEATURED PROPERTIES — carousel driven by /data/featured-properties.json
+     FEATURED PROPERTIES — fl-style hero carousel from /api/listings
      ============================================================ -->
 <style>
-  /* CSS variables for this section (community.css not loaded on homepage) */
-  #featured-properties {
-    --fp-dark:   #0d0d0d;
-    --fp-cream:  #faf7f2;
-    --fp-bronze: #eeca00;
-    --fp-serif:  'Playfair Display', Georgia, serif;
-    --fp-sans:   'Manrope', system-ui, sans-serif;
-  }
+  /* ── Featured Properties — fl-wrapper design ── */
+  #featured-properties { position: relative; background: #fff; }
 
-  #featured-properties {
+  .fl-header {
+    padding: 72px 56px 36px;
+    background: #fff;
+    border-top: 1px solid rgba(0,0,0,0.06);
+    text-align: center;
+  }
+  .fl-header-eyebrow {
+    display: block;
+    font-family: var(--font-label, 'Inter', sans-serif);
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--brand, #58172a);
+    margin: 0 0 14px;
+  }
+  .fl-header-title {
+    font-family: var(--font-display, 'Playfair Display', serif);
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 400;
+    color: var(--near-black, #1a1a1a);
+    letter-spacing: -0.02em;
+    line-height: 1.0;
+    margin: 0;
+  }
+  .fl-section {
     position: relative;
-    background: #111;
-    padding: 80px 0 100px;
+    width: 100%;
+    height: 90vh;
+    min-height: 580px;
     overflow: hidden;
+    background: #0a0005;
+    user-select: none;
   }
-  #featured-properties .section-header {
-    max-width: 1400px;
-    margin: 0 auto 36px;
-    padding: 0 48px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 24px;
-  }
-  .fp-carousel {
-    position: relative;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 48px;
-  }
-  .fp-stage {
-    position: relative;
-    aspect-ratio: 16 / 10;
-    background: #000;
-    overflow: hidden;
-  }
-  .fp-slide {
+  .fl-slide {
     position: absolute;
     inset: 0;
     opacity: 0;
-    transition: opacity 0.45s ease;
+    transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
     pointer-events: none;
   }
-  .fp-slide.active { opacity: 1; pointer-events: auto; }
-  .fp-slide img {
+  .fl-slide.is-active { opacity: 1; pointer-events: auto; }
+  .fl-slide-img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
+    transform-origin: center center;
+    will-change: transform;
   }
-  .fp-overlay-gradient {
+  .fl-slide.is-active .fl-slide-img { animation: fl-ken-burns 9s ease-out forwards; }
+  @keyframes fl-ken-burns {
+    from { transform: scale(1.0); }
+    to   { transform: scale(1.09); }
+  }
+  .fl-slide-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 35%, rgba(0,0,0,0) 60%);
-    pointer-events: none;
-    z-index: 1;
+    background:
+      linear-gradient(to top, rgba(8,0,4,0.88) 0%, rgba(8,0,4,0.38) 38%, rgba(8,0,4,0.12) 62%, transparent 100%),
+      linear-gradient(to right, rgba(8,0,4,0.22) 0%, transparent 55%);
   }
-
-  .fp-info {
+  .fl-slide-content {
     position: absolute;
-    left: 48px;
-    bottom: 48px;
-    max-width: 640px;
-    color: #fff;
-    text-shadow: 0 2px 14px rgba(0,0,0,0.45);
-    z-index: 3;
-    transition: opacity 0.35s ease, transform 0.35s ease;
-  }
-  .fp-eyebrow {
-    font-family: var(--fp-sans);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.92);
-    margin: 0 0 14px;
-  }
-  .fp-address {
-    font-family: var(--fp-serif);
-    font-size: clamp(28px, 4vw, 44px);
-    font-weight: 400;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    line-height: 1.1;
-    margin: 0 0 14px;
-    color: #fff;
-  }
-  .fp-stats-inline {
-    font-family: var(--fp-serif);
-    font-style: italic;
-    font-size: clamp(15px, 1.5vw, 19px);
-    font-weight: 300;
-    color: rgba(255,255,255,0.92);
-    margin: 0;
-  }
-
-  .fp-hover-card {
-    position: absolute;
-    left: 48px;
-    bottom: 48px;
-    display: grid;
-    grid-template-columns: minmax(280px, 360px) minmax(220px, 280px);
-    max-width: 640px;
-    font-family: var(--fp-serif);
-    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
-    z-index: 4;
-    opacity: 0;
-    transform: translateY(20px);
-    pointer-events: none;
-    transition: opacity 0.35s ease, transform 0.35s ease;
-  }
-  .fp-slide.has-hover:hover .fp-hover-card,
-  .fp-slide.has-hover:focus-within .fp-hover-card {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
-  .fp-slide.has-hover:hover .fp-info,
-  .fp-slide.has-hover:focus-within .fp-info {
-    opacity: 0;
-    transform: translateY(-12px);
-    pointer-events: none;
-  }
-  .fp-card-tagline {
-    background: var(--fp-cream);
-    color: #1a1814;
-    padding: 28px 30px;
-    font-style: italic;
-    font-size: 17px;
-    line-height: 1.55;
-  }
-  .fp-card-stats {
-    background: var(--fp-dark);
-    color: #fff;
-    padding: 20px 26px;
+    bottom: 0; left: 0; right: 0;
+    padding: 0 56px 56px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 6px;
-    font-family: var(--fp-serif);
-  }
-  .fp-card-stat {
-    display: flex;
+    align-items: flex-end;
     justify-content: space-between;
-    align-items: baseline;
-    border-bottom: 1px solid rgba(200,200,200,0.35);
-    padding: 8px 0;
+    gap: 32px;
+    z-index: 5;
   }
-  .fp-card-stat:last-child { border-bottom: 0; }
-  .fp-card-stat strong { font-weight: 600; font-size: 17px; letter-spacing: 0.01em; }
-  .fp-card-stat .label { font-style: italic; font-size: 14px; color: rgba(255,255,255,0.65); }
-  .fp-price strong { font-size: 22px; }
-  .fp-pricecut {
-    font-family: var(--fp-sans);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    color: #e8b04a;
-    padding: 6px 0 10px;
-    border-bottom: 1px solid rgba(200,200,200,0.35);
-    margin-top: -4px;
-  }
-  .fp-openhouse {
+  .fl-slide-info { flex: 1; min-width: 0; }
+  .fl-status {
     display: inline-block;
-    font-family: var(--fp-sans);
-    font-size: 10.5px;
-    font-weight: 600;
-    letter-spacing: 0.18em;
+    font-family: var(--font-label, 'Inter', sans-serif);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     color: #fff;
     background: #58172a;
-    padding: 7px 14px;
-    margin-bottom: 16px;
-    font-style: normal;
+    padding: 4px 10px 3px;
+    margin-bottom: 14px;
   }
-
-  .fp-cta {
-    position: absolute;
-    right: 48px;
-    bottom: 48px;
+  .fl-status--pending { background: rgba(8,68,94,0.92); }
+  .fl-status--sold    { background: rgba(30,30,30,0.9); }
+  .fl-address {
+    font-family: var(--font-display, 'Playfair Display', serif);
+    font-size: clamp(22px, 2.8vw, 38px);
+    font-weight: 400;
+    color: #fff;
+    line-height: 1.18;
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+  }
+  .fl-address-city {
+    display: block;
+    font-family: var(--font-label, 'Inter', sans-serif);
+    font-size: clamp(11px, 1vw, 13px);
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.62);
+    margin-top: 3px;
+  }
+  .fl-price {
+    font-family: var(--font-label, 'Inter', sans-serif);
+    font-size: clamp(15px, 1.5vw, 19px);
+    font-weight: 500;
+    color: #eeca00;
+    letter-spacing: 0.04em;
+    margin: 0 0 14px;
+  }
+  .fl-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+    font-family: var(--font-label, 'Inter', sans-serif);
+    font-size: 12px;
+    color: rgba(255,255,255,0.65);
+  }
+  .fl-meta-item { display: flex; align-items: center; gap: 5px; }
+  .fl-meta-item svg { flex-shrink: 0; opacity: 0.7; }
+  .fl-meta-divider { width: 1px; height: 11px; background: rgba(255,255,255,0.22); flex-shrink: 0; }
+  .fl-view-btn {
+    flex-shrink: 0;
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    font-family: var(--fp-sans);
-    font-size: 11px;
-    font-weight: 500;
+    gap: 9px;
+    font-family: var(--font-label, 'Inter', sans-serif);
+    font-size: 10px;
+    font-weight: 700;
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: #fff;
-    background: rgba(88,23,42,0.55);
-    border: 1.5px solid rgba(255,255,255,0.85);
-    padding: 14px 32px;
     text-decoration: none;
-    transition: background 0.2s, color 0.2s, border-color 0.2s;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid rgba(255,255,255,0.5);
+    padding: 15px 30px;
+    transition: background 0.22s ease, border-color 0.22s ease, color 0.22s ease;
+    white-space: nowrap;
+    position: relative;
+    z-index: 6;
   }
-  .fp-cta:hover {
-    background: #58172a;
-    border-color: #58172a;
-    color: #fff;
+  .fl-view-btn:hover, .fl-view-btn:focus-visible {
+    background: #eeca00;
+    border-color: #eeca00;
+    color: #58172a;
+    outline: none;
   }
-
-  .fp-arrow {
+  .fl-view-btn:active { opacity: 0.82; }
+  .fl-arrows {
     position: absolute;
-    top: 50%;
+    top: 50%; left: 0; right: 0;
     transform: translateY(-50%);
-    width: 56px;
-    height: 56px;
-    border-radius: 0;
-    border: 1.5px solid rgba(255,255,255,0.85);
-    background: rgba(0,0,0,0.35);
-    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 28px;
+    pointer-events: none;
+    z-index: 10;
+  }
+  .fl-arrow {
+    pointer-events: auto;
+    width: 52px; height: 52px;
+    border: 1px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    z-index: 5;
-    transition: background 0.2s, border-color 0.2s, color 0.2s;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    color: #fff;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
   }
-  .fp-arrow:hover { background: #58172a; border-color: #58172a; color: #fff; }
-  .fp-arrow:disabled { opacity: 0.35; cursor: default; }
-  .fp-arrow:disabled:hover { background: rgba(0,0,0,0.35); border-color: rgba(255,255,255,0.85); color: #fff; }
-  .fp-arrow svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.5; }
-  .fp-prev { left: 96px; }
-  .fp-next { right: 96px; }
-
-  .fp-dots {
+  .fl-arrow:hover, .fl-arrow:focus-visible {
+    background: rgba(255,255,255,0.16);
+    border-color: rgba(255,255,255,0.65);
+    outline: none;
+  }
+  .fl-arrow:active { transform: scale(0.92); }
+  .fl-arrow svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .fl-dots {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 28px;
+    align-items: center;
+    gap: 7px;
+    z-index: 10;
   }
-  .fp-dot {
-    width: 36px;
-    height: 2px;
-    background: rgba(255,255,255,0.25);
-    border: none;
+  .fl-dot {
+    width: 6px; height: 6px;
+    border-radius: 3px;
+    background: rgba(255,255,255,0.3);
     cursor: pointer;
+    border: none;
     padding: 0;
-    transition: background 0.2s;
+    transition: width 0.38s cubic-bezier(0.22,0.61,0.36,1), background 0.25s ease;
   }
-  .fp-dot.active { background: var(--fp-bronze); }
-  .fp-dot:hover { background: #ffd633; }
-
-  @media (max-width: 900px) {
-    #featured-properties .section-header { padding: 0 20px; flex-direction: column; align-items: flex-start; }
-    .fp-carousel { padding: 0 16px; }
-    .fp-stage { aspect-ratio: 4 / 5; }
-    .fp-info { left: 24px; right: 24px; bottom: 88px; max-width: none; }
-    .fp-eyebrow { font-size: 10px; margin-bottom: 10px; }
-    .fp-address { letter-spacing: 0.03em; }
-    .fp-stats-inline { font-size: 14px; }
-    .fp-hover-card { display: none; }
-    .fp-cta { right: 24px; bottom: 24px; padding: 11px 22px; font-size: 10px; }
-    .fp-prev { left: 8px; }
-    .fp-next { right: 8px; }
-    .fp-arrow { width: 44px; height: 44px; }
+  .fl-dot.is-active { width: 30px; background: #eeca00; }
+  .fl-dot:hover:not(.is-active) { background: rgba(255,255,255,0.6); }
+  .fl-counter {
+    position: absolute;
+    top: 28px; right: 56px;
+    font-family: var(--font-label, 'Inter', sans-serif);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.42);
+    z-index: 10;
+    pointer-events: none;
+  }
+  .fl-counter-current { color: rgba(255,255,255,0.85); font-weight: 500; }
+  @media (max-width: 1024px) {
+    .fl-header        { padding: 56px 36px 28px; }
+    .fl-slide-content { padding: 0 36px 52px; }
+    .fl-counter       { right: 36px; }
+  }
+  @media (max-width: 768px) {
+    .fl-header        { padding: 48px 24px 24px; }
+    .fl-section       { height: 88svh; min-height: 520px; }
+    .fl-slide-content { padding: 0 20px 80px; flex-direction: column; align-items: flex-start; gap: 20px; }
+    .fl-view-btn      { align-self: flex-start; }
+    .fl-arrows        { padding: 0 14px; }
+    .fl-arrow         { width: 42px; height: 42px; }
+    .fl-counter       { right: 24px; top: 20px; }
+  }
+  @media (max-width: 480px) {
+    .fl-address  { font-size: 20px; }
+    .fl-price    { font-size: 15px; }
+    .fl-meta     { font-size: 11px; gap: 6px 10px; }
+    .fl-view-btn { padding: 12px 22px; font-size: 9px; }
   }
 </style>
 
 <section id="featured-properties">
-  <div class="section-header reveal">
-    <div>
-      <p class="section-eyebrow">Curated Selection</p>
-      <h2 class="section-title">Featured Properties</h2>
-    </div>
-    <a href="https://search.palisaderealty.com/search" class="view-all-link" target="_blank" rel="noopener">View All Listings &rarr;</a>
+  <div class="fl-header">
+    <span class="fl-header-eyebrow">Palisade Realty</span>
+    <h2 class="fl-header-title">Featured Properties</h2>
   </div>
-
-  <div class="fp-carousel">
-    <div class="fp-stage" id="fp-stage" aria-roledescription="carousel">
-      <!-- slides injected by JS -->
+  <div class="fl-section" role="region" aria-label="Featured property listings" aria-roledescription="carousel" tabindex="0">
+    <div class="fl-slide-container" id="fp-stage"></div>
+    <div class="fl-arrows" role="group" aria-label="Carousel navigation">
+      <button class="fl-arrow fl-arrow-prev" id="fp-prev" aria-label="Previous listing" type="button">
+        <svg viewBox="0 0 18 18"><polyline points="11 14 6 9 11 4"/></svg>
+      </button>
+      <button class="fl-arrow fl-arrow-next" id="fp-next" aria-label="Next listing" type="button">
+        <svg viewBox="0 0 18 18"><polyline points="7 4 12 9 7 14"/></svg>
+      </button>
     </div>
-    <button class="fp-arrow fp-prev" id="fp-prev" aria-label="Previous property">
-      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
-    </button>
-    <button class="fp-arrow fp-next" id="fp-next" aria-label="Next property">
-      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
-    </button>
-    <div class="fp-dots" id="fp-dots"></div>
+    <div class="fl-dots" id="fp-dots" role="tablist" aria-label="Listing slides"></div>
+    <div class="fl-counter" aria-hidden="true">
+      <span class="fl-counter-current" id="fl-counter-current">01</span> / <span id="fl-counter-total">01</span>
+    </div>
   </div>
 </section>
 
@@ -957,116 +933,130 @@
 <script>
   (function () {
     'use strict'
-    function formatStat (n) { return typeof n === 'number' ? n.toLocaleString('en-US') : n }
 
-    function renderCarousel (props) {
-        var active = props.filter(function (p) { return p.status === 'active' })
-        if (!active.length) return
+    function pad(n) { return String(n).padStart(2, '0'); }
+    function fmtSqft(n) { return typeof n === 'number' ? n.toLocaleString('en-US') : n; }
 
-        var stage = document.getElementById('fp-stage')
-        var dotsContainer = document.getElementById('fp-dots')
-        var prevBtn = document.getElementById('fp-prev')
-        var nextBtn = document.getElementById('fp-next')
+    var ICON_BEDS  = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v6"/><path d="M3 18h18"/><path d="M3 12V8"/><path d="M21 12V8"/></svg>';
+    var ICON_BATHS = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6a1 1 0 0 1 2 0v2H9V6z"/><path d="M4 14h16v1a6 6 0 0 1-12 0v-1z"/><path d="M4 14V5a2 2 0 0 1 4 0"/></svg>';
+    var ICON_SQFT  = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></svg>';
+    var ICON_ARROW = '<svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.5h9"/><path d="M7.5 2.5 11.5 6.5 7.5 10.5"/></svg>';
 
-        stage.innerHTML = active.map(function (p, i) {
-          var inline = []
-          if (p.priceDisplay) inline.push(p.priceDisplay)
-          if (p.beds)  inline.push(p.beds + (p.beds === 1 ? ' Bed' : ' Beds'))
-          if (p.baths) inline.push(p.baths + (p.baths === 1 ? ' Bath' : ' Baths'))
-          if (p.sqft)  inline.push(formatStat(p.sqft) + ' Sq.Ft.')
-          var inlineStats = inline.length ? inline.join(' &nbsp;|&nbsp; ') : (p.city + ', ' + p.state)
-
-          var hoverStats = ''
-          if (p.priceDisplay) {
-            hoverStats += '<div class="fp-card-stat fp-price"><strong>' + p.priceDisplay + '</strong><span class="label">Price</span></div>'
-          }
-          if (p.priceCut) {
-            hoverStats += '<div class="fp-pricecut">&#x2193; ' + p.priceCut.amountDisplay + ' price reduction &middot; ' + p.priceCut.dateDisplay + '</div>'
-          }
-          if (p.beds)  hoverStats += '<div class="fp-card-stat"><strong>' + p.beds + '</strong><span class="label">Beds</span></div>'
-          if (p.baths) hoverStats += '<div class="fp-card-stat"><strong>' + p.baths + '</strong><span class="label">Baths</span></div>'
-          if (p.sqft)  hoverStats += '<div class="fp-card-stat"><strong>' + formatStat(p.sqft) + '</strong><span class="label">Sq.Ft.</span></div>'
-          if (!hoverStats) {
-            hoverStats = '<div class="fp-card-stat"><strong>Active Listing</strong><span class="label">' + (p.city || 'San Diego') + '</span></div>' +
-                         (p.mls ? '<div class="fp-card-stat"><strong>MLS ' + p.mls + '</strong><span class="label">Listing</span></div>' : '')
-          }
-
-          var openHouseBadge = ''
-          if (p.openHouse) {
-            openHouseBadge = '<div class="fp-openhouse">Open House &middot; ' + p.openHouse.displayShort + '</div>'
-          }
-
-          var hoverDesc = ''
-          if (p.description) {
-            var d = p.description.replace(/\s+/g, ' ').trim()
-            hoverDesc = d.length > 240 ? d.slice(0, 240).replace(/\s\S*$/, '') + '…' : d
-          } else if (p.tagline) {
-            hoverDesc = p.tagline
-          }
-          var showHoverCard = !!hoverDesc
-
-          var ctaHref = p.hasDetailPage ? '/properties/' + p.slug + '.html' : (p.ylopoDetailUrl || '#')
-          var ctaTarget = p.hasDetailPage ? '' : ' target="_blank" rel="noopener"'
-          var ctaLabel = p.hasDetailPage ? 'Learn More' : 'View on MLS'
-
-          return '<div class="fp-slide' + (i === 0 ? ' active' : '') + (showHoverCard ? ' has-hover' : '') + '" data-index="' + i + '">' +
-            '<img src="' + p.heroImage + '" alt="' + p.address + ', ' + p.city + '"' + (i === 0 ? '' : ' loading="lazy"') + ' />' +
-            '<div class="fp-overlay-gradient"></div>' +
-            '<div class="fp-info">' +
-              '<p class="fp-eyebrow">Featured Listing</p>' +
-              '<h3 class="fp-address">' + p.address + '</h3>' +
-              '<p class="fp-stats-inline">' + inlineStats + '</p>' +
+    function buildSlide(p, i, total) {
+      var statusLabel = p.status === 'active' ? 'For Sale' : (p.status || 'For Sale');
+      var statusMod   = p.status === 'pending' ? ' fl-status--pending' : (p.status === 'sold' ? ' fl-status--sold' : '');
+      var cityLine    = [p.city, p.state, p.zip].filter(Boolean).join(', ');
+      var url         = p.hasDetailPage ? '/properties/' + p.slug + '.html' : (p.ylopoDetailUrl || 'https://search.palisaderealty.com/search');
+      var target      = p.hasDetailPage ? '' : ' target="_blank" rel="noopener noreferrer"';
+      var loading     = i === 0 ? 'eager' : 'lazy';
+      return (
+        '<div class="fl-slide' + (i === 0 ? ' is-active' : '') + '" data-index="' + i + '">' +
+          '<img class="fl-slide-img" src="' + p.heroImage + '" alt="' + p.address + ', ' + cityLine + '" loading="' + loading + '" decoding="async">' +
+          '<div class="fl-slide-overlay"></div>' +
+          '<div class="fl-slide-content">' +
+            '<div class="fl-slide-info">' +
+              '<span class="fl-status' + statusMod + '">' + statusLabel + '</span>' +
+              '<p class="fl-address">' + p.address +
+                '<span class="fl-address-city">' + cityLine + '</span>' +
+              '</p>' +
+              '<p class="fl-price">' + (p.priceDisplay || '') + '</p>' +
+              '<div class="fl-meta">' +
+                (p.beds  ? '<div class="fl-meta-item">' + ICON_BEDS  + p.beds  + ' Bed'  + (p.beds  !== 1 ? 's' : '') + '</div><div class="fl-meta-divider"></div>' : '') +
+                (p.baths ? '<div class="fl-meta-item">' + ICON_BATHS + p.baths + ' Bath' + (p.baths !== 1 ? 's' : '') + '</div><div class="fl-meta-divider"></div>' : '') +
+                (p.sqft  ? '<div class="fl-meta-item">' + ICON_SQFT  + fmtSqft(p.sqft)  + ' Sq Ft</div>' : '') +
+              '</div>' +
             '</div>' +
-            (showHoverCard
-              ? '<div class="fp-hover-card" aria-hidden="true">' +
-                  '<div class="fp-card-tagline">' + openHouseBadge + hoverDesc + '</div>' +
-                  '<div class="fp-card-stats">' + hoverStats + '</div>' +
-                '</div>'
-              : '') +
-            '<a class="fp-cta" href="' + ctaHref + '"' + ctaTarget + '>' + ctaLabel + '</a>' +
-          '</div>'
-        }).join('')
+            '<a href="' + url + '"' + target + ' class="fl-view-btn">View Property ' + ICON_ARROW + '</a>' +
+          '</div>' +
+        '</div>'
+      );
+    }
 
-        dotsContainer.innerHTML = active.map(function (_, i) {
-          return '<button class="fp-dot' + (i === 0 ? ' active' : '') + '" data-index="' + i + '" aria-label="Go to slide ' + (i + 1) + '"></button>'
-        }).join('')
+    function renderCarousel(allProps) {
+      var props = allProps.filter(function (p) { return p.status !== 'inactive'; });
+      if (!props.length) return;
 
-        var slides = stage.querySelectorAll('.fp-slide')
-        var dots = dotsContainer.querySelectorAll('.fp-dot')
-        var current = 0
+      var stage   = document.getElementById('fp-stage');
+      var dotsEl  = document.getElementById('fp-dots');
+      var prevBtn = document.getElementById('fp-prev');
+      var nextBtn = document.getElementById('fp-next');
+      var countEl = document.getElementById('fl-counter-current');
+      var totalEl = document.getElementById('fl-counter-total');
+      var section = stage && stage.closest('.fl-section');
 
-        function go (i) {
-          var n = slides.length
-          current = ((i % n) + n) % n
-          slides.forEach(function (s, idx) { s.classList.toggle('active', idx === current) })
-          dots.forEach(function (d, idx) { d.classList.toggle('active', idx === current) })
-          prevBtn.disabled = nextBtn.disabled = (slides.length <= 1)
-        }
+      var total = props.length;
+      if (totalEl) totalEl.textContent = pad(total);
 
-        prevBtn.addEventListener('click', function () { go(current - 1) })
-        nextBtn.addEventListener('click', function () { go(current + 1) })
-        dots.forEach(function (d, i) { d.addEventListener('click', function () { go(i) }) })
-        if (slides.length <= 1) {
-          prevBtn.disabled = true
-          nextBtn.disabled = true
-        }
+      stage.innerHTML  = props.map(function (p, i) { return buildSlide(p, i, total); }).join('');
+      dotsEl.innerHTML = props.map(function (_, i) {
+        return '<button class="fl-dot' + (i === 0 ? ' is-active' : '') + '" role="tab" ' +
+               'aria-selected="' + (i === 0 ? 'true' : 'false') + '" ' +
+               'aria-label="Go to slide ' + (i + 1) + '" data-index="' + i + '" type="button"></button>';
+      }).join('');
 
-        document.addEventListener('keydown', function (e) {
-          var rect = stage.getBoundingClientRect()
-          var inView = rect.top < window.innerHeight && rect.bottom > 0
-          if (!inView) return
-          if (e.key === 'ArrowLeft')  go(current - 1)
-          if (e.key === 'ArrowRight') go(current + 1)
-        })
+      var slides     = Array.prototype.slice.call(stage.querySelectorAll('.fl-slide'));
+      var dots       = Array.prototype.slice.call(dotsEl.querySelectorAll('.fl-dot'));
+      var current    = 0;
+      var timer      = null;
+      var paused     = false;
+      var INTERVAL   = 6000;
+      var dragStartX = 0;
+      var dragActive = false;
+
+      function activate(idx) {
+        slides[current].classList.remove('is-active');
+        dots[current].classList.remove('is-active');
+        dots[current].setAttribute('aria-selected', 'false');
+        current = ((idx % total) + total) % total;
+        slides[current].classList.add('is-active');
+        dots[current].classList.add('is-active');
+        dots[current].setAttribute('aria-selected', 'true');
+        if (countEl) countEl.textContent = pad(current + 1);
+        var img = slides[current].querySelector('.fl-slide-img');
+        if (img) { img.style.animation = 'none'; img.offsetHeight; img.style.animation = ''; }
+      }
+
+      function startTimer() { clearInterval(timer); if (!paused) timer = setInterval(function () { activate(current + 1); }, INTERVAL); }
+      function pause()      { paused = true;  clearInterval(timer); }
+      function resume()     { paused = false; startTimer(); }
+
+      if (prevBtn) prevBtn.addEventListener('click', function () { activate(current - 1); startTimer(); });
+      if (nextBtn) nextBtn.addEventListener('click', function () { activate(current + 1); startTimer(); });
+      dots.forEach(function (dot, i) { dot.addEventListener('click', function () { activate(i); startTimer(); }); });
+
+      if (section) {
+        section.addEventListener('keydown', function (e) {
+          if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { activate(current + 1); startTimer(); }
+          if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   { activate(current - 1); startTimer(); }
+        });
+        section.addEventListener('mouseenter', pause);
+        section.addEventListener('mouseleave', function () { resume(); dragActive = false; });
+        section.addEventListener('focusin',  pause);
+        section.addEventListener('focusout', resume);
+        section.addEventListener('touchstart', function (e) { dragStartX = e.touches[0].clientX; dragActive = true; }, { passive: true });
+        section.addEventListener('touchend', function (e) {
+          if (!dragActive) return; dragActive = false;
+          var diff = e.changedTouches[0].clientX - dragStartX;
+          if (Math.abs(diff) > 48) { diff < 0 ? activate(current + 1) : activate(current - 1); startTimer(); }
+        });
+        section.addEventListener('mousedown', function (e) { dragStartX = e.clientX; dragActive = true; });
+        section.addEventListener('mouseup', function (e) {
+          if (!dragActive) return; dragActive = false;
+          var diff = e.clientX - dragStartX;
+          if (Math.abs(diff) > 48) { diff < 0 ? activate(current + 1) : activate(current - 1); startTimer(); }
+        });
+      }
+
+      startTimer();
     }
 
     fetch('/api/listings')
-      .then(function (r) { return r.json() })
+      .then(function (r) { return r.json(); })
       .then(renderCarousel)
       .catch(function () {
-        var inlineData = window.__featuredProperties
-        if (inlineData && inlineData.length) renderCarousel(inlineData)
-      })
+        var inlineData = window.__featuredProperties;
+        if (inlineData && inlineData.length) renderCarousel(inlineData);
+      });
   })()
 </script>
 
