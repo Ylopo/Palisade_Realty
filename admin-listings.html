@@ -133,6 +133,15 @@ select option{background:#1d2e42}
 }
 .cbx-label.muted{color:var(--text2)}
 
+.agent-checks-wrap{
+  max-height:130px;overflow-y:auto;
+  background:var(--input);border:1px solid var(--border);
+  border-radius:var(--r);padding:6px 8px;
+  display:flex;flex-direction:column;gap:3px;
+}
+.agent-checks-wrap:focus-within{border-color:var(--blue)}
+.agent-checks-wrap .cbx-label{font-size:12.5px;padding:2px 0}
+
 /* ── Gallery ── */
 .gallery-thumbs{
   display:flex;flex-wrap:wrap;gap:8px;
@@ -497,10 +506,10 @@ select option{background:#1d2e42}
           <input type="text" id="fSlug" placeholder="la-jolla-prospect-street">
         </div>
         <div class="ff">
-          <label class="flabel">Agent</label>
-          <select id="fAgent">
-            <option value="Hedda Parashos">Hedda Parashos</option>
-          </select>
+          <label class="flabel">Agent(s)</label>
+          <div id="fAgentList" class="agent-checks-wrap">
+            <label class="cbx-label"><input type="checkbox" name="fAgent" value="Hedda Parashos" checked> Hedda Parashos</label>
+          </div>
         </div>
         <div class="ff">
           <label class="flabel">Brokerage</label>
@@ -563,28 +572,45 @@ async function load() {
 }
 
 async function loadAgents() {
-  const sel = document.getElementById('fAgent');
-  if (!sel) return;
+  const wrap = document.getElementById('fAgentList');
+  if (!wrap) return;
   try {
     const r = await fetch('/api/team');
     if (!r.ok) throw new Error(r.status);
     const data = await r.json();
     const members = Array.isArray(data) ? data : (data.members || []);
     if (!members.length) return;
-    const current = sel.value;
-    sel.innerHTML = members
+    const checked = getCheckedAgents();
+    wrap.innerHTML = members
       .filter(m => m.name)
       .sort((a, b) => a.name.localeCompare(b.name))
-      .map(m => `<option value="${esc(m.name)}">${esc(m.name)}</option>`)
+      .map(m => {
+        const isChecked = checked.includes(m.name) || (!checked.length && m.name === 'Hedda Parashos');
+        return `<label class="cbx-label"><input type="checkbox" name="fAgent" value="${esc(m.name)}"${isChecked ? ' checked' : ''}> ${esc(m.name)}</label>`;
+      })
       .join('');
-    // Restore previously selected value if it exists as an option, else default to Hedda Parashos
-    if (current && Array.from(sel.options).some(o => o.value === current)) {
-      sel.value = current;
-    } else {
-      sel.value = 'Hedda Parashos';
-    }
   } catch {
-    // Keep the fallback option already in the HTML
+    // Keep the fallback checkbox already in the HTML
+  }
+}
+
+// Return array of checked agent names
+function getCheckedAgents() {
+  return Array.from(document.querySelectorAll('#fAgentList input[name=fAgent]:checked'))
+    .map(cb => cb.value);
+}
+
+// Set which agents are checked (accepts array of names)
+function setCheckedAgents(names) {
+  const arr = Array.isArray(names) ? names : (names ? [names] : []);
+  document.querySelectorAll('#fAgentList input[name=fAgent]').forEach(cb => {
+    cb.checked = arr.includes(cb.value);
+  });
+  // If nothing ended up checked, check the first option as fallback
+  const anyChecked = document.querySelectorAll('#fAgentList input[name=fAgent]:checked').length;
+  if (!anyChecked) {
+    const first = document.querySelector('#fAgentList input[name=fAgent]');
+    if (first) first.checked = true;
   }
 }
 
@@ -701,7 +727,7 @@ function clearForm() {
   ['fPrice','fBeds','fBaths','fSqft'].forEach(id => { const e=document.getElementById(id); if(e) e.value=''; });
   sv('fState','CA'); sv('fCommunity','');
   chk('fActive',false); chk('fOffMarket',false); chk('fDetailPage',true);
-  sv('fAgent','Hedda Parashos'); sv('fBrokerage','Palisade Realty');
+  setCheckedAgents(['Hedda Parashos']); sv('fBrokerage','Palisade Realty');
 }
 
 function fillForm(p) {
@@ -726,7 +752,8 @@ function fillForm(p) {
   sv('fDescription', p.description);
   sv('fFeatures', (p.features || []).join('\n'));
   sv('fSlug',    p.slug);
-  sv('fAgent',   p.listedBy?.agent   || 'Hedda Parashos');
+  const agentNames = p.listedBy?.agents || (p.listedBy?.agent ? [p.listedBy.agent] : ['Hedda Parashos']);
+  setCheckedAgents(agentNames);
   sv('fBrokerage', p.listedBy?.brokerage || 'Palisade Realty');
   sv('fListingUrl', p.ylopoDetailUrl || '');
   const st = p.status || 'active';
@@ -760,7 +787,7 @@ function readForm() {
     state: g('fState') || 'CA',
     status,
     hasDetailPage: b('fDetailPage'),
-    listedBy: { agent: g('fAgent') || 'Hedda Parashos', brokerage: g('fBrokerage') || 'Palisade Realty' }
+    listedBy: { agents: getCheckedAgents(), agent: getCheckedAgents()[0] || 'Hedda Parashos', brokerage: g('fBrokerage') || 'Palisade Realty' }
   };
   if (g('fZip'))          p.zip            = g('fZip');
   if (g('fMls'))          p.mls            = g('fMls');

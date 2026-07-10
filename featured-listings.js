@@ -263,9 +263,13 @@
           .map(function (slug) { return activeAll.find(function (l) { return l.slug === slug; }); })
           .filter(Boolean);
       } else {
-        // Filter by assigned agent (slugify display name for comparison)
+        // Filter by assigned agent — check agents array first, fall back to single agent string
         listings = activeAll.filter(function (l) {
           if (!l.listedBy) return false;
+          var agentsArr = Array.isArray(l.listedBy.agents) ? l.listedBy.agents : [];
+          if (agentsArr.length) {
+            return agentsArr.some(function (n) { return slugify(n) === listingsAgent; });
+          }
           var name = l.listedBy.agent || l.listedBy.name || '';
           return slugify(name) === listingsAgent;
         });
