@@ -95,6 +95,15 @@
       testEyebrow: 'Client Reviews',
       testHeading: 'What Our Clients Say',
       testReviewFor: 'Review for',
+      testimonialQuotes: [
+        '“Working with Anh was honestly one of the best decisions we made. She made the entire process as stress free as possible, going above and beyond to make sure we had everything on our list. Her knowledge of the market and outstanding communication gave us confidence every step of the way — we truly felt like she had our best interests at heart the entire time.”',
+        '“We worked with Wally on both the sale of our condo and the purchase of our home, and had a fantastic experience from start to finish. What we appreciated most was his communication — consistent real-time updates, total honesty at every stage, and a network of trusted professionals that made the entire process much smoother. Highly recommend!”',
+        '“Five stars truly isn’t enough to describe working with Jennifer. She brings a rare combination of deep market knowledge, flawless professionalism, and a brilliant get-it-done attitude. Real estate transactions can be stressful, but she completely shielded me from all of it — the process was entirely seamless. She is exceptional; I’d recommend her to anyone!”',
+        '“We had a great experience working with Taylor. She was consistently responsive, friendly, and took the time to clearly explain each step of the process — which made everything feel much less overwhelming. She was also a strong negotiator and helped us feel confident we were getting the best possible outcome from start to finish!”',
+        '“Jeremy managed to help us sell our house completely off-market, which saved us an incredible amount of time and stress. He flawlessly handled all the paperwork and took care of every interaction with contractors and vendors — we never had to worry about coordinating a thing. We cannot recommend Jeremy highly enough!”',
+        '“Corinne went above and beyond. She was always available every weekend to tour whatever listing we sent her way, did her homework on each house beforehand, and listened carefully to our needs. She was always quick to respond and was consistently a dream to work with. We will be sending her name around to anyone we know who is house hunting!”',
+        '“We can’t recommend Jodi Kirkwood highly enough! She helped us both purchase our upstairs condo and sell our existing condo. Her knowledge of the local market is outstanding, and thanks to her expertise we received top dollar for our sale. She was always responsive, professional, and a strong advocate for us every step of the way. We would absolutely work with her again.”'
+      ],
       testCta: 'Read All Client Reviews',
 
       /* HOMEPAGE — blog */
@@ -327,6 +336,15 @@
       testEyebrow: 'Reseñas de Clientes',
       testHeading: 'Lo Que Dicen Nuestros Clientes',
       testReviewFor: 'Reseña para',
+      testimonialQuotes: [
+        '"Trabajar con Anh fue, sin duda, una de las mejores decisiones que tomamos. Hizo que todo el proceso fuera lo más libre de estrés posible, yendo más allá para asegurarse de que tuviéramos todo en nuestra lista. Su conocimiento del mercado y su excelente comunicación nos dieron confianza en cada paso del camino — verdaderamente sentimos que tenía nuestros mejores intereses en mente en todo momento."',
+        '"Trabajamos con Wally tanto en la venta de nuestro condominio como en la compra de nuestra casa, y tuvimos una experiencia fantástica de principio a fin. Lo que más apreciamos fue su comunicación — actualizaciones constantes en tiempo real, total honestidad en cada etapa, y una red de profesionales de confianza que hicieron que todo el proceso fuera mucho más fluido. ¡Altamente recomendado!"',
+        '"Cinco estrellas verdaderamente no son suficientes para describir trabajar con Jennifer. Aporta una combinación única de profundo conocimiento del mercado, profesionalismo impecable y una brillante actitud de hacer las cosas. Las transacciones inmobiliarias pueden ser estresantes, pero ella me protegió completamente de todo eso — el proceso fue totalmente fluido. ¡Es excepcional; la recomendaría a cualquier persona!"',
+        '"Tuvimos una excelente experiencia trabajando con Taylor. Siempre fue muy atenta, amable y se tomó el tiempo de explicar claramente cada paso del proceso — lo que hizo que todo se sintiera mucho menos abrumador. También fue una negociadora muy capaz y nos ayudó a sentirnos seguros de que estábamos obteniendo el mejor resultado posible de principio a fin."',
+        '"Jeremy logró ayudarnos a vender nuestra casa completamente fuera del mercado, lo que nos ahorró una cantidad increíble de tiempo y estrés. Manejó todo el papeleo sin contratiempos y se encargó de cada interacción con contratistas y proveedores — nunca tuvimos que preocuparnos por coordinar nada. ¡No podemos recomendar a Jeremy lo suficiente!"',
+        '"Corinne hizo más de lo esperado. Siempre estuvo disponible cada fin de semana para visitar cualquier propiedad que le enviáramos, se preparó para cada casa de antemano y escuchó con atención nuestras necesidades. Siempre respondió rápidamente y fue un placer trabajar con ella. ¡Recomendaremos su nombre a todos los que conozcamos que estén buscando casa!"',
+        '"¡No podemos recomendar a Jodi Kirkwood lo suficiente! Nos ayudó tanto a comprar nuestro condominio del piso de arriba como a vender nuestro condominio existente. Su conocimiento del mercado local es sobresaliente, y gracias a su experiencia recibimos el mejor precio por nuestra venta. Siempre fue receptiva, profesional y una firme defensora de nuestros intereses en cada paso del camino. Definitivamente volveríamos a trabajar con ella."'
+      ],
       testCta: 'Leer Todas las Reseñas',
 
       /* HOMEPAGE — blog */
@@ -700,6 +718,15 @@
     document.querySelectorAll('.tp-review-for').forEach(function (el) {
       el.textContent = d.testReviewFor;
     });
+
+    if (d.testimonialQuotes) {
+      document.querySelectorAll('.testimonial-quote[data-quote-index]').forEach(function (el) {
+        var idx = parseInt(el.getAttribute('data-quote-index'), 10);
+        if (d.testimonialQuotes[idx] !== undefined) {
+          el.textContent = d.testimonialQuotes[idx];
+        }
+      });
+    }
 
     var testCta = document.querySelector('.tp-see-more-btn');
     if (testCta) svgEnd(testCta, d.testCta);
