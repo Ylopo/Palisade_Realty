@@ -872,6 +872,25 @@
     { badge: "PROPIETARIO", title: "5 Proyectos de Mejora del Hogar Económicos Perfectos para Realizar Este Otoño", excerpt: "El otoño es la temporada ideal para proyectos de mejora del hogar antes de que llegue el invierno. Estas actualizaciones asequibles agregan valor real sin requerir una gran inversión." }
   ];
 
+  var TC_BIOS = [
+    "Fundador y CEO de Palisade Realty desde 2010. Especialista en lujo en San Diego con más de 15 años de experiencia y un equipo de más de 60 agentes que brindan resultados excepcionales.",
+    "Negociador experto con profundo conocimiento del mercado de San Diego North County. Reconocido por identificar oportunidades fuera del mercado y cerrar transacciones complejas.",
+    "Agente dedicado a compradores con experiencia en compras por primera vez y de reubicación en las comunidades de San Diego. Comunicación clara desde la oferta hasta el cierre.",
+    "Especialista estratégico en listados, reconocido por su precisión en la fijación de precios, coordinación profesional de home staging y resultados récord en La Jolla y Coronado.",
+    "Facilita reubicaciones corporativas y desde otros estados hacia San Diego. Experto en plazos reducidos, recorridos virtuales y planificación de transiciones sin contratiempos.",
+    "Asesor de inversiones basado en datos, especializado en propiedades de renta en San Diego e intercambios 1031. Enfoque analítico para maximizar el rendimiento a largo plazo del portafolio.",
+    "Agente enfocada en el cliente con profundas raíces en las diversas comunidades de San Diego. Reconocida por su cálida comunicación y dedicación a lograr resultados sobresalientes.",
+    "Profesional inmobiliario experimentado en San Diego con talento para guiar a compradores y vendedores en cada etapa de la transacción con confianza y claridad.",
+    "Agente orientado a resultados, comprometido con hacer cada transacción inmobiliaria fluida. Especialista en compradores primerizos y ventas residenciales en todo el Condado de San Diego.",
+    "Profesional inmobiliario apasionado con un enfoque personalizado en cada relación con el cliente. Experto en las comunidades costeras de San Diego y los mercados residenciales de lujo.",
+    "Agente dinámico con agudas habilidades de negociación y conocimiento integral de los vecindarios de San Diego. Dedicado a ayudar a los clientes a encontrar su hogar ideal al precio correcto.",
+    "Experto inmobiliario bilingüe al servicio de las diversas comunidades de San Diego. Comprometido con superar barreras culturales e idiomáticas para brindar resultados excepcionales al cliente.",
+    "Profesional inmobiliario experimentado con un historial de transacciones exitosas en las comunidades más buscadas de San Diego. De confianza por su profundo conocimiento del mercado.",
+    "Agente estratégico especializado en propiedades residenciales y de inversión en todo el Condado de San Diego. Reconocido por su enfoque analítico y la satisfacción constante de sus clientes.",
+    "Agente inmobiliario multilingüe que aporta una perspectiva internacional al mercado de lujo de San Diego. Experto en representación de compradores internacionales y ventas de propiedades costeras.",
+    "Asesor inmobiliario altamente personalizado con un profundo compromiso con el éxito del cliente. Especializado en los vecindarios de primer nivel de San Diego, incluyendo La Jolla y Del Mar."
+  ];
+
 var AGENT_TRANSLATIONS = {
     'tom-parashos': {
       bioEyebrow: 'Liderazgo',
@@ -2647,6 +2666,24 @@ var AGENT_TRANSLATIONS = {
     });
 
     /* ── BLOG POST PAGES ────────────────────────────────────────── */
+
+    /* ── HOMEPAGE TEAM CAROUSEL ────────────────────────────────── */
+    if (document.querySelector('.tc-stage')) {
+      var tcBioEls = document.querySelectorAll('.card-bio');
+      var tcCtaEls = document.querySelectorAll('.card-cta');
+      TC_BIOS.forEach(function(bio, i) {
+        var el = tcBioEls[i];
+        if (!el) return;
+        if (el.dataset.langEn === undefined) el.dataset.langEn = el.textContent;
+        el.textContent = lang === 'es' ? bio : el.dataset.langEn;
+      });
+      tcCtaEls.forEach(function(el) {
+        var tn = el.childNodes[0];
+        if (!tn || tn.nodeType !== 3) return;
+        if (!el.dataset.langEn) el.dataset.langEn = tn.nodeValue;
+        tn.nodeValue = lang === 'es' ? 'Ver Perfil' : (el.dataset.langEn || 'View Profile');
+      });
+    }
 
     /* ── HOMEPAGE BLOG CAROUSEL ───────────────────────────────────── */
     if (document.querySelector('.blog-carousel')) {
