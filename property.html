@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Featured Properties | Palisade Realty San Diego</title>
+  <meta name="description" content="Browse Palisade Realty's exclusive featured listings in San Diego — La Jolla, Coronado, Del Mar, Rancho Santa Fe and more.">
+  <meta property="og:title" content="Featured Properties | Palisade Realty">
+  <meta property="og:description" content="Discover San Diego's finest luxury homes, personally curated by the Palisade Realty team.">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" type="image/jpeg" href="images/favicon.jpg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Shared nav/footer styles -->
+  <link rel="stylesheet" href="homepage.css">
+
+  <style>
+    /* ─── Reset & tokens ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brand:      #58172a;
+      --brand-dark: #3d0f1d;
+      --brand-mid:  #6e1f34;
+      --accent:     #eeca00;
+      --gold:       #b89a5e;
+      --off-white:  #faf7f2;
+      --surface:    #ffffff;
+      --text:       #1a0008;
+      --text-muted: #6b5058;
+      --border:     rgba(88,23,42,0.11);
+      --font-disp:  'Playfair Display', serif;
+      --font-body:  'Manrope', sans-serif;
+      --font-label: 'Inter', sans-serif;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text);
+      background: var(--off-white);
+    }
+
+    /* ─── Hero ──────────────────────────────────────────────────── */
+    .ph-hero {
+      background: var(--brand);
+      padding: 96px 24px 76px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .ph-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 25% 50%, rgba(255,255,255,0.04) 0%, transparent 65%),
+        radial-gradient(ellipse 55% 55% at 78% 30%, rgba(238,202,0,0.07) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .ph-hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(238,202,0,0.28) 50%, transparent 100%);
+    }
+    .ph-eyebrow {
+      display: block;
+      font-family: var(--font-label);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+    .ph-title {
+      font-family: var(--font-disp);
+      font-size: clamp(38px, 5.5vw, 62px);
+      font-weight: 400;
+      color: #fff;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
+    .ph-sub {
+      font-size: 16px;
+      color: rgba(255,255,255,0.62);
+      line-height: 1.72;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* ─── Filter / Sort bar ──────────────────────────────────────── */
+    .ph-bar {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 2px 14px rgba(88,23,42,0.06);
+      position: sticky;
+      top: 0;
+      z-index: 90;
+    }
+    .ph-bar-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 13px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .ph-chips {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .ph-chip {
+      font-family: var(--font-label);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 7px 18px;
+      border-radius: 100px;
+      border: 1.5px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 180ms, color 180ms, border-color 180ms;
+    }
+    .ph-chip:hover { border-color: var(--brand); color: var(--brand); }
+    .ph-chip.is-active { background: var(--brand); border-color: var(--brand); color: #fff; }
+    .ph-chip:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+
+    .ph-bar-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .ph-count {
+      font-family: var(--font-label);
+      font-size: 12px;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .ph-sort {
+      font-family: var(--font-label);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text);
+      padding: 7px 32px 7px 12px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      background: transparent;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236b5058' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      appearance: none;
+      cursor: pointer;
+      outline: none;
+      transition: border-color 180ms;
+    }
+    .ph-sort:hover, .ph-sort:focus { border-color: var(--brand); }
+
+    /* ─── Grid ───────────────────────────────────────────────────── */
+    .ph-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 56px 24px 88px;
+    }
+    .ph-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    @media (max-width: 900px) { .ph-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) {
+      .ph-grid { grid-template-columns: 1fr; }
+      .ph-hero { padding: 72px 20px 60px; }
+      .ph-bar-inner { padding: 10px 16px; }
+    }
+
+    /* ─── Card ───────────────────────────────────────────────────── */
+    .ph-card {
+      background: var(--surface);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(88,23,42,0.07), 0 1px 3px rgba(0,0,0,0.04);
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      transform: translateY(22px);
+      transition:
+        opacity 480ms cubic-bezier(0.22,0.61,0.36,1),
+        transform 480ms cubic-bezier(0.22,0.61,0.36,1),
+        box-shadow 280ms cubic-bezier(0.22,0.61,0.36,1);
+    }
+    .ph-card.is-visible { opacity: 1; transform: translateY(0); }
+    .ph-card:hover {
+      box-shadow: 0 16px 44px rgba(88,23,42,0.14), 0 4px 12px rgba(0,0,0,0.07);
+    }
+
+    /* Image */
+    .ph-card-img-wrap {
+      position: relative;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background: var(--brand-dark);
+    }
+    .ph-card-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 600ms cubic-bezier(0.22,0.61,0.36,1);
+    }
+    .ph-card:hover .ph-card-img { transform: scale(1.045); }
+    .ph-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(26,0,8,0.58) 0%, transparent 52%);
+      pointer-events: none;
+    }
+
+    /* Status badge */
+    .ph-badge {
+      position: absolute;
+      top: 14px; left: 14px;
+      font-family: var(--font-label);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #fff;
+      padding: 4px 10px 3px;
+      border-radius: 3px;
+      pointer-events: none;
+    }
+    .ph-badge--sale    { background: var(--brand); }
+    .ph-badge--pending { background: #1a5a6e; }
+    .ph-badge--sold    { background: #3a3a3a; }
+
+    /* Price overlay on image */
+    .ph-price-overlay {
+      position: absolute;
+      bottom: 14px; left: 16px;
+      font-family: var(--font-disp);
+      font-size: 23px;
+      font-weight: 400;
+      color: #fff;
+      text-shadow: 0 1px 10px rgba(0,0,0,0.45);
+      pointer-events: none;
+    }
+
+    /* Card body */
+    .ph-card-body {
+      padding: 20px 22px 22px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .ph-card-hood {
+      font-family: var(--font-label);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 7px;
+    }
+    .ph-card-address {
+      font-family: var(--font-disp);
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+    .ph-card-stats {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 14px;
+    }
+    .ph-stat {
+      font-family: var(--font-label);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .ph-stat + .ph-stat::before {
+      content: '·';
+      margin: 0 8px;
+      color: rgba(88,23,42,0.2);
+      font-size: 18px;
+      line-height: 1;
+    }
+    .ph-stat svg { flex-shrink: 0; }
+
+    /* Agent line */
+    .ph-agent {
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      font-family: var(--font-label);
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .ph-agent-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--brand);
+      opacity: 0.45;
+      flex-shrink: 0;
+    }
+
+    /* View Property button */
+    .ph-card-btn {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 20px;
+      border-radius: 8px;
+      border: 1.5px solid var(--brand);
+      background: transparent;
+      font-family: var(--font-label);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--brand);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 200ms, color 200ms;
+    }
+    .ph-card-btn:hover, .ph-card-btn:focus-visible {
+      background: var(--brand);
+      color: #fff;
+    }
+    .ph-card-btn:active { opacity: 0.82; }
+    .ph-card-btn svg { flex-shrink: 0; transition: transform 200ms; }
+    .ph-card-btn:hover svg { transform: translateX(3px); }
+
+    /* ─── Empty state ────────────────────────────────────────────── */
+    .ph-empty {
+      grid-column: 1 / -1;
+      padding: 88px 24px;
+      text-align: center;
+    }
+    .ph-empty-icon {
+      width: 52px; height: 52px;
+      margin: 0 auto 20px;
+      opacity: 0.35;
+      color: var(--brand);
+    }
+    .ph-empty-title {
+      font-family: var(--font-disp);
+      font-size: 26px;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .ph-empty-sub {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ─── Skeleton loaders ───────────────────────────────────────── */
+    .ph-skeleton {
+      border-radius: 14px;
+      aspect-ratio: 4/3;
+      background: linear-gradient(90deg, #ede8e4 25%, #e3dcd8 50%, #ede8e4 75%);
+      background-size: 200% 100%;
+      animation: ph-shimmer 1.5s ease-in-out infinite;
+    }
+    @keyframes ph-shimmer {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* ─── CTA section ────────────────────────────────────────────── */
+    .ph-cta {
+      background: var(--brand-dark);
+      padding: 80px 24px 88px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .ph-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 65% 80% at 20% 50%, rgba(238,202,0,0.055) 0%, transparent 58%),
+        radial-gradient(ellipse 50% 65% at 82% 50%, rgba(255,255,255,0.025) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .ph-cta-inner {
+      position: relative;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+    .ph-cta-eyebrow {
+      display: block;
+      font-family: var(--font-label);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+    .ph-cta-title {
+      font-family: var(--font-disp);
+      font-size: clamp(30px, 4.5vw, 48px);
+      font-weight: 400;
+      color: #fff;
+      line-height: 1.15;
+      letter-spacing: -0.022em;
+      margin-bottom: 16px;
+    }
+    .ph-cta-body {
+      font-size: 15px;
+      color: rgba(255,255,255,0.58);
+      line-height: 1.72;
+      margin-bottom: 36px;
+    }
+    .ph-cta-btns {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .ph-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-family: var(--font-label);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      cursor: pointer;
+      transition: opacity 200ms, transform 220ms;
+    }
+    .ph-cta-btn:hover { opacity: 0.87; transform: translateY(-1px); }
+    .ph-cta-btn:active { transform: translateY(0); opacity: 1; }
+    .ph-cta-btn--gold {
+      background: var(--accent);
+      color: var(--brand-dark);
+    }
+    .ph-cta-btn--outline {
+      background: transparent;
+      border: 1.5px solid rgba(255,255,255,0.32);
+      color: #fff;
+    }
+    .ph-cta-btn--outline:hover { border-color: rgba(255,255,255,0.6); opacity: 1; }
+  </style>
+</head>
+<body>
+
+<!-- ================================================================
+     NAVIGATION
+     ================================================================ -->
+<header class="site-header" id="site-header">
+
+  <!-- Left nav -->
+  <nav class="nav-links" aria-label="Primary navigation left">
+    <a href="https://search.palisaderealty.com/" target="_blank" rel="noopener noreferrer">Buy</a>
+    <a href="https://search.palisaderealty.com/seller" target="_blank" rel="noopener noreferrer">Sell</a>
+    <div class="nav-dropdown">
+      <a href="communities.html" class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+        Communities
+        <svg class="nav-dropdown-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3.5 5 6.5 8 3.5"/></svg>
+      </a>
+      <div class="nav-dropdown-panel" role="region" aria-label="Communities menu">
+        <span class="nav-dropdown-label">San Diego Communities</span>
+        <div class="nav-dropdown-grid">
+          <a class="nav-dropdown-item" href="communities/downtown-san-diego-real-estate.html"><span class="nav-dropdown-dot"></span>Downtown San Diego</a>
+          <a class="nav-dropdown-item" href="communities/mission-hills-real-estate.html"><span class="nav-dropdown-dot"></span>Mission Hills</a>
+          <a class="nav-dropdown-item" href="communities/point-loma-real-estate.html"><span class="nav-dropdown-dot"></span>Point Loma</a>
+          <a class="nav-dropdown-item" href="communities/coronado-real-estate.html"><span class="nav-dropdown-dot"></span>Coronado</a>
+          <a class="nav-dropdown-item" href="communities/pacific-mission-beach-real-estate.html"><span class="nav-dropdown-dot"></span>Pacific &amp; Mission Beach</a>
+          <a class="nav-dropdown-item" href="communities/mission-valley-real-estate.html"><span class="nav-dropdown-dot"></span>Mission Valley</a>
+          <a class="nav-dropdown-item" href="communities/la-jolla-real-estate.html"><span class="nav-dropdown-dot"></span>La Jolla</a>
+          <a class="nav-dropdown-item" href="communities/del-mar-real-estate.html"><span class="nav-dropdown-dot"></span>Del Mar</a>
+          <a class="nav-dropdown-item" href="communities/carmel-valley-real-estate.html"><span class="nav-dropdown-dot"></span>Carmel Valley</a>
+          <a class="nav-dropdown-item" href="communities/rancho-santa-fe-real-estate.html"><span class="nav-dropdown-dot"></span>Rancho Santa Fe</a>
+          <a class="nav-dropdown-item" href="communities/solana-beach-real-estate.html"><span class="nav-dropdown-dot"></span>Solana Beach</a>
+          <a class="nav-dropdown-item" href="communities/encinitas-real-estate.html"><span class="nav-dropdown-dot"></span>Encinitas</a>
+          <a class="nav-dropdown-item" href="communities/carlsbad-real-estate.html"><span class="nav-dropdown-dot"></span>Carlsbad</a>
+          <a class="nav-dropdown-item" href="communities/oceanside-real-estate.html"><span class="nav-dropdown-dot"></span>Oceanside</a>
+          <a class="nav-dropdown-item" href="communities/spring-valley-real-estate.html"><span class="nav-dropdown-dot"></span>Spring Valley</a>
+          <a class="nav-dropdown-item" href="communities/chula-vista-real-estate.html"><span class="nav-dropdown-dot"></span>Chula Vista</a>
+          <a class="nav-dropdown-item" href="communities/la-mesa-real-estate.html"><span class="nav-dropdown-dot"></span>La Mesa</a>
+          <a class="nav-dropdown-item" href="communities/el-cajon-real-estate.html"><span class="nav-dropdown-dot"></span>El Cajon</a>
+        </div>
+        <div class="nav-dropdown-divider"></div>
+        <div class="nav-dropdown-all">
+          <a href="communities.html">View All Communities <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 6h8"/><path d="M6 2.5 9.5 6 6 9.5"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <a href="testimonials.html">Testimonials</a>
+  </nav>
+
+  <!-- Logo -->
+  <a href="/" class="nav-logo" aria-label="Palisade Realty home">
+    <img src="images/logo.png" alt="Palisade Realty">
+  </a>
+
+  <!-- Right nav -->
+  <nav class="nav-links nav-links--right" aria-label="Primary navigation right">
+    <a href="property.html" aria-current="page">Properties</a>
+    <a href="team.html">Team</a>
+    <a href="blog.html">Blog</a>
+    <a href="contact.html">Contact</a>
+    <button class="lang-toggle" id="lang-toggle" aria-label="Switch language / Cambiar idioma">
+      <span class="lang-en lang-active">EN</span><span class="lang-sep">|</span><span class="lang-es">ES</span>
+    </button>
+  </nav>
+
+  <!-- Hamburger -->
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Open navigation menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+</header>
+
+<!-- Mobile drawer -->
+<div class="nav-mobile-drawer" id="nav-mobile-drawer" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+  <a href="https://search.palisaderealty.com/" target="_blank" rel="noopener noreferrer">Buy</a>
+  <a href="https://search.palisaderealty.com/seller" target="_blank" rel="noopener noreferrer">Sell</a>
+  <a href="communities.html" class="mobile-communities-toggle" id="mobile-communities-toggle" aria-expanded="false">Communities ▾</a>
+  <div class="mobile-communities-list" id="mobile-communities-list">
+    <a href="communities/downtown-san-diego-real-estate.html">Downtown San Diego</a>
+    <a href="communities/mission-hills-real-estate.html">Mission Hills</a>
+    <a href="communities/point-loma-real-estate.html">Point Loma</a>
+    <a href="communities/coronado-real-estate.html">Coronado</a>
+    <a href="communities/pacific-mission-beach-real-estate.html">Pacific &amp; Mission Beach</a>
+    <a href="communities/mission-valley-real-estate.html">Mission Valley</a>
+    <a href="communities/la-jolla-real-estate.html">La Jolla</a>
+    <a href="communities/del-mar-real-estate.html">Del Mar</a>
+    <a href="communities/carmel-valley-real-estate.html">Carmel Valley</a>
+    <a href="communities/rancho-santa-fe-real-estate.html">Rancho Santa Fe</a>
+    <a href="communities/solana-beach-real-estate.html">Solana Beach</a>
+    <a href="communities/encinitas-real-estate.html">Encinitas</a>
+    <a href="communities/carlsbad-real-estate.html">Carlsbad</a>
+    <a href="communities/oceanside-real-estate.html">Oceanside</a>
+    <a href="communities/spring-valley-real-estate.html">Spring Valley</a>
+    <a href="communities/chula-vista-real-estate.html">Chula Vista</a>
+    <a href="communities/la-mesa-real-estate.html">La Mesa</a>
+    <a href="communities/el-cajon-real-estate.html">El Cajon</a>
+  </div>
+  <a href="testimonials.html">Testimonials</a>
+  <a href="property.html">Properties</a>
+  <a href="team.html">Team</a>
+  <a href="blog.html">Blog</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<main>
+
+<!-- ─── HERO ─────────────────────────────────────────────────── -->
+<section class="ph-hero" aria-label="Featured Properties header">
+  <span class="ph-eyebrow">Palisade Realty Exclusives</span>
+  <h1 class="ph-title">Featured Properties</h1>
+  <p class="ph-sub">Discover San Diego's finest luxury homes, personally curated by the Palisade Realty team.</p>
+</section>
+
+<!-- ─── FILTER BAR ──────────────────────────────────────────── -->
+<div class="ph-bar" id="ph-bar" role="toolbar" aria-label="Filter and sort listings">
+  <div class="ph-bar-inner">
+    <div class="ph-chips" role="group" aria-label="Filter by status">
+      <button class="ph-chip is-active" data-filter="all">All</button>
+      <button class="ph-chip" data-filter="active">For Sale</button>
+      <button class="ph-chip" data-filter="pending">Pending</button>
+      <button class="ph-chip" data-filter="sold">Sold</button>
+    </div>
+    <div class="ph-bar-right">
+      <span class="ph-count" id="ph-count" aria-live="polite" aria-atomic="true"></span>
+      <select class="ph-sort" id="ph-sort" aria-label="Sort order">
+        <option value="default">Newest</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<!-- ─── GRID ──────────────────────────────────────────────────── -->
+<section class="ph-section" aria-label="Property listings">
+  <div class="ph-grid" id="ph-grid">
+    <div class="ph-skeleton" aria-hidden="true"></div>
+    <div class="ph-skeleton" aria-hidden="true"></div>
+    <div class="ph-skeleton" aria-hidden="true"></div>
+  </div>
+</section>
+
+<!-- ─── CTA ───────────────────────────────────────────────────── -->
+<section class="ph-cta" aria-labelledby="ph-cta-heading">
+  <div class="ph-cta-inner">
+    <span class="ph-cta-eyebrow">We're Here to Help</span>
+    <h2 class="ph-cta-title" id="ph-cta-heading">Looking for Something Specific?</h2>
+    <p class="ph-cta-body">Our agents have deep knowledge of every San Diego neighborhood. Tell us what you're looking for and we'll find it.</p>
+    <div class="ph-cta-btns">
+      <a href="contact.html" class="ph-cta-btn ph-cta-btn--gold">
+        Contact an Agent
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7h10M7 2.5 11.5 7 7 11.5"/></svg>
+      </a>
+      <a href="https://search.palisaderealty.com/" target="_blank" rel="noopener noreferrer" class="ph-cta-btn ph-cta-btn--outline">
+        View All Listings
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7h10M7 2.5 11.5 7 7 11.5"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ─── FOOTER ─────────────────────────────────────────────────── -->
+<footer class="site-footer" id="footer">
+  <div class="footer-texture" aria-hidden="true"></div>
+  <div class="footer-stripe" aria-hidden="true"></div>
+  <div class="footer-inner">
+
+    <!-- Brand column -->
+    <div class="footer-col-brand">
+      <div class="footer-logo">
+        <img src="images/logo.png" alt="Palisade Realty">
+      </div>
+      <div class="footer-copy-mls-row">
+        <div>
+          <p class="footer-copy">
+            &copy;Palisade Realty, Inc. 2026<br>
+            All Rights Reserved<br><br>
+            Brokerage CA DRE #01848565<br><br>
+            Hedda Parashos<br>
+            CA DRE #01773167
+          </p>
+        </div>
+        <div class="footer-mls-badge" aria-label="Move Safe Certified by HomeLight">
+          <img src="assets/images/move-safe-offsite-stacked.png" alt="Move Safe Certified by HomeLight">
+        </div>
+      </div>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/PalisadeRealty/" target="_blank" rel="noopener noreferrer" aria-label="Palisade Realty on Facebook">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M15 8a7 7 0 1 0-8.094 6.915V10.3H4.947V8h1.959V6.257C6.906 4.32 8.067 3.25 9.832 3.25c.847 0 1.733.151 1.733.151v1.9h-.976c-.962 0-1.261.597-1.261 1.209V8h2.147l-.343 2.3H9.328v4.615A7.003 7.003 0 0 0 15 8z"/></svg>
+        </a>
+        <a href="https://www.pinterest.com/palisaderealty/" target="_blank" rel="noopener noreferrer" aria-label="Palisade Realty on Pinterest">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0a8 8 0 0 0-2.915 15.452c-.07-.633-.134-1.606.027-2.297.146-.625.984-4.172.984-4.172s-.252-.503-.252-1.246c0-1.167.678-2.041 1.52-2.041.717 0 1.065.539 1.065 1.184 0 .721-.46 1.801-.698 2.8-.198.835.42 1.515 1.242 1.515 1.49 0 2.638-1.571 2.638-3.836 0-2.006-1.441-3.408-3.499-3.408-2.382 0-3.78 1.787-3.78 3.634 0 .72.276 1.49.621 1.91a.25.25 0 0 1 .057.239c-.063.264-.204.835-.232.952-.037.154-.124.186-.285.112-1.05-.489-1.707-2.028-1.707-3.264 0-2.653 1.928-5.09 5.559-5.09 2.919 0 5.187 2.081 5.187 4.862 0 2.902-1.83 5.237-4.371 5.237-.854 0-1.658-.444-1.932-.967l-.525 1.958c-.19.733-.705 1.65-1.05 2.208A8.001 8.001 0 0 0 8 16a8 8 0 0 0 0-16z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/palisade_realty/" target="_blank" rel="noopener noreferrer" aria-label="Palisade Realty on Instagram">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Quick links -->
+    <nav class="footer-col-links" aria-label="Quick links">
+      <span class="footer-col-title">Quick Links</span>
+      <div class="footer-links">
+        <a href="https://search.palisaderealty.com/" target="_blank" rel="noopener noreferrer">Buy a Home</a>
+        <a href="https://search.palisaderealty.com/seller" target="_blank" rel="noopener noreferrer">Sell Your Home</a>
+        <a href="communities.html">Communities</a>
+        <a href="property.html">Featured Properties</a>
+        <a href="testimonials.html">Testimonials</a>
+        <a href="blog.html">Blog</a>
+        <a href="team.html">Our Team</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+    </nav>
+
+    <!-- Contact column -->
+    <address class="footer-col-contact" style="font-style:normal;">
+      <span class="footer-col-title">Contact</span>
+      <span class="footer-contact-line"><strong>3434 Grove Street</strong></span>
+      <span class="footer-contact-line"><strong>Lemon Grove, CA 91945</strong></span>
+      <a href="tel:+16197940218" class="footer-contact-line">(619) 794-0218</a>
+      <a href="mailto:contactus@palisaderealty.com" class="footer-contact-line footer-contact-line--email">contactus@palisaderealty.com</a>
+      <span class="footer-contact-line">Mon – Fri: 9:00 AM – 5:00 PM</span>
+    </address>
+
+  </div>
+</footer>
+
+<!-- ================================================================
+     PROPERTY PAGE JAVASCRIPT
+     ================================================================ -->
+<script>
+(function () {
+  'use strict';
+
+  var allProps  = [];
+  var curFilter = 'all';
+  var curSort   = 'default';
+
+  var grid    = document.getElementById('ph-grid');
+  var counter = document.getElementById('ph-count');
+  var sortSel = document.getElementById('ph-sort');
+
+  /* ── helpers ──────────────────────────────── */
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function badgeClass(status) {
+    if (status === 'pending') return 'ph-badge--pending';
+    if (status === 'sold')    return 'ph-badge--sold';
+    return 'ph-badge--sale';
+  }
+  function badgeText(status) {
+    if (status === 'pending') return 'Pending';
+    if (status === 'sold')    return 'Sold';
+    return 'For Sale';
+  }
+
+  /* ── build one card ────────────────────────── */
+  function buildCard(prop) {
+    var isInternal = !!(prop.hasDetailPage && prop.slug);
+    var href = isInternal
+      ? 'properties/' + prop.slug + '.html'
+      : (prop.ylopoDetailUrl || 'https://search.palisaderealty.com/');
+    var agentName = (prop.listedBy && prop.listedBy.agent) ? prop.listedBy.agent : 'Palisade Realty';
+    var sqftFmt   = prop.sqft ? Number(prop.sqft).toLocaleString() : '—';
+    var imgSrc    = prop.heroImage ||
+      'https://placehold.co/800x600/58172a/ffffff?text=' + encodeURIComponent(prop.address || 'Property');
+
+    var card = document.createElement('article');
+    card.className = 'ph-card';
+
+    card.innerHTML =
+      '<div class="ph-card-img-wrap">' +
+        '<img class="ph-card-img" src="' + esc(imgSrc) + '" alt="' + esc(prop.address || 'Property photo') + '" loading="lazy" decoding="async">' +
+        '<div class="ph-card-overlay" aria-hidden="true"></div>' +
+        '<span class="ph-badge ' + badgeClass(prop.status) + '" aria-label="Status: ' + badgeText(prop.status) + '">' + badgeText(prop.status) + '</span>' +
+        '<span class="ph-price-overlay" aria-label="Price: ' + esc(prop.priceDisplay || '') + '">' + esc(prop.priceDisplay || '') + '</span>' +
+      '</div>' +
+      '<div class="ph-card-body">' +
+        (prop.neighborhood ? '<div class="ph-card-hood">' + esc(prop.neighborhood) + '</div>' : '') +
+        '<h2 class="ph-card-address">' + esc(prop.address) + ', ' + esc(prop.city) + ', ' + esc(prop.state) + '</h2>' +
+        '<div class="ph-card-stats">' +
+          '<span class="ph-stat">' +
+            '<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="1" y="7" width="14" height="7" rx="1.2"/><path d="M1 10h14M5 14v-3M11 14v-3M4.5 7V4a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v3"/></svg>' +
+            esc(prop.beds) + ' bd' +
+          '</span>' +
+          '<span class="ph-stat">' +
+            '<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M2 10h12v2a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-2z"/><path d="M2 10V4.5A2.5 2.5 0 0 1 4.5 2h0A2.5 2.5 0 0 1 7 4.5V10"/></svg>' +
+            esc(prop.baths) + ' ba' +
+          '</span>' +
+          '<span class="ph-stat">' +
+            '<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="2" y="2" width="12" height="12" rx="1"/><path d="M6 2v12M2 6h12"/></svg>' +
+            sqftFmt + ' sqft' +
+          '</span>' +
+        '</div>' +
+        '<div class="ph-agent">' +
+          '<span class="ph-agent-dot"></span>' +
+          esc(agentName) +
+        '</div>' +
+        '<a class="ph-card-btn" href="' + esc(href) + '"' +
+          (isInternal ? '' : ' target="_blank" rel="noopener noreferrer"') +
+          ' aria-label="View property: ' + esc(prop.address || '') + '">' +
+          'View Property' +
+          '<svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 6.5h9"/><path d="M6 2.5 10.5 6.5 6 10.5"/></svg>' +
+        '</a>' +
+      '</div>';
+
+    return card;
+  }
+
+  /* ── render current state ──────────────────── */
+  function render() {
+    var filtered = allProps.filter(function (p) {
+      if (p.status === 'archived') return false;
+      return curFilter === 'all' || p.status === curFilter;
+    });
+
+    if (curSort === 'price-asc')  filtered.sort(function (a, b) { return (a.price || 0) - (b.price || 0); });
+    if (curSort === 'price-desc') filtered.sort(function (a, b) { return (b.price || 0) - (a.price || 0); });
+
+    grid.innerHTML = '';
+
+    if (!filtered.length) {
+      var empty = document.createElement('div');
+      empty.className = 'ph-empty';
+      empty.innerHTML =
+        '<svg class="ph-empty-icon" viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">' +
+          '<path d="M26 4 4 20v28h14V32h16v16h14V20L26 4z"/>' +
+        '</svg>' +
+        '<h2 class="ph-empty-title">No listings match this filter</h2>' +
+        '<p class="ph-empty-sub">Try a different status filter or check back soon for new listings.</p>';
+      grid.appendChild(empty);
+      counter.textContent = '0 listings';
+      return;
+    }
+
+    counter.textContent = filtered.length + (filtered.length === 1 ? ' listing' : ' listings');
+
+    filtered.forEach(function (prop, i) {
+      var card = buildCard(prop);
+      grid.appendChild(card);
+      /* staggered fade-in */
+      setTimeout(function () { card.classList.add('is-visible'); }, 40 + i * 65);
+    });
+  }
+
+  /* ── filter chips ─────────────────────────── */
+  document.querySelectorAll('.ph-chip').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.ph-chip').forEach(function (b) {
+        b.classList.remove('is-active');
+      });
+      btn.classList.add('is-active');
+      curFilter = btn.getAttribute('data-filter');
+      render();
+    });
+  });
+
+  /* ── sort ──────────────────────────────────── */
+  sortSel.addEventListener('change', function () {
+    curSort = sortSel.value;
+    render();
+  });
+
+  /* ── fetch ─────────────────────────────────── */
+  fetch('/data/featured-properties.json')
+    .then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
+    .then(function (data) {
+      allProps = Array.isArray(data) ? data : [];
+      render();
+    })
+    .catch(function (err) {
+      console.error('property.html: failed to load listings', err);
+      grid.innerHTML =
+        '<div class="ph-empty">' +
+          '<h2 class="ph-empty-title">Unable to Load Listings</h2>' +
+          '<p class="ph-empty-sub">Please refresh the page or <a href="contact.html" style="color:var(--brand)">contact us</a> for assistance.</p>' +
+        '</div>';
+    });
+
+})();
+</script>
+
+<!-- Shared nav scripts (communities dropdown + mobile menu) -->
+<script>
+(function() {
+  var dd = document.querySelector('.nav-dropdown');
+  if (!dd) return;
+  var trigger = dd.querySelector('.nav-dropdown-trigger');
+  var closeTimer;
+  function openDD()  { clearTimeout(closeTimer); dd.classList.add('is-open');    trigger.setAttribute('aria-expanded','true');  }
+  function closeDD() { closeTimer = setTimeout(function(){ dd.classList.remove('is-open'); trigger.setAttribute('aria-expanded','false'); }, 120); }
+  dd.addEventListener('mouseenter', openDD);
+  dd.addEventListener('mouseleave', closeDD);
+  trigger.addEventListener('focus', openDD);
+  trigger.addEventListener('blur', function(e){ if (!dd.contains(e.relatedTarget)) closeDD(); });
+  document.addEventListener('keydown', function(e){ if (e.key==='Escape'){ dd.classList.remove('is-open'); trigger.setAttribute('aria-expanded','false'); } });
+
+  var mToggle = document.getElementById('mobile-communities-toggle');
+  var mList   = document.getElementById('mobile-communities-list');
+  if (mToggle && mList) {
+    mToggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      var isOpen = mList.classList.toggle('open');
+      mToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  }
+})();
+</script>
+
+<!-- Mobile hamburger (from homepage.js logic) -->
+<script>
+(function() {
+  var btn    = document.getElementById('nav-hamburger');
+  var drawer = document.getElementById('nav-mobile-drawer');
+  if (!btn || !drawer) return;
+  function toggle(open) {
+    document.body.classList.toggle('nav-open', open);
+    btn.setAttribute('aria-expanded', String(open));
+    if (open) {
+      drawer.style.display = 'flex';
+      requestAnimationFrame(function() { drawer.style.opacity = '1'; });
+    } else {
+      drawer.style.opacity = '0';
+      setTimeout(function() { drawer.style.display = 'none'; }, 300);
+    }
+  }
+  btn.addEventListener('click', function() {
+    toggle(!document.body.classList.contains('nav-open'));
+  });
+  drawer.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', function() { toggle(false); });
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && document.body.classList.contains('nav-open')) toggle(false);
+  });
+})();
+</script>
+
+<script src="lang.js"></script>
+</body>
+</html>
