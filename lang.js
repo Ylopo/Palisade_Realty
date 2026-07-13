@@ -3098,6 +3098,27 @@ var AGENT_TRANSLATIONS = {
           }
         });
       }
+      /* Rich content: description, features, community highlights */
+      if (window.__ppLangData) {
+        var _ppd = window.__ppLangData;
+        var ppBody = document.getElementById('pp-body');
+        if (ppBody && _ppd.description) {
+          var _dSrc = lang === 'es' ? (_ppd.description.es || _ppd.description.en) : _ppd.description.en;
+          if (_dSrc) ppBody.innerHTML = _dSrc.split(/\n\s*\n/).map(function(p) { return '<p>' + p.replace(/\n/g,' ').trim() + '</p>'; }).join('');
+        }
+        var ppFeat = document.getElementById('pp-features-list');
+        if (ppFeat && _ppd.features) {
+          var _fSrc = lang === 'es' ? (_ppd.features.es.length ? _ppd.features.es : _ppd.features.en) : _ppd.features.en;
+          if (_fSrc.length) ppFeat.innerHTML = _fSrc.map(function(f) { return '<li>' + f + '</li>'; }).join('');
+        }
+        var ppHl = document.getElementById('pp-community-highlights');
+        if (ppHl && _ppd.highlights) {
+          var _hSrc = lang === 'es' ? (_ppd.highlights.es && _ppd.highlights.es.length ? _ppd.highlights.es : _ppd.highlights.en) : _ppd.highlights.en;
+          ppHl.innerHTML = _hSrc.map(function(h) {
+            return '<div class="pp-highlight-card"><span class="pp-highlight-icon">' + (h.icon||'◆') + '</span><div class="pp-highlight-text"><h4>' + h.title + '</h4><p>' + h.body + '</p></div></div>';
+          }).join('');
+        }
+      }
       /* Neighborhood community guide link */
       var ppNhLink = document.getElementById('pp-neighborhood-link');
       if (ppNhLink && ppNhLink.textContent && ppNhLink.textContent !== '\u2192') {

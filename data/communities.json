@@ -21,30 +21,90 @@
     "schoolDistrict": "San Diego Unified School District",
     "schools": {
       "public": [
-        { "name": "La Jolla High School", "grades": "9–12", "type": "SDUSD" },
-        { "name": "Muirlands Middle School", "grades": "6–8", "type": "SDUSD" },
-        { "name": "La Jolla Elementary", "grades": "K–5", "type": "SDUSD" },
-        { "name": "Bird Rock Elementary", "grades": "K–5", "type": "SDUSD" }
+        {
+          "name": "La Jolla High School",
+          "grades": "9–12",
+          "type": "SDUSD"
+        },
+        {
+          "name": "Muirlands Middle School",
+          "grades": "6–8",
+          "type": "SDUSD"
+        },
+        {
+          "name": "La Jolla Elementary",
+          "grades": "K–5",
+          "type": "SDUSD"
+        },
+        {
+          "name": "Bird Rock Elementary",
+          "grades": "K–5",
+          "type": "SDUSD"
+        }
       ],
       "private": [
-        { "name": "The Bishop's School", "grades": "6–12", "type": "Independent" },
-        { "name": "La Jolla Country Day", "grades": "PreK–12", "type": "Independent" },
-        { "name": "Our Lady of the Sacred Heart", "grades": "K–8", "type": "Catholic" }
+        {
+          "name": "The Bishop's School",
+          "grades": "6–12",
+          "type": "Independent"
+        },
+        {
+          "name": "La Jolla Country Day",
+          "grades": "PreK–12",
+          "type": "Independent"
+        },
+        {
+          "name": "Our Lady of the Sacred Heart",
+          "grades": "K–8",
+          "type": "Catholic"
+        }
       ]
     },
     "parks": [
       {
         "name": "Torrey Pines State Natural Reserve",
         "size": "2,000 acres",
-        "amenities": ["Coastal hiking trails", "Gliderport access", "Wildlife observation", "Pacific overlooks"]
+        "amenities": [
+          "Coastal hiking trails",
+          "Gliderport access",
+          "Wildlife observation",
+          "Pacific overlooks"
+        ]
       },
       {
         "name": "La Jolla Shores Beach",
-        "amenities": ["Swimming beach", "Kayak launch", "Scuba diving", "Picnic areas"]
+        "amenities": [
+          "Swimming beach",
+          "Kayak launch",
+          "Scuba diving",
+          "Picnic areas"
+        ]
       },
       {
         "name": "Ellen Browning Scripps Park",
-        "amenities": ["Ocean-view lawn", "La Jolla Cove access", "Wedding venue", "Concierge seating"]
+        "amenities": [
+          "Ocean-view lawn",
+          "La Jolla Cove access",
+          "Wedding venue",
+          "Concierge seating"
+        ]
+      }
+    ],
+    "highlights_es": [
+      {
+        "icon": "◆",
+        "title": "Costa de Clase Mundial",
+        "body": "La Jolla Cove, la Piscina de los Niños y la playa de Torrey Pines ponen a distancia a pie de la mayoría de las casas algunos de los paisajes costeros más dramáticos del sur de California."
+      },
+      {
+        "icon": "◆",
+        "title": "Cultura del Village y Gastronomía",
+        "body": "Prospect Street y Girard Avenue ofrecen una excepcional concentración de restaurantes reconocidos, galerías independientes, tiendas boutique y mercados de productores de fin de semana."
+      },
+      {
+        "icon": "◆",
+        "title": "Hub de Investigación e Innovación",
+        "body": "UC San Diego, el Instituto Salk y Scripps Research anclan una concentración de institutos de biotecnología e investigación de renombre mundial que impulsa sólidos valores inmobiliarios a largo plazo."
       }
     ]
   },
@@ -70,29 +130,85 @@
     "schoolDistrict": "Coronado Unified School District",
     "schools": {
       "public": [
-        { "name": "Coronado High School", "grades": "9–12", "type": "CUSD" },
-        { "name": "Coronado Middle School", "grades": "6–8", "type": "CUSD" },
-        { "name": "Village Elementary School", "grades": "K–5", "type": "CUSD" },
-        { "name": "Silver Strand Elementary", "grades": "K–5", "type": "CUSD" }
+        {
+          "name": "Coronado High School",
+          "grades": "9–12",
+          "type": "CUSD"
+        },
+        {
+          "name": "Coronado Middle School",
+          "grades": "6–8",
+          "type": "CUSD"
+        },
+        {
+          "name": "Village Elementary School",
+          "grades": "K–5",
+          "type": "CUSD"
+        },
+        {
+          "name": "Silver Strand Elementary",
+          "grades": "K–5",
+          "type": "CUSD"
+        }
       ],
       "private": [
-        { "name": "Sacred Heart Parish School", "grades": "K–8", "type": "Catholic" },
-        { "name": "Coronado Montessori", "grades": "PreK–6", "type": "Montessori" }
+        {
+          "name": "Sacred Heart Parish School",
+          "grades": "K–8",
+          "type": "Catholic"
+        },
+        {
+          "name": "Coronado Montessori",
+          "grades": "PreK–6",
+          "type": "Montessori"
+        }
       ]
     },
     "parks": [
       {
         "name": "Coronado Beach",
         "size": "1.5 miles",
-        "amenities": ["Swimming", "Volleyball courts", "Dog beach", "Lifeguard service"]
+        "amenities": [
+          "Swimming",
+          "Volleyball courts",
+          "Dog beach",
+          "Lifeguard service"
+        ]
       },
       {
         "name": "Tidelands Park",
-        "amenities": ["Baseball diamonds", "Tennis courts", "Picnic shelters", "Bay views"]
+        "amenities": [
+          "Baseball diamonds",
+          "Tennis courts",
+          "Picnic shelters",
+          "Bay views"
+        ]
       },
       {
         "name": "Centennial Park",
-        "amenities": ["Bay-front promenade", "Ferry landing access", "Bike paths", "Waterfront dining nearby"]
+        "amenities": [
+          "Bay-front promenade",
+          "Ferry landing access",
+          "Bike paths",
+          "Waterfront dining nearby"
+        ]
+      }
+    ],
+    "highlights_es": [
+      {
+        "icon": "◆",
+        "title": "Vida en Isla, Acceso a la Ciudad",
+        "body": "Coronado Island ofrece un ambiente tranquilo de pueblo pequeño mientras permanece a minutos del centro de San Diego en carro o ferry — lo mejor de los dos mundos."
+      },
+      {
+        "icon": "◆",
+        "title": "Playa Prístina y Village Encantador",
+        "body": "Constantemente reconocida como una de las mejores playas del país, la playa de Coronado se extiende por millas junto a un encantador pueblo de tiendas independientes, restaurantes reconocidos y el legendario Hotel del Coronado."
+      },
+      {
+        "icon": "◆",
+        "title": "Seguridad y Comunidad",
+        "body": "Una de las comunidades más seguras del Condado de San Diego, Coronado cuenta con escuelas de primer nivel, fuerte orgullo cívico y una cultura de vecindario unida que atrae a compradores que planean quedarse."
       }
     ]
   },
@@ -118,29 +234,85 @@
     "schoolDistrict": "Rancho Santa Fe School District / San Dieguito Union High School District",
     "schools": {
       "public": [
-        { "name": "San Dieguito High School Academy", "grades": "9–12", "type": "SDUHSD" },
-        { "name": "Santa Fe Christian Schools", "grades": "K–12", "type": "Charter" },
-        { "name": "Rancho Santa Fe Elementary", "grades": "K–6", "type": "RSFD" }
+        {
+          "name": "San Dieguito High School Academy",
+          "grades": "9–12",
+          "type": "SDUHSD"
+        },
+        {
+          "name": "Santa Fe Christian Schools",
+          "grades": "K–12",
+          "type": "Charter"
+        },
+        {
+          "name": "Rancho Santa Fe Elementary",
+          "grades": "K–6",
+          "type": "RSFD"
+        }
       ],
       "private": [
-        { "name": "The Bishop's School", "grades": "6–12", "type": "Independent" },
-        { "name": "Torrey Pines Christian Academy", "grades": "K–12", "type": "Christian" },
-        { "name": "Rhoades School", "grades": "PreK–8", "type": "Independent" }
+        {
+          "name": "The Bishop's School",
+          "grades": "6–12",
+          "type": "Independent"
+        },
+        {
+          "name": "Torrey Pines Christian Academy",
+          "grades": "K–12",
+          "type": "Christian"
+        },
+        {
+          "name": "Rhoades School",
+          "grades": "PreK–8",
+          "type": "Independent"
+        }
       ]
     },
     "parks": [
       {
         "name": "Covenant Trails",
         "size": "60+ miles",
-        "amenities": ["Equestrian trails", "Hiking", "Mountain biking", "Nature observation"]
+        "amenities": [
+          "Equestrian trails",
+          "Hiking",
+          "Mountain biking",
+          "Nature observation"
+        ]
       },
       {
         "name": "RSF Golf Club",
-        "amenities": ["18-hole championship course", "Tennis & paddle", "Swim & fitness center", "Member dining"]
+        "amenities": [
+          "18-hole championship course",
+          "Tennis & paddle",
+          "Swim & fitness center",
+          "Member dining"
+        ]
       },
       {
         "name": "San Dieguito River Park",
-        "amenities": ["Coastal rail trail", "Birdwatching", "Nature center", "Group picnic areas"]
+        "amenities": [
+          "Coastal rail trail",
+          "Birdwatching",
+          "Nature center",
+          "Group picnic areas"
+        ]
+      }
+    ],
+    "highlights_es": [
+      {
+        "icon": "◆",
+        "title": "El Estilo de Vida del Covenant",
+        "body": "El histórico Covenant de Rancho Santa Fe — la comunidad planificada original que abarca 6,400 acres — preserva estrictos estándares arquitectónicos y majestuosos eucaliptos que le dan al pueblo su carácter inconfundible."
+      },
+      {
+        "icon": "◆",
+        "title": "Cultura Ecuestre y Recreativa",
+        "body": "Millas de senderos privados para cabalgar, el RSF Golf Club, instalaciones de tenis y pádel, y fácil acceso al hipódromo de Del Mar hacen de esta una de las comunidades de lujo más activas del sur de California."
+      },
+      {
+        "icon": "◆",
+        "title": "Privacidad y Extensión de Hacienda",
+        "body": "Los tamaños mínimos de lote de uno a dos acres en todo El Covenant garantizan privacidad, paisajismo maduro y el tipo de vida a escala de hacienda que es cada vez más raro en la costa del sur de California."
       }
     ]
   }

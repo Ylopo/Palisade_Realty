@@ -920,18 +920,24 @@
         }
 
         // Description
-        if (p.description) {
-          var paragraphs = p.description.split(/\n\s*\n/).map(function (para) {
+        var _isEs = localStorage.getItem('pr-lang') === 'es';
+        window.__ppLangData = window.__ppLangData || {};
+        var _descEn = p.description || p.tagline || '';
+        var _descEs = p.description_es || _descEn;
+        window.__ppLangData.description = { en: _descEn, es: _descEs };
+        var _descSrc = _isEs ? _descEs : _descEn;
+        if (_descSrc) {
+          $('pp-body').innerHTML = _descSrc.split(/\n\s*\n/).map(function (para) {
             return '<p>' + para.replace(/\n/g, ' ').trim() + '</p>'
           }).join('')
-          $('pp-body').innerHTML = paragraphs
-        } else if (p.tagline) {
-          $('pp-body').innerHTML = '<p>' + p.tagline + '</p>'
         }
 
         // Features
-        if (p.features && p.features.length) {
-          $('pp-features-list').innerHTML = p.features.map(function (f) {
+        window.__ppLangData = window.__ppLangData || {};
+        window.__ppLangData.features = { en: p.features || [], es: p.features_es || p.features || [] };
+        var _featArr = (_isEs && p.features_es && p.features_es.length) ? p.features_es : (p.features || []);
+        if (_featArr.length) {
+          $('pp-features-list').innerHTML = _featArr.map(function (f) {
             return '<li>' + f + '</li>'
           }).join('')
           $('pp-features-section').style.display = 'block'
@@ -1006,15 +1012,21 @@
 
             // Highlights
             if (c.highlights && c.highlights.length) {
-              $('pp-community-highlights').innerHTML = c.highlights.map(function (h) {
-                return '<div class="pp-highlight-card">' +
-                  '<span class="pp-highlight-icon">' + (h.icon || '◆') + '</span>' +
-                  '<div class="pp-highlight-text">' +
-                    '<h4>' + h.title + '</h4>' +
-                    '<p>' + h.body + '</p>' +
-                  '</div>' +
-                '</div>'
-              }).join('')
+              var _hlArr = (_isEs && c.highlights_es && c.highlights_es.length) ? c.highlights_es : c.highlights;
+              window.__ppLangData = window.__ppLangData || {};
+              window.__ppLangData.highlights = { en: c.highlights, es: c.highlights_es || c.highlights };
+              function _renderHighlights(arr) {
+                return arr.map(function (h) {
+                  return '<div class="pp-highlight-card">' +
+                    '<span class="pp-highlight-icon">' + (h.icon || '◆') + '</span>' +
+                    '<div class="pp-highlight-text">' +
+                      '<h4>' + h.title + '</h4>' +
+                      '<p>' + h.body + '</p>' +
+                    '</div>' +
+                  '</div>'
+                }).join('')
+              }
+              $('pp-community-highlights').innerHTML = _renderHighlights(_hlArr);
               $('pp-community-highlights-block').style.display = 'block'
             }
 
