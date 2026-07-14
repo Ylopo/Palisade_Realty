@@ -1051,14 +1051,20 @@
 
             // Parks & Recreation
             if (c.parks && c.parks.length) {
-              $('pp-community-parks').innerHTML = c.parks.map(function (k) {
-                var amenities = (k.amenities || []).slice(0, 4).map(function (a) { return '<li>' + a + '</li>' }).join('')
-                return '<div class="pp-park-card">' +
-                  '<div class="pp-park-name">' + k.name + '</div>' +
-                  (k.size ? '<div class="pp-park-size">' + k.size + '</div>' : '') +
-                  (amenities ? '<ul class="pp-park-amenities">' + amenities + '</ul>' : '') +
-                '</div>'
-              }).join('')
+              var _pkArr = (_isEs && c.parks_es && c.parks_es.length) ? c.parks_es : c.parks;
+              window.__ppLangData = window.__ppLangData || {};
+              window.__ppLangData.parks = { en: c.parks, es: c.parks_es || c.parks };
+              function _renderParks(arr) {
+                return arr.map(function (k) {
+                  var amenities = (k.amenities || []).slice(0, 4).map(function (a) { return '<li>' + a + '</li>' }).join('')
+                  return '<div class="pp-park-card">' +
+                    '<div class="pp-park-name">' + k.name + '</div>' +
+                    (k.size ? '<div class="pp-park-size">' + k.size + '</div>' : '') +
+                    (amenities ? '<ul class="pp-park-amenities">' + amenities + '</ul>' : '') +
+                  '</div>'
+                }).join('')
+              }
+              $('pp-community-parks').innerHTML = _renderParks(_pkArr);
               $('pp-community-parks-block').style.display = 'block'
             }
           }).catch(function () { /* graceful fail */ })

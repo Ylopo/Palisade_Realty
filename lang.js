@@ -3118,6 +3118,17 @@ var AGENT_TRANSLATIONS = {
             return '<div class="pp-highlight-card"><span class="pp-highlight-icon">' + (h.icon||'◆') + '</span><div class="pp-highlight-text"><h4>' + h.title + '</h4><p>' + h.body + '</p></div></div>';
           }).join('');
         }
+        var ppPk = document.getElementById('pp-community-parks');
+        if (ppPk && _ppd.parks) {
+          var _pkSrc = lang === 'es' ? (_ppd.parks.es && _ppd.parks.es.length ? _ppd.parks.es : _ppd.parks.en) : _ppd.parks.en;
+          ppPk.innerHTML = _pkSrc.map(function(k) {
+            var amenities = (k.amenities || []).slice(0, 4).map(function(a) { return '<li>' + a + '</li>'; }).join('');
+            return '<div class="pp-park-card"><div class="pp-park-name">' + k.name + '</div>' +
+              (k.size ? '<div class="pp-park-size">' + k.size + '</div>' : '') +
+              (amenities ? '<ul class="pp-park-amenities">' + amenities + '</ul>' : '') +
+              '</div>';
+          }).join('');
+        }
       }
       /* Neighborhood community guide link */
       var ppNhLink = document.getElementById('pp-neighborhood-link');

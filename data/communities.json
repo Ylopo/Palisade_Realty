@@ -106,6 +106,36 @@
         "title": "Hub de Investigación e Innovación",
         "body": "UC San Diego, el Instituto Salk y Scripps Research anclan una concentración de institutos de biotecnología e investigación de renombre mundial que impulsa sólidos valores inmobiliarios a largo plazo."
       }
+    ],
+    "parks_es": [
+      {
+        "name": "Reserva Natural Estatal de Torrey Pines",
+        "size": "2,000 acres",
+        "amenities": [
+          "Senderos costeros para senderismo",
+          "Acceso al Gliderport",
+          "Observación de fauna silvestre",
+          "Miradores del Pacífico"
+        ]
+      },
+      {
+        "name": "Playa de La Jolla Shores",
+        "amenities": [
+          "Playa para nadar",
+          "Lanzamiento de kayak",
+          "Buceo con escafandra",
+          "Áreas de picnic"
+        ]
+      },
+      {
+        "name": "Parque Ellen Browning Scripps",
+        "amenities": [
+          "Jardín con vista al océano",
+          "Acceso a La Jolla Cove",
+          "Lugar para bodas",
+          "Zona de asientos privados"
+        ]
+      }
     ]
   },
   "coronado": {
@@ -210,6 +240,36 @@
         "title": "Seguridad y Comunidad",
         "body": "Una de las comunidades más seguras del Condado de San Diego, Coronado cuenta con escuelas de primer nivel, fuerte orgullo cívico y una cultura de vecindario unida que atrae a compradores que planean quedarse."
       }
+    ],
+    "parks_es": [
+      {
+        "name": "Playa de Coronado",
+        "size": "1.5 millas",
+        "amenities": [
+          "Natación",
+          "Canchas de voleibol",
+          "Playa para perros",
+          "Servicio de salvavidas"
+        ]
+      },
+      {
+        "name": "Parque Tidelands",
+        "amenities": [
+          "Diamantes de béisbol",
+          "Canchas de tenis",
+          "Refugios de picnic",
+          "Vistas a la bahía"
+        ]
+      },
+      {
+        "name": "Parque Centenario",
+        "amenities": [
+          "Paseo frente a la bahía",
+          "Acceso al embarcadero del ferry",
+          "Ciclovías",
+          "Restaurantes frente al agua cercanos"
+        ]
+      }
     ]
   },
   "rancho-santa-fe": {
@@ -313,6 +373,36 @@
         "icon": "◆",
         "title": "Privacidad y Extensión de Hacienda",
         "body": "Los tamaños mínimos de lote de uno a dos acres en todo El Covenant garantizan privacidad, paisajismo maduro y el tipo de vida a escala de hacienda que es cada vez más raro en la costa del sur de California."
+      }
+    ],
+    "parks_es": [
+      {
+        "name": "Senderos del Covenant",
+        "size": "60+ millas",
+        "amenities": [
+          "Senderos ecuestres",
+          "Senderismo",
+          "Ciclismo de montaña",
+          "Observación de la naturaleza"
+        ]
+      },
+      {
+        "name": "Club de Golf RSF",
+        "amenities": [
+          "Campo de campeonato de 18 hoyos",
+          "Tenis y pádel",
+          "Centro de natación y fitness",
+          "Comedor de socios"
+        ]
+      },
+      {
+        "name": "Parque del Río San Dieguito",
+        "amenities": [
+          "Sendero costero del ferrocarril",
+          "Avistamiento de aves",
+          "Centro de naturaleza",
+          "Áreas de picnic grupal"
+        ]
       }
     ]
   }
