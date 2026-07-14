@@ -1030,6 +1030,12 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   color: var(--tc-muted);
   margin-bottom: 0;
   flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  -webkit-box-orient: vertical;
 }
 
 .card-bottom {
