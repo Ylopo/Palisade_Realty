@@ -2949,6 +2949,158 @@ var AGENT_TRANSLATIONS = {
         if (t === 'Community Type' || t === 'Tipo de Comunidad') el.textContent = d.cdHOATableType;
         else if (t === 'Monthly HOA' || t === 'HOA Mensual') el.textContent = d.cdHOATableMonthly;
       });
+
+      /* ── window.__cdTrans: Community-specific body translations ── */
+      if (window.__cdTrans) {
+        var ct = window.__cdTrans;
+        var cdEl = function(sel) { return document.querySelector(sel); };
+        var cdEls = function(sel) { return document.querySelectorAll(sel); };
+        var cdSwap = function(el, es) {
+          if (!el || es === undefined || es === null) return;
+          if (el.dataset.langEn === undefined) el.dataset.langEn = el.innerHTML;
+          el.innerHTML = lang === 'es' ? es : el.dataset.langEn;
+        };
+        var cdSwapArr = function(els, arr) {
+          if (!arr) return;
+          Array.prototype.forEach.call(els, function(el, i) {
+            if (arr[i] !== undefined && arr[i] !== null) cdSwap(el, arr[i]);
+          });
+        };
+
+        /* Hero */
+        cdSwap(cdEl('.hero-eyebrow'), ct.heroEyebrow);
+        cdSwap(cdEl('.hero-title'), ct.heroTitle);
+        if (ct.heroStatDaily) {
+          cdEls('.hero-stat-value').forEach(function(el) {
+            var t = el.textContent.trim();
+            if (t === 'Daily' || t === 'Diariamente') cdSwap(el, ct.heroStatDaily);
+          });
+        }
+
+        /* Location */
+        cdSwap(cdEl('#location-context .section-title'), ct.locationSectionTitle);
+        cdSwap(cdEl('.location-head p'), ct.locationPara);
+        if (ct.driveCards) {
+          cdEls('.location-drive-card').forEach(function(card, i) {
+            var dc = ct.driveCards[i]; if (!dc) return;
+            cdSwap(card.querySelector('.location-card-dest'), dc.dest);
+            cdSwap(card.querySelector('.location-card-via'), dc.via);
+          });
+        }
+
+        /* Overview */
+        cdSwap(cdEl('#overview .section-eyebrow'), ct.overviewEyebrow);
+        cdSwap(cdEl('#overview .section-title'), ct.overviewSectionTitle);
+        cdSwapArr(cdEls('.overview-body'), ct.overviewBodies);
+        if (ct.factValues) {
+          cdEls('.fact-value').forEach(function(el, i) {
+            if (ct.factValues[i]) cdSwap(el, ct.factValues[i]);
+          });
+        }
+
+        /* Highlights */
+        cdSwap(cdEl('#highlights .section-title'), ct.highlightsSectionTitle);
+        if (ct.highlights) {
+          cdEls('.highlight-card').forEach(function(card, i) {
+            var h = ct.highlights[i]; if (!h) return;
+            cdSwap(card.querySelector('.highlight-title'), h.title);
+            cdSwap(card.querySelector('.highlight-body'), h.body);
+          });
+        }
+
+        /* Neighborhoods */
+        cdSwap(cdEl('.neighborhoods-head .section-eyebrow'), ct.neighborhoodsEyebrow);
+        cdSwap(cdEl('.neighborhoods-head .section-title'), ct.neighborhoodsSectionTitle);
+        if (ct.neighborhoodTags) {
+          cdEls('.neighborhood-card').forEach(function(card, i) {
+            cdSwap(card.querySelector('.neighborhood-tags'), ct.neighborhoodTags[i]);
+          });
+        }
+
+        /* City stats (community-specific labels) */
+        if (ct.cityStatLabels) {
+          cdEls('.city-stat-label').forEach(function(el) {
+            var t = el.textContent.trim();
+            if (ct.cityStatLabels[t]) {
+              if (!el.dataset.langEn) el.dataset.langEn = el.textContent;
+              el.textContent = lang === 'es' ? ct.cityStatLabels[t] : el.dataset.langEn;
+            }
+          });
+        }
+
+        /* Listings */
+        cdSwap(cdEl('#listings .section-title'), ct.listingsSectionTitle);
+        cdSwap(cdEl('.btn-view-all'), ct.listingsViewAllBtn);
+
+        /* HOA */
+        cdSwap(cdEl('#hoa-fees .section-title'), ct.hoaSectionTitle);
+        if (ct.hoaTableRows) {
+          cdEls('.hoa-table tbody tr').forEach(function(row, i) {
+            var cells = row.querySelectorAll('td');
+            var rowData = ct.hoaTableRows[i]; if (!rowData) return;
+            Array.prototype.forEach.call(cells, function(cell, j) {
+              if (rowData[j] !== undefined) cdSwap(cell, rowData[j]);
+            });
+          });
+        }
+        cdSwap(cdEl('.hoa-note'), ct.hoaNote);
+        cdSwap(cdEl('.hoa-aside-note'), ct.hoaAsideNote);
+        cdSwapArr(cdEls('.hoa-covers-list li'), ct.hoaCovers);
+
+        /* Parks */
+        cdSwap(cdEl('#parks-rec .section-title'), ct.parksSectionTitle);
+        if (ct.parks) {
+          cdEls('.park-card').forEach(function(card, i) {
+            var p = ct.parks[i]; if (!p) return;
+            if (p.size) cdSwap(card.querySelector('.park-size'), p.size);
+            if (p.amenities) cdSwapArr(card.querySelectorAll('.park-amenities li'), p.amenities);
+          });
+        }
+
+        /* Schools */
+        cdSwap(cdEl('#schools .section-title'), ct.schoolsSectionTitle);
+        cdSwap(cdEl('.schools-disclaimer-top'), ct.schoolsDisclaimerTop);
+        if (ct.schoolsTabPublic) cdSwap(cdEl('.schools-tab:first-child'), ct.schoolsTabPublic);
+        if (ct.schoolsTabPrivate) cdSwap(cdEl('.schools-tab:last-child'), ct.schoolsTabPrivate);
+        if (ct.schoolsTableHeaders) {
+          if (ct.schoolsTableHeaders.pub) cdSwapArr(cdEls('#panel-public .schools-table th'), ct.schoolsTableHeaders.pub);
+          if (ct.schoolsTableHeaders.priv) cdSwapArr(cdEls('#panel-private .schools-table th'), ct.schoolsTableHeaders.priv);
+        }
+        cdSwap(cdEl('.schools-disclaimer'), ct.schoolsDisclaimerBottom);
+
+        /* Nearby communities */
+        cdSwap(cdEl('.nearby-head .section-title'), ct.nearbySectionTitle);
+        cdSwap(cdEl('.nearby-desc'), ct.nearbyDesc);
+        if (ct.nearbyTableHeaders) cdSwapArr(cdEls('.nearby-table thead th'), ct.nearbyTableHeaders);
+        if (ct.nearbyWhyConsider) {
+          cdEls('.nearby-table tbody tr').forEach(function(row, i) {
+            var cells = row.querySelectorAll('td');
+            if (cells[2] && ct.nearbyWhyConsider[i] !== undefined) cdSwap(cells[2], ct.nearbyWhyConsider[i]);
+          });
+        }
+
+        /* FAQ */
+        cdSwap(cdEl('.faq-head .section-title'), ct.faqSectionTitle);
+        cdSwap(cdEl('.faq-sub'), ct.faqSub);
+        if (ct.faqs) {
+          cdEls('.faq-item').forEach(function(item, i) {
+            var faq = ct.faqs[i]; if (!faq) return;
+            cdSwap(item.querySelector('.faq-question-text'), faq.q);
+            cdSwap(item.querySelector('.faq-answer-inner'), faq.a);
+          });
+        }
+
+        /* Lifestyle */
+        cdSwap(cdEl('#lifestyle .section-eyebrow'), ct.lifestyleEyebrow);
+        cdSwap(cdEl('#lifestyle .section-title'), ct.lifestyleSectionTitle);
+        cdSwapArr(cdEls('.lifestyle-body'), ct.lifestyleBodies);
+        cdSwapArr(cdEls('.lifestyle-bullets li'), ct.lifestyleBullets);
+
+        /* CTA */
+        cdSwap(cdEl('#community-cta .section-eyebrow'), ct.ctaEyebrow);
+        cdSwap(cdEl('.cta-title'), ct.ctaTitle);
+        if (ct.ctaParagraph) cdSwap(cdEl('#community-cta p[style]'), ct.ctaParagraph);
+      }
     }
 
     /* ── FEATURED LISTINGS CAROUSEL ────────────────────────── */
