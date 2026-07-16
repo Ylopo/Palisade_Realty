@@ -9,7 +9,7 @@
 const TEAM = [
   {
     name:    'Hedda Parashos',
-    role:    'Principal Broker / CEO',
+    role:    'CEO',
     bio:     'Founder and CEO of Palisade Realty since 2010. San Diego luxury specialist with 15+ years experience and a team of 60+ agents delivering exceptional results.',
     profile: 'team-page/hedda-parashos.html',
     photo:   'assets/images/agents/Hedda_Parashos.jpg',
@@ -44,7 +44,7 @@ const TEAM = [
   },
   {
     name:    'Michael DiVita',
-    role:    'Sales & Database Manager DRE# 02192354',
+    role:    'Database and Onboarding Manager',
     bio:     'Data-driven investment advisor specializing in San Diego rental properties and 1031 exchanges. Analytical approach to maximizing long-term portfolio returns.',
     profile: 'team-page/michael-divita.html',
     photo:   'assets/images/agent-michael-divita.jpg',
