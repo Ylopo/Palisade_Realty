@@ -67,7 +67,7 @@
       fypCta: 'See All Communities',
 
       /* HOMEPAGE — about */
-      aboutTitle: 'Principal Broker / CEO',
+      aboutTitle: 'CEO',
       aboutBio: "Hedda founded Palisade Realty in 2010 and has built it into one of San Diego’s most trusted luxury real estate firms — with a team of 60+ agents and over 15 years of market expertise. Her commitment to innovative representation, deep local knowledge, and genuine care for every client has positioned Palisade Realty as the go-to brokerage across the greater San Diego region. From first-time buyers to seasoned investors, Hedda’s team delivers the professional, efficient, and rewarding experience today’s market demands.",
       aboutCta: 'Meet Our Team',
 
@@ -233,7 +233,7 @@
       teamIntroH2: 'Built on <em>Results.</em><br>Driven by People.',
       teamIntroBody1: 'Palisade Realty, Inc. is a team of experienced, licensed real estate agents serving the San Diego, CA metro area. We\'ve built our reputation on one principle: the client comes first — always. From your first consultation to closing day and beyond, we deliver clear communication, market expertise, and results you can count on.',
       teamIntroBody2: 'Our team spans every corner of San Diego County — from coastal communities like Point Loma and La Jolla to vibrant urban neighborhoods like Downtown and Mission Hills. No matter where you\'re looking, someone on our team knows that market intimately.',
-      teamIntroBody3: 'Led by Principal Broker Hedda Parashos, Palisade Realty continues to grow because our agents grow — through mentorship, cutting-edge technology, and a culture that puts integrity at the center of every transaction.',
+      teamIntroBody3: 'Led by CEO Hedda Parashos, Palisade Realty continues to grow because our agents grow — through mentorship, cutting-edge technology, and a culture that puts integrity at the center of every transaction.',
       teamIntroWork: 'Work With Us',
       teamIntroSearch: 'Search Homes',
       teamLeaderTag: 'Management &amp; Staff',
@@ -429,7 +429,7 @@
       fypCta: 'Ver Todas las Comunidades',
 
       /* HOMEPAGE — about */
-      aboutTitle: 'Corredora Principal / CEO',
+      aboutTitle: 'CEO',
       aboutBio: 'Hedda fundó Palisade Realty en 2010 y la ha convertido en una de las firmas de bienes raíces de lujo más confiables de San Diego — con un equipo de más de 60 agentes y más de 15 años de experiencia en el mercado. Su compromiso con la representación innovadora, el profundo conocimiento local y el genuino cuidado por cada cliente han posicionado a Palisade Realty como la correduría preferida en toda la región de San Diego. Desde compradores primerizos hasta inversores experimentados, el equipo de Hedda ofrece la experiencia profesional, eficiente y gratificante que el mercado actual exige.',
       aboutCta: 'Conoce a Nuestro Equipo',
 
@@ -595,7 +595,7 @@
       teamIntroH2: 'Construido sobre <em>Resultados.</em><br>Impulsado por las Personas.',
       teamIntroBody1: 'Palisade Realty, Inc. es un equipo de agentes inmobiliarios con licencia y experiencia que atiende al área metropolitana de San Diego, CA. Hemos construido nuestra reputación sobre un principio: el cliente siempre es primero. Desde su primera consulta hasta el día del cierre y más allá, brindamos comunicación clara, experiencia en el mercado y resultados en los que puede confiar.',
       teamIntroBody2: 'Nuestro equipo abarca cada rincón del condado de San Diego — desde comunidades costeras como Point Loma y La Jolla hasta vibrantes vecindarios urbanos como Downtown y Mission Hills. No importa dónde esté buscando, alguien en nuestro equipo conoce ese mercado íntimamente.',
-      teamIntroBody3: 'Bajo el liderazgo de la Corredora Principal Hedda Parashos, Palisade Realty continúa creciendo porque nuestros agentes crecen — a través de la tutoría, tecnología de vanguardia y una cultura que pone la integridad en el centro de cada transacción.',
+      teamIntroBody3: 'Bajo el liderazgo de la CEO Hedda Parashos, Palisade Realty continúa creciendo porque nuestros agentes crecen — a través de la tutoría, tecnología de vanguardia y una cultura que pone la integridad en el centro de cada transacción.',
       teamIntroWork: 'Trabaje con Nosotros',
       teamIntroSearch: 'Buscar Casas',
       teamLeaderTag: 'Gerencia y Personal',
