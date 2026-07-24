@@ -1,6 +1,26 @@
-# Sanity Studio — deploy separately via `cd studio && npm run deploy`
-studio/
+# Sanity Studio standalone build — deploy separately via `cd studio && npm run deploy`
+# Leading slash = root-level only (won't match app/studio/)
+/studio/
 
 # Local environment variables — never deploy
 .env.local
 .env
+
+# Legacy static-site API files — replaced by app/api/ Next.js routes
+# Leading slash = root-level only (won't match app/api/)
+/api/
+
+# Legacy static-site asset directories — images are in public/ for Next.js
+# These root-level directories are 100+ MB and not served by Next.js
+/assets/
+/images/
+/communities/
+/properties/
+/blog/
+/team/
+/Testimonials/
+
+# Old static-site scripts and build artifacts
+*.mjs
+*.html
+node_modules
