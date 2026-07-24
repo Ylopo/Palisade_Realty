@@ -1,16 +1,3 @@
 {
-  "routes": [
-    {
-      "src": "^/(.+)\\.html$",
-      "headers": { "Location": "/$1" },
-      "status": 308
-    },
-    {
-      "handle": "filesystem"
-    },
-    {
-      "src": "^/([a-zA-Z0-9/_-]+)$",
-      "dest": "/$1.html"
-    }
-  ]
+  "framework": "nextjs"
 }
