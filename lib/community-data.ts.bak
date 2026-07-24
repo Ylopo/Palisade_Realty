@@ -1,0 +1,1463 @@
+export interface Highlight {
+  title: string
+  desc: string
+}
+
+export interface School {
+  name: string
+  grades: string
+  type: string
+}
+
+export interface NearbyCommunity {
+  name: string
+  slug: string
+  from: string
+  whyConsider?: string
+}
+
+export interface QuickFact {
+  label: string
+  value: string
+}
+
+export interface CommunityData {
+  name: string
+  slug: string
+  image: string
+  badge: string
+  region: string
+  heroStats: Array<{ value: string; label: string }>
+  titleFirst: string
+  titleRest: string
+  subtitle: string
+  overview: string[]
+  quickFacts: QuickFact[]
+  highlights: Highlight[]
+  publicSchools: School[]
+  privateSchools: School[]
+  schoolDistrict: string
+  ylopoSearch: string
+  nearbyCommunities: NearbyCommunity[]
+  // Extended fields — optional, render section only when present
+  locationDescription?: string
+  driveCards?: Array<{ time: string; dest: string; via: string }>
+  demographics?: Array<{ value: string; label: string }>
+  neighborhoods?: Array<{ name: string; priceRange: string; tags: string }>
+  cityStats?: Array<{ value: string; label: string }>
+  hoa?: Array<{ type: string; monthly: string }>
+  hoaNote?: string
+  hoaCovers?: string[]
+  hoaAside?: string
+  parks?: Array<{ name: string; address: string; size: string; amenities: string[] }>
+  faq?: Array<{ q: string; a: string }>
+  lifestyleBody?: string[]
+  lifestyleBullets?: string[]
+  nearbyDescription?: string
+}
+
+const COMMUNITIES: CommunityData[] = [
+  {
+    name: 'La Jolla',
+    slug: 'la-jolla-real-estate',
+    image: 'community-la-jolla.jpg',
+    badge: 'Ultra-Luxury Coastal',
+    region: 'coastal',
+    heroStats: [
+      { value: '200+', label: 'Active Listings' },
+      { value: '$2.4M', label: 'Median Price' },
+      { value: '4', label: 'Property Types' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    titleFirst: 'La',
+    titleRest: 'Jolla',
+    subtitle: 'San Diego County · California',
+    overview: [
+      'La Jolla — "The Jewel" — is San Diego\'s most prestigious coastal community, where grand estate homes cling to dramatic bluffs above turquoise coves, and the village center pulses with world-class restaurants, galleries, and boutiques that rival the finest in California.',
+      'UCSD\'s world-class research facilities and the nearby tech and biotech corridor bring an intellectual energy that sets La Jolla apart from other luxury coastal communities. From Windansea Beach bungalows to multi-million-dollar blufftop estates, Palisade Realty knows every block.',
+    ],
+    quickFacts: [
+      { label: 'City Type', value: 'Coastal Community' },
+      { label: 'County', value: 'San Diego County' },
+      { label: 'Population', value: '~46,000' },
+      { label: 'Median Home Price', value: '$2,400,000' },
+      { label: 'Architecture', value: 'Modern + Mediterranean' },
+      { label: 'ZIP Code', value: '92037' },
+    ],
+    highlights: [
+      { title: 'La Jolla Cove', desc: 'A pristine cove framed by sandstone cliffs where sea lions bask, snorkelers explore kelp beds, and sunsets are legendary.' },
+      { title: 'Village Dining & Culture', desc: 'Michelin-level restaurants, world-class galleries, MCASD, and the La Jolla Playhouse draw visitors from across the globe.' },
+      { title: 'UCSD & Research Corridor', desc: 'UCSD, the Salk Institute, and Scripps Research Institute create an intellectual energy unique in San Diego.' },
+    ],
+    publicSchools: [
+      { name: 'La Jolla High School', grades: '9–12', type: 'SDUSD' },
+      { name: 'Muirlands Middle School', grades: '6–8', type: 'SDUSD' },
+      { name: 'Bird Rock Elementary', grades: 'K–5', type: 'SDUSD' },
+    ],
+    privateSchools: [
+      { name: 'The Bishop\'s School', grades: '6–12', type: 'Independent Private' },
+      { name: 'La Jolla Country Day School', grades: 'PK–12', type: 'Independent Private' },
+    ],
+    schoolDistrict: 'San Diego Unified School District',
+    ylopoSearch: 'https://search.palisaderealty.com/search?s%5Blocations%5D%5B0%5D%5Bcity%5D=La+Jolla&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA',
+    nearbyCommunities: [
+      { name: 'Del Mar', slug: 'del-mar-real-estate', from: '$1.4M' },
+      { name: 'Carmel Valley', slug: 'carmel-valley-real-estate', from: '$1M' },
+      { name: 'Pacific Beach', slug: 'pacific-beach-real-estate', from: '$700K' },
+    ],
+  },
+  {
+    name: 'Coronado',
+    slug: 'coronado-real-estate',
+    image: 'community-coronado.jpg',
+    badge: 'Island Luxury',
+    region: 'coastal',
+    heroStats: [
+      { value: '100+', label: 'Active Listings' },
+      { value: '$2.8M', label: 'Median Price' },
+      { value: '3', label: 'Property Types' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    titleFirst: 'Coro',
+    titleRest: 'nado',
+    subtitle: 'San Diego Bay · California',
+    overview: [
+      'Coronado is one of California\'s most sought-after island destinations — a pristine community connected to San Diego by the iconic 2.12-mile Bay Bridge. The "Crown City" is defined by wide, tree-lined boulevards, elegant Victorian and Craftsman homes, and the legendary Hotel del Coronado.',
+      'With pristine beaches, a charming village, and a strong military presence centered around Naval Air Station North Island, Coronado offers a uniquely secure and gracious way of life. Palisade Realty\'s agents have deep expertise in this competitive, low-inventory market.',
+    ],
+    quickFacts: [
+      { label: 'City Type', value: 'Island City' },
+      { label: 'County', value: 'San Diego County' },
+      { label: 'Population', value: '~22,000' },
+      { label: 'Median Home Price', value: '$2,800,000' },
+      { label: 'Architecture', value: 'Victorian + Spanish Colonial' },
+      { label: 'ZIP Code', value: '92118' },
+    ],
+    highlights: [
+      { title: 'Coronado Beach', desc: 'Consistently ranked one of the best beaches in the U.S. — wide, flat, and sheltered from the Pacific\'s rougher surf.' },
+      { title: 'Hotel del Coronado', desc: 'The iconic 1888 Victorian resort is a National Historic Landmark and one of California\'s most photographed structures.' },
+      { title: 'Village & Orange Avenue', desc: 'A charming main street with boutiques, restaurants, and coffee shops that give Coronado its small-town-in-paradise feel.' },
+    ],
+    publicSchools: [
+      { name: 'Coronado High School', grades: '9–12', type: 'CUSD' },
+      { name: 'Coronado Middle School', grades: '6–8', type: 'CUSD' },
+      { name: 'Village Elementary School', grades: 'K–5', type: 'CUSD' },
+    ],
+    privateSchools: [
+      { name: 'Sacred Heart Parish School', grades: 'PK–8', type: 'Catholic Private' },
+    ],
+    schoolDistrict: 'Coronado Unified School District',
+    ylopoSearch: 'https://search.palisaderealty.com/search?s%5Blocations%5D%5B0%5D%5Bcity%5D=Coronado&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA',
+    nearbyCommunities: [
+      { name: 'Point Loma', slug: 'point-loma-real-estate', from: '$800K' },
+      { name: 'Downtown San Diego', slug: 'downtown-san-diego-real-estate', from: '$450K' },
+      { name: 'Chula Vista', slug: 'chula-vista-real-estate', from: '$550K' },
+    ],
+  },
+  {
+    name: 'Del Mar',
+    slug: 'del-mar-real-estate',
+    image: 'community-del-mar.jpg',
+    badge: 'Coastal Luxury',
+    region: 'coastal',
+    heroStats: [
+      { value: '80+', label: 'Active Listings' },
+      { value: '$2.2M', label: 'Median Price' },
+      { value: '3', label: 'Property Types' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    titleFirst: 'Del',
+    titleRest: 'Mar',
+    subtitle: 'North County Coastal · California',
+    overview: [
+      'Del Mar blends thoroughbred racing heritage with a refined coastal village lifestyle. Ocean-view estates and bluff-top homes command some of the highest prices in San Diego, while the charming village center offers boutique shopping and dining steps from the Pacific.',
+      'The Del Mar Racetrack, 15th Street Beach, and Torrey Pines State Beach anchor outdoor life here. With top-rated schools and low traffic, Del Mar consistently ranks among California\'s most livable communities.',
+    ],
+    quickFacts: [
+      { label: 'City Type', value: 'Coastal Village' },
+      { label: 'County', value: 'San Diego County' },
+      { label: 'Population', value: '~4,200' },
+      { label: 'Median Home Price', value: '$2,200,000' },
+      { label: 'Architecture', value: 'Mediterranean + Modern' },
+      { label: 'ZIP Code', value: '92014' },
+    ],
+    highlights: [
+      { title: 'Del Mar Racetrack', desc: 'One of the most picturesque thoroughbred racing venues in the world — "Where the Turf Meets the Surf" every July through September.' },
+      { title: 'Torrey Pines State Beach', desc: 'Miles of uncrowded beach adjacent to the state natural reserve — some of the best surf, hang gliding, and scenic hiking in San Diego.' },
+      { title: 'Village & 15th Street', desc: 'A walkable main street with restaurants, wine bars, and boutiques that attract both residents and day visitors from across the county.' },
+    ],
+    publicSchools: [
+      { name: 'Torrey Pines High School', grades: '9–12', type: 'SDUHSD' },
+      { name: 'Oak Crest Middle School', grades: '6–8', type: 'EUSD' },
+      { name: 'Del Mar Heights Elementary', grades: 'K–6', type: 'DMUSD' },
+    ],
+    privateSchools: [
+      { name: 'Cathedral Catholic High School', grades: '9–12', type: 'Catholic Private' },
+    ],
+    schoolDistrict: 'Del Mar Union School District / San Dieguito Union HS',
+    ylopoSearch: 'https://search.palisaderealty.com/search?s%5Blocations%5D%5B0%5D%5Bcity%5D=Del+Mar&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA',
+    nearbyCommunities: [
+      { name: 'Solana Beach', slug: 'solana-beach-real-estate', from: '$1.2M' },
+      { name: 'La Jolla', slug: 'la-jolla-real-estate', from: '$1.2M' },
+      { name: 'Carmel Valley', slug: 'carmel-valley-real-estate', from: '$1M' },
+    ],
+  },
+  {
+    name: 'Carmel Valley',
+    slug: 'carmel-valley-real-estate',
+    image: 'community-carmel-valley.jpg',
+    badge: 'Master-Planned',
+    region: 'coastal',
+    heroStats: [
+      { value: '150+', label: 'Active Listings' },
+      { value: '$1.5M', label: 'Median Price' },
+      { value: '4', label: 'Property Types' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    titleFirst: 'Carmel',
+    titleRest: 'Valley',
+    subtitle: 'North San Diego · California',
+    overview: [
+      'Carmel Valley is San Diego\'s premier master-planned community — a family-friendly enclave with some of the best-rated schools in California, manicured neighborhoods, and easy access to both the coast and the tech corridors of Sorrento Valley and UTC.',
+      'New construction and established homes sit side by side, with parks, trails, and a thriving retail corridor centered around Del Mar Highlands Town Center. For buyers prioritizing schools, safety, and long-term value, Carmel Valley consistently delivers.',
+    ],
+    quickFacts: [
+      { label: 'City Type', value: 'Master-Planned Community' },
+      { label: 'County', value: 'San Diego County' },
+      { label: 'Population', value: '~55,000' },
+      { label: 'Median Home Price', value: '$1,500,000' },
+      { label: 'Architecture', value: 'Contemporary + Traditional' },
+      { label: 'ZIP Code', value: '92130' },
+    ],
+    highlights: [
+      { title: 'Top-Ranked Schools', desc: 'Torrey Pines High School and multiple award-winning elementary schools make this one of California\'s most sought-after family communities.' },
+      { title: 'Trail System', desc: 'Miles of dedicated bike paths, hiking trails, and greenbelts connect neighborhoods and provide daily outdoor recreation without leaving the community.' },
+      { title: 'Tech Corridor Access', desc: 'Minutes from Sorrento Valley, UTC, and One Paseo — ideal for professionals working in biotech, tech, and healthcare.' },
+    ],
+    publicSchools: [
+      { name: 'Torrey Pines High School', grades: '9–12', type: 'SDUHSD' },
+      { name: 'Carmel Valley Middle School', grades: '6–8', type: 'DMUSD' },
+      { name: 'Carmel Del Mar Elementary', grades: 'K–6', type: 'DMUSD' },
+    ],
+    privateSchools: [
+      { name: 'Pacific Ridge School', grades: '6–12', type: 'Independent Private' },
+    ],
+    schoolDistrict: 'Del Mar Union / San Dieguito Union HS',
+    ylopoSearch: 'https://search.palisaderealty.com/search?s%5Blocations%5D%5B0%5D%5Bcity%5D=Carmel+Valley&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA',
+    nearbyCommunities: [
+      { name: 'Del Mar', slug: 'del-mar-real-estate', from: '$1.4M' },
+      { name: 'La Jolla', slug: 'la-jolla-real-estate', from: '$1.2M' },
+      { name: 'Solana Beach', slug: 'solana-beach-real-estate', from: '$1.2M' },
+    ],
+  },
+  {
+    name: 'Rancho Santa Fe',
+    slug: 'rancho-santa-fe-real-estate',
+    image: 'community-rancho-santa-fe.jpg',
+    badge: 'Estate Country',
+    region: 'coastal',
+    heroStats: [
+      { value: '60+', label: 'Active Listings' },
+      { value: '$4.5M', label: 'Median Price' },
+      { value: '3', label: 'Property Types' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    titleFirst: 'Rancho',
+    titleRest: 'Santa Fe',
+    subtitle: 'North San Diego County · California',
+    overview: [
+      'Rancho Santa Fe is San Diego\'s most exclusive address — a covenant community of sprawling equestrian estates, gated compounds, and manicured grounds set among eucalyptus-lined roads inland from the coast.',
+      'The Rancho Santa Fe Association maintains strict architectural guidelines that have preserved the community\'s Spanish Colonial character for a century. With top private schools, elite equestrian facilities, and legendary privacy, RSF attracts executives and families seeking uncompromising luxury.',
+    ],
+    quickFacts: [
+      { label: 'City Type', value: 'Covenant Community' },
+      { label: 'County', value: 'San Diego County' },
+      { label: 'Population', value: '~3,100' },
+      { label: 'Median Home Price', value: '$4,500,000' },
+      { label: 'Architecture', value: 'Spanish Colonial + Mediterranean' },
+      { label: 'ZIP Code', value: '92067' },
+    ],
+    highlights: [
+      { title: 'The Covenant', desc: 'The original RSF Covenant community spans 6,200 acres of manicured estates with architectural review and strict lot-size minimums for unmatched exclusivity.' },
+      { title: 'Equestrian Culture', desc: 'Miles of private riding trails, polo fields, and equestrian centers make RSF one of Southern California\'s premier horse communities.' },
+      { title: 'Privacy & Security', desc: 'Gated enclaves, private roads, and a community association that has maintained RSF\'s character since 1927.' },
+    ],
+    publicSchools: [
+      { name: 'Torrey Pines High School', grades: '9–12', type: 'SDUHSD' },
+      { name: 'R. Roger Rowe School', grades: 'K–8', type: 'RSF USD' },
+    ],
+    privateSchools: [
+      { name: 'The Grauer School', grades: '9–12', type: 'Independent Private' },
+      { name: 'San Dieguito Academy', grades: '9–12', type: 'Charter' },
+    ],
+    schoolDistrict: 'Rancho Santa Fe School District',
+    ylopoSearch: 'https://search.palisaderealty.com/search?s%5Blocations%5D%5B0%5D%5Bcity%5D=Rancho+Santa+Fe&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA',
+    nearbyCommunities: [
+      { name: 'Del Mar', slug: 'del-mar-real-estate', from: '$1.4M' },
+      { name: 'Solana Beach', slug: 'solana-beach-real-estate', from: '$1.2M' },
+      { name: 'Encinitas', slug: 'encinitas-real-estate', from: '$1.2M' },
+    ],
+  },
+  {
+    name: 'Point Loma',
+    slug: 'point-loma-real-estate',
+    image: 'community-point-loma.jpg',
+    badge: 'Coastal Living',
+    region: 'coastal',
+    heroStats: [
+      { value: '120+', label: 'Active Listings' },
+      { value: '$1.2M', label: 'Median Price' },
+      { value: '4', label: 'Property Types' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    titleFirst: 'Point',
+    titleRest: 'Loma',
+    subtitle: 'San Diego Bay · California',
+    overview: [
+      'Point Loma occupies a dramatic peninsula between San Diego Bay and the Pacific Ocean, offering panoramic views in almost every direction. The community blends military heritage, fishing culture, and a tight-knit neighborhood character.',
+      'Liberty Station — the redeveloped Naval Training Center — has become one of San Diego\'s premier dining, arts, and retail destinations. From the hilltop neighborhoods above Shelter Island to the surf-stoked shores of Ocean Beach, Point Loma rewards buyers who want coastal life without La Jolla\'s price tag.',
+    ],
+    quickFacts: [
+      { label: 'City Type', value: 'Peninsula Community' },
+      { label: 'County', value: 'San Diego County' },
+      { label: 'Population', value: '~65,000' },
+      { label: 'Median Home Price', value: '$1,200,000' },
+      { label: 'Architecture', value: 'Craftsman + Ranch + Modern' },
+      { label: 'ZIP Codes', value: '92106 / 92107 / 92110' },
+    ],
+    highlights: [
+      { title: 'Cabrillo National Monument', desc: 'The site of Juan Cabrillo\'s 1542 landing offers sweeping bay and ocean views, whale watching, and tide pool exploration at the peninsula\'s tip.' },
+      { title: 'Liberty Station', desc: 'The redeveloped NTC is now home to 70+ restaurants, shops, galleries, and farmers markets on one of SD\'s most beautiful adaptive reuse sites.' },
+      { title: 'Shelter Island', desc: 'San Diego\'s marina hub — Shelter Island Drive is lined with restaurants, yacht clubs, and one of the best sunset viewing spots in the city.' },
+    ],
+    publicSchools: [
+      { name: 'Point Loma High School', grades: '9–12', type: 'SDUSD' },
+      { name: 'Dana Middle School', grades: '6–8', type: 'SDUSD' },
+      { name: 'Loma Portal Elementary', grades: 'K–5', type: 'SDUSD' },
+    ],
+    privateSchools: [
+      { name: 'Point Loma Nazarene University', grades: 'College', type: 'Private University' },
+    ],
+    schoolDistrict: 'San Diego Unified School District',
+    ylopoSearch: 'https://search.palisaderealty.com/search?s%5Blocations%5D%5B0%5D%5Bcity%5D=Point+Loma&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA',
+    nearbyCommunities: [
+      { name: 'Coronado', slug: 'coronado-real-estate', from: '$1.8M' },
+      { name: 'Mission Hills', slug: 'mission-hills-real-estate', from: '$900K' },
+      { name: 'Downtown San Diego', slug: 'downtown-san-diego-real-estate', from: '$450K' },
+    ],
+  },
+  {
+    name: 'Downtown San Diego',
+    slug: 'downtown-san-diego-real-estate',
+    image: 'community-downtown-san-diego.jpg',
+    badge: 'Urban Core',
+    region: 'metro',
+    heroStats: [
+      { value: '300+', label: 'Active Listings' },
+      { value: '$700K', label: 'Median Price' },
+      { value: '3', label: 'Property Types' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    titleFirst: 'Downtown',
+    titleRest: 'San Diego',
+    subtitle: 'Urban Core · California',
+    overview: [
+      'Downtown San Diego is the urban heart of the county — a world-class waterfront city with a Walk Score of 97, a thriving arts and dining scene, and a skyline that frames spectacular San Diego Bay views. The Gaslamp Quarter, Little Italy, and the East Village each offer distinct urban character.',
+      'High-rise condos and loft-style residences put residents steps from Petco Park, the Convention Center, the Embarcadero, and dozens of acclaimed restaurants. With new development still transforming the neighborhood, downtown offers strong rental demand and long-term appreciation potential.',
+    ],
+    quickFacts: [
+      { label: 'City Type', value: 'Urban Core / CBD' },
+      { label: 'County', value: 'San Diego County' },
+      { label: 'Population', value: '~35,000' },
+      { label: 'Median Home Price', value: '$700,000' },
+      { label: 'Architecture', value: 'High-Rise + Loft + Historic' },
+      { label: 'ZIP Codes', value: '92101 / 92103' },
+    ],
+    highlights: [
+      { title: 'Gaslamp Quarter', desc: 'A 16-block National Historic District packed with restaurants, rooftop bars, live music venues, and some of the best nightlife in California.' },
+      { title: 'Little Italy', desc: 'SD\'s most vibrant urban neighborhood — an outdoor piazza, award-winning restaurants, Saturday farmers market, and a true sense of community.' },
+      { title: 'Embarcadero & Bay', desc: '4+ miles of waterfront promenade, world-class museums, cruise terminals, and the USS Midway aircraft carrier museum.' },
+    ],
+    publicSchools: [
+      { name: 'San Diego High School', grades: '9–12', type: 'SDUSD' },
+      { name: 'Roosevelt International Middle', grades: '6–8', type: 'SDUSD' },
+      { name: 'Washington Elementary', grades: 'K–5', type: 'SDUSD' },
+    ],
+    privateSchools: [
+      { name: 'Francis Parker School', grades: 'JK–12', type: 'Independent Private' },
+    ],
+    schoolDistrict: 'San Diego Unified School District',
+    ylopoSearch: 'https://search.palisaderealty.com/search?s%5Blocations%5D%5B0%5D%5Bcity%5D=San+Diego&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA',
+    nearbyCommunities: [
+      { name: 'North Park', slug: 'north-park-real-estate', from: '$700K', whyConsider: 'Urban village character just 2 miles north — independent coffee shops, craft breweries, and a farmers market along 30th Street with lower price points than downtown.' },
+      { name: 'Mission Hills', slug: 'mission-hills-real-estate', from: '$900K', whyConsider: 'Craftsman bungalows and Spanish Revival homes on tree-lined streets overlooking the valley — historic neighborhood charm with easy trolley access downtown.' },
+      { name: 'Point Loma', slug: 'point-loma-real-estate', from: '$800K', whyConsider: 'Harbor views, Sunset Cliffs, and Liberty Station on a peninsula just 10 minutes west — coastal living with a small-town feel and strong school scores.' },
+      { name: 'Coronado', slug: 'coronado-real-estate', from: '$1.4M', whyConsider: 'Island resort living across the Bay Bridge — pristine beach, the Hotel del Coronado, wide streets, and a quiet, secure community 15 minutes from downtown.' },
+      { name: 'Little Italy', slug: 'downtown-san-diego-real-estate', from: '$600K', whyConsider: 'The most walkable sub-neighborhood within downtown — a European-feel piazza, award-winning restaurants, Saturday farmers market, and high appreciation history.' },
+    ],
+    locationDescription: 'Downtown San Diego sits at the geographic heart of the region, anchored by more than four miles of waterfront along San Diego Bay. The urban core is bounded by Balboa Park to the north, the bay to the south, I-5 to the east, and the airport peninsula to the west — placing residents steps from everything San Diego has to offer: world-class dining, a working waterfront, and one of California\'s most vibrant arts scenes.',
+    driveCards: [
+      { time: '~5 min', dest: 'to SAN Airport', via: 'via I-5 / Laurel St' },
+      { time: '~15 min', dest: 'to La Jolla', via: 'via I-5 North' },
+      { time: '~10 min', dest: 'to Coronado', via: 'via Bay Bridge' },
+      { time: '~10 min', dest: 'to Mission Valley', via: 'via I-8 East' },
+    ],
+    demographics: [
+      { value: '90,000', label: 'Population' },
+      { value: '34.2', label: 'Median Age' },
+      { value: '$78,500', label: 'Avg Household Income' },
+      { value: '42,000', label: 'Total Households' },
+      { value: '22%', label: 'Ownership Rate' },
+    ],
+    neighborhoods: [
+      { name: 'East Village', priceRange: '$400K – $1.2M', tags: 'Breweries · Petco Park · Hip' },
+      { name: 'Little Italy', priceRange: '$600K – $2.5M', tags: 'Walkable · Dining · European Feel' },
+      { name: 'Gaslamp Quarter', priceRange: '$450K – $1.5M', tags: 'Nightlife · Historic · Entertainment' },
+      { name: 'Marina District', priceRange: '$500K – $2M', tags: 'Bayfront · Views · Luxury High-Rise' },
+      { name: 'Cortez Hill', priceRange: '$400K – $1.1M', tags: 'Views · Quiet · Value' },
+      { name: 'Columbia District', priceRange: '$500K – $1.8M', tags: 'Tech HQ · New Build · Investment' },
+      { name: 'Core District', priceRange: '$350K – $950K', tags: 'Value · Central · Transit' },
+      { name: 'Bankers Hill', priceRange: '$600K – $1.8M', tags: 'Heritage · Balboa Park · Boutique' },
+    ],
+    cityStats: [
+      { value: '97', label: 'Walk Score' },
+      { value: '266', label: 'Sunny Days / Year' },
+      { value: '$700K', label: 'Median Home Price' },
+      { value: '1850', label: 'City of San Diego Founded' },
+      { value: '4+', label: 'Miles of Bay Waterfront' },
+    ],
+    hoa: [
+      { type: 'Studio / 1BR condo', monthly: '$350 – $650' },
+      { type: '2BR condo (mid-rise)', monthly: '$450 – $750' },
+      { type: '3BR / Penthouse', monthly: '$750 – $2,000' },
+      { type: 'Loft conversion', monthly: '$300 – $550' },
+      { type: 'High-rise (new construction)', monthly: '$600 – $1,500' },
+      { type: 'Historic building condo', monthly: '$300 – $550' },
+    ],
+    hoaNote: 'HOA fees vary significantly by building age, amenities, and reserve fund health. Downtown high-rises often include concierge, parking, rooftop decks, and fitness centers — factor those into your cost-of-ownership analysis.',
+    hoaCovers: [
+      'Common area maintenance and landscaping',
+      'Exterior building upkeep and facade repairs',
+      'Building insurance (structure — not interior contents)',
+      'Trash collection and recycling service',
+      'Elevators, lobbies, and shared amenity maintenance',
+      'Community pool, spa, and fitness center',
+      'Rooftop deck and event space maintenance',
+      'Property management and reserve fund contributions',
+    ],
+    hoaAside: 'Downtown HOA documents require careful review — aging buildings sometimes carry deferred maintenance or special assessments. Hedda can walk you through reserve fund adequacy, litigation status, and CC&Rs before you commit to any offer.',
+    parks: [
+      {
+        name: 'Balboa Park',
+        address: '1549 El Prado, San Diego, CA 92101',
+        size: '1,200 Acres',
+        amenities: [
+          'Home to 17 museums, including the San Diego Museum of Art',
+          'San Diego Zoo (entry separate) on the park\'s northern edge',
+          'Shakespeare Garden and Japanese Friendship Garden',
+          'Over 65 miles of trails through canyons and mesas',
+          'Spreckels Organ Pavilion — free Sunday concerts year-round',
+        ],
+      },
+      {
+        name: 'Waterfront Park',
+        address: '1600 Pacific Hwy, San Diego, CA 92101',
+        size: '12 Acres',
+        amenities: [
+          'Sweeping San Diego Bay and downtown skyline views',
+          'Interactive splash pad and fountain plaza',
+          'Large lawn areas for events and recreation',
+          'Walking paths along the harbor waterfront',
+          'Adjacent to the County Administration Center',
+        ],
+      },
+      {
+        name: 'Pantoja Park',
+        address: '1st Ave & Island Ave, San Diego, CA 92101',
+        size: '2 Acres',
+        amenities: [
+          'Historic park at the heart of East Village and Marina',
+          'Dog-friendly green space with shade trees',
+          'Benches and seating areas for neighborhood gatherings',
+          'Walking distance from major restaurants and transit',
+          'One of downtown\'s oldest public parks',
+        ],
+      },
+      {
+        name: 'Chicano Park',
+        address: '1965 National Ave, San Diego, CA 92113',
+        size: '3.6 Acres',
+        amenities: [
+          'National Historic Landmark featuring world-famous murals',
+          'Cultural heritage site celebrating Chicano/Latino history',
+          'Annual Chicano Park Day Festival (April)',
+          'Community gathering space under the Coronado Bridge',
+          'Basketball courts and open recreation areas',
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: 'What is the median home price in Downtown San Diego?',
+        a: 'The median home price in Downtown San Diego is approximately $700,000 as of 2026. Entry-level studios and 1-bedroom condos in the Core District or East Village can start at $350,000–$500,000. Luxury high-rise units in the Marina District or Little Italy range from $1M to $4M+. Contact Hedda Parashos for current market conditions in specific neighborhoods.',
+      },
+      {
+        q: 'Which neighborhoods are within Downtown San Diego?',
+        a: 'Downtown San Diego comprises several distinct sub-markets: East Village (breweries, Petco Park, hip urban character), Little Italy (European dining scene, piazza, walkable), Gaslamp Quarter (historic entertainment district), Marina District (bayfront luxury high-rises), Cortez Hill (quieter, hillside views, more affordable), Columbia District (new office towers, growing residential), Core/Central Business District (value condos, transit access), and Bankers Hill (on the northern edge near Balboa Park — heritage homes and boutique buildings).',
+      },
+      {
+        q: 'Is Downtown San Diego a good place for families?',
+        a: 'Downtown can work for families who prioritize walkability and urban amenities over yard space and suburban schools. The proximity to Balboa Park, the waterfront, the Zoo, and museums is a genuine quality-of-life advantage. School quality varies significantly by building location — some addresses fall in the San Diego High feeder zone, others in Roosevelt International Middle (an excellent school). Verify your address\'s specific school assignments before purchasing.',
+      },
+      {
+        q: 'What ZIP codes cover Downtown San Diego?',
+        a: 'The primary ZIP code for Downtown San Diego is 92101, covering the Gaslamp Quarter, Marina District, East Village, Little Italy, and Cortez Hill. Bankers Hill and parts of the Core District also fall under 92103. When searching, using both ZIPs ensures you capture the full inventory of downtown-adjacent properties.',
+      },
+      {
+        q: 'How walkable is Downtown San Diego?',
+        a: 'Downtown San Diego has a Walk Score of 97 — one of the highest in the entire San Diego metropolitan area. Groceries, restaurants, gyms, parks, and entertainment are all walkable. The San Diego Trolley and the MTS bus network serve downtown from multiple stops, connecting residents to the airport, Mission Valley, SDSU, and the South Bay without a car. For daily errands and commuting within the county\'s urban core, downtown is unmatched.',
+      },
+      {
+        q: 'What are HOA fees like in Downtown San Diego?',
+        a: 'HOA fees in downtown vary widely. Older converted lofts and smaller buildings run $300–$550/month. Standard mid-rise condos (2BR) typically fall in the $450–$750 range. New luxury high-rises with concierge, rooftop decks, and fitness centers can reach $1,500–$2,000/month. Always review the HOA\'s reserve fund health and any pending special assessments — older buildings downtown sometimes carry deferred maintenance costs. Hedda can help you interpret HOA documents before making an offer.',
+      },
+      {
+        q: 'What are the best areas in Downtown for first-time buyers?',
+        a: 'First-time buyers in Downtown San Diego typically find the best value in the Core District (92101 Central), East Village, and Cortez Hill. These sub-neighborhoods have the highest inventory, the most competitive price-per-square-foot, and strong transit access. Cortez Hill offers elevated views and a quieter street life compared to the Gaslamp and East Village. As always in downtown, building age, HOA health, and parking availability are the key due-diligence items — contact Hedda for a building-by-building analysis.',
+      },
+    ],
+    lifestyleBody: [
+      'Life in Downtown San Diego rewards those who thrive on energy, access, and variety. Mornings unfold with a waterfront run along the Embarcadero, afternoons in Little Italy\'s outdoor piazza or browsing the Saturday farmers market, evenings at a Padres game at Petco Park or dinner at one of the neighborhood\'s Michelin-recognized restaurants. The bay is always visible from somewhere — a constant reminder that San Diego\'s world-class natural setting is built right into the city\'s DNA.',
+      'The urban core has also matured as a tech and creative hub. Amazon, Illumina, and dozens of biotech and legal firms have downtown offices, putting residents and employers in the same walkable blocks. The trolley connects downtown to Mission Valley, SDSU, the South Bay, and the border without touching a freeway — a genuine urban advantage that only a handful of San Diego neighborhoods can claim.',
+    ],
+    lifestyleBullets: [
+      'San Diego Padres baseball at Petco Park (April – October)',
+      'Fleet Week and Navy Fleet Review — bay spectacle every fall',
+      'Little Italy ARTWALK (April) — one of SoCal\'s largest outdoor art festivals',
+      'Gaslamp Mardi Gras and New Year\'s Eve fireworks from the bay',
+      'Comic-Con International every July — world\'s largest pop culture event',
+      'San Diego Bay Wine & Food Festival and Embarcadero seasonal events',
+    ],
+    nearbyDescription: 'How Downtown San Diego compares to neighboring areas — each with its own character, price point, and lifestyle.',
+  },
+  {
+    name: 'Mission Hills',
+    slug: 'mission-hills-real-estate',
+    image: 'community-mission-hills.jpg',
+    badge: 'Historic Charm',
+    region: 'metro',
+    heroStats: [
+      { value: '80+', label: 'Active Listings' },
+      { value: '$1.1M', label: 'Median Price' },
+      { value: '3', label: 'Property Types' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    titleFirst: 'Mission',
+    titleRest: 'Hills',
+    subtitle: 'Historic San Diego · California',
+    overview: [
+      'Mission Hills is one of San Diego\'s most treasured historic neighborhoods — a tree-lined enclave of Craftsman bungalows, Spanish Revival homes, and early-20th-century cottages perched on a ridge overlooking Mission Valley.',
+      'The neighborhood\'s compact main street along Fort Stockton and Washington Street offers an eclectic mix of independent restaurants, wine bars, and specialty shops. With Balboa Park minutes away and downtown accessible by Uber or trolley, Mission Hills appeals to buyers who want character, walkability, and authenticity.',
+    ],
+    quickFacts: [
+      { label: 'City Type', value: 'Historic Neighborhood' },
+      { label: 'County', value: 'San Diego County' },
+      { label: 'Population', value: '~12,000' },
+      { label: 'Median Home Price', value: '$1,100,000' },
+      { label: 'Architecture', value: 'Craftsman + Spanish Revival' },
+      { label: 'ZIP Code', value: '92103' },
+    ],
+    highlights: [
+      { title: 'Craftsman Architecture', desc: 'Some of San Diego\'s finest examples of early-20th-century residential architecture line the tree-shaded streets of Mission Hills.' },
+      { title: 'Presidio Park & Heritage Yard', desc: 'The birthplace of California — Presidio Park overlooks Mission Valley and houses the Junipero Serra Museum and the largest ficus hedge in the U.S.' },
+      { title: 'Walkable Main Street', desc: 'Fort Stockton and Washington Street\'s independent businesses create a genuine neighborhood main street that predates the chain-restaurant era.' },
+    ],
+    publicSchools: [
+      { name: 'San Diego High School', grades: '9–12', type: 'SDUSD' },
+      { name: 'Roosevelt International Middle', grades: '6–8', type: 'SDUSD' },
+      { name: 'Cabrillo Elementary', grades: 'K–5', type: 'SDUSD' },
+    ],
+    privateSchools: [
+      { name: 'Francis Parker School', grades: 'JK–12', type: 'Independent Private' },
+    ],
+    schoolDistrict: 'San Diego Unified School District',
+    ylopoSearch: 'https://search.palisaderealty.com/search?s%5Blocations%5D%5B0%5D%5Bcity%5D=Mission+Hills&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA',
+    nearbyCommunities: [
+      { name: 'North Park', slug: 'north-park-real-estate', from: '$700K' },
+      { name: 'Point Loma', slug: 'point-loma-real-estate', from: '$800K' },
+      { name: 'Downtown San Diego', slug: 'downtown-san-diego-real-estate', from: '$450K' },
+    ],
+  },
+  {
+    name: 'North Park',
+    slug: 'north-park-real-estate',
+    image: 'community-north-park.jpg',
+    badge: 'Urban Village',
+    region: 'metro',
+    heroStats: [
+      { value: '100+', label: 'Active Listings' },
+      { value: '$850K', label: 'Median Price' },
+      { value: '3', label: 'Property Types' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    titleFirst: 'North',
+    titleRest: 'Park',
+    subtitle: 'Urban San Diego · California',
+    overview: [
+      'North Park is San Diego\'s hippest urban neighborhood — a walkable grid of Craftsman bungalows, eclectic apartments, and converted storefronts anchored by the craft beer movement that put SD on the culinary map. University Avenue and 30th Street are lined with award-winning breweries, taquerias, vintage shops, and indie coffee roasters.',
+      'With Balboa Park as its backyard and strong bus and trolley access, North Park attracts young professionals, artists, and first-time buyers who want urban vitality at a relatively accessible price point.',
+    ],
+    quickFacts: [
+      { label: 'City Type', value: 'Urban Village' },
+      { label: 'County', value: 'San Diego County' },
+      { label: 'Population', value: '~38,000' },
+      { label: 'Median Home Price', value: '$850,000' },
+      { label: 'Architecture', value: 'Craftsman + Spanish Colonial' },
+      { label: 'ZIP Codes', value: '92104 / 92116' },
+    ],
+    highlights: [
+      { title: 'Craft Beer Capital', desc: 'Stone Brewing, Modern Times, Nickel Beer Co. — North Park\'s brewery row helped make San Diego one of the top craft beer cities in the world.' },
+      { title: 'Balboa Park Access', desc: 'The largest cultural park in the U.S. — 1,200 acres of gardens, 17 museums, the San Diego Zoo, and miles of trails — begins at North Park\'s doorstep.' },
+      { title: 'Restaurant Row', desc: 'University Avenue is home to some of San Diego\'s most celebrated restaurants and an increasingly diverse dining scene.' },
+    ],
+    publicSchools: [
+      { name: 'Hoover High School', grades: '9–12', type: 'SDUSD' },
+      { name: 'Monroe Clark Middle', grades: '6–8', type: 'SDUSD' },
+      { name: 'North Park Elementary', grades: 'K–5', type: 'SDUSD' },
+    ],
+    privateSchools: [
+      { name: 'Francis Parker School', grades: 'JK–12', type: 'Independent Private' },
+    ],
+    schoolDistrict: 'San Diego Unified School District',
+    ylopoSearch: 'https://search.palisaderealty.com/search?s%5Blocations%5D%5B0%5D%5Bcity%5D=North+Park&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA',
+    nearbyCommunities: [
+      { name: 'Mission Hills', slug: 'mission-hills-real-estate', from: '$900K' },
+      { name: 'Downtown San Diego', slug: 'downtown-san-diego-real-estate', from: '$450K' },
+      { name: 'El Cajon', slug: 'el-cajon-real-estate', from: '$450K' },
+    ],
+  },
+  {
+    name: 'Encinitas',
+    slug: 'encinitas-real-estate',
+    image: 'community-encinitas.jpg',
+    badge: 'Surf & Style',
+    region: 'coastal',
+    heroStats: [
+      { value: '120+', label: 'Active Listings' },
+      { value: '$1.6M', label: 'Median Price' },
+      { value: '4', label: 'Property Types' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    titleFirst: 'Enci',
+    titleRest: 'nitas',
+    subtitle: 'North County Coastal · California',
+    overview: [
+      'Encinitas is North County\'s surf-culture capital — a beach city of 65,000 with world-class surf breaks, a walkable village, and a wellness scene centered around yoga, farm-to-table dining, and flower farming.',
+      'From the bohemian streets of Old Encinitas to the master-planned Encinitas Ranch and the hillside luxury of Olivenhain, the city offers diverse housing options for buyers at every stage of life. The Self-Realization Fellowship\'s gold lotus towers are a beloved local landmark.',
+    ],
+    quickFacts: [
+      { label: 'City Type', value: 'Beach City' },
+      { label: 'County', value: 'San Diego County' },
+      { label: 'Population', value: '~65,000' },
+      { label: 'Median Home Price', value: '$1,600,000' },
+      { label: 'Architecture', value: 'Beach Cottage + Modern + Ranch' },
+      { label: 'ZIP Codes', value: '92024 / 92023' },
+    ],
+    highlights: [
+      { title: 'Moonlight Beach', desc: 'Encinitas\'s main beach is one of North County\'s most family-friendly — wide sand, fire rings, volleyball courts, and consistent surf year-round.' },
+      { title: 'San Elijo Lagoon', desc: '1,000-acre coastal estuary with 7 miles of hiking trails — one of San Diego\'s most important bird habitats and a beloved natural escape.' },
+      { title: 'Old Town Encinitas', desc: 'Coast Highway 101 through Old Encinitas is lined with surf shops, yoga studios, farm-to-table restaurants, and the legendary La Paloma Theatre.' },
+    ],
+    publicSchools: [
+      { name: 'San Dieguito High School Academy', grades: '9–12', type: 'SDUHSD / Charter' },
+      { name: 'Diegueno Middle School', grades: '7–8', type: 'EUSD' },
+      { name: 'Ocean Knoll Elementary', grades: 'K–6', type: 'EUSD' },
+    ],
+    privateSchools: [
+      { name: 'Pacific Ridge School', grades: '6–12', type: 'Independent Private' },
+    ],
+    schoolDistrict: 'Encinitas Union / San Dieguito Union HS',
+    ylopoSearch: 'https://search.palisaderealty.com/search?s%5Blocations%5D%5B0%5D%5Bcity%5D=Encinitas&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA',
+    nearbyCommunities: [
+      { name: 'Solana Beach', slug: 'solana-beach-real-estate', from: '$1.2M' },
+      { name: 'Carlsbad', slug: 'carlsbad-real-estate', from: '$1.1M' },
+      { name: 'Del Mar', slug: 'del-mar-real-estate', from: '$1.4M' },
+    ],
+  },
+  {
+    name: 'Carlsbad',
+    slug: 'carlsbad-real-estate',
+    image: 'community-carlsbad.jpg',
+    badge: 'North Coast',
+    region: 'coastal',
+    heroStats: [
+      { value: '200+', label: 'Active Listings' },
+      { value: '$1.3M', label: 'Median Price' },
+      { value: '4', label: 'Property Types' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    titleFirst: 'Carls',
+    titleRest: 'bad',
+    subtitle: 'North County Coastal · California',
+    overview: [
+      'Carlsbad is one of San Diego County\'s most family-friendly coastal cities — a planned community with miles of beaches, world-class resorts, the Flower Fields, and LEGOLAND California. The city\'s three distinct village neighborhoods (Carlsbad Village, Aviara, and La Costa) offer a variety of lifestyles at different price points.',
+      'Strong schools, low crime, a thriving biotech/tech presence, and direct freeway and Coaster train access to San Diego make Carlsbad one of North County\'s most attractive long-term investments.',
+    ],
+    quickFacts: [
+      { label: 'City Type', value: 'Coastal City' },
+      { label: 'County', value: 'San Diego County' },
+      { label: 'Population', value: '~115,000' },
+      { label: 'Median Home Price', value: '$1,300,000' },
+      { label: 'Architecture', value: 'Spanish Colonial + Contemporary' },
+      { label: 'ZIP Codes', value: '92008 / 92009 / 92010 / 92011' },
+    ],
+    highlights: [
+      { title: 'Carlsbad Village', desc: 'A charming village center with boutique shops, craft breweries, and a walkable main street steps from Carlsbad State Beach.' },
+      { title: 'Flower Fields', desc: '50 acres of giant ranunculus blooms visible from I-5 — one of Southern California\'s most beloved seasonal spectacles each spring.' },
+      { title: 'LEGOLAND & Resort Row', desc: 'LEGOLAND California, Park Hyatt Aviara, and La Costa Resort make Carlsbad a premier destination for families and corporate meetings alike.' },
+    ],
+    publicSchools: [
+      { name: 'Carlsbad High School', grades: '9–12', type: 'CUSD' },
+      { name: 'Calavera Hills Middle', grades: '6–8', type: 'CUSD' },
+      { name: 'Aviara Oaks Elementary', grades: 'K–5', type: 'CUSD' },
+    ],
+    privateSchools: [
+      { name: 'Army and Navy Academy', grades: '7–12', type: 'Private Military' },
+    ],
+    schoolDistrict: 'Carlsbad Unified School District',
+    ylopoSearch: 'https://search.palisaderealty.com/search?s%5Blocations%5D%5B0%5D%5Bcity%5D=Carlsbad&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA',
+    nearbyCommunities: [
+      { name: 'Encinitas', slug: 'encinitas-real-estate', from: '$1.2M' },
+      { name: 'Oceanside', slug: 'oceanside-real-estate', from: '$700K' },
+      { name: 'Solana Beach', slug: 'solana-beach-real-estate', from: '$1.2M' },
+    ],
+  },
+  {
+    name: 'Oceanside',
+    slug: 'oceanside-real-estate',
+    image: 'community-oceanside.jpg',
+    badge: 'Emerging Coastal',
+    region: 'coastal',
+    heroStats: [
+      { value: '200+', label: 'Active Listings' },
+      { value: '$800K', label: 'Median Price' },
+      { value: '4', label: 'Property Types' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    titleFirst: 'Ocean',
+    titleRest: 'side',
+    subtitle: 'North County Coastal · California',
+    overview: [
+      'Oceanside is one of San Diego County\'s fastest-rising real estate markets — a city of 175,000 with the longest stretch of beaches north of La Jolla, a revitalized downtown, and an emerging food and arts scene that has attracted young buyers priced out of Encinitas and Carlsbad.',
+      'Camp Pendleton\'s presence ensures stable demand, and the Coaster train\'s Oceanside station puts downtown San Diego within an hour\'s commute. With prices still 30-40% below Carlsbad, Oceanside offers the best value per square foot of any coastal San Diego city.',
+    ],
+    quickFacts: [
+      { label: 'City Type', value: 'Coastal City' },
+      { label: 'County', value: 'San Diego County' },
+      { label: 'Population', value: '~175,000' },
+      { label: 'Median Home Price', value: '$800,000' },
+      { label: 'Architecture', value: 'Beach Bungalow + Contemporary' },
+      { label: 'ZIP Codes', value: '92054 / 92056 / 92057 / 92058' },
+    ],
+    highlights: [
+      { title: 'California Surf Museum', desc: 'The world\'s only dedicated surfing museum celebrates the global history of wave riding in the heart of Oceanside\'s revitalized downtown.' },
+      { title: 'Harbor District', desc: 'One of Southern California\'s most active small-craft harbors — restaurants, sport fishing, and boat rentals surround the protected marina.' },
+      { title: 'Pier & Strand', desc: 'Oceanside\'s historic 1,942-foot wooden pier is one of the longest in California, anchoring a wide stretch of beach with strong surf breaks.' },
+    ],
+    publicSchools: [
+      { name: 'Oceanside High School', grades: '9–12', type: 'OUSD' },
+      { name: 'Jefferson Middle School', grades: '6–8', type: 'OUSD' },
+      { name: 'Laurel Elementary', grades: 'K–5', type: 'OUSD' },
+    ],
+    privateSchools: [
+      { name: 'St. Thomas More Academy', grades: 'K–8', type: 'Catholic Private' },
+    ],
+    schoolDistrict: 'Oceanside Unified School District',
+    ylopoSearch: 'https://search.palisaderealty.com/search?s%5Blocations%5D%5B0%5D%5Bcity%5D=Oceanside&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA',
+    nearbyCommunities: [
+      { name: 'Carlsbad', slug: 'carlsbad-real-estate', from: '$1.1M' },
+      { name: 'Solana Beach', slug: 'solana-beach-real-estate', from: '$1.2M' },
+      { name: 'Encinitas', slug: 'encinitas-real-estate', from: '$1.2M' },
+    ],
+  },
+  {
+    name: 'Solana Beach',
+    slug: 'solana-beach-real-estate',
+    image: 'community-solana-beach.jpg',
+    badge: 'Coastal Village',
+    region: 'north-county',
+    heroStats: [
+      { value: '50+', label: 'Active Listings' },
+      { value: '$1.8M', label: 'Median Price' },
+      { value: '3', label: 'Property Types' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    titleFirst: 'Solana',
+    titleRest: 'Beach',
+    subtitle: 'North County Coastal · California',
+    overview: [
+      'Solana Beach is a small, artsy coastal village of 14,000 where the Cedros Design District — a four-block stretch of galleries, furniture studios, and specialty shops — has earned national recognition. Beaches, bluffs, and trails round out an outdoor lifestyle that keeps residents firmly rooted.',
+      'With easy Coaster train access, excellent schools, and a community that balances creativity with civic pride, Solana Beach commands a premium among North County coastal buyers who know what they\'re looking for.',
+    ],
+    quickFacts: [
+      { label: 'City Type', value: 'Coastal Village' },
+      { label: 'County', value: 'San Diego County' },
+      { label: 'Population', value: '~14,000' },
+      { label: 'Median Home Price', value: '$1,800,000' },
+      { label: 'Architecture', value: 'Beach Cottage + Contemporary' },
+      { label: 'ZIP Code', value: '92075' },
+    ],
+    highlights: [
+      { title: 'Cedros Design District', desc: 'One of Southern California\'s most creative shopping destinations — galleries, furniture studios, yoga, and specialty restaurants in a 4-block strip.' },
+      { title: 'Fletcher Cove Park', desc: 'A rare beach-level access point on North County\'s generally bluff-lined coast — perfect for swimming, surfing, and spectacular sunsets.' },
+      { title: 'San Elijo Lagoon', desc: 'Borders Solana Beach to the south — 1,000 acres of protected wetlands with 7 miles of birding and hiking trails.' },
+    ],
+    publicSchools: [
+      { name: 'Torrey Pines High School', grades: '9–12', type: 'SDUHSD' },
+      { name: 'Earl Warren Middle School', grades: '7–8', type: 'EUSD' },
+      { name: 'Solana Vista Elementary', grades: 'K–6', type: 'SVSD' },
+    ],
+    privateSchools: [
+      { name: 'Pacific Ridge School', grades: '6–12', type: 'Independent Private' },
+    ],
+    schoolDistrict: 'Solana Beach School District',
+    ylopoSearch: 'https://search.palisaderealty.com/search?s%5Blocations%5D%5B0%5D%5Bcity%5D=Solana+Beach&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA',
+    nearbyCommunities: [
+      { name: 'Del Mar', slug: 'del-mar-real-estate', from: '$1.4M' },
+      { name: 'Encinitas', slug: 'encinitas-real-estate', from: '$1.2M' },
+      { name: 'Carmel Valley', slug: 'carmel-valley-real-estate', from: '$1M' },
+    ],
+  },
+  {
+    name: 'Pacific Beach',
+    slug: 'pacific-beach-real-estate',
+    image: 'community-pacific-beach.jpg',
+    badge: 'Coastal Energy',
+    region: 'coastal',
+    heroStats: [
+      { value: '150+', label: 'Active Listings' },
+      { value: '$1.1M', label: 'Median Price' },
+      { value: '3', label: 'Property Types' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    titleFirst: 'Pacific',
+    titleRest: 'Beach',
+    subtitle: 'San Diego Coastal · California',
+    overview: [
+      'Pacific Beach — "PB" to locals — is San Diego\'s high-energy beach neighborhood, where a two-mile boardwalk, Crystal Pier, and consistent surf attract a young, active population year-round. Garnet Avenue is the social spine of the neighborhood, lined with bars, restaurants, and shops that come alive after sunset.',
+      'With strong short-term rental demand, walkable beach access, and prices below Mission Beach, PB is a consistent favorite among both owner-occupants and investors seeking reliable rental income.',
+    ],
+    quickFacts: [
+      { label: 'City Type', value: 'Beach Neighborhood' },
+      { label: 'County', value: 'San Diego County' },
+      { label: 'Population', value: '~48,000' },
+      { label: 'Median Home Price', value: '$1,100,000' },
+      { label: 'Architecture', value: 'Bungalow + Condo + Beach Modern' },
+      { label: 'ZIP Code', value: '92109' },
+    ],
+    highlights: [
+      { title: 'Crystal Pier', desc: 'PB\'s beloved historic pier has 29 ocean-facing cottages guests can rent directly over the Pacific — one of the most unique accommodations in California.' },
+      { title: 'Mission Bay Park', desc: '4,200 acres of aquatic park on the bay side of PB — kayaking, paddleboarding, picnicking, and the largest aquatic park on the West Coast.' },
+      { title: 'Garnet Avenue', desc: 'PB\'s lively social hub — restaurants, coffee shops, and nightlife anchor one of San Diego\'s most consistently active street scenes.' },
+    ],
+    publicSchools: [
+      { name: 'Mission Bay High School', grades: '9–12', type: 'SDUSD' },
+      { name: 'Pacific Beach Middle', grades: '6–8', type: 'SDUSD' },
+      { name: 'Pacific Beach Elementary', grades: 'K–5', type: 'SDUSD' },
+    ],
+    privateSchools: [
+      { name: 'Our Lady of the Sacred Heart', grades: 'K–8', type: 'Catholic Private' },
+    ],
+    schoolDistrict: 'San Diego Unified School District',
+    ylopoSearch: 'https://search.palisaderealty.com/search?s%5Blocations%5D%5B0%5D%5Bcity%5D=Pacific+Beach&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA',
+    nearbyCommunities: [
+      { name: 'Mission Beach', slug: 'mission-beach-real-estate', from: '$900K' },
+      { name: 'La Jolla', slug: 'la-jolla-real-estate', from: '$1.2M' },
+      { name: 'North Park', slug: 'north-park-real-estate', from: '$700K' },
+    ],
+  },
+  {
+    name: 'Mission Beach',
+    slug: 'mission-beach-real-estate',
+    image: 'community-mission-beach.jpg',
+    badge: 'Oceanfront Peninsula',
+    region: 'coastal',
+    heroStats: [
+      { value: '80+', label: 'Active Listings' },
+      { value: '$1.4M', label: 'Median Price' },
+      { value: '2', label: 'Property Types' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    titleFirst: 'Mission',
+    titleRest: 'Beach',
+    subtitle: 'San Diego Coastal · California',
+    overview: [
+      'Mission Beach is a narrow ocean peninsula — barely two blocks wide in places — where vacation homes, surf cottages, and oceanfront rentals line a continuous two-mile boardwalk between the Pacific and Mission Bay.',
+      'Belmont Park\'s historic Giant Dipper roller coaster and the broad beach draw millions of visitors annually. For real estate buyers, Mission Beach offers true oceanfront access and strong short-term rental income potential at prices lower than La Jolla or Coronado.',
+    ],
+    quickFacts: [
+      { label: 'City Type', value: 'Beach Peninsula' },
+      { label: 'County', value: 'San Diego County' },
+      { label: 'Population', value: '~7,500' },
+      { label: 'Median Home Price', value: '$1,400,000' },
+      { label: 'Architecture', value: 'Beach Cottage + Modern Townhome' },
+      { label: 'ZIP Code', value: '92109' },
+    ],
+    highlights: [
+      { title: 'The Boardwalk', desc: 'San Diego\'s most famous boardwalk — a continuous two-mile promenade connecting Mission Beach to Pacific Beach, packed with skaters, cyclists, and beachgoers.' },
+      { title: 'Belmont Park', desc: 'A vintage 1925 amusement park anchored by the landmark Giant Dipper roller coaster — the last operating ride on San Diego\'s beachfront.' },
+      { title: 'Dual Waterfront', desc: 'The only neighborhood in San Diego with the Pacific Ocean on one side and the calm waters of Mission Bay on the other — water access from every direction.' },
+    ],
+    publicSchools: [
+      { name: 'Mission Bay High School', grades: '9–12', type: 'SDUSD' },
+      { name: 'Pacific Beach Middle', grades: '6–8', type: 'SDUSD' },
+      { name: 'Pacific Beach Elementary', grades: 'K–5', type: 'SDUSD' },
+    ],
+    privateSchools: [],
+    schoolDistrict: 'San Diego Unified School District',
+    ylopoSearch: 'https://search.palisaderealty.com/search?s%5Blocations%5D%5B0%5D%5Bcity%5D=Mission+Beach&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA',
+    nearbyCommunities: [
+      { name: 'Pacific Beach', slug: 'pacific-beach-real-estate', from: '$900K' },
+      { name: 'Ocean Beach', slug: 'pacific-mission-beach-real-estate', from: '$1M' },
+      { name: 'Point Loma', slug: 'point-loma-real-estate', from: '$800K' },
+    ],
+  },
+  {
+    name: 'Pacific & Mission Beach',
+    slug: 'pacific-mission-beach-real-estate',
+    image: 'community-pacific-mission-beach.jpg',
+    badge: 'Beach Life',
+    region: 'coastal',
+    heroStats: [
+      { value: '200+', label: 'Active Listings' },
+      { value: '$1.2M', label: 'Median Price' },
+      { value: '3', label: 'Property Types' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    titleFirst: 'Pacific &',
+    titleRest: 'Mission Beach',
+    subtitle: 'San Diego Beach Strip · California',
+    overview: [
+      'Together, Pacific Beach and Mission Beach form San Diego\'s iconic beach strip — a continuous stretch of boardwalk, surf breaks, and beachfront neighborhoods connecting Mission Bay to La Jolla. Each community has its own character, but both deliver direct beach access and strong rental demand.',
+      'This corridor consistently ranks among San Diego\'s best investment communities for short-term rentals, with PB\'s energy and MB\'s compact peninsula charm attracting buyers and renters alike year-round.',
+    ],
+    quickFacts: [
+      { label: 'City Type', value: 'Beach Neighborhoods' },
+      { label: 'County', value: 'San Diego County' },
+      { label: 'Population', value: '~55,000' },
+      { label: 'Median Home Price', value: '$1,200,000' },
+      { label: 'Architecture', value: 'Beach Bungalow + Condo + Townhome' },
+      { label: 'ZIP Code', value: '92109' },
+    ],
+    highlights: [
+      { title: 'Crystal Pier & Boardwalk', desc: 'PB\'s historic pier and a continuous two-mile boardwalk to MB are the social spine of this beach corridor — always alive with cyclists, surfers, and beachgoers.' },
+      { title: 'Mission Bay Park', desc: '4,200 acres of aquatic playground for paddleboarding, kayaking, sailing, and waterfront picnics just one block from the beach.' },
+      { title: 'Belmont Park', desc: 'The vintage 1925 amusement park on Mission Beach\'s boardwalk anchors a fun, family-friendly stretch of the peninsula.' },
+    ],
+    publicSchools: [
+      { name: 'Mission Bay High School', grades: '9–12', type: 'SDUSD' },
+      { name: 'Pacific Beach Middle', grades: '6–8', type: 'SDUSD' },
+      { name: 'Pacific Beach Elementary', grades: 'K–5', type: 'SDUSD' },
+    ],
+    privateSchools: [],
+    schoolDistrict: 'San Diego Unified School District',
+    ylopoSearch: 'https://search.palisaderealty.com/search?s%5Blocations%5D%5B0%5D%5Bcity%5D=Pacific+Beach&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA',
+    nearbyCommunities: [
+      { name: 'La Jolla', slug: 'la-jolla-real-estate', from: '$1.2M' },
+      { name: 'Mission Hills', slug: 'mission-hills-real-estate', from: '$900K' },
+      { name: 'Point Loma', slug: 'point-loma-real-estate', from: '$800K' },
+    ],
+  },
+  {
+    name: 'Mission Valley',
+    slug: 'mission-valley-real-estate',
+    image: 'community-mission-valley.jpg',
+    badge: 'Central Hub',
+    region: 'metro',
+    heroStats: [
+      { value: '100+', label: 'Active Listings' },
+      { value: '$650K', label: 'Median Price' },
+      { value: '3', label: 'Property Types' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    titleFirst: 'Mission',
+    titleRest: 'Valley',
+    subtitle: 'Central San Diego · California',
+    overview: [
+      'Mission Valley is San Diego\'s commercial and transit hub — a wide river valley running east-west through the heart of the city, lined with retail centers, restaurants, hotels, and condominiums with convenient freeway and trolley access in all directions.',
+      'Mission Valley offers some of San Diego\'s best value for buyers who prioritize commute convenience over beach proximity. Major employment centers, SDSU, and Fashion Valley mall all reside in or adjacent to this central corridor.',
+    ],
+    quickFacts: [
+      { label: 'City Type', value: 'Urban Corridor' },
+      { label: 'County', value: 'San Diego County' },
+      { label: 'Population', value: '~40,000' },
+      { label: 'Median Home Price', value: '$650,000' },
+      { label: 'Architecture', value: 'Condo + Townhome + Apartment' },
+      { label: 'ZIP Codes', value: '92108 / 92120 / 92123' },
+    ],
+    highlights: [
+      { title: 'Transit-Oriented', desc: 'Multiple trolley stations connect Mission Valley to Downtown, the border, and SDSU — one of the most accessible transit corridors in San Diego.' },
+      { title: 'Fashion Valley Mall', desc: 'The highest-end shopping center in San Diego features Neiman Marcus, Nordstrom, and dozens of luxury retailers in an outdoor mall.' },
+      { title: 'Snapdragon Stadium', desc: 'Home of SDSU Aztecs football and major concerts, the new stadium anchors Mission Valley\'s continued development and revitalization.' },
+    ],
+    publicSchools: [
+      { name: 'Patrick Henry High School', grades: '9–12', type: 'SDUSD' },
+      { name: 'Lewis Middle School', grades: '6–8', type: 'SDUSD' },
+      { name: 'Gage Elementary', grades: 'K–5', type: 'SDUSD' },
+    ],
+    privateSchools: [],
+    schoolDistrict: 'San Diego Unified School District',
+    ylopoSearch: 'https://search.palisaderealty.com/search?s%5Blocations%5D%5B0%5D%5Bcity%5D=Mission+Valley&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA',
+    nearbyCommunities: [
+      { name: 'Downtown San Diego', slug: 'downtown-san-diego-real-estate', from: '$450K', whyConsider: 'The urban core 10 minutes west — high-rise condos, bayfront living, a Walk Score of 97, and a world-class restaurant and arts scene without the freeway commute.' },
+      { name: 'Mission Hills', slug: 'mission-hills-real-estate', from: '$900K', whyConsider: 'Elevated above Mission Valley\'s north rim — historic Craftsman bungalows, a beloved village core, and tree-lined streets with strong architectural character and neighborhood pride.' },
+      { name: 'Point Loma', slug: 'point-loma-real-estate', from: '$750K', whyConsider: 'A 15-minute drive west delivers harbor views, Sunset Cliffs, Liberty Station, and a coastal peninsula lifestyle with natural beauty that Mission Valley\'s urban floor cannot match.' },
+      { name: 'Pacific & Mission Beach', slug: 'pacific-mission-beach-real-estate', from: '$700K', whyConsider: 'Trade the freeway hub for the boardwalk — Mission Bay and the Pacific Ocean are just 20 minutes west via I-8, offering quintessential San Diego beach-town living at a comparable price.' },
+      { name: 'Coronado', slug: 'coronado-real-estate', from: '$1.4M', whyConsider: 'Island resort living across San Diego Bay — the Hotel del Coronado, a world-famous beach, and a small-town feel just 15 minutes via I-8 and the Coronado Bridge.' },
+      { name: 'La Jolla', slug: 'la-jolla-real-estate', from: '$1.2M', whyConsider: 'San Diego\'s ultimate luxury coastal address — cliff-top estates, world-class dining, UCSD proximity, and dramatic ocean views 20 minutes north on I-5.' },
+    ],
+    locationDescription: 'Mission Valley occupies the flat river basin at San Diego\'s geographic heart — bisected east to west by the San Diego River and laced with four major freeways (I-8, I-15, I-805, and SR-163), it is the most accessible address in the county. Fashion Valley Mall, Snapdragon Stadium, and Mission San Diego de Alcalá anchor a neighborhood that is equal parts practical and historic.',
+    driveCards: [
+      { time: '~10 min', dest: 'to Downtown SD', via: 'via I-8 West' },
+      { time: '~5 min', dest: 'to SAN Airport', via: 'via I-8/I-5' },
+      { time: '~20 min', dest: 'to La Jolla', via: 'via I-5 North' },
+      { time: '~15 min', dest: 'to Point Loma', via: 'via I-8 West' },
+    ],
+    demographics: [
+      { value: '65,000', label: 'Population' },
+      { value: '35.8', label: 'Median Age' },
+      { value: '$82,400', label: 'Avg Household Income' },
+      { value: '27,800', label: 'Total Households' },
+      { value: '38%', label: 'Ownership Rate' },
+    ],
+    neighborhoods: [
+      { name: 'Mission Valley East', priceRange: '$500K – $1.2M', tags: 'Freeway Adjacent · Value · Accessible' },
+      { name: 'Mission Valley West', priceRange: '$550K – $1.4M', tags: 'Fashion Valley · Walkable · Retail' },
+      { name: 'Hotel Circle', priceRange: '$400K – $900K', tags: 'Golf Adjacent · Value · Convenient' },
+      { name: 'Friars Road Corridor', priceRange: '$500K – $1.1M', tags: 'River Views · Mid-Century · Practical' },
+      { name: 'Mission Gorge', priceRange: '$600K – $1.3M', tags: 'Single-Family · Hillside · Quiet' },
+      { name: 'Camino Del Rio', priceRange: '$450K – $950K', tags: 'Condo · Commercial · Commuter' },
+      { name: 'Qualcomm Way', priceRange: '$550K – $1.2M', tags: 'Modern · Tech Adjacent · New Build' },
+      { name: 'Sports Arena Adjacent', priceRange: '$500K – $1.1M', tags: 'Urban · Investment · Central' },
+    ],
+    cityStats: [
+      { value: '55', label: 'Walk Score' },
+      { value: '266', label: 'Sunny Days / Year' },
+      { value: '$650K', label: 'Median Home Price' },
+      { value: '1769', label: 'Mission San Diego Est.' },
+      { value: '4', label: 'Major Freeways' },
+    ],
+    hoa: [
+      { type: 'Single-family home (Mission Gorge area)', monthly: '$0 – $100' },
+      { type: 'Standard condo complex', monthly: '$250 – $500' },
+      { type: 'Townhome community', monthly: '$200 – $450' },
+      { type: 'Hotel Circle / Camino Del Rio condo', monthly: '$200 – $400' },
+      { type: 'Luxury high-rise or resort-style condo', monthly: '$450 – $850' },
+      { type: 'New construction (Riverwalk area)', monthly: '$350 – $650' },
+    ],
+    hoaNote: 'HOA fees vary significantly by development age, amenities, and reserve fund health. Always verify current fees, special assessments, and CC&Rs with your agent before making an offer.',
+    hoaCovers: [
+      'Common area landscaping and maintenance',
+      'Exterior building upkeep and repairs',
+      'Community pool, spa, and fitness center',
+      'Building insurance (structure — not interior)',
+      'Trash collection and recycling',
+      'Gated entry systems and security lighting',
+      'Reserve fund for major capital repairs',
+      'Property management and administration',
+    ],
+    hoaAside: 'Mission Valley is predominantly a condo and townhome market, so HOA due diligence is especially important. Hedda can walk you through HOA documents, reserve fund status, and any pending litigation — helping you understand exactly what you\'re buying into before you commit.',
+    parks: [
+      {
+        name: 'Mission Trails Regional Park',
+        address: 'One Father Junipero Serra Trail, San Diego, CA 92119',
+        size: '~8,000 Acres',
+        amenities: [
+          'One of the largest urban parks in the United States',
+          'Over 60 miles of hiking and biking trails',
+          'Visitor center with exhibits on regional ecology and history',
+          'Cowles Mountain — highest point in the City of San Diego',
+          'Lake Murray reservoir and fishing access',
+          'Equestrian trails and wildlife viewing areas',
+        ],
+      },
+      {
+        name: 'San Diego River Trail',
+        address: 'San Diego River Corridor, Mission Valley, CA 92108',
+        size: '~17 Miles',
+        amenities: [
+          'Multi-use paved trail running east to west through the valley',
+          'Connects Mission Gorge to Ocean Beach via Mission Bay',
+          'Riparian habitat supporting over 200 bird species',
+          'Dog-friendly with off-leash areas at select segments',
+          'Scenic river-level views of the valley walls and hillsides',
+        ],
+      },
+      {
+        name: 'Mission Valley Community Park',
+        address: '2980 Murphy Canyon Rd, San Diego, CA 92123',
+        size: '~8 Acres',
+        amenities: [
+          'Lighted athletic fields for soccer, softball, and baseball',
+          'Playground equipment and picnic areas',
+          'Walking and jogging paths around the perimeter',
+          'Community recreation center with fitness classes',
+          'Convenient access from Murphy Canyon and I-15',
+        ],
+      },
+      {
+        name: 'Snapdragon Stadium Green & Plaza',
+        address: '2101 Snapdragon Stadium Way, San Diego, CA 92108',
+        size: '~15 Acres',
+        amenities: [
+          'Public plaza and outdoor gathering spaces around the stadium',
+          'Food, beverage, and entertainment on match and game days',
+          'San Diego FC (MLS) and SDSU Aztecs football home',
+          'Green space and walking paths along the eastern river bend',
+          'Future Mission Village park expansion underway',
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: 'What is the median home price in Mission Valley?',
+        a: 'The median home price in Mission Valley is approximately $650,000 as of 2026. Entry-level condos in the Hotel Circle and Camino Del Rio areas can start as low as $400,000–$500,000, making Mission Valley one of the more accessible owner-occupant markets in central San Diego. Single-family homes in Mission Gorge and along the hillside pockets run $600,000–$1.3M. New construction along Riverwalk and Qualcomm Way commands a premium in the $700,000–$1.4M range. Contact Hedda Parashos for current market conditions.',
+      },
+      {
+        q: 'What are the different neighborhoods within Mission Valley?',
+        a: 'Mission Valley comprises several distinct sub-markets: Mission Valley West (Fashion Valley walkability, newer condos), Mission Valley East (value condos, Snapdragon Stadium proximity), Hotel Circle (older condo stock, golf adjacent, most affordable), Friars Road Corridor (river views, mid-century character), Mission Gorge (single-family homes, hillside setting, quieter), Camino Del Rio (commercial strip with dense condo development), Qualcomm Way (newer builds, tech employer proximity), and the Sports Arena / Midway District adjacent area (urban, investment-oriented).',
+      },
+      {
+        q: 'Is Mission Valley a good place for families?',
+        a: 'Mission Valley can work well for families, though it has a more urban character than traditional San Diego suburban neighborhoods. The Mission Gorge and Friars Road sub-markets offer more single-family homes, lower traffic density, and direct access to Mission Trails Regional Park. Families who value central location, easy school commutes, and quick access to SDSU, Snapdragon Stadium events, and Fashion Valley shopping will find Mission Valley genuinely appealing. Verify school district boundaries for your specific address.',
+      },
+      {
+        q: 'What ZIP code covers Mission Valley?',
+        a: 'The primary ZIP code for Mission Valley is 92108, which covers the valley floor from Hotel Circle in the west to Snapdragon Stadium in the east. Some adjacent areas along the valley\'s rim — including portions of Mission Gorge — also fall under 92120 (Del Cerro) or 92116 (Kensington/Normal Heights). Including all three ZIPs in your search ensures you capture the full range of Mission Valley-adjacent inventory.',
+      },
+      {
+        q: 'What is the Riverwalk redevelopment and how does it affect property values?',
+        a: 'The Riverwalk San Diego project is the redevelopment of the former Riverwalk Golf Club into a mixed-use urban village along the San Diego River. The full buildout envisions approximately 4,300 residential units, 152,000 square feet of retail, office space, parks, and a new Green Line trolley station — all within the western valley. Phase 1 construction is underway as of 2026. For buyers in Mission Valley West, this project represents significant long-term upside.',
+      },
+      {
+        q: 'How far is Mission Valley from downtown San Diego?',
+        a: 'Mission Valley is approximately 5–7 miles from downtown San Diego — a 10-minute drive via I-8 West in normal traffic. The San Diego Trolley\'s Green Line also connects Mission Valley to downtown with multiple stops along the valley corridor. SAN Airport is just 5 minutes away via the I-8/I-5 interchange, making Mission Valley one of the most airport-accessible neighborhoods in the entire county.',
+      },
+      {
+        q: 'Are there single-family homes available in Mission Valley?',
+        a: 'Yes, though Mission Valley is predominantly a condo and townhome market. Single-family homes are concentrated in Mission Gorge, along Friars Road\'s northern hillside, and in the quieter pockets north of I-8 near Camino Del Rio North. These SFR properties are generally well-maintained, benefit from larger lots, and carry lower HOA costs than comparable condo units. Inventory is limited and competition among buyers is strong.',
+      },
+      {
+        q: 'What are HOA fees like in Mission Valley?',
+        a: 'HOA fees in Mission Valley vary widely. Older condo complexes in Hotel Circle and Camino Del Rio typically run $200–$400/month. Standard condo developments across the valley floor range from $250–$500/month. Luxury or resort-style complexes with pools, fitness centers, and gated access can reach $850/month or more. New construction along the Riverwalk corridor falls in the $350–$650/month range. Single-family homes in Mission Gorge often have no HOA or a minimal ($0–$100) neighborhood association fee.',
+      },
+    ],
+    lifestyleBody: [
+      'Life in Mission Valley rewards those who prize convenience. Mornings start with a jog along the San Diego River Trail, afternoons unfold at Fashion Valley or over a round at Riverwalk Golf Club, and evenings find you at a stadium match or a rooftop table watching planes drift over the downtown skyline. The valley\'s flat geography and exceptional freeway access make it one of the easiest places in the county to actually live without a long commute dragging at your quality of life.',
+      'The community is young, diverse, and rapidly evolving. SDSU\'s campus just minutes away brings intellectual energy, live music, and a revolving roster of restaurants and coffee shops. The trolley connects residents to Petco Park, the Gaslamp Quarter, and the Convention Center without touching a freeway — a genuine urban bonus most San Diego neighborhoods cannot offer.',
+    ],
+    lifestyleBullets: [
+      'San Diego FC (MLS) home matches at Snapdragon Stadium',
+      'SDSU Aztecs football — Snapdragon sellouts each fall',
+      'Holiday Bowl (December) — national televised college football',
+      'Mission San Diego Annual Fiesta (July) — historic celebration',
+      'San Diego River cleanup days and naturalist-led trail walks',
+      'Fashion Valley seasonal events and outdoor dining series',
+    ],
+    nearbyDescription: 'How Mission Valley compares to neighboring areas — each with its own character, price point, and lifestyle.',
+  },
+  {
+    name: 'Chula Vista',
+    slug: 'chula-vista-real-estate',
+    image: 'community-chula-vista.jpg',
+    badge: 'South Bay',
+    region: 'metro',
+    heroStats: [
+      { value: '200+', label: 'Active Listings' },
+      { value: '$700K', label: 'Median Price' },
+      { value: '4', label: 'Property Types' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    titleFirst: 'Chula',
+    titleRest: 'Vista',
+    subtitle: 'South Bay · California',
+    overview: [
+      'Chula Vista is San Diego County\'s second-largest city — a rapidly growing South Bay community with new master-planned neighborhoods, bayfront development, and some of the best value in the San Diego metropolitan area.',
+      'The Otay Ranch master-planned community and the new Chula Vista Bayfront development are transforming the city into one of Southern California\'s most anticipated real estate destinations. Excellent schools and strong infrastructure make Chula Vista a top choice for families.',
+    ],
+    quickFacts: [
+      { label: 'City Type', value: 'South Bay City' },
+      { label: 'County', value: 'San Diego County' },
+      { label: 'Population', value: '~285,000' },
+      { label: 'Median Home Price', value: '$700,000' },
+      { label: 'Architecture', value: 'New Construction + Traditional' },
+      { label: 'ZIP Codes', value: '91910 / 91911 / 91913 / 91914 / 91915' },
+    ],
+    highlights: [
+      { title: 'Otay Ranch', desc: 'One of California\'s largest master-planned communities — award-winning schools, parks, and retail in a planned neighborhood setting.' },
+      { title: 'Chula Vista Bayfront', desc: 'A transformational multi-billion-dollar waterfront development bringing resort hotels, parks, and a new arena to San Diego Bay\'s South Bay shore.' },
+      { title: 'U.S. Olympic Training Center', desc: 'Chula Vista hosts the only warm-weather Olympic Training Center in the U.S. — a world-class athletic facility open for tours.' },
+    ],
+    publicSchools: [
+      { name: 'Eastlake High School', grades: '9–12', type: 'CVUSD' },
+      { name: 'Otay Ranch High School', grades: '9–12', type: 'CVUSD' },
+      { name: 'Wolf Canyon Elementary', grades: 'K–6', type: 'CVUSD' },
+    ],
+    privateSchools: [
+      { name: 'Mater Dei Catholic High', grades: '9–12', type: 'Catholic Private' },
+    ],
+    schoolDistrict: 'Chula Vista Elementary / Sweetwater Union HS',
+    ylopoSearch: 'https://search.palisaderealty.com/search?s%5Blocations%5D%5B0%5D%5Bcity%5D=Chula+Vista&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA',
+    nearbyCommunities: [
+      { name: 'Spring Valley', slug: 'spring-valley-real-estate', from: '$550K' },
+      { name: 'La Mesa', slug: 'la-mesa-real-estate', from: '$700K' },
+      { name: 'Downtown San Diego', slug: 'downtown-san-diego-real-estate', from: '$450K' },
+    ],
+  },
+  {
+    name: 'La Mesa',
+    slug: 'la-mesa-real-estate',
+    image: 'community-la-mesa.jpg',
+    badge: 'The Jewel of the Hills',
+    region: 'metro',
+    heroStats: [
+      { value: '100+', label: 'Active Listings' },
+      { value: '$750K', label: 'Median Price' },
+      { value: '3', label: 'Property Types' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    titleFirst: 'La',
+    titleRest: 'Mesa',
+    subtitle: 'East County · California',
+    overview: [
+      'La Mesa — "The Jewel of the Hills" — is one of San Diego\'s most livable cities: a walkable downtown village, top-rated schools, great transit access, and a genuine community character that has kept residents loyal for generations.',
+      'Spring Street\'s thriving downtown has attracted a wave of new restaurants, breweries, and boutiques alongside classic La Mesa staples. With trolley access to downtown San Diego and affordability relative to coastal communities, La Mesa offers exceptional value.',
+    ],
+    quickFacts: [
+      { label: 'City Type', value: 'East County City' },
+      { label: 'County', value: 'San Diego County' },
+      { label: 'Population', value: '~60,000' },
+      { label: 'Median Home Price', value: '$750,000' },
+      { label: 'Architecture', value: 'Ranch + Craftsman + Mid-Century' },
+      { label: 'ZIP Codes', value: '91941 / 91942 / 91943 / 91944' },
+    ],
+    highlights: [
+      { title: 'La Mesa Village', desc: 'Spring Street\'s walkable village is home to antique shops, craft breweries, farm-to-table restaurants, and a beloved weekly farmers market.' },
+      { title: 'Lake Murray', desc: 'A gorgeous reservoir surrounded by 5 miles of walking and biking trails — one of San Diego\'s most scenic recreational lakes minutes from downtown La Mesa.' },
+      { title: 'Trolley Access', desc: 'Multiple trolley stations on the Green and Orange lines connect La Mesa directly to downtown San Diego — one of the most transit-rich East County communities.' },
+    ],
+    publicSchools: [
+      { name: 'Helix High School', grades: '9–12', type: 'GUSD' },
+      { name: 'La Mesa Arts Academy', grades: '6–8', type: 'LMUSD' },
+      { name: 'Highlands Elementary', grades: 'K–6', type: 'LMUSD' },
+    ],
+    privateSchools: [
+      { name: 'Foothills Christian School', grades: 'K–12', type: 'Christian Private' },
+    ],
+    schoolDistrict: 'La Mesa-Spring Valley / Grossmont Union HS',
+    ylopoSearch: 'https://search.palisaderealty.com/search?s%5Blocations%5D%5B0%5D%5Bcity%5D=La+Mesa&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA',
+    nearbyCommunities: [
+      { name: 'Spring Valley', slug: 'spring-valley-real-estate', from: '$550K' },
+      { name: 'El Cajon', slug: 'el-cajon-real-estate', from: '$500K' },
+      { name: 'North Park', slug: 'north-park-real-estate', from: '$700K' },
+    ],
+  },
+  {
+    name: 'Spring Valley',
+    slug: 'spring-valley-real-estate',
+    image: 'community-spring-valley.jpg',
+    badge: 'East County',
+    region: 'east-south',
+    heroStats: [
+      { value: '100+', label: 'Active Listings' },
+      { value: '$650K', label: 'Median Price' },
+      { value: '3', label: 'Property Types' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    titleFirst: 'Spring',
+    titleRest: 'Valley',
+    subtitle: 'East County · California',
+    overview: [
+      'Spring Valley is a well-established unincorporated community in San Diego County offering affordable single-family homes, convenient freeway access, and a strong local community character.',
+      'Palisade Realty\'s main office is located in Spring Valley, giving our team unparalleled knowledge of this market. For buyers prioritizing space and value, Spring Valley delivers generous lots at prices well below the coastal communities.',
+    ],
+    quickFacts: [
+      { label: 'City Type', value: 'East County Community' },
+      { label: 'County', value: 'San Diego County' },
+      { label: 'Population', value: '~30,000' },
+      { label: 'Median Home Price', value: '$650,000' },
+      { label: 'Architecture', value: 'Ranch + Split-Level + Traditional' },
+      { label: 'ZIP Codes', value: '91977 / 91978' },
+    ],
+    highlights: [
+      { title: 'Palisade Realty HQ', desc: 'Our Lemon Grove office is minutes from Spring Valley — making our agents exceptionally well-positioned to guide buyers and sellers in this market.' },
+      { title: 'Freeway Access', desc: 'SR-94 and I-125 provide quick access to downtown San Diego, the border, and the wider East County corridor.' },
+      { title: 'Bonita & National City Adjacent', desc: 'Spring Valley borders Bonita (one of SD\'s most prized semi-rural communities) to the south and has convenient access to National City\'s bayfront.' },
+    ],
+    publicSchools: [
+      { name: 'Mount Miguel High School', grades: '9–12', type: 'GUSD' },
+      { name: 'Rancho de la Nacion Middle', grades: '6–8', type: 'SVSD' },
+      { name: 'Spring Valley Elementary', grades: 'K–6', type: 'SVSD' },
+    ],
+    privateSchools: [],
+    schoolDistrict: 'Spring Valley School District / Grossmont Union HS',
+    ylopoSearch: 'https://search.palisaderealty.com/search?s%5Blocations%5D%5B0%5D%5Bcity%5D=Spring+Valley&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA',
+    nearbyCommunities: [
+      { name: 'La Mesa', slug: 'la-mesa-real-estate', from: '$650K' },
+      { name: 'Chula Vista', slug: 'chula-vista-real-estate', from: '$600K' },
+      { name: 'El Cajon', slug: 'el-cajon-real-estate', from: '$500K' },
+    ],
+  },
+  {
+    name: 'El Cajon',
+    slug: 'el-cajon-real-estate',
+    image: 'community-el-cajon.jpg',
+    badge: 'East County Value',
+    region: 'metro',
+    heroStats: [
+      { value: '150+', label: 'Active Listings' },
+      { value: '$550K', label: 'Median Price' },
+      { value: '4', label: 'Property Types' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    titleFirst: 'El',
+    titleRest: 'Cajon',
+    subtitle: 'East County · California',
+    overview: [
+      'El Cajon is East County\'s largest city and San Diego\'s most affordable entry point to homeownership — a diverse community with strong rental demand, excellent freeway access, and a downtown undergoing a slow but steady revitalization.',
+      'For first-time buyers and investors, El Cajon offers single-family homes at prices that would be impossible to find closer to the coast. The Grossmont College corridor and major retail draw steady employment and population growth.',
+    ],
+    quickFacts: [
+      { label: 'City Type', value: 'East County City' },
+      { label: 'County', value: 'San Diego County' },
+      { label: 'Population', value: '~105,000' },
+      { label: 'Median Home Price', value: '$550,000' },
+      { label: 'Architecture', value: 'Ranch + Traditional + Condo' },
+      { label: 'ZIP Codes', value: '92019 / 92020 / 92021' },
+    ],
+    highlights: [
+      { title: 'Grossmont Center', desc: 'A major regional mall and retail hub serving East County — employment anchor and one of San Diego\'s most active retail corridors.' },
+      { title: 'Lake Jennings', desc: 'A county-operated fishing lake with campgrounds, boat rentals, and trails — a beloved East County outdoor destination minutes from downtown El Cajon.' },
+      { title: 'Transit Access', desc: 'The Trolley Green Line connects El Cajon\'s transit center to downtown San Diego, the border, and Mission Valley — one of East County\'s most connected communities.' },
+    ],
+    publicSchools: [
+      { name: 'Grossmont High School', grades: '9–12', type: 'GUSD' },
+      { name: 'Madison Avenue Middle', grades: '6–8', type: 'ECUSD' },
+      { name: 'Johnnie Carr Elementary', grades: 'K–6', type: 'ECUSD' },
+    ],
+    privateSchools: [
+      { name: 'Christian High School', grades: '9–12', type: 'Christian Private' },
+    ],
+    schoolDistrict: 'El Cajon Valley / Grossmont Union HS',
+    ylopoSearch: 'https://search.palisaderealty.com/search?s%5Blocations%5D%5B0%5D%5Bcity%5D=El+Cajon&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA',
+    nearbyCommunities: [
+      { name: 'La Mesa', slug: 'la-mesa-real-estate', from: '$650K' },
+      { name: 'Spring Valley', slug: 'spring-valley-real-estate', from: '$550K' },
+      { name: 'Santee', slug: 'downtown-san-diego-real-estate', from: '$650K' },
+    ],
+  },
+  {
+    name: 'Rancho Peñasquitos',
+    slug: 'rancho-penasquitos-real-estate',
+    image: 'community-rancho-penasquitos.jpg',
+    badge: 'Family Community',
+    region: 'coastal',
+    heroStats: [
+      { value: '80+', label: 'Active Listings' },
+      { value: '$1.0M', label: 'Median Price' },
+      { value: '3', label: 'Property Types' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    titleFirst: 'Rancho',
+    titleRest: 'Peñasquitos',
+    subtitle: 'North Central San Diego · California',
+    overview: [
+      'Rancho Peñasquitos is a well-established family community in North Central San Diego — an area of mature trees, hiking trails, and highly rated schools that has maintained strong values through every market cycle.',
+      'The Peñasquitos Canyon Preserve — 4,000 acres of protected natural land running through the community — gives residents unparalleled trail access minutes from home. With UCSD and the biotech corridor nearby, the community attracts professional families who want proximity to employment and high-quality schools.',
+    ],
+    quickFacts: [
+      { label: 'City Type', value: 'Established Neighborhood' },
+      { label: 'County', value: 'San Diego County' },
+      { label: 'Population', value: '~65,000' },
+      { label: 'Median Home Price', value: '$1,000,000' },
+      { label: 'Architecture', value: 'Ranch + Traditional + Contemporary' },
+      { label: 'ZIP Codes', value: '92129 / 92130' },
+    ],
+    highlights: [
+      { title: 'Peñasquitos Canyon Preserve', desc: '4,000 acres of preserved canyon land running through the community — waterfall hikes, equestrian trails, and native habitat minutes from any backyard.' },
+      { title: 'Top-Rated Schools', desc: 'Del Norte High School and multiple recognized elementary schools make this one of the most sought-after family communities in North San Diego.' },
+      { title: 'Sports & Recreation', desc: 'Extensive park system, youth sports leagues, and the YMCA make Peñasquitos one of the most family activity-rich neighborhoods in San Diego.' },
+    ],
+    publicSchools: [
+      { name: 'Del Norte High School', grades: '9–12', type: 'PUSD' },
+      { name: 'Mesa Verde Middle School', grades: '6–8', type: 'PUSD' },
+      { name: 'Los Penasquitos Elementary', grades: 'K–5', type: 'PUSD' },
+    ],
+    privateSchools: [],
+    schoolDistrict: 'Poway Unified School District',
+    ylopoSearch: 'https://search.palisaderealty.com/search?s%5Blocations%5D%5B0%5D%5Bcity%5D=Rancho+Penasquitos&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA',
+    nearbyCommunities: [
+      { name: 'Carmel Valley', slug: 'carmel-valley-real-estate', from: '$1M' },
+      { name: 'Scripps Ranch', slug: 'scripps-ranch-real-estate', from: '$1M' },
+      { name: 'La Jolla', slug: 'la-jolla-real-estate', from: '$1.2M' },
+    ],
+  },
+  {
+    name: 'Scripps Ranch',
+    slug: 'scripps-ranch-real-estate',
+    image: 'community-scripps-ranch.jpg',
+    badge: 'Established Living',
+    region: 'coastal',
+    heroStats: [
+      { value: '80+', label: 'Active Listings' },
+      { value: '$1.2M', label: 'Median Price' },
+      { value: '3', label: 'Property Types' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    titleFirst: 'Scripps',
+    titleRest: 'Ranch',
+    subtitle: 'North Central San Diego · California',
+    overview: [
+      'Scripps Ranch is one of San Diego\'s most consistently beloved family communities — a planned neighborhood of mature eucalyptus trees, winding roads, Miramar Lake, and excellent schools that has maintained strong demand for decades.',
+      'With MCAS Miramar adjacent to the community and the Miramar College campus nearby, Scripps Ranch has a distinct character that combines suburban stability with proximity to both the coast and the eastern tech corridor.',
+    ],
+    quickFacts: [
+      { label: 'City Type', value: 'Planned Community' },
+      { label: 'County', value: 'San Diego County' },
+      { label: 'Population', value: '~30,000' },
+      { label: 'Median Home Price', value: '$1,200,000' },
+      { label: 'Architecture', value: 'Contemporary + Ranch + Traditional' },
+      { label: 'ZIP Code', value: '92131' },
+    ],
+    highlights: [
+      { title: 'Lake Miramar', desc: 'A scenic reservoir in the heart of Scripps Ranch with a 5-mile paved trail, fishing access, and stunning views of the Scripps Ranch hills.' },
+      { title: 'Scripps Ranch High School', desc: 'Consistently ranked among San Diego County\'s top public high schools, anchoring the community\'s status as a premier family destination.' },
+      { title: 'Eucalyptus Forest', desc: 'The distinctive tree canopy that lines Scripps Ranch\'s roads was planted in the early 20th century — creating a unique sense of established, shaded community character.' },
+    ],
+    publicSchools: [
+      { name: 'Scripps Ranch High School', grades: '9–12', type: 'SDUSD' },
+      { name: 'Scripps Ranch Middle', grades: '6–8', type: 'SDUSD' },
+      { name: 'Jerabek Elementary', grades: 'K–5', type: 'SDUSD' },
+    ],
+    privateSchools: [
+      { name: 'Miramar Christian School', grades: 'K–8', type: 'Christian Private' },
+    ],
+    schoolDistrict: 'San Diego Unified School District',
+    ylopoSearch: 'https://search.palisaderealty.com/search?s%5Blocations%5D%5B0%5D%5Bcity%5D=Scripps+Ranch&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA',
+    nearbyCommunities: [
+      { name: 'Rancho Peñasquitos', slug: 'rancho-penasquitos-real-estate', from: '$900K' },
+      { name: 'Carmel Valley', slug: 'carmel-valley-real-estate', from: '$1M' },
+      { name: 'Mira Mesa', slug: 'downtown-san-diego-real-estate', from: '$750K' },
+    ],
+  },
+]
+
+export function getCommunityBySlug(slug: string): CommunityData | undefined {
+  return COMMUNITIES.find((c) => c.slug === slug)
+}
+
+export function getAllCommunitySlugs(): string[] {
+  return COMMUNITIES.map((c) => c.slug)
+}
+
+export default COMMUNITIES
