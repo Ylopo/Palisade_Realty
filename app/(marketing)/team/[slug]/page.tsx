@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Script from 'next/script'
 import { notFound } from 'next/navigation'
 import AgentContactForm from './AgentContactForm'
+import featuredPropertiesData from '../../../../data/featured-properties.json'
 
 interface AgentEntry {
   name: string
@@ -151,35 +152,39 @@ type FeaturedListing = {
   displayOrder: number | null
 }
 
-async function fetchAgentListings(slug: string): Promise<FeaturedListing[]> {
-  const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
-  const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
-  const token = process.env.SANITY_API_TOKEN
-  if (!projectId || !token) return []
-  try {
-    const groq = `*[_type == "teamMember" && slug.current == "${slug}" && active != false][0]{
-      "featuredListings": featuredListings[]->{
-        _id, title, price,
-        "street": address.street, "city": address.city, "state": address.state,
-        bedrooms, bathrooms, squareFootage,
-        "mainImageUrl": mainImage.asset->url,
-        listingUrl, status, active, displayOrder
-      }
-    }`
-    const url = `https://${projectId}.api.sanity.io/v2024-01-01/data/query/${dataset}?query=${encodeURIComponent(groq)}`
-    const r = await fetch(url, {
-      headers: { Authorization: `Bearer ${token}` },
-      next: { revalidate: 3600 },
-    })
-    if (!r.ok) return []
-    const d = await r.json()
-    const listings: FeaturedListing[] = Array.isArray(d.result?.featuredListings) ? d.result.featuredListings : []
-    return listings
-      .filter((l) => l.active !== false)
-      .sort((a, b) => (a.displayOrder ?? 999) - (b.displayOrder ?? 999))
-  } catch {
-    return []
-  }
+function getAgentListings(): FeaturedListing[] {
+  const properties = featuredPropertiesData as Array<{
+    slug: string
+    address?: string
+    city?: string
+    state?: string
+    status?: string
+    price?: number
+    beds?: number
+    baths?: number
+    sqft?: number
+    heroImage?: string
+    ylopoDetailUrl?: string
+    hasDetailPage?: boolean
+  }>
+  return properties
+    .filter((p) => p.status !== 'sold')
+    .map((p, i) => ({
+      _id: p.slug,
+      title: p.address || null,
+      price: p.price || null,
+      street: p.address || null,
+      city: p.city || null,
+      state: p.state || null,
+      bedrooms: p.beds || null,
+      bathrooms: p.baths || null,
+      squareFootage: p.sqft || null,
+      mainImageUrl: p.heroImage || null,
+      listingUrl: p.hasDetailPage ? `/properties/${p.slug}` : (p.ylopoDetailUrl || null),
+      status: p.status || null,
+      active: true,
+      displayOrder: i,
+    }))
 }
 
 export default async function AgentPage({ params }: Props) {
@@ -195,7 +200,7 @@ export default async function AgentPage({ params }: Props) {
     (a) => RELATED_SLUGS.includes(a.slug) && a.slug !== slug
   ).slice(0, 4)
 
-  const featuredListings = await fetchAgentListings(slug)
+  const featuredListings = getAgentListings()
 
   return (
     <>
@@ -353,8 +358,7 @@ export default async function AgentPage({ params }: Props) {
                     <div style={{ marginTop: 'auto' }}>
                       <a
                         href={listing.listingUrl || 'https://search.palisaderealty.com/'}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        {...(listing.listingUrl?.startsWith('/') ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
                         className="btn btn-brand"
                         style={{ display: 'block', textAlign: 'center' }}
                       >
