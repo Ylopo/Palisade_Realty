@@ -223,6 +223,16 @@ createServer(async (req, res) => {
     }
   }
 
+  // ── GET /api/listings — serve featured-properties.json ────────────────
+  if (req.method === 'GET' && url === '/api/listings') {
+    try {
+      const raw = await readFile(join(ROOT, 'data', 'featured-properties.json'), 'utf8');
+      return jsonRes(res, 200, JSON.parse(raw));
+    } catch (e) {
+      return jsonRes(res, 500, { error: e.message });
+    }
+  }
+
   // ── Static file serving ────────────────────────────────────────────────
   const filePath = join(ROOT, url === '/' ? 'index.html' : url);
   try {
