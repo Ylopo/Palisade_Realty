@@ -209,6 +209,7 @@
       commHeroTitle: 'San Diego Communities',
       commIntroEyebrow: 'Our Coverage',
       commIntroTitle: 'Find Your Perfect Place in San Diego',
+      commIntroBody: 'From oceanfront estates in La Jolla and Coronado to the rolling hills of Rancho Santa Fe, Palisade Realty serves every corner of San Diego County. Our team of local experts knows these neighborhoods inside and out — helping you find not just a home, but the right community for your lifestyle.',
       commIntroCta: 'Talk to a Local Expert',
       commGridEyebrow: 'Explore Every Area',
       commGridTitle: 'Our Communities',
@@ -571,6 +572,7 @@
       commHeroTitle: 'Comunidades de San Diego',
       commIntroEyebrow: 'Nuestra Cobertura',
       commIntroTitle: 'Encuentre su Lugar Perfecto en San Diego',
+      commIntroBody: 'Desde propiedades frente al océano en La Jolla y Coronado hasta las colinas de Rancho Santa Fe, Palisade Realty sirve a cada rincón del Condado de San Diego. Nuestro equipo de expertos locales conoce estos vecindarios por dentro y por fuera — ayudándole a encontrar no solo una casa, sino la comunidad adecuada para su estilo de vida.',
       commIntroCta: 'Hablar con un Experto Local',
       commGridEyebrow: 'Explore Cada Área',
       commGridTitle: 'Nuestras Comunidades',
@@ -2424,6 +2426,9 @@ var AGENT_TRANSLATIONS = {
 
     var cmIntroT = document.querySelector('.comm-intro-title');
     if (cmIntroT) cmIntroT.textContent = d.commIntroTitle;
+
+    var cmIntroB = document.querySelector('.comm-intro-body');
+    if (cmIntroB) cmIntroB.textContent = d.commIntroBody;
 
     var cmIntroCta = document.querySelector('.comm-intro-cta');
     if (cmIntroCta) cmIntroCta.textContent = d.commIntroCta;
