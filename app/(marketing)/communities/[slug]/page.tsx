@@ -3,7 +3,7 @@ import Link from 'next/link'
 import fs from 'fs'
 import path from 'path'
 import { notFound } from 'next/navigation'
-import { getCommunityBySlug, getAllCommunitySlugs } from '@/lib/community-data'
+import { getCommunityBySlug, getAllCommunitySlugs, DEFAULT_MELLO_ROOS, MelloRoosData } from '@/lib/community-data'
 import CommunityPageBodyClass from '@/components/CommunityPageBodyClass'
 import CommunitySchoolsTabs from '@/components/CommunitySchoolsTabs'
 
@@ -29,6 +29,8 @@ export default async function CommunityPage({ params }: Props) {
   const { slug } = await params
   const c = getCommunityBySlug(slug)
   if (!c) notFound()
+
+  const mr: MelloRoosData = { ...DEFAULT_MELLO_ROOS, ...c.melloroos }
 
   const transPath = path.join(process.cwd(), 'public', 'community-translations', `${slug}.js`)
   const cdTransScript = fs.existsSync(transPath) ? fs.readFileSync(transPath, 'utf8') : ''
@@ -205,7 +207,7 @@ export default async function CommunityPage({ params }: Props) {
       )}
 
       {/* ── 6b. MELLO-ROOS ──────────────────────────────────────── */}
-      {c.melloroos?.show && (
+      {mr.show !== false && (
         <section id="mello-roos" style={{ background: '#ffffff', padding: '100px var(--pad-x,56px)' }} aria-labelledby="mello-roos-heading">
           <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
 
@@ -222,9 +224,9 @@ export default async function CommunityPage({ params }: Props) {
                 </h2>
                 <div style={{ width: '40px', height: '2px', background: 'var(--brand,#58172a)', margin: '20px 0 28px' }} />
                 <p className="mello-roos-intro" style={{ fontFamily: 'var(--font-body)', fontSize: '16px', lineHeight: 1.78, color: 'rgba(33,33,33,0.70)', marginBottom: '24px', fontWeight: 500 }}>
-                  {c.melloroos.introText}
+                  {mr.introText}
                 </p>
-                {c.melloroos.detailParagraphs.map((p, i) => (
+                {mr.detailParagraphs.map((p, i) => (
                   <p key={i} className="mello-roos-body" style={{ fontFamily: 'var(--font-body)', fontSize: '16px', lineHeight: 1.78, color: 'rgba(33,33,33,0.55)', marginBottom: '18px' }}>
                     {p}
                   </p>
@@ -240,8 +242,8 @@ export default async function CommunityPage({ params }: Props) {
                 <p className="mello-qf-heading" style={{ fontFamily: 'var(--font-label)', fontSize: '10px', fontWeight: 700, letterSpacing: '0.28em', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '20px', paddingBottom: '16px', borderBottom: '1px solid rgba(0,0,0,0.10)' }}>
                   Quick Facts
                 </p>
-                {c.melloroos.quickFacts.map((fact, i) => (
-                  <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', padding: '12px 0', borderBottom: i < c.melloroos!.quickFacts.length - 1 ? '1px solid rgba(0,0,0,0.07)' : 'none' }}>
+                {mr.quickFacts.map((fact, i) => (
+                  <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', padding: '12px 0', borderBottom: i < mr.quickFacts.length - 1 ? '1px solid rgba(0,0,0,0.07)' : 'none' }}>
                     <span aria-hidden="true" style={{ flexShrink: 0, width: '6px', height: '6px', borderRadius: '50%', background: 'var(--brand,#58172a)', marginTop: '7px' }} />
                     <span className="mello-qf-item" style={{ fontFamily: 'var(--font-body)', fontSize: '14px', lineHeight: 1.60, color: 'rgba(33,33,33,0.70)' }}>{fact}</span>
                   </div>
@@ -251,7 +253,7 @@ export default async function CommunityPage({ params }: Props) {
 
             {/* Disclaimer */}
             <p className="mello-roos-disclaimer" style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'rgba(33,33,33,0.45)', lineHeight: 1.6, marginTop: '40px', paddingTop: '24px', borderTop: '1px solid rgba(0,0,0,0.08)', maxWidth: '820px' }}>
-              <em>{c.melloroos.disclaimer}</em>
+              <em>{mr.disclaimer}</em>
             </p>
 
             {/* CTA block */}
@@ -261,11 +263,11 @@ export default async function CommunityPage({ params }: Props) {
                   Need Help Understanding Mello-Roos?
                 </p>
                 <p className="mello-cta-body" style={{ fontFamily: 'var(--font-body)', fontSize: '15px', lineHeight: 1.65, color: 'rgba(33,33,33,0.55)', maxWidth: '560px', margin: 0 }}>
-                  {c.melloroos.ctaText}
+                  {mr.ctaText}
                 </p>
               </div>
               <Link
-                href={c.melloroos.ctaLink}
+                href={mr.ctaLink}
                 className="btn btn-brand mello-cta-btn"
                 aria-label="Contact our team about Mello-Roos assessments"
               >

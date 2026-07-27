@@ -54,15 +54,17 @@ export interface CommunityData {
   lifestyleBody?: string[]
   lifestyleBullets?: string[]
   nearbyDescription?: string
-  melloroos?: {
-    show: boolean
-    introText: string
-    detailParagraphs: string[]
-    quickFacts: string[]
-    disclaimer: string
-    ctaText: string
-    ctaLink: string
-  }
+  melloroos?: MelloRoosData
+}
+
+export interface MelloRoosData {
+  show: boolean
+  introText: string
+  detailParagraphs: string[]
+  quickFacts: string[]
+  disclaimer: string
+  ctaText: string
+  ctaLink: string
 }
 
 const COMMUNITIES: CommunityData[] = [
@@ -4003,6 +4005,29 @@ const COMMUNITIES: CommunityData[] = [
     ],
   },
 ]
+
+export const DEFAULT_MELLO_ROOS: MelloRoosData = {
+  show: true,
+  introText:
+    'Mello-Roos fees are a type of special tax that can apply to certain properties in California — most commonly in newer developments or areas where public infrastructure was built using Community Facilities District (CFD) bonds.',
+  detailParagraphs: [
+    'When a developer builds a new community, they sometimes partner with a public agency to finance infrastructure — roads, parks, schools, and sewer lines — through a bond. That bond is repaid over time through a special tax collected alongside property taxes on homes in the district.',
+    'Not every property in this area carries a Mello-Roos assessment. Established homes and older condominiums typically do not. Newer construction, planned communities, and recently developed parcels are more likely to carry a CFD assessment — though this varies significantly by project and individual parcel.',
+    'Assessment amounts vary by development, bond size, and how much of the original bond has been paid down. Some assessments are modest; others can add several hundred dollars per year to your overall tax bill. Verifying the current assessment — and its scheduled end date — before making an offer is an important step in understanding your true cost of ownership.',
+    'Palisade Realty agents can help you locate CFD parcel tax information for any specific property, interpret the assessment schedule, and factor the full cost into your monthly payment analysis before you commit.',
+  ],
+  quickFacts: [
+    'May apply to certain properties or developments',
+    'Helps fund public infrastructure and services',
+    'Assessment amounts vary by property',
+    'Buyers should verify before purchasing',
+  ],
+  disclaimer:
+    'Mello-Roos assessments vary by property, development, and district. Buyers should verify current assessments with the appropriate public agency and consult their real estate, tax, or legal professional.',
+  ctaText:
+    'Our team can help you review property details and better understand any additional assessments before you make an offer.',
+  ctaLink: '/contact',
+}
 
 export function getCommunityBySlug(slug: string): CommunityData | undefined {
   return COMMUNITIES.find((c) => c.slug === slug)
