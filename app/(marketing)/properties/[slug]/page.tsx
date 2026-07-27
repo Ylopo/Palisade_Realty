@@ -115,15 +115,13 @@ export default async function PropertyPage({ params }: Props) {
             {/* Features */}
             {p.features && p.features.length > 0 && (
               <div id="pp-features-section" style={{ marginBottom: '48px' }}>
+                <style dangerouslySetInnerHTML={{ __html: `#pp-features-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px 24px}#pp-features-list li{font-family:var(--font-body);font-size:15px;color:#555;display:flex;gap:10px;align-items:flex-start}#pp-features-list li::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent,#eeca00);flex-shrink:0;margin-top:7px;display:block}` }} />
                 <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '26px', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.01em', margin: '0 0 20px' }}>
                   Property <em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>Highlights</em>
                 </h2>
-                <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px 24px' }}>
+                <ul id="pp-features-list">
                   {p.features.map((f, i) => (
-                    <li key={i} style={{ fontFamily: 'var(--font-body)', fontSize: '15px', color: '#555', display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
-                      <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--accent,#eeca00)', flexShrink: 0, marginTop: '7px' }} />
-                      {f}
-                    </li>
+                    <li key={i}>{f}</li>
                   ))}
                 </ul>
               </div>
