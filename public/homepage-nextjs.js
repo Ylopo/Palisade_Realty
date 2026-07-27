@@ -262,6 +262,11 @@ var COMMUNITY_URLS = {
 
 /* ── MAPBOX ────────────────────────────────────────────────── */
 function initMapbox() {
+  // homepage-nextjs.js is in the layout (runs on every page). Skip silently on
+  // pages that don't have the map container — prevents an uncaught Mapbox error
+  // that would crash the script before window.__palisadeReinit is defined.
+  if (!document.getElementById('lfyp-map')) return;
+
   if (typeof mapboxgl === 'undefined') {
     // beforeInteractive should have loaded this; dynamic fallback for edge cases
     var link = document.createElement('link');

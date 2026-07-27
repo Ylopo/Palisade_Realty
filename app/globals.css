@@ -1076,7 +1076,9 @@ a {
   position: relative;
   padding: 100px var(--pad-x,60px);
   overflow: hidden;
-  background: var(--brand,#58172a);
+  background:
+    linear-gradient(rgba(88,23,42,0.80), rgba(40,0,12,0.90)),
+    url('/assets/images/cta-background.jpg') center/cover no-repeat;
   text-align: center;
 }
 .tp-cta-heading { font-family: var(--font-display,'Playfair Display',serif); font-size: clamp(28px, 4vw, 52px); font-weight: 400; color: #fff; letter-spacing: -0.02em; margin: 0 0 16px; }
