@@ -68,43 +68,43 @@ export default function AgentContactForm({ agentName, agentEmail }: Props) {
     <form className="ap-form" onSubmit={handleSubmit} noValidate aria-label={`Contact ${agentName}`}>
       <div className="ap-form-row">
         <div className="form-group">
-          <label htmlFor="af-first">First Name</label>
+          <label className="ap-form-label" htmlFor="cf-first">First Name</label>
           <input
-            id="af-first" type="text" placeholder="Jane" required
+            id="cf-first" type="text" placeholder="Jane" required
             value={fields.firstName} onChange={(e) => update('firstName', e.target.value)}
-            aria-invalid={!!errors.firstName} aria-describedby={errors.firstName ? 'af-first-err' : undefined}
+            aria-invalid={!!errors.firstName} aria-describedby={errors.firstName ? 'cf-first-err' : undefined}
           />
-          {errors.firstName && <span id="af-first-err" className="form-error" role="alert">{errors.firstName}</span>}
+          {errors.firstName && <span id="cf-first-err" className="form-error" role="alert">{errors.firstName}</span>}
         </div>
         <div className="form-group">
-          <label htmlFor="af-last">Last Name</label>
+          <label className="ap-form-label" htmlFor="cf-last">Last Name</label>
           <input
-            id="af-last" type="text" placeholder="Smith" required
+            id="cf-last" type="text" placeholder="Smith" required
             value={fields.lastName} onChange={(e) => update('lastName', e.target.value)}
-            aria-invalid={!!errors.lastName} aria-describedby={errors.lastName ? 'af-last-err' : undefined}
+            aria-invalid={!!errors.lastName} aria-describedby={errors.lastName ? 'cf-last-err' : undefined}
           />
-          {errors.lastName && <span id="af-last-err" className="form-error" role="alert">{errors.lastName}</span>}
+          {errors.lastName && <span id="cf-last-err" className="form-error" role="alert">{errors.lastName}</span>}
         </div>
       </div>
       <div className="form-group">
-        <label htmlFor="af-email">Email Address</label>
+        <label className="ap-form-label" htmlFor="cf-email">Email Address</label>
         <input
-          id="af-email" type="email" placeholder="jane@example.com" required
+          id="cf-email" type="email" placeholder="jane@example.com" required
           value={fields.email} onChange={(e) => update('email', e.target.value)}
-          aria-invalid={!!errors.email} aria-describedby={errors.email ? 'af-email-err' : undefined}
+          aria-invalid={!!errors.email} aria-describedby={errors.email ? 'cf-email-err' : undefined}
         />
-        {errors.email && <span id="af-email-err" className="form-error" role="alert">{errors.email}</span>}
+        {errors.email && <span id="cf-email-err" className="form-error" role="alert">{errors.email}</span>}
       </div>
       <div className="form-group">
-        <label htmlFor="af-phone">Phone Number <span style={{ color: '#999', fontWeight: 400 }}>(optional)</span></label>
+        <label className="ap-form-label" htmlFor="cf-phone">Phone Number <span style={{ color: '#999', fontWeight: 400 }}>(optional)</span></label>
         <input
-          id="af-phone" type="tel" placeholder="(619) 555-0000"
+          id="cf-phone" type="tel" placeholder="(619) 555-0000"
           value={fields.phone} onChange={(e) => update('phone', e.target.value)}
         />
       </div>
       <div className="form-group">
-        <label htmlFor="af-interest">I&apos;m Interested In</label>
-        <select id="af-interest" value={fields.interest} onChange={(e) => update('interest', e.target.value)}>
+        <label className="ap-form-label" htmlFor="cf-interest">I&apos;m Interested In</label>
+        <select id="cf-interest" value={fields.interest} onChange={(e) => update('interest', e.target.value)}>
           <option value="">Select one…</option>
           <option>Buying a Home</option>
           <option>Selling My Home</option>
@@ -114,14 +114,14 @@ export default function AgentContactForm({ agentName, agentEmail }: Props) {
         </select>
       </div>
       <div className="form-group">
-        <label htmlFor="af-message">Message</label>
+        <label className="ap-form-label" htmlFor="cf-message">Message</label>
         <textarea
-          id="af-message" placeholder="Tell me about your real estate goals…" rows={4} required
+          id="cf-message" placeholder="Tell me about your real estate goals…" rows={4} required
           value={fields.message} onChange={(e) => update('message', e.target.value)}
-          aria-invalid={!!errors.message} aria-describedby={errors.message ? 'af-message-err' : undefined}
+          aria-invalid={!!errors.message} aria-describedby={errors.message ? 'cf-message-err' : undefined}
           style={{ minHeight: '118px' }}
         />
-        {errors.message && <span id="af-message-err" className="form-error" role="alert">{errors.message}</span>}
+        {errors.message && <span id="cf-message-err" className="form-error" role="alert">{errors.message}</span>}
       </div>
       <p className="ap-form-consent">
         By providing your telephone number, you are consenting to allow Palisade Realty, Inc. to contact you with

@@ -223,7 +223,7 @@ export default async function AgentPage({ params }: Props) {
             <span style={{ color: 'rgba(255,255,255,.3)', margin: '0 8px' }}>/</span>
             <Link href="/team" style={{ color: 'rgba(255,255,255,.45)', textDecoration: 'none', fontSize: '12px', fontFamily: 'var(--font-label)', letterSpacing: '0.06em' }}>Our Team</Link>
             <span style={{ color: 'rgba(255,255,255,.3)', margin: '0 8px' }}>/</span>
-            <span style={{ color: 'rgba(255,255,255,.7)', fontSize: '12px', fontFamily: 'var(--font-label)', letterSpacing: '0.06em' }}>{agent.name}</span>
+            <span className="ap-hero-name" style={{ color: 'rgba(255,255,255,.7)', fontSize: '12px', fontFamily: 'var(--font-label)', letterSpacing: '0.06em' }}>{agent.name}</span>
           </nav>
           <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(56px,9.5vw,110px)', fontWeight: 400, color: '#fff', letterSpacing: '-0.03em', lineHeight: 1.0, margin: '0 0 16px' }}>
             <em style={{ fontStyle: 'italic', color: 'var(--accent,#eeca00)' }}>{firstName}</em> {agent.name.slice(firstName.length + 1)}
@@ -273,19 +273,19 @@ export default async function AgentPage({ params }: Props) {
             />
           </div>
           <div>
-            <p style={{ fontFamily: 'var(--font-label)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '10px' }}>Agent</p>
-            <h2 id="bio-heading" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(30px,3.5vw,48px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.02em', lineHeight: 1.18, margin: '0 0 24px' }}>
+            <p className="ap-bio-eyebrow" style={{ fontFamily: 'var(--font-label)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '10px' }}>Agent</p>
+            <h2 id="bio-heading" className="ap-bio-h2" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(30px,3.5vw,48px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.02em', lineHeight: 1.18, margin: '0 0 24px' }}>
               Meet <em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>{firstName}</em>
             </h2>
-            <p style={{ fontFamily: 'var(--font-body)', fontSize: '16px', color: '#555', lineHeight: 1.8, marginBottom: '16px' }}>
+            <p className="ap-bio-body" style={{ fontFamily: 'var(--font-body)', fontSize: '16px', color: '#555', lineHeight: 1.8, marginBottom: '16px' }}>
               As a {agent.title} with Palisade Realty, I am dedicated to delivering exceptional results for clients throughout San Diego County. With the support of one of the region&apos;s most trusted brokerages and access to deep local market knowledge, I guide buyers and sellers through every step of the real estate process.
             </p>
-            <p style={{ fontFamily: 'var(--font-body)', fontSize: '16px', color: '#555', lineHeight: 1.8 }}>
+            <p className="ap-bio-body" style={{ fontFamily: 'var(--font-body)', fontSize: '16px', color: '#555', lineHeight: 1.8 }}>
               From your first consultation to closing day, my priority is clear communication, honest advice, and results you can count on. Whether you are purchasing your first home, making an investment, or selling a treasured property, I am here to make the process as smooth and successful as possible.
             </p>
           </div>
           <div style={{ position: 'sticky', top: '96px', background: 'var(--off-white,#faf7f2)', borderRadius: '4px', padding: '28px 24px' }}>
-            <p style={{ fontFamily: 'var(--font-label)', fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#999', marginBottom: '20px' }}>Get in Touch</p>
+            <p className="ap-contact-sidebar-label" style={{ fontFamily: 'var(--font-label)', fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#999', marginBottom: '20px' }}>Get in Touch</p>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '14px' }}>
               <span style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--brand,#58172a)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -293,7 +293,7 @@ export default async function AgentPage({ params }: Props) {
                 </svg>
               </span>
               <div>
-                <p style={{ fontFamily: 'var(--font-label)', fontSize: '10px', color: '#aaa', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '2px' }}>Phone</p>
+                <p className="ap-contact-sidebar-detail-label" style={{ fontFamily: 'var(--font-label)', fontSize: '10px', color: '#aaa', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '2px' }}>Phone</p>
                 <a href="tel:+16197940218" style={{ fontFamily: 'var(--font-body)', fontSize: '15px', fontWeight: 600, color: 'var(--near-black,#1a0a0a)', textDecoration: 'none' }}>(619) 794-0218</a>
               </div>
             </div>
@@ -305,13 +305,13 @@ export default async function AgentPage({ params }: Props) {
                 </svg>
               </span>
               <div>
-                <p style={{ fontFamily: 'var(--font-label)', fontSize: '10px', color: '#aaa', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '2px' }}>Email</p>
+                <p className="ap-contact-sidebar-detail-label" style={{ fontFamily: 'var(--font-label)', fontSize: '10px', color: '#aaa', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '2px' }}>Email</p>
                 <a href={`mailto:${email}`} style={{ fontFamily: 'var(--font-body)', fontSize: '14px', fontWeight: 500, color: 'var(--brand,#58172a)', textDecoration: 'none', wordBreak: 'break-all' }}>{email}</a>
               </div>
             </div>
             <hr style={{ border: 'none', borderTop: '1px solid #e5e0da', margin: '0 0 20px' }} />
-            <a href="#contact" className="btn btn-brand" style={{ display: 'block', textAlign: 'center', marginBottom: '10px' }}>Send a Message</a>
-            <a href={`https://${slug.split('-')[0]}.palisaderealty.com/seller`} target="_blank" rel="noopener noreferrer" className="btn btn-outline-brand" style={{ display: 'block', textAlign: 'center' }}>
+            <a href="#contact" className="btn btn-brand ap-contact-sidebar-btn" style={{ display: 'block', textAlign: 'center', marginBottom: '10px' }}>Send a Message</a>
+            <a href={`https://${slug.split('-')[0]}.palisaderealty.com/seller`} target="_blank" rel="noopener noreferrer" className="btn btn-outline-brand ap-contact-sidebar-btn" style={{ display: 'block', textAlign: 'center' }}>
               Get a Home Valuation
             </a>
           </div>
@@ -384,11 +384,11 @@ export default async function AgentPage({ params }: Props) {
       <section style={{ background: 'var(--off-white,#faf7f2)', padding: '88px var(--pad-x,60px)' }} aria-labelledby="listings-heading">
         <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-            <p style={{ fontFamily: 'var(--font-label)', fontSize: '11px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>Palisade Realty</p>
-            <h2 id="listings-heading" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(48px,6vw,72px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.03em', lineHeight: 1.08, margin: '0 0 18px' }}>
+            <p className="ap-all-listings-eyebrow" style={{ fontFamily: 'var(--font-label)', fontSize: '11px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>Palisade Realty</p>
+            <h2 id="listings-heading" className="ap-all-listings-h2" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(48px,6vw,72px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.03em', lineHeight: 1.08, margin: '0 0 18px' }}>
               All <em style={{ fontStyle: 'italic' }}>Listings</em>
             </h2>
-            <p style={{ fontFamily: 'var(--font-body)', fontSize: '16px', color: '#888', lineHeight: 1.6, maxWidth: '440px', margin: '0 auto' }}>
+            <p className="ap-all-listings-sub" style={{ fontFamily: 'var(--font-body)', fontSize: '16px', color: '#888', lineHeight: 1.6, maxWidth: '440px', margin: '0 auto' }}>
               Browse current properties represented by {firstName} across San Diego County.
             </p>
           </div>
@@ -434,11 +434,11 @@ export default async function AgentPage({ params }: Props) {
       <section id="contact" style={{ background: '#fff', padding: '88px var(--pad-x,60px)' }} aria-labelledby="contact-heading">
         <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'start' }}>
           <div>
-            <p className="eyebrow" style={{ color: 'var(--brand,#58172a)' }}>Direct Contact</p>
-            <h2 id="contact-heading" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(28px,3.5vw,44px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.02em', margin: '10px 0 18px' }}>
+            <p className="eyebrow ap-contact-left-eyebrow" style={{ color: 'var(--brand,#58172a)' }}>Direct Contact</p>
+            <h2 id="contact-heading" className="ap-contact-left-h2" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(28px,3.5vw,44px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.02em', margin: '10px 0 18px' }}>
               <em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>Contact</em> {firstName}
             </h2>
-            <p style={{ fontFamily: 'var(--font-body)', fontSize: '16px', color: '#666', lineHeight: 1.8, marginBottom: '32px' }}>
+            <p className="ap-contact-left-body" style={{ fontFamily: 'var(--font-body)', fontSize: '16px', color: '#666', lineHeight: 1.8, marginBottom: '32px' }}>
               Ready to buy, sell, or just explore your options? I&apos;m here to guide you with honest advice, deep market knowledge, and a commitment to results at every step of the process.
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
@@ -466,10 +466,10 @@ export default async function AgentPage({ params }: Props) {
       </section>
 
       {/* ── RELATED AGENTS ──────────────────────────────────── */}
-      <section style={{ background: 'var(--off-white,#faf7f2)', padding: '88px var(--pad-x,60px)' }} aria-labelledby="related-heading">
+      <section className="ap-related" style={{ background: 'var(--off-white,#faf7f2)', padding: '88px var(--pad-x,60px)' }} aria-labelledby="related-heading">
         <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-          <p className="eyebrow" style={{ color: 'var(--brand,#58172a)' }}>The Team</p>
-          <h2 id="related-heading" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(26px,3vw,40px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.02em', margin: '8px 0 40px' }}>
+          <p className="eyebrow ap-related-eyebrow" style={{ color: 'var(--brand,#58172a)' }}>The Team</p>
+          <h2 id="related-heading" className="ap-related-h2" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(26px,3vw,40px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.02em', margin: '8px 0 40px' }}>
             Meet More of Our <em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>Agents</em>
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '18px', marginBottom: '40px' }}>
