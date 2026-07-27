@@ -84,7 +84,7 @@ export default function ContactPage() {
               </div>
               <span className="contact-card-label">Office Hours</span>
               <h3 className="contact-card-title">Hours</h3>
-              <p className="contact-card-body">Mon – Fri: 9:00 AM – 5:00 PM<br />Sat – Sun: By Appointment</p>
+              <p className="contact-card-body">Mon – Fri: 6:00 AM – 10:00 PM<br />Sat – Sun: By Appointment</p>
             </div>
 
           </div>

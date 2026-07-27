@@ -72,7 +72,7 @@ export default function SiteFooter() {
           <span className="footer-contact-line"><strong>Lemon Grove, CA 91945</strong></span>
           <a href="tel:+16197940218" className="footer-contact-line">(619) 794-0218</a>
           <a href="mailto:contactus@palisaderealty.com" className="footer-contact-line footer-contact-line--email">contactus@palisaderealty.com</a>
-          <span className="footer-contact-line">Mon – Fri: 9:00 AM – 5:00 PM</span>
+          <span className="footer-contact-line">Mon – Fri: 6:00 AM – 10:00 PM</span>
         </address>
 
       </div>

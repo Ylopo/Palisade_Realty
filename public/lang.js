@@ -32,7 +32,7 @@
       footerBlog: 'Blog',
       footerTeam: 'Our Team',
       footerContactUs: 'Contact Us',
-      footerHours: 'Mon – Fri: 9:00 AM – 5:00 PM',
+      footerHours: 'Mon – Fri: 6:00 AM – 10:00 PM',
 
       /* HOMEPAGE — hero */
       heroSubtitle: "Experience the new way of Buying and Selling real estate<br>in today’s shifting market.",
@@ -395,7 +395,7 @@
       footerBlog: 'Blog',
       footerTeam: 'Nuestro Equipo',
       footerContactUs: 'Contáctanos',
-      footerHours: 'Lun – Vie: 9:00 AM – 5:00 PM',
+      footerHours: 'Lun – Vie: 6:00 AM – 10:00 PM',
 
       /* HOMEPAGE — hero */
       heroSubtitle: 'Descubra la nueva forma de Comprar y Vender bienes raíces<br>en el mercado actual.',
