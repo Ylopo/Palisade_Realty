@@ -221,6 +221,27 @@
       commStatYears: 'Years of Experience',
       commStatAgents: 'Expert Agents',
 
+      /* MELLO-ROOS SECTION (community detail page) */
+      mellorooEyebrow: 'Understanding Additional Property Assessments',
+      mellorooIntro: 'Mello-Roos fees are a type of special tax that can apply to certain properties in California — most commonly in newer developments or areas where public infrastructure was built using Community Facilities District (CFD) bonds.',
+      mellrooBodies: [
+        'When a developer builds a new community, they sometimes partner with a public agency to finance infrastructure — roads, parks, schools, and sewer lines — through a bond. That bond is repaid over time through a special tax collected alongside property taxes on homes in the district.',
+        'Not every property in Downtown San Diego carries a Mello-Roos assessment. Older buildings and established condos typically do not. Newer developments, particularly in the East Village and Columbia District where significant construction has occurred, may carry a CFD assessment.',
+        'Assessment amounts vary by development, bond size, and how much of the original bond has been paid down. Some assessments are modest; others can add several hundred dollars per year to your overall tax bill. Verifying the current assessment — and its scheduled end date — before making an offer is an important step in understanding your true cost of ownership.',
+        'Palisade Realty agents can help you locate CFD parcel tax information for any specific property, interpret the assessment schedule, and factor the full cost into your monthly payment analysis before you commit.',
+      ],
+      mellorooQfHeading: 'Quick Facts',
+      mellorooQfItems: [
+        'May apply to certain properties or developments',
+        'Helps fund public infrastructure and services',
+        'Assessment amounts vary by property',
+        'Buyers should verify before purchasing',
+      ],
+      mellorooDisclaimer: 'Mello-Roos assessments vary by property and development. Buyers should verify current assessments with the appropriate public agency and consult their real estate or tax professional.',
+      mellrooCTAHeading: 'Need Help Understanding Mello-Roos?',
+      mellrooCTABody: 'Our team can help you review property details and better understand any additional assessments before you make an offer.',
+      mellrooCTABtn: 'Contact Our Team',
+
       /* TEAM PAGE */
       teamHeroEyebrow: 'San Diego Real Estate',
       teamHeroTitle: 'Meet Our <em>Team</em>',
@@ -583,6 +604,27 @@
       commStatPremier: 'Comunidades Destacadas',
       commStatYears: 'Años de Experiencia',
       commStatAgents: 'Agentes Expertos',
+
+      /* MELLO-ROOS SECTION (community detail page) */
+      mellorooEyebrow: 'Comprensión de Gravámenes Especiales',
+      mellorooIntro: 'Los cargos Mello-Roos son un tipo de impuesto especial que puede aplicarse a ciertas propiedades en California — más comúnmente en nuevos desarrollos o áreas donde la infraestructura pública fue construida mediante bonos del Distrito de Instalaciones Comunitarias (CFD).',
+      mellrooBodies: [
+        'Cuando un desarrollador construye una nueva comunidad, a veces se asocia con una agencia pública para financiar infraestructura — carreteras, parques, escuelas y alcantarillado — mediante un bono. Ese bono se reembolsa con el tiempo a través de un impuesto especial cobrado junto con los impuestos sobre la propiedad de las viviendas en el distrito.',
+        'No todas las propiedades en el Centro de San Diego tienen una evaluación Mello-Roos. Los edificios más antiguos y los condominios establecidos normalmente no la tienen. Los desarrollos más nuevos, en particular en el East Village y el Distrito de Columbia donde ha habido construcción significativa, pueden tener una evaluación CFD.',
+        'Los montos de evaluación varían según el desarrollo, el tamaño del bono y cuánto del bono original se ha pagado. Algunas evaluaciones son modestas; otras pueden agregar varios cientos de dólares al año a su factura fiscal total. Verificar la evaluación actual — y su fecha de vencimiento programada — antes de hacer una oferta es un paso importante para comprender su costo real de propiedad.',
+        'Los agentes de Palisade Realty pueden ayudarle a localizar información sobre impuestos de parcelas CFD para cualquier propiedad específica, interpretar el calendario de evaluación y considerar el costo total en su análisis de pago mensual antes de comprometerse.',
+      ],
+      mellorooQfHeading: 'Datos Rápidos',
+      mellorooQfItems: [
+        'Puede aplicarse a ciertas propiedades o desarrollos',
+        'Ayuda a financiar infraestructura y servicios públicos',
+        'Los montos de evaluación varían según la propiedad',
+        'Los compradores deben verificar antes de comprar',
+      ],
+      mellorooDisclaimer: 'Las evaluaciones Mello-Roos varían según la propiedad y el desarrollo. Los compradores deben verificar las evaluaciones actuales con la agencia pública correspondiente y consultar con su profesional inmobiliario o fiscal.',
+      mellrooCTAHeading: '¿Necesita Ayuda para Entender los Mello-Roos?',
+      mellrooCTABody: 'Nuestro equipo puede ayudarle a revisar los detalles de la propiedad y comprender mejor cualquier evaluación adicional antes de hacer una oferta.',
+      mellrooCTABtn: 'Contactar a Nuestro Equipo',
 
       /* TEAM PAGE */
       teamHeroEyebrow: 'Bienes Raíces en San Diego',
@@ -2454,6 +2496,34 @@ var AGENT_TRANSLATIONS = {
     var cmTiles = document.querySelectorAll('.comm-intro-tile-label');
     var tileKeys = ['commStatPremier', 'commStatYears', 'commStatAgents'];
     cmTiles.forEach(function (el, i) { if (tileKeys[i]) el.textContent = d[tileKeys[i]]; });
+
+    /* ── MELLO-ROOS SECTION (community detail page) ─────────── */
+    var mrEyebrow = document.querySelector('.mello-eyebrow');
+    if (mrEyebrow) mrEyebrow.textContent = d.mellorooEyebrow;
+
+    var mrIntro = document.querySelector('.mello-roos-intro');
+    if (mrIntro) mrIntro.textContent = d.mellorooIntro;
+
+    var mrBodies = document.querySelectorAll('.mello-roos-body');
+    mrBodies.forEach(function (el, i) { if (d.mellrooBodies && d.mellrooBodies[i]) el.textContent = d.mellrooBodies[i]; });
+
+    var mrQfHeading = document.querySelector('.mello-qf-heading');
+    if (mrQfHeading) mrQfHeading.textContent = d.mellorooQfHeading;
+
+    var mrQfItems = document.querySelectorAll('.mello-qf-item');
+    mrQfItems.forEach(function (el, i) { if (d.mellorooQfItems && d.mellorooQfItems[i]) el.textContent = d.mellorooQfItems[i]; });
+
+    var mrDisclaimer = document.querySelector('.mello-roos-disclaimer');
+    if (mrDisclaimer) mrDisclaimer.textContent = d.mellorooDisclaimer;
+
+    var mrCtaHeading = document.querySelector('.mello-cta-heading');
+    if (mrCtaHeading) mrCtaHeading.textContent = d.mellrooCTAHeading;
+
+    var mrCtaBody = document.querySelector('.mello-cta-body');
+    if (mrCtaBody) mrCtaBody.textContent = d.mellrooCTABody;
+
+    var mrCtaBtn = document.querySelector('.mello-cta-btn');
+    if (mrCtaBtn) mrCtaBtn.textContent = d.mellrooCTABtn;
 
     /* ── TEAM PAGE ──────────────────────────────────────────── */
     if (document.querySelector('.tp-hero')) {
