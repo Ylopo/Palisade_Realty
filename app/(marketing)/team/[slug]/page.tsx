@@ -131,7 +131,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-const RELATED_SLUGS = ['hedda-parashos', 'tom-parashos', 'britney-bartlett', 'melissa-maxwell']
+const RELATED_SLUGS = ['hedda-parashos', 'tom-parashos', 'britney-bartlett', 'melissa-maxwell', 'michael-divita', 'michael-guzman']
 
 export const revalidate = 3600
 
@@ -198,7 +198,7 @@ export default async function AgentPage({ params }: Props) {
 
   const relatedAgents = ALL_AGENTS.filter(
     (a) => RELATED_SLUGS.includes(a.slug) && a.slug !== slug
-  ).slice(0, 4)
+  ).slice(0, 5)
 
   const featuredListings = getAgentListings()
 
@@ -464,7 +464,7 @@ export default async function AgentPage({ params }: Props) {
           <h2 id="related-heading" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(26px,3vw,40px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.02em', margin: '8px 0 40px' }}>
             Meet More of Our <em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>Agents</em>
           </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '18px', marginBottom: '40px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '18px', marginBottom: '40px' }}>
             {relatedAgents.map((a) => (
               <article key={a.slug} className={`agent-card${a.isLeader ? ' agent-card--leader' : ''}`}>
                 <div className="agent-card-img-wrap">
