@@ -129,6 +129,7 @@ var CITIES = {"type":"FeatureCollection","features":[{"type":"Feature","id":"dow
     initNavScroll();
     // initMobileMenu() removed — SiteHeader.tsx handles this via React + body.nav-open
     initHeroSearch();
+    initHeroAutocomplete();
     initScrollAnimations();
     initMapbox();
     initTeamCarousel();
@@ -146,6 +147,7 @@ var CITIES = {"type":"FeatureCollection","features":[{"type":"Feature","id":"dow
 // in Next.js: script runs once, but the page component remounts and recreates the DOM)
 window.__palisadeReinit = function () {
   initHeroSearch();
+  initHeroAutocomplete();
   initScrollAnimations();
   initMapbox();
   initTeamCarousel();
@@ -201,6 +203,204 @@ function initHeroSearch() {
       e.preventDefault();
       window.location.href = 'https://search.palisaderealty.com/';
     }
+  });
+}
+
+/* ── HERO SEARCH AUTOCOMPLETE ──────────────────────────────── */
+function initHeroAutocomplete() {
+  var input = document.getElementById('hero-q');
+  if (!input) return;
+
+  // Remove any existing dropdown — handles reinit on back-navigation
+  var existing = document.getElementById('hero-autocomplete');
+  if (existing) existing.parentNode.removeChild(existing);
+
+  // Extend this array to add more communities — no other code changes needed
+  var COMMUNITIES = [
+    'Downtown San Diego',
+    'Mission Hills',
+    'Mission Valley',
+    'North Park',
+    'Point Loma',
+    'Coronado',
+    'Pacific Beach',
+    'Mission Beach',
+    'La Jolla',
+    'Del Mar',
+    'Carmel Valley',
+    'Rancho Santa Fe',
+    'Rancho Peñasquitos',
+    'Scripps Ranch',
+    'Encinitas',
+    'Carlsbad',
+    'Oceanside',
+    'Chula Vista',
+    'La Mesa',
+    'El Cajon',
+  ];
+
+  var dropdown = document.createElement('ul');
+  dropdown.id = 'hero-autocomplete';
+  dropdown.className = 'hero-autocomplete';
+  dropdown.setAttribute('role', 'listbox');
+  dropdown.setAttribute('aria-label', 'Community suggestions');
+  document.body.appendChild(dropdown);
+
+  input.setAttribute('aria-autocomplete', 'list');
+  input.setAttribute('aria-controls', 'hero-autocomplete');
+  input.setAttribute('aria-expanded', 'false');
+  input.setAttribute('aria-haspopup', 'listbox');
+
+  var activeIndex = -1;
+  var isOpen = false;
+  var debounceTimer = null;
+
+  function positionDropdown() {
+    var field = input.closest('.hero-search-field');
+    if (!field) return;
+    var rect = field.getBoundingClientRect();
+    dropdown.style.top    = (rect.bottom + window.scrollY - 1) + 'px';
+    dropdown.style.left   = (rect.left   + window.scrollX)     + 'px';
+    dropdown.style.width  = rect.width + 'px';
+  }
+
+  function getItems() {
+    return dropdown.querySelectorAll('.hero-autocomplete-item');
+  }
+
+  function setActive(index) {
+    var items = getItems();
+    if (!items.length) return;
+    index = Math.max(-1, Math.min(index, items.length - 1));
+    items.forEach(function (el, i) {
+      var on = (i === index);
+      el.classList.toggle('is-active', on);
+      el.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    activeIndex = index;
+    if (index >= 0 && items[index]) {
+      input.setAttribute('aria-activedescendant', items[index].id);
+    } else {
+      input.removeAttribute('aria-activedescendant');
+    }
+  }
+
+  function selectItem(value) {
+    input.value = value;
+    closeDropdown();
+    input.focus();
+  }
+
+  function closeDropdown() {
+    if (!isOpen) return;
+    dropdown.classList.remove('is-open');
+    input.setAttribute('aria-expanded', 'false');
+    input.removeAttribute('aria-activedescendant');
+    activeIndex = -1;
+    isOpen = false;
+  }
+
+  function openDropdown(matches) {
+    activeIndex = -1;
+    dropdown.innerHTML = '';
+
+    if (matches.length === 0) {
+      var empty = document.createElement('li');
+      empty.className = 'hero-autocomplete-empty';
+      empty.textContent = 'No matching communities found';
+      empty.setAttribute('role', 'option');
+      dropdown.appendChild(empty);
+    } else {
+      matches.forEach(function (name, i) {
+        var item = document.createElement('li');
+        item.className = 'hero-autocomplete-item';
+        item.id = 'hero-ac-opt-' + i;
+        item.setAttribute('role', 'option');
+        item.setAttribute('aria-selected', 'false');
+        item.setAttribute('data-value', name);
+        item.textContent = name;
+        // mousedown prevents blur before selection fires
+        item.addEventListener('mousedown', function (e) {
+          e.preventDefault();
+          selectItem(name);
+        });
+        // touchstart for fast response on mobile
+        item.addEventListener('touchstart', function (e) {
+          e.preventDefault();
+          selectItem(name);
+        }, { passive: false });
+        item.addEventListener('mouseover', function () { setActive(i); });
+        dropdown.appendChild(item);
+      });
+    }
+
+    positionDropdown();
+    dropdown.classList.add('is-open');
+    input.setAttribute('aria-expanded', 'true');
+    isOpen = true;
+  }
+
+  function getMatches(q) {
+    var normalized = q.replace(/\s+/g, ' ').trim().toLowerCase();
+    if (normalized.length < 2) return [];
+    return COMMUNITIES.filter(function (c) {
+      return c.toLowerCase().indexOf(normalized) !== -1;
+    });
+  }
+
+  // Debounced input handler
+  input.addEventListener('input', function () {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(function () {
+      var q = input.value;
+      if (q.replace(/\s+/g, '').length < 2) { closeDropdown(); return; }
+      openDropdown(getMatches(q));
+    }, 220);
+  });
+
+  // Keyboard navigation
+  input.addEventListener('keydown', function (e) {
+    var items = getItems();
+    if (!isOpen) {
+      if (e.key === 'ArrowDown' && input.value.trim().length >= 2) {
+        openDropdown(getMatches(input.value));
+      }
+      return;
+    }
+    switch (e.key) {
+      case 'ArrowDown':
+        e.preventDefault();
+        setActive(activeIndex + 1);
+        break;
+      case 'ArrowUp':
+        e.preventDefault();
+        setActive(activeIndex <= 0 ? -1 : activeIndex - 1);
+        break;
+      case 'Enter':
+        if (activeIndex >= 0 && items[activeIndex]) {
+          e.preventDefault();
+          selectItem(items[activeIndex].getAttribute('data-value'));
+        }
+        break;
+      case 'Escape':
+        closeDropdown();
+        break;
+    }
+  });
+
+  // Close when focus leaves the input (200ms allows click/touch to register first)
+  input.addEventListener('blur', function () {
+    setTimeout(closeDropdown, 200);
+  });
+
+  // Close on outside clicks
+  document.addEventListener('click', function (e) {
+    if (e.target !== input && !dropdown.contains(e.target)) closeDropdown();
+  });
+
+  // Reposition on window resize
+  window.addEventListener('resize', function () {
+    if (isOpen) positionDropdown();
   });
 }
 

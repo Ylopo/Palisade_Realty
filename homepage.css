@@ -505,6 +505,61 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .hero-search-btn:focus-visible { outline: 2px solid var(--white); outline-offset: -2px; }
 .hero-search-btn-icon { flex-shrink: 0; }
 
+/* ── HERO SEARCH AUTOCOMPLETE ───────────────────────────────── */
+.hero-autocomplete {
+  position: absolute;
+  z-index: 9000;
+  list-style: none;
+  margin: 0;
+  padding: 6px 0 8px;
+  background: #0e0e0e;
+  border: 1px solid rgba(255,255,255,0.16);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-radius: 0 0 16px 16px;
+  box-shadow:
+    0 20px 48px rgba(0,0,0,0.70),
+    0 4px 16px rgba(0,0,0,0.45);
+  overflow: hidden;
+  display: none;
+}
+.hero-autocomplete.is-open { display: block; }
+
+.hero-autocomplete-item {
+  padding: 11px 24px;
+  cursor: pointer;
+  font-family: var(--font-body,'Manrope',sans-serif);
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.80);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background 100ms ease, color 100ms ease;
+}
+.hero-autocomplete-item:hover,
+.hero-autocomplete-item.is-active {
+  background: rgba(255,255,255,0.07);
+  color: #fff;
+}
+.hero-autocomplete-item.is-active {
+  color: var(--accent,#eeca00);
+  background: rgba(238,202,0,0.07);
+}
+
+.hero-autocomplete-empty {
+  padding: 13px 24px;
+  font-family: var(--font-body,'Manrope',sans-serif);
+  font-size: 13px;
+  font-style: italic;
+  color: rgba(255,255,255,0.35);
+  pointer-events: none;
+  user-select: none;
+}
+
+@media (max-width: 768px) {
+  .hero-autocomplete { border-radius: 0 0 14px 14px; }
+}
+
 /* ── 8. COMMUNITIES — FLEX-EXPAND HOVER ───────────────────── */
 .communities {
   background: var(--white);
