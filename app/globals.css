@@ -1486,6 +1486,12 @@ a {
   .comm-cta-title { font-size: 32px; }
 }
 
+/* ── MELLO-ROOS SECTION (community detail page) ─────────── */
+@media (max-width: 1024px) {
+  .mello-roos-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+  .mello-roos-grid > div:last-child { position: static !important; }
+}
+
 /* ============================================================
    AGENT DETAIL PAGE  (.ap-*)
    ============================================================ */

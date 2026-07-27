@@ -54,6 +54,15 @@ export interface CommunityData {
   lifestyleBody?: string[]
   lifestyleBullets?: string[]
   nearbyDescription?: string
+  melloroos?: {
+    show: boolean
+    introText: string
+    detailParagraphs: string[]
+    quickFacts: string[]
+    disclaimer: string
+    ctaText: string
+    ctaLink: string
+  }
 }
 
 const COMMUNITIES: CommunityData[] = [
@@ -1431,6 +1440,25 @@ const COMMUNITIES: CommunityData[] = [
       'San Diego Bay Wine & Food Festival and Embarcadero seasonal events',
     ],
     nearbyDescription: 'How Downtown San Diego compares to neighboring areas — each with its own character, price point, and lifestyle.',
+    melloroos: {
+      show: true,
+      introText: 'Mello-Roos fees are a type of special tax that can apply to certain properties in California — most commonly in newer developments or areas where public infrastructure was built using Community Facilities District (CFD) bonds.',
+      detailParagraphs: [
+        'When a developer builds a new community, they sometimes partner with a public agency to finance infrastructure — roads, parks, schools, and sewer lines — through a bond. That bond is repaid over time through a special tax collected alongside property taxes on homes in the district.',
+        'Not every property in Downtown San Diego carries a Mello-Roos assessment. Older buildings and established condos typically do not. Newer developments, particularly in the East Village and Columbia District where significant construction has occurred, may carry a CFD assessment.',
+        'Assessment amounts vary by development, bond size, and how much of the original bond has been paid down. Some assessments are modest; others can add several hundred dollars per year to your overall tax bill. Verifying the current assessment — and its scheduled end date — before making an offer is an important step in understanding your true cost of ownership.',
+        'Palisade Realty agents can help you locate CFD parcel tax information for any specific property, interpret the assessment schedule, and factor the full cost into your monthly payment analysis before you commit.',
+      ],
+      quickFacts: [
+        'May apply to certain properties or developments',
+        'Helps fund public infrastructure and services',
+        'Assessment amounts vary by property',
+        'Buyers should verify before purchasing',
+      ],
+      disclaimer: 'Mello-Roos assessments vary by property and development. Buyers should verify current assessments with the appropriate public agency and consult their real estate or tax professional.',
+      ctaText: 'Our team can help you review property details and better understand any additional assessments before you make an offer.',
+      ctaLink: '/contact',
+    },
   },
   {
     name: 'Mission Hills',

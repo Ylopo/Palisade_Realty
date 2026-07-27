@@ -204,6 +204,78 @@ export default async function CommunityPage({ params }: Props) {
         </div>
       )}
 
+      {/* ── 6b. MELLO-ROOS ──────────────────────────────────────── */}
+      {c.melloroos?.show && (
+        <section id="mello-roos" style={{ background: '#ffffff', padding: '100px var(--pad-x,56px)' }} aria-labelledby="mello-roos-heading">
+          <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
+
+            {/* Two-column: content left, quick-facts card right */}
+            <div className="mello-roos-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: '72px', alignItems: 'start' }}>
+
+              {/* Left column */}
+              <div>
+                <span className="section-eyebrow" style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>
+                  Understanding Additional Property Assessments
+                </span>
+                <h2 id="mello-roos-heading" className="section-title" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px,4.5vw,64px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.64px', lineHeight: 1.1, marginBottom: '24px' }}>
+                  Mello-<em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>Roos</em>
+                </h2>
+                <div style={{ width: '40px', height: '2px', background: 'var(--brand,#58172a)', margin: '20px 0 28px' }} />
+                <p className="mello-roos-intro" style={{ fontFamily: 'var(--font-body)', fontSize: '16px', lineHeight: 1.78, color: 'rgba(33,33,33,0.70)', marginBottom: '24px', fontWeight: 500 }}>
+                  {c.melloroos.introText}
+                </p>
+                {c.melloroos.detailParagraphs.map((p, i) => (
+                  <p key={i} className="mello-roos-body" style={{ fontFamily: 'var(--font-body)', fontSize: '16px', lineHeight: 1.78, color: 'rgba(33,33,33,0.55)', marginBottom: '18px' }}>
+                    {p}
+                  </p>
+                ))}
+              </div>
+
+              {/* Right column — Quick Facts card */}
+              <div
+                style={{ background: '#ebebeb', border: '1px solid rgba(0,0,0,0.10)', borderRadius: '14px', padding: '32px 28px', position: 'sticky', top: '96px' }}
+                aria-label="Mello-Roos quick facts"
+              >
+                <p style={{ fontFamily: 'var(--font-label)', fontSize: '10px', fontWeight: 700, letterSpacing: '0.28em', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '20px', paddingBottom: '16px', borderBottom: '1px solid rgba(0,0,0,0.10)' }}>
+                  Quick Facts
+                </p>
+                {c.melloroos.quickFacts.map((fact, i) => (
+                  <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', padding: '12px 0', borderBottom: i < c.melloroos!.quickFacts.length - 1 ? '1px solid rgba(0,0,0,0.07)' : 'none' }}>
+                    <span aria-hidden="true" style={{ flexShrink: 0, width: '6px', height: '6px', borderRadius: '50%', background: 'var(--brand,#58172a)', marginTop: '7px' }} />
+                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '14px', lineHeight: 1.60, color: 'rgba(33,33,33,0.70)' }}>{fact}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Disclaimer */}
+            <p className="mello-roos-disclaimer" style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'rgba(33,33,33,0.45)', lineHeight: 1.6, marginTop: '40px', paddingTop: '24px', borderTop: '1px solid rgba(0,0,0,0.08)', maxWidth: '820px' }}>
+              <em>{c.melloroos.disclaimer}</em>
+            </p>
+
+            {/* CTA block */}
+            <div style={{ marginTop: '52px', background: '#faf7f2', border: '1px solid rgba(88,23,42,0.10)', borderRadius: '14px', padding: '36px 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '32px', flexWrap: 'wrap' }}>
+              <div>
+                <p style={{ fontFamily: 'var(--font-display)', fontSize: '22px', fontWeight: 500, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.01em', marginBottom: '8px' }}>
+                  Need Help Understanding Mello-Roos?
+                </p>
+                <p style={{ fontFamily: 'var(--font-body)', fontSize: '15px', lineHeight: 1.65, color: 'rgba(33,33,33,0.55)', maxWidth: '560px', margin: 0 }}>
+                  {c.melloroos.ctaText}
+                </p>
+              </div>
+              <Link
+                href={c.melloroos.ctaLink}
+                className="btn btn-brand"
+                aria-label="Contact our team about Mello-Roos assessments"
+              >
+                Contact Our Team
+              </Link>
+            </div>
+
+          </div>
+        </section>
+      )}
+
       {/* ── 7. CITY STATS ───────────────────────────────────────── */}
       {c.cityStats && c.cityStats.length > 0 && (
         <div id="city-stats" style={{ background: 'var(--brand,#58172a)', padding: '64px var(--pad-x,56px)' }}>
