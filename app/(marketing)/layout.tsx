@@ -18,6 +18,9 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
       <Script src="/homepage-nextjs.js" strategy="afterInteractive" />
       {/* fp-carousel.js must live in the layout (not page.tsx) so it runs exactly once per session */}
       <Script src="/fp-carousel.js" strategy="afterInteractive" />
+      {/* YLOPO widget — config must be set before the widget script loads */}
+      <Script id="ylopo-config" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: 'window.YLOPO_WIDGETS={"domain":"search.palisaderealty.com"}' }} />
+      <Script src="https://search.palisaderealty.com/build/js/widgets-1.0.0.js" strategy="afterInteractive" />
     </>
   )
 }
