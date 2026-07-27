@@ -207,37 +207,84 @@ function initHeroSearch() {
 }
 
 /* ── HERO SEARCH AUTOCOMPLETE ──────────────────────────────── */
+var __heroAutoSubmitHandler = null;
+
 function initHeroAutocomplete() {
   var input = document.getElementById('hero-q');
-  if (!input) return;
+  var form  = document.getElementById('hero-search-form');
+  if (!input || !form) return;
 
   // Remove any existing dropdown — handles reinit on back-navigation
   var existing = document.getElementById('hero-autocomplete');
   if (existing) existing.parentNode.removeChild(existing);
 
-  // Extend this array to add more communities — no other code changes needed
+  // Each entry: name (display + query), city, state, neighborhood
+  // neighborhood empty string = city-level search (Coronado, Del Mar, etc.)
   var COMMUNITIES = [
-    'Downtown San Diego',
-    'Mission Hills',
-    'Mission Valley',
-    'North Park',
-    'Point Loma',
-    'Coronado',
-    'Pacific Beach',
-    'Mission Beach',
-    'La Jolla',
-    'Del Mar',
-    'Carmel Valley',
-    'Rancho Santa Fe',
-    'Rancho Peñasquitos',
-    'Scripps Ranch',
-    'Encinitas',
-    'Carlsbad',
-    'Oceanside',
-    'Chula Vista',
-    'La Mesa',
-    'El Cajon',
+    { name: 'Downtown San Diego',  city: 'San Diego',       state: 'CA', neighborhood: 'Downtown San Diego' },
+    { name: 'Mission Hills',       city: 'San Diego',       state: 'CA', neighborhood: 'Mission Hills' },
+    { name: 'Mission Valley',      city: 'San Diego',       state: 'CA', neighborhood: 'Mission Valley' },
+    { name: 'North Park',          city: 'San Diego',       state: 'CA', neighborhood: 'North Park' },
+    { name: 'Point Loma',          city: 'San Diego',       state: 'CA', neighborhood: 'Point Loma' },
+    { name: 'Coronado',            city: 'Coronado',        state: 'CA', neighborhood: '' },
+    { name: 'Pacific Beach',       city: 'San Diego',       state: 'CA', neighborhood: 'Pacific Beach' },
+    { name: 'Mission Beach',       city: 'San Diego',       state: 'CA', neighborhood: 'Mission Beach' },
+    { name: 'La Jolla',            city: 'San Diego',       state: 'CA', neighborhood: 'La Jolla' },
+    { name: 'Del Mar',             city: 'Del Mar',         state: 'CA', neighborhood: '' },
+    { name: 'Carmel Valley',       city: 'San Diego',       state: 'CA', neighborhood: 'Carmel Valley' },
+    { name: 'Rancho Santa Fe',     city: 'Rancho Santa Fe', state: 'CA', neighborhood: '' },
+    { name: 'Rancho Peñasquitos',  city: 'San Diego',       state: 'CA', neighborhood: 'Rancho Peñasquitos' },
+    { name: 'Scripps Ranch',       city: 'San Diego',       state: 'CA', neighborhood: 'Scripps Ranch' },
+    { name: 'Encinitas',           city: 'Encinitas',       state: 'CA', neighborhood: '' },
+    { name: 'Carlsbad',            city: 'Carlsbad',        state: 'CA', neighborhood: '' },
+    { name: 'Oceanside',           city: 'Oceanside',       state: 'CA', neighborhood: '' },
+    { name: 'Chula Vista',         city: 'Chula Vista',     state: 'CA', neighborhood: '' },
+    { name: 'La Mesa',             city: 'La Mesa',         state: 'CA', neighborhood: '' },
+    { name: 'El Cajon',            city: 'El Cajon',        state: 'CA', neighborhood: '' },
   ];
+
+  function buildUrl(community) {
+    var enc = encodeURIComponent;
+    var propertyType = (form.querySelector('[name="propertyType"]') || {value: ''}).value || '';
+    var maxPrice     = (form.querySelector('[name="maxPrice"]')     || {value: ''}).value || '';
+    var parts = [
+      'q='            + enc(community.name),
+      'propertyType=' + enc(propertyType),
+      'maxPrice='     + enc(maxPrice),
+      's[orderBy]=sourceCreationDate%2Cdesc',
+      's[page]=1',
+    ];
+    if (community.neighborhood) {
+      parts.push('s[locations][0][neighborhood]=' + enc(community.neighborhood));
+    }
+    parts.push('s[locations][0][state]=' + enc(community.state));
+    parts.push('s[locations][0][city]='  + enc(community.city));
+    return 'https://search.palisaderealty.com/search?' + parts.join('&');
+  }
+
+  // Intercept form submit so all searches go to /search with proper params
+  if (__heroAutoSubmitHandler) form.removeEventListener('submit', __heroAutoSubmitHandler);
+  __heroAutoSubmitHandler = function (e) {
+    var q = input.value.trim();
+    if (!q) return; // empty — handled by initHeroSearch
+    e.preventDefault();
+    var enc = encodeURIComponent;
+    // Exact community name match → include structured location params
+    for (var i = 0; i < COMMUNITIES.length; i++) {
+      if (COMMUNITIES[i].name.toLowerCase() === q.toLowerCase()) {
+        window.location.href = buildUrl(COMMUNITIES[i]);
+        return;
+      }
+    }
+    // Free-text: /search with q only (no location params)
+    var propertyType = (form.querySelector('[name="propertyType"]') || {value: ''}).value || '';
+    var maxPrice     = (form.querySelector('[name="maxPrice"]')     || {value: ''}).value || '';
+    window.location.href = 'https://search.palisaderealty.com/search?q=' + enc(q)
+      + '&propertyType=' + enc(propertyType)
+      + '&maxPrice='     + enc(maxPrice)
+      + '&s[orderBy]=sourceCreationDate%2Cdesc&s[page]=1';
+  };
+  form.addEventListener('submit', __heroAutoSubmitHandler);
 
   var dropdown = document.createElement('ul');
   dropdown.id = 'hero-autocomplete';
@@ -251,9 +298,10 @@ function initHeroAutocomplete() {
   input.setAttribute('aria-expanded', 'false');
   input.setAttribute('aria-haspopup', 'listbox');
 
-  var activeIndex = -1;
-  var isOpen = false;
-  var debounceTimer = null;
+  var activeIndex    = -1;
+  var isOpen         = false;
+  var debounceTimer  = null;
+  var currentMatches = [];
 
   function positionDropdown() {
     var field = input.closest('.hero-search-field');
@@ -285,12 +333,6 @@ function initHeroAutocomplete() {
     }
   }
 
-  function selectItem(value) {
-    input.value = value;
-    closeDropdown();
-    input.focus();
-  }
-
   function closeDropdown() {
     if (!isOpen) return;
     dropdown.classList.remove('is-open');
@@ -300,7 +342,14 @@ function initHeroAutocomplete() {
     isOpen = false;
   }
 
+  function selectCommunity(community) {
+    input.value = community.name;
+    closeDropdown();
+    window.location.href = buildUrl(community);
+  }
+
   function openDropdown(matches) {
+    currentMatches = matches;
     activeIndex = -1;
     dropdown.innerHTML = '';
 
@@ -311,23 +360,22 @@ function initHeroAutocomplete() {
       empty.setAttribute('role', 'option');
       dropdown.appendChild(empty);
     } else {
-      matches.forEach(function (name, i) {
+      matches.forEach(function (community, i) {
         var item = document.createElement('li');
         item.className = 'hero-autocomplete-item';
         item.id = 'hero-ac-opt-' + i;
         item.setAttribute('role', 'option');
         item.setAttribute('aria-selected', 'false');
-        item.setAttribute('data-value', name);
-        item.textContent = name;
+        item.textContent = community.name;
         // mousedown prevents blur before selection fires
         item.addEventListener('mousedown', function (e) {
           e.preventDefault();
-          selectItem(name);
+          selectCommunity(community);
         });
         // touchstart for fast response on mobile
         item.addEventListener('touchstart', function (e) {
           e.preventDefault();
-          selectItem(name);
+          selectCommunity(community);
         }, { passive: false });
         item.addEventListener('mouseover', function () { setActive(i); });
         dropdown.appendChild(item);
@@ -344,7 +392,7 @@ function initHeroAutocomplete() {
     var normalized = q.replace(/\s+/g, ' ').trim().toLowerCase();
     if (normalized.length < 2) return [];
     return COMMUNITIES.filter(function (c) {
-      return c.toLowerCase().indexOf(normalized) !== -1;
+      return c.name.toLowerCase().indexOf(normalized) !== -1;
     });
   }
 
@@ -360,7 +408,6 @@ function initHeroAutocomplete() {
 
   // Keyboard navigation
   input.addEventListener('keydown', function (e) {
-    var items = getItems();
     if (!isOpen) {
       if (e.key === 'ArrowDown' && input.value.trim().length >= 2) {
         openDropdown(getMatches(input.value));
@@ -377,9 +424,9 @@ function initHeroAutocomplete() {
         setActive(activeIndex <= 0 ? -1 : activeIndex - 1);
         break;
       case 'Enter':
-        if (activeIndex >= 0 && items[activeIndex]) {
+        if (activeIndex >= 0 && currentMatches[activeIndex]) {
           e.preventDefault();
-          selectItem(items[activeIndex].getAttribute('data-value'));
+          selectCommunity(currentMatches[activeIndex]);
         }
         break;
       case 'Escape':
