@@ -1,9 +1,20 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import fs from 'fs'
+import path from 'path'
 import { notFound } from 'next/navigation'
 import { getPropertyBySlug, getAllPropertySlugs, getOtherProperties } from '@/lib/property-data'
 import PropertyGallery from './PropertyGallery'
 import PropertyPageBodyClass from '@/components/PropertyPageBodyClass'
+
+function loadSpanishData(slug: string): { descriptionEs?: string; featuresEs?: string[] } {
+  try {
+    const fp = path.join(process.cwd(), 'data', 'featured-properties.json')
+    const all = JSON.parse(fs.readFileSync(fp, 'utf8'))
+    const match = all.find((p: any) => p.slug === slug)
+    return { descriptionEs: match?.description_es, featuresEs: match?.features_es }
+  } catch { return {} }
+}
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -29,10 +40,16 @@ export default async function PropertyPage({ params }: Props) {
   if (!p) notFound()
 
   const others = getOtherProperties(slug).slice(0, 3)
+  const { descriptionEs, featuresEs } = loadSpanishData(slug)
+  const ppLangData = JSON.stringify({
+    description: { en: p.description, es: descriptionEs || p.description },
+    features: { en: p.features || [], es: featuresEs || p.features || [] },
+  })
 
   return (
     <>
       <PropertyPageBodyClass />
+      <script dangerouslySetInnerHTML={{ __html: `window.__ppLangData=${ppLangData};` }} />
       {/* ── GALLERY ─────────────────────────────────────────── */}
       <PropertyGallery images={p.gallery.length > 0 ? p.gallery : [p.heroImage]} address={p.address} />
 
@@ -91,7 +108,7 @@ export default async function PropertyPage({ params }: Props) {
                 {p.tagline}
               </p>
             )}
-            <p style={{ fontFamily: 'var(--font-body)', fontSize: '16px', color: '#555', lineHeight: 1.85, marginBottom: '40px' }}>
+            <p id="pp-body" style={{ fontFamily: 'var(--font-body)', fontSize: '16px', color: '#555', lineHeight: 1.85, marginBottom: '40px' }}>
               {p.description}
             </p>
 
