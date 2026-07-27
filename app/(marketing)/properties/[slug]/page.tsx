@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getPropertyBySlug, getAllPropertySlugs, getOtherProperties } from '@/lib/property-data'
 import PropertyGallery from './PropertyGallery'
+import PropertyPageBodyClass from '@/components/PropertyPageBodyClass'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -31,6 +32,7 @@ export default async function PropertyPage({ params }: Props) {
 
   return (
     <>
+      <PropertyPageBodyClass />
       {/* ── GALLERY ─────────────────────────────────────────── */}
       <PropertyGallery images={p.gallery.length > 0 ? p.gallery : [p.heroImage]} address={p.address} />
 
@@ -76,9 +78,9 @@ export default async function PropertyPage({ params }: Props) {
                 { label: 'Built', value: p.yearBuilt },
                 { label: 'MLS #', value: p.mls },
               ].map((s) => (
-                <div key={s.label}>
+                <div key={s.label} className="pp-stat">
                   <div style={{ fontFamily: 'var(--font-display)', fontSize: '22px', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', lineHeight: 1 }}>{s.value}</div>
-                  <div style={{ fontFamily: 'var(--font-label)', fontSize: '10px', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#aaa', marginTop: '3px' }}>{s.label}</div>
+                  <span style={{ fontFamily: 'var(--font-label)', fontSize: '10px', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#aaa', marginTop: '3px', display: 'block' }}>{s.label}</span>
                 </div>
               ))}
             </div>
@@ -95,7 +97,7 @@ export default async function PropertyPage({ params }: Props) {
 
             {/* Features */}
             {p.features && p.features.length > 0 && (
-              <div style={{ marginBottom: '48px' }}>
+              <div id="pp-features-section" style={{ marginBottom: '48px' }}>
                 <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '26px', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.01em', margin: '0 0 20px' }}>
                   Property <em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>Highlights</em>
                 </h2>
@@ -124,7 +126,7 @@ export default async function PropertyPage({ params }: Props) {
           {/* Sticky sidebar */}
           <aside style={{ position: 'sticky', top: '96px' }}>
             <div style={{ background: 'var(--brand-darker,#28000c)', borderRadius: '4px', padding: '32px 28px', color: '#fff' }}>
-              <p style={{ fontFamily: 'var(--font-label)', fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,.5)', marginBottom: '16px' }}>Listed By</p>
+              <p className="pp-attribution" style={{ fontFamily: 'var(--font-label)', fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,.5)', marginBottom: '16px' }}>Listed By</p>
               <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '24px' }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -195,7 +197,7 @@ export default async function PropertyPage({ params }: Props) {
 
       {/* ── OTHER FEATURED LISTINGS ─────────────────────────── */}
       {others.length > 0 && (
-        <section style={{ background: '#fff', padding: '88px var(--pad-x,60px)' }} aria-labelledby="other-props-heading">
+        <section id="pp-others-section" style={{ background: '#fff', padding: '88px var(--pad-x,60px)' }} aria-labelledby="other-props-heading">
           <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
             <p style={{ fontFamily: 'var(--font-label)', fontSize: '11px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '8px' }}>Featured Listings</p>
             <h2 id="other-props-heading" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(26px,3vw,40px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.02em', margin: '0 0 40px' }}>
@@ -230,7 +232,7 @@ export default async function PropertyPage({ params }: Props) {
 
       {/* ── CTA ─────────────────────────────────────────────── */}
       <section className="tp-cta" aria-labelledby="prop-cta-heading">
-        <div className="tp-wrap">
+        <div className="tp-wrap pp-tour">
           <h2 className="tp-cta-heading" id="prop-cta-heading">
             Ready to <em>Tour This Home?</em>
           </h2>
@@ -239,7 +241,7 @@ export default async function PropertyPage({ params }: Props) {
             {p.address}. Contact us today.
           </p>
           <div className="tp-cta-btns">
-            <a href={p.ylopoDetailUrl} target="_blank" rel="noopener noreferrer" className="btn btn-brand">
+            <a id="pp-tour-mailto" href={p.ylopoDetailUrl} target="_blank" rel="noopener noreferrer" className="btn btn-brand">
               Schedule a Tour
             </a>
             <Link href="/contact" className="btn btn-outline-white">
