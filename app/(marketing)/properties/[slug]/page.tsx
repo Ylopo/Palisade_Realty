@@ -205,6 +205,7 @@ export default async function PropertyPage({ params }: Props) {
               ],
               beds: { min: Math.max(1, p.beds - 1) },
               price: { max: Math.round(p.price * 1.5) },
+              limit: 12,
             })}
           />
         </div>
