@@ -85,6 +85,7 @@ export default async function BlogPostPage({ params }: Props) {
             .bp-cta-inline a:hover{text-decoration:underline;}
           `}</style>
           <section
+            className="bp-hero"
             style={{
               background: local.coverImage
                 ? `linear-gradient(to bottom, rgba(0,0,0,.55) 0%, rgba(40,0,12,.88) 100%), url(${local.coverImage}) center/cover no-repeat`
@@ -105,7 +106,7 @@ export default async function BlogPostPage({ params }: Props) {
                 {local.category}
               </span>
             </div>
-            <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(26px,4vw,52px)', fontWeight: 400, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1.18, margin: '0 auto 20px', maxWidth: '760px' }}>
+            <h1 className="bp-title" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(26px,4vw,52px)', fontWeight: 400, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1.18, margin: '0 auto 20px', maxWidth: '760px' }}>
               {local.title}
             </h1>
             <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -132,7 +133,7 @@ export default async function BlogPostPage({ params }: Props) {
             </div>
           </section>
           <section style={{ background: 'var(--off-white,#faf7f2)', padding: '48px var(--pad-x,60px)', textAlign: 'center' }}>
-            <Link href="/blog" className="btn btn-outline-brand">← Back to Blog</Link>
+            <Link href="/blog" className="bp-back btn btn-outline-brand">← Back to Blog</Link>
           </section>
         </>
       )
@@ -161,7 +162,7 @@ export default async function BlogPostPage({ params }: Props) {
 
     return (
       <>
-        <section style={{ background: 'var(--brand-darker,#28000c)', padding: '80px var(--pad-x,60px) 72px', textAlign: 'center' }}>
+        <section className="bp-hero" style={{ background: 'var(--brand-darker,#28000c)', padding: '80px var(--pad-x,60px) 72px', textAlign: 'center' }}>
           <nav aria-label="Breadcrumb" style={{ marginBottom: '32px' }}>
             <Link href="/" style={{ color: 'rgba(255,255,255,.4)', textDecoration: 'none', fontFamily: 'var(--font-label)', fontSize: '12px' }}>Palisade Realty</Link>
             <span style={{ color: 'rgba(255,255,255,.3)', margin: '0 8px' }}>/</span>
@@ -174,7 +175,7 @@ export default async function BlogPostPage({ params }: Props) {
               {staticPost.c}
             </span>
           </div>
-          <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(26px,4vw,52px)', fontWeight: 400, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1.18, margin: '0 auto 20px', maxWidth: '760px' }}>
+          <h1 className="bp-title" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(26px,4vw,52px)', fontWeight: 400, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1.18, margin: '0 auto 20px', maxWidth: '760px' }}>
             {staticPost.t}
           </h1>
           <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -202,7 +203,7 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
         </section>
         <section style={{ background: 'var(--off-white,#faf7f2)', padding: '48px var(--pad-x,60px)', textAlign: 'center' }}>
-          <Link href="/blog" className="btn btn-outline-brand">← Back to Blog</Link>
+          <Link href="/blog" className="bp-back btn btn-outline-brand">← Back to Blog</Link>
         </section>
       </>
     )
@@ -216,6 +217,7 @@ export default async function BlogPostPage({ params }: Props) {
     <>
       {/* ── HERO ─────────────────────────────────────────────── */}
       <section
+        className="bp-hero"
         style={{
           background: post.coverImage
             ? `linear-gradient(to bottom, rgba(0,0,0,.55) 0%, rgba(40,0,12,.88) 100%), url(${post.coverImage}) center/cover no-repeat`
@@ -236,7 +238,7 @@ export default async function BlogPostPage({ params }: Props) {
             {post.category}
           </span>
         </div>
-        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(26px,4vw,52px)', fontWeight: 400, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1.18, margin: '0 auto 20px', maxWidth: '760px' }}>
+        <h1 className="bp-title" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(26px,4vw,52px)', fontWeight: 400, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1.18, margin: '0 auto 20px', maxWidth: '760px' }}>
           {post.title}
         </h1>
         <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -259,7 +261,7 @@ export default async function BlogPostPage({ params }: Props) {
             </p>
           )}
           {post.body && post.body.length > 0 ? (
-            <div className="prose-body">
+            <div className="bp-content prose-body">
               <PortableText value={post.body as Parameters<typeof PortableText>[0]['value']} />
             </div>
           ) : (
@@ -270,7 +272,7 @@ export default async function BlogPostPage({ params }: Props) {
 
       {/* ── BACK NAV ─────────────────────────────────────────── */}
       <section style={{ background: 'var(--off-white,#faf7f2)', padding: '48px var(--pad-x,60px)', textAlign: 'center' }}>
-        <Link href="/blog" className="btn btn-outline-brand">← Back to Blog</Link>
+        <Link href="/blog" className="bp-back btn btn-outline-brand">← Back to Blog</Link>
       </section>
     </>
   )
