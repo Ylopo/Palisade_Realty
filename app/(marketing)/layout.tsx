@@ -1,6 +1,7 @@
 import Script from 'next/script'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
+import LangApplier from '@/components/LangApplier'
 import '@/homepage.css'
 import '@/lang.css'
 
@@ -8,6 +9,7 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
   return (
     <>
       <SiteHeader />
+      <LangApplier />
       <main>{children}</main>
       <SiteFooter />
       {/* lang.js must load after React hydration to avoid DOM conflicts */}

@@ -3318,10 +3318,17 @@ var AGENT_TRANSLATIONS = {
     });
   }
 
-  document.addEventListener('DOMContentLoaded', function () {
+  // DOMContentLoaded fires before Next.js "afterInteractive" scripts load,
+  // so check readyState and run immediately if the DOM is already available.
+  function doInit() {
     applyLang(getLang());
     initToggle();
-  });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', doInit);
+  } else {
+    doInit();
+  }
 
   // Re-apply language once the featured listings carousel finishes rendering
   window.addEventListener('fl-loaded', function () {
