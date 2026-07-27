@@ -402,8 +402,23 @@ export default async function AgentPage({ params }: Props) {
                 { city: 'Encinitas', state: 'CA' },
                 { city: 'Carlsbad', state: 'CA' },
               ],
+              limit: 12,
             })}
           />
+          <div style={{ textAlign: 'center', marginTop: '48px' }}>
+            <a
+              href="https://search.palisaderealty.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-brand"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '14px 32px', fontSize: '15px' }}
+            >
+              See More Listings
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
         </div>
       </section>
 
