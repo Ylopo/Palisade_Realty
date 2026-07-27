@@ -20,7 +20,7 @@ export default function PropertyGallery({ images, address }: Props) {
     <>
       {/* Main gallery */}
       <div style={{ position: 'relative', background: '#111', overflow: 'hidden' }}>
-        <div style={{ aspectRatio: '16/9', maxHeight: '620px', position: 'relative', cursor: 'pointer' }} onClick={() => setLightbox(true)}>
+        <div style={{ width: '100%', height: 'min(56.25vw, 620px)', position: 'relative', overflow: 'hidden', cursor: 'pointer' }} onClick={() => setLightbox(true)}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={images[active]}
