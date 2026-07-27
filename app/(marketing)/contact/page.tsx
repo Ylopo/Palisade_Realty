@@ -57,7 +57,7 @@ export default function ContactPage() {
               <span className="contact-card-label">Call Us</span>
               <h3 className="contact-card-title">Phone</h3>
               <p className="contact-card-body">
-                <a href="tel:+16197940218">(619) 794-0218</a><br />Mon – Fri: 9 AM – 5 PM
+                <a href="tel:+16197940218">(619) 794-0218</a><br />Mon – Fri: 6 AM – 10 PM
               </p>
             </div>
 
