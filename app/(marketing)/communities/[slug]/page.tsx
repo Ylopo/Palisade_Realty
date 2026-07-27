@@ -195,13 +195,30 @@ export default async function CommunityPage({ params }: Props) {
             </h2>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '14px', maxWidth: '1400px', margin: '0 auto' }}>
-            {c.neighborhoods.map((n, i) => (
-              <div key={i} className="neighborhood-card" style={{ background: '#ebebeb', border: '1px solid rgba(0,0,0,0.08)', borderRadius: '14px', padding: '22px 18px' }}>
-                <p style={{ fontFamily: 'var(--font-display)', fontSize: '18px', fontWeight: 500, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.01em', marginBottom: '5px' }}>{n.name}</p>
-                <p style={{ fontFamily: 'var(--font-label)', fontSize: '12px', fontWeight: 600, color: 'var(--brand,#58172a)', marginBottom: '8px' }}>{n.priceRange}</p>
-                <p className="neighborhood-tags" style={{ fontFamily: 'var(--font-label)', fontSize: '10px', color: 'rgba(33,33,33,0.55)', letterSpacing: '0.04em' }}>{n.tags}</p>
-              </div>
-            ))}
+            {c.neighborhoods.map((n, i) => {
+              const cardInner = (
+                <>
+                  <p style={{ fontFamily: 'var(--font-display)', fontSize: '18px', fontWeight: 500, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.01em', marginBottom: '5px' }}>{n.name}</p>
+                  <p style={{ fontFamily: 'var(--font-label)', fontSize: '12px', fontWeight: 600, color: 'var(--brand,#58172a)', marginBottom: '8px' }}>{n.priceRange}</p>
+                  <p className="neighborhood-tags" style={{ fontFamily: 'var(--font-label)', fontSize: '10px', color: 'rgba(33,33,33,0.55)', letterSpacing: '0.04em' }}>{n.tags}</p>
+                  {n.slug && <p style={{ fontFamily: 'var(--font-label)', fontSize: '10px', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginTop: '12px' }}>Explore →</p>}
+                </>
+              )
+              return n.slug ? (
+                <Link
+                  key={i}
+                  href={`/communities/${c.slug}/${n.slug}`}
+                  className="neighborhood-card neighborhood-card--linked"
+                  style={{ background: '#ebebeb', border: '1px solid rgba(0,0,0,0.08)', borderRadius: '14px', padding: '22px 18px', textDecoration: 'none', display: 'block' }}
+                >
+                  {cardInner}
+                </Link>
+              ) : (
+                <div key={i} className="neighborhood-card" style={{ background: '#ebebeb', border: '1px solid rgba(0,0,0,0.08)', borderRadius: '14px', padding: '22px 18px' }}>
+                  {cardInner}
+                </div>
+              )
+            })}
           </div>
         </div>
       )}

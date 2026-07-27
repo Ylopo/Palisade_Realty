@@ -43,7 +43,7 @@ export interface CommunityData {
   locationDescription?: string
   driveCards?: Array<{ time: string; dest: string; via: string }>
   demographics?: Array<{ value: string; label: string }>
-  neighborhoods?: Array<{ name: string; priceRange: string; tags: string }>
+  neighborhoods?: Array<{ name: string; priceRange: string; tags: string; slug?: string }>
   cityStats?: Array<{ value: string; label: string }>
   hoa?: Array<{ type: string; monthly: string }>
   hoaNote?: string
@@ -1313,7 +1313,7 @@ const COMMUNITIES: CommunityData[] = [
       { value: '22%', label: 'Ownership Rate' },
     ],
     neighborhoods: [
-      { name: 'East Village', priceRange: '$400K – $1.2M', tags: 'Breweries · Petco Park · Hip' },
+      { name: 'East Village', priceRange: '$400K – $1.2M', tags: 'Breweries · Petco Park · Hip', slug: 'east-village' },
       { name: 'Little Italy', priceRange: '$600K – $2.5M', tags: 'Walkable · Dining · European Feel' },
       { name: 'Gaslamp Quarter', priceRange: '$450K – $1.5M', tags: 'Nightlife · Historic · Entertainment' },
       { name: 'Marina District', priceRange: '$500K – $2M', tags: 'Bayfront · Views · Luxury High-Rise' },

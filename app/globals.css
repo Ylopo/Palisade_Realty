@@ -1492,6 +1492,21 @@ a {
   .mello-roos-grid > div:last-child { position: static !important; }
 }
 
+/* ── NEIGHBORHOOD CARD — linked state ───────────────────── */
+.neighborhood-card--linked {
+  transition: transform 0.18s cubic-bezier(.22,.68,0,1.2), box-shadow 0.18s ease, border-color 0.18s ease;
+  cursor: pointer;
+}
+.neighborhood-card--linked:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(88,23,42,0.12);
+  border-color: rgba(88,23,42,0.22) !important;
+}
+.neighborhood-card--linked:focus-visible {
+  outline: 2px solid var(--brand,#58172a);
+  outline-offset: 3px;
+}
+
 /* ============================================================
    AGENT DETAIL PAGE  (.ap-*)
    ============================================================ */
