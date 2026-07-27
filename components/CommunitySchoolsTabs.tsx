@@ -16,6 +16,7 @@ export default function CommunitySchoolsTabs({ publicSchools, privateSchools, sc
     <>
       <div style={{ display: 'flex', gap: '4px', marginBottom: '24px' }}>
         <button
+          className="schools-tab"
           onClick={() => setTab('public')}
           style={{
             fontFamily: 'var(--font-label)', fontSize: '13px', fontWeight: 600,
@@ -30,6 +31,7 @@ export default function CommunitySchoolsTabs({ publicSchools, privateSchools, sc
         </button>
         {privateSchools.length > 0 && (
           <button
+            className="schools-tab"
             onClick={() => setTab('private')}
             style={{
               fontFamily: 'var(--font-label)', fontSize: '13px', fontWeight: 600,
@@ -46,7 +48,8 @@ export default function CommunitySchoolsTabs({ publicSchools, privateSchools, sc
       </div>
 
       {tab === 'public' && publicSchools.length > 0 && (
-        <table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: 'var(--font-label)', fontSize: '13px' }}>
+        <div id="panel-public">
+        <table className="schools-table" style={{ width: '100%', borderCollapse: 'collapse', fontFamily: 'var(--font-label)', fontSize: '13px' }}>
           <thead>
             <tr>
               <th style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--brand,#58172a)', padding: '0 12px 14px 0', borderBottom: '1px solid rgba(0,0,0,0.12)', textAlign: 'left' }}>School Name</th>
@@ -64,10 +67,12 @@ export default function CommunitySchoolsTabs({ publicSchools, privateSchools, sc
             ))}
           </tbody>
         </table>
+        </div>
       )}
 
       {tab === 'private' && privateSchools.length > 0 && (
-        <table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: 'var(--font-label)', fontSize: '13px' }}>
+        <div id="panel-private">
+        <table className="schools-table" style={{ width: '100%', borderCollapse: 'collapse', fontFamily: 'var(--font-label)', fontSize: '13px' }}>
           <thead>
             <tr>
               <th style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--brand,#58172a)', padding: '0 12px 14px 0', borderBottom: '1px solid rgba(0,0,0,0.12)', textAlign: 'left' }}>School Name</th>
@@ -85,9 +90,10 @@ export default function CommunitySchoolsTabs({ publicSchools, privateSchools, sc
             ))}
           </tbody>
         </table>
+        </div>
       )}
 
-      <p style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'rgba(33,33,33,0.55)', lineHeight: 1.6, marginTop: '24px', paddingTop: '16px', borderTop: '1px solid rgba(0,0,0,0.08)' }}>
+      <p className="schools-disclaimer" style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'rgba(33,33,33,0.55)', lineHeight: 1.6, marginTop: '24px', paddingTop: '16px', borderTop: '1px solid rgba(0,0,0,0.08)' }}>
         School assignments are address-specific and subject to change. Verify enrollment zoning directly with {schoolDistrict} before purchasing. This data is for informational purposes only.
       </p>
     </>
