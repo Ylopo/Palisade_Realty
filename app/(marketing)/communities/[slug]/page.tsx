@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import fs from 'fs'
+import path from 'path'
 import { notFound } from 'next/navigation'
 import { getCommunityBySlug, getAllCommunitySlugs } from '@/lib/community-data'
 import CommunityPageBodyClass from '@/components/CommunityPageBodyClass'
@@ -28,9 +30,15 @@ export default async function CommunityPage({ params }: Props) {
   const c = getCommunityBySlug(slug)
   if (!c) notFound()
 
+  const transPath = path.join(process.cwd(), 'public', 'community-translations', `${slug}.js`)
+  const cdTransScript = fs.existsSync(transPath) ? fs.readFileSync(transPath, 'utf8') : ''
+
   return (
     <>
       <CommunityPageBodyClass />
+      {cdTransScript && (
+        <script dangerouslySetInnerHTML={{ __html: cdTransScript }} />
+      )}
 
       {/* ── 1. HERO ─────────────────────────────────────────────── */}
       <section
@@ -56,10 +64,10 @@ export default async function CommunityPage({ params }: Props) {
             <span aria-hidden="true">·</span>
             <span aria-current="page">{c.name}</span>
           </nav>
-          <p style={{ fontFamily: 'var(--font-label)', fontSize: '11px', fontWeight: 500, letterSpacing: '0.32em', textTransform: 'uppercase', color: 'var(--accent,#eeca00)', marginBottom: '16px' }}>
+          <p className="hero-eyebrow" style={{ fontFamily: 'var(--font-label)', fontSize: '11px', fontWeight: 500, letterSpacing: '0.32em', textTransform: 'uppercase', color: 'var(--accent,#eeca00)', marginBottom: '16px' }}>
             {c.subtitle}
           </p>
-          <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(52px,9vw,110px)', fontWeight: 400, color: '#fff', letterSpacing: '-0.035em', lineHeight: 0.95, marginBottom: '44px' }}>
+          <h1 className="hero-title" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(52px,9vw,110px)', fontWeight: 400, color: '#fff', letterSpacing: '-0.035em', lineHeight: 0.95, marginBottom: '44px' }}>
             {c.titleFirst} <em style={{ fontStyle: 'italic', color: 'var(--accent,#eeca00)' }}>{c.titleRest}</em>
           </h1>
           <div style={{ display: 'flex', alignItems: 'center' }} role="list">
@@ -70,7 +78,7 @@ export default async function CommunityPage({ params }: Props) {
                 style={{ padding: '0 36px', textAlign: 'center', borderRight: i < c.heroStats.length - 1 ? '1px solid rgba(255,255,255,0.18)' : undefined }}
               >
                 <span style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '26px', fontWeight: 600, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1, marginBottom: '5px' }}>{s.value}</span>
-                <span style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '10px', fontWeight: 400, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.50)' }}>{s.label}</span>
+                <span className="hero-stat-label" style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '10px', fontWeight: 400, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.50)' }}>{s.label}</span>
               </div>
             ))}
           </div>
@@ -81,8 +89,8 @@ export default async function CommunityPage({ params }: Props) {
       {c.driveCards && c.driveCards.length > 0 && (
         <div id="location-context" style={{ background: '#faf7f2', padding: '90px var(--pad-x,56px)' }}>
           <div style={{ textAlign: 'center', maxWidth: '900px', margin: '0 auto 52px' }}>
-            <span style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>Location</span>
-            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px,4.5vw,64px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.64px', lineHeight: 1.1, marginBottom: '24px' }}>
+            <span className="section-eyebrow" style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>Location</span>
+            <h2 className="section-title" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px,4.5vw,64px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.64px', lineHeight: 1.1, marginBottom: '24px' }}>
               Where is <em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>{c.name}?</em>
             </h2>
             {c.locationDescription && (
@@ -93,10 +101,10 @@ export default async function CommunityPage({ params }: Props) {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '12px', maxWidth: '1100px', margin: '0 auto' }}>
             {c.driveCards.map((d, i) => (
-              <div key={i} style={{ background: '#ebebeb', border: '1px solid rgba(0,0,0,0.08)', borderRadius: '14px', padding: '20px 16px', textAlign: 'center' }}>
+              <div key={i} className="location-drive-card" style={{ background: '#ebebeb', border: '1px solid rgba(0,0,0,0.08)', borderRadius: '14px', padding: '20px 16px', textAlign: 'center' }}>
                 <span style={{ display: 'block', fontFamily: 'var(--font-display)', fontSize: '28px', fontWeight: 400, color: 'var(--brand,#58172a)', letterSpacing: '-0.02em', marginBottom: '6px' }}>{d.time}</span>
-                <span style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '12px', fontWeight: 600, color: 'var(--near-black,#1a0a0a)', marginBottom: '4px' }}>{d.dest}</span>
-                <span style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '10px', color: 'rgba(33,33,33,0.55)', letterSpacing: '0.06em' }}>{d.via}</span>
+                <span className="location-card-dest" style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '12px', fontWeight: 600, color: 'var(--near-black,#1a0a0a)', marginBottom: '4px' }}>{d.dest}</span>
+                <span className="location-card-via" style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '10px', color: 'rgba(33,33,33,0.55)', letterSpacing: '0.06em' }}>{d.via}</span>
               </div>
             ))}
           </div>
@@ -107,13 +115,13 @@ export default async function CommunityPage({ params }: Props) {
       <section id="overview" style={{ background: '#ffffff', padding: '100px var(--pad-x,56px)' }}>
         <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 380px', gap: '72px', alignItems: 'start' }}>
           <div>
-            <span style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>{c.badge}</span>
-            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px,4.5vw,64px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.64px', lineHeight: 1.1, marginBottom: '24px' }}>
+            <span className="section-eyebrow" style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>{c.badge}</span>
+            <h2 className="section-title" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px,4.5vw,64px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.64px', lineHeight: 1.1, marginBottom: '24px' }}>
               About <em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>{c.name}</em>
             </h2>
             <div style={{ width: '40px', height: '2px', background: 'var(--brand,#58172a)', margin: '20px 0 28px' }} />
             {c.overview.map((p, i) => (
-              <p key={i} style={{ fontFamily: 'var(--font-body)', fontSize: '16px', lineHeight: 1.78, color: 'rgba(33,33,33,0.55)', marginBottom: '18px' }}>{p}</p>
+              <p key={i} className="overview-body" style={{ fontFamily: 'var(--font-body)', fontSize: '16px', lineHeight: 1.78, color: 'rgba(33,33,33,0.55)', marginBottom: '18px' }}>{p}</p>
             ))}
             <div style={{ display: 'flex', alignItems: 'center', gap: '20px', flexWrap: 'wrap', marginTop: '8px' }}>
               <a href={c.ylopoSearch} target="_blank" rel="noopener noreferrer" className="btn btn-brand">
@@ -125,11 +133,11 @@ export default async function CommunityPage({ params }: Props) {
             </div>
           </div>
           <div style={{ background: '#ebebeb', border: '1px solid rgba(0,0,0,0.10)', borderRadius: '14px', padding: '32px 28px', position: 'sticky', top: '96px' }} aria-label={`${c.name} at a glance`}>
-            <p style={{ fontFamily: 'var(--font-label)', fontSize: '10px', fontWeight: 700, letterSpacing: '0.28em', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '20px', paddingBottom: '16px', borderBottom: '1px solid rgba(0,0,0,0.10)' }}>At a Glance</p>
+            <p className="quick-facts-heading" style={{ fontFamily: 'var(--font-label)', fontSize: '10px', fontWeight: 700, letterSpacing: '0.28em', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '20px', paddingBottom: '16px', borderBottom: '1px solid rgba(0,0,0,0.10)' }}>At a Glance</p>
             {c.quickFacts.map((f, i) => (
               <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: '12px', padding: '10px 0', borderBottom: i < c.quickFacts.length - 1 ? '1px solid rgba(0,0,0,0.07)' : 'none' }}>
-                <span style={{ fontFamily: 'var(--font-label)', fontSize: '11px', color: 'rgba(33,33,33,0.55)', flexShrink: 0 }}>{f.label}</span>
-                <span style={{ fontFamily: 'var(--font-label)', fontSize: '12px', fontWeight: 600, color: 'var(--near-black,#1a0a0a)', textAlign: 'right' }}>{f.value}</span>
+                <span className="fact-label" style={{ fontFamily: 'var(--font-label)', fontSize: '11px', color: 'rgba(33,33,33,0.55)', flexShrink: 0 }}>{f.label}</span>
+                <span className="fact-value" style={{ fontFamily: 'var(--font-label)', fontSize: '12px', fontWeight: 600, color: 'var(--near-black,#1a0a0a)', textAlign: 'right' }}>{f.value}</span>
               </div>
             ))}
           </div>
@@ -140,14 +148,14 @@ export default async function CommunityPage({ params }: Props) {
       {c.demographics && c.demographics.length > 0 && (
         <div id="demographics" style={{ background: '#ebebeb', padding: '64px var(--pad-x,56px)' }}>
           <div style={{ textAlign: 'center', marginBottom: '44px' }}>
-            <span style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>Community Demographics</span>
-            <p style={{ fontFamily: 'var(--font-label)', fontSize: '10px', color: 'rgba(33,33,33,0.55)', letterSpacing: '0.06em' }}>Source: U.S. Census Bureau, ACS 5-Year Estimates</p>
+            <span className="section-eyebrow" style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>Community Demographics</span>
+            <p className="demo-source" style={{ fontFamily: 'var(--font-label)', fontSize: '10px', color: 'rgba(33,33,33,0.55)', letterSpacing: '0.06em' }}>Source: U.S. Census Bureau, ACS 5-Year Estimates</p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: `repeat(${c.demographics.length},1fr)`, maxWidth: '1100px', margin: '0 auto' }}>
             {c.demographics.map((d, i) => (
               <div key={i} style={{ textAlign: 'center', padding: '20px 12px', borderRight: i < c.demographics!.length - 1 ? '1px solid rgba(0,0,0,0.09)' : undefined }}>
                 <span style={{ display: 'block', fontFamily: 'var(--font-display)', fontSize: 'clamp(28px,3.5vw,42px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.03em', marginBottom: '6px' }}>{d.value}</span>
-                <span style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '11px', fontWeight: 500, color: 'var(--brand,#58172a)', letterSpacing: '0.06em' }}>{d.label}</span>
+                <span className="demo-label" style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '11px', fontWeight: 500, color: 'var(--brand,#58172a)', letterSpacing: '0.06em' }}>{d.label}</span>
               </div>
             ))}
           </div>
@@ -158,17 +166,17 @@ export default async function CommunityPage({ params }: Props) {
       <section id="highlights" style={{ background: '#ffffff', padding: '100px var(--pad-x,56px)' }} aria-labelledby="highlights-heading">
         <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '52px' }}>
-            <span style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>What Makes It Special</span>
-            <h2 id="highlights-heading" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px,4.5vw,64px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.64px', lineHeight: 1.1 }}>
+            <span className="section-eyebrow" style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>What Makes It Special</span>
+            <h2 id="highlights-heading" className="section-title" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px,4.5vw,64px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.64px', lineHeight: 1.1 }}>
               Living in <em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>{c.name}</em>
             </h2>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: `repeat(${Math.min(c.highlights.length, 3)},1fr)`, gap: '20px' }}>
             {c.highlights.map((h, i) => (
-              <div key={i} style={{ background: '#ebebeb', border: '1px solid rgba(0,0,0,0.08)', borderRadius: '14px', padding: '32px 28px' }}>
+              <div key={i} className="highlight-card" style={{ background: '#ebebeb', border: '1px solid rgba(0,0,0,0.08)', borderRadius: '14px', padding: '32px 28px' }}>
                 <div style={{ width: '40px', height: '3px', background: 'var(--brand,#58172a)', marginBottom: '18px' }} />
-                <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '20px', fontWeight: 500, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.01em', marginBottom: '12px' }}>{h.title}</h3>
-                <p style={{ fontFamily: 'var(--font-body)', fontSize: '14px', lineHeight: 1.70, color: 'rgba(33,33,33,0.55)' }}>{h.desc}</p>
+                <h3 className="highlight-title" style={{ fontFamily: 'var(--font-display)', fontSize: '20px', fontWeight: 500, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.01em', marginBottom: '12px' }}>{h.title}</h3>
+                <p className="highlight-body" style={{ fontFamily: 'var(--font-body)', fontSize: '14px', lineHeight: 1.70, color: 'rgba(33,33,33,0.55)' }}>{h.desc}</p>
               </div>
             ))}
           </div>
@@ -178,18 +186,18 @@ export default async function CommunityPage({ params }: Props) {
       {/* ── 6. NEIGHBORHOODS ────────────────────────────────────── */}
       {c.neighborhoods && c.neighborhoods.length > 0 && (
         <div id="neighborhoods" style={{ background: '#faf7f2', padding: '90px var(--pad-x,56px)' }}>
-          <div style={{ textAlign: 'center', marginBottom: '52px' }}>
-            <span style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>Explore {c.name}</span>
-            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px,4.5vw,64px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.64px', lineHeight: 1.1 }}>
+          <div className="neighborhoods-head" style={{ textAlign: 'center', marginBottom: '52px' }}>
+            <span className="section-eyebrow" style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>Explore {c.name}</span>
+            <h2 className="section-title" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px,4.5vw,64px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.64px', lineHeight: 1.1 }}>
               Neighborhoods &amp; <em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>Enclaves</em>
             </h2>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '14px', maxWidth: '1400px', margin: '0 auto' }}>
             {c.neighborhoods.map((n, i) => (
-              <div key={i} style={{ background: '#ebebeb', border: '1px solid rgba(0,0,0,0.08)', borderRadius: '14px', padding: '22px 18px' }}>
+              <div key={i} className="neighborhood-card" style={{ background: '#ebebeb', border: '1px solid rgba(0,0,0,0.08)', borderRadius: '14px', padding: '22px 18px' }}>
                 <p style={{ fontFamily: 'var(--font-display)', fontSize: '18px', fontWeight: 500, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.01em', marginBottom: '5px' }}>{n.name}</p>
                 <p style={{ fontFamily: 'var(--font-label)', fontSize: '12px', fontWeight: 600, color: 'var(--brand,#58172a)', marginBottom: '8px' }}>{n.priceRange}</p>
-                <p style={{ fontFamily: 'var(--font-label)', fontSize: '10px', color: 'rgba(33,33,33,0.55)', letterSpacing: '0.04em' }}>{n.tags}</p>
+                <p className="neighborhood-tags" style={{ fontFamily: 'var(--font-label)', fontSize: '10px', color: 'rgba(33,33,33,0.55)', letterSpacing: '0.04em' }}>{n.tags}</p>
               </div>
             ))}
           </div>
@@ -203,7 +211,7 @@ export default async function CommunityPage({ params }: Props) {
             {c.cityStats.map((s, i) => (
               <div key={i} style={{ textAlign: 'center', padding: '12px 8px', borderRight: i < c.cityStats!.length - 1 ? '1px solid rgba(255,255,255,0.14)' : undefined }}>
                 <span style={{ display: 'block', fontFamily: 'var(--font-display)', fontSize: 'clamp(30px,4vw,48px)', fontWeight: 400, color: 'var(--accent,#eeca00)', letterSpacing: '-0.03em', lineHeight: 1, marginBottom: '8px' }}>{s.value}</span>
-                <span style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '10px', fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(242,237,228,0.70)' }}>{s.label}</span>
+                <span className="city-stat-label" style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '10px', fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(242,237,228,0.70)' }}>{s.label}</span>
               </div>
             ))}
           </div>
@@ -215,12 +223,12 @@ export default async function CommunityPage({ params }: Props) {
         <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
           <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: '24px', marginBottom: '40px', flexWrap: 'wrap' }}>
             <div>
-              <span style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>Live MLS Data</span>
-              <h2 id="listings-heading" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px,4.5vw,64px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.64px', lineHeight: 1.1, marginBottom: 0 }}>
+              <span className="section-eyebrow" style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>Live MLS Data</span>
+              <h2 id="listings-heading" className="section-title" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px,4.5vw,64px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.64px', lineHeight: 1.1, marginBottom: 0 }}>
                 {c.name} Homes For Sale
               </h2>
             </div>
-            <a href={c.ylopoSearch} target="_blank" rel="noopener noreferrer" style={{ fontFamily: 'var(--font-label)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--brand,#58172a)', whiteSpace: 'nowrap', textDecoration: 'none' }}>
+            <a href={c.ylopoSearch} target="_blank" rel="noopener noreferrer" className="view-all-link" style={{ fontFamily: 'var(--font-label)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--brand,#58172a)', whiteSpace: 'nowrap', textDecoration: 'none' }}>
               View All Listings →
             </a>
           </div>
@@ -234,7 +242,7 @@ export default async function CommunityPage({ params }: Props) {
             })}
           />
           <div style={{ marginTop: '36px', textAlign: 'center' }}>
-            <a href={c.ylopoSearch} target="_blank" rel="noopener noreferrer" style={{ fontFamily: 'var(--font-label)', fontSize: '13px', fontWeight: 600, letterSpacing: '0.08em', color: 'var(--brand,#58172a)', borderBottom: '1px solid rgba(88,23,42,0.30)', paddingBottom: '2px', textDecoration: 'none' }}>
+            <a href={c.ylopoSearch} target="_blank" rel="noopener noreferrer" className="btn-view-all" style={{ fontFamily: 'var(--font-label)', fontSize: '13px', fontWeight: 600, letterSpacing: '0.08em', color: 'var(--brand,#58172a)', borderBottom: '1px solid rgba(88,23,42,0.30)', paddingBottom: '2px', textDecoration: 'none' }}>
               View All {c.name} Properties →
             </a>
           </div>
@@ -245,13 +253,13 @@ export default async function CommunityPage({ params }: Props) {
       {c.hoa && c.hoa.length > 0 && (
         <section id="hoa-fees" style={{ background: '#ffffff', padding: '100px var(--pad-x,56px)' }}>
           <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-            <span style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>What to Expect</span>
-            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px,4.5vw,64px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.64px', lineHeight: 1.1, marginBottom: '40px' }}>
+            <span className="section-eyebrow" style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>What to Expect</span>
+            <h2 className="section-title" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px,4.5vw,64px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.64px', lineHeight: 1.1, marginBottom: '40px' }}>
               HOA Fees in <em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>{c.name}</em>
             </h2>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'start' }}>
               <div>
-                <table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: 'var(--font-label)', fontSize: '13px' }} aria-label="HOA fee ranges by community type">
+                <table className="hoa-table" style={{ width: '100%', borderCollapse: 'collapse', fontFamily: 'var(--font-label)', fontSize: '13px' }} aria-label="HOA fee ranges by community type">
                   <thead>
                     <tr>
                       <th style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--brand,#58172a)', padding: '0 0 14px', borderBottom: '1px solid rgba(0,0,0,0.12)', textAlign: 'left' }}>Community Type</th>
@@ -274,13 +282,13 @@ export default async function CommunityPage({ params }: Props) {
               <div>
                 {c.hoaAside && (
                   <>
-                    <p style={{ fontFamily: 'var(--font-label)', fontSize: '12px', fontWeight: 700, color: 'var(--near-black,#1a0a0a)', letterSpacing: '0.06em', marginBottom: '12px' }}>Have Questions?</p>
+                    <p className="hoa-aside-heading" style={{ fontFamily: 'var(--font-label)', fontSize: '12px', fontWeight: 700, color: 'var(--near-black,#1a0a0a)', letterSpacing: '0.06em', marginBottom: '12px' }}>Have Questions?</p>
                     <p style={{ fontFamily: 'var(--font-body)', fontSize: '14px', color: 'rgba(33,33,33,0.55)', lineHeight: 1.68, marginBottom: '24px' }}>{c.hoaAside}</p>
                   </>
                 )}
                 {c.hoaCovers && c.hoaCovers.length > 0 && (
                   <>
-                    <p style={{ fontFamily: 'var(--font-label)', fontSize: '12px', fontWeight: 700, color: 'var(--near-black,#1a0a0a)', letterSpacing: '0.06em', marginBottom: '12px' }}>What HOAs Typically Cover</p>
+                    <p className="hoa-aside-heading" style={{ fontFamily: 'var(--font-label)', fontSize: '12px', fontWeight: 700, color: 'var(--near-black,#1a0a0a)', letterSpacing: '0.06em', marginBottom: '12px' }}>What HOAs Typically Cover</p>
                     <ul style={{ fontFamily: 'var(--font-body)', fontSize: '14px', color: 'rgba(33,33,33,0.55)', lineHeight: 1.8, paddingLeft: '18px' }}>
                       {c.hoaCovers.map((item, i) => (
                         <li key={i} style={{ marginBottom: '4px' }}>{item}</li>
@@ -299,8 +307,8 @@ export default async function CommunityPage({ params }: Props) {
         <div id="parks-rec" style={{ background: '#faf7f2', padding: '90px var(--pad-x,56px)' }}>
           <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
             <div style={{ textAlign: 'center', marginBottom: '52px' }}>
-              <span style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>Outdoor Living</span>
-              <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px,4.5vw,64px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.64px', lineHeight: 1.1 }}>
+              <span className="section-eyebrow" style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>Outdoor Living</span>
+              <h2 className="section-title" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px,4.5vw,64px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.64px', lineHeight: 1.1 }}>
                 Parks &amp; Recreation<br />in <em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>{c.name}</em>
               </h2>
             </div>
@@ -326,8 +334,8 @@ export default async function CommunityPage({ params }: Props) {
       <section id="schools" style={{ background: '#ffffff', padding: '100px var(--pad-x,56px)' }} aria-labelledby="schools-heading">
         <div style={{ maxWidth: '960px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '16px' }}>
-            <span style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>Education</span>
-            <h2 id="schools-heading" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px,4.5vw,64px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.64px', lineHeight: 1.1 }}>
+            <span className="section-eyebrow" style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>Education</span>
+            <h2 id="schools-heading" className="section-title" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px,4.5vw,64px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.64px', lineHeight: 1.1 }}>
               Schools Serving <em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>{c.name}</em>
             </h2>
           </div>
@@ -345,9 +353,9 @@ export default async function CommunityPage({ params }: Props) {
 
       {/* ── 12. NEARBY COMMUNITIES ──────────────────────────────── */}
       <div id="nearby-communities" style={{ background: '#faf7f2', padding: '90px var(--pad-x,56px)' }}>
-        <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-          <span style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>Comparisons</span>
-          <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px,4.5vw,64px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.64px', lineHeight: 1.1, marginBottom: '16px' }}>
+        <div className="nearby-head" style={{ maxWidth: '1400px', margin: '0 auto' }}>
+          <span className="section-eyebrow" style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>Comparisons</span>
+          <h2 className="section-title" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px,4.5vw,64px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.64px', lineHeight: 1.1, marginBottom: '16px' }}>
             Nearby Communities<br />to <em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>Consider</em>
           </h2>
           {c.nearbyDescription && (
@@ -391,9 +399,9 @@ export default async function CommunityPage({ params }: Props) {
       {c.faq && c.faq.length > 0 && (
         <section id="faq" style={{ background: '#ffffff', padding: '100px var(--pad-x,56px)' }}>
           <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-            <div style={{ textAlign: 'center', marginBottom: '12px' }}>
-              <span style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>Common Questions</span>
-              <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px,4.5vw,64px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.64px', lineHeight: 1.1 }}>
+            <div className="faq-head" style={{ textAlign: 'center', marginBottom: '12px' }}>
+              <span className="section-eyebrow" style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>Common Questions</span>
+              <h2 className="section-title" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px,4.5vw,64px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.64px', lineHeight: 1.1 }}>
                 Frequently Asked Questions<br />About <em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>{c.name}</em>
               </h2>
             </div>
@@ -418,8 +426,8 @@ export default async function CommunityPage({ params }: Props) {
         <div id="lifestyle" style={{ background: '#ebebeb', padding: '90px var(--pad-x,56px)' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '72px', alignItems: 'center', maxWidth: '1400px', margin: '0 auto' }}>
             <div>
-              <span style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>The {c.name} Lifestyle</span>
-              <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px,4.5vw,64px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.64px', lineHeight: 1.1, marginBottom: '24px' }}>
+              <span className="section-eyebrow" style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>The {c.name} Lifestyle</span>
+              <h2 className="section-title" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px,4.5vw,64px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.64px', lineHeight: 1.1, marginBottom: '24px' }}>
                 Central Living,<br /><em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>Effortlessly Connected</em>
               </h2>
               {c.lifestyleBody.map((p, i) => (
@@ -454,7 +462,7 @@ export default async function CommunityPage({ params }: Props) {
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, backgroundImage: 'url(/images/hero-background/hero-2.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', filter: 'brightness(1.05) saturate(0.9)', zIndex: 0 }} />
         <div style={{ position: 'absolute', inset: 0, background: 'rgba(245,245,245,0.88)', zIndex: 1 }} aria-hidden="true" />
         <div style={{ position: 'relative', zIndex: 2, maxWidth: '680px', margin: '0 auto' }}>
-          <span style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>Your Guide to {c.name}</span>
+          <span className="section-eyebrow" style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>Your Guide to {c.name}</span>
           <h2 id="community-cta-heading" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(40px,5vw,72px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.03em', lineHeight: 1.1, marginBottom: '24px' }}>
             <em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>Ready to Find Your</em><br />{c.name} Home?
           </h2>
