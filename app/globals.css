@@ -330,7 +330,7 @@ a {
 .contact-cta-texture {
   position: absolute; inset: 0;
   background-image: url('/images/hero-background/hero-4.jpg');
-  background-size: cover; background-position: center; opacity: 0.18;
+  background-size: cover; background-position: center; opacity: 0.35;
 }
 .contact-cta-inner { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
 .contact-cta .eyebrow { color: var(--accent); margin-bottom: 16px; }
