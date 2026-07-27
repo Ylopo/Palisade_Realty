@@ -79,7 +79,7 @@ export default async function NeighborhoodPage({ params }: Props) {
             {n.subtitle}
           </p>
           <h1 className="hero-title" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(52px,9vw,110px)', fontWeight: 400, color: '#fff', letterSpacing: '-0.035em', lineHeight: 0.95, marginBottom: '44px' }}>
-            East{' '}<em style={{ fontStyle: 'italic', color: 'var(--accent,#eeca00)' }}>Village</em>
+            {n.titleFirst}{' '}<em style={{ fontStyle: 'italic', color: 'var(--accent,#eeca00)' }}>{n.titleRest}</em>
           </h1>
           <div style={{ display: 'flex', alignItems: 'center' }} role="list">
             {n.heroStats.map((s, i) => (
