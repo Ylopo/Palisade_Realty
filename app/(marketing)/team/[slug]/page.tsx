@@ -383,13 +383,15 @@ export default async function AgentPage({ params }: Props) {
       {/* ── ALL LISTINGS (YLOPO) ─────────────────────────────── */}
       <section style={{ background: 'var(--off-white,#faf7f2)', padding: '88px var(--pad-x,60px)' }} aria-labelledby="listings-heading">
         <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-          <p className="eyebrow" style={{ color: 'var(--brand,#58172a)' }}>Palisade Realty</p>
-          <h2 id="listings-heading" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(26px,3vw,40px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.02em', margin: '8px 0 12px' }}>
-            All <em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>Listings</em>
-          </h2>
-          <p style={{ fontFamily: 'var(--font-body)', fontSize: '15px', color: '#777', marginBottom: '40px' }}>
-            Browse current properties available across San Diego County.
-          </p>
+          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+            <p style={{ fontFamily: 'var(--font-label)', fontSize: '11px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>Palisade Realty</p>
+            <h2 id="listings-heading" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(48px,6vw,72px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.03em', lineHeight: 1.08, margin: '0 0 18px' }}>
+              All <em style={{ fontStyle: 'italic' }}>Listings</em>
+            </h2>
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: '16px', color: '#888', lineHeight: 1.6, maxWidth: '440px', margin: '0 auto' }}>
+              Browse current properties represented by {firstName} across San Diego County.
+            </p>
+          </div>
           <div
             className="YLOPO_resultsWidget"
             data-search={JSON.stringify({
