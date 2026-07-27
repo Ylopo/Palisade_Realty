@@ -1076,9 +1076,13 @@ a {
   position: relative;
   padding: 100px var(--pad-x,60px);
   overflow: hidden;
-  background:
-    linear-gradient(rgba(88,23,42,0.80), rgba(40,0,12,0.90)),
-    url('/assets/images/cta-background.jpg') center/cover no-repeat;
+  background-color: var(--brand,#58172a);
+  background-image:
+    linear-gradient(rgba(88,23,42,0.82), rgba(40,0,12,0.88)),
+    url('/assets/images/cta-background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   text-align: center;
 }
 .tp-cta-heading { font-family: var(--font-display,'Playfair Display',serif); font-size: clamp(28px, 4vw, 52px); font-weight: 400; color: #fff; letter-spacing: -0.02em; margin: 0 0 16px; }
