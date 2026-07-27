@@ -2142,16 +2142,16 @@ var AGENT_TRANSLATIONS = {
     document.querySelectorAll('.nav-links a[href*="testimonials"]').forEach(function (el) {
       el.textContent = d.testimonials;
     });
-    document.querySelectorAll('.nav-links a[href*="fl-section"], .nav-links a[href="/#listings"], .nav-links a[href*="property.html"]').forEach(function (el) {
+    document.querySelectorAll('.nav-links a[href*="fl-section"], .nav-links a[href="/#listings"], .nav-links a[href*="property.html"], .nav-links a[href="/properties"]').forEach(function (el) {
       el.textContent = d.properties;
     });
-    document.querySelectorAll('.nav-links a[href*="team.html"], .nav-links a[href*="#team-carousel"]').forEach(function (el) {
+    document.querySelectorAll('.nav-links a[href*="team.html"], .nav-links a[href*="#team-carousel"], .nav-links a[href="/team"]').forEach(function (el) {
       el.textContent = d.team;
     });
-    document.querySelectorAll('.nav-links a[href*="blog.html"], .nav-links a[href="/#blog"]').forEach(function (el) {
+    document.querySelectorAll('.nav-links a[href*="blog.html"], .nav-links a[href="/#blog"], .nav-links a[href="/blog"]').forEach(function (el) {
       el.textContent = d.blog;
     });
-    document.querySelectorAll('.nav-links a[href*="contact.html"]').forEach(function (el) {
+    document.querySelectorAll('.nav-links a[href*="contact.html"], .nav-links a[href="/contact"]').forEach(function (el) {
       el.textContent = d.contact;
     });
 
@@ -2168,16 +2168,16 @@ var AGENT_TRANSLATIONS = {
     document.querySelectorAll('.nav-mobile-drawer a[href*="testimonials"]').forEach(function (el) {
       el.textContent = d.testimonials;
     });
-    document.querySelectorAll('.nav-mobile-drawer a[href*="fl-section"], .nav-mobile-drawer a[href="/#listings"], .nav-mobile-drawer a[href*="property.html"]').forEach(function (el) {
+    document.querySelectorAll('.nav-mobile-drawer a[href*="fl-section"], .nav-mobile-drawer a[href="/#listings"], .nav-mobile-drawer a[href*="property.html"], .nav-mobile-drawer a[href="/properties"]').forEach(function (el) {
       el.textContent = d.properties;
     });
-    document.querySelectorAll('.nav-mobile-drawer a[href*="team.html"], .nav-mobile-drawer a[href*="#team-carousel"]').forEach(function (el) {
+    document.querySelectorAll('.nav-mobile-drawer a[href*="team.html"], .nav-mobile-drawer a[href*="#team-carousel"], .nav-mobile-drawer a[href="/team"]').forEach(function (el) {
       el.textContent = d.team;
     });
-    document.querySelectorAll('.nav-mobile-drawer a[href*="blog.html"], .nav-mobile-drawer a[href="/#blog"]').forEach(function (el) {
+    document.querySelectorAll('.nav-mobile-drawer a[href*="blog.html"], .nav-mobile-drawer a[href="/#blog"], .nav-mobile-drawer a[href="/blog"]').forEach(function (el) {
       el.textContent = d.blog;
     });
-    document.querySelectorAll('.nav-mobile-drawer a[href*="contact.html"]').forEach(function (el) {
+    document.querySelectorAll('.nav-mobile-drawer a[href*="contact.html"], .nav-mobile-drawer a[href="/contact"]').forEach(function (el) {
       el.textContent = d.contact;
     });
 
