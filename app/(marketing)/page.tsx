@@ -174,7 +174,7 @@ export default function HomePage() {
               <h3 className="community-card-name">Spring Valley</h3>
               <div className="community-card-accent" />
               <p className="community-card-desc">East County value with a strong community character. Established neighborhoods, full-sized homes, and a 15-minute commute to Downtown San Diego.</p>
-              <Link href="/communities/spring-valley-real-estate" className="community-explore-btn">
+              <Link href="/communities/chula-vista-real-estate" className="community-explore-btn">
                 Explore {EXPLORE_ICON}
               </Link>
             </div>
