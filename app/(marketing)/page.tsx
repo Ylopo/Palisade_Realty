@@ -167,13 +167,13 @@ export default function HomePage() {
           <article className="community-card" role="listitem">
             <div className="community-card-bg" aria-hidden="true">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/assets/images/community-spring-valley.jpg" alt="Spring Valley neighborhood" loading="lazy" />
+              <img src="/assets/images/community-chula-vista.jpg" alt="Chula Vista neighborhood" loading="lazy" />
               <div className="community-card-overlay" />
             </div>
             <div className="community-card-content">
-              <h3 className="community-card-name">Spring Valley</h3>
+              <h3 className="community-card-name">Chula Vista</h3>
               <div className="community-card-accent" />
-              <p className="community-card-desc">East County value with a strong community character. Established neighborhoods, full-sized homes, and a 15-minute commute to Downtown San Diego.</p>
+              <p className="community-card-desc">San Diego's second-largest city offering exceptional value, master-planned communities, bayfront living, and easy access to the broader metro.</p>
               <Link href="/communities/chula-vista-real-estate" className="community-explore-btn">
                 Explore {EXPLORE_ICON}
               </Link>
