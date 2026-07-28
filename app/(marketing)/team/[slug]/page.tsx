@@ -11,10 +11,16 @@ interface AgentEntry {
   imgSrc: string
   title: string
   isLeader?: boolean
+  bio?: string[]
 }
 
 const ALL_AGENTS: AgentEntry[] = [
-  { name: 'Hedda Parashos',         slug: 'hedda-parashos',              title: 'CEO',                           imgSrc: '/assets/images/agents/hedda-parashos.jpg',              isLeader: true },
+  { name: 'Hedda Parashos', slug: 'hedda-parashos', title: 'CEO', imgSrc: '/assets/images/agents/hedda-parashos.jpg', isLeader: true, bio: [
+    'Hedda Parashos is the Owner and President of Palisade Realty, a full-service real estate brokerage established in 2006. She acquired the company in 2012 and has since transformed it into one of Southern California\'s respected independent brokerages through innovation, strong leadership, and an unwavering commitment to both clients and agents.',
+    'Today, Palisade Realty is home to more than 100 real estate agent partners, with continued growth across San Diego County, Orange County, and parts of Riverside County. Under Hedda\'s leadership, the brokerage has been involved in the successful sale of thousands of homes, earning a reputation for professionalism, integrity, and exceptional client service.',
+    'Hedda\'s passion for real estate extends beyond buying and selling homes. She is dedicated to creating an environment where agents can thrive through mentorship, innovative marketing, cutting-edge technology, and a culture built on collaboration and genuine care. Her vision has positioned Palisade Realty as a brokerage that continually evolves to meet the changing needs of today\'s real estate market.',
+    'Whether working with first-time homebuyers, luxury sellers, investors, or experienced clients, Hedda and the Palisade Realty team are committed to delivering knowledgeable guidance, strategic representation, and an exceptional real estate experience from start to finish.',
+  ] },
   { name: 'Tom Parashos',           slug: 'tom-parashos',                title: 'Broker',                        imgSrc: '/assets/images/agents/tom-parashos.jpg',                isLeader: true },
   { name: 'Britney Bartlett',       slug: 'britney-bartlett',            title: 'Director of Operations',        imgSrc: '/assets/images/agents/britney-bartlett.jpg',            isLeader: true },
   { name: 'Michael DiVita',         slug: 'michael-divita',              title: 'Database and Onboarding Manager', imgSrc: '/assets/images/agents/michael-divita.jpg',            isLeader: true },
@@ -277,12 +283,26 @@ export default async function AgentPage({ params }: Props) {
             <h2 id="bio-heading" className="ap-bio-h2" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(30px,3.5vw,48px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.02em', lineHeight: 1.18, margin: '0 0 24px' }}>
               Meet <em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>{firstName}</em>
             </h2>
-            <p className="ap-bio-body" style={{ fontFamily: 'var(--font-body)', fontSize: '16px', color: '#555', lineHeight: 1.8, marginBottom: '16px' }}>
-              As a {agent.title} with Palisade Realty, I am dedicated to delivering exceptional results for clients throughout San Diego County. With the support of one of the region&apos;s most trusted brokerages and access to deep local market knowledge, I guide buyers and sellers through every step of the real estate process.
-            </p>
-            <p className="ap-bio-body" style={{ fontFamily: 'var(--font-body)', fontSize: '16px', color: '#555', lineHeight: 1.8 }}>
-              From your first consultation to closing day, my priority is clear communication, honest advice, and results you can count on. Whether you are purchasing your first home, making an investment, or selling a treasured property, I am here to make the process as smooth and successful as possible.
-            </p>
+            {agent.bio ? (
+              agent.bio.map((paragraph, i) => (
+                <p
+                  key={i}
+                  className="ap-bio-body"
+                  style={{ fontFamily: 'var(--font-body)', fontSize: '16px', color: '#555', lineHeight: 1.8, marginBottom: i < agent.bio!.length - 1 ? '16px' : undefined }}
+                >
+                  {paragraph}
+                </p>
+              ))
+            ) : (
+              <>
+                <p className="ap-bio-body" style={{ fontFamily: 'var(--font-body)', fontSize: '16px', color: '#555', lineHeight: 1.8, marginBottom: '16px' }}>
+                  As a {agent.title} with Palisade Realty, I am dedicated to delivering exceptional results for clients throughout San Diego County. With the support of one of the region&apos;s most trusted brokerages and access to deep local market knowledge, I guide buyers and sellers through every step of the real estate process.
+                </p>
+                <p className="ap-bio-body" style={{ fontFamily: 'var(--font-body)', fontSize: '16px', color: '#555', lineHeight: 1.8 }}>
+                  From your first consultation to closing day, my priority is clear communication, honest advice, and results you can count on. Whether you are purchasing your first home, making an investment, or selling a treasured property, I am here to make the process as smooth and successful as possible.
+                </p>
+              </>
+            )}
           </div>
           <div style={{ position: 'sticky', top: '96px', background: 'var(--off-white,#faf7f2)', borderRadius: '4px', padding: '28px 24px' }}>
             <p className="ap-contact-sidebar-label" style={{ fontFamily: 'var(--font-label)', fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#999', marginBottom: '20px' }}>Get in Touch</p>
