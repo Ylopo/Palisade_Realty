@@ -208,8 +208,8 @@ a {
    ============================================================ */
 .contact-hero {
   position: relative; height: 560px;
-  display: flex; align-items: center; justify-content: center;
-  text-align: center; overflow: hidden; padding-top: 80px;
+  display: flex; align-items: center; justify-content: flex-start;
+  text-align: left; overflow: hidden; padding-top: 80px; padding-left: clamp(24px, 8vw, 120px);
 }
 .contact-hero-bg { position: absolute; inset: 0; }
 .contact-hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center 60%; }
