@@ -5,7 +5,7 @@ import TeamGrid from './TeamGrid'
 export const metadata: Metadata = {
   title: 'Meet Our Team',
   description:
-    'Meet the 80+ licensed real estate professionals at Palisade Realty. San Diego agents with deep local knowledge ready to guide your next home purchase or sale.',
+    'Meet the 100+ licensed real estate professionals at Palisade Realty. San Diego agents with deep local knowledge ready to guide your next home purchase or sale.',
 }
 
 export default function TeamPage() {
@@ -22,7 +22,7 @@ export default function TeamPage() {
           <span className="tp-eyebrow">San Diego Real Estate</span>
           <h1 className="tp-hero-h1">Meet Our <em>Team</em></h1>
           <p className="tp-hero-sub">
-            80+ passionate local agents. 15+ years of San Diego expertise. One mission — to guide
+            100+ passionate local agents. 20+ years of San Diego expertise. One mission — to guide
             you home.
           </p>
           <Link href="/contact" className="btn btn-brand">Connect With Us</Link>
@@ -33,19 +33,19 @@ export default function TeamPage() {
       <div className="tp-stats" aria-label="Team statistics">
         <div className="tp-stats-inner">
           <div className="tp-stat">
-            <span className="tp-stat-num">80+</span>
+            <span className="tp-stat-num">100+</span>
             <span className="tp-stat-label">Agents on the Team</span>
           </div>
           <div className="tp-stat">
-            <span className="tp-stat-num">15+</span>
+            <span className="tp-stat-num">20+</span>
             <span className="tp-stat-label">Years of Excellence</span>
           </div>
           <div className="tp-stat">
-            <span className="tp-stat-num">19</span>
+            <span className="tp-stat-num">100+</span>
             <span className="tp-stat-label">San Diego Communities</span>
           </div>
           <div className="tp-stat">
-            <span className="tp-stat-num">1,000+</span>
+            <span className="tp-stat-num">3,000+</span>
             <span className="tp-stat-label">Families Served</span>
           </div>
         </div>
@@ -115,8 +115,8 @@ export default function TeamPage() {
                     <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
                   </svg>
                 ),
-                title: 'A Team of 80+',
-                body: 'No single-agent limits. With 80+ professionals, someone on our team has sold your exact type of home, in your neighborhood, this year.',
+                title: 'A Team of 100+',
+                body: 'No single-agent limits. With 100+ professionals, someone on our team has sold your exact type of home, in your neighborhood, this year.',
               },
               {
                 icon: (
