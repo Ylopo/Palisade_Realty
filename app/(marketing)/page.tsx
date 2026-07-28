@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import AboutBio from './AboutBio'
 import Script from 'next/script'
 import Link from 'next/link'
 import HomepageInit from '@/components/HomepageInit'
@@ -248,12 +249,12 @@ export default function HomePage() {
               Hedda Parashos
             </a>
             <p className="about-title reveal stagger-1">CEO</p>
-            <div className="about-bio reveal stagger-2">
+            <AboutBio>
               <p>Hedda Parashos is the Owner and President of Palisade Realty, a full-service real estate brokerage established in 2006. She acquired the company in 2012 and has since transformed it into one of Southern California&rsquo;s respected independent brokerages through innovation, strong leadership, and an unwavering commitment to both clients and agents.</p>
               <p>Today, Palisade Realty is home to more than 100 real estate agent partners, with continued growth across San Diego County, Orange County, and parts of Riverside County. Under Hedda&rsquo;s leadership, the brokerage has been involved in the successful sale of thousands of homes, earning a reputation for professionalism, integrity, and exceptional client service.</p>
               <p>Hedda&rsquo;s passion for real estate extends beyond buying and selling homes. She is dedicated to creating an environment where agents can thrive through mentorship, innovative marketing, cutting-edge technology, and a culture built on collaboration and genuine care. Her vision has positioned Palisade Realty as a brokerage that continually evolves to meet the changing needs of today&rsquo;s real estate market.</p>
               <p>Whether working with first-time homebuyers, luxury sellers, investors, or experienced clients, Hedda and the Palisade Realty team are committed to delivering knowledgeable guidance, strategic representation, and an exceptional real estate experience from start to finish.</p>
-            </div>
+            </AboutBio>
             <div className="about-cta reveal stagger-3">
               <a href="#team-carousel" className="btn btn-brand">Meet Our Team</a>
             </div>

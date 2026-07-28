@@ -2323,7 +2323,7 @@ var AGENT_TRANSLATIONS = {
     var aboutTitle = document.querySelector('.about-title');
     if (aboutTitle) aboutTitle.textContent = d.aboutTitle;
 
-    var aboutBio = document.querySelector('.about-bio');
+    var aboutBio = document.querySelector('.about-bio-inner');
     if (aboutBio) aboutBio.innerHTML = d.aboutBio;
 
     var aboutCta = document.querySelector('.about-cta .btn-brand');
