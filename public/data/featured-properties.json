@@ -359,6 +359,51 @@
     "description_es": "Disfrute de impresionantes puestas de sol frente al mar desde este magnífico refugio costero de dos plantas en el corazón de Del Mar. Con 3 recámaras y 3.5 baños, esta hermosa casa está idealmente ubicada cerca del Del Mar Village, playas de renombre mundial, la Reserva de Torrey Pines, centros comerciales y restaurantes de primer nivel, y escuelas de alta calificación. La sala iluminada exhibe espectaculares vistas al océano y se abre a una amplia terraza, creando la experiencia perfecta de vida interior-exterior. La cocina gourmet y el área de comedor también disfrutan de vistas panorámicas al mar, con electrodomésticos de nivel chef, una gran isla central y acabados elegantes. Pisos de madera rica fluyen por toda la casa, complementados por sofisticados detalles de piedra y azulejo. Viva lo mejor de la vida costera del sur de California y haga realidad el sueño de Del Mar."
   },
   {
+    "slug": "san-diego-bear-river-row-unit-2",
+    "address": "6867 Bear River Row Unit 2",
+    "city": "San Diego",
+    "state": "CA",
+    "status": "active",
+    "hasDetailPage": true,
+    "listedBy": {
+      "agents": [
+        "Hedda Parashos"
+      ],
+      "agent": "Hedda Parashos",
+      "brokerage": "Palisade Realty"
+    },
+    "zip": "92139",
+    "mls": "260018231",
+    "price": 499000,
+    "priceDisplay": "$499,000",
+    "beds": 2,
+    "baths": 1,
+    "sqft": 866,
+    "yearBuilt": 1980,
+    "description": "Beautifully remodeled 2 bedroom, 1 bath end unit offering single level living in the desirable Paradise Hills area. VA and FHA approved, making this an excellent opportunity for first time homebuyers, military buyers, and downsizers. This move in ready home features an open concept living and dining area that flows seamlessly to a private patio, creating the perfect indoor outdoor lifestyle. The updated kitchen includes new appliances, ample cabinetry, and pantry storage. Enjoy the convenience of an interior laundry area, central air conditioning, and quality finishes throughout. Enjoy two private patios. The main patio offers a comfortable outdoor entertaining space, while the second private patio is accessible directly from the primary bedroom, providing a peaceful retreat. As an end unit, the home offers added privacy in a quiet, well maintained community. Ideally situated approximately 15 minutes from Downtown San Diego, with easy access to Highway 54, Interstate 5, and Interstate 805, making commuting throughout San Diego County simple.",
+    "ylopoDetailUrl": "https://search.palisaderealty.com/search/detail/267731358?s[propertyTypes][0]=house&s[propertyTypes][1]=condo&s[propertyTypes][2]=townhouse&s[propertyTypes][3]=manuf&s[propertyTypes][4]=mobile&s[propertyTypes][5]=apt&s[propertyTypes][6]=comm&s[propertyTypes][7]=land&s[featured]=t",
+    "heroImage": "https://d25fhp1qfwqa2h.cloudfront.net/b2c199110cf8c21e8e779bd9062a681e,1784940894000_auto_650?phid=19579343191",
+    "gallery": [
+      "https://d25fhp1qfwqa2h.cloudfront.net/b2c199110cf8c21e8e779bd9062a681e,1784940894000_auto_650?phid=19579343191",
+      "https://d25fhp1qfwqa2h.cloudfront.net/ac4cf9191f9f67472edee38caca5db26,1784940894000_auto_650?phid=19579343192",
+      "https://d25fhp1qfwqa2h.cloudfront.net/a76e2df18e36c8ae1bfdd2c19ec872dd,1784940894000_auto_650?phid=19579343193",
+      "https://d25fhp1qfwqa2h.cloudfront.net/2bd2372c2f52620dc1d38b2422f1c255,1784940894000_auto_650?phid=19579343194",
+      "https://d25fhp1qfwqa2h.cloudfront.net/e6089e6f2a21d887feb2d2c49949b00a,1784940894000_auto_650?phid=19579343195",
+      "https://d25fhp1qfwqa2h.cloudfront.net/06808959615f1fa480ef6a05d70b573a,1784940894000_auto_650?phid=19579343196",
+      "https://d25fhp1qfwqa2h.cloudfront.net/0d247e151a56ffa22b57d2fe5c35980e,1784940894000_auto_650?phid=19579343197",
+      "https://d25fhp1qfwqa2h.cloudfront.net/7cb5faa0187896866e466df400bfc6ef,1784940894000_auto_650?phid=19579343198",
+      "https://d25fhp1qfwqa2h.cloudfront.net/9081b2aaf4405db64ad9478ede55a3d3,1784940894000_auto_650?phid=19579343199",
+      "https://d25fhp1qfwqa2h.cloudfront.net/5e3f08c0b86fcf91e524d3b781e5e0a6,1784940894000_auto_650?phid=19579343200",
+      "https://d25fhp1qfwqa2h.cloudfront.net/afd8273ba5268bef1fe19573d3614997,1784940894000_auto_650?phid=19579343201",
+      "https://d25fhp1qfwqa2h.cloudfront.net/4e2c613d89d06f0f0bb3d0f4429be8ca,1784940894000_auto_650?phid=19579343202",
+      "https://d25fhp1qfwqa2h.cloudfront.net/5a4d723e7e716af6561ce89d861d6771,1784940894000_auto_650?phid=19579343203",
+      "https://d25fhp1qfwqa2h.cloudfront.net/3532543266a58567bd2cb633da093c80,1784940894000_auto_650?phid=19579343204",
+      "https://d25fhp1qfwqa2h.cloudfront.net/9fd9547c266df09ce761f9b4189f4bb5,1784940894000_auto_650?phid=19579343205",
+      "https://d25fhp1qfwqa2h.cloudfront.net/f823507aaa1b97d05448c14dd1e98914,1784940894000_auto_650?phid=19579343206",
+      "https://d25fhp1qfwqa2h.cloudfront.net/8937b05148f3c790bf7726e0a8dd9161,1784940894000_auto_650?phid=19579343207"
+    ]
+  },
+  {
     "slug": "del-mar-portofino",
     "address": "13297 Portofino",
     "city": "Del Mar",
@@ -413,51 +458,6 @@
       "https://d25fhp1qfwqa2h.cloudfront.net/52bc8008a6b1073d413a75487bad0b91,1783040695000_auto_650?phid=19437709008"
     ],
     "description_es": "Santuario Costero Magistralmente Renovado en las Prestigiosas Del Mar Heights | 5 Recámaras | 4 Baños. Enclavada en las prestigiosas Del Mar Heights, esta magistralmente renovada residencia encarna el lujo costero elevado para el comprador más exigente. Cada detalle fue cuidadosamente renovado: nuevo panel eléctrico, techo nuevo, pisos de roble blanco europeo y acabados interiores suaves que establecen un tono cálido y sofisticado. Una llamativa puerta pivotante de vidrio de gran tamaño crea una entrada imponente. Un ingeniero diseñó cuidadosamente el trazado, generando espacios bien definidos que fluyen perfectamente por toda la casa. El corazón del hogar es una cocina de inspiración gourmet con electrodomésticos Bosch premium, fregadero moderno sin contacto, gran isla central y despensa dedicada con vinoteca y fregadero. Los nuevos pisos de roble fluyen con gracia por toda la casa, complementados por una dramática araña. Una acogedora chimenea ancla la sala de estar. Nuevas puertas bi-fold de vidrio se abren dramáticamente al jardín, ofreciendo un verdadero estilo de vida indoor-outdoor perfecto para el café de la mañana, cenas al atardecer o entretenimiento relajado."
-  },
-  {
-    "slug": "san-diego-bear-river-row-unit-2",
-    "address": "6867 Bear River Row Unit 2",
-    "city": "San Diego",
-    "state": "CA",
-    "status": "active",
-    "hasDetailPage": true,
-    "listedBy": {
-      "agents": [
-        "Hedda Parashos"
-      ],
-      "agent": "Hedda Parashos",
-      "brokerage": "Palisade Realty"
-    },
-    "zip": "92139",
-    "mls": "260018231",
-    "price": 499000,
-    "priceDisplay": "$499,000",
-    "beds": 2,
-    "baths": 1,
-    "sqft": 866,
-    "yearBuilt": 1980,
-    "description": "Beautifully remodeled 2 bedroom, 1 bath end unit offering single level living in the desirable Paradise Hills area. VA and FHA approved, making this an excellent opportunity for first time homebuyers, military buyers, and downsizers. This move in ready home features an open concept living and dining area that flows seamlessly to a private patio, creating the perfect indoor outdoor lifestyle. The updated kitchen includes new appliances, ample cabinetry, and pantry storage. Enjoy the convenience of an interior laundry area, central air conditioning, and quality finishes throughout. Enjoy two private patios. The main patio offers a comfortable outdoor entertaining space, while the second private patio is accessible directly from the primary bedroom, providing a peaceful retreat. As an end unit, the home offers added privacy in a quiet, well maintained community. Ideally situated approximately 15 minutes from Downtown San Diego, with easy access to Highway 54, Interstate 5, and Interstate 805, making commuting throughout San Diego County simple.",
-    "ylopoDetailUrl": "https://search.palisaderealty.com/search/detail/267731358?s[propertyTypes][0]=house&s[propertyTypes][1]=condo&s[propertyTypes][2]=townhouse&s[propertyTypes][3]=manuf&s[propertyTypes][4]=mobile&s[propertyTypes][5]=apt&s[propertyTypes][6]=comm&s[propertyTypes][7]=land&s[featured]=t",
-    "heroImage": "https://d25fhp1qfwqa2h.cloudfront.net/b2c199110cf8c21e8e779bd9062a681e,1784940894000_auto_650?phid=19579343191",
-    "gallery": [
-      "https://d25fhp1qfwqa2h.cloudfront.net/b2c199110cf8c21e8e779bd9062a681e,1784940894000_auto_650?phid=19579343191",
-      "https://d25fhp1qfwqa2h.cloudfront.net/ac4cf9191f9f67472edee38caca5db26,1784940894000_auto_650?phid=19579343192",
-      "https://d25fhp1qfwqa2h.cloudfront.net/a76e2df18e36c8ae1bfdd2c19ec872dd,1784940894000_auto_650?phid=19579343193",
-      "https://d25fhp1qfwqa2h.cloudfront.net/2bd2372c2f52620dc1d38b2422f1c255,1784940894000_auto_650?phid=19579343194",
-      "https://d25fhp1qfwqa2h.cloudfront.net/e6089e6f2a21d887feb2d2c49949b00a,1784940894000_auto_650?phid=19579343195",
-      "https://d25fhp1qfwqa2h.cloudfront.net/06808959615f1fa480ef6a05d70b573a,1784940894000_auto_650?phid=19579343196",
-      "https://d25fhp1qfwqa2h.cloudfront.net/0d247e151a56ffa22b57d2fe5c35980e,1784940894000_auto_650?phid=19579343197",
-      "https://d25fhp1qfwqa2h.cloudfront.net/7cb5faa0187896866e466df400bfc6ef,1784940894000_auto_650?phid=19579343198",
-      "https://d25fhp1qfwqa2h.cloudfront.net/9081b2aaf4405db64ad9478ede55a3d3,1784940894000_auto_650?phid=19579343199",
-      "https://d25fhp1qfwqa2h.cloudfront.net/5e3f08c0b86fcf91e524d3b781e5e0a6,1784940894000_auto_650?phid=19579343200",
-      "https://d25fhp1qfwqa2h.cloudfront.net/afd8273ba5268bef1fe19573d3614997,1784940894000_auto_650?phid=19579343201",
-      "https://d25fhp1qfwqa2h.cloudfront.net/4e2c613d89d06f0f0bb3d0f4429be8ca,1784940894000_auto_650?phid=19579343202",
-      "https://d25fhp1qfwqa2h.cloudfront.net/5a4d723e7e716af6561ce89d861d6771,1784940894000_auto_650?phid=19579343203",
-      "https://d25fhp1qfwqa2h.cloudfront.net/3532543266a58567bd2cb633da093c80,1784940894000_auto_650?phid=19579343204",
-      "https://d25fhp1qfwqa2h.cloudfront.net/9fd9547c266df09ce761f9b4189f4bb5,1784940894000_auto_650?phid=19579343205",
-      "https://d25fhp1qfwqa2h.cloudfront.net/f823507aaa1b97d05448c14dd1e98914,1784940894000_auto_650?phid=19579343206",
-      "https://d25fhp1qfwqa2h.cloudfront.net/8937b05148f3c790bf7726e0a8dd9161,1784940894000_auto_650?phid=19579343207"
-    ]
   },
   {
     "slug": "del-mar-boquita",
