@@ -204,14 +204,7 @@ export default function ContactSection() {
                 <p className="contact-office-addr">3434 Grove Street<br />Lemon Grove, CA 91945</p>
               </div>
             </div>
-            <div className="contact-office">
-              <div className="contact-office-dot" style={{ background: 'var(--accent)' }} aria-hidden="true" />
-              <div>
-                <p className="contact-office-name" style={{ color: 'var(--mid-gray)' }}>Spring Valley</p>
-                <p className="contact-office-addr">9847 Campo Road<br />Spring Valley, CA 91977</p>
-              </div>
-            </div>
-            <div className="contact-office">
+<div className="contact-office">
               <div className="contact-office-dot" style={{ background: 'var(--mid-gray)' }} aria-hidden="true" />
               <div>
                 <p className="contact-office-name" style={{ color: 'var(--mid-gray)' }}>San Diego</p>
