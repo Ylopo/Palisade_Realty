@@ -68,7 +68,7 @@
 
       /* HOMEPAGE — about */
       aboutTitle: 'CEO',
-      aboutBio: "Hedda founded Palisade Realty in 2010 and has built it into one of San Diego’s most trusted luxury real estate firms — with a team of 60+ agents and over 15 years of market expertise. Her commitment to innovative representation, deep local knowledge, and genuine care for every client has positioned Palisade Realty as the go-to brokerage across the greater San Diego region. From first-time buyers to seasoned investors, Hedda’s team delivers the professional, efficient, and rewarding experience today’s market demands.",
+      aboutBio: "<p>Hedda Parashos is the Owner and President of Palisade Realty, a full-service real estate brokerage established in 2006. She acquired the company in 2012 and has since transformed it into one of Southern California&rsquo;s respected independent brokerages through innovation, strong leadership, and an unwavering commitment to both clients and agents.</p><p>Today, Palisade Realty is home to more than 100 real estate agent partners, with continued growth across San Diego County, Orange County, and parts of Riverside County. Under Hedda&rsquo;s leadership, the brokerage has been involved in the successful sale of thousands of homes, earning a reputation for professionalism, integrity, and exceptional client service.</p><p>Hedda&rsquo;s passion for real estate extends beyond buying and selling homes. She is dedicated to creating an environment where agents can thrive through mentorship, innovative marketing, cutting-edge technology, and a culture built on collaboration and genuine care. Her vision has positioned Palisade Realty as a brokerage that continually evolves to meet the changing needs of today&rsquo;s real estate market.</p><p>Whether working with first-time homebuyers, luxury sellers, investors, or experienced clients, Hedda and the Palisade Realty team are committed to delivering knowledgeable guidance, strategic representation, and an exceptional real estate experience from start to finish.</p>",
       aboutCta: 'Meet Our Team',
 
       /* HOMEPAGE — team carousel */
@@ -452,7 +452,7 @@
 
       /* HOMEPAGE — about */
       aboutTitle: 'CEO',
-      aboutBio: 'Hedda fundó Palisade Realty en 2010 y la ha convertido en una de las firmas de bienes raíces de lujo más confiables de San Diego — con un equipo de más de 60 agentes y más de 15 años de experiencia en el mercado. Su compromiso con la representación innovadora, el profundo conocimiento local y el genuino cuidado por cada cliente han posicionado a Palisade Realty como la correduría preferida en toda la región de San Diego. Desde compradores primerizos hasta inversores experimentados, el equipo de Hedda ofrece la experiencia profesional, eficiente y gratificante que el mercado actual exige.',
+      aboutBio: '<p>Hedda Parashos es la Propietaria y Presidenta de Palisade Realty, una correduría inmobiliaria de servicio completo fundada en 2006. Adquirió la empresa en 2012 y desde entonces la ha transformado en una de las corredurías independientes más reconocidas del sur de California, a través de la innovación, un liderazgo sólido y un compromiso inquebrantable tanto con los clientes como con los agentes.</p><p>Hoy en día, Palisade Realty cuenta con más de 100 agentes asociados, con un crecimiento continuo en el condado de San Diego, el condado de Orange y partes del condado de Riverside. Bajo el liderazgo de Hedda, la correduría ha participado en la venta exitosa de miles de propiedades, ganando una reputación de profesionalismo, integridad y servicio excepcional al cliente.</p><p>La pasión de Hedda por los bienes raíces va más allá de comprar y vender casas. Está comprometida con crear un ambiente donde los agentes puedan prosperar a través de la mentoría, el marketing innovador, la tecnología de vanguardia y una cultura de colaboración y cuidado genuino. Su visión ha posicionado a Palisade Realty como una correduría que evoluciona continuamente para satisfacer las necesidades cambiantes del mercado inmobiliario actual.</p><p>Ya sea trabajando con compradores de primera vez, vendedores de propiedades de lujo, inversores o clientes experimentados, Hedda y el equipo de Palisade Realty están comprometidos a brindar orientación experta, representación estratégica y una experiencia inmobiliaria excepcional de principio a fin.</p>',
       aboutCta: 'Conoce a Nuestro Equipo',
 
       /* HOMEPAGE — team carousel */
@@ -2324,7 +2324,7 @@ var AGENT_TRANSLATIONS = {
     if (aboutTitle) aboutTitle.textContent = d.aboutTitle;
 
     var aboutBio = document.querySelector('.about-bio');
-    if (aboutBio) aboutBio.textContent = d.aboutBio;
+    if (aboutBio) aboutBio.innerHTML = d.aboutBio;
 
     var aboutCta = document.querySelector('.about-cta .btn-brand');
     if (aboutCta) aboutCta.textContent = d.aboutCta;

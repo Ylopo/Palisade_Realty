@@ -903,6 +903,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   z-index: 1;
   flex: 1;
 }
+.about-bio p { margin-bottom: 1em; }
+.about-bio p:last-child { margin-bottom: 0; }
 
 .about-cta {
   position: relative;
