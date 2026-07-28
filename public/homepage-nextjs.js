@@ -10,7 +10,7 @@ const TEAM = [
   {
     name:    'Hedda Parashos',
     role:    'CEO',
-    bio:     'Founder and CEO of Palisade Realty since 2010. San Diego luxury specialist with 15+ years experience and a team of 60+ agents delivering exceptional results.',
+    bio:     'Owner and President of Palisade Realty since 2012. Under her leadership the brokerage has grown to 100+ agents across San Diego, Orange, and Riverside counties — built on innovation, integrity, and an unwavering commitment to clients and agents.',
     profile: '/team/hedda-parashos',
     photo:   '/assets/images/agents/hedda-parashos.jpg',
   },
