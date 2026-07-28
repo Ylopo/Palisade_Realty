@@ -1013,7 +1013,7 @@
   ];
 
   var TC_BIOS = [
-    "Fundador y CEO de Palisade Realty desde 2010. Especialista en lujo en San Diego con más de 15 años de experiencia y un equipo de más de 60 agentes que brindan resultados excepcionales.",
+    "Propietaria y Presidenta de Palisade Realty desde 2012. Bajo su liderazgo, la correduría ha crecido a más de 100 agentes en los condados de San Diego, Orange y Riverside, construida sobre la innovación, la integridad y un compromiso inquebrantable con clientes y agentes.",
     "Negociador experto con profundo conocimiento del mercado de San Diego North County. Reconocido por identificar oportunidades fuera del mercado y cerrar transacciones complejas.",
     "Agente dedicado a compradores con experiencia en compras por primera vez y de reubicación en las comunidades de San Diego. Comunicación clara desde la oferta hasta el cierre.",
     "Especialista estratégico en listados, reconocido por su precisión en la fijación de precios, coordinación profesional de home staging y resultados récord en La Jolla y Coronado.",
