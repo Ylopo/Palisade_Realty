@@ -60,14 +60,30 @@ export default function TeamPage() {
               Built on <em>Results.</em><br />Driven by People.
             </h2>
             <p className="tp-intro-body">
-              Palisade Realty was founded on the belief that every client deserves a true partner —
-              someone who listens, advocates, and delivers. Under the leadership of CEO Hedda Parashos,
-              we&apos;ve grown into one of San Diego&apos;s most respected independent brokerages, with
-              agents spanning every corner of the county.
+              Palisade Realty, Inc. is a leading Southern California real estate brokerage serving San
+              Diego County, Orange County, and parts of Riverside County. Our team of experienced,
+              licensed real estate professionals specializes in residential homes, luxury properties,
+              investment properties, first-time homebuyers, relocation, and home sellers throughout
+              Southern California.
             </p>
             <p className="tp-intro-body" style={{ marginTop: '16px' }}>
-              We don&apos;t just sell homes. We help families find their place in one of the world&apos;s
-              most beautiful cities.
+              We&apos;ve built our reputation on one guiding principle: the client comes first, always.
+              From your initial consultation to closing day and beyond, we provide expert market
+              knowledge, innovative marketing, skilled negotiation, clear communication, and exceptional
+              service every step of the way.
+            </p>
+            <p className="tp-intro-body" style={{ marginTop: '16px' }}>
+              Our real estate agents have extensive local expertise across San Diego County, including
+              La Jolla, Del Mar, Coronado, Point Loma, Downtown San Diego, Mission Hills, Carlsbad,
+              Encinitas, Chula Vista, and surrounding communities. We also proudly serve Orange County,
+              including Newport Beach, Laguna Beach, Irvine, Huntington Beach, Costa Mesa, Tustin, and
+              Anaheim, as well as select communities throughout Riverside County, including Temecula,
+              Murrieta, Menifee, and Winchester.
+            </p>
+            <p className="tp-intro-body" style={{ marginTop: '16px' }}>
+              Whether you&apos;re buying, selling, investing, or relocating, Palisade Realty delivers
+              the local expertise, personalized service, and proven results that have helped thousands
+              of clients achieve their real estate goals throughout Southern California.
             </p>
           </div>
           <div className="tp-intro-visual">
