@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import ContactSection from './ContactSection'
+import ContactHeroMap from './ContactHeroMap'
 
 export const metadata: Metadata = {
   title: 'Contact Us',
@@ -7,16 +8,54 @@ export const metadata: Metadata = {
     'Get in touch with Palisade Realty. Call (619) 794-0218, email us, or fill out our contact form. Offices in Lemon Grove, Spring Valley, and San Diego, CA.',
 }
 
-export default function ContactPage() {
+const OFFICE = {
+  name: 'Palisade Realty',
+  address: '3434 Grove St, Lemon Grove, CA 91945, USA',
+  // Fallback used only if geocoding fails — Lemon Grove, CA approximate center
+  fallback: [-117.0308, 32.7437] as [number, number],
+}
+
+async function geocodeOffice(token: string): Promise<[number, number]> {
+  try {
+    const encoded = encodeURIComponent(OFFICE.address)
+    const res = await fetch(
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${encoded}.json?access_token=${token}&limit=1`,
+      { next: { revalidate: 86400 } } // re-geocode once per day at most
+    )
+    if (!res.ok) return OFFICE.fallback
+    const json = await res.json()
+    const center: unknown = json.features?.[0]?.center
+    if (Array.isArray(center) && center.length === 2) {
+      return [center[0] as number, center[1] as number]
+    }
+    return OFFICE.fallback
+  } catch {
+    return OFFICE.fallback
+  }
+}
+
+export default async function ContactPage() {
+  const token = process.env.MAPBOX_PUBLIC_TOKEN ?? ''
+  const coordinates: [number, number] = token
+    ? await geocodeOffice(token)
+    : OFFICE.fallback
+
   return (
     <>
       {/* ── HERO ────────────────────────────────────────────── */}
       <section className="contact-hero" aria-label="Contact Palisade Realty">
-        <div className="contact-hero-bg" aria-hidden="true">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/hero-background/hero-2.jpg" alt="San Diego skyline" loading="eager" />
-        </div>
-        <div className="contact-hero-overlay" aria-hidden="true" />
+        {token ? (
+          <ContactHeroMap token={token} coordinates={coordinates} />
+        ) : (
+          /* Graceful fallback when token is missing */
+          <>
+            <div className="contact-hero-bg" aria-hidden="true">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/hero-background/hero-2.jpg" alt="San Diego skyline" loading="eager" />
+            </div>
+            <div className="contact-hero-overlay" aria-hidden="true" />
+          </>
+        )}
         <div className="contact-hero-content">
           <span className="contact-hero-eyebrow reveal">Palisade Realty, Inc.</span>
           <h1 className="contact-hero-title reveal reveal-delay-1">Let&rsquo;s <em>Connect</em></h1>
