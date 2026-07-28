@@ -1,6 +1,9 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getAllProperties } from '@/lib/property-data'
+import type { FeaturedProperty } from '@/lib/property-data'
+
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 export const metadata: Metadata = {
   title: 'Featured Properties — Palisade Realty',
@@ -8,12 +11,36 @@ export const metadata: Metadata = {
     'Browse featured San Diego luxury properties presented by Palisade Realty. La Jolla, Coronado, Del Mar, Rancho Santa Fe, and more.',
 }
 
+async function getProperties(): Promise<FeaturedProperty[]> {
+  const token = process.env.GITHUB_TOKEN
+  try {
+    const res = await fetch(
+      `https://api.github.com/repos/jomylopo/Palisade_Realty/contents/data/featured-properties.json`,
+      {
+        headers: {
+          Accept: 'application/vnd.github.v3.raw',
+          'User-Agent': 'palisade-realty-site',
+          ...(token && { Authorization: `token ${token}` }),
+        },
+        cache: 'no-store',
+      }
+    )
+    if (!res.ok) return []
+    const text = await res.text()
+    let data: unknown
+    try { data = JSON.parse(text) } catch { return [] }
+    return Array.isArray(data) ? (data as FeaturedProperty[]) : []
+  } catch {
+    return []
+  }
+}
+
 function formatPrice(n: number): string {
   return '$' + n.toLocaleString('en-US')
 }
 
-export default function PropertiesPage() {
-  const properties = getAllProperties()
+export default async function PropertiesPage() {
+  const properties = await getProperties()
 
   return (
     <>
@@ -102,9 +129,9 @@ export default function PropertiesPage() {
                   </p>
                   <div style={{ display: 'flex', gap: '18px', marginBottom: '20px' }}>
                     {[
-                      { label: 'Beds', value: p.beds },
-                      { label: 'Baths', value: p.baths },
-                      { label: 'Sq Ft', value: p.sqft.toLocaleString() },
+                      { label: 'Beds', value: p.beds ?? '—' },
+                      { label: 'Baths', value: p.baths ?? '—' },
+                      { label: 'Sq Ft', value: p.sqft != null ? Number(p.sqft).toLocaleString() : '—' },
                     ].map((stat) => (
                       <div key={stat.label}>
                         <div style={{ fontFamily: 'var(--font-display)', fontSize: '20px', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', lineHeight: 1 }}>{stat.value}</div>

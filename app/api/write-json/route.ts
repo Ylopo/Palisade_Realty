@@ -4,7 +4,7 @@ export const dynamic = 'force-dynamic'
 
 const SECRET       = process.env.ADMIN_SECRET
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN
-const GITHUB_REPO  = process.env.GITHUB_REPO || 'Ylopo/Palisade_Realty'
+const GITHUB_REPO  = process.env.GITHUB_REPO || 'jomylopo/Palisade_Realty'
 
 export async function POST(request: NextRequest) {
   if (SECRET && request.headers.get('x-admin-secret') !== SECRET) {
@@ -34,10 +34,11 @@ export async function POST(request: NextRequest) {
   }
 
   const ghHeaders = {
-    'Authorization': `token ${GITHUB_TOKEN}`,
-    'Accept': 'application/vnd.github.v3+json',
+    'Authorization': `Bearer ${GITHUB_TOKEN}`,
+    'Accept': 'application/vnd.github+json',
     'Content-Type': 'application/json',
     'User-Agent': 'Palisade-Admin/1.0',
+    'X-GitHub-Api-Version': '2022-11-28',
   }
   const apiBase = `https://api.github.com/repos/${GITHUB_REPO}/contents/${filePath}`
   const commitMsg = request.nextUrl.searchParams.get('commit') || `Update ${rawFile} via admin`
@@ -47,7 +48,9 @@ export async function POST(request: NextRequest) {
     const getRes  = await fetch(apiBase, { headers: ghHeaders })
     const getJson = await getRes.json()
     if (!getRes.ok && getRes.status !== 404) {
-      return NextResponse.json({ ok: false, error: `GitHub GET failed: ${getJson.message}` }, { status: 502 })
+      const msg = getJson.message || JSON.stringify(getJson)
+      console.error('[write-json] GitHub GET failed:', getRes.status, msg)
+      return NextResponse.json({ ok: false, error: `GitHub GET failed (${getRes.status}): ${msg}` }, { status: 502 })
     }
     const sha = getJson.sha as string | undefined
 
@@ -64,7 +67,9 @@ export async function POST(request: NextRequest) {
     if (putRes.ok) {
       return NextResponse.json({ ok: true, committed: true, pushed: true, commit: putJson.commit?.sha })
     } else {
-      return NextResponse.json({ ok: false, committed: false, pushed: false, error: putJson.message }, { status: 502 })
+      const msg = putJson.message || JSON.stringify(putJson)
+      console.error('[write-json] GitHub PUT failed:', putRes.status, msg)
+      return NextResponse.json({ ok: false, committed: false, pushed: false, error: `GitHub PUT failed (${putRes.status}): ${msg}` }, { status: 502 })
     }
   } catch (e: unknown) {
     return NextResponse.json({ ok: false, error: (e as Error).message }, { status: 500 })

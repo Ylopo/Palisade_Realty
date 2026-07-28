@@ -20,6 +20,7 @@ export async function GET(request: NextRequest) {
           'User-Agent': 'palisade-realty-site',
           ...(token && { Authorization: `token ${token}` }),
         },
+        cache: 'no-store',
       }
     )
 

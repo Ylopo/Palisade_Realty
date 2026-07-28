@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!p) return { title: 'Property Not Found' }
   return {
     title: `${p.address} — ${p.priceDisplay} | Palisade Realty`,
-    description: p.tagline ?? `${p.beds}bd/${p.baths}ba, ${p.sqft.toLocaleString()} sq ft in ${p.city}, CA. Listed by Palisade Realty.`,
+    description: p.tagline ?? `${p.beds ?? '?'}bd/${p.baths ?? '?'}ba, ${p.sqft != null ? Number(p.sqft).toLocaleString() : '?'} sq ft in ${p.city}, CA. Listed by Palisade Realty.`,
   }
 }
 
@@ -51,7 +51,7 @@ export default async function PropertyPage({ params }: Props) {
       <PropertyPageBodyClass />
       <script dangerouslySetInnerHTML={{ __html: `window.__ppLangData=${ppLangData};` }} />
       {/* ── GALLERY ─────────────────────────────────────────── */}
-      <PropertyGallery images={p.gallery.length > 0 ? p.gallery : [p.heroImage]} address={p.address} />
+      <PropertyGallery images={(p.gallery?.length ?? 0) > 0 ? p.gallery : [p.heroImage].filter(Boolean)} address={p.address} />
 
       {/* ── MAIN DETAIL ─────────────────────────────────────── */}
       <section style={{ background: '#fff', padding: '64px var(--pad-x,60px)' }}>
@@ -90,7 +90,7 @@ export default async function PropertyPage({ params }: Props) {
               {[
                 { label: 'Beds', value: p.beds },
                 { label: 'Baths', value: p.baths },
-                { label: 'Sq Ft', value: p.sqft.toLocaleString() },
+                { label: 'Sq Ft', value: p.sqft != null ? Number(p.sqft).toLocaleString() : '—' },
                 ...(p.lotSize ? [{ label: 'Lot', value: p.lotSize }] : []),
                 { label: 'Built', value: p.yearBuilt },
                 { label: 'MLS #', value: p.mls },
@@ -150,7 +150,7 @@ export default async function PropertyPage({ params }: Props) {
                   style={{ width: '52px', height: '52px', borderRadius: '50%', objectFit: 'cover', objectPosition: 'top', border: '2px solid rgba(238,202,0,.4)' }}
                 />
                 <div>
-                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '16px', fontWeight: 700, color: '#fff', margin: 0 }}>{p.listedBy.agent}</p>
+                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '16px', fontWeight: 700, color: '#fff', margin: 0 }}>{p.listedBy?.agent ?? 'Hedda Parashos'}</p>
                   <p style={{ fontFamily: 'var(--font-label)', fontSize: '11px', color: 'rgba(255,255,255,.55)', margin: 0 }}>Palisade Realty</p>
                 </div>
               </div>
@@ -231,7 +231,7 @@ export default async function PropertyPage({ params }: Props) {
                     <p style={{ fontFamily: 'var(--font-body)', fontSize: '14px', fontWeight: 600, color: 'var(--near-black,#1a0a0a)', margin: '0 0 2px' }}>{o.address}</p>
                     <p style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: '#999', margin: '0 0 14px' }}>{o.city}, {o.state}</p>
                     <div style={{ display: 'flex', gap: '12px', marginBottom: '14px' }}>
-                      {[{ v: o.beds, l: 'Bd' }, { v: o.baths, l: 'Ba' }, { v: o.sqft.toLocaleString(), l: 'Sf' }].map((s) => (
+                      {[{ v: o.beds ?? '—', l: 'Bd' }, { v: o.baths ?? '—', l: 'Ba' }, { v: o.sqft != null ? Number(o.sqft).toLocaleString() : '—', l: 'Sf' }].map((s) => (
                         <span key={s.l} style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: '#666' }}>{s.v} {s.l}</span>
                       ))}
                     </div>
