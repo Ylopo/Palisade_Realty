@@ -429,7 +429,7 @@ a {
 .test-hero-accent { width: 48px; height: 3px; background: #eeca00; border-radius: 2px; margin: 36px auto 0; }
 .stats-bar { background: #fff; border-bottom: 1px solid rgba(88,23,42,0.07); }
 .stats-inner {
-  max-width: 960px; margin: 0 auto; padding: 40px clamp(20px, 5vw, 60px);
+  max-width: 1400px; margin: 0 auto; padding: 40px clamp(20px, 5vw, 60px);
   display: flex; justify-content: center; gap: clamp(28px, 7vw, 90px); flex-wrap: wrap;
 }
 .stat-item { text-align: center; }
