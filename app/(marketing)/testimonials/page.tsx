@@ -47,19 +47,19 @@ export default async function TestimonialsPage() {
       <section className="stats-bar" aria-label="Client success metrics">
         <div className="stats-inner">
           <div className="stat-item">
-            <span className="stat-value">500+</span>
+            <span className="stat-value">2800+</span>
             <span className="stat-label">Families Helped</span>
           </div>
           <div className="stat-item">
-            <span className="stat-value">4.9★</span>
+            <span className="stat-value">5★</span>
             <span className="stat-label">Average Rating</span>
           </div>
           <div className="stat-item">
-            <span className="stat-value">15+</span>
+            <span className="stat-value">20+</span>
             <span className="stat-label">Years of Experience</span>
           </div>
           <div className="stat-item">
-            <span className="stat-value">60+</span>
+            <span className="stat-value">100+</span>
             <span className="stat-label">Dedicated Agents</span>
           </div>
         </div>
