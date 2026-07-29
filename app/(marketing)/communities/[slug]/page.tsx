@@ -7,6 +7,7 @@ import { getCommunityBySlug, getAllCommunitySlugs, DEFAULT_MELLO_ROOS, MelloRoos
 import CommunityPageBodyClass from '@/components/CommunityPageBodyClass'
 import CommunitySchoolsTabs from '@/components/CommunitySchoolsTabs'
 import CommunityLocationMap from '@/components/CommunityLocationMap'
+import { COMMUNITY_LOCATION_MAPS } from '@/lib/community-location-maps'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -32,6 +33,7 @@ export default async function CommunityPage({ params }: Props) {
   if (!c) notFound()
 
   const mr: MelloRoosData = { ...DEFAULT_MELLO_ROOS, ...c.melloroos }
+  const locationMap = c.locationMap ?? COMMUNITY_LOCATION_MAPS[slug]
 
   const transPath = path.join(process.cwd(), 'public', 'community-translations', `${slug}.js`)
   const cdTransScript = fs.existsSync(transPath) ? fs.readFileSync(transPath, 'utf8') : ''
@@ -102,14 +104,14 @@ export default async function CommunityPage({ params }: Props) {
               </p>
             )}
           </div>
-          {c.locationMap && (
+          {locationMap && (
             <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
               <CommunityLocationMap
-                center={c.locationMap.center}
-                zoom={c.locationMap.zoom}
-                boundary={c.locationMap.boundary}
-                i5={c.locationMap.i5}
-                harbor={c.locationMap.harbor}
+                center={locationMap.center}
+                zoom={locationMap.zoom}
+                boundary={locationMap.boundary}
+                i5={locationMap.i5}
+                harbor={locationMap.harbor}
                 name={c.name}
               />
             </div>
