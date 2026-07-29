@@ -212,6 +212,11 @@ function initScrollAnimations() {
     });
   }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
 
+  // Elements already in the viewport — make visible immediately, no scroll animation needed
+  Array.from(targets).filter(function (el) {
+    return el.getBoundingClientRect().top <= vh * 0.85;
+  }).forEach(function (el) { el.classList.add('visible'); });
+
   belowFold.forEach(function (el) { observer.observe(el); });
 }
 

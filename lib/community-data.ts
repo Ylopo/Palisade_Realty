@@ -55,6 +55,13 @@ export interface CommunityData {
   lifestyleBullets?: string[]
   nearbyDescription?: string
   melloroos?: MelloRoosData
+  locationMap?: {
+    center: [number, number]
+    zoom: number
+    boundary: [number, number][]
+    i5?: [number, number][]
+    harbor?: [number, number][]
+  }
 }
 
 export interface MelloRoosData {
@@ -1460,6 +1467,23 @@ const COMMUNITIES: CommunityData[] = [
       disclaimer: 'Mello-Roos assessments vary by property and development. Buyers should verify current assessments with the appropriate public agency and consult their real estate or tax professional.',
       ctaText: 'Our team can help you review property details and better understand any additional assessments before you make an offer.',
       ctaLink: '/contact',
+    },
+    locationMap: {
+      center: [-116.96, 32.98] as [number, number],
+      zoom: 8.2,
+      boundary: [
+        [-117.176, 32.730], [-117.155, 32.732], [-117.132, 32.728],
+        [-117.130, 32.715], [-117.131, 32.700], [-117.145, 32.695],
+        [-117.162, 32.697], [-117.173, 32.702], [-117.177, 32.714],
+        [-117.176, 32.730],
+      ] as [number, number][],
+      i5: [
+        [-117.107, 32.671], [-117.130, 32.703], [-117.136, 32.718],
+        [-117.143, 32.735], [-117.155, 32.783], [-117.168, 32.845], [-117.175, 32.903],
+      ] as [number, number][],
+      harbor: [
+        [-117.136, 32.699], [-117.158, 32.711], [-117.169, 32.722], [-117.175, 32.731],
+      ] as [number, number][],
     },
   },
   {

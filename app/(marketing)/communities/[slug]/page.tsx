@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation'
 import { getCommunityBySlug, getAllCommunitySlugs, DEFAULT_MELLO_ROOS, MelloRoosData } from '@/lib/community-data'
 import CommunityPageBodyClass from '@/components/CommunityPageBodyClass'
 import CommunitySchoolsTabs from '@/components/CommunitySchoolsTabs'
+import CommunityLocationMap from '@/components/CommunityLocationMap'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -101,6 +102,18 @@ export default async function CommunityPage({ params }: Props) {
               </p>
             )}
           </div>
+          {c.locationMap && (
+            <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+              <CommunityLocationMap
+                center={c.locationMap.center}
+                zoom={c.locationMap.zoom}
+                boundary={c.locationMap.boundary}
+                i5={c.locationMap.i5}
+                harbor={c.locationMap.harbor}
+                name={c.name}
+              />
+            </div>
+          )}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '12px', maxWidth: '1100px', margin: '0 auto' }}>
             {c.driveCards.map((d, i) => (
               <div key={i} className="location-drive-card" style={{ background: '#ebebeb', border: '1px solid rgba(0,0,0,0.08)', borderRadius: '14px', padding: '20px 16px', textAlign: 'center' }}>
