@@ -125,7 +125,7 @@ export default function HomePage() {
             <div className="community-card-content">
               <h3 className="community-card-name">Downtown San Diego</h3>
               <div className="community-card-accent" />
-              <p className="community-card-desc">Urban sophistication meets coastal living. World-class dining, nightlife, and walkable neighborhoods in the heart of America&rsquo;s Finest City.</p>
+              <p className="community-card-desc" data-comm-card="downtown">Urban sophistication meets coastal living. World-class dining, nightlife, and walkable neighborhoods in the heart of America&rsquo;s Finest City.</p>
               <span className="community-explore-btn" aria-hidden="true">
                 Explore {EXPLORE_ICON}
               </span>
@@ -141,7 +141,7 @@ export default function HomePage() {
             <div className="community-card-content">
               <h3 className="community-card-name">Carmel Valley</h3>
               <div className="community-card-accent" />
-              <p className="community-card-desc">North County&rsquo;s premier family destination. Top-rated schools, walkable village amenities at One Paseo, and easy coastal access in one polished package.</p>
+              <p className="community-card-desc" data-comm-card="carmel-valley">North County&rsquo;s premier family destination. Top-rated schools, walkable village amenities at One Paseo, and easy coastal access in one polished package.</p>
               <span className="community-explore-btn" aria-hidden="true">
                 Explore {EXPLORE_ICON}
               </span>
@@ -157,7 +157,7 @@ export default function HomePage() {
             <div className="community-card-content">
               <h3 className="community-card-name">Mission Valley</h3>
               <div className="community-card-accent" />
-              <p className="community-card-desc">San Diego&rsquo;s central hub. Unbeatable freeway access, trolley connections, SDSU energy, and exceptional value minutes from the beach and downtown.</p>
+              <p className="community-card-desc" data-comm-card="mission-valley">San Diego&rsquo;s central hub. Unbeatable freeway access, trolley connections, SDSU energy, and exceptional value minutes from the beach and downtown.</p>
               <span className="community-explore-btn" aria-hidden="true">
                 Explore {EXPLORE_ICON}
               </span>
@@ -173,7 +173,7 @@ export default function HomePage() {
             <div className="community-card-content">
               <h3 className="community-card-name">Chula Vista</h3>
               <div className="community-card-accent" />
-              <p className="community-card-desc">San Diego's second-largest city offering exceptional value, master-planned communities, bayfront living, and easy access to the broader metro.</p>
+              <p className="community-card-desc" data-comm-card="chula-vista">San Diego's second-largest city offering exceptional value, master-planned communities, bayfront living, and easy access to the broader metro.</p>
               <span className="community-explore-btn" aria-hidden="true">
                 Explore {EXPLORE_ICON}
               </span>

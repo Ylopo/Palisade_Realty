@@ -59,6 +59,13 @@
       commEyebrow: 'Where We Work',
       commHeading: 'Explore Our Communities',
       commExplore: 'Explore',
+      commCardDescs: {
+        'downtown':      "Urban sophistication meets coastal living. World-class dining, nightlife, and walkable neighborhoods in the heart of America’s Finest City.",
+        'carmel-valley': "North County’s premier family destination. Top-rated schools, walkable village amenities at One Paseo, and easy coastal access in one polished package.",
+        'mission-valley':"San Diego’s central hub. Unbeatable freeway access, trolley connections, SDSU energy, and exceptional value minutes from the beach and downtown.",
+        'chula-vista':   "San Diego's second-largest city offering exceptional value, master-planned communities, bayfront living, and easy access to the broader metro.",
+        'spring-valley': "East County value with a strong community character. Established neighborhoods, full-sized homes, and a 15-minute commute to Downtown San Diego."
+      },
 
       /* HOMEPAGE — find your place */
       fypEyebrow: 'Explore the Region',
@@ -421,6 +428,13 @@
       commEyebrow: 'Dónde Trabajamos',
       commHeading: 'Explore Nuestras Comunidades',
       commExplore: 'Explorar',
+      commCardDescs: {
+        'downtown':      'La sofisticación urbana se encuentra con la vida costera. Gastronomía de primer nivel, vida nocturna y vecindarios caminables en el corazón de la Ciudad Más Bella de América.',
+        'carmel-valley': 'El destino familiar preferido del North County. Escuelas de alto rendimiento, servicios en One Paseo y fácil acceso a la costa, todo en un mismo lugar.',
+        'mission-valley':"El centro neurálgico de San Diego. Acceso inmejorable a autopistas, conexiones de tranvía, energía universitaria y excelente valor a minutos de la playa y el centro.",
+        'chula-vista':   'La segunda ciudad más grande de San Diego, con excelente valor, comunidades planificadas, vida frente a la bahía y fácil acceso a toda la metrópolis.',
+        'spring-valley': 'El valor del East County con un fuerte carácter comunitario. Vecindarios consolidados, casas amplias y a solo 15 minutos del centro de San Diego.'
+      },
 
       /* HOMEPAGE — find your place */
       fypEyebrow: 'Explore la Región',
@@ -2263,6 +2277,13 @@ var AGENT_TRANSLATIONS = {
     document.querySelectorAll('.community-explore-btn').forEach(function (el) {
       svgEnd(el, d.commExplore);
     });
+
+    if (d.commCardDescs) {
+      document.querySelectorAll('.community-card-desc[data-comm-card]').forEach(function (el) {
+        var key = el.getAttribute('data-comm-card');
+        if (d.commCardDescs[key]) el.textContent = d.commCardDescs[key];
+      });
+    }
 
     var fypEy = document.querySelector('.find-your-place .eyebrow');
     if (fypEy) fypEy.textContent = d.fypEyebrow;
