@@ -138,7 +138,7 @@ a {
 }
 .listings-outer { background: #f5f5f5; }
 .listings-outer .listings { background: transparent; }
-.community-card { background: #1a0008; }
+.community-card { background: #1a0008; text-decoration: none; color: inherit; }
 .blog-card-image { background: #28000c; }
 
 /* ============================================================

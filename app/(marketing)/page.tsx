@@ -116,7 +116,7 @@ export default function HomePage() {
         </h2>
         <div className="communities-cards" role="list">
 
-          <article className="community-card" role="listitem">
+          <Link href="/communities/downtown-san-diego-real-estate" className="community-card" role="listitem" aria-label="View Downtown San Diego community">
             <div className="community-card-bg" aria-hidden="true">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/assets/images/community-downtown-san-diego.jpg" alt="Downtown San Diego cityscape" loading="lazy" />
@@ -126,13 +126,13 @@ export default function HomePage() {
               <h3 className="community-card-name">Downtown San Diego</h3>
               <div className="community-card-accent" />
               <p className="community-card-desc">Urban sophistication meets coastal living. World-class dining, nightlife, and walkable neighborhoods in the heart of America&rsquo;s Finest City.</p>
-              <Link href="/communities/downtown-san-diego-real-estate" className="community-explore-btn">
+              <span className="community-explore-btn" aria-hidden="true">
                 Explore {EXPLORE_ICON}
-              </Link>
+              </span>
             </div>
-          </article>
+          </Link>
 
-          <article className="community-card" role="listitem">
+          <Link href="/communities/carmel-valley-real-estate" className="community-card" role="listitem" aria-label="View Carmel Valley community">
             <div className="community-card-bg" aria-hidden="true">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/assets/images/community-carmel-valley.jpg" alt="Carmel Valley neighborhood" loading="lazy" />
@@ -142,13 +142,13 @@ export default function HomePage() {
               <h3 className="community-card-name">Carmel Valley</h3>
               <div className="community-card-accent" />
               <p className="community-card-desc">North County&rsquo;s premier family destination. Top-rated schools, walkable village amenities at One Paseo, and easy coastal access in one polished package.</p>
-              <Link href="/communities/carmel-valley-real-estate" className="community-explore-btn">
+              <span className="community-explore-btn" aria-hidden="true">
                 Explore {EXPLORE_ICON}
-              </Link>
+              </span>
             </div>
-          </article>
+          </Link>
 
-          <article className="community-card" role="listitem">
+          <Link href="/communities/mission-valley-real-estate" className="community-card" role="listitem" aria-label="View Mission Valley community">
             <div className="community-card-bg" aria-hidden="true">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/assets/images/community-mission-valley.jpg" alt="Mission Valley San Diego" loading="lazy" />
@@ -158,13 +158,13 @@ export default function HomePage() {
               <h3 className="community-card-name">Mission Valley</h3>
               <div className="community-card-accent" />
               <p className="community-card-desc">San Diego&rsquo;s central hub. Unbeatable freeway access, trolley connections, SDSU energy, and exceptional value minutes from the beach and downtown.</p>
-              <Link href="/communities/mission-valley-real-estate" className="community-explore-btn">
+              <span className="community-explore-btn" aria-hidden="true">
                 Explore {EXPLORE_ICON}
-              </Link>
+              </span>
             </div>
-          </article>
+          </Link>
 
-          <article className="community-card" role="listitem">
+          <Link href="/communities/chula-vista-real-estate" className="community-card" role="listitem" aria-label="View Chula Vista community">
             <div className="community-card-bg" aria-hidden="true">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/assets/images/community-chula-vista.jpg" alt="Chula Vista neighborhood" loading="lazy" />
@@ -174,11 +174,11 @@ export default function HomePage() {
               <h3 className="community-card-name">Chula Vista</h3>
               <div className="community-card-accent" />
               <p className="community-card-desc">San Diego's second-largest city offering exceptional value, master-planned communities, bayfront living, and easy access to the broader metro.</p>
-              <Link href="/communities/chula-vista-real-estate" className="community-explore-btn">
+              <span className="community-explore-btn" aria-hidden="true">
                 Explore {EXPLORE_ICON}
-              </Link>
+              </span>
             </div>
-          </article>
+          </Link>
 
         </div>
       </section>

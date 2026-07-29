@@ -609,6 +609,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   padding: 32px 24px;
   flex: 1;
   cursor: pointer;
+  text-decoration: none;
+  color: inherit;
   transition: flex 0.68s var(--ease-communities);
 }
 .community-card:hover { flex: 3.2; }
