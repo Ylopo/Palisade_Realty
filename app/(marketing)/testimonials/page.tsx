@@ -3,6 +3,7 @@ import Link from 'next/link'
 import ReviewGallery, { type ReviewCardProps } from './ReviewGallery'
 import { client } from '@/lib/sanity/client'
 import { ALL_TESTIMONIALS_QUERY } from '@/lib/sanity/queries'
+import StatsBar from '@/components/StatsBar'
 
 export const metadata: Metadata = {
   title: 'Client Testimonials',
@@ -44,26 +45,7 @@ export default async function TestimonialsPage() {
       </section>
 
       {/* ── STATS BAR ───────────────────────────────────────── */}
-      <section className="stats-bar" aria-label="Client success metrics">
-        <div className="stats-inner">
-          <div className="stat-item">
-            <span className="stat-value">2800+</span>
-            <span className="stat-label">Families Helped</span>
-          </div>
-          <div className="stat-item">
-            <span className="stat-value">5★</span>
-            <span className="stat-label">Average Rating</span>
-          </div>
-          <div className="stat-item">
-            <span className="stat-value">20+</span>
-            <span className="stat-label">Years of Experience</span>
-          </div>
-          <div className="stat-item">
-            <span className="stat-value">100+</span>
-            <span className="stat-label">Dedicated Agents</span>
-          </div>
-        </div>
-      </section>
+      <StatsBar />
 
       {/* ── REVIEW GALLERY (client component) ──────────────── */}
       <ReviewGallery reviews={sanityReviews.length > 0 ? sanityReviews : undefined} />

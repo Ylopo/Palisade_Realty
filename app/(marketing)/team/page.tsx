@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import TeamGrid from './TeamGrid'
+import StatsBar from '@/components/StatsBar'
 
 export const metadata: Metadata = {
   title: 'Meet Our Team',
@@ -50,6 +51,9 @@ export default function TeamPage() {
           </div>
         </div>
       </div>
+
+      {/* ── STATS BAR ───────────────────────────────────────── */}
+      <StatsBar />
 
       {/* ── INTRO / HEDDA SPOTLIGHT ─────────────────────────── */}
       <section className="tp-section" aria-labelledby="intro-heading">

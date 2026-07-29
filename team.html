@@ -277,6 +277,27 @@
       .tp-stats-inner { grid-template-columns: repeat(2,1fr); }
       .tp-agents-grid { grid-template-columns: repeat(2,1fr); gap: 10px; }
     }
+
+    /* ── STATS BAR (shared with Testimonials) ── */
+    .stats-bar { background: #fff; border-bottom: 1px solid rgba(88,23,42,0.07); }
+    .stats-inner {
+      max-width: 1400px; margin: 0 auto;
+      padding: 40px clamp(20px, 5vw, 60px);
+      display: flex; justify-content: center;
+      gap: clamp(28px, 7vw, 90px); flex-wrap: wrap;
+    }
+    .stat-item { text-align: center; }
+    .stat-value {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 2.5rem; font-weight: 700; color: #58172a;
+      display: block; letter-spacing: -0.02em; line-height: 1;
+    }
+    .stat-label {
+      font-family: 'Inter', sans-serif; font-size: 0.75rem;
+      font-weight: 600; color: #aaa; text-transform: uppercase;
+      letter-spacing: 0.1em; margin-top: 6px; display: block;
+    }
+    @media (max-width: 560px) { .stats-inner { gap: 20px; } .stat-value { font-size: 2rem; } }
   </style>
   <link rel="stylesheet" href="lang.css">
   <link rel="icon" type="image/jpeg" href="images/favicon.jpg">
@@ -416,6 +437,28 @@
     </div>
   </div>
 </div>
+
+<!-- ══ STATS BAR ══ -->
+<section class="stats-bar" aria-label="Client success metrics">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <span class="stat-value">2800+</span>
+      <span class="stat-label">Families Helped</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-value">5★</span>
+      <span class="stat-label">Average Rating</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-value">20+</span>
+      <span class="stat-label">Years of Experience</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-value">100+</span>
+      <span class="stat-label">Dedicated Agents</span>
+    </div>
+  </div>
+</section>
 
 <!-- ══ COMPANY INTRO ══ -->
 <section class="tp-section" aria-label="About Palisade Realty">
