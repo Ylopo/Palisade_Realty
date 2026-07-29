@@ -102,7 +102,7 @@ export default async function NeighborhoodPage({ params }: Props) {
           <div>
             <span className="section-eyebrow" style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>{n.badge}</span>
             <h2 className="section-title" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px,4.5vw,64px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.64px', lineHeight: 1.1, marginBottom: '24px' }}>
-              About <em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>East Village</em>
+              About <em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>{n.name}</em>
             </h2>
             <div style={{ width: '40px', height: '2px', background: 'var(--brand,#58172a)', margin: '20px 0 28px' }} />
             {n.overview.map((p, i) => (
@@ -117,7 +117,7 @@ export default async function NeighborhoodPage({ params }: Props) {
               </Link>
             </div>
           </div>
-          <div style={{ background: '#ebebeb', border: '1px solid rgba(0,0,0,0.10)', borderRadius: '14px', padding: '32px 28px', position: 'sticky', top: '96px' }} aria-label="East Village at a glance">
+          <div style={{ background: '#ebebeb', border: '1px solid rgba(0,0,0,0.10)', borderRadius: '14px', padding: '32px 28px', position: 'sticky', top: '96px' }} aria-label={`${n.name} at a glance`}>
             <p className="quick-facts-heading" style={{ fontFamily: 'var(--font-label)', fontSize: '10px', fontWeight: 700, letterSpacing: '0.28em', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '20px', paddingBottom: '16px', borderBottom: '1px solid rgba(0,0,0,0.10)' }}>At a Glance</p>
             {n.quickFacts.map((f, i) => (
               <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: '12px', padding: '10px 0', borderBottom: i < n.quickFacts.length - 1 ? '1px solid rgba(0,0,0,0.07)' : 'none' }}>
@@ -143,7 +143,7 @@ export default async function NeighborhoodPage({ params }: Props) {
           <div style={{ textAlign: 'center', marginBottom: '52px' }}>
             <span className="section-eyebrow" style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>What Makes It Special</span>
             <h2 id="highlights-heading" className="section-title" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px,4.5vw,64px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.64px', lineHeight: 1.1 }}>
-              Living in <em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>East Village</em>
+              Living in <em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>{n.name}</em>
             </h2>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '20px' }}>
@@ -164,13 +164,13 @@ export default async function NeighborhoodPage({ params }: Props) {
           <div>
             <span className="section-eyebrow" style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>Who It&rsquo;s For</span>
             <h2 className="section-title" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px,4.5vw,64px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.64px', lineHeight: 1.1, marginBottom: '24px' }}>
-              The East Village<br /><em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>Lifestyle</em>
+              The {n.name}<br /><em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>Lifestyle</em>
             </h2>
             <p className="lifestyle-body" style={{ fontFamily: 'var(--font-body)', fontSize: '16px', lineHeight: 1.78, color: 'rgba(33,33,33,0.55)', marginBottom: '18px' }}>
-              East Village draws a broad mix of residents who share one thing in common: a preference for being in the center of it all. Urban professionals walk to work in nearby Downtown offices. Baseball enthusiasts are steps from Petco Park. Creatives find inspiration in the neighborhood&rsquo;s mix of art, architecture, and street culture.
+              {n.name} draws a diverse mix of residents who share one thing in common: a deep appreciation for what this community has to offer. Whether you&rsquo;re an urban professional, a family seeking character and convenience, or a buyer who values walkability and culture, {n.name} consistently delivers.
             </p>
             <p className="lifestyle-body" style={{ fontFamily: 'var(--font-body)', fontSize: '16px', lineHeight: 1.78, color: 'rgba(33,33,33,0.55)', marginBottom: '24px' }}>
-              The neighborhood also appeals strongly to investors and second-home buyers, given its walkability, rental demand, and proximity to major demand drivers — the Convention Center, Petco Park, and the Gaslamp Quarter. Whether you&rsquo;re buying to live or buying to hold, East Village offers compelling fundamentals.
+              The neighborhood also appeals strongly to investors and second-home buyers, given its location, rental demand, and long-term fundamentals. Whether you&rsquo;re buying to live or buying to hold, {n.name} offers a compelling case within San Diego&rsquo;s competitive real estate market.
             </p>
             <ul className="lifestyle-bullets" style={{ fontFamily: 'var(--font-body)', fontSize: '14px', color: 'rgba(33,33,33,0.55)', lineHeight: 2, paddingLeft: '18px' }}>
               <li>Urban professionals seeking walkable convenience</li>
@@ -185,7 +185,7 @@ export default async function NeighborhoodPage({ params }: Props) {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={`/assets/images/${n.image}`}
-              alt="East Village lifestyle, Downtown San Diego"
+              alt={`${n.name} lifestyle, Downtown San Diego`}
               style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '20px' }}
             />
           </div>
@@ -266,7 +266,7 @@ export default async function NeighborhoodPage({ params }: Props) {
             <div>
               <span className="section-eyebrow" style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>Live MLS Data</span>
               <h2 id="listings-heading" className="section-title" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px,4.5vw,64px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.64px', lineHeight: 1.1, marginBottom: 0 }}>
-                East Village Homes For Sale
+                {n.name} Homes For Sale
               </h2>
             </div>
             <a href={n.ylopoSearch} target="_blank" rel="noopener noreferrer" className="view-all-link" style={{ fontFamily: 'var(--font-label)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--brand,#58172a)', whiteSpace: 'nowrap', textDecoration: 'none' }}>
@@ -284,7 +284,7 @@ export default async function NeighborhoodPage({ params }: Props) {
           />
           <div style={{ marginTop: '36px', textAlign: 'center' }}>
             <a href={n.ylopoSearch} target="_blank" rel="noopener noreferrer" className="btn-view-all" style={{ fontFamily: 'var(--font-label)', fontSize: '13px', fontWeight: 600, letterSpacing: '0.08em', color: 'var(--brand,#58172a)', borderBottom: '1px solid rgba(88,23,42,0.30)', paddingBottom: '2px', textDecoration: 'none' }}>
-              View All East Village Properties →
+              View All {n.name} Properties →
             </a>
           </div>
         </div>
@@ -298,7 +298,7 @@ export default async function NeighborhoodPage({ params }: Props) {
             Nearby Communities<br />to <em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>Consider</em>
           </h2>
           <p className="nearby-desc" style={{ fontFamily: 'var(--font-body)', fontSize: '15px', color: 'rgba(33,33,33,0.55)', marginBottom: '40px' }}>
-            How East Village compares to neighboring areas — each with its own character, price point, and lifestyle.
+            How {n.name} compares to neighboring areas — each with its own character, price point, and lifestyle.
           </p>
           <table className="nearby-table" style={{ width: '100%', borderCollapse: 'collapse', fontFamily: 'var(--font-label)', fontSize: '13px' }} aria-label="Nearby San Diego communities comparison">
             <thead>
@@ -339,12 +339,12 @@ export default async function NeighborhoodPage({ params }: Props) {
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, backgroundImage: 'url(/images/hero-background/hero-2.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', filter: 'brightness(1.05) saturate(0.9)', zIndex: 0 }} />
         <div style={{ position: 'absolute', inset: 0, background: 'rgba(245,245,245,0.88)', zIndex: 1 }} aria-hidden="true" />
         <div style={{ position: 'relative', zIndex: 2, maxWidth: '680px', margin: '0 auto' }}>
-          <span className="section-eyebrow" style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>Your Guide to East Village</span>
+          <span className="section-eyebrow" style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>Your Guide to {n.name}</span>
           <h2 id="community-cta-heading" className="cta-title" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(40px,5vw,72px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.03em', lineHeight: 1.1, marginBottom: '24px' }}>
-            <em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>Find Your Home</em><br />in East Village
+            <em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>Find Your Home</em><br />in {n.name}
           </h2>
           <p style={{ fontFamily: 'var(--font-body)', fontSize: '16px', lineHeight: 1.72, color: 'rgba(33,33,33,0.55)', marginBottom: '40px' }}>
-            Explore available residences and discover whether East Village is the right fit for your lifestyle. Hedda Parashos and the Palisade Realty team know Downtown San Diego inside and out.
+            Explore available residences and discover whether {n.name} is the right fit for your lifestyle. Hedda Parashos and the Palisade Realty team know Downtown San Diego inside and out.
           </p>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px', flexWrap: 'wrap' }}>
             <a href="tel:+16197940218" className="btn btn-brand">Call (619) 794-0218</a>
