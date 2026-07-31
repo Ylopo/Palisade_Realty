@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 const zillowReviews: ReviewCardProps[] = (reviewsData.reviews as ReviewCardProps[]).filter(
   (r) => r.source === 'Zillow'
 )
+const zillowProfileUrl = reviewsData.summary?.zillow?.profileUrl
 
 export default function TestimonialsPage() {
   return (
@@ -31,7 +32,7 @@ export default function TestimonialsPage() {
       <StatsBar />
 
       {/* ── REVIEW GALLERY (client component) ──────────────── */}
-      <ReviewGallery reviews={zillowReviews} />
+      <ReviewGallery reviews={zillowReviews} zillowProfileUrl={zillowProfileUrl} />
 
       {/* ── CTA ─────────────────────────────────────────────── */}
       <section className="test-cta" aria-label="Call to action">

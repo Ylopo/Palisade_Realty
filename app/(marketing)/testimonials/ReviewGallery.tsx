@@ -33,7 +33,7 @@ interface Props {
   reviews: ReviewCardProps[]
 }
 
-function ReviewCard({ id, source, reviewerName, reviewText, rating, reviewDate, sourceUrl, profileName }: ReviewCardProps) {
+function ReviewCard({ id, source, reviewerName, reviewText, rating, reviewDate, profileName }: ReviewCardProps) {
   const [expanded, setExpanded] = useState(false)
   const [needsClamp, setNeedsClamp] = useState(false)
   const quoteRef = useRef<HTMLParagraphElement>(null)
@@ -85,20 +85,15 @@ function ReviewCard({ id, source, reviewerName, reviewText, rating, reviewDate, 
           </p>
         </div>
       </div>
-      <a
-        className="rg-zillow-btn"
-        href={sourceUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={`View ${reviewerName}'s review on Zillow`}
-      >
-        View on Zillow
-      </a>
     </article>
   )
 }
 
-export default function ReviewGallery({ reviews }: Props) {
+interface GalleryProps extends Props {
+  zillowProfileUrl?: string
+}
+
+export default function ReviewGallery({ reviews, zillowProfileUrl }: GalleryProps) {
   return (
     <section className="review-gallery" aria-labelledby="gallery-heading">
       <div className="section-header">
@@ -111,6 +106,19 @@ export default function ReviewGallery({ reviews }: Props) {
           <ReviewCard key={r.id} {...r} />
         ))}
       </div>
+      {zillowProfileUrl && (
+        <div className="rg-see-all-wrap">
+          <a
+            className="rg-zillow-btn"
+            href={zillowProfileUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="See all client reviews on Zillow (opens in a new tab)"
+          >
+            See All Reviews on Zillow
+          </a>
+        </div>
+      )}
     </section>
   )
 }
