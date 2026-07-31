@@ -1,5 +1,6 @@
 {
   "generatedAt": "2026-07-31",
+  "usageNote": "As of 2026-08-01, all 10 verified Zillow reviews (zillow-001 through zillow-010) are displayed on the /testimonials page — 'selected' below still refers only to the homepage carousel subset (featured: true in data/reviews.json), not exclusion from the Testimonials page. The target of 24 Zillow reviews requested for the Testimonials page could not be met: Zillow's public profile UI has no way to filter 'Team reviews' down to reviews for Hedda Parashos individually (confirmed via a live Firecrawl interact session on 2026-08-01 — the only filters available are by transaction type, e.g. 'Helped me buy', not by team member). The 10 reviews here are the complete, verified set specifically attributed to Hedda Parashos (sourced from the official Zillow-review widget on her own site, palisaderealty.com/team-page/hedda-parashos). No additional Hedda-specific Zillow reviews could be found without fabricating or misattributing team-wide reviews belonging to other agents.",
   "sources": {
     "google": {
       "listingsSought": ["Hedda Parashos Palisade Realty Inc. - North Park (GBP)", "Hedda Parashos Palisade Realty Inc. - Lemon Grove (GBP)"],

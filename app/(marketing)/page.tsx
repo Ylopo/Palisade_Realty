@@ -7,7 +7,7 @@ import GoogleZillowReviews, { type Review, type ReviewSummary } from '@/componen
 import reviewsData from '@/data/reviews.json'
 
 const reviewSummary = reviewsData.summary as { google?: ReviewSummary; zillow?: ReviewSummary }
-const reviewList = reviewsData.reviews as Review[]
+const reviewList = (reviewsData.reviews as Review[]).filter((r) => r.featured === true)
 
 export const metadata: Metadata = {
   title: 'San Diego Real Estate',

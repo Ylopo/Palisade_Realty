@@ -21,6 +21,7 @@ export interface Review {
   reviewDate?: string
   sourceUrl: string
   profileName: 'Hedda Parashos' | 'Palisade Realty'
+  featured?: boolean
 }
 
 interface Props {

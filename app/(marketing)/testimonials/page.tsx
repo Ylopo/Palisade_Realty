@@ -1,37 +1,20 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import ReviewGallery, { type ReviewCardProps } from './ReviewGallery'
-import { client } from '@/lib/sanity/client'
-import { ALL_TESTIMONIALS_QUERY } from '@/lib/sanity/queries'
 import StatsBar from '@/components/StatsBar'
+import reviewsData from '@/data/reviews.json'
 
 export const metadata: Metadata = {
   title: 'Client Testimonials',
   description:
-    'Read what clients say about working with Palisade Realty. Real reviews from home buyers and sellers in San Diego, La Jolla, Coronado, and beyond.',
+    'Read verified Zillow reviews from clients of Hedda Parashos and Palisade Realty. Real reviews from home buyers and sellers in San Diego and beyond.',
 }
 
-export const revalidate = 3600
+const zillowReviews: ReviewCardProps[] = (reviewsData.reviews as ReviewCardProps[]).filter(
+  (r) => r.source === 'Zillow'
+)
 
-export default async function TestimonialsPage() {
-  let sanityReviews: ReviewCardProps[] = []
-  try {
-    const raw = await client.fetch(ALL_TESTIMONIALS_QUERY)
-    sanityReviews = (raw ?? []).map((t: {
-      clientName: string; location?: string; body: string;
-      agentName?: string; rating?: number
-    }) => ({
-      quote: `"${t.body}"`,
-      agentName: t.agentName ?? 'Palisade Realty',
-      agentPhoto: t.agentName
-        ? `${t.agentName.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}.jpg`
-        : 'hedda-parashos.jpg',
-      rating: t.rating ?? 5.0,
-    }))
-  } catch {
-    // Sanity unavailable — fall through to static REVIEWS
-  }
-
+export default function TestimonialsPage() {
   return (
     <>
       {/* ── HERO ────────────────────────────────────────────── */}
@@ -48,7 +31,7 @@ export default async function TestimonialsPage() {
       <StatsBar />
 
       {/* ── REVIEW GALLERY (client component) ──────────────── */}
-      <ReviewGallery reviews={sanityReviews.length > 0 ? sanityReviews : undefined} />
+      <ReviewGallery reviews={zillowReviews} />
 
       {/* ── CTA ─────────────────────────────────────────────── */}
       <section className="test-cta" aria-label="Call to action">
