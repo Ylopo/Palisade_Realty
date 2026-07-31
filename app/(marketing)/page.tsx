@@ -3,6 +3,11 @@ import AboutBio from './AboutBio'
 import Script from 'next/script'
 import Link from 'next/link'
 import HomepageInit from '@/components/HomepageInit'
+import GoogleZillowReviews, { type Review, type ReviewSummary } from '@/components/GoogleZillowReviews'
+import reviewsData from '@/data/reviews.json'
+
+const reviewSummary = reviewsData.summary as { google?: ReviewSummary; zillow?: ReviewSummary }
+const reviewList = reviewsData.reviews as Review[]
 
 export const metadata: Metadata = {
   title: 'San Diego Real Estate',
@@ -340,6 +345,10 @@ export default function HomePage() {
         <div className="testimonial-inner">
           <p className="testimonial-eyebrow reveal">Client Reviews</p>
           <h2 className="testimonial-heading reveal stagger-1" id="testimonials-heading">What Our Clients Say</h2>
+
+          {reviewList.length > 0 && (
+            <GoogleZillowReviews summary={reviewSummary} reviews={reviewList} />
+          )}
 
           <div className="testimonial-avatars reveal stagger-2" role="tablist" aria-label="Select reviewer">
             {[

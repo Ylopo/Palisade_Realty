@@ -1,0 +1,190 @@
+{
+  "generatedAt": "2026-07-31",
+  "sources": {
+    "google": {
+      "listingsSought": ["Hedda Parashos Palisade Realty Inc. - North Park (GBP)", "Hedda Parashos Palisade Realty Inc. - Lemon Grove (GBP)"],
+      "listingsFound": ["Palisade Realty, Inc. (Google Business Profile, 9847 Campo Rd, Spring Valley, CA 91977)"],
+      "profileUrls": ["https://maps.google.com/?q=32.74770749,-116.9837475"],
+      "scrapeNotes": "The two OneUp-tracked GBP listings named 'North Park' and 'Lemon Grove' could not be located as separately indexed/crawlable public pages via Firecrawl search — they may be internal OneUp labels for the same underlying listing(s) rather than distinct public profiles. The only Google Business Profile actually found and verified is the general 'Palisade Realty, Inc.' listing at the Spring Valley HQ address, accessed via its Birdeye syndication page (reviews.birdeye.com/hedda-parashos-palisade-realty-inc-156930837829452), which itself embeds the live Google Maps widget and displays a Google-attributed review breakdown (32 Google reviews out of 35 total, the rest Facebook). The individual Google review list (beyond 2 highlighted excerpts) requires client-side pagination/filtering that a static scrape could not reach; a Firecrawl interact (browser) session was attempted to click through the 'Google (32)' filter but the interact service was unavailable during this research pass ('fetch failed' / 'Browser session not found'). As a result, only 2 individual Google reviews (both truncated excerpts, not full text) could be captured — neither qualified for the homepage per the verification checklist. The aggregate rating verified directly on the live page (not sampled/computed) is 3.8, 32 reviews.",
+      "displayOverride": "Per explicit user instruction on 2026-07-31, reviews.json's summary.google.averageRating was manually set to 4.9 for display purposes, overriding the verified 3.8 figure above. The user was told this would not match the verified source before confirming. This audit file retains 3.8 as the actual verified value; 4.9 is a manual display choice, not a Firecrawl-verified number."
+    },
+    "zillow": {
+      "profileUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
+      "scrapeNotes": "Hedda Parashos's Zillow profile page displays a 'Team reviews (993)' feed explicitly labeled as representing all ~87 Palisade Realty team members, not Hedda individually — the visible recent-reviews carousel was almost entirely for other agents (Jodi Kirkwood, Debbie Lawes, Chris Nguyen, etc.), not Hedda. The 5.0/993 aggregate is real and verified but is a team-wide number (used in reviews.json summary.zillow, labeled as Palisade Realty per explicit user decision). Separately, Hedda's own official site (palisaderealty.com/team-page/hedda-parashos) embeds 10 individual, Hedda-specific 5-star reviews via an official Zillow-sourced widget (each links out to '[Read full reviews on Zillow]' at https://zillow.com/profile/Hedda-Parashos/#reviews). These 10 reviews' exact reviewer usernames do not appear in the static scrape of Hedda's main Zillow profile page (Zillow's per-agent review pagination/filtering also requires interaction unavailable during this pass), so their verbatim completeness could not be independently cross-checked against zillow.com directly — they are sourced from the business's own official Zillow-syndication widget, which reads as complete, well-formed, unmodified reviews. No parseable per-review dates were available from this widget (omitted from reviews.json rather than fabricated)."
+    }
+  },
+  "reviews": [
+    {
+      "id": "zillow-001",
+      "source": "Zillow",
+      "reviewerName": "ckvonk",
+      "reviewText": "Hedda and her team were incredible from start to finish -- her online portal helped me keep track of homes that were coming on the market; when I found homes I liked her team quickly setup up tours; I felt completely supported and advocated for during the process of making an offer and negotiating with the sellers; and during the escrow/closing (and beyond) Hedda and her team provided quick replies and accurate/helpful information the whole way through. On top of all that, Hedda is incredibly friendly and warm, and added personal touches to her service that made me realize how much she cared about supporting me and my interests throughout the entire process. I wouldn't use anyone else!",
+      "rating": 5,
+      "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
+      "profileName": "Hedda Parashos",
+      "selected": true,
+      "reason": "Names Hedda directly, covers communication/negotiation/responsiveness themes, full text available, passed all checks."
+    },
+    {
+      "id": "zillow-002",
+      "source": "Zillow",
+      "reviewerName": "sdtinystar",
+      "reviewText": "Hedda is the best realtor I have ever had! She is truly a client's advocate and goes above and beyond to ensure that every question and concern is addressed promptly and thoroughly. She is very enthusiastic but never pushy. She genuinely cares about her clients. I trust her completely. In fact, I have hired her to sell one property and help me purchase two properties. I have told her that she is my realtor for life because her customer service is outstanding. I highly recommend her if you are looking for a sharp, kind, prepared, patient, and caring realtor.",
+      "rating": 5,
+      "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
+      "profileName": "Hedda Parashos",
+      "selected": true,
+      "reason": "Repeat client (buyer + seller), strong loyalty/professionalism theme, passed all checks."
+    },
+    {
+      "id": "zillow-003",
+      "source": "Zillow",
+      "reviewerName": "amyjcrees",
+      "reviewText": "Hedda provided a world class experience and helped me and my husband through our first home buying experience in a very challenging/competitive market. Her local knowledge and experience was 100% evident in the way she guided us to our dream home. It was EXTREMELY helpful having such an experienced mind on our side to navigate the multi-offer scenario and she was able to help get our offer excepted on the house we wanted most! Extremely responsive throughout the entire process and her negotiating skills were TOP NOTCH. We would recommend Hedda and her business to anyone who wants a brilliant real estate mind on their side.",
+      "rating": 5,
+      "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
+      "profileName": "Hedda Parashos",
+      "selected": true,
+      "reason": "First-time buyer, local knowledge + negotiation themes, passed all checks. Contains an apparent original typo ('excepted' for 'accepted') preserved verbatim."
+    },
+    {
+      "id": "zillow-004",
+      "source": "Zillow",
+      "reviewerName": "dwash197733",
+      "reviewText": "I just wanted to send you a quick message in praise of Hedda and her team. The whole team is something I have never seen in process that went so smooth and fast. They sold my condo basically in two weeks in a changing market for top dollar. Hedda always had a smile and was so quick to respond just as her team does. I will definitely be referring friends to the company and all military personnel I come across. She is the greatest!",
+      "rating": 5,
+      "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
+      "profileName": "Hedda Parashos",
+      "selected": true,
+      "reason": "Seller experience, fast sale, San Diego military-community relevance, passed all checks."
+    },
+    {
+      "id": "zillow-005",
+      "source": "Zillow",
+      "reviewerName": "flopsy55",
+      "reviewText": "I genuinely cannot say enough about Hedda. Kind, courteous, professional, caring, and honest don't even begin to describe what a wonderful individual she is. I first found Hedda through Zillow. Upon our very first phone conversation, it was instantaneously apparent that Hedda was different from the other agents I had interviewed. I was searching for my very first home, and wanted the best professional on my side. I got very lucky to have found Hedda, as she is truly the best. Hedda painstakingly searched countless properties for me. She was incredibly flexible and accommodating with her time. She worked with me in every way possible to ensure that I found a home I love, got a great deal, and was happy with my purchase. Hedda was there next to me every step of the way. She took the time to explain the smallest of details, and was always available to me when I needed her. When we finally closed the deal, she met my wife and I at our new home to give us the keys. Being the kind, sweet, and caring individual that she is, she even brought us a gift to help celebrate the occasion. I now consider Hedda a dear friend, and have and will continue to recommend her to anyone looking for the very best real estate professional in San Diego. If you are seeking an agent who will be in your corner, will be completely honest and transparent, and will have your best intentions at heart, there really is no substitute for Hedda Parashos.",
+      "rating": 5,
+      "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
+      "profileName": "Hedda Parashos",
+      "selected": true,
+      "reason": "Long, detailed, emotional first-time-buyer narrative — selected as the primary Read More/Read Less test case. Note: source markdown had missing spaces between some sentences (e.g. 'best.Hedda'); normalized to single spaces after periods as a whitespace-only scrape-artifact fix — no words added, removed, or changed."
+    },
+    {
+      "id": "zillow-006",
+      "source": "Zillow",
+      "reviewerName": "adrian loeza1",
+      "reviewText": "I've purchased and sold several properties in Northern California and San Diego. Like all real estate owners, I always want to sell high and buy low. Hedda helped me accomplish that. She helped me sell quickly while maximizing my profit and helped me purchase a home at fair market vale while also helping me negotiate through requests for repairs. Hedda's team kept me informed throughout the escrow process making sure contractual timeframes were met in a timely manner. I look forward to having Hedda and her team represent me in future transactions. You could expect to be in good hands if you have to opportunity to work with Hedda and her team.",
+      "rating": 5,
+      "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
+      "profileName": "Hedda Parashos",
+      "selected": true,
+      "reason": "Repeat/experienced property owner, negotiation + timeline management themes, passed all checks. Contains apparent original typos ('vale', 'have to opportunity') preserved verbatim."
+    },
+    {
+      "id": "zillow-007",
+      "source": "Zillow",
+      "reviewerName": "keredman",
+      "reviewText": "Hedda and her team really know how to take care of you. She was always available when we needed her and answered all of our many questions. She made the process really easy, you can tell that she has the experience, is good at what she does, and cares about her clients. It was truly a great experience working with her and we highly recommend her to anyone looking for a home.",
+      "rating": 5,
+      "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
+      "profileName": "Hedda Parashos",
+      "selected": true,
+      "reason": "Responsiveness + experience themes, concise, passed all checks."
+    },
+    {
+      "id": "zillow-008",
+      "source": "Zillow",
+      "reviewerName": "davidnfranco1",
+      "reviewText": "Hedda understood how and who to market our home too. She was personable, professional and responsive. She got us the top of the market price and negotiated in a highly skilled way.",
+      "rating": 5,
+      "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
+      "profileName": "Hedda Parashos",
+      "selected": true,
+      "reason": "Short, punchy seller review — marketing/negotiation themes, good length contrast to the longer reviews, passed all checks."
+    },
+    {
+      "id": "zillow-009",
+      "source": "Zillow",
+      "reviewerName": "rahil136103",
+      "reviewText": "As a first time buyer, Hedda did an amazing job for us. She is so kind and caring, she responded to all our questions with patience and kindness. We worked with some agents before but non of them were responsive like Hedda. She made our purchase so easy and she was with us in every step from the beginning. Defiantly we work with her again.",
+      "rating": 5,
+      "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
+      "profileName": "Hedda Parashos",
+      "selected": false,
+      "reason": "Passed verification but not selected for homepage — thematically redundant with zillow-003/zillow-007 (first-time-buyer responsiveness); homepage capped at 8 featured reviews."
+    },
+    {
+      "id": "zillow-010",
+      "source": "Zillow",
+      "reviewerName": "zuser20160816162044956",
+      "reviewText": "Hedda is amazing! Everything she does comes from her heart first. She's very kind and listens closely to your wants and needs. She has an open mindset. I've worked with some agents before but none of them were as responsive as Hedda is. She makes buying and selling simple, due to her incredible patience. She will definitely with you every step of the way. Two thumbs up!",
+      "rating": 5,
+      "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
+      "profileName": "Hedda Parashos",
+      "selected": false,
+      "reason": "Passed verification but not selected for homepage — thematically redundant with zillow-002/zillow-007 (patience/responsiveness); reviewer identity is an auto-generated Zillow username, less distinctive; homepage capped at 8 featured reviews."
+    },
+    {
+      "id": "google-001",
+      "source": "Google",
+      "reviewerName": "Chelsea Barclay",
+      "reviewText": "Casie O'Donnell was absolutely exceptional throughout my home buying proces...",
+      "rating": 5,
+      "reviewDate": "2026-03-04",
+      "sourceUrl": "https://reviews.birdeye.com/hedda-parashos-palisade-realty-inc-156930837829452",
+      "profileName": "Palisade Realty",
+      "sourceListing": "Palisade Realty, Inc. (Spring Valley HQ, via Birdeye/Google syndication)",
+      "selected": false,
+      "reason": "Review is about a different agent (Casie O'Donnell), not Hedda Parashos, and does not name Palisade Realty in the visible text; also the full review text is unavailable — the source page truncates it ('...') and the full version requires an interactive session that was unavailable during this research pass."
+    },
+    {
+      "id": "google-002",
+      "source": "Google",
+      "reviewerName": "David Antico",
+      "reviewText": "Concur with the comment posted four days ago as well. Do your research. Sig...",
+      "rating": 1,
+      "reviewDate": "2025-10-29",
+      "sourceUrl": "https://reviews.birdeye.com/hedda-parashos-palisade-realty-inc-156930837829452",
+      "profileName": "Palisade Realty",
+      "sourceListing": "Palisade Realty, Inc. (Spring Valley HQ, via Birdeye/Google syndication)",
+      "selected": false,
+      "reason": "Negative review — not selected for a homepage highlight per review-selection guidance to prioritize positive, on-brand experiences. Full text also unavailable (truncated in source; see scrapeNotes)."
+    },
+    {
+      "id": "facebook-001",
+      "source": "Facebook",
+      "reviewerName": "Deanna M West",
+      "reviewText": "no no no ,they take your money lead you on and and don't help you !",
+      "rating": null,
+      "sourceUrl": "https://reviews.birdeye.com/hedda-parashos-palisade-realty-inc-156930837829452",
+      "profileName": "Palisade Realty",
+      "sourceListing": "Palisade Realty, Inc. (Spring Valley HQ, via Birdeye/Facebook syndication)",
+      "selected": false,
+      "reason": "Source is Facebook, not Google or Zillow — out of scope for this task. Logged for transparency only; negative content also would have excluded it regardless."
+    },
+    {
+      "id": "facebook-002",
+      "source": "Facebook",
+      "reviewerName": "Christine Marie",
+      "reviewText": null,
+      "rating": null,
+      "sourceUrl": "https://reviews.birdeye.com/hedda-parashos-palisade-realty-inc-156930837829452",
+      "profileName": "Palisade Realty",
+      "sourceListing": "Palisade Realty, Inc. (Spring Valley HQ, via Birdeye/Facebook syndication)",
+      "selected": false,
+      "reason": "Source is Facebook, not Google or Zillow — out of scope. No review text was rendered in the static scrape (rating/text likely require interaction to reveal)."
+    },
+    {
+      "id": "facebook-003",
+      "source": "Facebook",
+      "reviewerName": "Cheryl Hampton",
+      "reviewText": null,
+      "rating": null,
+      "sourceUrl": "https://reviews.birdeye.com/hedda-parashos-palisade-realty-inc-156930837829452",
+      "profileName": "Palisade Realty",
+      "sourceListing": "Palisade Realty, Inc. (Spring Valley HQ, via Birdeye/Facebook syndication)",
+      "selected": false,
+      "reason": "Source is Facebook, not Google or Zillow — out of scope. No review text was rendered in the static scrape (rating/text likely require interaction to reveal)."
+    }
+  ]
+}

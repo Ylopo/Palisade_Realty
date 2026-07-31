@@ -1,0 +1,94 @@
+{
+  "summary": {
+    "google": {
+      "averageRating": 4.9,
+      "reviewCount": 32,
+      "profileUrl": "https://maps.google.com/?q=32.74770749,-116.9837475",
+      "profileName": "Palisade Realty, Inc.",
+      "verifiedAt": "2026-07-31",
+      "structuredDataEligible": false
+    },
+    "zillow": {
+      "averageRating": 5.0,
+      "reviewCount": 993,
+      "profileUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
+      "profileName": "Palisade Realty",
+      "note": "Team-wide rating across all Palisade Realty agents on Zillow, not Hedda Parashos individually.",
+      "verifiedAt": "2026-07-31"
+    }
+  },
+  "reviews": [
+    {
+      "id": "zillow-001",
+      "source": "Zillow",
+      "reviewerName": "ckvonk",
+      "reviewText": "Hedda and her team were incredible from start to finish -- her online portal helped me keep track of homes that were coming on the market; when I found homes I liked her team quickly setup up tours; I felt completely supported and advocated for during the process of making an offer and negotiating with the sellers; and during the escrow/closing (and beyond) Hedda and her team provided quick replies and accurate/helpful information the whole way through. On top of all that, Hedda is incredibly friendly and warm, and added personal touches to her service that made me realize how much she cared about supporting me and my interests throughout the entire process. I wouldn't use anyone else!",
+      "rating": 5,
+      "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
+      "profileName": "Hedda Parashos"
+    },
+    {
+      "id": "zillow-002",
+      "source": "Zillow",
+      "reviewerName": "sdtinystar",
+      "reviewText": "Hedda is the best realtor I have ever had! She is truly a client's advocate and goes above and beyond to ensure that every question and concern is addressed promptly and thoroughly. She is very enthusiastic but never pushy. She genuinely cares about her clients. I trust her completely. In fact, I have hired her to sell one property and help me purchase two properties. I have told her that she is my realtor for life because her customer service is outstanding. I highly recommend her if you are looking for a sharp, kind, prepared, patient, and caring realtor.",
+      "rating": 5,
+      "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
+      "profileName": "Hedda Parashos"
+    },
+    {
+      "id": "zillow-003",
+      "source": "Zillow",
+      "reviewerName": "amyjcrees",
+      "reviewText": "Hedda provided a world class experience and helped me and my husband through our first home buying experience in a very challenging/competitive market. Her local knowledge and experience was 100% evident in the way she guided us to our dream home. It was EXTREMELY helpful having such an experienced mind on our side to navigate the multi-offer scenario and she was able to help get our offer excepted on the house we wanted most! Extremely responsive throughout the entire process and her negotiating skills were TOP NOTCH. We would recommend Hedda and her business to anyone who wants a brilliant real estate mind on their side.",
+      "rating": 5,
+      "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
+      "profileName": "Hedda Parashos"
+    },
+    {
+      "id": "zillow-004",
+      "source": "Zillow",
+      "reviewerName": "dwash197733",
+      "reviewText": "I just wanted to send you a quick message in praise of Hedda and her team. The whole team is something I have never seen in process that went so smooth and fast. They sold my condo basically in two weeks in a changing market for top dollar. Hedda always had a smile and was so quick to respond just as her team does. I will definitely be referring friends to the company and all military personnel I come across. She is the greatest!",
+      "rating": 5,
+      "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
+      "profileName": "Hedda Parashos"
+    },
+    {
+      "id": "zillow-005",
+      "source": "Zillow",
+      "reviewerName": "flopsy55",
+      "reviewText": "I genuinely cannot say enough about Hedda. Kind, courteous, professional, caring, and honest don't even begin to describe what a wonderful individual she is. I first found Hedda through Zillow. Upon our very first phone conversation, it was instantaneously apparent that Hedda was different from the other agents I had interviewed. I was searching for my very first home, and wanted the best professional on my side. I got very lucky to have found Hedda, as she is truly the best. Hedda painstakingly searched countless properties for me. She was incredibly flexible and accommodating with her time. She worked with me in every way possible to ensure that I found a home I love, got a great deal, and was happy with my purchase. Hedda was there next to me every step of the way. She took the time to explain the smallest of details, and was always available to me when I needed her. When we finally closed the deal, she met my wife and I at our new home to give us the keys. Being the kind, sweet, and caring individual that she is, she even brought us a gift to help celebrate the occasion. I now consider Hedda a dear friend, and have and will continue to recommend her to anyone looking for the very best real estate professional in San Diego. If you are seeking an agent who will be in your corner, will be completely honest and transparent, and will have your best intentions at heart, there really is no substitute for Hedda Parashos.",
+      "rating": 5,
+      "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
+      "profileName": "Hedda Parashos"
+    },
+    {
+      "id": "zillow-006",
+      "source": "Zillow",
+      "reviewerName": "adrian loeza1",
+      "reviewText": "I've purchased and sold several properties in Northern California and San Diego. Like all real estate owners, I always want to sell high and buy low. Hedda helped me accomplish that. She helped me sell quickly while maximizing my profit and helped me purchase a home at fair market vale while also helping me negotiate through requests for repairs. Hedda's team kept me informed throughout the escrow process making sure contractual timeframes were met in a timely manner. I look forward to having Hedda and her team represent me in future transactions. You could expect to be in good hands if you have to opportunity to work with Hedda and her team.",
+      "rating": 5,
+      "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
+      "profileName": "Hedda Parashos"
+    },
+    {
+      "id": "zillow-007",
+      "source": "Zillow",
+      "reviewerName": "keredman",
+      "reviewText": "Hedda and her team really know how to take care of you. She was always available when we needed her and answered all of our many questions. She made the process really easy, you can tell that she has the experience, is good at what she does, and cares about her clients. It was truly a great experience working with her and we highly recommend her to anyone looking for a home.",
+      "rating": 5,
+      "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
+      "profileName": "Hedda Parashos"
+    },
+    {
+      "id": "zillow-008",
+      "source": "Zillow",
+      "reviewerName": "davidnfranco1",
+      "reviewText": "Hedda understood how and who to market our home too. She was personable, professional and responsive. She got us the top of the market price and negotiated in a highly skilled way.",
+      "rating": 5,
+      "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
+      "profileName": "Hedda Parashos"
+    }
+  ]
+}
