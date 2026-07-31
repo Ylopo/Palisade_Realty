@@ -26,6 +26,7 @@
       "rating": 5,
       "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
       "profileName": "Hedda Parashos",
+      "agentPhoto": "hedda-parashos.jpg",
       "featured": true
     },
     {
@@ -36,6 +37,7 @@
       "rating": 5,
       "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
       "profileName": "Hedda Parashos",
+      "agentPhoto": "hedda-parashos.jpg",
       "featured": true
     },
     {
@@ -46,6 +48,7 @@
       "rating": 5,
       "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
       "profileName": "Hedda Parashos",
+      "agentPhoto": "hedda-parashos.jpg",
       "featured": true
     },
     {
@@ -56,6 +59,7 @@
       "rating": 5,
       "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
       "profileName": "Hedda Parashos",
+      "agentPhoto": "hedda-parashos.jpg",
       "featured": true
     },
     {
@@ -66,6 +70,7 @@
       "rating": 5,
       "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
       "profileName": "Hedda Parashos",
+      "agentPhoto": "hedda-parashos.jpg",
       "featured": true
     },
     {
@@ -76,6 +81,7 @@
       "rating": 5,
       "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
       "profileName": "Hedda Parashos",
+      "agentPhoto": "hedda-parashos.jpg",
       "featured": true
     },
     {
@@ -86,6 +92,7 @@
       "rating": 5,
       "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
       "profileName": "Hedda Parashos",
+      "agentPhoto": "hedda-parashos.jpg",
       "featured": true
     },
     {
@@ -96,6 +103,7 @@
       "rating": 5,
       "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
       "profileName": "Hedda Parashos",
+      "agentPhoto": "hedda-parashos.jpg",
       "featured": true
     },
     {
@@ -106,6 +114,7 @@
       "rating": 5,
       "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
       "profileName": "Hedda Parashos",
+      "agentPhoto": "hedda-parashos.jpg",
       "featured": false
     },
     {
@@ -116,6 +125,127 @@
       "rating": 5,
       "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
       "profileName": "Hedda Parashos",
+      "agentPhoto": "hedda-parashos.jpg",
+      "featured": false
+    },
+    {
+      "id": "zillow-team-001",
+      "source": "Zillow",
+      "reviewerName": "Rick W",
+      "reviewText": "Jodi is awesome. Super knowledgeable, super friendly, always on time, seemingly always on the job. She worked with us around our hectic schedule over several months as we navigated areas all over San Diego, and finally settled on a property in Ramona. Led us through all the paperwork, before during and after we signed, and even much after we signed as we needed stuff. We've had a few realtors in the past - Jodi is the best.",
+      "rating": 5,
+      "reviewDate": "7/29/2026",
+      "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
+      "profileName": "Jodi Kirkwood",
+      "agentPhoto": "jodi-kirkwood.jpg",
+      "featured": false
+    },
+    {
+      "id": "zillow-team-002",
+      "source": "Zillow",
+      "reviewerName": "Peter Kam",
+      "reviewText": "Chris was professional and helpful throughout the process. He was very responsive and knew what had to get done. His knowledge of the market and his team helped my family. Cannot reccomend him enough.",
+      "rating": 5,
+      "reviewDate": "7/29/2026",
+      "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
+      "profileName": "Chris Nguyen",
+      "agentPhoto": "chris-nguyen.jpg",
+      "featured": false
+    },
+    {
+      "id": "zillow-team-003",
+      "source": "Zillow",
+      "reviewerName": "Jose Garcia",
+      "reviewText": "Working with Vanda to buy our home was an incredible experience from start to finish. From day one, she took the time to truly understand what we were looking for and gave us honest, invaluable guidance about different neighborhoods and market conditions. When viewing homes, Vanda had an incredible eye for details we would have completely missed, pointing out potential red flags as well as great opportunities. During the offer and escrow process, her negotiation skills and quick communication made all the difference. She kept every step moving smoothly and fought to get us the best possible deal. We felt fully supported the entire time and couldn't be happier with our new home. If you are looking to buy, I can't recommend Vanda enough!",
+      "rating": 5,
+      "reviewDate": "7/28/2026",
+      "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
+      "profileName": "Vanda Fernandes",
+      "agentPhoto": "vanda-fernandes.jpg",
+      "featured": false
+    },
+    {
+      "id": "zillow-team-004",
+      "source": "Zillow",
+      "reviewerName": "vedanthgaitonde1",
+      "reviewText": "Incredibly Helpful all Around! Debbie was extremely helpful with helping me find the right property. She had a wealth of knowledge about the market and the areas of interest, helped me secure a great deal on the property, and was a joy to spend time with all around. She did a great job communicating with me and the other parties which helped get this deal across the line.",
+      "rating": 5,
+      "reviewDate": "7/27/2026",
+      "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
+      "profileName": "Debbie Lawes",
+      "agentPhoto": "debbie-lawes.jpg",
+      "featured": false
+    },
+    {
+      "id": "zillow-team-005",
+      "source": "Zillow",
+      "reviewerName": "Siva Veerepalli",
+      "reviewText": "\"Honest, Strong Negotiator, Problem-Solver, Proactive Investment Expert, 5-Star Service!” Working with Debbie Lawes to buy our investment condo was an absolute pleasure. Debbie has a phenomenal understanding of the rental market and is a powerhouse negotiator. She successfully lowered the final sale price and knew exactly which builder incentives to demand. What we appreciate most is her straightforward, honest attitude. Debbie gives you the raw pros and cons of every property, even telling us point-blank when a place was overpriced. She is incredibly punctual, flexible with scheduling, and highly proactive in sharing upcoming listings before they hit the market. Her service didn't stop at the contract; when we hit a major coverage gap with the builder's home insurance, she immediately connected us with an insurance agent who provided superior coverage at a competitive rate. Debbie seamlessly handles hurdles and truly protects your bottom line. We highly recommend Debbie Lawes!",
+      "rating": 5,
+      "reviewDate": "7/25/2026",
+      "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
+      "profileName": "Debbie Lawes",
+      "agentPhoto": "debbie-lawes.jpg",
+      "featured": false
+    },
+    {
+      "id": "zillow-team-006",
+      "source": "Zillow",
+      "reviewerName": "Jamie",
+      "reviewText": "Sergio made our home-buying process so smooth. We gave him a list of our needs, wishes and budget. After just one day of viewing homes, we found one that checked every box on the list and he was able to negotiate the best possible offer for both the seller and buyer. He is very knowledgeable, attentive & was responsive at all times of the day that worked with our schedule in order to help us close in less than a month! We highly recommend him to anyone looking to buy a home.",
+      "rating": 5,
+      "reviewDate": "7/22/2026",
+      "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
+      "profileName": "Sergio Yturralde",
+      "agentPhoto": "sergio-yturralde.jpg",
+      "featured": false
+    },
+    {
+      "id": "zillow-team-007",
+      "source": "Zillow",
+      "reviewerName": "katelyn m thomas12",
+      "reviewText": "Robby is the best realtor in San Diego to work with because of his knowledge of the area, his dedicated hard work to find the best properties, and his unbiased opinions - he really works for his customers with their best interests in mind. This is my second time working with Robby and I have found my perfect place at the perfect price for me both times. I highly recommend working with Roby Gmur!!",
+      "rating": 5,
+      "reviewDate": "7/18/2026",
+      "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
+      "profileName": "Robby Gmur",
+      "agentPhoto": "robby-gmur.jpg",
+      "featured": false
+    },
+    {
+      "id": "zillow-team-008",
+      "source": "Zillow",
+      "reviewerName": "criseidaw",
+      "reviewText": "We feel so lucky to have had Deborah as our real estate agent. From our very first conversation, she made us feel comfortable, listened carefully to what we were looking for, and guided us through every step of the process with patience and genuine care. She was always available to answer our questions, explain every detail, and offer honest advice that helped us make confident decisions. In just 5 weeks since our first conversation, sale closed and we are very happy homeowners. Thanks Deborah!",
+      "rating": 5,
+      "reviewDate": "7/18/2026",
+      "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
+      "profileName": "Deborah Trevino",
+      "agentPhoto": "deborah-trevino.jpg",
+      "featured": false
+    },
+    {
+      "id": "zillow-team-009",
+      "source": "Zillow",
+      "reviewerName": "Diane Allen",
+      "reviewText": "Debbie was the utmost professional and knew exactly what needed to be done when and the best professionals for the jobs. She communicated perfectly and was concise yet thorough at appropriate times. I can't imagine there being a more well suited agent for any transaction, either side, she was right on the ball throughout.",
+      "rating": 5,
+      "reviewDate": "7/16/2026",
+      "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
+      "profileName": "Debbie Lawes",
+      "agentPhoto": "debbie-lawes.jpg",
+      "featured": false
+    },
+    {
+      "id": "zillow-team-010",
+      "source": "Zillow",
+      "reviewerName": "Anne Corrigan",
+      "reviewText": "Debbie responded quickly and got my house up for sale within days of contact. She prepared the sale, took photos and proposed sale price quickly, showed the house and found a buyer within days. She was also very helpful facilitating the sale for me at a distance and she coordinated everything in my place. Would definately use her again.",
+      "rating": 5,
+      "reviewDate": "7/16/2026",
+      "sourceUrl": "https://www.zillow.com/profile/Hedda%20Parashos#reviews",
+      "profileName": "Debbie Lawes",
+      "agentPhoto": "debbie-lawes.jpg",
       "featured": false
     }
   ]

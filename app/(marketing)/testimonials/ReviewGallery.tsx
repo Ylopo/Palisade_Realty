@@ -27,13 +27,14 @@ export interface ReviewCardProps {
   reviewDate?: string
   sourceUrl: string
   profileName: string
+  agentPhoto?: string
 }
 
 interface Props {
   reviews: ReviewCardProps[]
 }
 
-function ReviewCard({ id, source, reviewerName, reviewText, rating, reviewDate, profileName }: ReviewCardProps) {
+function ReviewCard({ id, source, reviewerName, reviewText, rating, reviewDate, profileName, agentPhoto }: ReviewCardProps) {
   const [expanded, setExpanded] = useState(false)
   const [needsClamp, setNeedsClamp] = useState(false)
   const quoteRef = useRef<HTMLParagraphElement>(null)
@@ -72,7 +73,7 @@ function ReviewCard({ id, source, reviewerName, reviewText, rating, reviewDate, 
       )}
       <div className="rg-card-footer">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/assets/images/agents/hedda-parashos.jpg" alt={profileName} className="rg-agent-photo" loading="lazy" />
+        <img src={`/assets/images/agents/${agentPhoto ?? 'hedda-parashos.jpg'}`} alt={profileName} className="rg-agent-photo" loading="lazy" />
         <div className="rg-card-info">
           <p className="rg-agent-label">Review for: <strong>{profileName}</strong></p>
           <div className="rg-stars-row">
