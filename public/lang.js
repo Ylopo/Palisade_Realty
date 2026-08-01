@@ -2180,6 +2180,10 @@ var AGENT_TRANSLATIONS = {
     var d = DICT[lang];
     document.documentElement.lang = lang;
     localStorage.setItem('pr-lang', lang);
+    /* Notify React-rendered components (e.g. interactive review cards) that
+       can't be safely patched via direct DOM textContent swaps below, since
+       their text is state-driven and would be overwritten on next re-render. */
+    window.dispatchEvent(new CustomEvent('pr-lang-changed', { detail: { lang: lang } }));
 
     /* ── NAV (desktop) ─────────────────────────────────────── */
     document.querySelectorAll('.nav-links a[href*="palisaderealty.com/"]:not([href*="seller"])').forEach(function (el) {
