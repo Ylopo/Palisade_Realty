@@ -74,6 +74,7 @@ export interface ReviewCardProps {
   source: 'Zillow' | 'Google'
   reviewerName: string
   reviewText: string
+  reviewTextEs?: string
   rating: number
   reviewDate?: string
   sourceUrl: string
@@ -85,19 +86,20 @@ interface Props {
   reviews: ReviewCardProps[]
 }
 
-function ReviewCard({ id, source, reviewerName, reviewText, rating, reviewDate, profileName, agentPhoto }: ReviewCardProps) {
+function ReviewCard({ id, source, reviewerName, reviewText, reviewTextEs, rating, reviewDate, profileName, agentPhoto }: ReviewCardProps) {
   const lang = useSiteLang()
   const t = STRINGS[lang]
+  const displayText = lang === 'es' && reviewTextEs ? reviewTextEs : reviewText
   const [expanded, setExpanded] = useState(false)
   const [needsClamp, setNeedsClamp] = useState(false)
   const quoteRef = useRef<HTMLParagraphElement>(null)
   const quoteId = `rg-quote-${id}`
 
   useEffect(() => {
-    if (quoteRef.current && quoteRef.current.scrollHeight > CLAMP_HEIGHT + 8) {
-      setNeedsClamp(true)
+    if (quoteRef.current) {
+      setNeedsClamp(quoteRef.current.scrollHeight > CLAMP_HEIGHT + 8)
     }
-  }, [])
+  }, [displayText])
 
   return (
     <article className="rg-card">
@@ -110,7 +112,7 @@ function ReviewCard({ id, source, reviewerName, reviewText, rating, reviewDate, 
           ref={quoteRef}
           style={needsClamp ? { maxHeight: expanded ? quoteRef.current?.scrollHeight : CLAMP_HEIGHT } : undefined}
         >
-          {reviewText}
+          {displayText}
         </p>
       </div>
       {needsClamp && (
