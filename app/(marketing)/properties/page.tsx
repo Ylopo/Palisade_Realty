@@ -63,7 +63,7 @@ export default async function PropertiesPage() {
               'radial-gradient(ellipse 70% 60% at 0% 100%, rgba(88,23,42,.5) 0%, transparent 70%), radial-gradient(ellipse 50% 40% at 100% 0%, rgba(238,202,0,.06) 0%, transparent 70%)',
           }}
         />
-        <div style={{ position: 'relative', zIndex: 1, maxWidth: '1320px', margin: '0 auto' }}>
+        <div style={{ position: 'relative', zIndex: 1, maxWidth: '1320px', margin: '0 auto', textAlign: 'center' }}>
           <nav style={{ marginBottom: '48px' }}>
             <Link href="/" style={{ color: 'rgba(255,255,255,.45)', textDecoration: 'none', fontSize: '12px', fontFamily: 'var(--font-label)', letterSpacing: '0.06em' }}>Palisade Realty</Link>
             <span style={{ color: 'rgba(255,255,255,.3)', margin: '0 8px' }}>/</span>
@@ -75,7 +75,7 @@ export default async function PropertiesPage() {
           <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(52px,8vw,96px)', fontWeight: 400, color: '#fff', letterSpacing: '-0.03em', lineHeight: 1.0, margin: '0 0 24px' }}>
             Featured<br /><em style={{ fontStyle: 'italic', color: 'var(--accent,#eeca00)' }}>Properties</em>
           </h1>
-          <p style={{ fontFamily: 'var(--font-body)', fontSize: '18px', color: 'rgba(255,255,255,.65)', lineHeight: 1.7, maxWidth: '520px' }}>
+          <p style={{ fontFamily: 'var(--font-body)', fontSize: '18px', color: 'rgba(255,255,255,.65)', lineHeight: 1.7, maxWidth: '520px', margin: '0 auto' }}>
             Exceptional homes across San Diego County, personally curated by the Palisade Realty team.
           </p>
         </div>
