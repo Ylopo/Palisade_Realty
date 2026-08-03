@@ -73,7 +73,7 @@ export default async function PropertiesPage() {
             Palisade Realty
           </p>
           <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(52px,8vw,96px)', fontWeight: 400, color: '#fff', letterSpacing: '-0.03em', lineHeight: 1.0, margin: '0 0 24px' }}>
-            Featured<br /><em style={{ fontStyle: 'italic', color: 'var(--accent,#eeca00)' }}>Properties</em>
+            Featured <em style={{ fontStyle: 'italic', color: 'var(--accent,#eeca00)' }}>Properties</em>
           </h1>
           <p style={{ fontFamily: 'var(--font-body)', fontSize: '18px', color: 'rgba(255,255,255,.65)', lineHeight: 1.7, maxWidth: '520px', margin: '0 auto' }}>
             Exceptional homes across San Diego County, personally curated by the Palisade Realty team.
