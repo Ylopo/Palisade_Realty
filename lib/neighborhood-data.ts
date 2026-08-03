@@ -1248,6 +1248,646 @@ const NEIGHBORHOODS: NeighborhoodData[] = [
       marker: [-117.186, 32.752],
     },
   },
+
+  // ── POINT LOMA HEIGHTS ───────────────────────────────────────────────────
+  {
+    name: 'Point Loma Heights',
+    titleFirst: 'Point Loma',
+    titleRest: 'Heights',
+    parentName: 'Point Loma',
+    parentSlug: 'point-loma-real-estate',
+    slug: 'point-loma-heights',
+    image: 'community-point-loma.jpg',
+    badge: 'Harbor Views · Central Point Loma',
+    subtitle: 'Point Loma · San Diego, California',
+    priceRange: '$900K – $1.6M',
+    tags: 'Harbor Views · Craftsman · Central',
+    heroStats: [
+      { value: '$900K+', label: 'Starting Price' },
+      { value: '68', label: 'Walk Score' },
+      { value: '92107', label: 'ZIP Code' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    overview: [
+      'Point Loma Heights is an officially recognized neighborhood in the City of San Diego\'s Peninsula Community Plan, sitting in the central-northern part of the Point Loma peninsula — bounded by Froude Street to the west, Point Loma Avenue and Chatsworth Boulevard to the south, Nimitz Boulevard to the east, and Midway Drive and the San Diego River to the north. It borders Ocean Beach to the west, Sunset Cliffs and Roseville-Fleetridge to the south, Loma Portal to the east, and the Midway/Mission Bay Park area to the north.',
+      'Within its own boundaries, the community plan further subdivides Point Loma Heights into four smaller pockets — Loma Palisades, Loma Alta, Point Loma Highlands, and Ocean Beach Highlands. Major streets include Catalina Boulevard, Nimitz Boulevard, Narragansett Avenue, and Voltaire Street, with everyday commercial corridors along West Point Loma Boulevard and Voltaire Street putting coffee, dining, and errands within easy reach.',
+      'Housing here ranges from older single-family homes near the Ocean Beach border to multi-family buildings closer to Midway, giving buyers a wider mix of price points and property types than some of Point Loma\'s more uniformly single-family pockets.',
+    ],
+    quickFacts: [
+      { label: 'Type', value: 'Central Residential Neighborhood' },
+      { label: 'Parent Community', value: 'Point Loma' },
+      { label: 'ZIP Code', value: '92107' },
+      { label: 'Sub-Pockets', value: 'Loma Palisades · Loma Alta · Highlands' },
+      { label: 'Price Range', value: '$900K – $1.6M' },
+      { label: 'Housing Mix', value: 'Single-Family · Multi-Family' },
+    ],
+    highlights: [
+      {
+        title: 'An Officially Recognized Neighborhood',
+        desc: 'Point Loma Heights is named and mapped in the City of San Diego\'s Peninsula Community Plan — a documented, planning-recognized boundary rather than an informal marketing label.',
+      },
+      {
+        title: 'Four Sub-Pockets in One',
+        desc: 'The community plan further divides Point Loma Heights into Loma Palisades, Loma Alta, Point Loma Highlands, and Ocean Beach Highlands, each with its own subtle character within the larger neighborhood.',
+      },
+      {
+        title: 'Central Peninsula Position',
+        desc: 'Sitting between Ocean Beach and Loma Portal, this neighborhood puts residents within easy reach of the beach, the bay, and Point Loma\'s other enclaves without committing to either extreme.',
+      },
+      {
+        title: 'Everyday Commercial Corridors',
+        desc: 'Voltaire Street and West Point Loma Boulevard give residents walkable access to coffee shops, restaurants, and daily errands without a drive to Newport Avenue or Liberty Station.',
+      },
+    ],
+    ylopoSearch:
+      'https://search.palisaderealty.com/search?q=Point+Loma+Heights&s%5BorderBy%5D=sourceCreationDate%2Cdesc&s%5Bpage%5D=1&s%5Blocations%5D%5B0%5D%5Bneighborhood%5D=Point+Loma+Heights&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA&s%5Blocations%5D%5B0%5D%5Bcity%5D=San+Diego',
+    ylopoLocations: [{ neighborhood: 'Point Loma Heights', city: 'San Diego', state: 'CA' }],
+    nearbyCommunities: [
+      { name: 'Downtown San Diego', slug: 'downtown-san-diego-real-estate', from: '$450K', whyConsider: 'The urban core just 10 minutes away — condos, lofts, and bayfront living with Walk Score 97 and a world-class restaurant scene.' },
+      { name: 'Mission Hills', slug: 'mission-hills-real-estate', from: '$900K', whyConsider: 'Historic Craftsman bungalows and a charming village core — the quieter, tree-lined alternative just north of Old Town with strong architectural character.' },
+      { name: 'Coronado', slug: 'coronado-real-estate', from: '$1.4M', whyConsider: 'Island resort living across the bay — the iconic Hotel del Coronado, a world-famous beach, and an intimate small-town feel minutes from downtown.' },
+    ],
+    lifestyleBody: [
+      'Point Loma Heights suits buyers who want a genuine foothold in Point Loma without picking a side — close enough to walk to Ocean Beach on a Saturday morning, close enough to Loma Portal for a family-friendly evening stroll, and close enough to Midway for a quick freeway on-ramp when it\'s time to head across town.',
+      'It\'s a practical, lived-in neighborhood rather than a postcard — real errands get run on Voltaire Street, real neighbors know each other on the residential blocks, and the mix of housing stock means there\'s genuinely something here for a range of budgets within Point Loma.',
+    ],
+    lifestyleBullets: [
+      'Buyers who want a central Point Loma location',
+      'First-time Point Loma buyers seeking a range of price points',
+      'Renters and buyers of multi-family housing near Midway',
+      'Families who want proximity to both Ocean Beach and Loma Portal',
+      'Commuters who value quick freeway access',
+    ],
+    locationMap: {
+      center: [-117.246, 32.762],
+      zoom: 13.6,
+      boundary: [
+        [-117.256, 32.768], [-117.238, 32.768], [-117.236, 32.756],
+        [-117.248, 32.752], [-117.256, 32.756], [-117.256, 32.768],
+      ],
+      marker: [-117.246, 32.762],
+    },
+  },
+
+  // ── LA PLAYA ─────────────────────────────────────────────────────────────
+  {
+    name: 'La Playa',
+    titleFirst: 'La',
+    titleRest: 'Playa',
+    parentName: 'Point Loma',
+    parentSlug: 'point-loma-real-estate',
+    slug: 'la-playa',
+    image: 'community-point-loma.jpg',
+    badge: 'Bayfront · Yacht Club Row',
+    subtitle: 'Point Loma · San Diego, California',
+    priceRange: '$1.2M – $3.5M+',
+    tags: 'Bayfront · Luxury Estates · Yacht Access',
+    heroStats: [
+      { value: '$1.2M+', label: 'Starting Price' },
+      { value: '68', label: 'Walk Score' },
+      { value: '92106', label: 'ZIP Code' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    overview: [
+      'La Playa — Spanish for "the beach" — is one of San Diego\'s oldest and most historically significant neighborhoods, sitting directly on San Diego Bay and bordered by Naval Base Point Loma to the south, the Wooded Area to the west, Roseville-Fleetridge to the north, and Shelter Island across a narrow channel to the east. European use of the site dates to April 1, 1769, when the Spanish packet San Antonio arrived as part of the Serra-Portolá expedition — a landing traditionally cited as occurring near present-day Ballast Point, alongside Juan Rodríguez Cabrillo\'s earlier 1542 arrival.',
+      'The La Playa Trail, described as the oldest commercial trail in the western United States, once connected this anchorage to Mission San Diego de Alcalá. During the Mexican era, roughly 800 residents lived here, centered on cattle-hide processing for Boston trading ships, and La Playa remained San Diego\'s principal port until the 1870s. The site earned California Historical Landmark status (#61) in 1932 and recognition from San Diego\'s Historical Resources Board in 1970.',
+      'Today, La Playa is anchored by a row of storied yacht clubs — the San Diego Yacht Club (founded 1886, at its current location since 1924, three-time America\'s Cup winner), the Southwestern Yacht Club (formed 1925), and the La Playa Yacht Club (founded in the early 1930s) — and counts among San Diego\'s most valuable residential real estate, with many bayfront homes offering private dock access.',
+    ],
+    quickFacts: [
+      { label: 'Type', value: 'Historic Bayfront Enclave' },
+      { label: 'Parent Community', value: 'Point Loma' },
+      { label: 'ZIP Code', value: '92106' },
+      { label: 'Historic Status', value: 'California Historical Landmark #61' },
+      { label: 'Price Range', value: '$1.2M – $3.5M+' },
+      { label: 'Yacht Clubs', value: 'SDYC · Southwestern · La Playa' },
+    ],
+    highlights: [
+      {
+        title: 'San Diego\'s Original Harbor',
+        desc: 'European use dates to 1769, and La Playa served as San Diego\'s principal port until the 1870s — a history recognized with California Historical Landmark status (#61) since 1932.',
+      },
+      {
+        title: 'The La Playa Trail',
+        desc: 'Once the oldest commercial trail in the western United States, connecting this bayside anchorage to Mission San Diego de Alcalá — a documented piece of California\'s earliest colonial-era infrastructure.',
+      },
+      {
+        title: 'Yacht Club Row',
+        desc: 'Three historic yacht clubs anchor the waterfront: the San Diego Yacht Club (1886, a three-time America\'s Cup winner), the Southwestern Yacht Club (1925), and the La Playa Yacht Club (early 1930s).',
+      },
+      {
+        title: 'Bayfront Estate Living',
+        desc: 'Among San Diego\'s most valuable residential real estate, with many homes along the water offering private dock access — a rare combination of historic pedigree and boating convenience.',
+      },
+    ],
+    ylopoSearch:
+      'https://search.palisaderealty.com/search?q=La+Playa&s%5BorderBy%5D=sourceCreationDate%2Cdesc&s%5Bpage%5D=1&s%5Blocations%5D%5B0%5D%5Bneighborhood%5D=La+Playa&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA&s%5Blocations%5D%5B0%5D%5Bcity%5D=San+Diego',
+    ylopoLocations: [{ neighborhood: 'La Playa', city: 'San Diego', state: 'CA' }],
+    nearbyCommunities: [
+      { name: 'Downtown San Diego', slug: 'downtown-san-diego-real-estate', from: '$450K', whyConsider: 'The urban core just 10 minutes away — condos, lofts, and bayfront living with Walk Score 97 and a world-class restaurant scene.' },
+      { name: 'Mission Hills', slug: 'mission-hills-real-estate', from: '$900K', whyConsider: 'Historic Craftsman bungalows and a charming village core — the quieter, tree-lined alternative just north of Old Town with strong architectural character.' },
+      { name: 'Coronado', slug: 'coronado-real-estate', from: '$1.4M', whyConsider: 'Island resort living across the bay — the iconic Hotel del Coronado, a world-famous beach, and an intimate small-town feel minutes from downtown.' },
+    ],
+    lifestyleBody: [
+      'La Playa is for buyers who want to live inside San Diego\'s maritime history — mornings on a private dock, afternoons at the yacht club, evenings watching the sun set over the bay from a bluff that\'s been continuously inhabited since 1769.',
+      'It\'s a quiet, established, and deeply rooted community rather than a discovery — many families have owned here for generations, and the pace reflects a neighborhood that has never needed to chase trends to justify its place in San Diego\'s story.',
+    ],
+    lifestyleBullets: [
+      'Boating and sailing enthusiasts',
+      'Buyers seeking historic pedigree alongside bayfront luxury',
+      'Yacht club members and prospective members',
+      'History enthusiasts drawn to San Diego\'s founding-era sites',
+      'Multi-generational and long-term ownership families',
+    ],
+    locationMap: {
+      center: [-117.228, 32.702],
+      zoom: 13.8,
+      boundary: [
+        [-117.236, 32.708], [-117.220, 32.708], [-117.218, 32.696],
+        [-117.228, 32.692], [-117.236, 32.696], [-117.236, 32.708],
+      ],
+      marker: [-117.228, 32.702],
+    },
+  },
+
+  // ── SHELTER ISLAND ───────────────────────────────────────────────────────
+  {
+    name: 'Shelter Island',
+    titleFirst: 'Shelter',
+    titleRest: 'Island',
+    parentName: 'Point Loma',
+    parentSlug: 'point-loma-real-estate',
+    slug: 'shelter-island',
+    image: 'community-point-loma.jpg',
+    badge: 'Marina District · Resort Living',
+    subtitle: 'Point Loma · San Diego, California',
+    priceRange: '$700K – $2.5M+',
+    tags: 'Marina · Waterfront · Resort Lifestyle',
+    heroStats: [
+      { value: '$700K+', label: 'Starting Price' },
+      { value: '68', label: 'Walk Score' },
+      { value: '92106', label: 'ZIP Code' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    overview: [
+      'Shelter Island is a genuinely man-made peninsula — originally a sandbar visible only at low tide, built up using bay-dredging spoils starting in 1934 and further raised with material from Navy channel-deepening projects during World War II. In the early 1950s, the San Diego Harbor Commission developed it in earnest: a yacht basin was dredged, a deep-water channel cut, and a causeway built connecting it to the Point Loma mainland. Today it stretches roughly 1.2 miles along a single road, Shelter Island Drive, with all development following a city-mandated Polynesian architectural theme.',
+      'The island\'s best-known landmark is the Yokohama Friendship Bell, a gift from the city of Yokohama, Japan presented in 1958 to mark San Diego\'s first sister-city relationship, with the bell first rung on December 10, 1960. Nearby, the Bali Hai restaurant occupies a 1953 building that has served as a tiki dining destination since 1954 — one of the oldest classic mid-century tiki restaurants still operating anywhere. Shoreline Park is also home to the Tunaman\'s Memorial, a 1988 bronze sculpture honoring the Italian, Japanese, Portuguese, and Slavic fishermen who built San Diego\'s historic tuna fleet.',
+      'Two long-running resort hotels anchor the marina district: the Kona Kai Resort & Spa and Humphreys Half Moon Inn & Suites, home to the well-known Humphreys Concerts by the Bay outdoor summer concert series. Three historic yacht clubs — Silvergate, San Diego, and Southwestern — also maintain facilities on or near the island.',
+    ],
+    quickFacts: [
+      { label: 'Type', value: 'Man-Made Marina Peninsula' },
+      { label: 'Parent Community', value: 'Point Loma' },
+      { label: 'ZIP Code', value: '92106' },
+      { label: 'Architecture', value: 'Mid-Century Polynesian Overlay' },
+      { label: 'Price Range', value: '$700K – $2.5M+' },
+      { label: 'Built', value: 'Dredged 1934 – Early 1950s' },
+    ],
+    highlights: [
+      {
+        title: 'Built From the Bay Itself',
+        desc: 'Shelter Island began as a tidal sandbar, built up with dredging spoils starting in 1934 and further developed by the Harbor Commission in the early 1950s — a genuinely engineered piece of San Diego\'s waterfront.',
+      },
+      {
+        title: 'The Yokohama Friendship Bell',
+        desc: 'A 1958 gift from Yokohama, Japan marking San Diego\'s first-ever sister-city relationship, first rung on December 10, 1960 — a landmark that still anchors the island\'s identity.',
+      },
+      {
+        title: 'Bali Hai Restaurant',
+        desc: 'Housed in a 1953 building and serving as a tiki dining destination since 1954, Bali Hai is one of the longest continuously operating classic tiki restaurants anywhere.',
+      },
+      {
+        title: 'Humphreys Concerts by the Bay',
+        desc: 'The outdoor venue at Humphreys Half Moon Inn hosts a well-known summer concert series each June through September, drawing visitors from across the county.',
+      },
+    ],
+    ylopoSearch:
+      'https://search.palisaderealty.com/search?q=Shelter+Island&s%5BorderBy%5D=sourceCreationDate%2Cdesc&s%5Bpage%5D=1&s%5Blocations%5D%5B0%5D%5Bneighborhood%5D=Shelter+Island&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA&s%5Blocations%5D%5B0%5D%5Bcity%5D=San+Diego',
+    ylopoLocations: [{ neighborhood: 'Shelter Island', city: 'San Diego', state: 'CA' }],
+    nearbyCommunities: [
+      { name: 'Downtown San Diego', slug: 'downtown-san-diego-real-estate', from: '$450K', whyConsider: 'The urban core just 10 minutes away — condos, lofts, and bayfront living with Walk Score 97 and a world-class restaurant scene.' },
+      { name: 'Mission Hills', slug: 'mission-hills-real-estate', from: '$900K', whyConsider: 'Historic Craftsman bungalows and a charming village core — the quieter, tree-lined alternative just north of Old Town with strong architectural character.' },
+      { name: 'Coronado', slug: 'coronado-real-estate', from: '$1.4M', whyConsider: 'Island resort living across the bay — the iconic Hotel del Coronado, a world-famous beach, and an intimate small-town feel minutes from downtown.' },
+    ],
+    lifestyleBody: [
+      'Shelter Island suits buyers who want resort living as a daily backdrop — a marina view from the kitchen window, a summer concert within walking distance, and a genuine sense of being on vacation without leaving home.',
+      'It\'s a small, self-contained district with a distinct architectural identity, appealing to boating enthusiasts and buyers who want waterfront character without the historic weight of neighboring La Playa.',
+    ],
+    lifestyleBullets: [
+      'Boating and yacht club enthusiasts',
+      'Buyers who want resort-style waterfront living',
+      'Fans of Humphreys Concerts by the Bay and the summer events calendar',
+      'Buyers drawn to distinctive mid-century architecture',
+      'Second-home and vacation-style buyers',
+    ],
+    locationMap: {
+      center: [-117.220, 32.714],
+      zoom: 14.0,
+      boundary: [
+        [-117.226, 32.720], [-117.213, 32.720], [-117.212, 32.709],
+        [-117.219, 32.706], [-117.226, 32.709], [-117.226, 32.720],
+      ],
+      marker: [-117.220, 32.714],
+    },
+  },
+
+  // ── LIBERTY STATION ──────────────────────────────────────────────────────
+  {
+    name: 'Liberty Station',
+    titleFirst: 'Liberty',
+    titleRest: 'Station',
+    parentName: 'Point Loma',
+    parentSlug: 'point-loma-real-estate',
+    slug: 'liberty-station',
+    image: 'community-point-loma.jpg',
+    badge: 'Arts District · Adaptive Reuse',
+    subtitle: 'Point Loma · San Diego, California',
+    priceRange: '$800K – $1.4M',
+    tags: 'Arts District · Modern · Community',
+    heroStats: [
+      { value: '$800K+', label: 'Starting Price' },
+      { value: '68', label: 'Walk Score' },
+      { value: '92106', label: 'ZIP Code' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    overview: [
+      'Liberty Station is the redevelopment of the former Naval Training Center San Diego, dedicated on October 27, 1923 and renamed NTC in 1944 after additional schools were added. At its wartime peak in 1942, the base trained 33,000 personnel at once, and over its full operating life more than 1.75 million recruits passed through. The federal Base Realignment and Closure commission ordered its closure in 1993, with a formal closure ceremony held on March 21, 1997.',
+      'The City Council adopted a final reuse plan in October 1998, and renovation of the historic buildings began in earnest around 2002 — more than 50 buildings have been restored and repurposed since, with Phase Two (15 buildings) completing in November 2012. The Joan, a new performing arts theater, opened in September 2025 as the 56th renovated building, a sign the district continues to evolve.',
+      'Today, Liberty Station spans roughly 360 acres and includes Liberty Public Market — a 25,000-square-foot food hall with 30+ vendors inside a converted 1921 military building — alongside the Arts District Liberty Station, a creative campus of galleries, studios, and nonprofits. Established anchors include Stone Brewing, Trader Joe\'s, Vons, and the High Tech High school network.',
+    ],
+    quickFacts: [
+      { label: 'Type', value: 'Redeveloped Naval Training Center' },
+      { label: 'Parent Community', value: 'Point Loma' },
+      { label: 'ZIP Code', value: '92106' },
+      { label: 'Architecture', value: 'Historic Military · Modern Infill' },
+      { label: 'Price Range', value: '$800K – $1.4M' },
+      { label: 'Footprint', value: 'Roughly 360 Acres' },
+    ],
+    highlights: [
+      {
+        title: 'A Century of History',
+        desc: 'From its 1923 dedication as a Naval Training Station through its 1997 closure ceremony to The Joan theater\'s 2025 opening, Liberty Station has spent over a hundred years evolving — first for the Navy, now for the community.',
+      },
+      {
+        title: 'Liberty Public Market',
+        desc: 'A 25,000-square-foot food hall with 30+ vendors housed inside a converted 1921 military building — one of San Diego\'s most popular food-hall destinations.',
+      },
+      {
+        title: 'Arts District Liberty Station',
+        desc: 'A creative campus of galleries, artist studios, and nonprofit spaces gives this district a cultural density unlike anywhere else in Point Loma.',
+      },
+      {
+        title: 'Established Modern Anchors',
+        desc: 'Stone Brewing, Trader Joe\'s, Vons, and the High Tech High school network give residents genuine day-to-day convenience alongside the district\'s historic character.',
+      },
+    ],
+    ylopoSearch:
+      'https://search.palisaderealty.com/search?q=Liberty+Station&s%5BorderBy%5D=sourceCreationDate%2Cdesc&s%5Bpage%5D=1&s%5Blocations%5D%5B0%5D%5Bneighborhood%5D=Liberty+Station&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA&s%5Blocations%5D%5B0%5D%5Bcity%5D=San+Diego',
+    ylopoLocations: [{ neighborhood: 'Liberty Station', city: 'San Diego', state: 'CA' }],
+    nearbyCommunities: [
+      { name: 'Downtown San Diego', slug: 'downtown-san-diego-real-estate', from: '$450K', whyConsider: 'The urban core just 10 minutes away — condos, lofts, and bayfront living with Walk Score 97 and a world-class restaurant scene.' },
+      { name: 'Mission Hills', slug: 'mission-hills-real-estate', from: '$900K', whyConsider: 'Historic Craftsman bungalows and a charming village core — the quieter, tree-lined alternative just north of Old Town with strong architectural character.' },
+      { name: 'Coronado', slug: 'coronado-real-estate', from: '$1.4M', whyConsider: 'Island resort living across the bay — the iconic Hotel del Coronado, a world-famous beach, and an intimate small-town feel minutes from downtown.' },
+    ],
+    lifestyleBody: [
+      'Liberty Station suits buyers who want a walkable, planned community built around genuine adaptive-reuse architecture — Saturday mornings at Liberty Public Market, an evening gallery walk through the Arts District, a concert or event on the waterfront promenade.',
+      'It\'s one of the more modern-feeling pockets of Point Loma despite its century-old bones, appealing to buyers who want community amenities and walkability without sacrificing the historic character the rest of the peninsula is known for.',
+    ],
+    lifestyleBullets: [
+      'Buyers who want walkable, planned-community living',
+      'Foodies and Liberty Public Market regulars',
+      'Arts and culture enthusiasts',
+      'Families drawn to High Tech High and nearby schools',
+      'Buyers who appreciate adaptive-reuse architecture',
+    ],
+    locationMap: {
+      center: [-117.214, 32.742],
+      zoom: 13.8,
+      boundary: [
+        [-117.221, 32.748], [-117.208, 32.748], [-117.206, 32.736],
+        [-117.216, 32.732], [-117.221, 32.736], [-117.221, 32.748],
+      ],
+      marker: [-117.214, 32.742],
+    },
+  },
+
+  // ── LOMA PORTAL ──────────────────────────────────────────────────────────
+  {
+    name: 'Loma Portal',
+    titleFirst: 'Loma',
+    titleRest: 'Portal',
+    parentName: 'Point Loma',
+    parentSlug: 'point-loma-real-estate',
+    slug: 'loma-portal',
+    image: 'community-point-loma.jpg',
+    badge: 'Tree-Lined · Family Favorite',
+    subtitle: 'Point Loma · San Diego, California',
+    priceRange: '$900K – $1.5M',
+    tags: 'Tree-Lined · Family · Quiet',
+    heroStats: [
+      { value: '$900K+', label: 'Starting Price' },
+      { value: '68', label: 'Walk Score' },
+      { value: '92106', label: 'ZIP Code' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    overview: [
+      'Loma Portal is an officially recognized Point Loma neighborhood, occupying a hilly area northwest of Rosecrans Street and northeast of Nimitz Boulevard, overlooking San Diego Bay. Its major streets include Rosecrans Street, Chatsworth Boulevard, and Catalina Boulevard, and it\'s known for a distinctive local quirk: its east-west residential streets are named alphabetically after literary figures, running from Addison to Zola, as documented in the 2014 book Reading Between the Lampposts.',
+      'The neighborhood\'s architecture — largely Spanish Revival and Tudor-style homes built from the early 1900s through the 1940s — sits on tree-lined streets that have earned Loma Portal a long-standing reputation as one of Point Loma\'s most family-oriented pockets. Loma Portal Elementary, built in 1914 at 3341 Browning Street after resident George Burnham lobbied for a neighborhood school, still serves the community today and won a California Distinguished School award in 2010.',
+      'Local gathering spots include Plumosa Park, a 1.4-acre park known for its annual Christmas Eve luminaria lighting, and the Hervey Point Loma Branch Library, which opened in 2003. Residents also share a local nickname — "the Point Loma Pause" — for the brief lull in conversation when a jet passes overhead on approach to nearby San Diego International Airport.',
+    ],
+    quickFacts: [
+      { label: 'Type', value: 'Family Residential Neighborhood' },
+      { label: 'Parent Community', value: 'Point Loma' },
+      { label: 'ZIP Code', value: '92106' },
+      { label: 'Architecture', value: 'Spanish Revival · Tudor' },
+      { label: 'Price Range', value: '$900K – $1.5M' },
+      { label: 'Elementary School', value: 'Loma Portal (Est. 1914)' },
+    ],
+    highlights: [
+      {
+        title: 'Streets Named for Authors',
+        desc: 'Loma Portal\'s east-west streets run alphabetically through literary figures, from Addison to Zola — a documented local naming convention that gives the neighborhood a distinct identity.',
+      },
+      {
+        title: 'Loma Portal Elementary Since 1914',
+        desc: 'Built after a resident-led campaign for a neighborhood school, Loma Portal Elementary still serves the community today and earned a California Distinguished School award in 2010.',
+      },
+      {
+        title: 'Plumosa Park\'s Christmas Eve Tradition',
+        desc: 'This 1.4-acre neighborhood park hosts an annual Christmas Eve luminaria lighting that has become a beloved local tradition.',
+      },
+      {
+        title: 'Tree-Lined, Family-Oriented Streets',
+        desc: 'Spanish Revival and Tudor homes from the early 1900s through the 1940s line quiet, tree-canopied streets that have long made Loma Portal a favorite for families.',
+      },
+    ],
+    ylopoSearch:
+      'https://search.palisaderealty.com/search?q=Loma+Portal&s%5BorderBy%5D=sourceCreationDate%2Cdesc&s%5Bpage%5D=1&s%5Blocations%5D%5B0%5D%5Bneighborhood%5D=Loma+Portal&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA&s%5Blocations%5D%5B0%5D%5Bcity%5D=San+Diego',
+    ylopoLocations: [{ neighborhood: 'Loma Portal', city: 'San Diego', state: 'CA' }],
+    nearbyCommunities: [
+      { name: 'Downtown San Diego', slug: 'downtown-san-diego-real-estate', from: '$450K', whyConsider: 'The urban core just 10 minutes away — condos, lofts, and bayfront living with Walk Score 97 and a world-class restaurant scene.' },
+      { name: 'Mission Hills', slug: 'mission-hills-real-estate', from: '$900K', whyConsider: 'Historic Craftsman bungalows and a charming village core — the quieter, tree-lined alternative just north of Old Town with strong architectural character.' },
+      { name: 'Coronado', slug: 'coronado-real-estate', from: '$1.4M', whyConsider: 'Island resort living across the bay — the iconic Hotel del Coronado, a world-famous beach, and an intimate small-town feel minutes from downtown.' },
+    ],
+    lifestyleBody: [
+      'Loma Portal is for buyers who want Point Loma\'s coastal proximity wrapped in a genuinely family-first neighborhood — walking kids to a century-old elementary school, gathering at Plumosa Park on Christmas Eve, and knowing the names of half the block.',
+      'It\'s one of the more traditionally residential corners of Point Loma, with a settled, multi-generational feel that appeals to buyers looking for stability and community over a beach-town buzz.',
+    ],
+    lifestyleBullets: [
+      'Families with school-age children',
+      'Buyers seeking tree-lined, quiet residential streets',
+      'Long-term owners who value neighborhood tradition',
+      'Buyers who want bay-adjacent living without direct waterfront pricing',
+      'Commuters who value proximity to the airport and Rosecrans corridor',
+    ],
+    locationMap: {
+      center: [-117.222, 32.760],
+      zoom: 13.8,
+      boundary: [
+        [-117.230, 32.766], [-117.214, 32.766], [-117.212, 32.754],
+        [-117.222, 32.750], [-117.230, 32.754], [-117.230, 32.766],
+      ],
+      marker: [-117.222, 32.760],
+    },
+  },
+
+  // ── OCEAN BEACH ──────────────────────────────────────────────────────────
+  {
+    name: 'Ocean Beach',
+    titleFirst: 'Ocean',
+    titleRest: 'Beach',
+    parentName: 'Point Loma',
+    parentSlug: 'point-loma-real-estate',
+    slug: 'ocean-beach',
+    image: 'community-point-loma.jpg',
+    badge: 'Eclectic Beach Town',
+    subtitle: 'Point Loma · San Diego, California',
+    priceRange: '$800K – $1.3M',
+    tags: 'Eclectic · Beach Town · The OB Pier',
+    heroStats: [
+      { value: '$800K+', label: 'Starting Price' },
+      { value: '68', label: 'Walk Score' },
+      { value: '92107', label: 'ZIP Code' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    overview: [
+      'Ocean Beach — known locally as "OB" — was founded in 1887 by developers on land previously used by the Kumeyaay people as a fishing encampment called Hapai. Surfing is credited with arriving here as early as 1916, and OB hosted the 1966 World Surfing Championship, won by Nat Young. The neighborhood embraced a countercultural identity through the 1960s and 70s, earning the nickname "the Haight-Ashbury of San Diego" and a community motto — "Keep OB Weird" — that still holds today.',
+      'The Ocean Beach Pier opened July 2, 1966 at 1,971 feet, making it the longest concrete pier in the world at the time. It has been closed to the public since October 2023 due to storm damage, and the City of San Diego has determined a full replacement — estimated at $170–190 million — is the path forward rather than repair; no reopening date has been set as of this writing. Newport Avenue remains OB\'s commercial heart, anchored by Hodad\'s, a burger institution open since 1969 that gained national attention on Diners, Drive-Ins and Dives.',
+      'Ocean Beach is also home to Dog Beach, established in 1972 as one of the first officially designated leash-free beaches in the United States, and hosts a Wednesday farmers market on the 4900 block of Newport Avenue that has run for more than three decades.',
+    ],
+    quickFacts: [
+      { label: 'Type', value: 'Beach Town' },
+      { label: 'Parent Community', value: 'Point Loma' },
+      { label: 'ZIP Code', value: '92107' },
+      { label: 'Architecture', value: 'Craftsman Bungalow · Beach Cottage' },
+      { label: 'Price Range', value: '$800K – $1.3M' },
+      { label: 'Founded', value: '1887' },
+    ],
+    highlights: [
+      {
+        title: '"Keep OB Weird"',
+        desc: 'Ocean Beach\'s countercultural identity, forged in the 1960s and 70s, is still very much alive today — a genuine, unpolished beach-town character that\'s rare on the California coast.',
+      },
+      {
+        title: 'Hodad\'s Since 1969',
+        desc: 'This Newport Avenue burger institution gained national fame on Diners, Drive-Ins and Dives and remains one of San Diego\'s most beloved and enduring local businesses.',
+      },
+      {
+        title: 'Dog Beach, Established 1972',
+        desc: 'One of the first officially designated leash-free beaches in the United States, Dog Beach draws residents and visitors from across the county to its quarter-mile stretch of sand.',
+      },
+      {
+        title: 'The Historic OB Pier',
+        desc: 'Opened in 1966 as the world\'s longest concrete pier, the OB Pier is currently closed to the public following storm damage, with the city pursuing a full replacement rather than repair — a status worth knowing for anyone considering the neighborhood today.',
+      },
+    ],
+    ylopoSearch:
+      'https://search.palisaderealty.com/search?q=Ocean+Beach&s%5BorderBy%5D=sourceCreationDate%2Cdesc&s%5Bpage%5D=1&s%5Blocations%5D%5B0%5D%5Bneighborhood%5D=Ocean+Beach&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA&s%5Blocations%5D%5B0%5D%5Bcity%5D=San+Diego',
+    ylopoLocations: [{ neighborhood: 'Ocean Beach', city: 'San Diego', state: 'CA' }],
+    nearbyCommunities: [
+      { name: 'Downtown San Diego', slug: 'downtown-san-diego-real-estate', from: '$450K', whyConsider: 'The urban core just 10 minutes away — condos, lofts, and bayfront living with Walk Score 97 and a world-class restaurant scene.' },
+      { name: 'Mission Hills', slug: 'mission-hills-real-estate', from: '$900K', whyConsider: 'Historic Craftsman bungalows and a charming village core — the quieter, tree-lined alternative just north of Old Town with strong architectural character.' },
+      { name: 'Coronado', slug: 'coronado-real-estate', from: '$1.4M', whyConsider: 'Island resort living across the bay — the iconic Hotel del Coronado, a world-famous beach, and an intimate small-town feel minutes from downtown.' },
+    ],
+    lifestyleBody: [
+      'Ocean Beach suits buyers who want the real, unpolished version of California beach life — a walk to Dog Beach with the family dog, a Wednesday evening at the farmers market, a Hodad\'s burger that tastes the same as it did decades ago.',
+      'It\'s a tight-knit, independent-minded community that has actively resisted chain retail and homogenization, appealing to buyers who want genuine local character over a manicured coastal aesthetic.',
+    ],
+    lifestyleBullets: [
+      'Surfers and beach-lifestyle buyers',
+      'Dog owners drawn to Dog Beach',
+      'Buyers who value independent, non-chain local character',
+      'Renters and buyers seeking classic beach-cottage charm',
+      'Community-minded buyers who want a walkable town center',
+    ],
+    locationMap: {
+      center: [-117.253, 32.748],
+      zoom: 13.8,
+      boundary: [
+        [-117.262, 32.754], [-117.246, 32.754], [-117.244, 32.742],
+        [-117.254, 32.738], [-117.262, 32.742], [-117.262, 32.754],
+      ],
+      marker: [-117.253, 32.748],
+    },
+  },
+
+  // ── SUNSET CLIFFS ────────────────────────────────────────────────────────
+  {
+    name: 'Sunset Cliffs',
+    titleFirst: 'Sunset',
+    titleRest: 'Cliffs',
+    parentName: 'Point Loma',
+    parentSlug: 'point-loma-real-estate',
+    slug: 'sunset-cliffs',
+    image: 'community-point-loma.jpg',
+    badge: 'Dramatic Ocean Views',
+    subtitle: 'Point Loma · San Diego, California',
+    priceRange: '$950K – $2M+',
+    tags: 'Ocean Views · Surfer Culture · Dramatic',
+    heroStats: [
+      { value: '$950K+', label: 'Starting Price' },
+      { value: '68', label: 'Walk Score' },
+      { value: '92107', label: 'ZIP Code' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    overview: [
+      'Sunset Cliffs takes its name from Sunset Cliffs Natural Park, a genuinely dramatic 68-acre city park combining an 18-acre stretch of coastal bluffs — between Adair and Ladera streets — with a 50-acre hillside section designated as a multiple-species conservation area. The park\'s sandstone bluffs, sea arches, and sea caves have made it one of San Diego\'s most photographed natural landmarks, with three main viewing areas along Ladera Street, Luscomb Point, and Osprey Street, and seasonal views of migrating gray whales.',
+      'The park is intentionally undeveloped — there are no restroom facilities at any of the main viewing areas — and the coastline here is subject to real, ongoing erosion. Bluff collapses have occurred as recently as this year, and the City of San Diego has proposed a $32 million seawall project to address the issue, though as of this writing it remains a proposal facing community discussion rather than a completed structure. Residential streets above the cliffs reflect a mix of eras, from early Spanish Revival cottages to contemporary view-oriented rebuilds.',
+      'Sunset Cliffs has also long been recognized as one of San Diego\'s premier surf breaks, drawing wave-riders to its point breaks and reef setups for generations.',
+    ],
+    quickFacts: [
+      { label: 'Type', value: 'Coastal Bluff Neighborhood' },
+      { label: 'Parent Community', value: 'Point Loma' },
+      { label: 'ZIP Code', value: '92107' },
+      { label: 'Architecture', value: 'Spanish Revival · Contemporary Coastal' },
+      { label: 'Price Range', value: '$950K – $2M+' },
+      { label: 'Adjacent Park', value: 'Sunset Cliffs Natural Park (68 Acres)' },
+    ],
+    highlights: [
+      {
+        title: 'Sunset Cliffs Natural Park',
+        desc: 'A 68-acre park of sandstone bluffs, sea arches, and sea caves along the Pacific — one of San Diego\'s most striking and photographed natural landscapes, with seasonal gray whale sightings from its clifftop viewpoints.',
+      },
+      {
+        title: 'A Legendary Surf Break',
+        desc: 'Generations of surfers have made the pilgrimage to Sunset Cliffs\' point breaks and reef setups, cementing its reputation as one of San Diego\'s premier surf spots.',
+      },
+      {
+        title: 'A Living, Undeveloped Coastline',
+        desc: 'With no restroom facilities and an active, documented erosion problem, Sunset Cliffs remains a genuinely natural park rather than a manicured tourist attraction — a quality residents value even as the city studies solutions.',
+      },
+      {
+        title: 'Dramatic View Homes',
+        desc: 'Residential streets above the bluffs are oriented toward some of San Diego\'s most striking sunset views, spanning architectural eras from early Spanish Revival cottages to contemporary rebuilds.',
+      },
+    ],
+    ylopoSearch:
+      'https://search.palisaderealty.com/search?q=Sunset+Cliffs&s%5BorderBy%5D=sourceCreationDate%2Cdesc&s%5Bpage%5D=1&s%5Blocations%5D%5B0%5D%5Bneighborhood%5D=Sunset+Cliffs&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA&s%5Blocations%5D%5B0%5D%5Bcity%5D=San+Diego',
+    ylopoLocations: [{ neighborhood: 'Sunset Cliffs', city: 'San Diego', state: 'CA' }],
+    nearbyCommunities: [
+      { name: 'Downtown San Diego', slug: 'downtown-san-diego-real-estate', from: '$450K', whyConsider: 'The urban core just 10 minutes away — condos, lofts, and bayfront living with Walk Score 97 and a world-class restaurant scene.' },
+      { name: 'Mission Hills', slug: 'mission-hills-real-estate', from: '$900K', whyConsider: 'Historic Craftsman bungalows and a charming village core — the quieter, tree-lined alternative just north of Old Town with strong architectural character.' },
+      { name: 'Coronado', slug: 'coronado-real-estate', from: '$1.4M', whyConsider: 'Island resort living across the bay — the iconic Hotel del Coronado, a world-famous beach, and an intimate small-town feel minutes from downtown.' },
+    ],
+    lifestyleBody: [
+      'Sunset Cliffs is for buyers who want to wake up to the Pacific in its rawest form — dramatic bluffs instead of a manicured boardwalk, a surf check instead of a commute, an evening ritual of watching the sun drop into the ocean from the same cliffs generations of San Diegans have gathered on.',
+      'It rewards buyers who value natural drama over polish, and who understand that living on an actively eroding coastline is part of the deal — the same forces that carved the sea caves and arches continue to shape the bluffs today.',
+    ],
+    lifestyleBullets: [
+      'Surfers and ocean-lifestyle buyers',
+      'Buyers seeking dramatic, view-oriented properties',
+      'Nature enthusiasts who prefer undeveloped coastline',
+      'Sunset-watchers and photography enthusiasts',
+      'Buyers comfortable with the realities of coastal bluff living',
+    ],
+    locationMap: {
+      center: [-117.258, 32.726],
+      zoom: 13.8,
+      boundary: [
+        [-117.267, 32.732], [-117.250, 32.732], [-117.248, 32.720],
+        [-117.259, 32.716], [-117.267, 32.720], [-117.267, 32.732],
+      ],
+      marker: [-117.258, 32.726],
+    },
+  },
+
+  // ── WOODED AREA ──────────────────────────────────────────────────────────
+  {
+    name: 'Wooded Area',
+    titleFirst: 'Wooded',
+    titleRest: 'Area',
+    parentName: 'Point Loma',
+    parentSlug: 'point-loma-real-estate',
+    slug: 'wooded-area',
+    image: 'community-point-loma.jpg',
+    badge: 'Established · Tree Canopy',
+    subtitle: 'Point Loma · San Diego, California',
+    priceRange: '$950K – $1.8M',
+    tags: 'Residential · Mature Trees · Established',
+    heroStats: [
+      { value: '$950K+', label: 'Starting Price' },
+      { value: '68', label: 'Walk Score' },
+      { value: '92106', label: 'ZIP Code' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    overview: [
+      'Wooded Area is an officially named neighborhood in the City of San Diego\'s Peninsula Community Plan — occupying a hilltop area south of Talbot Street on both sides of Catalina Boulevard, bordered by Naval Base Point Loma to the south, La Playa to the east, Roseville-Fleetridge to the north, and Sunset Cliffs and Point Loma Nazarene University to the west. Its name comes honestly: 19th-century author Richard Henry Dana Jr. described this headland as "well-wooded" in the 1830s, though later logging stripped much of that original vegetation.',
+      'The tree canopy that defines the neighborhood today is credited to Katherine Tingley\'s Theosophical Society community, "Lomaland," which arrived around 1900 and systematically replanted eucalyptus and avocado trees across the western slopes. One notable remnant of that era, the 1912 Rosecroft estate — once home to the multi-acre Rosecroft Begonia Gardens tourist attraction before it closed in the 1960s — is listed on the National Register of Historic Places.',
+      'Today, Wooded Area remains almost entirely residential, with large lot sizes, some streets without sidewalks, and a semi-rural feel that distinguishes it from the denser pockets of Point Loma closer to the beach — an established, quiet character that has attracted prominent local families over the decades.',
+    ],
+    quickFacts: [
+      { label: 'Type', value: 'Officially Named Residential Enclave' },
+      { label: 'Parent Community', value: 'Point Loma' },
+      { label: 'ZIP Code', value: '92106' },
+      { label: 'Architecture', value: 'Custom Estate' },
+      { label: 'Price Range', value: '$950K – $1.8M' },
+      { label: 'Historic Landmark', value: 'Rosecroft (NRHP-Listed, 1912)' },
+    ],
+    highlights: [
+      {
+        title: 'An Officially Named Neighborhood',
+        desc: 'Wooded Area is recognized in the City of San Diego\'s Peninsula Community Plan — a documented boundary, not an informal label, despite its lesser-known name.',
+      },
+      {
+        title: 'Replanted by Lomaland',
+        desc: 'The tree canopy that gives this neighborhood its name traces back to Katherine Tingley\'s Theosophical Society community, which replanted eucalyptus and avocado trees across the hillside starting around 1900.',
+      },
+      {
+        title: 'The Rosecroft Estate',
+        desc: 'This 1912 estate, once home to the multi-acre Rosecroft Begonia Gardens tourist attraction, is listed on the National Register of Historic Places — a tangible link to the neighborhood\'s early 20th-century character.',
+      },
+      {
+        title: 'Large Lots, Semi-Rural Feel',
+        desc: 'Some streets here still lack sidewalks, and generous lot sizes give Wooded Area a quieter, more spread-out character than Point Loma\'s denser coastal pockets.',
+      },
+    ],
+    ylopoSearch:
+      'https://search.palisaderealty.com/search?q=Wooded+Area&s%5BorderBy%5D=sourceCreationDate%2Cdesc&s%5Bpage%5D=1&s%5Blocations%5D%5B0%5D%5Bneighborhood%5D=Wooded+Area&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA&s%5Blocations%5D%5B0%5D%5Bcity%5D=San+Diego',
+    ylopoLocations: [{ neighborhood: 'Wooded Area', city: 'San Diego', state: 'CA' }],
+    nearbyCommunities: [
+      { name: 'Downtown San Diego', slug: 'downtown-san-diego-real-estate', from: '$450K', whyConsider: 'The urban core just 10 minutes away — condos, lofts, and bayfront living with Walk Score 97 and a world-class restaurant scene.' },
+      { name: 'Mission Hills', slug: 'mission-hills-real-estate', from: '$900K', whyConsider: 'Historic Craftsman bungalows and a charming village core — the quieter, tree-lined alternative just north of Old Town with strong architectural character.' },
+      { name: 'Coronado', slug: 'coronado-real-estate', from: '$1.4M', whyConsider: 'Island resort living across the bay — the iconic Hotel del Coronado, a world-famous beach, and an intimate small-town feel minutes from downtown.' },
+    ],
+    lifestyleBody: [
+      'Wooded Area suits buyers who want space and privacy within Point Loma — generous lots, mature tree cover, and a hilltop setting that feels a world away from the beach crowds, while still being minutes from everything the peninsula offers.',
+      'It\'s one of Point Loma\'s quieter, more established corners, appealing to buyers who value a semi-rural feel and long-term neighborhood continuity over walkable density.',
+    ],
+    lifestyleBullets: [
+      'Buyers seeking privacy and larger lots',
+      'Families who want a quiet, semi-rural setting',
+      'History enthusiasts drawn to the Rosecroft estate',
+      'Buyers who value mature tree canopy and shade',
+      'Long-term owners seeking an established, low-turnover street',
+    ],
+    locationMap: {
+      center: [-117.238, 32.696],
+      zoom: 13.8,
+      boundary: [
+        [-117.246, 32.702], [-117.230, 32.702], [-117.228, 32.690],
+        [-117.238, 32.686], [-117.246, 32.690], [-117.246, 32.702],
+      ],
+      marker: [-117.238, 32.696],
+    },
+  },
 ]
 
 export function getNeighborhoodBySlug(communitySlug: string, neighborhoodSlug: string): NeighborhoodData | undefined {
