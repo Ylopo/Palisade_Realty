@@ -1,4 +1,5 @@
 import type { NextConfig } from 'next'
+// v2 — forces full rebuild cache bust
 
 const nextConfig: NextConfig = {
   async redirects() {

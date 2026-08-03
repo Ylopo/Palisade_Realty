@@ -452,9 +452,9 @@ a {
   color: #1a0008; letter-spacing: -0.02em; text-wrap: balance; margin: 0 0 10px;
 }
 .section-sub { font-family: var(--font-body); font-size: 1rem; color: #666; line-height: 1.65; }
-.gallery-grid { max-width: 1200px; margin: 0 auto; columns: 3 320px; column-gap: 20px; }
+.gallery-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; align-items: start; }
 .rg-card {
-  position: relative; break-inside: avoid; margin-bottom: 20px; background: #fff;
+  position: relative; background: #fff;
   border-radius: 16px; border: 1px solid rgba(88,23,42,0.07); padding: 28px 28px 24px;
   box-shadow: 0 2px 14px rgba(88,23,42,0.07), 0 1px 4px rgba(0,0,0,0.04); overflow: hidden;
   transition: transform 280ms cubic-bezier(0.22,0.61,0.36,1), box-shadow 280ms cubic-bezier(0.22,0.61,0.36,1);
@@ -551,8 +551,8 @@ a {
 .test-cta-btn:hover { background: #f5d84e; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(238,202,0,0.38); }
 .test-cta-btn:active { transform: translateY(0); }
 .test-cta-btn:focus-visible { outline: 3px solid rgba(238,202,0,0.55); outline-offset: 4px; }
-@media (max-width: 900px) { .gallery-grid { columns: 2 280px; } }
-@media (max-width: 560px) { .gallery-grid { columns: 1; } .stats-inner { gap: 20px; } .stat-value { font-size: 2rem; } }
+@media (max-width: 900px) { .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .gallery-grid { grid-template-columns: 1fr; } .stats-inner { gap: 20px; } .stat-value { font-size: 2rem; } }
 
 /* ============================================================
    BLOG PAGE
