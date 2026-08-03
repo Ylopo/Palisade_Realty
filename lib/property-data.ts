@@ -104,14 +104,11 @@ const PROPERTIES: FeaturedProperty[] = [
       'Lutron whole-home smart lighting and AV',
       'Two blocks from Hotel del Coronado',
     ],
-    heroImage: 'https://d25fhp1qfwqa2h.cloudfront.net/ec8fb09cfed8dfac32315536ceb82095,1783536596000_auto_650?phid=19459864929',
+    heroImage: 'https://d25fhp1qfwqa2h.cloudfront.net/ed61950a6b0a4c69b97c0746968d8c61,1783967398000_auto_650?phid=19489033992',
     gallery: [
-      'https://d25fhp1qfwqa2h.cloudfront.net/ec8fb09cfed8dfac32315536ceb82095,1783536596000_auto_650?phid=19459864929',
-      'https://d25fhp1qfwqa2h.cloudfront.net/d0b01441bfb58080757a88c8b949f8d1,1783536596000_auto_650?phid=19459864930',
-      'https://d25fhp1qfwqa2h.cloudfront.net/138998d194b5771606ae55925d455c72,1783536596000_auto_650?phid=19459864931',
-      'https://d25fhp1qfwqa2h.cloudfront.net/37213d6a66a9e17c057f0e237caf382b,1783536596000_auto_650?phid=19459864932',
-      'https://d25fhp1qfwqa2h.cloudfront.net/4bf1d6d7df3a21f760ee5b0de77c29a8,1783536596000_auto_650?phid=19459864933',
-      'https://d25fhp1qfwqa2h.cloudfront.net/a71ba866f710f559a82bdc4ae6b5c989,1783536596000_auto_650?phid=19459864934',
+      'https://d25fhp1qfwqa2h.cloudfront.net/ed61950a6b0a4c69b97c0746968d8c61,1783967398000_auto_650?phid=19489033992',
+      'https://d25fhp1qfwqa2h.cloudfront.net/03be577fc894ef61329e2cfdcd50a69e,1783967398000_auto_650?phid=19489033993',
+      'https://d25fhp1qfwqa2h.cloudfront.net/c3a1fb11f9ec07de1a7d4b6b56f5f264,1783967398000_auto_650?phid=19489033994',
     ],
   },
   {
