@@ -1,6 +1,9 @@
 export interface Highlight {
-  title: string
-  desc: string
+  icon?: string
+  heading?: string
+  body?: string
+  title?: string
+  desc?: string
 }
 
 export interface School {
@@ -12,7 +15,8 @@ export interface School {
 export interface NearbyCommunity {
   name: string
   slug: string
-  from: string
+  from?: string
+  image?: string
   whyConsider?: string
 }
 
