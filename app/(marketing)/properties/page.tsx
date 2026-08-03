@@ -160,20 +160,29 @@ export default async function PropertiesPage() {
       </section>
 
       {/* ── SEARCH CTA ──────────────────────────────────────── */}
-      <section style={{ background: '#fff', padding: '88px var(--pad-x,60px)' }} aria-labelledby="search-cta-heading">
-        <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
-          <p style={{ fontFamily: 'var(--font-label)', fontSize: '11px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '16px' }}>All Listings</p>
-          <h2 id="search-cta-heading" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(28px,4vw,52px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.02em', margin: '0 0 16px' }}>
-            Find Your <em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>Perfect Home</em>
+      <section style={{ position: 'relative', overflow: 'hidden', padding: '110px var(--pad-x,60px)' }} aria-labelledby="search-cta-heading">
+        <div aria-hidden="true" style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/assets/images/cta-background.jpg"
+            alt=""
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+          />
+          <div style={{ position: 'absolute', inset: 0, background: 'rgba(10,0,5,0.6)' }} />
+        </div>
+        <div style={{ position: 'relative', zIndex: 1, maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
+          <p style={{ fontFamily: 'var(--font-label)', fontSize: '11px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--accent,#eeca00)', marginBottom: '16px' }}>All Listings</p>
+          <h2 id="search-cta-heading" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(28px,4vw,52px)', fontWeight: 400, color: '#fff', letterSpacing: '-0.02em', margin: '0 0 16px' }}>
+            Find Your <em style={{ fontStyle: 'italic', color: 'var(--accent,#eeca00)' }}>Perfect Home</em>
           </h2>
-          <p style={{ fontFamily: 'var(--font-body)', fontSize: '17px', color: '#777', lineHeight: 1.8, marginBottom: '36px', maxWidth: '540px', margin: '0 auto 36px' }}>
+          <p style={{ fontFamily: 'var(--font-body)', fontSize: '17px', color: 'rgba(255,255,255,.7)', lineHeight: 1.8, marginBottom: '36px', maxWidth: '540px', margin: '0 auto 36px' }}>
             Browse the full MLS across all San Diego communities — La Jolla, Coronado, Del Mar, Encinitas, and beyond.
           </p>
           <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href="https://search.palisaderealty.com/" target="_blank" rel="noopener noreferrer" className="btn btn-brand">
               Search All Listings
             </a>
-            <Link href="/contact" className="btn btn-outline-brand">
+            <Link href="/contact" className="btn btn-outline-white">
               Talk to an Agent
             </Link>
           </div>
