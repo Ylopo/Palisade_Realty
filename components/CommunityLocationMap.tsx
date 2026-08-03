@@ -8,6 +8,7 @@ interface Props {
   boundary: [number, number][]
   i5?: [number, number][]
   harbor?: [number, number][]
+  marker?: [number, number]
   name: string
 }
 
@@ -30,8 +31,9 @@ const SD_COUNTY_COORDS = [
   [-117.61054,33.33367],
 ]
 
-export default function CommunityLocationMap({ center, zoom, boundary, i5, harbor, name }: Props) {
+export default function CommunityLocationMap({ center, zoom, boundary, i5, harbor, marker, name }: Props) {
   const containerRef = useRef<HTMLDivElement>(null)
+  const markerRef = useRef<any>(null)
 
   useEffect(() => {
     const mgl = (window as any).mapboxgl
@@ -74,9 +76,16 @@ export default function CommunityLocationMap({ center, zoom, boundary, i5, harbo
         map.addLayer({ id: 'loc-harbor-glow', type: 'line', source: 'loc-harbor', paint: { 'line-color': '#58172a', 'line-width': 4, 'line-opacity': 0.20, 'line-blur': 4 } })
         map.addLayer({ id: 'loc-harbor-line', type: 'line', source: 'loc-harbor', paint: { 'line-color': '#58172a', 'line-width': 1.5, 'line-opacity': 0.60 } })
       }
+
+      if (marker) {
+        markerRef.current = new mgl.Marker({ color: '#eeca00' }).setLngLat(marker).addTo(map)
+      }
     })
 
-    return () => { map.remove() }
+    return () => {
+      markerRef.current?.remove()
+      map.remove()
+    }
   }, [])
 
   const legendItems = [

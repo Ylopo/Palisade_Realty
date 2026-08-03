@@ -224,6 +224,7 @@ export default async function CommunityPage({ params }: Props) {
                   key={i}
                   href={`/communities/${c.slug}/${n.slug}`}
                   className="neighborhood-card neighborhood-card--linked"
+                  aria-label={`Explore ${n.name} in ${c.name}`}
                   style={{ background: '#ebebeb', border: '1px solid rgba(0,0,0,0.08)', borderRadius: '14px', padding: '22px 18px', textDecoration: 'none', display: 'block' }}
                 >
                   {cardInner}

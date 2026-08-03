@@ -20,6 +20,14 @@ export interface NeighborhoodData {
   ylopoLocations: Array<{ city?: string; neighborhood?: string; state: string }>
   nearbyCommunities: NearbyCommunity[]
   melloroos?: MelloRoosData
+  lifestyleBody?: string[]
+  lifestyleBullets?: string[]
+  locationMap?: {
+    center: [number, number]
+    zoom: number
+    boundary: [number, number][]
+    marker?: [number, number]
+  }
 }
 
 const NEIGHBORHOODS: NeighborhoodData[] = [
@@ -606,6 +614,639 @@ const NEIGHBORHOODS: NeighborhoodData[] = [
       { name: 'Mission Hills', slug: 'mission-hills-real-estate', from: '$900K', whyConsider: "Adjacent historic neighborhood with Craftsman homes and boutique dining — Bankers Hill's northern neighbor" },
       { name: 'North Park', slug: 'north-park-real-estate', from: '$750K', whyConsider: 'Vibrant arts and dining neighborhood just east of Balboa Park, easily accessible from Bankers Hill' },
     ],
+  },
+
+  // ── MISSION HILLS CORE ───────────────────────────────────────────────────
+  {
+    name: 'Mission Hills Core',
+    titleFirst: 'Mission Hills',
+    titleRest: 'Core',
+    parentName: 'Mission Hills',
+    parentSlug: 'mission-hills-real-estate',
+    slug: 'mission-hills-core',
+    image: 'community-mission-hills.jpg',
+    badge: 'Historic District · Best Craftsman Stock',
+    subtitle: 'Mission Hills · San Diego, California',
+    priceRange: '$1.1M – $3M+',
+    tags: 'Best Craftsman Stock · Historic District · Fort Stockton Dr',
+    heroStats: [
+      { value: '$1.1M+', label: 'Starting Price' },
+      { value: '70', label: 'Walk Score' },
+      { value: '92103', label: 'ZIP Code' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    overview: [
+      'Mission Hills Core is the historic heart of the neighborhood — the streets where the community\'s identity was established in 1908, when developer George Marston platted his original subdivision along Sunset Boulevard, Sheridan Avenue, and Lyndon Road. The City of San Diego locally designated this tract a historic district in 2007 and expanded it in 2014 to roughly 129 properties, with a period of architectural significance spanning 1908 to 1942.',
+      'The Core sits alongside — and in places overlaps with — the separately designated Fort Stockton Line Historic District, named for the streetcar route that opened the neighborhood to development in 1910. Together, these two districts preserve one of San Diego\'s finest concentrations of Craftsman, Prairie School, and Spanish Colonial Revival homes, designed by architects including William Hebbard, William Templeton Johnson, and Emmor Brooke Weaver.',
+      'Buyers drawn to this pocket are typically preservation-minded — many eligible homes qualify for Mills Act contracts, which can reduce property tax bills by 40–70% in exchange for maintaining historic character. It\'s a premium, tightly held slice of Mission Hills, and turnover is historically low.',
+    ],
+    quickFacts: [
+      { label: 'Type', value: 'Historic District Core' },
+      { label: 'Parent Community', value: 'Mission Hills' },
+      { label: 'ZIP Code', value: '92103' },
+      { label: 'Architecture', value: 'Craftsman · Prairie · Spanish Revival' },
+      { label: 'Price Range', value: '$1.1M – $3M+' },
+      { label: 'Historic Status', value: 'Locally Designated District (2007/2014)' },
+    ],
+    highlights: [
+      {
+        title: 'The 1908 Marston Subdivision',
+        desc: 'George Marston\'s original 1908 tract along Sunset Boulevard, Sheridan Avenue, and Lyndon Road remains the architectural core of Mission Hills. The City of San Diego locally designated the district in 2007 and expanded it in 2014 to about 129 properties, 68 of them contributing structures — preserving a remarkably intact early-20th-century streetscape.',
+      },
+      {
+        title: 'Mills Act Tax Savings',
+        desc: 'Many homes within the Core qualify for a Mills Act contract with the City of San Diego, which can reduce a property\'s tax bill by 40–70% in exchange for a commitment to maintain its historic character — one of the more meaningful financial advantages of owning here.',
+      },
+      {
+        title: 'Kate Sessions\' Street Tree Legacy',
+        desc: 'Horticulturist Kate Sessions, best known for shaping Balboa Park, also influenced Mission Hills\' street tree canopy and founded Mission Hills Nursery on Fort Stockton Drive in 1910 — still operating today as one of San Diego\'s oldest continuously run nurseries.',
+      },
+      {
+        title: 'Fort Stockton Line District',
+        desc: 'The adjacent, separately designated Fort Stockton Line Historic District traces its name to the 1910–1939 streetcar route that first opened this ridge to development, adding a second layer of protected architecture just steps from the Core.',
+      },
+    ],
+    ylopoSearch:
+      'https://search.palisaderealty.com/search?q=Mission+Hills+Core&s%5BorderBy%5D=sourceCreationDate%2Cdesc&s%5Bpage%5D=1&s%5Blocations%5D%5B0%5D%5Bneighborhood%5D=Mission+Hills+Core&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA&s%5Blocations%5D%5B0%5D%5Bcity%5D=San+Diego',
+    ylopoLocations: [{ neighborhood: 'Mission Hills Core', city: 'San Diego', state: 'CA' }],
+    nearbyCommunities: [
+      { name: 'Downtown San Diego', slug: 'downtown-san-diego-real-estate', from: '$450K', whyConsider: 'Urban condo lifestyle, walk score 97, bayfront living, and San Diego\'s most vibrant nightlife and dining 10 minutes south.' },
+      { name: 'Bankers Hill', slug: 'bankers-hill-real-estate', from: '$700K', whyConsider: 'Mission Hills\' eastern neighbor — similarly historic but with more condo options and direct Balboa Park frontage.' },
+      { name: 'Point Loma', slug: 'point-loma-real-estate', from: '$800K', whyConsider: 'Peninsula living west of Mission Hills — scenic harbor views, ocean access, and a laid-back coastal character all its own.' },
+    ],
+    lifestyleBody: [
+      'Life in Mission Hills Core moves at the pace of a neighborhood that has never needed to reinvent itself. Original picture windows, wide front porches, and mature street trees set a tone that\'s equal parts civic pride and quiet routine — mornings often begin with a walk down to Fort Stockton or Washington Street for coffee before the day starts.',
+      'This pocket draws buyers who want the real thing: a documented, protected historic streetscape rather than a modern approximation of one. Many residents get involved with the neighborhood\'s active preservation community and the annual Mission Hills Home Tour, which has run since 1976.',
+    ],
+    lifestyleBullets: [
+      'Preservation-minded buyers seeking Mills Act eligibility',
+      'History and architecture enthusiasts',
+      'Long-term owners who value neighborhood continuity',
+      'Buyers who want a walkable, tree-canopied historic streetscape',
+      'Families and professionals seeking an established, low-turnover market',
+    ],
+    locationMap: {
+      center: [-117.192, 32.757],
+      zoom: 14.2,
+      boundary: [
+        [-117.198, 32.761], [-117.186, 32.761], [-117.184, 32.754],
+        [-117.190, 32.750], [-117.198, 32.752], [-117.198, 32.761],
+      ],
+      marker: [-117.192, 32.757],
+    },
+  },
+
+  // ── BUNGALOW HAVEN ───────────────────────────────────────────────────────
+  {
+    name: 'Bungalow Haven',
+    titleFirst: 'Bungalow',
+    titleRest: 'Haven',
+    parentName: 'Mission Hills',
+    parentSlug: 'mission-hills-real-estate',
+    slug: 'bungalow-haven',
+    image: 'community-mission-hills.jpg',
+    badge: 'Craftsman Density · Tree-Lined',
+    subtitle: 'Mission Hills · San Diego, California',
+    priceRange: '$900K – $1.8M',
+    tags: 'Craftsman Density · Preserved · Tree-Lined',
+    heroStats: [
+      { value: '$900K+', label: 'Starting Price' },
+      { value: '70', label: 'Walk Score' },
+      { value: '92103', label: 'ZIP Code' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    overview: [
+      'Bungalow Haven is the name Palisade Realty and local buyers use for Mission Hills\' densest, most consistently Craftsman-scaled residential blocks — the tree-lined side streets where the neighborhood\'s 1908–1930 building boom left its heaviest architectural fingerprint. It isn\'t a separately platted or officially bounded district, but rather the informal shorthand for the pocket where small and mid-size bungalows sit shoulder to shoulder beneath a mature street-tree canopy.',
+      'The housing stock here leans smaller and more accessible than the premier historic-district streets, making it a common entry point for buyers who want authentic Mission Hills character without competing for the largest, most restored estates. Many homes retain original details — built-in cabinetry, exposed rafter tails, clinker-brick porches — while others have been sensitively updated.',
+    ],
+    quickFacts: [
+      { label: 'Type', value: 'Residential Pocket' },
+      { label: 'Parent Community', value: 'Mission Hills' },
+      { label: 'ZIP Code', value: '92103' },
+      { label: 'Architecture', value: 'Craftsman Bungalow' },
+      { label: 'Price Range', value: '$900K – $1.8M' },
+      { label: 'Character', value: 'Dense · Preserved · Tree-Lined' },
+    ],
+    highlights: [
+      {
+        title: 'Consistent Craftsman Streetscape',
+        desc: 'Block after block of 1908–1930 Craftsman bungalows gives this pocket one of the most visually cohesive streetscapes in Mission Hills — a defining feature of the neighborhood\'s broader, well-documented architectural identity.',
+      },
+      {
+        title: 'Mature Tree Canopy',
+        desc: 'Decades of street-tree plantings tied to Mission Hills\' horticultural history (Kate Sessions\' influence extended well beyond Balboa Park) give these residential blocks a deep, shaded canopy that\'s become one of the neighborhood\'s signature qualities.',
+      },
+      {
+        title: 'Accessible Entry Point',
+        desc: 'Smaller lot sizes and bungalow floor plans generally price below Mission Hills\' premier historic-core streets, making this pocket a common starting point for buyers new to the neighborhood.',
+      },
+      {
+        title: 'Walkable to the Village',
+        desc: 'A short walk delivers residents to the Goldfinch Street and Washington Street business core — coffee, dining, and everyday errands without needing a car.',
+      },
+    ],
+    ylopoSearch:
+      'https://search.palisaderealty.com/search?q=Bungalow+Haven+Mission+Hills&s%5BorderBy%5D=sourceCreationDate%2Cdesc&s%5Bpage%5D=1&s%5Blocations%5D%5B0%5D%5Bneighborhood%5D=Bungalow+Haven&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA&s%5Blocations%5D%5B0%5D%5Bcity%5D=San+Diego',
+    ylopoLocations: [{ neighborhood: 'Bungalow Haven', city: 'San Diego', state: 'CA' }],
+    nearbyCommunities: [
+      { name: 'Downtown San Diego', slug: 'downtown-san-diego-real-estate', from: '$450K', whyConsider: 'Urban condo lifestyle, walk score 97, bayfront living, and San Diego\'s most vibrant nightlife and dining 10 minutes south.' },
+      { name: 'Bankers Hill', slug: 'bankers-hill-real-estate', from: '$700K', whyConsider: 'Mission Hills\' eastern neighbor — similarly historic but with more condo options and direct Balboa Park frontage.' },
+      { name: 'Point Loma', slug: 'point-loma-real-estate', from: '$800K', whyConsider: 'Peninsula living west of Mission Hills — scenic harbor views, ocean access, and a laid-back coastal character all its own.' },
+    ],
+    lifestyleBody: [
+      'Bungalow Haven suits buyers who want the Mission Hills feel — front porches, gardens, neighbors who know each other — without chasing the largest historic estates. It\'s a place where a Saturday might mean weeding the parkway strip, walking the dog past a dozen nearly identical porch swings, then ending up at a Goldfinch Street coffee shop.',
+      'The scale is intimate rather than grand, and that\'s the appeal: real Craftsman character at a size and price that keeps the neighborhood accessible to first-time historic-home buyers, not just move-up buyers.',
+    ],
+    lifestyleBullets: [
+      'First-time historic-home buyers',
+      'Buyers who want authentic character at an accessible price point',
+      'Gardeners and porch-culture enthusiasts',
+      'Young professionals and small families',
+      'Buyers prioritizing walkability to the village core',
+    ],
+    locationMap: {
+      center: [-117.188, 32.751],
+      zoom: 14.2,
+      boundary: [
+        [-117.194, 32.755], [-117.182, 32.755], [-117.181, 32.748],
+        [-117.187, 32.745], [-117.194, 32.747], [-117.194, 32.755],
+      ],
+      marker: [-117.188, 32.751],
+    },
+  },
+
+  // ── WEST LEWIS STREET ────────────────────────────────────────────────────
+  {
+    name: 'West Lewis Street',
+    titleFirst: 'West Lewis',
+    titleRest: 'Street',
+    parentName: 'Mission Hills',
+    parentSlug: 'mission-hills-real-estate',
+    slug: 'west-lewis-street',
+    image: 'community-mission-hills.jpg',
+    badge: 'Canyon Rim · Larger Lots',
+    subtitle: 'Mission Hills · San Diego, California',
+    priceRange: '$1.0M – $2.5M',
+    tags: 'Larger Lots · Canyon Views · Quiet',
+    heroStats: [
+      { value: '$1.0M+', label: 'Starting Price' },
+      { value: '70', label: 'Walk Score' },
+      { value: '92103', label: 'ZIP Code' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    overview: [
+      'West Lewis Street is a real, well-documented Mission Hills corridor and part of the locally designated Fort Stockton Line Historic District, which the City of San Diego recognized in 2007 for its concentration of homes tied to the 1910–1939 streetcar era. The western blocks of the street sit along a canyon rim, and multiple independent brokerage listings — spanning different agencies — describe homes there with panoramic and canyon-facing views, a consistent pattern that lends credibility to the street\'s "view corridor" reputation.',
+      'West Lewis Street isn\'t uniform in character along its length. The western residential blocks are quieter and generally sit on larger parcels than much of Mission Hills, while the eastern stretch, closer to Goldfinch Street and India Street, blends into a small cluster of cafés and professional offices. Buyers drawn to this corridor are typically after the former: privacy, canyon exposure, and a sense of separation from the busier village core just a few blocks away.',
+    ],
+    quickFacts: [
+      { label: 'Type', value: 'Canyon-Rim Corridor' },
+      { label: 'Parent Community', value: 'Mission Hills' },
+      { label: 'ZIP Code', value: '92103' },
+      { label: 'Architecture', value: 'Craftsman · Prairie · Spanish Revival' },
+      { label: 'Price Range', value: '$1.0M – $2.5M' },
+      { label: 'Historic Status', value: 'Fort Stockton Line District (2007)' },
+    ],
+    highlights: [
+      {
+        title: 'Canyon Rim Views',
+        desc: 'Homes along the western blocks of West Lewis Street sit on a canyon rim, and listings from multiple independent brokerages consistently describe panoramic and canyon-facing views from this stretch — a well-documented pattern, not a one-off marketing claim.',
+      },
+      {
+        title: 'Fort Stockton Line Historic District',
+        desc: 'West Lewis Street forms part of the City of San Diego\'s locally designated Fort Stockton Line Historic District (2007), tied to the streetcar route that opened this stretch of Mission Hills to development starting in 1910.',
+      },
+      {
+        title: 'Quiet, Larger-Parcel Blocks',
+        desc: 'The western residential blocks trade the density of Mission Hills\' village core for more breathing room between homes — a quieter, more private feel that appeals to buyers who still want walkable access to the neighborhood\'s restaurants and shops.',
+      },
+      {
+        title: 'Café Cluster to the East',
+        desc: 'The street\'s eastern end, near Goldfinch and India Street, has its own small commercial pocket — including a neighborhood coffee shop — giving residents an easy walk to a second, quieter dining option beyond the main village strip.',
+      },
+    ],
+    ylopoSearch:
+      'https://search.palisaderealty.com/search?q=West+Lewis+Street&s%5BorderBy%5D=sourceCreationDate%2Cdesc&s%5Bpage%5D=1&s%5Blocations%5D%5B0%5D%5Bneighborhood%5D=West+Lewis+Street&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA&s%5Blocations%5D%5B0%5D%5Bcity%5D=San+Diego',
+    ylopoLocations: [{ neighborhood: 'West Lewis Street', city: 'San Diego', state: 'CA' }],
+    nearbyCommunities: [
+      { name: 'Downtown San Diego', slug: 'downtown-san-diego-real-estate', from: '$450K', whyConsider: 'Urban condo lifestyle, walk score 97, bayfront living, and San Diego\'s most vibrant nightlife and dining 10 minutes south.' },
+      { name: 'Bankers Hill', slug: 'bankers-hill-real-estate', from: '$700K', whyConsider: 'Mission Hills\' eastern neighbor — similarly historic but with more condo options and direct Balboa Park frontage.' },
+      { name: 'Point Loma', slug: 'point-loma-real-estate', from: '$800K', whyConsider: 'Peninsula living west of Mission Hills — scenic harbor views, ocean access, and a laid-back coastal character all its own.' },
+    ],
+    lifestyleBody: [
+      'West Lewis Street appeals to buyers who want Mission Hills\' walkability and architectural pedigree without living directly on top of the village\'s busiest corner. The canyon-facing western blocks offer a genuine sense of retreat — morning coffee on a rear deck overlooking open space is a real, repeatable experience here, not just a listing photo.',
+      'It\'s a corridor for buyers who value privacy and view exposure as much as historic character, and who don\'t mind a slightly longer walk to the village core in exchange for a quieter street.',
+    ],
+    lifestyleBullets: [
+      'Buyers prioritizing canyon or view exposure',
+      'Privacy-minded buyers wanting larger parcels',
+      'Established professionals and move-up buyers',
+      'Owners who want walkable access without direct village-core frontage',
+      'Buyers drawn to Fort Stockton Line historic-district homes',
+    ],
+    locationMap: {
+      center: [-117.199, 32.749],
+      zoom: 14.2,
+      boundary: [
+        [-117.205, 32.753], [-117.193, 32.753], [-117.192, 32.746],
+        [-117.198, 32.743], [-117.205, 32.745], [-117.205, 32.753],
+      ],
+      marker: [-117.199, 32.749],
+    },
+  },
+
+  // ── MISSION HILLS TERRACE ────────────────────────────────────────────────
+  {
+    name: 'Mission Hills Terrace',
+    titleFirst: 'Mission Hills',
+    titleRest: 'Terrace',
+    parentName: 'Mission Hills',
+    parentSlug: 'mission-hills-real-estate',
+    slug: 'mission-hills-terrace',
+    image: 'community-mission-hills.jpg',
+    badge: 'Hillside · Established',
+    subtitle: 'Mission Hills · San Diego, California',
+    priceRange: '$950K – $2M',
+    tags: 'Hillside · Downtown Bay Views · Established',
+    heroStats: [
+      { value: '$950K+', label: 'Starting Price' },
+      { value: '70', label: 'Walk Score' },
+      { value: '92103', label: 'ZIP Code' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    overview: [
+      'Mission Hills sits on a ridge overlooking Old Town, Mission Valley, and San Diego Bay — a documented topographic fact, not a marketing claim — and Mission Hills Terrace is the name used for the neighborhood\'s hillside blocks where that elevation translates into real view exposure. The terrain here generally slopes toward the west and south, opening view corridors toward the bay, Point Loma, and the downtown skyline from select lots.',
+      'This is one of Mission Hills\' more established pockets, with a housing stock that reflects decades of ownership continuity alongside the neighborhood\'s usual mix of Craftsman and Spanish Revival influence. Because view exposure varies significantly lot to lot on a hillside, buyers here should expect a wider price range driven by orientation and elevation as much as square footage.',
+    ],
+    quickFacts: [
+      { label: 'Type', value: 'Hillside Residential' },
+      { label: 'Parent Community', value: 'Mission Hills' },
+      { label: 'ZIP Code', value: '92103' },
+      { label: 'Architecture', value: 'Craftsman · Spanish Revival' },
+      { label: 'Price Range', value: '$950K – $2M' },
+      { label: 'Terrain', value: 'West/Southwest-Facing Hillside' },
+    ],
+    highlights: [
+      {
+        title: 'Ridge-Top Position',
+        desc: 'Mission Hills occupies a genuine ridge above Old Town and Mission Valley, and Mission Hills Terrace sits on the portion of that ridge where the hillside slopes most dramatically toward the west and south.',
+      },
+      {
+        title: 'View-Oriented Lots',
+        desc: 'Select properties on the western-facing slope open toward the bay, Point Loma, and the downtown skyline — view exposure that varies meaningfully by exact lot and elevation, which is part of what drives this pocket\'s wide price range.',
+      },
+      {
+        title: 'Established Ownership',
+        desc: 'This pocket skews toward longer-tenured owners and a settled, low-turnover feel — a quieter counterpart to the more transactional blocks closer to the village core.',
+      },
+      {
+        title: 'Sunset-Facing Streets',
+        desc: 'The westward slope means many streets here are naturally oriented toward evening light, a quality residents frequently cite as part of the neighborhood\'s appeal.',
+      },
+    ],
+    ylopoSearch:
+      'https://search.palisaderealty.com/search?q=Mission+Hills+Terrace&s%5BorderBy%5D=sourceCreationDate%2Cdesc&s%5Bpage%5D=1&s%5Blocations%5D%5B0%5D%5Bneighborhood%5D=Mission+Hills+Terrace&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA&s%5Blocations%5D%5B0%5D%5Bcity%5D=San+Diego',
+    ylopoLocations: [{ neighborhood: 'Mission Hills Terrace', city: 'San Diego', state: 'CA' }],
+    nearbyCommunities: [
+      { name: 'Downtown San Diego', slug: 'downtown-san-diego-real-estate', from: '$450K', whyConsider: 'Urban condo lifestyle, walk score 97, bayfront living, and San Diego\'s most vibrant nightlife and dining 10 minutes south.' },
+      { name: 'Bankers Hill', slug: 'bankers-hill-real-estate', from: '$700K', whyConsider: 'Mission Hills\' eastern neighbor — similarly historic but with more condo options and direct Balboa Park frontage.' },
+      { name: 'Point Loma', slug: 'point-loma-real-estate', from: '$800K', whyConsider: 'Peninsula living west of Mission Hills — scenic harbor views, ocean access, and a laid-back coastal character all its own.' },
+    ],
+    lifestyleBody: [
+      'Mission Hills Terrace suits buyers who want elevation and exposure as part of daily life — a deck oriented toward the sunset, a kitchen window that frames a slice of the bay, evenings that end with the downtown skyline lighting up below.',
+      'It\'s an established pocket rather than a discovery — many owners have been here for years, and the pace reflects that settled character. Buyers should expect to shop carefully lot by lot, since view exposure (and price) shifts quickly across even adjacent parcels.',
+    ],
+    lifestyleBullets: [
+      'View-motivated buyers',
+      'Established professionals and move-up buyers',
+      'Long-term owners seeking a settled, low-turnover street',
+      'Buyers comfortable evaluating hillside lots individually',
+      'Sunset and skyline enthusiasts',
+    ],
+    locationMap: {
+      center: [-117.196, 32.741],
+      zoom: 14.2,
+      boundary: [
+        [-117.202, 32.745], [-117.190, 32.745], [-117.189, 32.738],
+        [-117.195, 32.735], [-117.202, 32.737], [-117.202, 32.745],
+      ],
+      marker: [-117.196, 32.741],
+    },
+  },
+
+  // ── GOLDFINCH STREET AREA ────────────────────────────────────────────────
+  {
+    name: 'Goldfinch Street Area',
+    titleFirst: 'Goldfinch Street',
+    titleRest: 'Area',
+    parentName: 'Mission Hills',
+    parentSlug: 'mission-hills-real-estate',
+    slug: 'goldfinch-street-area',
+    image: 'community-mission-hills.jpg',
+    badge: 'Village Core · Walk to Everything',
+    subtitle: 'Mission Hills · San Diego, California',
+    priceRange: '$1.0M – $2.2M',
+    tags: 'Walk to Village · Dining · Coffee',
+    heroStats: [
+      { value: '$1.0M+', label: 'Starting Price' },
+      { value: '70', label: 'Walk Score' },
+      { value: '92103', label: 'ZIP Code' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    overview: [
+      'The Goldfinch Street Area is Mission Hills\' commercial and social hub — the walkable village core where Goldfinch Street meets West Washington Street. This is genuinely one of San Diego\'s more walkable pockets outside Downtown, earning a documented Walk Score of 70 ("Very Walkable") and ranking among the city\'s more pedestrian-friendly neighborhoods.',
+      'Homes here put residents within a short walk of a real, current mix of independent restaurants and cafés — Cardellino, Komatsuya, Lefty\'s Chicago Pizzeria, The Huddle, and coffee shops including Heartwork Coffee and Meshuggah Shack on Goldfinch itself, plus Farmer\'s Bottega, Jo\'s Mission Hills Diner, Harley Gray Kitchen & Bar, and Lamplighter just around the corner on Washington Street. For buyers who want to run daily errands on foot, this is the most convenient pocket in Mission Hills.',
+    ],
+    quickFacts: [
+      { label: 'Type', value: 'Village Commercial Core' },
+      { label: 'Parent Community', value: 'Mission Hills' },
+      { label: 'ZIP Code', value: '92103' },
+      { label: 'Architecture', value: 'Craftsman · Mixed-Use' },
+      { label: 'Price Range', value: '$1.0M – $2.2M' },
+      { label: 'Walk Score', value: '70 (Very Walkable)' },
+    ],
+    highlights: [
+      {
+        title: 'Mission Hills\' Main Street',
+        desc: 'Goldfinch Street and West Washington Street form the neighborhood\'s genuine commercial spine — an eclectic, walkable strip of independent restaurants, cafés, and shops that predates the chain-restaurant era and gives Mission Hills its "real neighborhood" identity.',
+      },
+      {
+        title: 'A Documented Walk Score of 70',
+        desc: 'Walk Score rates this area 70 out of 100 — "Very Walkable" — a verified, independently sourced figure that reflects genuine day-to-day walkability rather than a marketing estimate.',
+      },
+      {
+        title: 'Real, Current Local Businesses',
+        desc: 'Cardellino, Komatsuya, Lefty\'s Chicago Pizzeria, The Huddle, Heartwork Coffee, and Meshuggah Shack anchor Goldfinch Street itself, with Farmer\'s Bottega, Jo\'s Mission Hills Diner, Harley Gray Kitchen & Bar, and Lamplighter a block away on Washington Street.',
+      },
+      {
+        title: 'Mixed-Use Density',
+        desc: 'Several multi-unit mixed-use buildings sit at the Goldfinch/Washington corner, giving this pocket a denser, more urban-village feel than the surrounding residential streets.',
+      },
+    ],
+    ylopoSearch:
+      'https://search.palisaderealty.com/search?q=Goldfinch+Street+Area&s%5BorderBy%5D=sourceCreationDate%2Cdesc&s%5Bpage%5D=1&s%5Blocations%5D%5B0%5D%5Bneighborhood%5D=Goldfinch+Street+Area&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA&s%5Blocations%5D%5B0%5D%5Bcity%5D=San+Diego',
+    ylopoLocations: [{ neighborhood: 'Goldfinch Street Area', city: 'San Diego', state: 'CA' }],
+    nearbyCommunities: [
+      { name: 'Downtown San Diego', slug: 'downtown-san-diego-real-estate', from: '$450K', whyConsider: 'Urban condo lifestyle, walk score 97, bayfront living, and San Diego\'s most vibrant nightlife and dining 10 minutes south.' },
+      { name: 'Bankers Hill', slug: 'bankers-hill-real-estate', from: '$700K', whyConsider: 'Mission Hills\' eastern neighbor — similarly historic but with more condo options and direct Balboa Park frontage.' },
+      { name: 'Point Loma', slug: 'point-loma-real-estate', from: '$800K', whyConsider: 'Peninsula living west of Mission Hills — scenic harbor views, ocean access, and a laid-back coastal character all its own.' },
+    ],
+    lifestyleBody: [
+      'This is Mission Hills for people who want the neighborhood\'s charm on tap every day — a five-minute walk to coffee, another five to dinner, no car required. Weekend mornings often start at one of the Goldfinch Street cafés and drift into an afternoon of browsing the handful of independent shops along Washington Street.',
+      'It suits buyers who prioritize daily convenience and street life over a quiet cul-de-sac — the tradeoff being a bit more foot and car traffic in exchange for the shortest possible walk to everything the neighborhood has to offer.',
+    ],
+    lifestyleBullets: [
+      'Buyers who want to walk to dinner every night',
+      'Coffee-shop regulars and café culture enthusiasts',
+      'Empty-nesters downsizing from a larger, car-dependent home',
+      'Buyers who prioritize convenience over quiet',
+      'Small-business owners and remote workers who want a walkable café office',
+    ],
+    locationMap: {
+      center: [-117.190, 32.749],
+      zoom: 14.4,
+      boundary: [
+        [-117.194, 32.752], [-117.186, 32.752], [-117.185, 32.746],
+        [-117.190, 32.744], [-117.194, 32.746], [-117.194, 32.752],
+      ],
+      marker: [-117.190, 32.749],
+    },
+  },
+
+  // ── PARK WEST ────────────────────────────────────────────────────────────
+  {
+    name: 'Park West',
+    titleFirst: 'Park',
+    titleRest: 'West',
+    parentName: 'Mission Hills',
+    parentSlug: 'mission-hills-real-estate',
+    slug: 'park-west',
+    image: 'community-mission-hills.jpg',
+    badge: 'Bankers Hill Adjacent · Eclectic',
+    subtitle: 'Mission Hills · San Diego, California',
+    priceRange: '$850K – $1.5M',
+    tags: 'Bankers Hill Adjacent · Eclectic · Value',
+    heroStats: [
+      { value: '$850K+', label: 'Starting Price' },
+      { value: '70', label: 'Walk Score' },
+      { value: '92103', label: 'ZIP Code' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    overview: [
+      'Park West sits on Mission Hills\' southeastern flank, where the neighborhood borders Bankers Hill — a district the City of San Diego officially names "Bankers Hill/Park West" on its own community planning materials. This pocket of Mission Hills is best understood as the transitional edge between the two neighborhoods: it carries Mission Hills\' address and character while sharing an eclectic, walkable energy with its Bankers Hill neighbor just across the boundary.',
+      'Because it sits at that seam, Park West tends to offer a more accessible price point than Mission Hills\' historic core, with a housing mix that blends Craftsman-era single-family homes with the smaller apartment and condo buildings more typical of Bankers Hill. It\'s a genuine value pocket for buyers who want proximity to both neighborhoods\' amenities.',
+    ],
+    quickFacts: [
+      { label: 'Type', value: 'Transitional Border Pocket' },
+      { label: 'Parent Community', value: 'Mission Hills' },
+      { label: 'ZIP Code', value: '92103' },
+      { label: 'Architecture', value: 'Craftsman · Small Multi-Family' },
+      { label: 'Price Range', value: '$850K – $1.5M' },
+      { label: 'Adjacent District', value: 'Bankers Hill / Park West' },
+    ],
+    highlights: [
+      {
+        title: 'Borders Bankers Hill/Park West',
+        desc: 'This pocket sits directly against the district the City of San Diego formally designates "Bankers Hill/Park West" — giving residents easy access to Bankers Hill\'s restaurants and Balboa Park frontage in addition to everything Mission Hills offers.',
+      },
+      {
+        title: 'Eclectic Housing Mix',
+        desc: 'Unlike Mission Hills\' more uniformly Craftsman blocks, this edge pocket blends single-family bungalows with smaller apartment and condo buildings, giving it a more varied streetscape and a wider range of entry price points.',
+      },
+      {
+        title: 'Value Within Mission Hills',
+        desc: 'Price points here generally run below the neighborhood\'s historic core, making this one of the more accessible ways to buy into Mission Hills while staying close to Balboa Park and Downtown.',
+      },
+      {
+        title: 'Balboa Park Proximity',
+        desc: 'Balboa Park sits roughly a mile to the east via Bankers Hill — close enough for a regular walk or short drive, without living directly on the park\'s busiest frontage.',
+      },
+    ],
+    ylopoSearch:
+      'https://search.palisaderealty.com/search?q=Park+West+Mission+Hills&s%5BorderBy%5D=sourceCreationDate%2Cdesc&s%5Bpage%5D=1&s%5Blocations%5D%5B0%5D%5Bneighborhood%5D=Park+West&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA&s%5Blocations%5D%5B0%5D%5Bcity%5D=San+Diego',
+    ylopoLocations: [{ neighborhood: 'Park West', city: 'San Diego', state: 'CA' }],
+    nearbyCommunities: [
+      { name: 'Downtown San Diego', slug: 'downtown-san-diego-real-estate', from: '$450K', whyConsider: 'Urban condo lifestyle, walk score 97, bayfront living, and San Diego\'s most vibrant nightlife and dining 10 minutes south.' },
+      { name: 'Bankers Hill', slug: 'bankers-hill-real-estate', from: '$700K', whyConsider: 'Mission Hills\' eastern neighbor — similarly historic but with more condo options and direct Balboa Park frontage.' },
+      { name: 'Point Loma', slug: 'point-loma-real-estate', from: '$800K', whyConsider: 'Peninsula living west of Mission Hills — scenic harbor views, ocean access, and a laid-back coastal character all its own.' },
+    ],
+    lifestyleBody: [
+      'Park West suits buyers who want a foot in both worlds — Mission Hills\' historic residential calm and Bankers Hill\'s livelier, more urban edge, both within a short walk. It\'s a practical choice for buyers priced out of the historic core who still want the Mission Hills name and address.',
+      'The eclectic mix of housing stock means less architectural uniformity than elsewhere in the neighborhood, but that variety is part of the appeal for buyers who want character without a strict historic-district price premium.',
+    ],
+    lifestyleBullets: [
+      'Value-conscious buyers wanting a Mission Hills address',
+      'Buyers who want easy access to both Mission Hills and Bankers Hill',
+      'First-time buyers and small households',
+      'Buyers open to condo or small multi-family options',
+      'Balboa Park regulars',
+    ],
+    locationMap: {
+      center: [-117.172, 32.740],
+      zoom: 14.2,
+      boundary: [
+        [-117.178, 32.744], [-117.166, 32.744], [-117.163, 32.738],
+        [-117.169, 32.734], [-117.176, 32.735], [-117.178, 32.744],
+      ],
+      marker: [-117.172, 32.740],
+    },
+  },
+
+  // ── OLD TOWN ADJACENT ────────────────────────────────────────────────────
+  {
+    name: 'Old Town Adjacent',
+    titleFirst: 'Old Town',
+    titleRest: 'Adjacent',
+    parentName: 'Mission Hills',
+    parentSlug: 'mission-hills-real-estate',
+    slug: 'old-town-adjacent',
+    image: 'community-mission-hills.jpg',
+    badge: 'Southern Edge · Historic Park',
+    subtitle: 'Mission Hills · San Diego, California',
+    priceRange: '$800K – $1.6M',
+    tags: 'Southern Edge · Historic Park · Family',
+    heroStats: [
+      { value: '$800K+', label: 'Starting Price' },
+      { value: '70', label: 'Walk Score' },
+      { value: '92103', label: 'ZIP Code' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    overview: [
+      'Old Town Adjacent is Mission Hills\' southwestern edge, where the neighborhood\'s residential streets give way to Presidio Park and, just beyond it, Old Town San Diego State Historic Park — the site of California\'s first European settlement in 1769. Presidio Park itself, more than 1,500 acres including the Junípero Serra Museum, sits directly between the two neighborhoods and is a five-minute walk or drive from this pocket of Mission Hills.',
+      'This edge tends to draw families and buyers who want easy access to genuinely unique open space — hiking trails, sweeping views over Mission Valley and the Pacific from Presidio Park, and the museums, restaurants, and annual festivals (including Día de los Muertos each October) down in Old Town itself.',
+    ],
+    quickFacts: [
+      { label: 'Type', value: 'Southern Residential Edge' },
+      { label: 'Parent Community', value: 'Mission Hills' },
+      { label: 'ZIP Code', value: '92103' },
+      { label: 'Architecture', value: 'Craftsman · Spanish Revival' },
+      { label: 'Price Range', value: '$800K – $1.6M' },
+      { label: 'Adjacent Landmark', value: 'Presidio Park (1,500+ Acres)' },
+    ],
+    highlights: [
+      {
+        title: 'Presidio Park at the Doorstep',
+        desc: 'Presidio Park — over 1,500 acres, home to the Junípero Serra Museum and considered the birthplace of California — sits directly adjacent to this pocket, offering hiking trails and sweeping views a five-minute walk from home.',
+      },
+      {
+        title: 'Old Town San Diego State Historic Park',
+        desc: 'Just beyond Presidio Park, Old Town preserves California\'s first European settlement (1769) with living-history demonstrations, adobe buildings, restaurants, and annual events including the Día de los Muertos festival each October.',
+      },
+      {
+        title: 'Family-Oriented Streets',
+        desc: 'This edge of Mission Hills tends toward a quieter, more family-oriented character, with easy access to open space that\'s rare to find this close to a major urban core.',
+      },
+      {
+        title: 'Easy Regional Access',
+        desc: 'Proximity to Old Town\'s transit hub (trolley connections to Downtown and Mission Valley) and nearby freeway access make this edge convenient for commuters despite its quieter residential feel.',
+      },
+    ],
+    ylopoSearch:
+      'https://search.palisaderealty.com/search?q=Old+Town+Adjacent+Mission+Hills&s%5BorderBy%5D=sourceCreationDate%2Cdesc&s%5Bpage%5D=1&s%5Blocations%5D%5B0%5D%5Bneighborhood%5D=Old+Town+Adjacent&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA&s%5Blocations%5D%5B0%5D%5Bcity%5D=San+Diego',
+    ylopoLocations: [{ neighborhood: 'Old Town Adjacent', city: 'San Diego', state: 'CA' }],
+    nearbyCommunities: [
+      { name: 'Downtown San Diego', slug: 'downtown-san-diego-real-estate', from: '$450K', whyConsider: 'Urban condo lifestyle, walk score 97, bayfront living, and San Diego\'s most vibrant nightlife and dining 10 minutes south.' },
+      { name: 'Bankers Hill', slug: 'bankers-hill-real-estate', from: '$700K', whyConsider: 'Mission Hills\' eastern neighbor — similarly historic but with more condo options and direct Balboa Park frontage.' },
+      { name: 'Point Loma', slug: 'point-loma-real-estate', from: '$800K', whyConsider: 'Peninsula living west of Mission Hills — scenic harbor views, ocean access, and a laid-back coastal character all its own.' },
+    ],
+    lifestyleBody: [
+      'This pocket suits families and buyers who want Mission Hills\' walkable village and historic character balanced against genuine, expansive open space next door. Weekend routines often include a walk through Presidio Park before breakfast in Old Town, or an evening stroll to catch the sunset over Mission Valley.',
+      'It\'s a quieter, more residential edge of the neighborhood — less about the village\'s café culture and more about proximity to trails, museums, and the kind of open space that\'s genuinely rare this close to Downtown.',
+    ],
+    lifestyleBullets: [
+      'Families seeking proximity to parks and open space',
+      'Hikers and outdoor enthusiasts',
+      'Buyers who want a quieter, more residential Mission Hills edge',
+      'History enthusiasts drawn to Old Town and Presidio Park',
+      'Commuters who value nearby trolley and freeway access',
+    ],
+    locationMap: {
+      center: [-117.203, 32.744],
+      zoom: 14.2,
+      boundary: [
+        [-117.209, 32.748], [-117.197, 32.748], [-117.196, 32.740],
+        [-117.202, 32.737], [-117.209, 32.739], [-117.209, 32.748],
+      ],
+      marker: [-117.203, 32.744],
+    },
+  },
+
+  // ── FORT STOCKTON DRIVE ──────────────────────────────────────────────────
+  {
+    name: 'Fort Stockton Drive',
+    titleFirst: 'Fort Stockton',
+    titleRest: 'Drive',
+    parentName: 'Mission Hills',
+    parentSlug: 'mission-hills-real-estate',
+    slug: 'fort-stockton-drive',
+    image: 'community-mission-hills.jpg',
+    badge: 'Premier Street · Most Preserved',
+    subtitle: 'Mission Hills · San Diego, California',
+    priceRange: '$1.1M – $2.8M',
+    tags: 'Premier Street · Most Preserved · Victorian',
+    heroStats: [
+      { value: '$1.1M+', label: 'Starting Price' },
+      { value: '70', label: 'Walk Score' },
+      { value: '92103', label: 'ZIP Code' },
+      { value: 'Daily', label: 'Updated' },
+    ],
+    overview: [
+      'Fort Stockton Drive is Mission Hills\' most storied street — the namesake and spine of the locally designated Fort Stockton Line Historic District, approved by the City of San Diego on July 16, 2007. The street traces the route of the San Diego Electric Railway\'s Line 3, the "Fort Stockton Line" streetcar that operated from 1910 to 1939 and first opened this ridge to residential development.',
+      'The official historic district record credits a roster of noted architects and builders — including Requa and Jackson, Nathan Rigdon, Martin Melhorn, Alexander Schreiber, and Henry Lang — with the corridor\'s Craftsman, Prairie-style, and Spanish/Mission Revival homes. It remains one of Mission Hills\' most architecturally intact and sought-after addresses, commanding some of the neighborhood\'s highest prices for fully restored properties.',
+    ],
+    quickFacts: [
+      { label: 'Type', value: 'Premier Historic Street' },
+      { label: 'Parent Community', value: 'Mission Hills' },
+      { label: 'ZIP Code', value: '92103' },
+      { label: 'Architecture', value: 'Craftsman · Prairie · Spanish/Mission Revival' },
+      { label: 'Price Range', value: '$1.1M – $2.8M' },
+      { label: 'Historic Status', value: 'Fort Stockton Line District (Designated 2007)' },
+    ],
+    highlights: [
+      {
+        title: 'The Fort Stockton Line Streetcar',
+        desc: 'Fort Stockton Drive traces the route of the San Diego Electric Railway\'s Line 3, which operated from 1910 to 1939 and first opened this stretch of Mission Hills to residential development — the corridor\'s defining historical fact.',
+      },
+      {
+        title: 'Locally Designated Historic District',
+        desc: 'The City of San Diego designated the Fort Stockton Line Historic District on July 16, 2007, with a period of architectural significance spanning 1910–1939 and named architects and builders including Requa and Jackson, Nathan Rigdon, and Martin Melhorn.',
+      },
+      {
+        title: 'Mission Hills Nursery',
+        desc: 'Kate Sessions founded Mission Hills Nursery on Fort Stockton Drive in 1910 — still operating today, more than a century later, as a living link to the street\'s earliest years.',
+      },
+      {
+        title: 'The Neighborhood\'s Most Preserved Address',
+        desc: 'With some of Mission Hills\' most architecturally intact Craftsman, Prairie, and Spanish Revival homes, Fort Stockton Drive commands premium prices and is often the first street buyers ask about when they say they want "the real Mission Hills."',
+      },
+    ],
+    ylopoSearch:
+      'https://search.palisaderealty.com/search?q=Fort+Stockton+Drive&s%5BorderBy%5D=sourceCreationDate%2Cdesc&s%5Bpage%5D=1&s%5Blocations%5D%5B0%5D%5Bneighborhood%5D=Fort+Stockton+Drive&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA&s%5Blocations%5D%5B0%5D%5Bcity%5D=San+Diego',
+    ylopoLocations: [{ neighborhood: 'Fort Stockton Drive', city: 'San Diego', state: 'CA' }],
+    nearbyCommunities: [
+      { name: 'Downtown San Diego', slug: 'downtown-san-diego-real-estate', from: '$450K', whyConsider: 'Urban condo lifestyle, walk score 97, bayfront living, and San Diego\'s most vibrant nightlife and dining 10 minutes south.' },
+      { name: 'Bankers Hill', slug: 'bankers-hill-real-estate', from: '$700K', whyConsider: 'Mission Hills\' eastern neighbor — similarly historic but with more condo options and direct Balboa Park frontage.' },
+      { name: 'Point Loma', slug: 'point-loma-real-estate', from: '$800K', whyConsider: 'Peninsula living west of Mission Hills — scenic harbor views, ocean access, and a laid-back coastal character all its own.' },
+    ],
+    lifestyleBody: [
+      'Fort Stockton Drive is for buyers who want to own a piece of documented San Diego history — a fully restored Craftsman or Spanish Revival home on the street that literally built Mission Hills, a short walk from a nursery that has operated continuously since 1910.',
+      'It\'s the neighborhood\'s aspirational address: architecturally uncompromising, tightly held, and priced accordingly. Buyers here tend to be preservation-committed and willing to pay a premium for a documented historic pedigree.',
+    ],
+    lifestyleBullets: [
+      'Preservation-committed buyers seeking premier historic homes',
+      'Architecture enthusiasts and collectors',
+      'Buyers who want San Diego\'s most documented streetcar-era street',
+      'Move-up buyers targeting Mission Hills\' top price tier',
+      'Long-term holders focused on irreplaceable, low-inventory streets',
+    ],
+    locationMap: {
+      center: [-117.186, 32.752],
+      zoom: 14.4,
+      boundary: [
+        [-117.198, 32.754], [-117.174, 32.754], [-117.174, 32.750],
+        [-117.198, 32.750], [-117.198, 32.754],
+      ],
+      marker: [-117.186, 32.752],
+    },
   },
 ]
 

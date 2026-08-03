@@ -5,6 +5,7 @@ import { getNeighborhoodBySlug, getAllNeighborhoodParams } from '@/lib/neighborh
 import { DEFAULT_MELLO_ROOS, MelloRoosData } from '@/lib/community-data'
 import CommunityPageBodyClass from '@/components/CommunityPageBodyClass'
 import CommunitySchoolsTabs from '@/components/CommunitySchoolsTabs'
+import CommunityLocationMap from '@/components/CommunityLocationMap'
 
 interface Props {
   params: Promise<{ slug: string; neighborhood: string }>
@@ -38,10 +39,46 @@ export default async function NeighborhoodPage({ params }: Props) {
   if (!n) notFound()
 
   const mr: MelloRoosData = { ...DEFAULT_MELLO_ROOS, ...n.melloroos }
+  const lifestyleBody = n.lifestyleBody ?? [
+    `${n.name} draws a diverse mix of residents who share one thing in common: a deep appreciation for what this community has to offer. Whether you're an urban professional, a family seeking character and convenience, or a buyer who values walkability and culture, ${n.name} consistently delivers.`,
+    `The neighborhood also appeals strongly to investors and second-home buyers, given its location, rental demand, and long-term fundamentals. Whether you're buying to live or buying to hold, ${n.name} offers a compelling case within San Diego's competitive real estate market.`,
+  ]
+  const lifestyleBullets = n.lifestyleBullets ?? [
+    'Urban professionals seeking walkable convenience',
+    'Sports fans and Padres season-ticket holders',
+    'Buyers prioritizing dining, nightlife, and culture',
+    'Investors seeking rental income potential',
+    'Second-home buyers visiting San Diego regularly',
+    'First-time buyers entering Downtown San Diego',
+  ]
+
+  const jsonLd = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://palisade-realty.vercel.app/' },
+        { '@type': 'ListItem', position: 2, name: 'Communities', item: 'https://palisade-realty.vercel.app/communities' },
+        { '@type': 'ListItem', position: 3, name: n.parentName, item: `https://palisade-realty.vercel.app/communities/${n.parentSlug}` },
+        { '@type': 'ListItem', position: 4, name: n.name, item: `https://palisade-realty.vercel.app/communities/${n.parentSlug}/${n.slug}` },
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Place',
+      name: n.name,
+      containedInPlace: { '@type': 'Place', name: n.parentName },
+      address: { '@type': 'PostalAddress', addressLocality: 'San Diego', addressRegion: 'CA', addressCountry: 'US' },
+    },
+  ]
 
   return (
     <>
       <CommunityPageBodyClass />
+      {jsonLd.map((entry, i) => (
+        // eslint-disable-next-line react/no-danger
+        <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(entry) }} />
+      ))}
 
       {/* ── 1. HERO ─────────────────────────────────────────────── */}
       <section
@@ -158,7 +195,28 @@ export default async function NeighborhoodPage({ params }: Props) {
         </div>
       </section>
 
-      {/* ── 4. WHO IS EAST VILLAGE FOR ──────────────────────────── */}
+      {/* ── 3B. LOCATION MAP (rendered only when locationMap data is supplied) ── */}
+      {n.locationMap && (
+        <section id="location-map" style={{ background: '#faf7f2', padding: '90px var(--pad-x,56px)' }} aria-labelledby="location-map-heading">
+          <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+              <span className="section-eyebrow" style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>Where It Is</span>
+              <h2 id="location-map-heading" className="section-title" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px,4.5vw,64px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.64px', lineHeight: 1.1 }}>
+                {n.name} on the <em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>Map</em>
+              </h2>
+            </div>
+            <CommunityLocationMap
+              center={n.locationMap.center}
+              zoom={n.locationMap.zoom}
+              boundary={n.locationMap.boundary}
+              marker={n.locationMap.marker}
+              name={n.name}
+            />
+          </div>
+        </section>
+      )}
+
+      {/* ── 4. WHO IS IT FOR ─────────────────────────────────────── */}
       <div id="lifestyle" style={{ background: '#ebebeb', padding: '90px var(--pad-x,56px)' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '72px', alignItems: 'center', maxWidth: '1400px', margin: '0 auto' }}>
           <div>
@@ -166,26 +224,22 @@ export default async function NeighborhoodPage({ params }: Props) {
             <h2 className="section-title" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px,4.5vw,64px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.64px', lineHeight: 1.1, marginBottom: '24px' }}>
               The {n.name}<br /><em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>Lifestyle</em>
             </h2>
-            <p className="lifestyle-body" style={{ fontFamily: 'var(--font-body)', fontSize: '16px', lineHeight: 1.78, color: 'rgba(33,33,33,0.55)', marginBottom: '18px' }}>
-              {n.name} draws a diverse mix of residents who share one thing in common: a deep appreciation for what this community has to offer. Whether you&rsquo;re an urban professional, a family seeking character and convenience, or a buyer who values walkability and culture, {n.name} consistently delivers.
-            </p>
-            <p className="lifestyle-body" style={{ fontFamily: 'var(--font-body)', fontSize: '16px', lineHeight: 1.78, color: 'rgba(33,33,33,0.55)', marginBottom: '24px' }}>
-              The neighborhood also appeals strongly to investors and second-home buyers, given its location, rental demand, and long-term fundamentals. Whether you&rsquo;re buying to live or buying to hold, {n.name} offers a compelling case within San Diego&rsquo;s competitive real estate market.
-            </p>
+            {lifestyleBody.map((p, i) => (
+              <p key={i} className="lifestyle-body" style={{ fontFamily: 'var(--font-body)', fontSize: '16px', lineHeight: 1.78, color: 'rgba(33,33,33,0.55)', marginBottom: i < lifestyleBody.length - 1 ? '18px' : '24px' }}>
+                {p}
+              </p>
+            ))}
             <ul className="lifestyle-bullets" style={{ fontFamily: 'var(--font-body)', fontSize: '14px', color: 'rgba(33,33,33,0.55)', lineHeight: 2, paddingLeft: '18px' }}>
-              <li>Urban professionals seeking walkable convenience</li>
-              <li>Sports fans and Padres season-ticket holders</li>
-              <li>Buyers prioritizing dining, nightlife, and culture</li>
-              <li>Investors seeking rental income potential</li>
-              <li>Second-home buyers visiting San Diego regularly</li>
-              <li>First-time buyers entering Downtown San Diego</li>
+              {lifestyleBullets.map((b, i) => (
+                <li key={i}>{b}</li>
+              ))}
             </ul>
           </div>
           <div style={{ background: 'rgba(88,23,42,0.06)', borderRadius: '20px', height: '480px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={`/assets/images/${n.image}`}
-              alt={`${n.name} lifestyle, Downtown San Diego`}
+              alt={`${n.name} lifestyle, ${n.parentName}`}
               style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '20px' }}
             />
           </div>
