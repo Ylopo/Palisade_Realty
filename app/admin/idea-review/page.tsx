@@ -358,10 +358,7 @@ function IdeaCard({ idea, secret, onAction }: {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function IdeaReviewPage() {
-  const secret = typeof window !== 'undefined'
-    ? new URLSearchParams(window.location.search).get('secret') ?? ''
-    : ''
-
+  const [secret, setSecret] = useState('')
   const [ideas, setIdeas] = useState<IdeaCandidate[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -372,10 +369,18 @@ export default function IdeaReviewPage() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
   const [publishedCounts, setPublishedCounts] = useState<Record<string, number>>({})
 
+  // Reads window.location only inside this effect (never during render, which
+  // this static page's build-time server pass would otherwise mismatch on),
+  // and runs exactly once on mount — no race with a second effect over a
+  // 'secret' dependency that starts empty.
   useEffect(() => {
-    if (!secret) { setError('No secret in URL — add ?secret=YOUR_ADMIN_SECRET'); setLoading(false); return }
+    const s = new URLSearchParams(window.location.search).get('secret') ?? ''
+    setSecret(s)
+
+    if (!s) { setError('No secret in URL — add ?secret=YOUR_ADMIN_SECRET'); setLoading(false); return }
+
     Promise.all([
-      fetch(`/api/content/ideas?secret=${encodeURIComponent(secret)}`).then(async (r) => {
+      fetch(`/api/content/ideas?secret=${encodeURIComponent(s)}`).then(async (r) => {
         if (r.status === 401) throw new Error('Unauthorized — wrong secret in URL')
         if (!r.ok) {
           const body = await r.json().catch(() => ({ error: `HTTP ${r.status}` }))
@@ -383,17 +388,17 @@ export default function IdeaReviewPage() {
         }
         return r.json()
       }),
-      fetch(`/api/content/ideas/category-stats?secret=${encodeURIComponent(secret)}`)
-        .then((r) => r.ok ? r.json() : Promise.resolve({}))
-        .catch(() => ({})),
+      fetch(`/api/content/ideas/category-stats?secret=${encodeURIComponent(s)}`)
+        .then((r) => r.ok ? r.json() : Promise.resolve({ published: {} }))
+        .catch(() => ({ published: {} })),
     ])
       .then(([ideasData, statsData]) => {
-        setIdeas(ideasData)
-        setPublishedCounts(statsData)
+        setIdeas(ideasData.ideas ?? [])
+        setPublishedCounts(statsData.published ?? {})
       })
       .catch((err) => setError(err instanceof Error ? err.message : 'Failed to load ideas'))
       .finally(() => setLoading(false))
-  }, [secret])
+  }, [])
 
   async function handleGenerate() {
     setGenerating(true)
@@ -407,7 +412,7 @@ export default function IdeaReviewPage() {
       if (!res.ok) throw new Error(data.error ?? 'Generation failed')
       setGenerateResult(data.count)
       const r2 = await fetch(`/api/content/ideas?secret=${encodeURIComponent(secret)}`)
-      if (r2.ok) setIdeas(await r2.json())
+      if (r2.ok) setIdeas((await r2.json()).ideas ?? [])
     } catch (err) {
       setGenerateError(err instanceof Error ? err.message : 'Generation failed')
     } finally {

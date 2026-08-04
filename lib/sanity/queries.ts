@@ -97,7 +97,7 @@ export async function getQueueCounts() {
 // calendar month without needing a client-supplied date param.
 const MONTHLY_PUBLISH_STATS_QUERY = groq`
   {
-    "published": count(*[
+    "totalPosts": count(*[
       _type == "blogPost" &&
       workflowStatus == "published" &&
       string::startsWith(publishedAt, now()[0..6])
@@ -112,7 +112,7 @@ const MONTHLY_PUBLISH_STATS_QUERY = groq`
 `
 
 export async function getMonthlyPublishStats() {
-  return writeClient.fetch<{ published: number; videoPosts: number }>(MONTHLY_PUBLISH_STATS_QUERY)
+  return writeClient.fetch<{ totalPosts: number; videoPosts: number }>(MONTHLY_PUBLISH_STATS_QUERY)
 }
 
 const SCHEDULED_POSTS_DUE_QUERY = groq`
