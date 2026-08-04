@@ -3339,10 +3339,16 @@ var AGENT_TRANSLATIONS = {
     });
   }
 
-  document.addEventListener('DOMContentLoaded', function () {
+  function init() {
     applyLang(getLang());
     initToggle();
-  });
+  }
+  // With Next.js afterInteractive, DOMContentLoaded has already fired — run immediately.
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 
   // Re-apply language once the featured listings carousel finishes rendering
   window.addEventListener('fl-loaded', function () {
