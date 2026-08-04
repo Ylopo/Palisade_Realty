@@ -5,4 +5,5 @@ export default defineCliConfig({
     projectId: 'qjhzi2t2',
     dataset: 'production',
   },
+  studioHost: 'palisade-realty',
 })
