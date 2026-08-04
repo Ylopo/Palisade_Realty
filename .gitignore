@@ -15,3 +15,5 @@ webmap.html
 
 .vercel
 .env*
+.next/
+*.tsbuildinfo

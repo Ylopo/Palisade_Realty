@@ -1,93 +1,84 @@
-# Shana Gates — Blog Style Guide & Market Learnings
+# Palisade Realty — Content Intelligence Log
 
-This file is read by the AI writer to inform blog post tone, structure, and local context.
-Update it after reviewing content performance.
+This file is automatically maintained by the content pipeline. It records weekly
+learnings, approval signals, and performance data to improve future content
+generation. Claude reads this entire file before generating new posts — the
+pipeline should get smarter over time.
 
----
+**How it works:**
+- Daily research cron scores new ideas into the review queue
+- Weekly digest → Hedda (or the VA) approves/defers/skips
+- This file is updated periodically with what's actually working
+- Every generation cycle, Claude reads this entire file first
 
-## Voice & Tone
+**Signal hierarchy:**
+1. Approval/skip decisions in `/admin/idea-review` (immediate signal)
+2. GA4 organic sessions in the 7 days after publish (performance signal, lags by 1 week)
+3. OneUp per-platform reach/engagement (pattern signal, once analytics is enabled on the OneUp category)
 
-- **Write as Shana Gates** — experienced Coachella Valley REALTOR® at Craft & Bauer | Real Broker
-- Knowledgeable and approachable, never salesy or pushy
-- Second-person ("you/your") to make content personal and actionable
-- Always connect news or advice back to the local Coachella Valley / Palm Springs market specifically
-- Warm but authoritative — like getting advice from a trusted neighbor who knows this market cold
-
-## Post Structure (required for all posts)
-
-1. **Headline** — engaging, keyword-optimized rewrite of source title
-2. **Opening question** — the exact question the blog answers, in bold
-3. **Snippet answer** — 1–2 direct sentences immediately below the question (AEO-optimized)
-4. **Body sections** — 2–3 `##` sections, 2–3 paragraphs each
-5. **## What This Means For You** — 3–4 bullet points with actionable takeaways
-6. **Closing paragraph** — ties it together, actionable next step
-7. **## Frequently Asked Questions** — exactly 3 questions as `###` headings, each 2–3 sentence answer
-8. **CTA** — `*Ready to make your move in the Coachella Valley? Reach out to Shana Gates at Craft & Bauer. [Contact Shana →](mailto:shana@craftbauer.com)*`
-
-## Community Link Rule
-
-On the FIRST mention of any Coachella Valley city by name in the post body, format it as a markdown link:
-- [Palm Springs](/palm-springs.html)
-- [Palm Desert](/palm-desert.html)
-- [Rancho Mirage](/rancho-mirage.html)
-- [Indian Wells](/indian-wells.html)
-- [La Quinta](/la-quinta.html)
-- [Indio](/indio.html)
-- [Cathedral City](/cathedral-city.html)
-- [Desert Hot Springs](/desert-hot-springs.html)
-- [Coachella](/coachella.html)
-
-Only the first mention of each city — leave all later mentions as plain text.
+Note: this client has no external competitor-benchmark data feed (the source
+system this was replicated from used a third-party analytics dashboard for
+pattern-matching — that integration was deliberately not carried over for
+Palisade Realty). Every signal below comes from this site's own approval
+decisions and GA4/OneUp performance once there's enough published history to
+measure.
 
 ---
 
-## Coachella Valley Market Context
+## Week 1 Seed — Voice Principles + Market Context (August 2026)
 
-### The Market
-- **Primary market**: 9 incorporated cities of the Coachella Valley, Riverside County, CA
-- **Market character**: mix of primary residences, second homes, vacation rentals, and luxury estates
-- **Seasonal dynamics**: "snowbird season" runs roughly November–April; summer is slower and hotter (110°F+)
-- **Major demand drivers**: Coachella Festival (April), Stagecoach (April), BNP Paribas Open (March), winter visitors from LA and Pacific Northwest
+This is the foundational seed. There is no performance history yet — these are
+starting principles, not measured lift. Future entries (added periodically as
+real performance data accumulates) will be prepended above this section.
 
-### Price Ranges by City (approximate 2026 ranges)
-- **Palm Springs**: $450K–$2M+ (mid-market to luxury; strong STR demand)
-- **Palm Desert**: $400K–$1.5M+ (largest city; diverse price points; El Paseo shopping)
-- **Rancho Mirage**: $600K–$3M+ (luxury-focused; celebrity history; Agua Caliente casino adjacent)
-- **Indian Wells**: $700K–$5M+ (ultra-luxury; BNP Open venue; lowest density of any CV city)
-- **La Quinta**: $500K–$2.5M+ (strong golf community; Old Town La Quinta; active buyer market)
-- **Indio**: $300K–$800K (most affordable CV city; Coachella/Stagecoach host city)
-- **Cathedral City**: $300K–$700K (budget-friendly; between Palm Springs and Rancho Mirage)
-- **Desert Hot Springs**: $200K–$500K (most affordable; known for hot springs; up-and-coming)
-- **Coachella**: $250K–$600K (agricultural roots; growing; younger buyer profile)
+### Voice
 
-### Key Local Stats (update periodically)
-- CV median home price: approximately $550,000–$650,000 (varies by quarter)
-- Average days on market: 45–75 days depending on season
-- Short-term rental (STR) rules: vary significantly by city — Palm Springs requires permit + TOT; Rancho Mirage prohibits most STRs; La Quinta has tiered permit system
-- Strong vacation rental markets: Palm Springs, La Quinta, Indio (near Coachella)
+- Written as Hedda Parashos, Owner/President of Palisade Realty — a brokerage
+  owner and San Diego market leader, not a "resident/parent/investor" persona.
+  She speaks from what she sees across 100+ agent partners and thousands of
+  closed transactions, not just her own deals.
+- Warm, direct, knowledgeable — advice from someone who knows the market cold,
+  never a sales pitch.
+- Never invent statistics. Ground every number in the source research data
+  provided for that post.
 
-### What Clients Care About
-**Buyers**: second home potential, STR income feasibility, HOA fees, pool requirements, proximity to golf/tennis, commute to LA, lot size
-**Sellers**: timing relative to snowbird season, staging for vacation-home market, pricing vs. recent sales in gated communities
-**Investors**: STR permit availability, cap rates, seasonal occupancy, property management availability
+### San Diego Market Context
+
+- Primary communities: Downtown San Diego, Carmel Valley, Mission Valley,
+  Chula Vista, Point Loma, North Park, Coronado — plus San Diego County broadly
+  (Palisade Realty also serves parts of Orange and Riverside counties).
+- California is an escrow state (title/escrow officer handles closing, not
+  attorneys). No Virginia-style attorney-closing content applies here.
+- Disclosure-heavy state: Transfer Disclosure Statement (TDS) + Natural Hazard
+  Disclosure (NHD) report are the two documents buyers most need explained.
+- Mello-Roos special tax districts are a recurring point of confusion for
+  buyers in newer/master-planned areas (Carmel Valley especially) — always
+  worth a plain-language explanation when relevant.
+- Wildfire insurance availability (CA FAIR Plan) is a live, worsening issue —
+  don't shy away from it, buyers actively search for it.
+- Coastal bluff erosion (La Jolla, Del Mar, Sunset Cliffs) is a real, ongoing
+  local story — California Coastal Commission jurisdiction applies to any
+  shoreline armoring/development discussion.
+- Military presence is real but secondary to the source market this was
+  replicated from: Naval Base San Diego, NAS North Island (Coronado), MCRD San
+  Diego, Camp Pendleton (near North County). Include a military/PCS/VA-loan
+  angle where it naturally fits, don't force it into every post.
+- Proposition 19 (property-tax basis portability for 55+/disabled/disaster
+  victims) is San-Diego-relevant and has no equivalent in the source market —
+  worth its own explainer content.
+
+### Instructions for Next Generation Cycle
+
+1. There is no established topic-priority signal yet — lean on the required-
+   topics registry (`lib/required-topics.ts`) to fill obvious evergreen gaps
+   first (cost-to-buy/sell, closing costs, market outlook per community).
+2. Always cover at least one of the 7 primary communities per week once volume
+   ramps up — don't let coverage concentrate on just one or two.
+3. Avoid pure seller-commission content until there's a real approval signal
+   on it — start with buyer education and market-update content.
+4. Flag anything that reads like it needs a licensed-attorney review (Mello-
+   Roos, Coastal Commission, Prop 19) for a light human legal check before the
+   first few posts on those topics go out — the content is drafted to be
+   accurate but this is new subject matter for this specific pipeline.
 
 ---
-
-## Writing Rules
-
-- **Length**: 500–700 words for market updates / tips; 700–900 words for evergreen guides
-- **Stats**: cite real, verifiable sources or omit — no fabricated numbers
-- **Avoid**: generic "tips" content that could be published by any agent anywhere
-- **Always localize**: tie every insight back to what it means for CV buyers/sellers specifically
-- **FAQ section**: required — write questions a real CV buyer/seller/homeowner would actually Google
-- **No fluff openers**: never start with "In the world of real estate..." or "Whether you're buying or selling..."
-- **No trailing summaries**: end with a clear CTA, not "In conclusion..."
-
-## Performance Notes
-
-*(Updated as posts publish and analytics accumulate)*
-
-- Market updates with specific price data perform best — lead with numbers
-- "What This Means For You" bullet sections get featured snippets
-- La Quinta and Palm Springs content gets highest engagement — prioritize these cities when relevant
-- STR/vacation rental posts drive strong investor traffic — this is an underserved audience

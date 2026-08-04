@@ -5,6 +5,7 @@ import path from 'path'
 import { PortableText } from '@portabletext/react'
 import { client } from '@/lib/sanity/client'
 import { POST_BY_SLUG_QUERY } from '@/lib/sanity/queries'
+import { categoryToDisplayBucket } from '@/lib/blog/category-map'
 import { STATIC_POSTS } from '@/lib/blog/static-posts'
 
 interface LocalPost {
@@ -42,10 +43,39 @@ interface Props {
   params: Promise<{ slug: string }>
 }
 
+// blogPost's raw category (e.g. "buying-tips") and authorName field get mapped
+// onto the SanityPost shape (category -> display bucket, authorName -> author)
+// that the JSX below already expects.
+async function fetchSanityPost(slug: string): Promise<SanityPost | null> {
+  const raw = await client.fetch<{
+    _id: string
+    title: string
+    slug: string
+    category: string
+    publishedAt: string
+    excerpt?: string
+    authorName?: string
+    coverImage?: string
+    body?: unknown[]
+  } | null>(POST_BY_SLUG_QUERY, { slug })
+  if (!raw) return null
+  return {
+    _id: raw._id,
+    title: raw.title,
+    slug: raw.slug,
+    category: categoryToDisplayBucket(raw.category),
+    publishedAt: raw.publishedAt,
+    excerpt: raw.excerpt,
+    author: raw.authorName,
+    coverImage: raw.coverImage,
+    body: raw.body,
+  }
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   let post: SanityPost | null = null
-  try { post = await client.fetch(POST_BY_SLUG_QUERY, { slug }) } catch { /* ignore */ }
+  try { post = await fetchSanityPost(slug) } catch { /* ignore */ }
   if (post) return { title: `${post.title} | Palisade Realty Blog`, description: post.excerpt }
   const local = loadLocalPost(slug)
   if (local) return { title: `${local.title} | Palisade Realty Blog`, description: local.excerpt }
@@ -59,7 +89,7 @@ export const revalidate = 3600
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params
   let post: SanityPost | null = null
-  try { post = await client.fetch(POST_BY_SLUG_QUERY, { slug }) } catch { /* ignore */ }
+  try { post = await fetchSanityPost(slug) } catch { /* ignore */ }
 
   // Try local HTML-extracted content
   if (!post) {

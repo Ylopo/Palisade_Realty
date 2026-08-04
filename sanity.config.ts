@@ -18,6 +18,10 @@ export default defineConfig({
           .title('Content')
           .items([
             S.listItem().title('Blog Posts').schemaType('post').child(S.documentTypeList('post').title('Blog Posts')),
+            S.listItem()
+              .title('Blog Posts (Content Machine)')
+              .schemaType('blogPost')
+              .child(S.documentTypeList('blogPost').title('Blog Posts (Content Machine)')),
           ]),
     }),
   ],

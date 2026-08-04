@@ -3,6 +3,7 @@ import Link from 'next/link'
 import BlogListing, { type Post } from './BlogListing'
 import { client } from '@/lib/sanity/client'
 import { ALL_POSTS_QUERY } from '@/lib/sanity/queries'
+import { categoryToDisplayBucket } from '@/lib/blog/category-map'
 import './blog.css'
 
 export const metadata: Metadata = {
@@ -19,11 +20,11 @@ export default async function BlogPage() {
     const raw = await client.fetch(ALL_POSTS_QUERY)
     sanityPosts = (raw ?? []).map((p: {
       slug: string; title: string; category: string;
-      publishedAt: string; excerpt?: string; coverImage?: string
+      publishedAt: string; excerpt?: string; authorName?: string; coverImage?: string
     }) => ({
       s: p.slug,
       t: p.title,
-      c: p.category,
+      c: categoryToDisplayBucket(p.category),
       d: new Date(p.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
       iso: p.publishedAt.slice(0, 10),
       x: p.excerpt ?? '',

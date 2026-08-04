@@ -52,3 +52,62 @@
 - Do not stop after one screenshot pass
 - Do not use `transition-all`
 - Do not use default Tailwind blue/indigo as primary color
+
+---
+
+# Content Machine Architecture
+
+## What This Is
+Palisade Realty's marketing site (above) has an AI content pipeline bolted onto
+it — research → write → Fair Housing check → media/video → social publish —
+replicated from a system built for a different client (Legacy Home Search,
+Hampton Roads VA) and customized for San Diego / Hedda Parashos.
+
+## Key Facts
+- **Sanity project ID**: `qjhzi2t2`
+- **Sanity dataset**: `production`
+- **Redis key prefix**: `hps:` (hardcoded literally in key templates, not env-driven — matches source convention)
+- **Persona**: Hedda Parashos, Owner/President of Palisade Realty — written as a brokerage owner/San Diego market leader, NOT a "resident/parent/investor" persona (that framing didn't fit her actual bio and was deliberately not carried over)
+- **Video**: shared Ylopo Enterprise render platform (`ENTERPRISE_CLIENT_ID`, `ENTERPRISE_VIDEO_BASE_URL`, `ENTERPRISE_VIDEO_API_KEY`) — NOT a per-client HeyGen account. Look IDs + Voice ID are set by the VA in `/admin/va-queue/[postId]`, never hardcoded.
+- **Social publish**: OneUp (one shared agency account, this client's own category `ONEUP_CATEGORY_ID`), 6 platforms — Facebook, Instagram, TikTok, YouTube, LinkedIn, X. Threads is not supported by OneUp.
+- **Fair Housing**: California list (federal 7 + ancestry, age, genetic information, immigration/citizenship status, primary language, veteran/military status, medical condition, plus the sexual-orientation/gender-identity/marital-status/source-of-income classes already covered federally-adjacent). See `lib/fair-housing.ts`.
+
+## Pipeline
+Research (Tavily, daily cron) → scored ideas in Redis → `/admin/idea-review`
+(approve/defer/skip) → Claude Sonnet writes post → Fair Housing check (Claude
+Haiku) → Sanity `blogPost` doc (`workflowStatus: media_pending`) →
+`/admin/va-queue/[postId]` (script → look/voice → scene images → Enterprise
+render → thumbnail) → Publish → OneUp fans out to all 6 platforms + the post
+goes live on `/blog` → `/admin/blog-dashboard` analytics.
+
+Key lib files: `lib/research.ts`, `lib/idea-store.ts`, `lib/idea-writer.ts`,
+`lib/publish-service.ts`, `lib/oneup-client.ts`, `lib/fair-housing.ts`,
+`lib/required-topics.ts`, `lib/fed-research.ts`, `lib/events-research.ts`,
+`lib/enterprise-video.ts`, `lib/video-settings.ts`, `lib/scene-images.ts`.
+
+- Voice/style intelligence (updated periodically): **LEARNINGS.md**
+- Replication source + hard rules this build followed: see the original
+  operator's replication kit (external to this repo)
+
+## Blog Schema Consolidation
+The marketing site's `/blog` pages were originally built against a simple
+Sanity type `post` (empty, unused). This was consolidated onto the content
+machine's richer `blogPost` type — `/blog` now reads only `blogPost` documents
+with `workflowStatus == 'published'`. The `post` type is still registered in
+the schema but has no active consumers.
+
+## Scope Notes / What Wasn't Built
+Several source-system subsystems were intentionally left out of this build
+(out of scope per the replication plan, or not requested):
+- Market Reports pipeline (Altos Research integration) — not built
+- Renick competitor-analytics pipeline — not built (no data feed for this client; references to it were genericized in UI copy/topic text)
+- AI Content Assistant (`/admin/assistant`) — not built
+- AEO pages cron, idx-proof cron, tiktok-scrape cron — not built
+- Refresh-queue evaluation logic is a simplified best-effort implementation, not a faithful port (no source file existed to copy)
+- Blog Listings / IDX area-selector card in the video pipeline UI may be UI-only (no backend) depending on what the implementing pass chose — check `app/admin/va-queue/[postId]/page.tsx` for a TODO comment if so
+
+## Current Status (August 2026)
+- Content machine build in progress — see the session that created this section for the full file list
+- LinkedIn + X OneUp account IDs were not yet available at build time — `ONEUP_LINKEDIN_ACCOUNT_ID` / `ONEUP_X_ACCOUNT_ID` env vars are referenced but unset; those two platforms will silently fail to publish until set
+- GA4 property ID / measurement ID / service account JSON were not yet available at build time — `lib/ga4.ts` degrades gracefully (returns empty data) until those are set
+- Domain: `palisaderealty.com`
