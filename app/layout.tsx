@@ -58,6 +58,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"
           strategy="beforeInteractive"
         />
+        {/* ADA Compliance Widget — UserWay config must be set before widget.js loads */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window._userway_config={position:'5',size:'small',color:'#808080',mobile:false,account:'gWCTZli47p'};`,
+          }}
+        />
+        <Script
+          src="https://cdn.userway.org/widget.js"
+          data-account="gWCTZli47p"
+          strategy="afterInteractive"
+        />
       </head>
       <body>{children}</body>
     </html>
