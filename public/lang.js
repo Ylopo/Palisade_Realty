@@ -32,7 +32,7 @@
       footerBlog: 'Blog',
       footerTeam: 'Our Team',
       footerContactUs: 'Contact Us',
-      footerHours: 'Mon – Fri: 6:00 AM – 10:00 PM',
+      footerHours: 'Mon – Fri: 9:00 AM – 5:00 PM',
 
       /* HOMEPAGE — hero */
       heroSubtitle: "Experience the new way of Buying and Selling real estate<br>in today’s shifting market.",
@@ -60,9 +60,9 @@
       commHeading: 'Explore Our Communities',
       commExplore: 'Explore',
       commCardDescs: {
-        'downtown':      "Urban sophistication meets coastal living. World-class dining, nightlife, and walkable neighborhoods in the heart of America's Finest City.",
-        'carmel-valley': "North County's premier family destination. Top-rated schools, walkable village amenities at One Paseo, and easy coastal access in one polished package.",
-        'mission-valley':"San Diego's central hub. Unbeatable freeway access, trolley connections, SDSU energy, and exceptional value minutes from the beach and downtown.",
+        'downtown':      "Urban sophistication meets coastal living. World-class dining, nightlife, and walkable neighborhoods in the heart of America’s Finest City.",
+        'carmel-valley': "North County’s premier family destination. Top-rated schools, walkable village amenities at One Paseo, and easy coastal access in one polished package.",
+        'mission-valley':"San Diego’s central hub. Unbeatable freeway access, trolley connections, SDSU energy, and exceptional value minutes from the beach and downtown.",
         'chula-vista':   "San Diego's second-largest city offering exceptional value, master-planned communities, bayfront living, and easy access to the broader metro.",
         'spring-valley': "East County value with a strong community character. Established neighborhoods, full-sized homes, and a 15-minute commute to Downtown San Diego."
       },
@@ -75,7 +75,7 @@
 
       /* HOMEPAGE — about */
       aboutTitle: 'CEO',
-      aboutBio: "<p>Hedda Parashos is the Owner and President of Palisade Realty, a full-service real estate brokerage established in 2006. She acquired the company in 2012 and has since transformed it into one of Southern California&rsquo;s respected independent brokerages through innovation, strong leadership, and an unwavering commitment to both clients and agents.</p><p>Today, Palisade Realty is home to more than 100 real estate agent partners, with continued growth across San Diego County, Orange County, and parts of Riverside County. Under Hedda&rsquo;s leadership, the brokerage has been involved in the successful sale of thousands of homes, earning a reputation for professionalism, integrity, and exceptional client service.</p><p>Hedda&rsquo;s passion for real estate extends beyond buying and selling homes. She is dedicated to creating an environment where agents can thrive through mentorship, innovative marketing, cutting-edge technology, and a culture built on collaboration and genuine care. Her vision has positioned Palisade Realty as a brokerage that continually evolves to meet the changing needs of today&rsquo;s real estate market.</p><p>Whether working with first-time homebuyers, luxury sellers, investors, or experienced clients, Hedda and the Palisade Realty team are committed to delivering knowledgeable guidance, strategic representation, and an exceptional real estate experience from start to finish.</p>",
+      aboutBio: "Hedda founded Palisade Realty in 2010 and has built it into one of San Diego’s most trusted luxury real estate firms — with a team of 60+ agents and over 15 years of market expertise. Her commitment to innovative representation, deep local knowledge, and genuine care for every client has positioned Palisade Realty as the go-to brokerage across the greater San Diego region. From first-time buyers to seasoned investors, Hedda’s team delivers the professional, efficient, and rewarding experience today’s market demands.",
       aboutCta: 'Meet Our Team',
 
       /* HOMEPAGE — team carousel */
@@ -216,7 +216,6 @@
       commHeroTitle: 'San Diego Communities',
       commIntroEyebrow: 'Our Coverage',
       commIntroTitle: 'Find Your Perfect Place in San Diego',
-      commIntroBody: 'From oceanfront estates in La Jolla and Coronado to the rolling hills of Rancho Santa Fe, Palisade Realty serves every corner of San Diego County. Our team of local experts knows these neighborhoods inside and out — helping you find not just a home, but the right community for your lifestyle.',
       commIntroCta: 'Talk to a Local Expert',
       commGridEyebrow: 'Explore Every Area',
       commGridTitle: 'Our Communities',
@@ -227,27 +226,6 @@
       commStatPremier: 'Premier Communities',
       commStatYears: 'Years of Experience',
       commStatAgents: 'Expert Agents',
-
-      /* MELLO-ROOS SECTION (community detail page) */
-      mellorooEyebrow: 'Understanding Additional Property Assessments',
-      mellorooIntro: 'Mello-Roos fees are a type of special tax that can apply to certain properties in California — most commonly in newer developments or areas where public infrastructure was built using Community Facilities District (CFD) bonds.',
-      mellrooBodies: [
-        'When a developer builds a new community, they sometimes partner with a public agency to finance infrastructure — roads, parks, schools, and sewer lines — through a bond. That bond is repaid over time through a special tax collected alongside property taxes on homes in the district.',
-        'Not every property in Downtown San Diego carries a Mello-Roos assessment. Older buildings and established condos typically do not. Newer developments, particularly in the East Village and Columbia District where significant construction has occurred, may carry a CFD assessment.',
-        'Assessment amounts vary by development, bond size, and how much of the original bond has been paid down. Some assessments are modest; others can add several hundred dollars per year to your overall tax bill. Verifying the current assessment — and its scheduled end date — before making an offer is an important step in understanding your true cost of ownership.',
-        'Palisade Realty agents can help you locate CFD parcel tax information for any specific property, interpret the assessment schedule, and factor the full cost into your monthly payment analysis before you commit.',
-      ],
-      mellorooQfHeading: 'Quick Facts',
-      mellorooQfItems: [
-        'May apply to certain properties or developments',
-        'Helps fund public infrastructure and services',
-        'Assessment amounts vary by property',
-        'Buyers should verify before purchasing',
-      ],
-      mellorooDisclaimer: 'Mello-Roos assessments vary by property and development. Buyers should verify current assessments with the appropriate public agency and consult their real estate or tax professional.',
-      mellrooCTAHeading: 'Need Help Understanding Mello-Roos?',
-      mellrooCTABody: 'Our team can help you review property details and better understand any additional assessments before you make an offer.',
-      mellrooCTABtn: 'Contact Our Team',
 
       /* TEAM PAGE */
       teamHeroEyebrow: 'San Diego Real Estate',
@@ -423,7 +401,7 @@
       footerBlog: 'Blog',
       footerTeam: 'Nuestro Equipo',
       footerContactUs: 'Contáctanos',
-      footerHours: 'Lun – Vie: 6:00 AM – 10:00 PM',
+      footerHours: 'Lun – Vie: 9:00 AM – 5:00 PM',
 
       /* HOMEPAGE — hero */
       heroSubtitle: 'Descubra la nueva forma de Comprar y Vender bienes raíces<br>en el mercado actual.',
@@ -466,7 +444,7 @@
 
       /* HOMEPAGE — about */
       aboutTitle: 'CEO',
-      aboutBio: '<p>Hedda Parashos es la Propietaria y Presidenta de Palisade Realty, una correduría inmobiliaria de servicio completo fundada en 2006. Adquirió la empresa en 2012 y desde entonces la ha transformado en una de las corredurías independientes más reconocidas del sur de California, a través de la innovación, un liderazgo sólido y un compromiso inquebrantable tanto con los clientes como con los agentes.</p><p>Hoy en día, Palisade Realty cuenta con más de 100 agentes asociados, con un crecimiento continuo en el condado de San Diego, el condado de Orange y partes del condado de Riverside. Bajo el liderazgo de Hedda, la correduría ha participado en la venta exitosa de miles de propiedades, ganando una reputación de profesionalismo, integridad y servicio excepcional al cliente.</p><p>La pasión de Hedda por los bienes raíces va más allá de comprar y vender casas. Está comprometida con crear un ambiente donde los agentes puedan prosperar a través de la mentoría, el marketing innovador, la tecnología de vanguardia y una cultura de colaboración y cuidado genuino. Su visión ha posicionado a Palisade Realty como una correduría que evoluciona continuamente para satisfacer las necesidades cambiantes del mercado inmobiliario actual.</p><p>Ya sea trabajando con compradores de primera vez, vendedores de propiedades de lujo, inversores o clientes experimentados, Hedda y el equipo de Palisade Realty están comprometidos a brindar orientación experta, representación estratégica y una experiencia inmobiliaria excepcional de principio a fin.</p>',
+      aboutBio: 'Hedda fundó Palisade Realty en 2010 y la ha convertido en una de las firmas de bienes raíces de lujo más confiables de San Diego — con un equipo de más de 60 agentes y más de 15 años de experiencia en el mercado. Su compromiso con la representación innovadora, el profundo conocimiento local y el genuino cuidado por cada cliente han posicionado a Palisade Realty como la correduría preferida en toda la región de San Diego. Desde compradores primerizos hasta inversores experimentados, el equipo de Hedda ofrece la experiencia profesional, eficiente y gratificante que el mercado actual exige.',
       aboutCta: 'Conoce a Nuestro Equipo',
 
       /* HOMEPAGE — team carousel */
@@ -607,7 +585,6 @@
       commHeroTitle: 'Comunidades de San Diego',
       commIntroEyebrow: 'Nuestra Cobertura',
       commIntroTitle: 'Encuentre su Lugar Perfecto en San Diego',
-      commIntroBody: 'Desde propiedades frente al océano en La Jolla y Coronado hasta las colinas de Rancho Santa Fe, Palisade Realty sirve a cada rincón del Condado de San Diego. Nuestro equipo de expertos locales conoce estos vecindarios por dentro y por fuera — ayudándole a encontrar no solo una casa, sino la comunidad adecuada para su estilo de vida.',
       commIntroCta: 'Hablar con un Experto Local',
       commGridEyebrow: 'Explore Cada Área',
       commGridTitle: 'Nuestras Comunidades',
@@ -618,27 +595,6 @@
       commStatPremier: 'Comunidades Destacadas',
       commStatYears: 'Años de Experiencia',
       commStatAgents: 'Agentes Expertos',
-
-      /* MELLO-ROOS SECTION (community detail page) */
-      mellorooEyebrow: 'Comprensión de Gravámenes Especiales',
-      mellorooIntro: 'Los cargos Mello-Roos son un tipo de impuesto especial que puede aplicarse a ciertas propiedades en California — más comúnmente en nuevos desarrollos o áreas donde la infraestructura pública fue construida mediante bonos del Distrito de Instalaciones Comunitarias (CFD).',
-      mellrooBodies: [
-        'Cuando un desarrollador construye una nueva comunidad, a veces se asocia con una agencia pública para financiar infraestructura — carreteras, parques, escuelas y alcantarillado — mediante un bono. Ese bono se reembolsa con el tiempo a través de un impuesto especial cobrado junto con los impuestos sobre la propiedad de las viviendas en el distrito.',
-        'No todas las propiedades en el Centro de San Diego tienen una evaluación Mello-Roos. Los edificios más antiguos y los condominios establecidos normalmente no la tienen. Los desarrollos más nuevos, en particular en el East Village y el Distrito de Columbia donde ha habido construcción significativa, pueden tener una evaluación CFD.',
-        'Los montos de evaluación varían según el desarrollo, el tamaño del bono y cuánto del bono original se ha pagado. Algunas evaluaciones son modestas; otras pueden agregar varios cientos de dólares al año a su factura fiscal total. Verificar la evaluación actual — y su fecha de vencimiento programada — antes de hacer una oferta es un paso importante para comprender su costo real de propiedad.',
-        'Los agentes de Palisade Realty pueden ayudarle a localizar información sobre impuestos de parcelas CFD para cualquier propiedad específica, interpretar el calendario de evaluación y considerar el costo total en su análisis de pago mensual antes de comprometerse.',
-      ],
-      mellorooQfHeading: 'Datos Rápidos',
-      mellorooQfItems: [
-        'Puede aplicarse a ciertas propiedades o desarrollos',
-        'Ayuda a financiar infraestructura y servicios públicos',
-        'Los montos de evaluación varían según la propiedad',
-        'Los compradores deben verificar antes de comprar',
-      ],
-      mellorooDisclaimer: 'Las evaluaciones Mello-Roos varían según la propiedad y el desarrollo. Los compradores deben verificar las evaluaciones actuales con la agencia pública correspondiente y consultar con su profesional inmobiliario o fiscal.',
-      mellrooCTAHeading: '¿Necesita Ayuda para Entender los Mello-Roos?',
-      mellrooCTABody: 'Nuestro equipo puede ayudarle a revisar los detalles de la propiedad y comprender mejor cualquier evaluación adicional antes de hacer una oferta.',
-      mellrooCTABtn: 'Contactar a Nuestro Equipo',
 
       /* TEAM PAGE */
       teamHeroEyebrow: 'Bienes Raíces en San Diego',
@@ -1027,7 +983,7 @@
   ];
 
   var TC_BIOS = [
-    "Propietaria y Presidenta de Palisade Realty desde 2012. Bajo su liderazgo, la correduría ha crecido a más de 100 agentes en los condados de San Diego, Orange y Riverside, construida sobre la innovación, la integridad y un compromiso inquebrantable con clientes y agentes.",
+    "Fundador y CEO de Palisade Realty desde 2010. Especialista en lujo en San Diego con más de 15 años de experiencia y un equipo de más de 60 agentes que brindan resultados excepcionales.",
     "Negociador experto con profundo conocimiento del mercado de San Diego North County. Reconocido por identificar oportunidades fuera del mercado y cerrar transacciones complejas.",
     "Agente dedicado a compradores con experiencia en compras por primera vez y de reubicación en las comunidades de San Diego. Comunicación clara desde la oferta hasta el cierre.",
     "Especialista estratégico en listados, reconocido por su precisión en la fijación de precios, coordinación profesional de home staging y resultados récord en La Jolla y Coronado.",
@@ -2180,10 +2136,6 @@ var AGENT_TRANSLATIONS = {
     var d = DICT[lang];
     document.documentElement.lang = lang;
     localStorage.setItem('pr-lang', lang);
-    /* Notify React-rendered components (e.g. interactive review cards) that
-       can't be safely patched via direct DOM textContent swaps below, since
-       their text is state-driven and would be overwritten on next re-render. */
-    window.dispatchEvent(new CustomEvent('pr-lang-changed', { detail: { lang: lang } }));
 
     /* ── NAV (desktop) ─────────────────────────────────────── */
     document.querySelectorAll('.nav-links a[href*="palisaderealty.com/"]:not([href*="seller"])').forEach(function (el) {
@@ -2348,8 +2300,8 @@ var AGENT_TRANSLATIONS = {
     var aboutTitle = document.querySelector('.about-title');
     if (aboutTitle) aboutTitle.textContent = d.aboutTitle;
 
-    var aboutBio = document.querySelector('.about-bio-inner');
-    if (aboutBio) aboutBio.innerHTML = d.aboutBio;
+    var aboutBio = document.querySelector('.about-bio');
+    if (aboutBio) aboutBio.textContent = d.aboutBio;
 
     var aboutCta = document.querySelector('.about-cta .btn-brand');
     if (aboutCta) aboutCta.textContent = d.aboutCta;
@@ -2494,9 +2446,6 @@ var AGENT_TRANSLATIONS = {
     var cmIntroT = document.querySelector('.comm-intro-title');
     if (cmIntroT) cmIntroT.textContent = d.commIntroTitle;
 
-    var cmIntroB = document.querySelector('.comm-intro-body');
-    if (cmIntroB) cmIntroB.textContent = d.commIntroBody;
-
     var cmIntroCta = document.querySelector('.comm-intro-cta');
     if (cmIntroCta) cmIntroCta.textContent = d.commIntroCta;
 
@@ -2521,34 +2470,6 @@ var AGENT_TRANSLATIONS = {
     var cmTiles = document.querySelectorAll('.comm-intro-tile-label');
     var tileKeys = ['commStatPremier', 'commStatYears', 'commStatAgents'];
     cmTiles.forEach(function (el, i) { if (tileKeys[i]) el.textContent = d[tileKeys[i]]; });
-
-    /* ── MELLO-ROOS SECTION (community detail page) ─────────── */
-    var mrEyebrow = document.querySelector('.mello-eyebrow');
-    if (mrEyebrow) mrEyebrow.textContent = d.mellorooEyebrow;
-
-    var mrIntro = document.querySelector('.mello-roos-intro');
-    if (mrIntro) mrIntro.textContent = d.mellorooIntro;
-
-    var mrBodies = document.querySelectorAll('.mello-roos-body');
-    mrBodies.forEach(function (el, i) { if (d.mellrooBodies && d.mellrooBodies[i]) el.textContent = d.mellrooBodies[i]; });
-
-    var mrQfHeading = document.querySelector('.mello-qf-heading');
-    if (mrQfHeading) mrQfHeading.textContent = d.mellorooQfHeading;
-
-    var mrQfItems = document.querySelectorAll('.mello-qf-item');
-    mrQfItems.forEach(function (el, i) { if (d.mellorooQfItems && d.mellorooQfItems[i]) el.textContent = d.mellorooQfItems[i]; });
-
-    var mrDisclaimer = document.querySelector('.mello-roos-disclaimer');
-    if (mrDisclaimer) mrDisclaimer.textContent = d.mellorooDisclaimer;
-
-    var mrCtaHeading = document.querySelector('.mello-cta-heading');
-    if (mrCtaHeading) mrCtaHeading.textContent = d.mellrooCTAHeading;
-
-    var mrCtaBody = document.querySelector('.mello-cta-body');
-    if (mrCtaBody) mrCtaBody.textContent = d.mellrooCTABody;
-
-    var mrCtaBtn = document.querySelector('.mello-cta-btn');
-    if (mrCtaBtn) mrCtaBtn.textContent = d.mellrooCTABtn;
 
     /* ── TEAM PAGE ──────────────────────────────────────────── */
     if (document.querySelector('.tp-hero')) {
@@ -3418,17 +3339,10 @@ var AGENT_TRANSLATIONS = {
     });
   }
 
-  // DOMContentLoaded fires before Next.js "afterInteractive" scripts load,
-  // so check readyState and run immediately if the DOM is already available.
-  function doInit() {
+  document.addEventListener('DOMContentLoaded', function () {
     applyLang(getLang());
     initToggle();
-  }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', doInit);
-  } else {
-    doInit();
-  }
+  });
 
   // Re-apply language once the featured listings carousel finishes rendering
   window.addEventListener('fl-loaded', function () {
