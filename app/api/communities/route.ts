@@ -233,7 +233,7 @@ function normalizeYlopoListing(item: Record<string, any>, domain: string) {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function buildDoc(b: Record<string, any>) {
   const slug   = b.slug || ''
-  const city   = slug.includes('henderson') ? 'henderson' : 'las-vegas'
+  const city   = 'san-diego'
   const docId  = b._id || ('communityIndex-' + city)
   const heroBg = buildImg(b.heroBackgroundImageRef)
   const ogImg  = buildImg(b.ogImageRef)
@@ -317,7 +317,7 @@ function buildDetailDoc(b: Record<string, any>) {
     communityName: b.communityName || '',
     slug:          { _type: 'slug', current: slug },
     pageUrl:       b.pageUrl || '',
-    city:          b.city    || 'henderson',
+    city:          b.city    || 'san-diego',
     active:        b.active !== false,
     hero: {
       headline:       h.headline       || '',

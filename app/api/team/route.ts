@@ -28,7 +28,7 @@ function toDoc(b: Record<string, any>) {
     _type:          'teamMember',
     name:           b.name         || '',
     role:           b.role         || 'Real Estate Agent',
-    location:       b.location     || 'Las Vegas, NV',
+    location:       b.location     || 'San Diego, CA',
     phone:          b.phone        || '',
     email:          b.email        || '',
     bio:            b.bio          || '',
