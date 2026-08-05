@@ -43,6 +43,40 @@ interface Props {
   params: Promise<{ slug: string }>
 }
 
+function blogPostingJsonLd({ slug, title, description, datePublished, image, author }: {
+  slug: string
+  title: string
+  description?: string
+  datePublished: string
+  image?: string
+  author?: string
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: title,
+    url: `https://www.palisaderealty.com/blog/${slug}`,
+    ...(description && { description }),
+    ...(image && { image }),
+    datePublished,
+    dateModified: datePublished,
+    // Bylines are generic "By Palisade Realty" until posts are attributed to a
+    // named agent (see findings/content.md) — do not fabricate a Person author.
+    author: author
+      ? { '@type': 'Person', name: author }
+      : { '@type': 'Organization', name: 'Palisade Realty', '@id': 'https://www.palisaderealty.com/#organization' },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Palisade Realty',
+      logo: { '@type': 'ImageObject', url: 'https://www.palisaderealty.com/assets/images/graphic-logo-wht.png' },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://www.palisaderealty.com/blog/${slug}`,
+    },
+  }
+}
+
 // blogPost's raw category (e.g. "buying-tips") and authorName field get mapped
 // onto the SanityPost shape (category -> display bucket, authorName -> author)
 // that the JSX below already expects.
@@ -102,6 +136,14 @@ export default async function BlogPostPage({ params }: Props) {
       })
       return (
         <>
+          <script
+            type="application/ld+json"
+            // eslint-disable-next-line react/no-danger
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingJsonLd({
+              slug, title: local.title, description: local.excerpt,
+              datePublished: local.publishedAt, image: local.coverImage,
+            })) }}
+          />
           <style>{`
             .bp-content p{font-family:var(--font-body);font-size:17px;line-height:1.8;color:rgba(33,33,33,.85);margin:0 0 24px;}
             .bp-content h2{font-family:var(--font-display);font-size:26px;font-weight:400;color:var(--near-black,#1a0a0a);letter-spacing:-.01em;margin:40px 0 20px;}
@@ -194,6 +236,13 @@ export default async function BlogPostPage({ params }: Props) {
 
     return (
       <>
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingJsonLd({
+            slug, title: staticPost.t, description: staticPost.x, datePublished: staticPost.iso,
+          })) }}
+        />
         <section className="bp-hero" style={{ background: 'var(--brand-darker,#28000c)', padding: '80px var(--pad-x,60px) 72px', textAlign: 'center' }}>
           <nav aria-label="Breadcrumb" style={{ marginBottom: '32px' }}>
             <Link href="/" style={{ color: 'rgba(255,255,255,.4)', textDecoration: 'none', fontFamily: 'var(--font-label)', fontSize: '12px' }}>Palisade Realty</Link>
@@ -247,6 +296,14 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingJsonLd({
+          slug, title: post.title, description: post.excerpt, datePublished: post.publishedAt,
+          image: post.coverImage, author: post.author,
+        })) }}
+      />
       {/* ── HERO ─────────────────────────────────────────────── */}
       <section
         className="bp-hero"

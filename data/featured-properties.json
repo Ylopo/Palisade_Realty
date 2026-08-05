@@ -64,22 +64,21 @@
     "sqft": 1538,
     "lotSize": "7,840 sq ft",
     "yearBuilt": 1928,
-    "neighborhood": "Coronado Village",
-    "communitySlug": "coronado",
+    "neighborhood": "Kensington",
     "lat": 32.7552,
     "lng": -117.0993,
-    "tagline": "A rare beachside estate on one of Coronado Island's most prestigious streets, with white-water views and resort-caliber amenities.",
+    "tagline": "A beautifully updated Kensington Spanish hacienda just north of Adams Avenue, with paid solar and a private rear garden built for entertaining.",
     "description": "Kensington Classic Spanish! Extraordinarily well kept and updated single story Hacienda in the middle of Kensington and well north of Adams Avenue. Significant upgrades including paid solar, remodeled kitchen and baths and a striking fireplace! Formal living and dining rooms, breakfast nook and a private rear garden with second fireplace, ideal for entertaining! Detached two car garage. All on a private corner lot!",
     "ylopoDetailUrl": "https://search.palisaderealty.com/search/detail/266368236?s[locations][0][city]=San%20Diego&s[locations][0][state]=CA",
     "features": [
-      "Direct beach access and white-water Pacific views",
-      "Professional-grade kitchen with La Cornue range",
-      "Heated saltwater pool and outdoor fire pit",
-      "Primary suite with dedicated ocean-view deck",
-      "Home theater and temperature-controlled wine room",
-      "Four-car garage with car-lift capability",
-      "Lutron whole-home smart lighting and AV",
-      "Two blocks from Hotel del Coronado"
+      "Paid solar system",
+      "Remodeled kitchen and bathrooms",
+      "Striking living-room fireplace",
+      "Formal living and dining rooms",
+      "Breakfast nook",
+      "Private rear garden with a second fireplace, ideal for entertaining",
+      "Detached two-car garage",
+      "Private corner lot"
     ],
     "heroImage": "https://d25fhp1qfwqa2h.cloudfront.net/ec8fb09cfed8dfac32315536ceb82095,1783536596000_auto_650?phid=19459864929",
     "gallery": [
@@ -115,14 +114,14 @@
     ],
     "description_es": "¡Hacienda Española Clásica de Kensington! Impecable y actualizada hacienda de un solo piso en el corazón de Kensington, bien al norte de Adams Avenue. Importantes mejoras que incluyen paneles solares pagados, cocina y baños remodelados y una impresionante chimenea. Sala de estar y comedor formales, desayunador y jardín trasero privado con segunda chimenea, ideal para entretenimiento. Garaje independiente para dos autos. Todo en un lote privado en esquina.",
     "features_es": [
-      "Acceso directo a la playa y vistas panorámicas al Pacífico",
-      "Cocina profesional con rango La Cornue",
-      "Piscina climatizada de agua salada y fogata exterior",
-      "Suite principal con terraza privada con vista al mar",
-      "Sala de cine y bodega con control de temperatura",
-      "Garaje para cuatro autos con elevador para vehículos",
-      "Sistema de iluminación y audio inteligente Lutron",
-      "A dos cuadras del Hotel del Coronado"
+      "Sistema solar pagado",
+      "Cocina y baños remodelados",
+      "Impresionante chimenea en la sala de estar",
+      "Sala de estar y comedor formales",
+      "Desayunador",
+      "Jardín trasero privado con segunda chimenea, ideal para entretenimiento",
+      "Garaje independiente para dos autos",
+      "Lote privado en esquina"
     ]
   },
   {

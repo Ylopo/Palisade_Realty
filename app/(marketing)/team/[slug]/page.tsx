@@ -99,8 +99,25 @@ export default async function AgentPage({ params }: Props) {
 
   const featuredListings = getAgentListings()
 
+  const personJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: agent.name,
+    url: `https://www.palisaderealty.com/team/${slug}`,
+    image: `https://www.palisaderealty.com${agent.imgSrc}`,
+    jobTitle: agent.title,
+    telephone: phone,
+    email,
+    worksFor: { '@id': 'https://www.palisaderealty.com/#organization' },
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+      />
       <Script src="https://search.palisaderealty.com/build/js/widgets-1.0.0.js" strategy="afterInteractive" />
       {/* ── HERO ────────────────────────────────────────────── */}
       <section

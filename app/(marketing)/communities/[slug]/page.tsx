@@ -41,9 +41,33 @@ export default async function CommunityPage({ params }: Props) {
   const transPath = path.join(process.cwd(), 'public', 'community-translations', `${slug}.js`)
   const cdTransScript = fs.existsSync(transPath) ? fs.readFileSync(transPath, 'utf8') : ''
 
+  const placeJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Place',
+    name: `${c.name}, San Diego County, CA`,
+    url: `https://www.palisaderealty.com/communities/${slug}`,
+    description: c.overview[0],
+    containedInPlace: {
+      '@type': 'AdministrativeArea',
+      name: 'San Diego County, California',
+    },
+    ...(locationMap && {
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: locationMap.center[1],
+        longitude: locationMap.center[0],
+      },
+    }),
+  }
+
   return (
     <>
       <CommunityPageBodyClass />
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(placeJsonLd) }}
+      />
       {cdTransScript && (
         <script dangerouslySetInnerHTML={{ __html: cdTransScript }} />
       )}
@@ -78,11 +102,23 @@ export default async function CommunityPage({ params }: Props) {
           <h1 className="hero-title" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(52px,9vw,110px)', fontWeight: 400, color: '#fff', letterSpacing: '-0.035em', lineHeight: 0.95, marginBottom: '44px' }}>
             {c.titleFirst} <em style={{ fontStyle: 'italic', color: 'var(--accent,#eeca00)' }}>{c.titleRest}</em>
           </h1>
-          <div style={{ display: 'flex', alignItems: 'center' }} role="list">
+          {/*
+            Fixed-width flex row doesn't wrap below 768px, pushing the first/last
+            stat cards off-screen (a ~260px horizontal-overflow bug on mobile
+            across all community pages) — see findings/visual.md.
+          */}
+          <style dangerouslySetInnerHTML={{ __html: `
+            @media (max-width: 768px) {
+              .comm-hero-stats { flex-wrap: wrap !important; justify-content: center !important; row-gap: 16px !important; }
+              .comm-hero-stat { padding: 0 18px !important; border-right: none !important; flex: 0 0 50% !important; }
+            }
+          ` }} />
+          <div className="comm-hero-stats" style={{ display: 'flex', alignItems: 'center' }} role="list">
             {c.heroStats.map((s, i) => (
               <div
                 key={i}
                 role="listitem"
+                className="comm-hero-stat"
                 style={{ padding: '0 36px', textAlign: 'center', borderRight: i < c.heroStats.length - 1 ? '1px solid rgba(255,255,255,0.18)' : undefined }}
               >
                 <span style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '26px', fontWeight: 600, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1, marginBottom: '5px' }}>{s.value}</span>

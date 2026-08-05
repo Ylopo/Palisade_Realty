@@ -97,8 +97,19 @@ export default async function PropertyPage({ params }: Props) {
       <PropertyGallery images={(p.gallery?.length ?? 0) > 0 ? p.gallery : [p.heroImage].filter(Boolean)} address={p.address} />
 
       {/* ── MAIN DETAIL ─────────────────────────────────────── */}
+      {/*
+        Fixed 320px second column doesn't collapse below 768px, causing a
+        ~270px horizontal-overflow/clipped-content bug on mobile across all
+        property pages — see findings/visual.md.
+      */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        @media (max-width: 768px) {
+          .pp-detail-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+          .pp-detail-sidebar { position: static !important; top: auto !important; }
+        }
+      ` }} />
       <section style={{ background: '#fff', padding: '64px var(--pad-x,60px)' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 320px', gap: '64px', alignItems: 'start' }}>
+        <div className="pp-detail-grid" style={{ maxWidth: '1100px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 320px', gap: '64px', alignItems: 'start' }}>
 
           {/* Left column */}
           <div>
@@ -181,8 +192,8 @@ export default async function PropertyPage({ params }: Props) {
             )}
           </div>
 
-          {/* Sticky sidebar */}
-          <aside style={{ position: 'sticky', top: '96px' }}>
+          {/* Sticky sidebar (collapses to static position on mobile — see .pp-detail-sidebar media query above) */}
+          <aside className="pp-detail-sidebar" style={{ position: 'sticky', top: '96px' }}>
             <div style={{ background: 'var(--brand-darker,#28000c)', borderRadius: '4px', padding: '32px 28px', color: '#fff' }}>
               <p className="pp-attribution" style={{ fontFamily: 'var(--font-label)', fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,.5)', marginBottom: '16px' }}>Listed By</p>
               <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '24px' }}>
