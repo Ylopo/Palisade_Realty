@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   },
   description:
     'San Diego real estate experts. Search homes, explore communities, and connect with Hedda Parashos and the Palisade Realty team.',
-  icons: { icon: '/assets/images/favicon.jpg' },
+  icons: { icon: '/images/favicon.jpg' },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
