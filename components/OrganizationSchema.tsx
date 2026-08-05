@@ -33,6 +33,25 @@ export default function OrganizationSchema() {
       'https://www.pinterest.com/palisaderealty/',
       'https://www.zillow.com/profile/Hedda%20Parashos#reviews',
     ],
+    // Second confirmed office/GBP listing (findings/local.md: "no local schema
+    // on the 18 community pages" / "multi-location schema pattern not
+    // implemented"). Represented via `department` per schema.org's documented
+    // multi-location pattern rather than a second top-level entity.
+    department: [
+      {
+        '@type': 'RealEstateAgent',
+        '@id': `${SITE_URL}/#location-north-park`,
+        name: 'Hedda Parashos – North Park',
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: '2828 University Ave., Suite 102',
+          addressLocality: 'San Diego',
+          addressRegion: 'CA',
+          postalCode: '92104',
+          addressCountry: 'US',
+        },
+      },
+    ],
     ...(zillow && {
       aggregateRating: {
         '@type': 'AggregateRating',

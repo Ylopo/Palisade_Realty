@@ -1,13 +1,26 @@
 {
   "summary": {
-    "google": {
-      "averageRating": 4.9,
-      "reviewCount": 32,
-      "profileUrl": "https://www.google.com/maps/search/?api=1&query=Palisade+Realty%2C+Inc.%2C+3434+Grove+St%2C+Lemon+Grove%2C+CA+91945",
-      "profileName": "Palisade Realty, Inc.",
-      "verifiedAt": "2026-07-31",
-      "structuredDataEligible": false
-    },
+    "googleLocations": [
+      {
+        "location": "Lemon Grove",
+        "averageRating": 4.9,
+        "reviewCount": 32,
+        "profileUrl": "https://www.google.com/maps/search/?api=1&query=Hedda+Parashos+-+Lemon+Grove%2C+3434+Grove+St%2C+Lemon+Grove%2C+CA+91945",
+        "profileName": "Hedda Parashos – Lemon Grove",
+        "verifiedAt": "2026-07-31",
+        "structuredDataEligible": false
+      },
+      {
+        "location": "North Park",
+        "averageRating": null,
+        "reviewCount": null,
+        "profileUrl": null,
+        "profileName": "Hedda Parashos – North Park",
+        "verifiedAt": null,
+        "structuredDataEligible": false,
+        "note": "Confirmed to exist 2026-08 -- awaiting the direct GBP share link and review count from the business before this renders on-site."
+      }
+    ],
     "zillow": {
       "averageRating": 5.0,
       "reviewCount": 993,

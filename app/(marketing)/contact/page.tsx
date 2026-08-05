@@ -5,7 +5,7 @@ import ContactHeroMap from './ContactHeroMap'
 export const metadata: Metadata = {
   title: 'Contact Us',
   description:
-    'Get in touch with Palisade Realty. Call (619) 794-0218, email us, or fill out our contact form. Offices in Lemon Grove and San Diego, CA.',
+    'Get in touch with Palisade Realty. Call (619) 794-0218, email us, or fill out our contact form. Offices in Lemon Grove and North Park, San Diego, CA.',
   alternates: {
     canonical: '/contact',
   },

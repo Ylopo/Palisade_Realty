@@ -3,12 +3,13 @@
 import { useCallback, useEffect, useRef, useState, type PointerEvent } from 'react'
 
 export interface ReviewSummary {
-  averageRating: number
-  reviewCount: number
-  profileUrl: string
+  averageRating: number | null
+  reviewCount: number | null
+  profileUrl: string | null
   profileName?: string
+  location?: string
   note?: string
-  verifiedAt: string
+  verifiedAt: string | null
   structuredDataEligible?: boolean
 }
 
@@ -25,7 +26,7 @@ export interface Review {
 }
 
 interface Props {
-  summary: { google?: ReviewSummary; zillow?: ReviewSummary }
+  summary: { googleLocations?: ReviewSummary[]; zillow?: ReviewSummary }
   reviews: Review[]
 }
 
@@ -156,20 +157,25 @@ export default function GoogleZillowReviews({ summary, reviews }: Props) {
       <h3 className="gzr-subheading">Trusted by San Diego Buyers and Sellers</h3>
       <p className="gzr-lead">Verified feedback from real Palisade Realty clients on Google and Zillow.</p>
 
-      {(summary.google || summary.zillow) && (
+      {((summary.googleLocations && summary.googleLocations.length > 0) || summary.zillow) && (
         <div className="gzr-summary-row">
-          {summary.google && (
-            <div className="gzr-summary-tile">
-              <span className="gzr-summary-source">Google</span>
-              <span className="gzr-summary-rating">{summary.google.averageRating.toFixed(1)}</span>
-              <GzrStars rating={Math.round(summary.google.averageRating)} />
-              <span className="gzr-summary-count">{summary.google.reviewCount} reviews</span>
-              <a className="tp-see-more-btn gzr-summary-link" href={summary.google.profileUrl} target="_blank" rel="noopener noreferrer">
-                Read Our Google Reviews
-              </a>
-            </div>
-          )}
-          {summary.zillow && (
+          {(summary.googleLocations ?? [])
+            // Skip locations we haven't been given real review data for yet
+            // (e.g. a confirmed-but-not-yet-linked GBP listing) rather than
+            // render a broken/fake tile — see findings/local.md.
+            .filter((g) => g.averageRating != null && g.reviewCount != null && g.profileUrl)
+            .map((g) => (
+              <div className="gzr-summary-tile" key={g.location ?? g.profileName}>
+                <span className="gzr-summary-source">Google{g.location ? ` — ${g.location}` : ''}</span>
+                <span className="gzr-summary-rating">{g.averageRating!.toFixed(1)}</span>
+                <GzrStars rating={Math.round(g.averageRating!)} />
+                <span className="gzr-summary-count">{g.reviewCount} reviews</span>
+                <a className="tp-see-more-btn gzr-summary-link" href={g.profileUrl!} target="_blank" rel="noopener noreferrer">
+                  Read Our Google Reviews
+                </a>
+              </div>
+            ))}
+          {summary.zillow && summary.zillow.averageRating != null && summary.zillow.reviewCount != null && summary.zillow.profileUrl && (
             <div className="gzr-summary-tile">
               <span className="gzr-summary-source">Zillow</span>
               <span className="gzr-summary-rating">{summary.zillow.averageRating.toFixed(1)}</span>

@@ -207,7 +207,7 @@ export default function ContactSection() {
 <div className="contact-office">
               <div className="contact-office-dot" style={{ background: 'var(--mid-gray)' }} aria-hidden="true" />
               <div>
-                <p className="contact-office-name" style={{ color: 'var(--mid-gray)' }}>San Diego</p>
+                <p className="contact-office-name" style={{ color: 'var(--mid-gray)' }}>North Park</p>
                 <p className="contact-office-addr">2828 University Ave., Suite 102<br />San Diego, CA 92104</p>
               </div>
             </div>

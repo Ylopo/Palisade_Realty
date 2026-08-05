@@ -6,7 +6,7 @@ import HomepageInit from '@/components/HomepageInit'
 import GoogleZillowReviews, { type Review, type ReviewSummary } from '@/components/GoogleZillowReviews'
 import reviewsData from '@/data/reviews.json'
 
-const reviewSummary = reviewsData.summary as { google?: ReviewSummary; zillow?: ReviewSummary }
+const reviewSummary = reviewsData.summary as { googleLocations?: ReviewSummary[]; zillow?: ReviewSummary }
 const reviewList = (reviewsData.reviews as Review[]).filter((r) => r.featured === true)
 
 export const metadata: Metadata = {
