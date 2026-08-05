@@ -21,6 +21,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${agent.name} — ${agent.title}`,
     description: `${agent.name} is a ${agent.title} with Palisade Realty serving San Diego County. Call ${agent.phone ?? SITE_PHONE}.`,
+    alternates: {
+      canonical: `/team/${slug}`,
+    },
   }
 }
 

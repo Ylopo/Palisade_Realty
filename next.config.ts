@@ -7,6 +7,8 @@ const nextConfig: NextConfig = {
     return [
       { source: '/:path*.html', destination: '/:path*', permanent: true },
       { source: '/index.html', destination: '/', permanent: true },
+      // Legacy team bio path structure (/team-page/:slug) — current routes live at /team/:slug
+      { source: '/team-page/:slug*', destination: '/team/:slug*', permanent: true },
     ]
   },
   images: {

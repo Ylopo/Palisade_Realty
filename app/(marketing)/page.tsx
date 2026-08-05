@@ -12,6 +12,9 @@ const reviewList = (reviewsData.reviews as Review[]).filter((r) => r.featured ==
 export const metadata: Metadata = {
   title: 'San Diego Real Estate',
   description: 'Experience the new way of buying and selling real estate in San Diego with Palisade Realty. Expert agents, exclusive listings, and unmatched local market knowledge.',
+  alternates: {
+    canonical: '/',
+  },
 }
 
 const STAR_SVG = (
@@ -244,15 +247,13 @@ export default function HomePage() {
       <div className="about-outer">
         <section className="about" id="about" aria-labelledby="about-heading">
           <div className="about-text">
-            <a
-              href="https://palisaderealty.com/team-page/hedda-parashos"
+            <Link
+              href="/team/hedda-parashos"
               className="about-name reveal"
               id="about-heading"
-              target="_blank"
-              rel="noopener noreferrer"
             >
               Hedda Parashos
-            </a>
+            </Link>
             <p className="about-title reveal stagger-1">CEO</p>
             <AboutBio>
               <p>Hedda Parashos is the Owner and President of Palisade Realty, a full-service real estate brokerage established in 2006. She acquired the company in 2012 and has since transformed it into one of Southern California&rsquo;s respected independent brokerages through innovation, strong leadership, and an unwavering commitment to both clients and agents.</p>
@@ -580,7 +581,7 @@ export default function HomePage() {
       <section className="cta-banner" id="cta" aria-labelledby="cta-heading">
         <div className="cta-banner-bg" aria-hidden="true">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className="cta-banner-bg-base" src="/assets/images/cta-background.jpg" alt="" />
+          <img className="cta-banner-bg-base" src="/assets/images/cta-background.jpg" alt="" loading="lazy" />
           <div className="cta-banner-bg-dark" />
         </div>
         <div className="cta-banner-content">

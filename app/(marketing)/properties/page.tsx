@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   title: 'Featured Properties — Palisade Realty',
   description:
     'Browse featured San Diego luxury properties presented by Palisade Realty. La Jolla, Coronado, Del Mar, Rancho Santa Fe, and more.',
+  alternates: {
+    canonical: '/properties',
+  },
 }
 
 async function getProperties(): Promise<FeaturedProperty[]> {
@@ -166,6 +169,7 @@ export default async function PropertiesPage() {
           <img
             src="/assets/images/cta-background.jpg"
             alt=""
+            loading="lazy"
             style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
           />
           <div style={{ position: 'absolute', inset: 0, background: 'rgba(10,0,5,0.6)' }} />

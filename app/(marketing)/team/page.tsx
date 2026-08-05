@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: 'Meet Our Team',
   description:
     'Meet the 100+ licensed real estate professionals at Palisade Realty. San Diego agents with deep local knowledge ready to guide your next home purchase or sale.',
+  alternates: {
+    canonical: '/team',
+  },
 }
 
 export default function TeamPage() {

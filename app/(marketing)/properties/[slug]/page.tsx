@@ -29,8 +29,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const p = getPropertyBySlug(slug)
   if (!p) return { title: 'Property Not Found' }
   return {
-    title: `${p.address} — ${p.priceDisplay} | Palisade Realty`,
+    // Root layout's title.template already appends " | Palisade Realty" — don't duplicate it here.
+    title: `${p.address} — ${p.priceDisplay}`,
     description: p.tagline ?? `${p.beds ?? '?'}bd/${p.baths ?? '?'}ba, ${p.sqft != null ? Number(p.sqft).toLocaleString() : '?'} sq ft in ${p.city}, CA. Listed by Palisade Realty.`,
+    alternates: {
+      canonical: `/properties/${slug}`,
+    },
   }
 }
 
@@ -46,9 +50,48 @@ export default async function PropertyPage({ params }: Props) {
     features: { en: p.features || [], es: featuresEs || p.features || [] },
   })
 
+  const listingJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'RealEstateListing',
+    name: p.address,
+    url: `https://www.palisaderealty.com/properties/${slug}`,
+    description: p.tagline ?? p.description,
+    image: (p.gallery?.length ?? 0) > 0 ? p.gallery : [p.heroImage].filter(Boolean),
+    about: {
+      '@type': 'SingleFamilyResidence',
+      name: p.address,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: p.address,
+        addressLocality: p.city,
+        addressRegion: p.state,
+        postalCode: p.zip,
+        addressCountry: 'US',
+      },
+      numberOfBedrooms: p.beds,
+      numberOfBathroomsTotal: p.baths,
+      ...(p.sqft != null && {
+        floorSize: { '@type': 'QuantitativeValue', value: p.sqft, unitCode: 'FTK' },
+      }),
+    },
+    offers: {
+      '@type': 'Offer',
+      price: p.price,
+      priceCurrency: 'USD',
+      availability: p.status === 'active' ? 'https://schema.org/InStock' : 'https://schema.org/SoldOut',
+      url: `https://www.palisaderealty.com/properties/${slug}`,
+      seller: { '@id': 'https://www.palisaderealty.com/#organization' },
+    },
+  }
+
   return (
     <>
       <PropertyPageBodyClass />
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(listingJsonLd) }}
+      />
       <script dangerouslySetInnerHTML={{ __html: `window.__ppLangData=${ppLangData};` }} />
       {/* ── GALLERY ─────────────────────────────────────────── */}
       <PropertyGallery images={(p.gallery?.length ?? 0) > 0 ? p.gallery : [p.heroImage].filter(Boolean)} address={p.address} />

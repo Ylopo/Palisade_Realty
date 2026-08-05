@@ -24,6 +24,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${c.name} Homes For Sale`,
     description: `Explore homes for sale in ${c.name}, CA. ${c.badge} living in San Diego County. Guided by Palisade Realty — local experts since 2008.`,
+    alternates: {
+      canonical: `/communities/${slug}`,
+    },
   }
 }
 

@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: 'San Diego Real Estate Blog',
   description:
     'Expert insights on buying, selling, and owning a home in San Diego. Browse articles from the Palisade Realty team covering market trends, tips, and local community guides.',
+  alternates: {
+    canonical: '/blog',
+  },
 }
 
 export const revalidate = 3600

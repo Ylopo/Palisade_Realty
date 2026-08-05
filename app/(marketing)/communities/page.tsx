@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: 'San Diego Communities',
   description:
     'Explore San Diego\'s finest communities with Palisade Realty. From La Jolla and Coronado to Rancho Santa Fe and beyond — find your perfect neighborhood.',
+  alternates: {
+    canonical: '/communities',
+  },
 }
 
 export default function CommunitiesPage() {
@@ -87,7 +90,7 @@ export default function CommunitiesPage() {
       <section className="comm-cta" id="cta" aria-labelledby="comm-cta-heading">
         <div className="comm-cta-bg" aria-hidden="true">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/assets/images/cta-background.jpg" alt="" />
+          <img src="/assets/images/cta-background.jpg" alt="" loading="lazy" />
           <div className="comm-cta-bg-overlay" />
         </div>
         <div className="comm-cta-content">

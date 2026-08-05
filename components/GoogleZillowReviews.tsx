@@ -137,27 +137,11 @@ export default function GoogleZillowReviews({ summary, reviews }: Props) {
 
   if (reviews.length === 0) return null
 
-  const jsonLd: Record<string, unknown>[] = []
-  if (summary.google && summary.google.structuredDataEligible !== false) {
-    jsonLd.push({
-      '@context': 'https://schema.org',
-      '@type': 'AggregateRating',
-      itemReviewed: { '@type': 'RealEstateAgent', name: summary.google.profileName || 'Palisade Realty' },
-      ratingValue: summary.google.averageRating,
-      reviewCount: summary.google.reviewCount,
-      bestRating: 5,
-    })
-  }
-  if (summary.zillow) {
-    jsonLd.push({
-      '@context': 'https://schema.org',
-      '@type': 'AggregateRating',
-      itemReviewed: { '@type': 'RealEstateAgent', name: summary.zillow.profileName || 'Palisade Realty' },
-      ratingValue: summary.zillow.averageRating,
-      reviewCount: summary.zillow.reviewCount,
-      bestRating: 5,
-    })
-  }
+  // Note: the site-wide RealEstateAgent JSON-LD (with a properly nested
+  // aggregateRating) is emitted once in app/layout.tsx via <OrganizationSchema />.
+  // This component used to also emit its own standalone, non-standard
+  // `AggregateRating` blocks here — removed to avoid duplicate/conflicting
+  // structured data on the homepage (see findings/schema.md, Critical finding #1).
 
   return (
     <div
@@ -254,11 +238,6 @@ export default function GoogleZillowReviews({ summary, reviews }: Props) {
           </svg>
         </button>
       </div>
-
-      {jsonLd.map((entry, i) => (
-        // eslint-disable-next-line react/no-danger
-        <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(entry) }} />
-      ))}
     </div>
   )
 }

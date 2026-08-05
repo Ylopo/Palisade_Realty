@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: 'Client Testimonials',
   description:
     'Read verified Zillow reviews from clients of Hedda Parashos and Palisade Realty. Real reviews from home buyers and sellers in San Diego and beyond.',
+  alternates: {
+    canonical: '/testimonials',
+  },
 }
 
 const zillowReviews: ReviewCardProps[] = (reviewsData.reviews as ReviewCardProps[]).filter(

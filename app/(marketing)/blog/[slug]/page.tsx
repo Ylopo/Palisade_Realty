@@ -74,14 +74,16 @@ async function fetchSanityPost(slug: string): Promise<SanityPost | null> {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
+  // Root layout's title.template already appends " | Palisade Realty" — don't duplicate it here.
+  const canonical = `/blog/${slug}`
   let post: SanityPost | null = null
   try { post = await fetchSanityPost(slug) } catch { /* ignore */ }
-  if (post) return { title: `${post.title} | Palisade Realty Blog`, description: post.excerpt }
+  if (post) return { title: `${post.title} | Blog`, description: post.excerpt, alternates: { canonical } }
   const local = loadLocalPost(slug)
-  if (local) return { title: `${local.title} | Palisade Realty Blog`, description: local.excerpt }
+  if (local) return { title: `${local.title} | Blog`, description: local.excerpt, alternates: { canonical } }
   const staticPost = STATIC_POSTS.find((p) => p.s === slug)
-  if (staticPost) return { title: `${staticPost.t} | Palisade Realty Blog`, description: staticPost.x }
-  return { title: 'Blog Post | Palisade Realty' }
+  if (staticPost) return { title: `${staticPost.t} | Blog`, description: staticPost.x, alternates: { canonical } }
+  return { title: 'Blog Post', alternates: { canonical } }
 }
 
 export const revalidate = 3600

@@ -17,11 +17,27 @@ export default function ContactHeroMap({ token, coordinates }: Props) {
   useEffect(() => {
     if (!containerRef.current || !token) return
 
-    // Mapbox GL JS is loaded globally via layout.tsx (strategy="beforeInteractive")
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const mgl: any = (window as any).mapboxgl
-    if (!mgl) return
+    // Mapbox GL JS is loaded globally via layout.tsx, but with strategy="lazyOnload"
+    // it may not be ready yet on mount — poll briefly rather than silently giving up,
+    // mirroring the same self-healing pattern already used by homepage-nextjs.js.
+    let cancelled = false
+    let pollId: ReturnType<typeof setTimeout> | undefined
 
+    const tryInit = () => {
+      if (cancelled || !containerRef.current) return
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const mgl: any = (window as any).mapboxgl
+      if (!mgl) {
+        pollId = setTimeout(tryInit, 150)
+        return
+      }
+      initMap(mgl)
+    }
+
+    let cleanupMap: (() => void) | undefined
+
+    function initMap(mgl: any) { // eslint-disable-line @typescript-eslint/no-explicit-any
+    if (!containerRef.current) return
     mgl.accessToken = token
 
     const map = new mgl.Map({
@@ -102,8 +118,15 @@ export default function ContactHeroMap({ token, coordinates }: Props) {
       }
     })
 
+      cleanupMap = () => map.remove()
+    }
+
+    tryInit()
+
     return () => {
-      map.remove()
+      cancelled = true
+      if (pollId) clearTimeout(pollId)
+      cleanupMap?.()
     }
   }, [token, coordinates])
 

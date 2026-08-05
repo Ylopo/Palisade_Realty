@@ -182,7 +182,7 @@ export default function ContactSection() {
             Our <em style={{ fontStyle: 'italic', color: 'var(--brand)' }}>Offices</em>
           </h2>
           <p className="contact-map-intro reveal reveal-delay-2">
-            We serve the greater San Diego area from three convenient locations.
+            We serve the greater San Diego area from two convenient locations.
           </p>
 
           <div className="contact-map-wrap reveal reveal-delay-2">
