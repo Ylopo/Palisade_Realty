@@ -12,7 +12,7 @@ export default function SiteFooter() {
         <div className="footer-col-brand">
           <div className="footer-logo">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/logo.png" alt="Palisade Realty" />
+            <img src="/images/logo.png" alt="Palisade Realty" width={477} height={180} loading="lazy" />
           </div>
 
           <div className="footer-copy-mls-row">
@@ -27,7 +27,7 @@ export default function SiteFooter() {
             </div>
             <div className="footer-mls-badge" aria-label="Move Safe Certified by HomeLight">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/assets/images/move-safe-offsite-stacked.png" alt="Move Safe Certified by HomeLight" />
+              <img src="/assets/images/move-safe-offsite-stacked.png" alt="Move Safe Certified by HomeLight" width={308} height={202} loading="lazy" />
             </div>
           </div>
 

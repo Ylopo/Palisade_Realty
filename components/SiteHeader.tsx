@@ -119,7 +119,7 @@ export default function SiteHeader() {
         {/* Center Logo */}
         <Link href="/" className="nav-logo" aria-label="Palisade Realty home">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/logo.png" alt="Palisade Realty" />
+          <img src="/images/logo.png" alt="Palisade Realty" width={477} height={180} />
         </Link>
 
         {/* Right Nav */}

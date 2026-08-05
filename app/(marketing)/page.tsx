@@ -50,7 +50,7 @@ export default function HomePage() {
         <div className="hero-content">
           <div className="hero-crest" aria-hidden="true">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/assets/images/graphic-logo-wht.png" alt="" />
+            <img src="/assets/images/graphic-logo-wht.png" alt="" width={232} height={314} />
           </div>
           <h1 className="hero-title">PALISADE REALTY</h1>
           <p className="hero-subtitle">
@@ -267,7 +267,7 @@ export default function HomePage() {
           </div>
           <div className="about-image">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/assets/images/Hedda_Parashos.jpg" alt="Hedda Parashos, CEO of Palisade Realty" />
+            <img src="/assets/images/Hedda_Parashos.jpg" alt="Hedda Parashos, CEO of Palisade Realty" width={960} height={1200} loading="lazy" />
           </div>
         </section>
       </div>
@@ -372,7 +372,7 @@ export default function HomePage() {
               >
                 <div className="testimonial-avatar-initials" aria-hidden="true">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={img} alt="" className="tp-av-img" />
+                  <img src={img} alt="" className="tp-av-img" width={100} height={100} loading="lazy" />
                 </div>
                 <span className="testimonial-avatar-name">{name}</span>
               </button>
@@ -391,7 +391,7 @@ export default function HomePage() {
                 <p className="testimonial-quote" data-quote-index="0">&ldquo;Working with Anh was honestly one of the best decisions we made. She made the entire process as stress free as possible, going above and beyond to make sure we had everything on our list. Her knowledge of the market and outstanding communication gave us confidence every step of the way &mdash; we truly felt like she had our best interests at heart the entire time.&rdquo;</p>
                 <div className="tp-agent-row">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/assets/images/agents/anh-lam.jpg" alt="Anh Lam" className="tp-agent-photo" />
+                  <img src="/assets/images/agents/anh-lam.jpg" alt="Anh Lam" className="tp-agent-photo" width={100} height={100} loading="lazy" />
                   <div className="tp-agent-info">
                     <span className="tp-review-for">Review for</span>
                     <span className="testimonial-author-name">Anh Lam</span>
@@ -407,7 +407,7 @@ export default function HomePage() {
                 <p className="testimonial-quote" data-quote-index="1">&ldquo;We worked with Wally on both the sale of our condo and the purchase of our home, and had a fantastic experience from start to finish. What we appreciated most was his communication &mdash; consistent real-time updates, total honesty at every stage, and a network of trusted professionals that made the entire process much smoother. Highly recommend!&rdquo;</p>
                 <div className="tp-agent-row">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/assets/images/agents/wally-dally.png" alt="Wally Dally" className="tp-agent-photo" />
+                  <img src="/assets/images/agents/wally-dally.png" alt="Wally Dally" className="tp-agent-photo" width={100} height={100} loading="lazy" />
                   <div className="tp-agent-info">
                     <span className="tp-review-for">Review for</span>
                     <span className="testimonial-author-name">Wally Dally</span>
@@ -423,7 +423,7 @@ export default function HomePage() {
                 <p className="testimonial-quote" data-quote-index="2">&ldquo;Five stars truly isn&rsquo;t enough to describe working with Jennifer. She brings a rare combination of deep market knowledge, flawless professionalism, and a brilliant get-it-done attitude. Real estate transactions can be stressful, but she completely shielded me from all of it &mdash; the process was entirely seamless. She is exceptional; I&rsquo;d recommend her to anyone!&rdquo;</p>
                 <div className="tp-agent-row">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/assets/images/agents/jennifer-crosby.jpg" alt="Jennifer Crosby" className="tp-agent-photo" />
+                  <img src="/assets/images/agents/jennifer-crosby.jpg" alt="Jennifer Crosby" className="tp-agent-photo" width={100} height={100} loading="lazy" />
                   <div className="tp-agent-info">
                     <span className="tp-review-for">Review for</span>
                     <span className="testimonial-author-name">Jennifer Crosby</span>
@@ -439,7 +439,7 @@ export default function HomePage() {
                 <p className="testimonial-quote" data-quote-index="3">&ldquo;We had a great experience working with Taylor. She was consistently responsive, friendly, and took the time to clearly explain each step of the process &mdash; which made everything feel much less overwhelming. She was also a strong negotiator and helped us feel confident we were getting the best possible outcome from start to finish!&rdquo;</p>
                 <div className="tp-agent-row">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/assets/images/agents/taylor-schunk.jpg" alt="Taylor Schunk" className="tp-agent-photo" />
+                  <img src="/assets/images/agents/taylor-schunk.jpg" alt="Taylor Schunk" className="tp-agent-photo" width={100} height={100} loading="lazy" />
                   <div className="tp-agent-info">
                     <span className="tp-review-for">Review for</span>
                     <span className="testimonial-author-name">Taylor Schunk</span>
@@ -455,7 +455,7 @@ export default function HomePage() {
                 <p className="testimonial-quote" data-quote-index="4">&ldquo;Jeremy managed to help us sell our house completely off-market, which saved us an incredible amount of time and stress. He flawlessly handled all the paperwork and took care of every interaction with contractors and vendors &mdash; we never had to worry about coordinating a thing. We cannot recommend Jeremy highly enough!&rdquo;</p>
                 <div className="tp-agent-row">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/assets/images/agents/jeremy-mchone.png" alt="Jeremy McHone" className="tp-agent-photo" />
+                  <img src="/assets/images/agents/jeremy-mchone.png" alt="Jeremy McHone" className="tp-agent-photo" width={100} height={100} loading="lazy" />
                   <div className="tp-agent-info">
                     <span className="tp-review-for">Review for</span>
                     <span className="testimonial-author-name">Jeremy McHone</span>
@@ -471,7 +471,7 @@ export default function HomePage() {
                 <p className="testimonial-quote" data-quote-index="5">&ldquo;Corinne went above and beyond. She was always available every weekend to tour whatever listing we sent her way, did her homework on each house beforehand, and listened carefully to our needs. She was always quick to respond and was consistently a dream to work with. We will be sending her name around to anyone we know who is house hunting!&rdquo;</p>
                 <div className="tp-agent-row">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/assets/images/agents/corinne-mauro.jpg" alt="Corinne Mauro" className="tp-agent-photo" />
+                  <img src="/assets/images/agents/corinne-mauro.jpg" alt="Corinne Mauro" className="tp-agent-photo" width={100} height={100} loading="lazy" />
                   <div className="tp-agent-info">
                     <span className="tp-review-for">Review for</span>
                     <span className="testimonial-author-name">Corinne Mauro</span>
@@ -487,7 +487,7 @@ export default function HomePage() {
                 <p className="testimonial-quote" data-quote-index="6">&ldquo;We can&rsquo;t recommend Jodi Kirkwood highly enough! She helped us both purchase our upstairs condo and sell our existing condo. Her knowledge of the local market is outstanding, and thanks to her expertise we received top dollar for our sale. She was always responsive, professional, and a strong advocate for us every step of the way. We would absolutely work with her again.&rdquo;</p>
                 <div className="tp-agent-row">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/assets/images/agents/jodi-kirkwood.jpg" alt="Jodi Kirkwood" className="tp-agent-photo" />
+                  <img src="/assets/images/agents/jodi-kirkwood.jpg" alt="Jodi Kirkwood" className="tp-agent-photo" width={100} height={100} loading="lazy" />
                   <div className="tp-agent-info">
                     <span className="tp-review-for">Review for</span>
                     <span className="testimonial-author-name">Jodi Kirkwood</span>
@@ -545,14 +545,15 @@ export default function HomePage() {
                 { slug: 'should-you-buy-a-new-house-before-selling-your-old-one-lets-explore-the-pros-and-cons', date: 'Aug 15, 2025', badge: 'SELLER', title: 'Should You Buy A New House Before Selling Your Old One? Pros and Cons', excerpt: 'The buy-before-sell dilemma is one of the most common challenges for move-up buyers. This breakdown helps you choose the right strategy for your situation.' },
                 { slug: 'safety-tips-to-keep-your-house-safe-during-a-renovation', date: 'Jul 29, 2025', badge: 'HOMEOWNER', title: 'Safety Tips to Keep Your House Safe During A Renovation', excerpt: 'Home renovations create excitement but also real hazards. Keeping your household safe requires planning, communication, and awareness of common risks.' },
                 { slug: '5-questions-to-ask-yourself-before-deciding-to-buy-a-house', date: 'Jun 30, 2025', badge: 'BUYER', title: '5 Questions to Ask Yourself Before Deciding To Buy A House', excerpt: 'Asking yourself these five honest questions before you start searching can save you time, money, and stress on the road to homeownership.' },
-              ].map(({ slug, date, badge, title, excerpt }, i) => (
+              ].map(({ slug, date, badge, title, excerpt }) => (
                 <article key={slug} className="blog-card">
                   <div className="blog-card-image">
+                    {/* Carousel sits well below the fold — none of these need to be eager (was forcing the first 3, contributing to homepage preload dilution; see findings/performance.md) */}
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={`/images/blog/${slug}.jpg`}
                       alt={title}
-                      loading={i < 3 ? 'eager' : 'lazy'}
+                      loading="lazy"
                     />
                     <span className="blog-card-date">{date}</span>
                   </div>
