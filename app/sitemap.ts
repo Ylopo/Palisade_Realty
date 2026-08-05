@@ -6,6 +6,7 @@ import { getAllCommunitySlugs } from '@/lib/community-data'
 import { getAllNeighborhoodParams } from '@/lib/neighborhood-data'
 import { ALL_AGENTS } from '@/lib/agents'
 import { STATIC_POSTS } from '@/lib/blog/static-posts'
+import { PILLARS } from '@/lib/blog/pillars'
 import { client } from '@/lib/sanity/client'
 import { ALL_POSTS_QUERY } from '@/lib/sanity/queries'
 
@@ -77,6 +78,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.9,
   }))
 
+  const guidePages: MetadataRoute.Sitemap = PILLARS.map((p) => ({
+    url: `${SITE_URL}/guides/${p.slug}`,
+    changeFrequency: 'weekly',
+    priority: 0.7,
+  }))
+
   const teamPages: MetadataRoute.Sitemap = ALL_AGENTS.map((a) => ({
     url: `${SITE_URL}/team/${a.slug}`,
     changeFrequency: 'yearly',
@@ -90,5 +97,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }))
 
-  return [...corePages, ...communityPages, ...neighborhoodPages, ...propertyPages, ...teamPages, ...blogPages]
+  return [...corePages, ...communityPages, ...neighborhoodPages, ...propertyPages, ...guidePages, ...teamPages, ...blogPages]
 }

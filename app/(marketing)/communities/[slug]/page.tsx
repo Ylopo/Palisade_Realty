@@ -8,6 +8,7 @@ import CommunityPageBodyClass from '@/components/CommunityPageBodyClass'
 import CommunitySchoolsTabs from '@/components/CommunitySchoolsTabs'
 import CommunityLocationMap from '@/components/CommunityLocationMap'
 import { COMMUNITY_LOCATION_MAPS } from '@/lib/community-location-maps'
+import { PILLARS } from '@/lib/blog/pillars'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -599,6 +600,25 @@ export default async function CommunityPage({ params }: Props) {
           </div>
         </div>
       )}
+
+      {/* ── 14b. GUIDES ─────────────────────────────────────────────
+          Bridges community pages to the blog's Buyer/Seller/Homeowner guides —
+          previously these had zero connective tissue beyond the generic sitewide
+          nav, see findings/cluster.md ("Community pages are strong, underused
+          pillar candidates with zero connection to blog content").
+      */}
+      <div style={{ background: '#faf7f2', padding: '56px var(--pad-x,56px)', textAlign: 'center' }}>
+        <span className="section-eyebrow" style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '20px' }}>
+          Buying or Selling in {c.name}?
+        </span>
+        <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
+          {PILLARS.map((p) => (
+            <Link key={p.slug} href={`/guides/${p.slug}`} className="btn btn-outline-brand">
+              {p.shortTitle}
+            </Link>
+          ))}
+        </div>
+      </div>
 
       {/* ── 15. CTA ─────────────────────────────────────────────── */}
       <section

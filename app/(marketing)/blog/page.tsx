@@ -4,6 +4,7 @@ import BlogListing, { type Post } from './BlogListing'
 import { client } from '@/lib/sanity/client'
 import { ALL_POSTS_QUERY } from '@/lib/sanity/queries'
 import { categoryToDisplayBucket } from '@/lib/blog/category-map'
+import { PILLARS } from '@/lib/blog/pillars'
 import './blog.css'
 
 export const metadata: Metadata = {
@@ -46,6 +47,24 @@ export default async function BlogPage() {
         <p className="blog-hero-sub reveal reveal-d2">
           Expert tips, local market insights, and practical advice for buyers, sellers, and homeowners throughout San Diego County.
         </p>
+      </section>
+
+      {/* ── BROWSE BY GUIDE ────────────────────────────────────
+          Cross-links into the 3 pillar guides so visitors (and crawlers) can
+          reach the hub-and-spoke architecture from the blog index — see
+          findings/cluster.md ("zero internal linking between the 20 blog posts").
+      */}
+      <section style={{ background: '#fff', padding: '48px var(--pad-x,60px) 0', textAlign: 'center' }}>
+        <p style={{ fontFamily: 'var(--font-label)', fontSize: '11px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#999', marginBottom: '16px' }}>
+          Browse by Guide
+        </p>
+        <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
+          {PILLARS.map((p) => (
+            <Link key={p.slug} href={`/guides/${p.slug}`} className="btn btn-outline-brand">
+              {p.shortTitle}
+            </Link>
+          ))}
+        </div>
       </section>
 
       {/* ── BLOG LISTING (client component) ─────────────────── */}

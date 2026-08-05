@@ -5,8 +5,9 @@ import path from 'path'
 import { PortableText } from '@portabletext/react'
 import { client } from '@/lib/sanity/client'
 import { POST_BY_SLUG_QUERY } from '@/lib/sanity/queries'
-import { categoryToDisplayBucket } from '@/lib/blog/category-map'
+import { categoryToDisplayBucket, type DisplayBucket } from '@/lib/blog/category-map'
 import { STATIC_POSTS } from '@/lib/blog/static-posts'
+import RelatedArticles from '@/components/RelatedArticles'
 
 interface LocalPost {
   slug: string
@@ -206,6 +207,7 @@ export default async function BlogPostPage({ params }: Props) {
               <Link href="/team" className="btn btn-outline-white">Meet Our Team</Link>
             </div>
           </section>
+          <RelatedArticles slug={slug} category={local.category as DisplayBucket} />
           <section style={{ background: 'var(--off-white,#faf7f2)', padding: '48px var(--pad-x,60px)', textAlign: 'center' }}>
             <Link href="/blog" className="bp-back btn btn-outline-brand">← Back to Blog</Link>
           </section>
@@ -283,6 +285,7 @@ export default async function BlogPostPage({ params }: Props) {
             </div>
           </div>
         </section>
+        <RelatedArticles slug={slug} category={staticPost.c as DisplayBucket} />
         <section style={{ background: 'var(--off-white,#faf7f2)', padding: '48px var(--pad-x,60px)', textAlign: 'center' }}>
           <Link href="/blog" className="bp-back btn btn-outline-brand">← Back to Blog</Link>
         </section>
@@ -358,6 +361,8 @@ export default async function BlogPostPage({ params }: Props) {
           )}
         </div>
       </section>
+
+      <RelatedArticles slug={slug} category={post.category as DisplayBucket} />
 
       {/* ── BACK NAV ─────────────────────────────────────────── */}
       <section style={{ background: 'var(--off-white,#faf7f2)', padding: '48px var(--pad-x,60px)', textAlign: 'center' }}>
