@@ -122,7 +122,10 @@ export async function POST(request: NextRequest) {
     const { videoId } = await submitRender({
       script: post.videoScript,
       imageUrls,
-      thumbnailUrl: post.videoThumbnailUrl,
+      // Sanity/GROQ returns null (not undefined) for an unset field — the
+      // Enterprise API's schema rejects an explicit null for an optional
+      // field ("expected string, received null"), so this must be coerced.
+      thumbnailUrl: post.videoThumbnailUrl ?? undefined,
       lookId: chosenLook,
       voiceId: voiceId ?? undefined,
       idempotencyKey,

@@ -73,6 +73,13 @@ export async function submitRender(input: SubmitRenderInput): Promise<SubmitRend
     headers['Idempotency-Key'] = input.idempotencyKey
   }
 
+  // Build the optional fields conditionally rather than always including the
+  // key — callers occasionally pass through a Sanity-sourced `null` (GROQ
+  // returns null, not undefined, for an unset field) for thumbnailUrl/lookId/
+  // voiceId, and the platform's schema rejects an explicit null on an
+  // optional field ("expected string, received null") even though omitting
+  // the key entirely is fine. This is the same fix at the boundary that
+  // callers should also apply themselves — belt and suspenders.
   const res = await fetch(`${baseUrl}/api/v1/videos`, {
     method: 'POST',
     headers,
@@ -82,9 +89,9 @@ export async function submitRender(input: SubmitRenderInput): Promise<SubmitRend
       script: input.script,
       layout: 'animated',
       imageUrls: input.imageUrls,
-      lookId: input.lookId,
-      voiceId: input.voiceId,
-      thumbnailUrl: input.thumbnailUrl,
+      ...(input.lookId ? { lookId: input.lookId } : {}),
+      ...(input.voiceId ? { voiceId: input.voiceId } : {}),
+      ...(input.thumbnailUrl ? { thumbnailUrl: input.thumbnailUrl } : {}),
     }),
   })
 
