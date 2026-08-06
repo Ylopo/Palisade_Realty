@@ -216,6 +216,7 @@ export default function VAPostPage() {
   const [uploadingSceneIndex, setUploadingSceneIndex] = useState<number | null>(null)
   const [savingScenes, setSavingScenes] = useState(false)
   const [scenesSaved, setScenesSaved] = useState(false)
+  const [saveScenesError, setSaveScenesError] = useState('')
 
   // ── NEW: Generate Video — Ylopo Enterprise state ────────────────────────────
   const [enterpriseCoverUrl, setEnterpriseCoverUrl] = useState<string | null>(null)
@@ -250,6 +251,14 @@ export default function VAPostPage() {
               imageQuery: s.imageQuery,
               ...(s.place ? { place: s.place } : {}),
             })))
+            // Also rehydrate which scenes were already approved + saved, keyed
+            // by array order, so a previously-saved selection still shows as
+            // selected instead of looking unset after a reload.
+            const approved: Record<number, string> = {}
+            found.videoScenes.forEach((s, i) => {
+              if (s.approved && s.imageUrl) approved[i] = s.imageUrl
+            })
+            if (Object.keys(approved).length > 0) setApprovedScenes(approved)
           }
 
           if (found.workflowStatus === 'media_ready' || found.workflowStatus === 'published' || found.workflowStatus === 'scheduled') {
@@ -704,15 +713,31 @@ export default function VAPostPage() {
   async function handleSaveScenes() {
     setSavingScenes(true)
     setScenesSaved(false)
+    setSaveScenesError('')
     try {
-      const approvedUrls = Object.values(approvedScenes)
+      // /api/content/save-scenes expects the full scene shape it can persist
+      // (keyword/phrase/order/approved/imageUrl), not a bare list of URLs —
+      // send every scene so metadata for not-yet-approved ones survives too.
+      const scenesPayload = scenes.map((scene, sceneIndex) => ({
+        keyword: scene.keyword,
+        phrase: scene.phrase,
+        imageQuery: scene.imageQuery,
+        ...(scene.place ? { place: scene.place } : {}),
+        imageUrl: approvedScenes[sceneIndex] ?? '',
+        order: sceneIndex,
+        approved: sceneIndex in approvedScenes,
+      }))
       const res = await fetch(`/api/content/save-scenes?secret=${encodeURIComponent(secret)}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ postId, imageUrls: approvedUrls }),
+        body: JSON.stringify({ postId, scenes: scenesPayload }),
       })
-      if (res.ok) setScenesSaved(true)
-    } catch { /* ignore */ } finally {
+      const data = await res.json().catch(() => ({}))
+      if (!res.ok) throw new Error(data.error ?? 'Save failed')
+      setScenesSaved(true)
+    } catch (err) {
+      setSaveScenesError(err instanceof Error ? err.message : 'Save failed')
+    } finally {
       setSavingScenes(false)
     }
   }
@@ -1539,20 +1564,62 @@ export default function VAPostPage() {
                               </div>
                             )
                           })}
-                          <label style={{
-                            width: 96, height: 96, borderRadius: 6, border: '1.5px dashed #cbd5e1',
-                            display: 'flex', alignItems: 'center', justifyContent: 'center',
-                            fontSize: 11, color: '#94a3b8', textAlign: 'center', cursor: uploadingSceneIndex === sceneIndex ? 'wait' : 'pointer',
-                            padding: 4,
-                          }}>
-                            {uploadingSceneIndex === sceneIndex ? 'Uploading…' : 'Upload your own'}
-                            <input
-                              type="file"
-                              accept="image/*"
-                              onChange={e => handleUploadOwnScene(sceneIndex, e)}
-                              style={{ display: 'none' }}
-                            />
-                          </label>
+                          {(() => {
+                            const approvedUrl = approvedScenes[sceneIndex]
+                            const isOwnUpload = approvedUrl && !scene.candidates.some(c => c.url === approvedUrl)
+                            if (isOwnUpload) {
+                              // Show the uploaded image itself (not just a static
+                              // placeholder) so it's obvious the upload registered
+                              // and is the one that'll be saved for this scene.
+                              return (
+                                <div style={{ position: 'relative' }}>
+                                  <label style={{ display: 'block', cursor: uploadingSceneIndex === sceneIndex ? 'wait' : 'pointer' }}>
+                                    <img
+                                      src={approvedUrl}
+                                      alt={`${scene.keyword} — your upload`}
+                                      style={{ width: 96, height: 96, objectFit: 'cover', borderRadius: 6, border: `2px solid ${BRAND}` }}
+                                    />
+                                    <input
+                                      type="file"
+                                      accept="image/*"
+                                      onChange={e => handleUploadOwnScene(sceneIndex, e)}
+                                      style={{ display: 'none' }}
+                                    />
+                                  </label>
+                                  <span style={{
+                                    position: 'absolute', top: 4, right: 4,
+                                    background: BRAND, color: '#fff', fontSize: 10, fontWeight: 700,
+                                    borderRadius: 99, width: 18, height: 18, display: 'flex',
+                                    alignItems: 'center', justifyContent: 'center',
+                                  }}>
+                                    ✓
+                                  </span>
+                                  <span style={{
+                                    position: 'absolute', bottom: -18, left: 0, right: 0,
+                                    fontSize: 10, color: BRAND, fontWeight: 600, textAlign: 'center',
+                                  }}>
+                                    Your upload
+                                  </span>
+                                </div>
+                              )
+                            }
+                            return (
+                              <label style={{
+                                width: 96, height: 96, borderRadius: 6, border: '1.5px dashed #cbd5e1',
+                                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                fontSize: 11, color: '#94a3b8', textAlign: 'center', cursor: uploadingSceneIndex === sceneIndex ? 'wait' : 'pointer',
+                                padding: 4,
+                              }}>
+                                {uploadingSceneIndex === sceneIndex ? 'Uploading…' : 'Upload your own'}
+                                <input
+                                  type="file"
+                                  accept="image/*"
+                                  onChange={e => handleUploadOwnScene(sceneIndex, e)}
+                                  style={{ display: 'none' }}
+                                />
+                              </label>
+                            )
+                          })()}
                         </div>
                       </div>
                     ))}
@@ -1574,6 +1641,7 @@ export default function VAPostPage() {
                     {savingScenes ? 'Saving…' : `Save ${Object.keys(approvedScenes).length} approved scene${Object.keys(approvedScenes).length === 1 ? '' : 's'}`}
                   </button>
                   {scenesSaved && <span style={{ fontSize: 12, color: '#166534', fontWeight: 600 }}>✓ Saved</span>}
+                  {saveScenesError && <span style={{ fontSize: 12, color: '#dc2626', fontWeight: 600 }}>{saveScenesError}</span>}
                 </div>
               </>
             )}

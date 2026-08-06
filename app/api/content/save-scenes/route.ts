@@ -12,6 +12,9 @@ interface IncomingScene {
   approved: boolean
   /** Optional provenance tag carried over from source-scene-images candidates (e.g. "unsplash", "google"). */
   source?: string
+  /** Preserved so a later "Find Images" re-run after a page reload still has a query/place to search with. */
+  imageQuery?: string
+  place?: string
 }
 
 interface SavedScene {
@@ -21,6 +24,8 @@ interface SavedScene {
   order: number
   approved: boolean
   source: string
+  imageQuery?: string
+  place?: string
 }
 
 function isAuthorized(request: NextRequest): boolean {
@@ -99,6 +104,8 @@ export async function POST(request: NextRequest) {
         order: scene.order,
         approved: scene.approved,
         source: scene.source ?? (isSanityUrl(scene.imageUrl) ? 'sanity' : 'external'),
+        ...(scene.imageQuery ? { imageQuery: scene.imageQuery } : {}),
+        ...(scene.place ? { place: scene.place } : {}),
       })
     }
 
