@@ -38,6 +38,16 @@ export interface SanityBlogPost {
   socialCopy?: string
   socialDeclined?: boolean
   videoScript?: string
+  videoScenes?: Array<{
+    keyword: string
+    phrase: string
+    imageQuery: string
+    place?: string
+    imageUrl?: string
+    order?: number
+    approved?: boolean
+    source?: string
+  }>
   videoUrl?: string
   videoThumbnailUrl?: string
   scheduledPublishAt?: string
@@ -229,6 +239,18 @@ export default function VAPostPage() {
         if (found) {
           setSocialCopy(found.socialCopy ?? '')
           setVideoScript(found.videoScript ?? '')
+          // Rehydrate scenes saved by a previous generate-script call — without
+          // this, refreshing the page after generating a script (but before
+          // finding/approving images) wipes the Scene Images card back to
+          // "Generate a video script above first" even though a script exists.
+          if (found.videoScenes?.length) {
+            setScenes(found.videoScenes.map((s) => ({
+              keyword: s.keyword,
+              phrase: s.phrase,
+              imageQuery: s.imageQuery,
+              ...(s.place ? { place: s.place } : {}),
+            })))
+          }
 
           if (found.workflowStatus === 'media_ready' || found.workflowStatus === 'published' || found.workflowStatus === 'scheduled') {
             setThumbnail({ type: 'saved' })

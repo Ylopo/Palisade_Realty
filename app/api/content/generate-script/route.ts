@@ -239,6 +239,22 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    // Persist immediately — without this, the script/scenes only ever lived
+    // in the browser's React state, so refreshing the page (or coming back
+    // later) before scene images were found/approved silently lost them and
+    // reset the Scene Images card to "Generate a video script above first."
+    await writeClient
+      .patch(postId)
+      .set({
+        videoScript: script,
+        videoScenes: scenes.map((scene, order) => ({
+          ...scene,
+          order,
+          approved: false,
+        })),
+      })
+      .commit()
+
     return NextResponse.json({
       script,
       scenes,
