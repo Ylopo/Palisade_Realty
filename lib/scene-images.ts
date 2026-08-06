@@ -1,5 +1,5 @@
 /**
- * Sources 3-5 candidate background images per script "scene" for the Enterprise
+ * Sources 4-5 candidate background images per script "scene" for the Enterprise
  * Video Pipeline. A scene is one beat of a script tied to a place/topic
  * (`{keyword, phrase, imageQuery, place?}`).
  *
@@ -7,10 +7,25 @@
  *   1. Mapbox static map (only if `scene.place` is set) — always candidate[0].
  *   2. Firecrawl web search for real photos matching `scene.imageQuery`
  *      (skipped gracefully if `FIRECRAWL_API_KEY` is not configured).
- *   3. OpenAI image generation, but ONLY as a last resort if steps 1-2 produced
- *      zero candidates (skipped gracefully if `OPENAI_API_KEY` is not configured
- *      — in that case the scene simply gets zero candidates, it does not throw).
+ *   3. OpenAI image generation fills the remainder up to TARGET_CANDIDATES —
+ *      this is the primary source for topic/stat scenes with no place and no
+ *      Firecrawl results (e.g. "sales surge", "median price"), not just a
+ *      last-resort single image. Generates several distinct framings in
+ *      parallel (skipped gracefully if `OPENAI_API_KEY` is not configured —
+ *      in that case the scene simply gets fewer candidates, it does not throw).
  */
+
+const TARGET_CANDIDATES = 4
+
+// Distinct framing/style hints appended to the same base prompt so parallel
+// DALL-E calls return genuinely different options instead of near-duplicates.
+const IMAGE_STYLE_VARIANTS = [
+  'wide establishing shot, natural daylight',
+  'close-up detail shot, warm evening light',
+  'aerial drone perspective',
+  'interior-focused composition with depth',
+  'street-level candid composition',
+]
 
 const MAPBOX_TOKEN = process.env.MAPBOX_PUBLIC_TOKEN
 
@@ -146,12 +161,11 @@ async function searchFirecrawlImages(imageQuery: string): Promise<SceneCandidate
 }
 
 /**
- * Generates a fallback background image via OpenAI's image API. Returns null
- * (never throws) if `OPENAI_API_KEY` is not configured or the request fails —
- * this integration is optional per client and this is only ever called as a
- * last-resort fallback when no real photos were found.
+ * Generates one background image via OpenAI's image API for a single style
+ * variant. Returns null (never throws) if `OPENAI_API_KEY` is not configured
+ * or the request fails — this integration is optional per client.
  */
-async function generateOpenAiImage(imageQuery: string): Promise<SceneCandidate | null> {
+async function generateOneOpenAiImage(imageQuery: string, styleHint: string): Promise<SceneCandidate | null> {
   const apiKey = process.env.OPENAI_API_KEY
   if (!apiKey) return null
 
@@ -164,7 +178,7 @@ async function generateOpenAiImage(imageQuery: string): Promise<SceneCandidate |
       },
       body: JSON.stringify({
         model: 'dall-e-3',
-        prompt: imageQuery,
+        prompt: `Real estate marketing photo: ${imageQuery}. ${styleHint}. Photorealistic, professional real estate photography, no text or watermarks.`,
         n: 1,
         size: '1024x1792', // portrait, closest native size to a 9:16 video frame
         response_format: 'url',
@@ -188,7 +202,23 @@ async function generateOpenAiImage(imageQuery: string): Promise<SceneCandidate |
 }
 
 /**
- * Sources 3-5 candidate background images per scene for a script.
+ * Generates up to `count` background images via OpenAI in parallel, each with
+ * a distinct framing/style hint so the operator gets genuinely different
+ * options rather than near-duplicates. DALL-E 3 only supports n=1 per call,
+ * so this fans out `count` separate requests instead of one call with n>1.
+ * Returns whatever succeeded — never throws, and returns [] if
+ * `OPENAI_API_KEY` is not configured.
+ */
+async function generateOpenAiImages(imageQuery: string, count: number): Promise<SceneCandidate[]> {
+  if (!process.env.OPENAI_API_KEY || count <= 0) return []
+
+  const variants = IMAGE_STYLE_VARIANTS.slice(0, count)
+  const results = await Promise.all(variants.map((hint) => generateOneOpenAiImage(imageQuery, hint)))
+  return results.filter((r): r is SceneCandidate => r !== null)
+}
+
+/**
+ * Sources up to TARGET_CANDIDATES background images per scene for a script.
  */
 export async function sourceSceneImages(scenes: Scene[]): Promise<SourcedScene[]> {
   const results: SourcedScene[] = []
@@ -208,12 +238,11 @@ export async function sourceSceneImages(scenes: Scene[]): Promise<SourcedScene[]
     const searchCandidates = await searchFirecrawlImages(scene.imageQuery)
     candidates.push(...searchCandidates)
 
-    // 3. OpenAI generation, only if steps 1-2 found nothing.
-    if (candidates.length === 0) {
-      const generated = await generateOpenAiImage(scene.imageQuery)
-      if (generated) {
-        candidates.push(generated)
-      }
+    // 3. OpenAI generation fills the remainder up to TARGET_CANDIDATES — the
+    // primary source for topic/stat scenes (no place, nothing from search).
+    if (candidates.length < TARGET_CANDIDATES) {
+      const generated = await generateOpenAiImages(scene.imageQuery, TARGET_CANDIDATES - candidates.length)
+      candidates.push(...generated)
     }
 
     results.push({
