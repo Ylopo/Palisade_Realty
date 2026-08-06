@@ -37,6 +37,13 @@ export const blogPost = defineType({
       description: "Community slugs (e.g. coronado-real-estate) — post appears in that community's Most Popular tab",
     }),
     defineField({
+      name: 'idxAreas',
+      title: 'IDX Listing Areas',
+      type: 'array',
+      of: [{ type: 'string' }],
+      description: 'Community names to show live IDX listings for at the bottom of this blog post (set from the VA queue\'s "Blog Listings" card).',
+    }),
+    defineField({
       name: 'category',
       title: 'Category',
       type: 'string',

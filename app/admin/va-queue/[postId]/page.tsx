@@ -38,6 +38,7 @@ export interface SanityBlogPost {
   socialCopy?: string
   socialDeclined?: boolean
   videoScript?: string
+  idxAreas?: string[]
   videoScenes?: Array<{
     keyword: string
     phrase: string
@@ -240,6 +241,7 @@ export default function VAPostPage() {
         if (found) {
           setSocialCopy(found.socialCopy ?? '')
           setVideoScript(found.videoScript ?? '')
+          if (found.idxAreas?.length) setIdxAreas(found.idxAreas)
           // Rehydrate scenes saved by a previous generate-script call — without
           // this, refreshing the page after generating a script (but before
           // finding/approving images) wipes the Scene Images card back to
@@ -261,7 +263,11 @@ export default function VAPostPage() {
             if (Object.keys(approved).length > 0) setApprovedScenes(approved)
           }
 
-          if (found.workflowStatus === 'media_ready' || found.workflowStatus === 'published' || found.workflowStatus === 'scheduled') {
+          // mark-ready always advances workflowStatus regardless of whether an
+          // image was ever uploaded (e.g. it's also used to save caption/script
+          // edits before a thumbnail exists) — so workflowStatus alone can't
+          // tell us a cover image is actually saved. Check the real data.
+          if (found.coverImage?.asset) {
             setThumbnail({ type: 'saved' })
           }
 
