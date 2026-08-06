@@ -43,6 +43,28 @@ function isSanityUrl(url: string): boolean {
   }
 }
 
+// Mirrors image-proxy's UA — the same third-party sites that block bot-looking
+// <img> requests (which is why the proxy exists) will also block a bare
+// server-side fetch without this header.
+const BROWSER_USER_AGENT =
+  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+
+/**
+ * approvedScenes stores whatever URL was shown in the browser — for real-photo
+ * candidates from source-scene-images, that's a same-origin
+ * `/api/content/image-proxy?url=<encoded original>` path built for `<img>`
+ * tags, not a fetchable absolute URL. Node's `fetch()` can't resolve a
+ * relative URL ("Failed to parse URL from ..."), so unwrap the original
+ * upstream URL out of the proxy path before fetching it here. Any other URL
+ * (Sanity CDN, Mapbox static map, DALL-E) is already absolute and passes
+ * through unchanged.
+ */
+function resolveFetchableUrl(url: string): string {
+  if (!url.startsWith('/api/content/image-proxy')) return url
+  const original = new URL(url, 'http://localhost').searchParams.get('url')
+  return original ?? url
+}
+
 /**
  * POST /api/content/save-scenes?secret=...
  * Body: { postId: string; scenes: Array<{ keyword, phrase, imageUrl, order, approved }> }
@@ -82,7 +104,10 @@ export async function POST(request: NextRequest) {
       let finalImageUrl = scene.imageUrl
 
       if (scene.approved && scene.imageUrl && !isSanityUrl(scene.imageUrl)) {
-        const upstream = await fetch(scene.imageUrl)
+        const fetchUrl = resolveFetchableUrl(scene.imageUrl)
+        const upstream = await fetch(fetchUrl, {
+          headers: { 'User-Agent': BROWSER_USER_AGENT, Accept: 'image/avif,image/webp,image/apng,image/*,*/*;q=0.8' },
+        })
         if (!upstream.ok) {
           throw new Error(
             `save-scenes: failed to fetch scene image for order ${scene.order} (${upstream.status})`
