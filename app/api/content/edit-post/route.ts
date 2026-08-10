@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
-import { writeClient } from '@/lib/sanity/client'
+import { client, writeClient } from '@/lib/sanity/client'
+import { waitForCdn } from '@/lib/sanity/cdn-sync'
 import { portableTextToMarkdown, markdownToPortableText } from '@/lib/portable-text-utils'
 
 export const runtime = 'nodejs'
@@ -91,13 +92,22 @@ async function applyEdits(postId: string, replacements: Replacement[], dryRun: b
 
   const newBody = markdownToPortableText(markdown)
 
+  let cdnSynced: boolean | undefined
   if (!dryRun) {
     await writeClient.patch(post._id).set({ body: newBody }).commit()
+    // The public pages read through Sanity's CDN, which lags writes — wait for
+    // the new body to be visible there before revalidating, or Next re-caches
+    // the stale version for an hour.
+    const expected = JSON.stringify(newBody)
+    cdnSynced = await waitForCdn(async () => {
+      const cdnBody = await client.fetch(`*[_id == $postId][0].body`, { postId: post._id })
+      return JSON.stringify(cdnBody) === expected
+    })
     revalidatePath('/blog')
     if (post.slug) revalidatePath(`/blog/${post.slug}`)
   }
 
-  return NextResponse.json({ ok: true, dryRun, postId: post._id, slug: post.slug, applied, missed })
+  return NextResponse.json({ ok: true, dryRun, postId: post._id, slug: post.slug, applied, missed, cdnSynced })
 }
 
 export async function GET(request: NextRequest) {

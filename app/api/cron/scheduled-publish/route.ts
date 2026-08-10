@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
-import { writeClient } from '@/lib/sanity/client'
+import { client, writeClient } from '@/lib/sanity/client'
+import { waitForCdn } from '@/lib/sanity/cdn-sync'
 import { getVAQueuePost } from '@/lib/sanity/queries'
 import { publishPostToAll } from '@/lib/publish-service'
 
@@ -43,7 +44,13 @@ export async function GET(request: Request) {
       if (result.ok) {
         published++
         await writeClient.patch(stub._id).set({ workflowStatus: 'published' }).commit()
-        // Blog pages use hour-long ISR — refresh them so the post shows up now.
+        // Blog pages use hour-long ISR — refresh them so the post shows up
+        // now. Wait for Sanity's CDN to see the status flip first, or the
+        // revalidated render re-caches the pre-publish state.
+        await waitForCdn(async () => {
+          const status = await client.fetch(`*[_id == $postId][0].workflowStatus`, { postId: stub._id })
+          return status === 'published'
+        })
         revalidatePath('/blog')
         revalidatePath(`/blog/${post.slug}`)
         console.log(`[scheduled-publish] Published: ${post.title}`)

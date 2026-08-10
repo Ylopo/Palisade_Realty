@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
-import { writeClient } from '@/lib/sanity/client'
+import { client, writeClient } from '@/lib/sanity/client'
+import { waitForCdn } from '@/lib/sanity/cdn-sync'
 import { getVAQueuePost } from '@/lib/sanity/queries'
 import { publishPostToAll } from '@/lib/publish-service'
 
@@ -67,6 +68,12 @@ export async function POST(request: Request) {
 
   // Blog pages use hour-long ISR — refresh them now so the post shows up
   // on the site immediately instead of whenever the cache next expires.
+  // Wait for Sanity's CDN (which the public pages read) to see the status
+  // flip first, or the revalidated render re-caches the pre-publish state.
+  await waitForCdn(async () => {
+    const status = await client.fetch(`*[_id == $postId][0].workflowStatus`, { postId })
+    return status === 'published'
+  })
   revalidatePath('/blog')
   revalidatePath(`/blog/${post.slug}`)
 
