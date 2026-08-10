@@ -44,7 +44,7 @@ const VA_QUEUE_QUERY = groq`
     category,
     workflowStatus,
     vaQueuePriority,
-    "coverImage": coverImage.asset->url,
+    coverImage,
     publishedAt,
     scheduledPublishAt,
     videoUrl,
@@ -62,7 +62,6 @@ export async function getVAQueue() {
 const VA_QUEUE_POST_QUERY = groq`
   *[_id == $postId][0]{
     ...,
-    "coverImage": coverImage.asset->url,
     videoScenes,
     videoThumbnailUrl,
     videoLookId
