@@ -274,3 +274,36 @@ export function sourceBonus(domain: string): number {
     default:                  return 0
   }
 }
+
+// ─── Human-readable publication names ────────────────────────────────────────
+// Used for the "Sources:" credit block on generated posts — a reader should
+// see "Freddie Mac", not a source-type bucket like "Web" or "Market Data".
+
+const SOURCE_DISPLAY_NAMES: Record<string, string> = {
+  'fastexpert.com':           'FastExpert',
+  'freddiemac.com':           'Freddie Mac',
+  'va.gov':                   'U.S. Department of Veterans Affairs',
+  'hud.gov':                  'U.S. Department of Housing and Urban Development',
+  'sandiego.gov':             'City of San Diego',
+  'sandiegocounty.gov':       'County of San Diego',
+  'ca.gov':                   'State of California',
+  'sandiegouniontribune.com': 'The San Diego Union-Tribune',
+  'timesofsandiego.com':      'Times of San Diego',
+  'voiceofsandiego.org':      'Voice of San Diego',
+  'kpbs.org':                 'KPBS',
+  'sdbj.com':                 'San Diego Business Journal',
+  'sandiegohistory.org':      'San Diego History Center',
+  'nps.gov':                  'National Park Service',
+  'car.org':                  'California Association of Realtors',
+  'nar.realtor':              'National Association of Realtors',
+  'sdar.com':                 'Greater San Diego Association of Realtors',
+  'zillow.com':               'Zillow',
+  'redfin.com':               'Redfin',
+  'realtor.com':              'Realtor.com',
+}
+
+/** Human-readable publication name for a source domain (falls back to the bare domain). */
+export function sourceDisplayName(domain: string): string {
+  const d = domain.toLowerCase().replace(/^www\./, '')
+  return SOURCE_DISPLAY_NAMES[d] ?? d
+}

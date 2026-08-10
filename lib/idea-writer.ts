@@ -2,6 +2,7 @@ import Anthropic from '@anthropic-ai/sdk'
 import type { IdeaCandidate, BlogPostDraft, PortableTextBlock } from '@/lib/types'
 import { FAIR_HOUSING_RULES } from '@/lib/fair-housing'
 import { lineToBlock } from '@/lib/portable-text-utils'
+import { sourceDisplayName } from '@/lib/source-rules'
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
@@ -105,7 +106,11 @@ SELLER CTA RULE: you may inline a "[SELLER_CTA: Find out what your home is worth
 
 COMMUNITY LINK RULE: when referencing San Diego communities by name, link to their community pages using this exact list where relevant: ${COMMUNITY_LINKS}`
 
-  const seoRules = `SEO: use the target keyword in the opening paragraph, in 1 heading, and 2-3 times in the body. End with exactly 3 FAQ questions as "###" headings with 2-3 sentence answers. Include 1 internal link to a relevant page.`
+  const seoRules = `SEO: use the target keyword in the opening paragraph, in 1 heading, and 2-3 times in the body. End with exactly 3 FAQ questions as "###" headings with 2-3 sentence answers. Include 1 internal link to a relevant page.
+
+OUTBOUND CITATION RULE: when you cite a specific statistic, number, rate, or forecast, attribute it inline with a markdown link to the source it actually came from — e.g. "according to [Freddie Mac](https://www.freddiemac.com/pmms)" — using ONLY the SOURCES urls provided below. Never invent, guess, or embellish a URL, and never attribute a number to a source that didn't publish it.
+
+FORMATTING: plain text only — never use **bold**, *italics*, or other markdown emphasis (they render as literal asterisks on the site). Allowed markup: "##"/"###" headings, "- " bullets, [text](url) links, and the [SELLER_CTA: ...] macro.`
 
   const learningsBlock = learningsContext
     ? `\n\nVOICE + PERFORMANCE LEARNINGS (apply these, they come from what has actually worked on this blog):\n${learningsContext}`
@@ -163,19 +168,27 @@ Respond with ONLY valid JSON, no other text, in this exact shape:
   const slug = slugify(parsed.title)
   const body = bodyTextToBlocks(parsed.bodyMarkdown)
 
-  // Source credit block, appended to every generated post.
+  // Sources credit block, appended to every generated post — each source is
+  // named by publication (not a generic type bucket like "Web") and linked.
   if (idea.sourceUrls.length > 0) {
-    const markDefKey = makeKey('link')
-    body.push({
-      _type: 'block',
-      _key: makeKey('block'),
-      style: 'normal',
-      markDefs: [{ _key: markDefKey, _type: 'link', href: idea.sourceUrls[0] }],
-      children: [
-        { _type: 'span', _key: makeKey('span'), text: 'Source: ', marks: [] },
-        { _type: 'span', _key: makeKey('span'), text: idea.sourceLabels[0] ?? idea.sourceDomains[0] ?? idea.sourceUrls[0], marks: [markDefKey] },
-      ],
-    })
+    const seenDomains = new Set<string>()
+    const markDefs: PortableTextBlock['markDefs'] = []
+    const children: PortableTextBlock['children'] = [
+      { _type: 'span', _key: makeKey('span'), text: idea.sourceUrls.length > 1 ? 'Sources: ' : 'Source: ', marks: [] },
+    ]
+    for (const url of idea.sourceUrls.slice(0, 4)) {
+      let domain: string
+      try { domain = new URL(url).hostname.replace(/^www\./, '') } catch { continue }
+      if (seenDomains.has(domain)) continue
+      seenDomains.add(domain)
+      if (children.length > 1) {
+        children.push({ _type: 'span', _key: makeKey('span'), text: ', ', marks: [] })
+      }
+      const markDefKey = makeKey('link')
+      markDefs.push({ _key: markDefKey, _type: 'link', href: url })
+      children.push({ _type: 'span', _key: makeKey('span'), text: sourceDisplayName(domain), marks: [markDefKey] })
+    }
+    body.push({ _type: 'block', _key: makeKey('block'), style: 'normal', markDefs, children })
   }
 
   return {
