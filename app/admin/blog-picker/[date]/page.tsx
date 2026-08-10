@@ -14,6 +14,8 @@ const CATEGORY_LABELS: Record<string, string> = {
   'community-spotlight': 'Community Spotlight',
   investment: 'Investment',
   news: 'News',
+  'local-history': 'Local History',
+  'local-interest': 'Local Interest',
 }
 
 // Normalized to the brand burgundy/gold palette instead of the source's
@@ -26,6 +28,8 @@ const CATEGORY_COLORS: Record<string, string> = {
   'community-spotlight': '#5a2d6e',
   investment: '#6b5a2e',
   news: '#607D8B',
+  'local-history': '#8a5a2e',
+  'local-interest': '#8a5a2e',
 }
 
 export default function BlogPickerPage() {

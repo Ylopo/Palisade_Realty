@@ -7,7 +7,7 @@ import { fetchAndScoreArticles } from '@/lib/research'
 import { writePostFromIdea } from '@/lib/idea-writer'
 import { publishBlogPost } from '@/lib/sanity/write'
 import { checkFairHousing, saveFHResult } from '@/lib/fair-housing'
-import { buildWeekId } from '@/lib/idea-store'
+import { buildWeekId, getIdea, updateIdeaStatus } from '@/lib/idea-store'
 import type { ScoredArticle, IdeaCandidate } from '@/lib/types'
 
 export const runtime = 'nodejs'
@@ -126,7 +126,17 @@ export async function POST(request: NextRequest) {
     const selected = articles.filter((a) => selectedIds.has(a.id))
     const unselected = articles.filter((a) => !selectedIds.has(a.id))
 
-    if (selected.length === 0) {
+    // Local-history picks aren't in the daily article cache — the picker
+    // surfaces them from the idea queue, so resolve the full IdeaCandidate
+    // (story brief, sources, contentType) from the idea store directly.
+    const historyIdeas: IdeaCandidate[] = []
+    for (const id of articleIds) {
+      if (!id.startsWith('localhist-') || selected.some((a) => a.id === id)) continue
+      const idea = await getIdea(id)
+      if (idea) historyIdeas.push(idea)
+    }
+
+    if (selected.length === 0 && historyIdeas.length === 0) {
       return NextResponse.json({ error: 'None of the given articleIds match this date\'s articles' }, { status: 404 })
     }
 
@@ -136,9 +146,13 @@ export async function POST(request: NextRequest) {
     const published: Array<{ title: string; slug: string; postId: string }> = []
     const failed: Array<{ articleId: string; error: string }> = []
 
-    for (const article of selected) {
+    const candidates: IdeaCandidate[] = [
+      ...selected.map((a) => articleToIdeaCandidate(a, weekId)),
+      ...historyIdeas.map((i) => ({ ...i, status: 'approved' as const, reviewedAt: new Date().toISOString() })),
+    ]
+
+    for (const idea of candidates) {
       try {
-        const idea = articleToIdeaCandidate(article, weekId)
 
         // 1. Write the blog post
         const draft = await writePostFromIdea(idea, learningsContext)
@@ -162,10 +176,17 @@ export async function POST(request: NextRequest) {
         }
 
         published.push({ title: draft.title, slug: draft.slug, postId })
+
+        // A published local-history idea leaves the idea-review queue too.
+        if (idea.id.startsWith('localhist-')) {
+          await updateIdeaStatus(idea.id, 'approved').catch((e) =>
+            console.error('[api/blog/publish] updateIdeaStatus failed:', e)
+          )
+        }
       } catch (articleErr) {
-        console.error('[api/blog/publish] article failed:', article.id, articleErr)
+        console.error('[api/blog/publish] article failed:', idea.id, articleErr)
         failed.push({
-          articleId: article.id,
+          articleId: idea.id,
           error: articleErr instanceof Error ? articleErr.message : 'Unknown error',
         })
       }

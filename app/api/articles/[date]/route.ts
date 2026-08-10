@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { loadArticles } from '@/lib/store'
 import { fetchAndScoreArticles } from '@/lib/research'
-import type { ScoredArticle } from '@/lib/types'
+import { getPendingIdeas } from '@/lib/idea-store'
+import type { IdeaCandidate, ScoredArticle } from '@/lib/types'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -15,6 +16,33 @@ function isAuthorized(request: NextRequest): boolean {
 
 interface RouteContext {
   params: Promise<{ date: string }>
+}
+
+/** Maps a pending local-history idea onto the ScoredArticle shape the blog
+ * picker renders. The idea id is preserved so /api/blog/publish can resolve
+ * the full IdeaCandidate (story brief included) from the idea store. */
+function historyIdeaToArticle(idea: IdeaCandidate): ScoredArticle {
+  return {
+    id: idea.id,
+    title: idea.title,
+    url: idea.sourceUrls[0] ?? '',
+    content: idea.researchData ?? idea.angle,
+    publishedDate: idea.createdAt,
+    source: idea.sourceDomains[0],
+    relevanceScore: Math.max(1, Math.min(10, Math.round(idea.score.total / 10))),
+    category: 'local-history',
+    whyItMatters: idea.whyItMatters,
+  }
+}
+
+async function pendingHistoryArticles(): Promise<ScoredArticle[]> {
+  try {
+    const pending = await getPendingIdeas()
+    return pending.filter((i) => i.category === 'local-history').map(historyIdeaToArticle)
+  } catch (err) {
+    console.error('[api/articles] Failed to load local-history ideas:', err instanceof Error ? err.message : err)
+    return []
+  }
 }
 
 /**
@@ -40,13 +68,12 @@ export async function GET(request: NextRequest, context: RouteContext) {
 
   try {
     const cached = await loadArticles(date)
-    if (cached) {
-      return NextResponse.json({ articles: cached.articles })
-    }
-
-    // No cached research for this date yet — fetch fresh as a fallback.
-    const articles: ScoredArticle[] = await fetchAndScoreArticles()
-    return NextResponse.json({ articles })
+    const articles: ScoredArticle[] = cached ? cached.articles : await fetchAndScoreArticles()
+    // Local-history story ideas live in the idea queue, not the daily article
+    // cache — surface pending ones here too so the blog picker shows them.
+    const merged = [...articles, ...(await pendingHistoryArticles())]
+      .sort((a, b) => b.relevanceScore - a.relevanceScore)
+    return NextResponse.json({ articles: merged })
   } catch (err: unknown) {
     console.error('[api/articles/[date]][GET]', (err as Error).message)
     return NextResponse.json({ error: (err as Error).message }, { status: 500 })
