@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { writeClient } from '@/lib/sanity/client'
 import { getVAQueuePost } from '@/lib/sanity/queries'
 import { publishPostToAll } from '@/lib/publish-service'
@@ -63,6 +64,11 @@ export async function POST(request: Request) {
   // This client publishes to all 6 platforms (source predates the OneUp
   // LinkedIn/X integration, so it only tracked 4).
   await writeClient.patch(postId).set({ workflowStatus: 'published' }).commit()
+
+  // Blog pages use hour-long ISR — refresh them now so the post shows up
+  // on the site immediately instead of whenever the cache next expires.
+  revalidatePath('/blog')
+  revalidatePath(`/blog/${post.slug}`)
 
   return NextResponse.json({
     ok: true,

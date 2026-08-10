@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { writeClient } from '@/lib/sanity/client'
 import { getVAQueuePost } from '@/lib/sanity/queries'
 import { publishPostToAll } from '@/lib/publish-service'
@@ -42,6 +43,9 @@ export async function GET(request: Request) {
       if (result.ok) {
         published++
         await writeClient.patch(stub._id).set({ workflowStatus: 'published' }).commit()
+        // Blog pages use hour-long ISR — refresh them so the post shows up now.
+        revalidatePath('/blog')
+        revalidatePath(`/blog/${post.slug}`)
         console.log(`[scheduled-publish] Published: ${post.title}`)
       } else {
         failed++

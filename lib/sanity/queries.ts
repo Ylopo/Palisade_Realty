@@ -62,6 +62,7 @@ export async function getVAQueue() {
 const VA_QUEUE_POST_QUERY = groq`
   *[_id == $postId][0]{
     ...,
+    "slug": slug.current,
     videoScenes,
     videoThumbnailUrl,
     videoLookId
