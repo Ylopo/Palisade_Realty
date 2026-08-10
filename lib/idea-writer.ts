@@ -1,6 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk'
-import type { IdeaCandidate, BlogPostDraft, PortableTextBlock, PortableTextSpan } from '@/lib/types'
+import type { IdeaCandidate, BlogPostDraft, PortableTextBlock } from '@/lib/types'
 import { FAIR_HOUSING_RULES } from '@/lib/fair-housing'
+import { lineToBlock } from '@/lib/portable-text-utils'
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
@@ -28,16 +29,12 @@ function slugify(title: string): string {
     .slice(0, 96)
 }
 
-/** Converts a single markdown-flavored line into one Portable Text block. */
-function lineToBlock(line: string, style: PortableTextBlock['style'] = 'normal'): PortableTextBlock {
-  const span: PortableTextSpan = { _type: 'span', _key: makeKey('span'), text: line, marks: [] }
-  return { _type: 'block', _key: makeKey('block'), style, markDefs: [], children: [span] }
-}
-
 /**
  * Expands [SELLER_CTA: text] macros into a link-styled Portable Text block and
  * converts the AI's markdown-flavored JSON body (## / ### headings, plain
- * paragraphs) into Sanity Portable Text blocks.
+ * paragraphs) into Sanity Portable Text blocks. Line-level conversion is
+ * delegated to the shared lineToBlock so [text](url) links — including
+ * relative community-page links — become real link markDefs.
  */
 function bodyTextToBlocks(bodyText: string): PortableTextBlock[] {
   const lines = bodyText.split('\n').filter((l) => l.trim().length > 0)
@@ -91,9 +88,11 @@ export async function writePostFromIdea(idea: IdeaCandidate, learningsContext: s
   const structureRules = isLocalHistory
     ? `Voice: vivid, narrative, journalistic. Hedda has led a San Diego brokerage for over a decade and genuinely loves this region's history and neighborhoods. Write like you're telling a story over coffee, not like a Wikipedia article.
 
-Structure: open with the most dramatic or surprising fact — never "Did you know…" — then historical context, then 2-3 "##" sections going deeper, then "## Why It Still Matters Today", then "## Frequently Asked Questions" (exactly 3 questions as "###" headings, 2-3 sentence answers).
+Structure: open with the most dramatic or surprising fact — never "Did you know…" — then historical context, then 2-3 "##" sections going deeper, then "## What Remains Today" (the buildings, street names, boundaries, or landmarks readers can still see or visit), then "## Why It Still Matters Today", then "## Frequently Asked Questions" (exactly 3 questions as "###" headings, 2-3 sentence answers).
 
-Length: 600-900 words. No Seller CTA — this is community-authority content, not lead generation. Tie the history to a specific San Diego neighborhood or landmark; include a military-history angle where it naturally fits (Naval Base San Diego, NAS North Island in Coronado, MCRD San Diego, Camp Pendleton).
+Length: 600-900 words. No Seller CTA — this is community-authority content, not lead generation. No sales pitches, listing promotions, or "contact a real estate agent" language anywhere; Hedda appears as a knowledgeable local guide, not a salesperson. Tie the history to a specific San Diego neighborhood or landmark; include a military-history angle where it naturally fits (Naval Base San Diego, NAS North Island in Coronado, MCRD San Diego, Camp Pendleton).
+
+ACCURACY: use only facts, names, dates, and events present in the research data and sources — never invent them. If the research flags a claim as folklore, disputed, or not fully verified, say so in the article ("local legend holds…", "accounts differ…") — never present folklore as confirmed history.
 
 COMMUNITY LINK RULE: when referencing San Diego communities by name, link to their community pages using this exact list where relevant: ${COMMUNITY_LINKS}`
     : `Voice: knowledgeable, warm, direct. Feels like advice from a brokerage owner who knows the market cold across every San Diego neighborhood — not a pitch.

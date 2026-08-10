@@ -37,6 +37,7 @@ interface PortableTextBlockLike {
 interface SanityPost {
   title?: string
   excerpt?: string
+  category?: string
   body?: PortableTextBlockLike[]
 }
 
@@ -97,8 +98,20 @@ function stripJsonFences(text: string): string {
   return text.replace(/^```(?:json)?\s*/i, '').replace(/```\s*$/i, '').trim()
 }
 
-function buildSystemPrompt(title: string, excerpt: string, sourceText: string): string {
+// Local-history posts get a story-teaser treatment instead of the default
+// market-commentary style — hook first, hold something back, no sales angle.
+const LOCAL_HISTORY_STYLE = `
+LOCAL HISTORY MODE: this is a neighborhood-history story, not market commentary.
+- Open with the single most surprising fact or question from the article — never a greeting or preamble.
+- Name the recognizable neighborhood, street, or landmark in the first two sentences.
+- Reveal enough of the story to be satisfying, but HOLD BACK one or two fascinating details so viewers have a reason to read the full article.
+- Sound like a curious local sharing something they can't believe they just learned — not a history lecture, a news report, or a real estate ad. Zero selling.
+- End with a curiosity-based invitation to read the complete story at the link in the description (e.g. "the full story — including what happened to it — is at the link in the description"), never a sales CTA.`
+
+function buildSystemPrompt(title: string, excerpt: string, sourceText: string, category?: string): string {
+  const isLocalHistory = category === 'local-history' || category === 'local-interest'
   return `You are writing a short-form video script spoken in first person AS Hedda Parashos, a San Diego brokerage owner. She is speaking as a neighbor and local voice sharing something she noticed — NOT introduced as "a real estate agent," "realtor," or any professional title, and the brokerage name must never appear in the spoken script itself.
+${isLocalHistory ? LOCAL_HISTORY_STYLE : ''}
 
 DATA-GROUNDING (critical): The only facts, numbers, statistics, and dates you may use are the ones that appear in the ARTICLE BODY below. Never invent, estimate, or infer a statistic that isn't explicitly present in the source material. If the article doesn't contain a number, don't say one — speak generally instead.
 
@@ -126,11 +139,11 @@ Rules for "scenes":
 - Include "place" ONLY when the keyword/phrase corresponds to a real, nameable San Diego community from this exact list: ${KNOWN_PLACES.join(', ')}. Format it as "<Community Name>, California". If it doesn't correspond to one of these, omit the "place" field entirely (do not invent a place or use Hedda's personal neighborhood).`
 }
 
-async function generateScriptPayload(title: string, excerpt: string, sourceText: string): Promise<ScriptPayload> {
+async function generateScriptPayload(title: string, excerpt: string, sourceText: string, category?: string): Promise<ScriptPayload> {
   const message = await anthropic.messages.create({
     model: MODEL,
     max_tokens: 1024,
-    messages: [{ role: 'user', content: buildSystemPrompt(title, excerpt, sourceText) }],
+    messages: [{ role: 'user', content: buildSystemPrompt(title, excerpt, sourceText, category) }],
   })
 
   const raw = message.content[0].type === 'text' ? message.content[0].text : ''
@@ -205,7 +218,7 @@ export async function POST(request: NextRequest) {
 
   try {
     const post = await writeClient.fetch<SanityPost | null>(
-      `*[_id==$postId][0]{title,excerpt,body}`,
+      `*[_id==$postId][0]{title,excerpt,category,body}`,
       { postId },
     )
     if (!post) {
@@ -216,7 +229,7 @@ export async function POST(request: NextRequest) {
     const title = post.title ?? ''
     const excerpt = post.excerpt ?? ''
 
-    let { script, scenes } = await generateScriptPayload(title, excerpt, sourceText)
+    let { script, scenes } = await generateScriptPayload(title, excerpt, sourceText, post.category)
     let wordCount = countWords(script)
 
     // Server-side enforcement of the 150-word hard cap: retry once via a

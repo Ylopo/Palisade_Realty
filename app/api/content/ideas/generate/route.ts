@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { fetchAndScoreIdeas } from '@/lib/research'
+import { fetchLocalHistoryIdeas } from '@/lib/local-history-research'
 import { saveIdea, getCoveredTopics, getPendingIdeas } from '@/lib/idea-store'
 import { isNearDuplicateTitle, BREAKING_ALERT_THRESHOLD } from '@/lib/dedupe'
 import { sendBreakingAlert } from '@/lib/breaking-alert'
 import type { IdeaCandidate } from '@/lib/types'
 
 export const runtime = 'nodejs'
-export const maxDuration = 120
+export const maxDuration = 300
 
 // On-demand "Generate Ideas Now" admin action — same flow as
 // app/api/cron/research (dedupe against pending ideas + breaking alert),
@@ -19,7 +20,16 @@ export async function POST(req: NextRequest) {
 
   try {
     const coveredTopics = await getCoveredTopics()
-    const ideas = await fetchAndScoreIdeas(coveredTopics)
+    // News-driven ideas and local-history story scouting run in parallel —
+    // both feed the same queue and dedupe loop below.
+    const [newsIdeas, historyIdeas] = await Promise.all([
+      fetchAndScoreIdeas(coveredTopics),
+      fetchLocalHistoryIdeas(coveredTopics).catch((err) => {
+        console.error('[ideas/generate] Local-history scout failed:', err instanceof Error ? err.message : err)
+        return [] as IdeaCandidate[]
+      }),
+    ])
+    const ideas = [...newsIdeas, ...historyIdeas]
 
     let skippedDupes = 0
     const breakingIdeas: IdeaCandidate[] = []

@@ -1,11 +1,12 @@
 import { NextResponse } from 'next/server'
 import { fetchAndScoreArticles, fetchAndScoreIdeas } from '@/lib/research'
+import { fetchLocalHistoryIdeas } from '@/lib/local-history-research'
 import { saveIdea, getCoveredTopics, getPendingIdeas } from '@/lib/idea-store'
 import { isNearDuplicateTitle, BREAKING_ALERT_THRESHOLD } from '@/lib/dedupe'
 import { sendBreakingAlert } from '@/lib/breaking-alert'
 import type { IdeaCandidate } from '@/lib/types'
 
-export const maxDuration = 60
+export const maxDuration = 300
 
 // Vercel cron: GET with Bearer CRON_SECRET
 export async function GET(request: Request) {
@@ -39,10 +40,18 @@ async function runResearch() {
     const legacyArticles = await fetchAndScoreArticles()
     console.log(`[research] Scored ${legacyArticles.length} legacy article(s)`)
 
-    // New: score as ideas and route to the unified queue
+    // New: score as ideas and route to the unified queue. News-driven ideas
+    // and local-history story scouting run in parallel.
     const coveredTopics = await getCoveredTopics()
-    const ideas = await fetchAndScoreIdeas(coveredTopics)
-    console.log(`[research] ${ideas.length} ideas passed threshold`)
+    const [newsIdeas, historyIdeas] = await Promise.all([
+      fetchAndScoreIdeas(coveredTopics),
+      fetchLocalHistoryIdeas(coveredTopics).catch((err) => {
+        console.error('[research] Local-history scout failed:', err instanceof Error ? err.message : err)
+        return [] as IdeaCandidate[]
+      }),
+    ])
+    const ideas = [...newsIdeas, ...historyIdeas]
+    console.log(`[research] ${newsIdeas.length} news + ${historyIdeas.length} local-history ideas passed threshold`)
 
     let savedCount = 0
     let skippedDupes = 0
