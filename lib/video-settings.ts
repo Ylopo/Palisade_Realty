@@ -29,10 +29,16 @@ export async function getVideoSettings(): Promise<VideoSettings> {
     return { lookIds: [], voiceId: null }
   }
 
+  // @upstash/redis auto-deserializes JSON values on read, so the stored
+  // JSON-stringified array usually arrives here already parsed — only
+  // JSON.parse it when it's still a string (same guard as lib/idea-store).
   let lookIds: string[] = []
-  if (hash.lookIds) {
+  const rawLookIds: unknown = hash.lookIds
+  if (Array.isArray(rawLookIds)) {
+    lookIds = rawLookIds.filter((id): id is string => typeof id === 'string')
+  } else if (typeof rawLookIds === 'string') {
     try {
-      const parsed = JSON.parse(hash.lookIds)
+      const parsed = JSON.parse(rawLookIds)
       if (Array.isArray(parsed)) {
         lookIds = parsed.filter((id): id is string => typeof id === 'string')
       }
