@@ -142,7 +142,10 @@ async function searchFirecrawlImages(imageQuery: string): Promise<SceneCandidate
       }),
     })
 
-    if (!res.ok) return []
+    if (!res.ok) {
+      console.error(`[scene-images] Firecrawl search failed (${res.status}):`, (await res.text()).slice(0, 200))
+      return []
+    }
 
     const data = (await res.json()) as { success?: boolean; data?: FirecrawlSearchResult[] }
     if (!data.success || !Array.isArray(data.data)) return []
@@ -185,7 +188,10 @@ async function generateOneOpenAiImage(imageQuery: string, styleHint: string): Pr
       }),
     })
 
-    if (!res.ok) return null
+    if (!res.ok) {
+      console.error(`[scene-images] OpenAI image generation failed (${res.status}):`, (await res.text()).slice(0, 300))
+      return null
+    }
 
     const data = (await res.json()) as { data?: Array<{ url?: string; b64_json?: string }> }
     const first = data.data?.[0]
@@ -218,12 +224,30 @@ async function generateOpenAiImages(imageQuery: string, count: number): Promise<
 }
 
 /**
+ * Configuration warnings surfaced to the admin UI so a missing key shows up as
+ * a visible message instead of a silently empty candidate strip.
+ */
+export function sceneSourcingWarnings(): string[] {
+  const warnings: string[] = []
+  if (!process.env.OPENAI_API_KEY) {
+    warnings.push('OPENAI_API_KEY is not configured — AI image generation is skipped.')
+  }
+  if (!process.env.FIRECRAWL_API_KEY) {
+    warnings.push('FIRECRAWL_API_KEY is not configured — web photo search is skipped.')
+  }
+  if (!process.env.MAPBOX_PUBLIC_TOKEN) {
+    warnings.push('MAPBOX_PUBLIC_TOKEN is not configured — map images are skipped.')
+  }
+  return warnings
+}
+
+/**
  * Sources up to TARGET_CANDIDATES background images per scene for a script.
+ * Scenes run in parallel — image generation is slow (~10-25s per scene), and
+ * a 5-scene script processed sequentially blows past serverless time limits.
  */
 export async function sourceSceneImages(scenes: Scene[]): Promise<SourcedScene[]> {
-  const results: SourcedScene[] = []
-
-  for (const scene of scenes) {
+  return Promise.all(scenes.map(async (scene) => {
     const candidates: SceneCandidate[] = []
 
     // 1. Mapbox static map, if the scene has a place.
@@ -245,12 +269,10 @@ export async function sourceSceneImages(scenes: Scene[]): Promise<SourcedScene[]
       candidates.push(...generated)
     }
 
-    results.push({
+    return {
       keyword: scene.keyword,
       phrase: scene.phrase,
       candidates,
-    })
-  }
-
-  return results
+    }
+  }))
 }

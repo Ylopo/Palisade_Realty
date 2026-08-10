@@ -1,8 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { sourceSceneImages } from '@/lib/scene-images'
+import { sourceSceneImages, sceneSourcingWarnings } from '@/lib/scene-images'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
+// Image generation takes ~10-25s per scene even with scenes parallelized —
+// without this the platform default kills the request and the UI sees nothing.
+export const maxDuration = 300
 
 interface SceneRequestInput {
   keyword: string
@@ -76,7 +79,7 @@ export async function POST(request: NextRequest) {
       })),
     }))
 
-    return NextResponse.json({ scenes: proxiedResults })
+    return NextResponse.json({ scenes: proxiedResults, warnings: sceneSourcingWarnings() })
   } catch (err: unknown) {
     console.error('[api/content/source-scene-images]', (err as Error).message)
     return NextResponse.json({ error: (err as Error).message }, { status: 500 })

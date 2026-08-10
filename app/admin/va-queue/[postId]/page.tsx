@@ -213,6 +213,8 @@ export default function VAPostPage() {
   // ── NEW: Scene Images (keyword-matched backgrounds) state ──────────────────
   const [sourcedScenes, setSourcedScenes] = useState<SourcedScene[]>([])
   const [findingImages, setFindingImages] = useState(false)
+  const [findImagesError, setFindImagesError] = useState('')
+  const [findImagesWarnings, setFindImagesWarnings] = useState<string[]>([])
   const [approvedScenes, setApprovedScenes] = useState<Record<number, string>>({})
   const [uploadingSceneIndex, setUploadingSceneIndex] = useState<number | null>(null)
   const [savingScenes, setSavingScenes] = useState(false)
@@ -679,15 +681,30 @@ export default function VAPostPage() {
   async function handleFindImages() {
     if (scenes.length === 0) return
     setFindingImages(true)
+    setFindImagesError('')
+    setFindImagesWarnings([])
     try {
       const res = await fetch(`/api/content/source-scene-images?secret=${encodeURIComponent(secret)}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ scenes }),
       })
-      const data = await res.json()
-      if (res.ok && Array.isArray(data.scenes)) setSourcedScenes(data.scenes)
-    } catch { /* leave state unchanged */ } finally {
+      const data = await res.json().catch(() => ({}))
+      if (!res.ok) {
+        throw new Error(data.error ?? `Image sourcing failed (HTTP ${res.status})`)
+      }
+      if (Array.isArray(data.scenes)) {
+        setSourcedScenes(data.scenes)
+        if (Array.isArray(data.warnings) && data.warnings.length > 0) {
+          setFindImagesWarnings(data.warnings)
+        }
+        if (data.scenes.every((s: SourcedScene) => s.candidates.length === 0)) {
+          setFindImagesError('No images could be sourced for any scene — check the warnings above (or Vercel logs) for the failing provider.')
+        }
+      }
+    } catch (err) {
+      setFindImagesError(err instanceof Error ? err.message : 'Image sourcing failed')
+    } finally {
       setFindingImages(false)
     }
   }
@@ -1530,6 +1547,17 @@ export default function VAPostPage() {
                 >
                   {findingImages ? 'Searching…' : '🔍 Find Images'}
                 </button>
+
+                {findImagesWarnings.map((w, i) => (
+                  <p key={i} style={{ fontSize: 12, color: '#92400e', background: '#fef3c7', border: '1px solid #fcd34d', borderRadius: 6, padding: '6px 10px', margin: '0 0 8px' }}>
+                    ⚠ {w}
+                  </p>
+                ))}
+                {findImagesError && (
+                  <p style={{ fontSize: 12, color: '#dc2626', background: '#fef2f2', border: '1px solid #fca5a5', borderRadius: 6, padding: '6px 10px', margin: '0 0 8px' }}>
+                    {findImagesError}
+                  </p>
+                )}
 
                 {sourcedScenes.length > 0 && (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginBottom: 16 }}>
