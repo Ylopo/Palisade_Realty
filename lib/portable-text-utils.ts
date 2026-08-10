@@ -12,7 +12,8 @@ import type { PortableTextBlock, PortableTextSpan } from '@/lib/types'
 
 const SELLER_URL = 'https://search.palisaderealty.com/seller'
 const SELLER_CTA_RE = /\[SELLER_CTA:\s*([^\]]+)\]/
-const MD_LINK_RE = /\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g
+// Accepts absolute (https://...) and root-relative (/communities/...) URLs.
+const MD_LINK_RE = /\[([^\]]+)\]\(((?:https?:\/\/|\/)[^)\s]+)\)/g
 
 function makeKey(): string {
   return Math.random().toString(36).slice(2, 10)
