@@ -51,9 +51,13 @@ export async function POST(request: NextRequest) {
   // multipart uploads with a browser-side "Failed to fetch") and sends the
   // blob URL; this route then pulls the bytes server-side.
   const imageUrl = form.get('imageUrl') as string | null
+  // advance=false: save the provided fields WITHOUT advancing workflowStatus —
+  // used by the admin's save-on-select thumbnail upload, which must not move a
+  // media_pending post into the Ready to Publish bucket.
+  const advance = form.get('advance') !== 'false'
 
   try {
-    const patch: Record<string, unknown> = { workflowStatus: 'media_ready' }
+    const patch: Record<string, unknown> = advance ? { workflowStatus: 'media_ready' } : {}
     if (socialCopy !== null) patch.socialCopy = socialCopy
     if (videoScript !== null) patch.videoScript = videoScript
     if (videoUrl !== null) patch.videoUrl = videoUrl

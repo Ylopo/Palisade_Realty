@@ -68,7 +68,7 @@ export interface SanityBlogPost {
 type ThumbnailState =
   | { type: 'none' }
   | { type: 'upload'; file: File; previewUrl: string }
-  | { type: 'saved' }
+  | { type: 'saved'; previewUrl?: string }
 
 type VideoState =
   | { type: 'none' }
@@ -553,6 +553,29 @@ export default function VAPostPage() {
     if (!file) return
     const previewUrl = URL.createObjectURL(file)
     setThumbnail({ type: 'upload', file, previewUrl })
+    // Persist immediately — a thumbnail that only lives in component state is
+    // silently lost when the operator navigates away without hitting Mark
+    // Ready/Publish, and the Media Review queue can't show it.
+    void persistThumbnail(file, previewUrl)
+  }
+
+  async function persistThumbnail(file: File, previewUrl: string) {
+    try {
+      const blobUrl = await uploadThumbnailToBlob(file)
+      const form = new FormData()
+      form.append('postId', postId)
+      form.append('imageUrl', blobUrl)
+      form.append('advance', 'false') // save the image only — don't touch workflowStatus
+      const res = await fetch(`/api/content/mark-ready?secret=${encodeURIComponent(secret)}`, {
+        method: 'POST',
+        body: form,
+      })
+      if (!res.ok) throw new Error('thumbnail save failed')
+      setThumbnail({ type: 'saved', previewUrl })
+    } catch {
+      // Leave state as 'upload' — Mark Ready / Publish / Schedule still upload
+      // it as before, so nothing is lost if this background save fails.
+    }
   }
 
   // ── NEW: Blog Listings — Area(s) handlers ───────────────────────────────────
@@ -1087,6 +1110,7 @@ export default function VAPostPage() {
 
   const thumbnailPreviewUrl =
     thumbnail.type === 'upload' ? thumbnail.previewUrl :
+    thumbnail.type === 'saved' && thumbnail.previewUrl ? thumbnail.previewUrl :
     thumbnail.type === 'saved' && post?.coverImage?.asset
       ? `https://cdn.sanity.io/images/qjhzi2t2/production/${post.coverImage.asset._ref.replace('image-', '').replace(/-(\w+)$/, '.$1')}`
       : null
