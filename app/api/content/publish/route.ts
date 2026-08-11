@@ -6,7 +6,10 @@ import { getVAQueuePost } from '@/lib/sanity/queries'
 import { publishPostToAll } from '@/lib/publish-service'
 
 export const dynamic = 'force-dynamic'
-export const maxDuration = 60
+// Video posts fan out to 6 platforms plus caption generation and a CDN-sync
+// wait — 60s was borderline and a killed function surfaces to the operator as
+// a browser "Failed to fetch".
+export const maxDuration = 300
 
 export async function POST(request: Request) {
   const { searchParams } = new URL(request.url)

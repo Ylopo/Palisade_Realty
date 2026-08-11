@@ -532,6 +532,17 @@ export default function VAPostPage() {
     }
   }
 
+  // Uploads the selected blog thumbnail to Vercel Blob first — sending the raw
+  // file through the mark-ready multipart route hits the ~4.5MB serverless
+  // request-body cap on larger images and dies with a browser "Failed to fetch".
+  async function uploadThumbnailToBlob(file: File): Promise<string> {
+    const blob = await upload(file.name, file, {
+      access: 'public',
+      handleUploadUrl: `/api/content/upload-video?secret=${encodeURIComponent(secret)}`,
+    })
+    return blob.url
+  }
+
   // ── Upload thumbnail ─────────────────────────────────────────────────────────
   function handleFileSelect(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0]
@@ -793,7 +804,7 @@ export default function VAPostPage() {
       if (videoThumbnailUrl) form.append('videoThumbnailUrl', videoThumbnailUrl)
 
       if (thumbnail.type === 'upload') {
-        form.append('image', thumbnail.file)
+        form.append('imageUrl', await uploadThumbnailToBlob(thumbnail.file))
       }
 
       const res = await fetch(`/api/content/mark-ready?secret=${encodeURIComponent(secret)}`, {
@@ -862,7 +873,7 @@ export default function VAPostPage() {
         if (videoScript) form.append('videoScript', videoScript)
         if (video.type === 'ready') form.append('videoUrl', video.url)
         if (videoThumbnailUrl) form.append('videoThumbnailUrl', videoThumbnailUrl)
-        form.append('image', thumbnail.file)
+        form.append('imageUrl', await uploadThumbnailToBlob(thumbnail.file))
 
         const markRes = await fetch(`/api/content/mark-ready?secret=${encodeURIComponent(secret)}`, {
           method: 'POST',
@@ -1018,7 +1029,7 @@ export default function VAPostPage() {
         if (videoScript) form.append('videoScript', videoScript)
         if (video.type === 'ready') form.append('videoUrl', video.url)
         if (videoThumbnailUrl) form.append('videoThumbnailUrl', videoThumbnailUrl)
-        form.append('image', thumbnail.file)
+        form.append('imageUrl', await uploadThumbnailToBlob(thumbnail.file))
         const markRes = await fetch(`/api/content/mark-ready?secret=${encodeURIComponent(secret)}`, {
           method: 'POST',
           body: form,

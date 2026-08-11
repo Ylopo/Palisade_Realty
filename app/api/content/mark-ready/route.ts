@@ -46,6 +46,11 @@ export async function POST(request: NextRequest) {
   const videoUrl = form.get('videoUrl') as string | null
   const videoThumbnailUrl = form.get('videoThumbnailUrl') as string | null
   const imageFile = form.get('image') as File | null
+  // Preferred path: the admin uploads the thumbnail to Vercel Blob client-side
+  // (bypassing the ~4.5MB serverless request-body cap that kills large
+  // multipart uploads with a browser-side "Failed to fetch") and sends the
+  // blob URL; this route then pulls the bytes server-side.
+  const imageUrl = form.get('imageUrl') as string | null
 
   try {
     const patch: Record<string, unknown> = { workflowStatus: 'media_ready' }
@@ -54,7 +59,15 @@ export async function POST(request: NextRequest) {
     if (videoUrl !== null) patch.videoUrl = videoUrl
     if (videoThumbnailUrl !== null) patch.videoThumbnailUrl = videoThumbnailUrl
 
-    if (imageFile) {
+    if (imageUrl) {
+      const imgRes = await fetch(imageUrl)
+      if (!imgRes.ok) throw new Error(`Failed to fetch thumbnail from blob storage (${imgRes.status})`)
+      const buffer = Buffer.from(await imgRes.arrayBuffer())
+      const asset = await writeClient.assets.upload('image', buffer, {
+        filename: `cover-${postId}-${Date.now()}.jpg`,
+      })
+      patch.coverImage = { _type: 'image', asset: { _type: 'reference', _ref: asset._id } }
+    } else if (imageFile) {
       const buffer = Buffer.from(await imageFile.arrayBuffer())
       const asset = await writeClient.assets.upload('image', buffer, {
         filename: imageFile.name || `cover-${postId}-${Date.now()}.jpg`,
