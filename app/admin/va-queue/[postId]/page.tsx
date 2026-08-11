@@ -75,11 +75,6 @@ type VideoState =
   | { type: 'ready'; url: string; filename: string }
   | { type: 'saved'; url: string }
 
-type HeyGenState =
-  | { type: 'idle' }
-  | { type: 'generating'; videoId: string; message: string }
-  | { type: 'ready'; url: string }
-
 type PlatformStatus =
   | { phase: 'idle' }
   | { phase: 'publishing' }
@@ -170,7 +165,6 @@ export default function VAPostPage() {
   const [generatingScript, setGeneratingScript] = useState(false)
   const [scenes, setScenes] = useState<Scene[]>([]) // scenes returned alongside the script — feeds the Scene Images card
   const [video, setVideo] = useState<VideoState>({ type: 'none' })
-  const [heygenState, setHeygenState] = useState<HeyGenState>({ type: 'idle' })
   const [videoThumbnailUrl, setVideoThumbnailUrl] = useState<string | null>(null)
   const [uploadingVideoThumb, setUploadingVideoThumb] = useState(false)
   const [videoUploadedAt, setVideoUploadedAt] = useState<Date | null>(null)
@@ -180,7 +174,6 @@ export default function VAPostPage() {
     | { phase: 'done'; facebookReel: { postSubmissionId?: string; error?: string }; youtube: { postSubmissionId?: string; error?: string }; tiktok: { postSubmissionId?: string; error?: string } }
     | { phase: 'error'; message: string }
   >({ phase: 'idle' })
-  const heygenPollRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
   // Publish state
   const [publishState, setPublishState] = useState<PublishState>({ phase: 'idle' })
@@ -319,7 +312,6 @@ export default function VAPostPage() {
   // ── Cleanup polls on unmount ─────────────────────────────────────────────────
   useEffect(() => () => {
     Object.values(pollRefs.current).forEach(clearInterval)
-    if (heygenPollRef.current) clearInterval(heygenPollRef.current)
     if (enterprisePollRef.current) clearInterval(enterprisePollRef.current)
   }, [])
 
@@ -455,62 +447,6 @@ export default function VAPostPage() {
       // leave existing script unchanged
     } finally {
       setGeneratingScript(false)
-    }
-  }
-
-  // ── Generate base video via HeyGen ──────────────────────────────────────────
-  async function handleGenerateHeyGenVideo() {
-    if (!videoScript.trim()) return
-    if (heygenPollRef.current) clearInterval(heygenPollRef.current)
-
-    try {
-      const res = await fetch(`/api/content/generate-heygen-video?secret=${encodeURIComponent(secret)}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ script: videoScript }),
-      })
-      const data = await res.json()
-      if (!res.ok) throw new Error(data.error ?? 'Failed to start video generation')
-
-      const { videoId } = data
-      setHeygenState({ type: 'generating', videoId, message: 'Starting render…' })
-
-      let elapsed = 0
-      heygenPollRef.current = setInterval(async () => {
-        elapsed += 15
-        const minutes = Math.floor(elapsed / 60)
-        const seconds = elapsed % 60
-        const timeStr = minutes > 0 ? `${minutes}m ${seconds}s` : `${seconds}s`
-
-        setHeygenState(prev =>
-          prev.type === 'generating'
-            ? { ...prev, message: `Rendering… ${timeStr}` }
-            : prev
-        )
-
-        try {
-          const statusRes = await fetch(
-            `/api/content/heygen-status?secret=${encodeURIComponent(secret)}&videoId=${encodeURIComponent(videoId)}`
-          )
-          const statusData = await statusRes.json()
-
-          if (statusData.status === 'completed') {
-            clearInterval(heygenPollRef.current!)
-            setHeygenState({ type: 'ready', url: statusData.videoUrl })
-          } else if (statusData.status === 'failed') {
-            clearInterval(heygenPollRef.current!)
-            setHeygenState({ type: 'idle' })
-            alert(`HeyGen render failed: ${statusData.error ?? 'Unknown error'}`)
-          } else if (elapsed >= 600) {
-            clearInterval(heygenPollRef.current!)
-            setHeygenState({ type: 'idle' })
-            alert('HeyGen render timed out after 10 minutes. Try again.')
-          }
-        } catch { /* keep polling */ }
-      }, 15000)
-    } catch (err) {
-      setHeygenState({ type: 'idle' })
-      alert(err instanceof Error ? err.message : 'Failed to generate video')
     }
   }
 
@@ -733,31 +669,37 @@ export default function VAPostPage() {
     }
   }
 
+  // /api/content/save-scenes expects the full scene shape it can persist
+  // (keyword/phrase/order/approved/imageUrl), not a bare list of URLs —
+  // send every scene so metadata for not-yet-approved ones survives too.
+  // Shared by the Save Scenes button and the HeyGen generate button (which
+  // auto-saves so a forgotten click can't cause "no approved video scenes").
+  async function saveScenesToSanity(): Promise<void> {
+    const scenesPayload = scenes.map((scene, sceneIndex) => ({
+      keyword: scene.keyword,
+      phrase: scene.phrase,
+      imageQuery: scene.imageQuery,
+      ...(scene.place ? { place: scene.place } : {}),
+      imageUrl: approvedScenes[sceneIndex] ?? '',
+      order: sceneIndex,
+      approved: sceneIndex in approvedScenes,
+    }))
+    const res = await fetch(`/api/content/save-scenes?secret=${encodeURIComponent(secret)}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ postId, scenes: scenesPayload }),
+    })
+    const data = await res.json().catch(() => ({}))
+    if (!res.ok) throw new Error(data.error ?? 'Save failed')
+    setScenesSaved(true)
+  }
+
   async function handleSaveScenes() {
     setSavingScenes(true)
     setScenesSaved(false)
     setSaveScenesError('')
     try {
-      // /api/content/save-scenes expects the full scene shape it can persist
-      // (keyword/phrase/order/approved/imageUrl), not a bare list of URLs —
-      // send every scene so metadata for not-yet-approved ones survives too.
-      const scenesPayload = scenes.map((scene, sceneIndex) => ({
-        keyword: scene.keyword,
-        phrase: scene.phrase,
-        imageQuery: scene.imageQuery,
-        ...(scene.place ? { place: scene.place } : {}),
-        imageUrl: approvedScenes[sceneIndex] ?? '',
-        order: sceneIndex,
-        approved: sceneIndex in approvedScenes,
-      }))
-      const res = await fetch(`/api/content/save-scenes?secret=${encodeURIComponent(secret)}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ postId, scenes: scenesPayload }),
-      })
-      const data = await res.json().catch(() => ({}))
-      if (!res.ok) throw new Error(data.error ?? 'Save failed')
-      setScenesSaved(true)
+      await saveScenesToSanity()
     } catch (err) {
       setSaveScenesError(err instanceof Error ? err.message : 'Save failed')
     } finally {
@@ -788,6 +730,12 @@ export default function VAPostPage() {
     if (enterprisePollRef.current) clearInterval(enterprisePollRef.current)
     setEnterpriseState({ phase: 'submitting' })
     try {
+      // Auto-save uploaded/approved scene images first — the render reads them
+      // from Sanity, so an unsaved selection would fail with "no approved
+      // video scenes" even though the images are visible on this page.
+      if (scenes.length > 0 && Object.keys(approvedScenes).length > 0 && !scenesSaved) {
+        await saveScenesToSanity()
+      }
       const res = await fetch(`/api/content/generate-enterprise-video?secret=${encodeURIComponent(secret)}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -1682,10 +1630,11 @@ export default function VAPostPage() {
           </Card>
 
           {/* NEW — Generate Video, Ylopo Enterprise */}
-          <Card title="Generate Video — Ylopo Enterprise">
+          <Card title="Generate Video — HeyGen Enterprise">
             <p style={{ fontSize: 12, color: '#94a3b8', margin: '0 0 16px', lineHeight: 1.5 }}>
-              Renders on the shared Ylopo Enterprise video platform using the saved look/voice above
-              and the approved scene images. Typically takes several minutes.
+              Renders through the HeyGen Enterprise account using the saved look/voice above, the video
+              script, and the scene images you uploaded/approved. The finished video appears here for
+              review and is attached to the post automatically. Typically takes several minutes.
             </p>
 
             {/* Cover thumbnail */}
@@ -1745,7 +1694,7 @@ export default function VAPostPage() {
                   border: 'none', borderRadius: 8, fontSize: 14, fontWeight: 700, cursor: 'pointer',
                 }}
               >
-                🎬 Generate Video
+                🤖 Generate with HeyGen
               </button>
             )}
 
@@ -1761,7 +1710,7 @@ export default function VAPostPage() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
                   <span style={{ fontSize: 18, display: 'inline-block', animation: 'ent-spin 1.4s linear infinite' }}>🎬</span>
                   <div>
-                    <div style={{ fontSize: 13, fontWeight: 700, color: BRAND }}>Rendering on Ylopo Enterprise…</div>
+                    <div style={{ fontSize: 13, fontWeight: 700, color: BRAND }}>Rendering on HeyGen Enterprise…</div>
                     <div style={{ fontSize: 12, color: BRAND }}>
                       {Math.floor(enterpriseState.elapsedSec / 60)}m {enterpriseState.elapsedSec % 60}s elapsed
                     </div>
@@ -1808,86 +1757,13 @@ export default function VAPostPage() {
           {/* Video upload (legacy path — YouTube + TikTok + Facebook Reel) */}
           <Card title={isPublished ? 'Video — Replace & Re-publish' : 'Video (YouTube + TikTok + Facebook Reel)'}>
             <p style={{ fontSize: 12, color: '#94a3b8', margin: '0 0 16px', lineHeight: 1.5 }}>
-              Optional. Upload a final video to publish to YouTube, TikTok, and Facebook Reel alongside the Facebook post. Supports MP4, MOV, or WebM up to 500 MB.
+              Optional manual fallback. The Generate with HeyGen button above renders and attaches the video automatically — use this only to upload your own final cut instead. Supports MP4, MOV, or WebM up to 500 MB.
             </p>
 
-            {/* Step 1: HeyGen base generation */}
-            <div style={{ marginBottom: 20, paddingBottom: 20, borderBottom: '1px solid #f1f5f9' }}>
-              <div style={{ fontSize: 11, fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 10 }}>
-                Step 1 — Generate Base Video (optional)
-              </div>
-
-              {heygenState.type === 'idle' && (
-                <>
-                  <button
-                    onClick={handleGenerateHeyGenVideo}
-                    disabled={!videoScript.trim()}
-                    title={!videoScript.trim() ? 'Generate a video script first' : undefined}
-                    style={{
-                      padding: '9px 18px',
-                      background: videoScript.trim() ? BRAND : '#e2e8f0',
-                      color: videoScript.trim() ? '#fff' : '#94a3b8',
-                      border: 'none', borderRadius: 8, fontSize: 13,
-                      fontWeight: 600, cursor: videoScript.trim() ? 'pointer' : 'not-allowed',
-                    }}
-                  >
-                    🤖 Generate with HeyGen
-                  </button>
-                  <p style={{ fontSize: 11, color: '#94a3b8', marginTop: 8 }}>
-                    Renders a talking-head avatar video from the script above. Download it, edit it to add backgrounds, then upload your final version below.
-                  </p>
-                </>
-              )}
-
-              {heygenState.type === 'generating' && (
-                <div style={{ padding: '14px 16px', background: BRAND_TINT, border: `1px solid ${BRAND_BORDER}`, borderRadius: 8 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
-                    <div style={{ fontSize: 18 }}>🎬</div>
-                    <div>
-                      <div style={{ fontSize: 13, fontWeight: 700, color: BRAND }}>HeyGen is rendering the base video</div>
-                      <div style={{ fontSize: 12, color: BRAND }}>{heygenState.message}</div>
-                    </div>
-                  </div>
-                  <div style={{ height: 4, background: BRAND_BORDER, borderRadius: 99, overflow: 'hidden' }}>
-                    <div style={{ height: '100%', width: '100%', background: BRAND, borderRadius: 99, animation: 'pulse 1.5s ease-in-out infinite' }} />
-                  </div>
-                  <p style={{ fontSize: 11, color: BRAND, marginTop: 8, marginBottom: 0 }}>
-                    Typically takes 2–5 minutes. This page can stay open.
-                  </p>
-                </div>
-              )}
-
-              {heygenState.type === 'ready' && (
-                <div style={{ padding: '12px 14px', background: '#f0fdf4', border: '1px solid #86efac', borderRadius: 8 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 }}>
-                    <span style={{ fontSize: 18 }}>✅</span>
-                    <span style={{ fontSize: 13, fontWeight: 700, color: '#166534' }}>Base video rendered</span>
-                    <a
-                      href={heygenState.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ marginLeft: 'auto', fontSize: 12, fontWeight: 600, color: BRAND, textDecoration: 'none' }}
-                    >
-                      Download ↗
-                    </a>
-                  </div>
-                  <p style={{ fontSize: 11, color: '#166534', margin: '0 0 8px', lineHeight: 1.5 }}>
-                    Open it in HeyGen or a video editor to add backgrounds and graphics, then upload your final cut below.
-                  </p>
-                  <button
-                    onClick={() => setHeygenState({ type: 'idle' })}
-                    style={{ fontSize: 11, color: '#64748b', background: 'none', border: 'none', cursor: 'pointer', padding: 0, textDecoration: 'underline' }}
-                  >
-                    Generate new base video
-                  </button>
-                </div>
-              )}
-            </div>
-
-            {/* Step 2: Upload final video */}
+            {/* Manual upload fallback */}
             <div>
               <div style={{ fontSize: 11, fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 10 }}>
-                Step 2 — Upload Final Video
+                Upload Final Video
               </div>
 
               {video.type === 'none' && (
