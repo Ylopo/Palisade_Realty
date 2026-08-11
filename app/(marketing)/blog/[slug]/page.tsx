@@ -6,6 +6,7 @@ import { PortableText } from '@portabletext/react'
 import { client } from '@/lib/sanity/client'
 import { POST_BY_SLUG_QUERY } from '@/lib/sanity/queries'
 import { categoryToDisplayBucket, type DisplayBucket } from '@/lib/blog/category-map'
+import BlogAreaListings from './BlogAreaListings'
 import { STATIC_POSTS } from '@/lib/blog/static-posts'
 import RelatedArticles from '@/components/RelatedArticles'
 
@@ -37,6 +38,7 @@ interface SanityPost {
   author?: string
   readTime?: number
   coverImage?: string
+  idxAreas?: string[]
   body?: unknown[]
 }
 
@@ -91,6 +93,7 @@ async function fetchSanityPost(slug: string): Promise<SanityPost | null> {
     excerpt?: string
     authorName?: string
     coverImage?: string
+    idxAreas?: string[]
     body?: unknown[]
   } | null>(POST_BY_SLUG_QUERY, { slug })
   if (!raw) return null
@@ -103,6 +106,7 @@ async function fetchSanityPost(slug: string): Promise<SanityPost | null> {
     excerpt: raw.excerpt,
     author: raw.authorName,
     coverImage: raw.coverImage,
+    idxAreas: raw.idxAreas,
     body: raw.body,
   }
 }
@@ -361,6 +365,9 @@ export default async function BlogPostPage({ params }: Props) {
           )}
         </div>
       </section>
+
+      {/* ── IDX LISTINGS (from the post's Blog Listings Areas) ── */}
+      {post.idxAreas && post.idxAreas.length > 0 && <BlogAreaListings areas={post.idxAreas} />}
 
       <RelatedArticles slug={slug} category={post.category as DisplayBucket} />
 

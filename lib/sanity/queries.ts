@@ -28,6 +28,7 @@ export const POST_BY_SLUG_QUERY = groq`
     excerpt,
     authorName,
     "coverImage": coverImage.asset->url,
+    idxAreas,
     body,
   }
 `
