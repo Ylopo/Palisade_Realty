@@ -51,6 +51,7 @@ export interface SanityBlogPost {
   }>
   videoUrl?: string
   videoThumbnailUrl?: string
+  videoCoverUrl?: string
   scheduledPublishAt?: string
   vaQueuePriority?: number
   oneupFacebookSubmissionId?: string
@@ -271,6 +272,9 @@ export default function VAPostPage() {
           }
           if (found.videoThumbnailUrl) {
             setVideoThumbnailUrl(found.videoThumbnailUrl)
+          }
+          if (found.videoCoverUrl) {
+            setEnterpriseCoverUrl(found.videoCoverUrl)
           }
 
           // Fetch FH result
@@ -750,7 +754,7 @@ export default function VAPostPage() {
       const res = await fetch(`/api/content/generate-enterprise-video?secret=${encodeURIComponent(secret)}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ postId, ...(lookOverride ? { lookOverride } : {}) }),
+        body: JSON.stringify({ postId, ...(lookOverride ? { lookOverride } : {}), ...(enterpriseCoverUrl ? { coverUrl: enterpriseCoverUrl } : {}) }),
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error ?? 'Failed to start render')

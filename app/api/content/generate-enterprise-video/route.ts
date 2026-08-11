@@ -19,6 +19,8 @@ interface PostVideoFields {
   videoScript?: string
   videoScenes?: VideoScene[]
   videoThumbnailUrl?: string
+  /** The cover/first-frame image baked into the start of the render. */
+  videoCoverUrl?: string
   /** A previously-saved look override for this post, persisted by a prior render. */
   videoLookId?: string
 }
@@ -32,6 +34,7 @@ const POST_VIDEO_FIELDS_QUERY = `*[_type == "blogPost" && _id == $postId][0]{
   videoScript,
   videoScenes,
   videoThumbnailUrl,
+  videoCoverUrl,
   videoLookId
 }`
 
@@ -50,19 +53,22 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  let body: { postId?: unknown; lookOverride?: unknown }
+  let body: { postId?: unknown; lookOverride?: unknown; coverUrl?: unknown }
   try {
     body = await request.json()
   } catch {
     return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 })
   }
 
-  const { postId, lookOverride } = body
+  const { postId, lookOverride, coverUrl: coverUrlInput } = body
   if (typeof postId !== 'string' || postId.length === 0) {
     return NextResponse.json({ error: 'postId is required' }, { status: 400 })
   }
   if (lookOverride !== undefined && typeof lookOverride !== 'string') {
     return NextResponse.json({ error: 'lookOverride must be a string' }, { status: 400 })
+  }
+  if (coverUrlInput !== undefined && typeof coverUrlInput !== 'string') {
+    return NextResponse.json({ error: 'coverUrl must be a string' }, { status: 400 })
   }
 
   try {
@@ -98,21 +104,30 @@ export async function POST(request: NextRequest) {
     const approvedScenes = (post.videoScenes ?? [])
       .filter((scene) => scene.approved)
       .sort((a, b) => a.order - b.order)
-    const imageUrls = approvedScenes.map((scene) => scene.imageUrl)
+    const sceneImageUrls = approvedScenes.map((scene) => scene.imageUrl)
 
-    if (imageUrls.length === 0) {
+    if (sceneImageUrls.length === 0) {
       return NextResponse.json(
         { error: `Post ${postId} has no approved video scenes` },
         { status: 400 }
       )
     }
 
+    // d2. Cover/first-frame image: explicit from this request, else previously
+    // saved. Baked in as the FIRST image so the video's opening frames show it
+    // — Reels/TikTok ignore external thumbnail hints and display the first
+    // frame, so this is the only way the uploaded cover reliably becomes the
+    // visible thumbnail on every platform. Also passed as the platform-level
+    // thumbnailUrl for platforms that do honor it.
+    const coverUrl = (coverUrlInput as string | undefined) ?? post.videoCoverUrl ?? undefined
+    const imageUrls = coverUrl ? [coverUrl, ...sceneImageUrls] : sceneImageUrls
+
     // e. Idempotency key MUST include the chosen look so a look change forces a new render.
     const idempotencyKey = buildIdempotencyKey(
       postId,
       post.videoScript,
       imageUrls,
-      post.videoThumbnailUrl,
+      coverUrl ?? post.videoThumbnailUrl ?? undefined,
       chosenLook,
       voiceId ?? undefined
     )
@@ -125,7 +140,7 @@ export async function POST(request: NextRequest) {
       // Sanity/GROQ returns null (not undefined) for an unset field — the
       // Enterprise API's schema rejects an explicit null for an optional
       // field ("expected string, received null"), so this must be coerced.
-      thumbnailUrl: post.videoThumbnailUrl ?? undefined,
+      thumbnailUrl: coverUrl ?? post.videoThumbnailUrl ?? undefined,
       lookId: chosenLook,
       voiceId: voiceId ?? undefined,
       idempotencyKey,
@@ -138,6 +153,7 @@ export async function POST(request: NextRequest) {
         enterpriseVideoJobId: videoId,
         enterpriseVideoStatus: 'processing',
         videoLookId: chosenLook,
+        ...(coverUrl ? { videoCoverUrl: coverUrl } : {}),
       })
       .commit()
 

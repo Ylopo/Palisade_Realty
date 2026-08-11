@@ -43,6 +43,7 @@ export interface SanityBlogPost {
   category?: string
   videoUrl?: string
   videoThumbnailUrl?: string
+  videoCoverUrl?: string
   coverImage?: any
 }
 
@@ -421,7 +422,7 @@ export async function publishPostToAll(
 
       const [reelOutcome, ytOutcome, ttOutcome, igOutcome] = await Promise.allSettled([
         publishToFacebookReel(fbCopy, post.videoUrl),
-        publishToYouTube(post.title, videoDescription, post.videoUrl, post.videoThumbnailUrl),
+        publishToYouTube(post.title, videoDescription, post.videoUrl, post.videoThumbnailUrl ?? post.videoCoverUrl),
         publishToTikTok(tiktokCaption, post.videoUrl),
         // Instagram: try reel, fall back to image
         tryVideoThenImage(publishToInstagramReel, igCopy, post.videoUrl, imageUrl, 'Instagram'),
