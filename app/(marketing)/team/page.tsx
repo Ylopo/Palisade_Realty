@@ -34,7 +34,7 @@ export default function TeamPage() {
       </section>
 
       {/* ── STATS BAR ───────────────────────────────────────── */}
-      <div className="tp-stats" aria-label="Team statistics">
+      <div className="tp-stats" aria-label="Team statistics" style={{display:'none'}}>
         <div className="tp-stats-inner">
           <div className="tp-stat">
             <span className="tp-stat-num">100+</span>

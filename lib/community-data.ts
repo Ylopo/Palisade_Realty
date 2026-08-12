@@ -59,6 +59,7 @@ export interface CommunityData {
   lifestyleBullets?: string[]
   nearbyDescription?: string
   melloroos?: MelloRoosData
+  widgetLocations?: Array<{ city?: string; neighborhood?: string; state: string }>
   locationMap?: {
     center: [number, number]
     zoom: number
@@ -1106,6 +1107,7 @@ const COMMUNITIES: CommunityData[] = [
     ],
     schoolDistrict: 'San Diego Unified School District',
     ylopoSearch: 'https://search.palisaderealty.com/search?s%5Blocations%5D%5B0%5D%5Bcity%5D=Point+Loma&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA',
+    widgetLocations: [{ neighborhood: 'Point Loma', city: 'San Diego', state: 'CA' }],
     nearbyCommunities: [
       { name: 'Downtown San Diego', slug: 'downtown-san-diego-real-estate', from: '$450K', whyConsider: 'The urban core just 10 minutes away — condos, lofts, and bayfront living with Walk Score 97 and a world-class restaurant scene.' },
       { name: 'Mission Hills', slug: 'mission-hills-real-estate', from: '$900K', whyConsider: 'Historic Craftsman bungalows and a charming village core — the quieter, tree-lined alternative just north of Old Town with strong architectural character.' },
@@ -1302,6 +1304,16 @@ const COMMUNITIES: CommunityData[] = [
     ],
     schoolDistrict: 'San Diego Unified School District',
     ylopoSearch: 'https://search.palisaderealty.com/search?s%5Blocations%5D%5B0%5D%5Bcity%5D=San+Diego&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA',
+    widgetLocations: [
+      { neighborhood: 'East Village', city: 'San Diego', state: 'CA' },
+      { neighborhood: 'Little Italy', city: 'San Diego', state: 'CA' },
+      { neighborhood: 'Gaslamp Quarter', city: 'San Diego', state: 'CA' },
+      { neighborhood: 'Marina District', city: 'San Diego', state: 'CA' },
+      { neighborhood: 'Cortez Hill', city: 'San Diego', state: 'CA' },
+      { neighborhood: 'Columbia District', city: 'San Diego', state: 'CA' },
+      { neighborhood: 'Core District', city: 'San Diego', state: 'CA' },
+      { neighborhood: 'Bankers Hill', city: 'San Diego', state: 'CA' },
+    ],
     nearbyCommunities: [
       { name: 'North Park', slug: 'north-park-real-estate', from: '$700K', whyConsider: 'Urban village character just 2 miles north — independent coffee shops, craft breweries, and a farmers market along 30th Street with lower price points than downtown.' },
       { name: 'Mission Hills', slug: 'mission-hills-real-estate', from: '$900K', whyConsider: 'Craftsman bungalows and Spanish Revival homes on tree-lined streets overlooking the valley — historic neighborhood charm with easy trolley access downtown.' },
@@ -1532,6 +1544,7 @@ const COMMUNITIES: CommunityData[] = [
     ],
     schoolDistrict: 'San Diego Unified School District',
     ylopoSearch: 'https://search.palisaderealty.com/search?s%5Blocations%5D%5B0%5D%5Bcity%5D=Mission+Hills&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA',
+    widgetLocations: [{ neighborhood: 'Mission Hills', city: 'San Diego', state: 'CA' }],
     nearbyCommunities: [
       { name: 'Downtown San Diego', slug: 'downtown-san-diego-real-estate', from: '$450K', whyConsider: 'Urban condo lifestyle, walk score 97, bayfront living, and San Diego\'s most vibrant nightlife and dining 10 minutes south.' },
       { name: 'Bankers Hill', slug: 'bankers-hill-real-estate', from: '$700K', whyConsider: 'Mission Hills\' eastern neighbor — similarly historic but with more condo options and direct Balboa Park frontage.' },
@@ -1726,6 +1739,7 @@ const COMMUNITIES: CommunityData[] = [
     ],
     schoolDistrict: 'San Diego Unified School District',
     ylopoSearch: 'https://search.palisaderealty.com/search?s%5Blocations%5D%5B0%5D%5Bcity%5D=North+Park&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA',
+    widgetLocations: [{ neighborhood: 'North Park', city: 'San Diego', state: 'CA' }],
     nearbyCommunities: [
       { name: 'Downtown San Diego', slug: 'downtown-san-diego-real-estate', from: '$450K', whyConsider: 'Urban condo lifestyle, walk score 97, bayfront living, and San Diego\'s most vibrant nightlife and dining 10 minutes south.' },
       { name: 'Bankers Hill', slug: 'bankers-hill-real-estate', from: '$700K', whyConsider: 'Mission Hills\' eastern neighbor — similarly historic but with more condo options and direct Balboa Park frontage.' },
@@ -2801,6 +2815,10 @@ const COMMUNITIES: CommunityData[] = [
     privateSchools: [],
     schoolDistrict: 'San Diego Unified School District',
     ylopoSearch: 'https://search.palisaderealty.com/search?s%5Blocations%5D%5B0%5D%5Bcity%5D=Pacific+Beach&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA',
+    widgetLocations: [
+      { city: 'Pacific Beach', state: 'CA' },
+      { city: 'Mission Beach', state: 'CA' },
+    ],
     nearbyCommunities: [
       { name: 'Point Loma', slug: 'point-loma-real-estate', from: '$800K', whyConsider: 'Sunset Cliffs, Liberty Station, and harbor views — a more established, quieter coastal alternative with strong community character just minutes south via I-8.' },
       { name: 'La Jolla', slug: 'la-jolla-real-estate', from: '$1.2M', whyConsider: 'San Diego\'s luxury coastal address — cliff-top estates, world-class dining, UCSD proximity, and Torrey Pines just 20 minutes north on I-5.' },
@@ -2995,6 +3013,7 @@ const COMMUNITIES: CommunityData[] = [
     privateSchools: [],
     schoolDistrict: 'San Diego Unified School District',
     ylopoSearch: 'https://search.palisaderealty.com/search?s%5Blocations%5D%5B0%5D%5Bcity%5D=Mission+Valley&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA',
+    widgetLocations: [{ neighborhood: 'Mission Valley', city: 'San Diego', state: 'CA' }],
     nearbyCommunities: [
       { name: 'Downtown San Diego', slug: 'downtown-san-diego-real-estate', from: '$450K', whyConsider: 'The urban core 10 minutes west — high-rise condos, bayfront living, a Walk Score of 97, and a world-class restaurant and arts scene without the freeway commute.' },
       { name: 'Mission Hills', slug: 'mission-hills-real-estate', from: '$900K', whyConsider: 'Elevated above Mission Valley\'s north rim — historic Craftsman bungalows, a beloved village core, and tree-lined streets with strong architectural character and neighborhood pride.' },
@@ -3978,6 +3997,7 @@ const COMMUNITIES: CommunityData[] = [
     privateSchools: [],
     schoolDistrict: 'Poway Unified School District',
     ylopoSearch: 'https://search.palisaderealty.com/search?s%5Blocations%5D%5B0%5D%5Bcity%5D=Rancho+Penasquitos&s%5Blocations%5D%5B0%5D%5Bstate%5D=CA',
+    widgetLocations: [{ city: 'Rancho Penasquitos', state: 'CA' }],
     nearbyCommunities: [
       { name: 'Carmel Valley', slug: 'carmel-valley-real-estate', from: '$1M' },
       { name: 'Scripps Ranch', slug: 'scripps-ranch-real-estate', from: '$1M' },

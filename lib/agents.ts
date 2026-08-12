@@ -19,21 +19,21 @@ export const SITE_PHONE = '(619) 794-0218'
 export const SITE_EMAIL_FALLBACK = (slug: string) => `${slug.split('-')[0]}@palisaderealty.com`
 
 export const LEADERSHIP: AgentEntry[] = [
-  { name: 'Hedda Parashos',     slug: 'hedda-parashos',     title: 'CEO',                             imgSrc: '/assets/images/agents/hedda-parashos.jpg',     isLeader: true, bio: [
+  { name: 'Hedda Parashos',     slug: 'hedda-parashos',     title: 'CEO',                             imgSrc: '/assets/images/agents/hedda-parashos.jpg',     isLeader: true, phone: '(619) 200-7559', email: 'teamhedda@palisaderealty.com', bio: [
     'Hedda Parashos is the Owner and President of Palisade Realty, a full-service real estate brokerage established in 2006. She acquired the company in 2012 and has since transformed it into one of Southern California\'s respected independent brokerages through innovation, strong leadership, and an unwavering commitment to both clients and agents.',
     'Today, Palisade Realty is home to more than 100 real estate agent partners, with continued growth across San Diego County, Orange County, and parts of Riverside County. Under Hedda\'s leadership, the brokerage has been involved in the successful sale of thousands of homes, earning a reputation for professionalism, integrity, and exceptional client service.',
     'Hedda\'s passion for real estate extends beyond buying and selling homes. She is dedicated to creating an environment where agents can thrive through mentorship, innovative marketing, cutting-edge technology, and a culture built on collaboration and genuine care. Her vision has positioned Palisade Realty as a brokerage that continually evolves to meet the changing needs of today\'s real estate market.',
     'Whether working with first-time homebuyers, luxury sellers, investors, or experienced clients, Hedda and the Palisade Realty team are committed to delivering knowledgeable guidance, strategic representation, and an exceptional real estate experience from start to finish.',
   ] },
-  { name: 'Tom Parashos',       slug: 'tom-parashos',       title: 'Broker',                          imgSrc: '/assets/images/agents/tom-parashos.jpg',       isLeader: true },
-  { name: 'Britney Bartlett',   slug: 'britney-bartlett',   title: 'Director of Operations',          imgSrc: '/assets/images/agents/britney-bartlett.jpg',   isLeader: true },
-  { name: 'Michael DiVita',     slug: 'michael-divita',     title: 'Database and Onboarding Manager', imgSrc: '/assets/images/agents/michael-divita.jpg',     isLeader: true },
-  { name: 'Michael Guzman',     slug: 'michael-guzman',     title: 'REALTOR®',                        imgSrc: '/assets/images/agents/michael-guzman.jpg',     isLeader: true },
-  { name: 'Nicole Ward',        slug: 'nicole-ward',        title: 'Risk Manager',                    imgSrc: '/assets/images/agents/nicole-ward.png',        isLeader: true },
-  { name: 'Danielle Patterson', slug: 'danielle-patterson', title: 'Transaction Coordinator',         imgSrc: '/assets/images/agents/danielle-patterson.jpg', isLeader: true },
-  { name: 'Lisa Florendo',      slug: 'lisa-florendo',      title: 'Transaction Coordinator',         imgSrc: '/assets/images/agents/lisa-florendo.png',      isLeader: true },
-  { name: 'Kelly Chan',         slug: 'kelly-chan',          title: 'Database Assistant',              imgSrc: '/assets/images/agents/kelly-chan.jpg',         isLeader: true },
-  { name: 'Fermin Perez',       slug: 'fermin-perez',       title: 'Transaction Coordinator',         imgSrc: '/assets/images/agents/fermin-perez.jpg',       isLeader: true },
+  { name: 'Tom Parashos',       slug: 'tom-parashos',       title: 'Broker',                          imgSrc: '/assets/images/agents/tom-parashos.jpg',       isLeader: true, phone: '(619) 586-5278', email: 'tparashos@palisaderealty.com' },
+  { name: 'Britney Bartlett',   slug: 'britney-bartlett',   title: 'Office Manager',                  imgSrc: '/assets/images/agents/britney-bartlett.jpg',   isLeader: true, phone: '(619) 794-0218', email: 'Bbartlett@palisaderealty.com' },
+  { name: 'Michael DiVita',     slug: 'michael-divita',     title: 'Database and Onboarding Manager', imgSrc: '/assets/images/agents/michael-divita.jpg',     isLeader: true, phone: '(619) 313-5483', email: 'mDivita@palisaderealty.com' },
+  { name: 'Michael Guzman',     slug: 'michael-guzman',     title: 'Executive Assistant',             imgSrc: '/assets/images/agents/michael-guzman.jpg',     isLeader: true, phone: '(619) 764-6316', email: 'mguzman@palisaderealty.com' },
+  { name: 'Nicole Ward',        slug: 'nicole-ward',        title: 'Risk Manager',                    imgSrc: '/assets/images/agents/nicole-ward.png',        isLeader: true, phone: '(619) 758-3521', email: 'nward@palisaderealty.com' },
+  { name: 'Danielle Patterson', slug: 'danielle-patterson', title: 'Transaction Coordinator',         imgSrc: '/assets/images/agents/danielle-patterson.jpg', isLeader: true, phone: '(619) 413-9618', email: 'dpatterson@palisaderealty.com' },
+  { name: 'Lisa Florendo',      slug: 'lisa-florendo',      title: 'Transaction Coordinator',         imgSrc: '/assets/images/agents/lisa-florendo.png',      isLeader: true, phone: '(619) 473-4985', email: 'lisa@palisaderealty.com' },
+  { name: 'Kelly Chan',         slug: 'kelly-chan',          title: 'Database Assistant',              imgSrc: '/assets/images/agents/kelly-chan.jpg',         isLeader: true, phone: '(619) 949-2441', email: 'kchan@palisaderealty.com' },
+  { name: 'Fermin Perez',       slug: 'fermin-perez',       title: 'Transaction Coordinator',         imgSrc: '/assets/images/agents/fermin-perez.jpg',       isLeader: true, phone: '(619) 468-4520', email: 'fperez@palisaderealty.com' },
 ]
 
 export const AGENTS: AgentEntry[] = [
@@ -79,7 +79,7 @@ export const AGENTS: AgentEntry[] = [
   { name: 'Diane Van Korlaar',           slug: 'diane-van-korlaar',           title: 'REALTOR®', imgSrc: '/assets/images/agents/diane-van-korlaar.jpg',           phone: '(949) 942-3886', email: 'homesbydianevank@gmail.com' },
   { name: 'Ryan Stein',                  slug: 'ryan-stein',                  title: 'REALTOR®', imgSrc: '/assets/images/agents/ryan-stein.jpg',                  phone: '(619) 917-1679', email: 'ryan@callstein.com' },
   { name: 'Brandon Le',                  slug: 'brandon-le',                  title: 'REALTOR®', imgSrc: '/assets/images/agents/brandon-le.jpg',                  phone: '(858) 254-1504', email: 'brandonsdrealtor@gmail.com' },
-  { name: 'Zach Campbell',               slug: 'zach-campbell',               title: 'REALTOR®', imgSrc: '/assets/images/agents/zach-campbell.jpg',               phone: '(760) 458-0732', email: 'zachsellssocal@gmail.com' },
+  { name: 'Zach Campbell',               slug: 'zach-campbell',               title: 'REALTOR®', imgSrc: '/assets/images/agents/zach-campbell.jpg',               phone: '(760) 888-6493', email: 'zachsellssocal@gmail.com' },
   { name: 'Aubrey Foulk',                slug: 'aubrey-foulk',                title: 'REALTOR®', imgSrc: '/assets/images/agents/aubrey-foulk.jpg',                phone: '(619) 201-2086', email: 'aubreyfoulk5@gmail.com' },
   { name: 'Jeremy McHone',               slug: 'jeremy-mchone',               title: 'REALTOR®', imgSrc: '/assets/images/agents/jeremy-mchone.png',               phone: '(619) 971-0791', email: 'jeremymchonerealtor@gmail.com' },
   { name: 'Laura Pachlin',               slug: 'laura-pachlin',               title: 'REALTOR®', imgSrc: '/assets/images/agents/laura-pachlin.jpg',               phone: '(619) 504-9996', email: 'laura@finehomesofsd.com' },
@@ -93,7 +93,7 @@ export const AGENTS: AgentEntry[] = [
   { name: 'Chris Nguyen',                slug: 'chris-nguyen',                title: 'REALTOR®', imgSrc: '/assets/images/agents/chris-nguyen.jpg',                phone: '(619) 354-7920', email: 'Chrisnguyensold@outlook.com' },
   { name: 'Jared Lawrence',              slug: 'jared-lawrence',              title: 'REALTOR®', imgSrc: '/assets/images/agents/jared-lawrence.jpg',              phone: '(858) 449-4022', email: 'jared@jaredlawrencere.com' },
   { name: 'Jonathan Cohen-Kurzrock',     slug: 'jonathan-cohen-kurzrock',     title: 'REALTOR®', imgSrc: '/assets/images/agents/jonathan-cohen-kurzrock.png',     phone: '(858) 336-9653', email: 'Jcohenkurzrock@gmail.com' },
-  { name: 'Chittra Cruz',                slug: 'chittra-cruz',                title: 'REALTOR®', imgSrc: '/assets/images/agents/chittra-cruz.jpg',                phone: '(619) 940-0370', email: 'ChittraCruz@gmail.com' },
+  { name: 'Chittra Cruz',                slug: 'chittra-cruz',                title: 'REALTOR®', imgSrc: '/assets/images/agents/chittra-cruz.jpg',                phone: '(619) 941-0370', email: 'ChittraCruz@gmail.com' },
   { name: 'Kelsey Barry Farnsworth',     slug: 'kelsey-barry-farnsworth',     title: 'REALTOR®', imgSrc: '/assets/images/agents/kelsey-barry-farnsworth.jpg',     phone: '(858) 833-2488', email: 'kelseybarryhomes@gmail.com' },
   { name: 'Edelia Eveland',              slug: 'edelia-eveland',              title: 'REALTOR®', imgSrc: '/assets/images/agents/edelia-eveland.png',              phone: '(951) 218-1070', email: 'edeliaeveland@gmail.com' },
   { name: 'Sabrina Alvarado',            slug: 'sabrina-alvarado',            title: 'REALTOR®', imgSrc: '/assets/images/agents/sabrina-alvarado.jpg',            phone: '(619) 346-2342', email: 'hellosdhomes@gmail.com' },
@@ -105,8 +105,8 @@ export const AGENTS: AgentEntry[] = [
   { name: "Casie O'Donnell",             slug: 'casie-o-donnell',             title: 'REALTOR®', imgSrc: '/assets/images/agents/casie-o-donnell.jpg',             phone: '(619) 417-1943', email: 'CasieSellsSanDiego@gmail.com' },
   { name: 'Sergio Yturralde',            slug: 'sergio-yturralde',            title: 'REALTOR®', imgSrc: '/assets/images/agents/sergio-yturralde.jpg',            phone: '(760) 710-1965', email: 'sergioyrealtor@gmail.com' },
   { name: 'Melissa Campos',              slug: 'melissa-campos',              title: 'REALTOR®', imgSrc: '/assets/images/agents/melissa-campos.jpg',              phone: '(619) 651-3332', email: 'Melissa@lovewhereyoulivesd.com' },
-  { name: 'Emma Dearing',                slug: 'emma-dearing',                title: 'REALTOR®', imgSrc: '/assets/images/agents/emma-dearing.jpg',                phone: '(619) 432-3019', email: 'dearingrealty@gmail.com' },
-  { name: 'Tristen Campanella',          slug: 'tristen-campanella',          title: 'REALTOR®', imgSrc: '/assets/images/agents/tristen-campanella.png',          phone: '(951) 259-0755', email: 'tristen@homebytristen.com' },
+  { name: 'Emma Dearing',                slug: 'emma-dearing',                title: 'REALTOR®', imgSrc: '/assets/images/agents/emma-dearing.jpg',                phone: '(619) 432-3019', email: 'emma@dearingrealty.com' },
+  { name: 'Tristen Campanella',          slug: 'tristen-campanella',          title: 'REALTOR®', imgSrc: '/assets/images/agents/tristen-campanella.png',          phone: '(760) 310-0166', email: 'tristen@homebytristen.com' },
   { name: 'Rachel Ohara',                slug: 'rachel-ohara',                title: 'REALTOR®', imgSrc: '/assets/images/agents/rachel-ohara.png',                phone: '(714) 553-0732', email: 'rachelosdre@gmail.com' },
   { name: 'Jennifer Crosby',             slug: 'jennifer-crosby',             title: 'REALTOR®', imgSrc: '/assets/images/agents/jennifer-crosby.jpg',             phone: '(619) 917-7647', email: 'jencrosbyrealtor@gmail.com' },
   { name: 'Glennis Dawson',              slug: 'glennis-dawson',              title: 'REALTOR®', imgSrc: '/assets/images/agents/glennis-dawson.jpg',              phone: '(760) 208-5347', email: 'glennis28@gmail.com' },
@@ -114,11 +114,16 @@ export const AGENTS: AgentEntry[] = [
   { name: 'Corinne Mauro',               slug: 'corinne-mauro',               title: 'REALTOR®', imgSrc: '/assets/images/agents/corinne-mauro.jpg',               phone: '(619) 952-6958', email: 'corinnemauro.realestate@gmail.com' },
   { name: 'Jules Marchisio',             slug: 'jules-marchisio',             title: 'REALTOR®', imgSrc: '/assets/images/agents/jules-marchisio.jpg',             phone: '(619) 391-2399', email: 'julesmarchisio@gmail.com' },
   { name: 'Greg Lathem',                 slug: 'greg-lathem',                 title: 'REALTOR®', imgSrc: '/assets/images/agents/greg-lathem.jpg',                 phone: '(619) 304-3033', email: 'lathemhomes@gmail.com' },
-  { name: 'James McNab',                 slug: 'james-mcnab',                 title: 'REALTOR®', imgSrc: '/assets/images/agents/james-mcnab.jpg',                 phone: '(619) 375-2139', email: 'james.mcnabhomes@gmail.com' },
+  { name: 'James McNab',                 slug: 'james-mcnab',                 title: 'REALTOR®', imgSrc: '/assets/images/agents/james-mcnab.jpg',                 phone: '(518) 391-9173', email: 'james.mcnabhomes@gmail.com' },
   { name: 'Jarrod Norris',               slug: 'jarrod-norris',               title: 'REALTOR®', imgSrc: '/assets/images/agents/jarrod-norris.jpg',               phone: '(619) 206-8156', email: 'Norris.jarrod@gmail.com' },
-  { name: 'Hannah Ohman',                slug: 'hannah-ohman',                title: 'REALTOR®', imgSrc: '/assets/images/agents/hannah-ohman.png',                phone: '(303) 956-8060', email: 'hannah@hannahohmansd.com' },
+  { name: 'Hannah Ohman',                slug: 'hannah-ohman',                title: 'REALTOR®', imgSrc: '/assets/images/agents/hannah-ohman.png',                phone: '(619) 815-3505', email: 'hannah@hannahohmansd.com' },
   { name: 'Katie Lussier',               slug: 'katie-lussier',               title: 'REALTOR®', imgSrc: '/assets/images/agents/katie-lussier.jpg',               phone: '(760) 792-7180', email: 'Klussiersellingsd@gmail.com' },
   { name: 'John Verdin',                 slug: 'john-verdin',                 title: 'REALTOR®', imgSrc: '/assets/images/agents/john-verdin.jpg',                 phone: '(714) 353-7466', email: 'jverdinrealty@gmail.com' },
+  { name: 'Michael Grandy',              slug: 'michael-grandy',              title: 'REALTOR®', imgSrc: '/assets/images/agents/michael-grandy.jpg',              phone: '(619) 384-1144', email: 'grandy41@gmail.com', bio: [
+    'Michael is a proud California native, born and raised in sunny San Diego. Having also spent 10 years in the Temecula area, he brings valuable local knowledge and a genuine appreciation for the communities he serves throughout San Diego County.',
+    'As a dedicated member of Palisade Realty, Michael combines his extensive background in finance and business with a client-first approach to real estate. He understands that buying or selling a home is both a major financial decision and a deeply personal experience. By listening carefully, identifying each client\'s unique needs, and providing attentive service, Michael works to make every transaction informed, smooth, and successful.',
+    'Above all, Michael values relationships, integrity, and family. He is the proud father of four adult daughters and considers raising them one of his greatest accomplishments. Those same qualities - patience, dedication, care, and trust - guide the way he serves every client. Whether helping someone purchase a first home, sell a property, or pursue an investment opportunity, Michael is committed to being a knowledgeable and dependable real estate partner.',
+  ] },
 ]
 
 export const ALL_AGENTS: AgentEntry[] = [...LEADERSHIP, ...AGENTS]

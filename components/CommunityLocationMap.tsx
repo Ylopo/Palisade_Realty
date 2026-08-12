@@ -36,55 +36,73 @@ export default function CommunityLocationMap({ center, zoom, boundary, i5, harbo
   const markerRef = useRef<any>(null)
 
   useEffect(() => {
-    const mgl = (window as any).mapboxgl
-    if (!mgl || !containerRef.current) return
+    let map: any = null
+    let interval: ReturnType<typeof setInterval> | null = null
 
-    mgl.accessToken = TOKEN
-    const map = new mgl.Map({
-      container: containerRef.current,
-      style: 'mapbox://styles/mapbox/dark-v11',
-      center,
-      zoom,
-      pitch: 0,
-      interactive: false,
-      attributionControl: false,
-    })
+    const init = () => {
+      const mgl = (window as any).mapboxgl
+      if (!mgl || !containerRef.current) return false
 
-    map.on('load', () => {
-      map.addSource('loc-county', {
-        type: 'geojson',
-        data: { type: 'Feature', geometry: { type: 'Polygon', coordinates: [SD_COUNTY_COORDS] } },
+      mgl.accessToken = TOKEN
+      map = new mgl.Map({
+        container: containerRef.current,
+        style: 'mapbox://styles/mapbox/dark-v11',
+        center,
+        zoom,
+        pitch: 0,
+        interactive: false,
+        attributionControl: false,
       })
-      map.addLayer({ id: 'loc-county-fill', type: 'fill', source: 'loc-county', paint: { 'fill-color': '#C8C8C8', 'fill-opacity': 0.06 } })
-      map.addLayer({ id: 'loc-county-line', type: 'line', source: 'loc-county', paint: { 'line-color': '#C8C8C8', 'line-width': 1, 'line-opacity': 0.35 } })
 
-      map.addSource('loc-current', {
-        type: 'geojson',
-        data: { type: 'Feature', geometry: { type: 'Polygon', coordinates: [boundary] } },
+      map.on('load', () => {
+        map.addSource('loc-county', {
+          type: 'geojson',
+          data: { type: 'Feature', geometry: { type: 'Polygon', coordinates: [SD_COUNTY_COORDS] } },
+        })
+        map.addLayer({ id: 'loc-county-fill', type: 'fill', source: 'loc-county', paint: { 'fill-color': '#C8C8C8', 'fill-opacity': 0.06 } })
+        map.addLayer({ id: 'loc-county-line', type: 'line', source: 'loc-county', paint: { 'line-color': '#C8C8C8', 'line-width': 1, 'line-opacity': 0.35 } })
+
+        map.addSource('loc-current', {
+          type: 'geojson',
+          data: { type: 'Feature', geometry: { type: 'Polygon', coordinates: [boundary] } },
+        })
+        map.addLayer({ id: 'loc-current-fill', type: 'fill', source: 'loc-current', paint: { 'fill-color': '#eeca00', 'fill-opacity': 0.28 } })
+        map.addLayer({ id: 'loc-current-line', type: 'line', source: 'loc-current', paint: { 'line-color': '#eeca00', 'line-width': 2, 'line-opacity': 0.90 } })
+
+        if (i5) {
+          map.addSource('loc-i5', { type: 'geojson', data: { type: 'Feature', geometry: { type: 'LineString', coordinates: i5 } } })
+          map.addLayer({ id: 'loc-i5-glow', type: 'line', source: 'loc-i5', paint: { 'line-color': '#5ba4ff', 'line-width': 4, 'line-opacity': 0.20, 'line-blur': 4 } })
+          map.addLayer({ id: 'loc-i5-line', type: 'line', source: 'loc-i5', paint: { 'line-color': '#7dbfff', 'line-width': 1.5, 'line-opacity': 0.65 } })
+        }
+
+        if (harbor) {
+          map.addSource('loc-harbor', { type: 'geojson', data: { type: 'Feature', geometry: { type: 'LineString', coordinates: harbor } } })
+          map.addLayer({ id: 'loc-harbor-glow', type: 'line', source: 'loc-harbor', paint: { 'line-color': '#58172a', 'line-width': 4, 'line-opacity': 0.20, 'line-blur': 4 } })
+          map.addLayer({ id: 'loc-harbor-line', type: 'line', source: 'loc-harbor', paint: { 'line-color': '#58172a', 'line-width': 1.5, 'line-opacity': 0.60 } })
+        }
+
+        if (marker) {
+          markerRef.current = new mgl.Marker({ color: '#eeca00' }).setLngLat(marker).addTo(map)
+        }
       })
-      map.addLayer({ id: 'loc-current-fill', type: 'fill', source: 'loc-current', paint: { 'fill-color': '#eeca00', 'fill-opacity': 0.28 } })
-      map.addLayer({ id: 'loc-current-line', type: 'line', source: 'loc-current', paint: { 'line-color': '#eeca00', 'line-width': 2, 'line-opacity': 0.90 } })
 
-      if (i5) {
-        map.addSource('loc-i5', { type: 'geojson', data: { type: 'Feature', geometry: { type: 'LineString', coordinates: i5 } } })
-        map.addLayer({ id: 'loc-i5-glow', type: 'line', source: 'loc-i5', paint: { 'line-color': '#5ba4ff', 'line-width': 4, 'line-opacity': 0.20, 'line-blur': 4 } })
-        map.addLayer({ id: 'loc-i5-line', type: 'line', source: 'loc-i5', paint: { 'line-color': '#7dbfff', 'line-width': 1.5, 'line-opacity': 0.65 } })
-      }
+      return true
+    }
 
-      if (harbor) {
-        map.addSource('loc-harbor', { type: 'geojson', data: { type: 'Feature', geometry: { type: 'LineString', coordinates: harbor } } })
-        map.addLayer({ id: 'loc-harbor-glow', type: 'line', source: 'loc-harbor', paint: { 'line-color': '#58172a', 'line-width': 4, 'line-opacity': 0.20, 'line-blur': 4 } })
-        map.addLayer({ id: 'loc-harbor-line', type: 'line', source: 'loc-harbor', paint: { 'line-color': '#58172a', 'line-width': 1.5, 'line-opacity': 0.60 } })
-      }
-
-      if (marker) {
-        markerRef.current = new mgl.Marker({ color: '#eeca00' }).setLngLat(marker).addTo(map)
-      }
-    })
+    if (!init()) {
+      // Mapbox GL not ready yet — poll until lazyOnload script finishes
+      interval = setInterval(() => {
+        if (init()) {
+          clearInterval(interval!)
+          interval = null
+        }
+      }, 150)
+    }
 
     return () => {
+      if (interval) clearInterval(interval)
       markerRef.current?.remove()
-      map.remove()
+      map?.remove()
     }
   }, [])
 

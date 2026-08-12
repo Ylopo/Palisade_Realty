@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import type { FeaturedProperty } from '@/lib/property-data'
+import localProperties from '@/data/featured-properties.json'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -15,27 +16,7 @@ export const metadata: Metadata = {
 }
 
 async function getProperties(): Promise<FeaturedProperty[]> {
-  const token = process.env.GITHUB_TOKEN
-  try {
-    const res = await fetch(
-      `https://api.github.com/repos/jomylopo/Palisade_Realty/contents/data/featured-properties.json`,
-      {
-        headers: {
-          Accept: 'application/vnd.github.v3.raw',
-          'User-Agent': 'palisade-realty-site',
-          ...(token && { Authorization: `token ${token}` }),
-        },
-        cache: 'no-store',
-      }
-    )
-    if (!res.ok) return []
-    const text = await res.text()
-    let data: unknown
-    try { data = JSON.parse(text) } catch { return [] }
-    return Array.isArray(data) ? (data as FeaturedProperty[]) : []
-  } catch {
-    return []
-  }
+  return localProperties as FeaturedProperty[]
 }
 
 function formatPrice(n: number): string {

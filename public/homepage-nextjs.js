@@ -23,7 +23,7 @@ const TEAM = [
   },
   {
     name:    'Britney Bartlett',
-    role:    'Director of Operations',
+    role:    'Office Manager',
     bio:     'Keeps the Palisade Realty engine running smoothly. Britney oversees day-to-day operations, ensuring every transaction and client interaction is seamless from start to finish.',
     profile: '/team/britney-bartlett',
     photo:   '/assets/images/agents/britney-bartlett.jpg',
@@ -37,8 +37,8 @@ const TEAM = [
   },
   {
     name:    'Michael Guzman',
-    role:    'REALTOR®',
-    bio:     'Dedicated buyer\'s and seller\'s agent with deep roots across San Diego County. Known for his straightforward communication and strong negotiating skills.',
+    role:    'Executive Assistant',
+    bio:     'Supports Palisade Realty\'s leadership team with precision and care. Michael keeps operations organized and agents resourced so every client experience runs without a hitch.',
     profile: '/team/michael-guzman',
     photo:   '/assets/images/agents/michael-guzman.jpg',
   },

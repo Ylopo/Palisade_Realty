@@ -383,7 +383,7 @@ export default async function CommunityPage({ params }: Props) {
           <div
             className="YLOPO_resultsWidget"
             data-search={JSON.stringify({
-              locations: [{ city: c.name.split(' & ')[0], state: 'CA' }],
+              locations: c.widgetLocations ?? [{ city: c.name.split(' & ')[0], state: 'CA' }],
               propertyTypes: ['house', 'condo', 'townhouse', 'multi_family'],
               status: 'active',
               limit: 12,

@@ -5,6 +5,9 @@ import Link from 'next/link'
 import HomepageInit from '@/components/HomepageInit'
 import GoogleZillowReviews, { type Review, type ReviewSummary } from '@/components/GoogleZillowReviews'
 import reviewsData from '@/data/reviews.json'
+import { client } from '@/lib/sanity/client'
+import { ALL_POSTS_QUERY } from '@/lib/sanity/queries'
+import { categoryToDisplayBucket } from '@/lib/blog/category-map'
 
 const reviewSummary = reviewsData.summary as { googleLocations?: ReviewSummary[]; zillow?: ReviewSummary }
 const reviewList = (reviewsData.reviews as Review[]).filter((r) => r.featured === true)
@@ -35,7 +38,38 @@ const EXPLORE_ICON = (
   </svg>
 )
 
-export default function HomePage() {
+type BlogPost = { slug: string; date: string; badge: string; title: string; excerpt: string; img?: string }
+
+const STATIC_BLOG_POSTS: BlogPost[] = [
+  { slug: 'why-having-a-good-driveway-matters-when-selling-your-home', date: 'Jun 11, 2026', badge: 'SELLER', title: "Here's Why Having A Good Driveway Matters When Selling Your Home", excerpt: 'Your driveway is often the first thing buyers physically interact with. Learn why its condition directly impacts buyer perception and your final sale price.' },
+  { slug: 'landscaping-costs-homebuyers-forget-to-budget-for', date: 'May 21, 2026', badge: 'BUYER', title: "Here's One Thing Most Home Buyers Forget to Budget For: Landscaping", excerpt: 'First-time buyers often overlook landscaping costs. Understanding these ongoing expenses before buying can prevent financial surprises down the road.' },
+  { slug: 'simple-guide-to-choosing-the-ideal-paint-color-for-your-space', date: 'Apr 27, 2026', badge: 'HOMEOWNER', title: 'A Simple Guide To Choosing The Ideal Paint Color For Your Space', excerpt: 'Choosing the right paint color feels overwhelming with thousands of options. This guide walks you through key considerations to find the perfect color for any room.' },
+  { slug: 'understanding-cash-to-close-in-real-estate', date: 'Apr 15, 2026', badge: 'BUYER', title: 'Understanding Cash to Close When Purchasing A Home', excerpt: "Beyond the down payment, buyers need to prepare for dozens of smaller fees at closing. Learn what cash to close means and how to budget for it well in advance." },
+  { slug: 'easy-and-inexpensive-bathroom-updates-you-can-make-before-selling-your-home', date: 'Mar 27, 2026', badge: 'SELLER', title: 'Easy and Inexpensive Bathroom Updates You Can Make Before Selling Your Home', excerpt: 'Simple, affordable bathroom improvements can significantly boost your home\'s appeal to buyers — even with minimal DIY experience.' },
+  { slug: 'where-to-keep-your-down-payment-savings', date: 'Mar 16, 2026', badge: 'BUYER', title: 'Where to Keep Your Down Payment Savings For Your Dream Home', excerpt: 'Where you keep your down payment savings can make a meaningful difference in how quickly you reach your homeownership goal.' },
+  { slug: '5-ways-your-neighbors-can-affect-your-homes-value', date: 'Feb 23, 2026', badge: 'HOMEOWNER', title: "5 Ways Your Neighbors Can Affect Your Home's Value", excerpt: 'No matter how well you maintain your property, neighboring homes can influence its value. Understanding this dynamic helps you make smarter real estate decisions.' },
+  { slug: 'from-date-nights-to-mortgage-payments-tips-for-couples-buying-their-first-home-together', date: 'Feb 9, 2026', badge: 'BUYER', title: 'From Date Nights to Mortgage Payments: Tips for Couples Buying Their First Home Together', excerpt: 'Buying a home is one of the biggest decisions couples make together. With the right preparation, the process can strengthen your relationship and your finances.' },
+  { slug: 'simple-but-effective-habits-for-a-cleaner-and-tidier-home-all-year', date: 'Jan 20, 2026', badge: 'HOMEOWNER', title: '7 Simple But Effective Habits For A Cleaner and Tidier Home All Year', excerpt: 'Small, consistent habits make a bigger difference than marathon cleaning sessions. Start these routines now for a more organized home throughout the year.' },
+  { slug: 'why-you-should-list-your-home-at-the-beginning-of-the-year', date: 'Jan 6, 2026', badge: 'SELLER', title: 'Why You Should List Your Home at the Beginning of the Year', excerpt: 'Most sellers wait for spring, but listing at the start of the year can give you a competitive edge with motivated buyers and far less competition.' },
+]
+
+export default async function HomePage() {
+  let blogPosts: BlogPost[] = []
+  try {
+    const raw = await client.fetch(ALL_POSTS_QUERY)
+    if (Array.isArray(raw) && raw.length > 0) {
+      blogPosts = raw.map((p: { slug: string; title: string; category: string; publishedAt: string; excerpt?: string; coverImage?: string }) => ({
+        slug: p.slug,
+        date: new Date(p.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
+        badge: categoryToDisplayBucket(p.category).toUpperCase(),
+        title: p.title,
+        excerpt: p.excerpt ?? '',
+        img: p.coverImage,
+      }))
+    }
+  } catch { /* Sanity unavailable — use static fallback */ }
+  const posts = blogPosts.length > 0 ? blogPosts : STATIC_BLOG_POSTS
+
   return (
     <>
       <HomepageInit />
@@ -524,34 +558,12 @@ export default function HomePage() {
           </button>
           <div className="blog-cards-viewport">
             <div className="blog-cards-track" id="blog-track">
-              {[
-                { slug: 'why-having-a-good-driveway-matters-when-selling-your-home', date: 'Jun 11, 2026', badge: 'SELLER', title: "Here's Why Having A Good Driveway Matters When Selling Your Home", excerpt: 'Your driveway is often the first thing buyers physically interact with. Learn why its condition directly impacts buyer perception and your final sale price.' },
-                { slug: 'landscaping-costs-homebuyers-forget-to-budget-for', date: 'May 21, 2026', badge: 'BUYER', title: "Here's One Thing Most Home Buyers Forget to Budget For: Landscaping", excerpt: 'First-time buyers often overlook landscaping costs. Understanding these ongoing expenses before buying can prevent financial surprises down the road.' },
-                { slug: 'simple-guide-to-choosing-the-ideal-paint-color-for-your-space', date: 'Apr 27, 2026', badge: 'HOMEOWNER', title: 'A Simple Guide To Choosing The Ideal Paint Color For Your Space', excerpt: 'Choosing the right paint color feels overwhelming with thousands of options. This guide walks you through key considerations to find the perfect color for any room.' },
-                { slug: 'understanding-cash-to-close-in-real-estate', date: 'Apr 15, 2026', badge: 'BUYER', title: 'Understanding Cash to Close When Purchasing A Home', excerpt: "Beyond the down payment, buyers need to prepare for dozens of smaller fees at closing. Learn what cash to close means and how to budget for it well in advance." },
-                { slug: 'easy-and-inexpensive-bathroom-updates-you-can-make-before-selling-your-home', date: 'Mar 27, 2026', badge: 'SELLER', title: 'Easy and Inexpensive Bathroom Updates You Can Make Before Selling Your Home', excerpt: 'Simple, affordable bathroom improvements can significantly boost your home\'s appeal to buyers — even with minimal DIY experience.' },
-                { slug: 'where-to-keep-your-down-payment-savings', date: 'Mar 16, 2026', badge: 'BUYER', title: 'Where to Keep Your Down Payment Savings For Your Dream Home', excerpt: 'Where you keep your down payment savings can make a meaningful difference in how quickly you reach your homeownership goal.' },
-                { slug: '5-ways-your-neighbors-can-affect-your-homes-value', date: 'Feb 23, 2026', badge: 'HOMEOWNER', title: "5 Ways Your Neighbors Can Affect Your Home's Value", excerpt: 'No matter how well you maintain your property, neighboring homes can influence its value. Understanding this dynamic helps you make smarter real estate decisions.' },
-                { slug: 'from-date-nights-to-mortgage-payments-tips-for-couples-buying-their-first-home-together', date: 'Feb 9, 2026', badge: 'BUYER', title: 'From Date Nights to Mortgage Payments: Tips for Couples Buying Their First Home Together', excerpt: 'Buying a home is one of the biggest decisions couples make together. With the right preparation, the process can strengthen your relationship and your finances.' },
-                { slug: 'simple-but-effective-habits-for-a-cleaner-and-tidier-home-all-year', date: 'Jan 20, 2026', badge: 'HOMEOWNER', title: '7 Simple But Effective Habits For A Cleaner and Tidier Home All Year', excerpt: 'Small, consistent habits make a bigger difference than marathon cleaning sessions. Start these routines now for a more organized home throughout the year.' },
-                { slug: 'why-you-should-list-your-home-at-the-beginning-of-the-year', date: 'Jan 6, 2026', badge: 'SELLER', title: 'Why You Should List Your Home at the Beginning of the Year', excerpt: 'Most sellers wait for spring, but listing at the start of the year can give you a competitive edge with motivated buyers and far less competition.' },
-                { slug: '7-step-practical-guide-to-unpacking-efficiently-after-a-move', date: 'Dec 4, 2025', badge: 'GENERAL', title: 'A 7-Step Practical Guide to Unpacking Efficiently After A Move', excerpt: 'A systematic approach to unpacking can transform an overwhelming pile of boxes into a comfortable home in days — not weeks.' },
-                { slug: 'your-home-buyer-wants-to-extend-the-closing-date-part-2', date: 'Nov 25, 2025', badge: 'SELLER', title: 'Your Home Buyer Wants To Extend The Closing Date—What Now? [Part 2]', excerpt: 'When a buyer requests more time to close, sellers face a difficult decision. Part 2 covers your options, how to negotiate, and when walking away makes sense.' },
-                { slug: 'your-home-buyer-wants-to-extend-the-closing-date-what-now-part-1', date: 'Nov 18, 2025', badge: 'SELLER', title: 'Your Home Buyer Wants To Extend The Closing Date—What Now? [Part 1]', excerpt: "A closing date extension can be frustrating when you've already planned your move. Learn why buyers ask for more time and what your rights are as a seller." },
-                { slug: 'biggest-home-inspection-red-flags-to-look-out-for-before-buying', date: 'Oct 24, 2025', badge: 'BUYER', title: 'Biggest Home Inspection Red Flags To Look Out For Before Buying', excerpt: 'From structural defects to pest infestations, certain inspection findings can reveal serious underlying risks every buyer should watch for before closing.' },
-                { slug: 'budget-friendly-home-improvement-projects-perfect-to-tackle-this-fall', date: 'Oct 5, 2025', badge: 'HOMEOWNER', title: '5 Budget-Friendly Home Improvement Projects Perfect to Tackle This Fall', excerpt: 'Fall is the ideal season for home improvement projects before winter arrives. These affordable updates add real value without requiring a major investment.' },
-                { slug: 'how-many-showings-does-it-take-to-sell-a-house', date: 'Sep 16, 2025', badge: 'SELLER', title: 'How Many Showings Does It Take To Sell A House?', excerpt: 'The answer depends on your market, pricing, and presentation — all factors you can influence. Here\'s what the data says about showings before an offer.' },
-                { slug: 'what-you-should-know-about-a-homes-hvac-system', date: 'Aug 31, 2025', badge: 'HOMEOWNER', title: "What You Should Know About A Home's HVAC System", excerpt: "Your home's HVAC is one of its most expensive components. Understanding how it works, how to maintain it, and when to replace it can save you thousands." },
-                { slug: 'should-you-buy-a-new-house-before-selling-your-old-one-lets-explore-the-pros-and-cons', date: 'Aug 15, 2025', badge: 'SELLER', title: 'Should You Buy A New House Before Selling Your Old One? Pros and Cons', excerpt: 'The buy-before-sell dilemma is one of the most common challenges for move-up buyers. This breakdown helps you choose the right strategy for your situation.' },
-                { slug: 'safety-tips-to-keep-your-house-safe-during-a-renovation', date: 'Jul 29, 2025', badge: 'HOMEOWNER', title: 'Safety Tips to Keep Your House Safe During A Renovation', excerpt: 'Home renovations create excitement but also real hazards. Keeping your household safe requires planning, communication, and awareness of common risks.' },
-                { slug: '5-questions-to-ask-yourself-before-deciding-to-buy-a-house', date: 'Jun 30, 2025', badge: 'BUYER', title: '5 Questions to Ask Yourself Before Deciding To Buy A House', excerpt: 'Asking yourself these five honest questions before you start searching can save you time, money, and stress on the road to homeownership.' },
-              ].map(({ slug, date, badge, title, excerpt }) => (
+              {posts.map(({ slug, date, badge, title, excerpt, img }) => (
                 <article key={slug} className="blog-card">
                   <div className="blog-card-image">
-                    {/* Carousel sits well below the fold — none of these need to be eager (was forcing the first 3, contributing to homepage preload dilution; see findings/performance.md) */}
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={`/images/blog/${slug}.jpg`}
+                      src={img || `/images/blog/${slug}.jpg`}
                       alt={title}
                       loading="lazy"
                     />
