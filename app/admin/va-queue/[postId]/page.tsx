@@ -786,8 +786,14 @@ export default function VAPostPage() {
       setEnterpriseState({ phase: 'polling', videoId, elapsedSec: 0 })
 
       let elapsedSec = 0
+      // The completed-status check downloads + re-hosts the video server-side
+      // and can take longer than one 15s tick — never start a second check
+      // while one is still running, or they pile up doing duplicate transfers.
+      let checkInFlight = false
       enterprisePollRef.current = setInterval(async () => {
         elapsedSec += 15
+        if (checkInFlight) return
+        checkInFlight = true
         try {
           const statusRes = await fetch(
             `/api/content/enterprise-status?secret=${encodeURIComponent(secret)}&videoId=${encodeURIComponent(videoId)}&postId=${encodeURIComponent(postId)}`
@@ -806,7 +812,9 @@ export default function VAPostPage() {
           } else {
             setEnterpriseState({ phase: 'polling', videoId, elapsedSec })
           }
-        } catch { /* keep polling */ }
+        } catch { /* keep polling */ } finally {
+          checkInFlight = false
+        }
       }, ENTERPRISE_POLL_MS)
     } catch (err) {
       setEnterpriseState({ phase: 'error', message: err instanceof Error ? err.message : 'Failed to start render' })
