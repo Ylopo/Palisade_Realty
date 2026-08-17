@@ -7,6 +7,7 @@ const TABS = [
   { label: 'Blog Picker',    path: '/admin/idea-review' },
   { label: 'Media Review',   path: '/admin/va-queue' },
   { label: 'Analytics',      path: '/admin/blog-dashboard' },
+  { label: 'SEO / AEO',      path: '/admin/seo-log' },
   { label: 'Refresh Queue',  path: '/admin/refresh-queue' },
 ] as const
 
