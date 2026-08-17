@@ -77,6 +77,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           data-account="gWCTZli47p"
           strategy="afterInteractive"
         />
+        {/* GA4 — renders nothing until NEXT_PUBLIC_GA_MEASUREMENT_ID is set.
+            Feeds the sessions/pageviews data the admin blog-dashboard reads
+            back through lib/ga4.ts (which needs GA4_PROPERTY_ID +
+            GOOGLE_SERVICE_ACCOUNT_JSON). */}
+        {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga4-init" strategy="afterInteractive">
+              {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}');`}
+            </Script>
+          </>
+        )}
       </head>
       <body>
         <OrganizationSchema />

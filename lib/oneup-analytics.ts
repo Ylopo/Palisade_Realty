@@ -6,28 +6,25 @@
  * publish/status API in `lib/oneup-client.ts`, which lives at
  * `www.oneupapp.io/api`).
  *
- * GUESS / best-effort notice: OneUp's public docs describe this host as
- * providing "unified metrics for YouTube, Facebook, TikTok, Instagram" but
- * don't publish an exact REST path or response shape alongside the main
- * publish API docs used to build `lib/oneup-client.ts`. The request shape
- * below (`GET /api/analytics/{platform}?apiKey=...&category_id=...&period=...`)
- * and the response field names it tries (`reach`/`total_reach`/`impressions`,
- * `change_percent`, `top_post`/`topPost`) are a reasonable guess based on
- * OneUp's other endpoints' conventions (apiKey + category_id query auth,
- * snake_case JSON), NOT a confirmed contract. If the real endpoint differs,
- * every platform will simply come back `null` (see below) until this is
- * corrected against a live account with analytics enabled.
+ * Verified contract (docs.oneupapp.io → Analytics, confirmed live against
+ * this client's accounts):
  *
- * LinkedIn and X are intentionally excluded — per the source system's
- * documented scope, OneUp's analytics API only unifies YouTube, Facebook,
- * TikTok, and Instagram.
+ *   GET https://analyze.oneupapp.io/api/{platform}/overview
+ *       ?apiKey=...&social_network_id=...&preset=last_30_days
  *
- * Analytics must be manually enabled per OneUp category (a known
- * multi-hour turnaround) — so every platform call is independently
- * try/caught. One platform being not-yet-enabled (or erroring for any other
- * reason) must not take down the other three; it returns `null` for that
- * platform only, and the dashboard should render that as an "OFFLINE" badge
- * rather than crashing the page.
+ *   → { success: true, data: { metrics: [
+ *         { key, name, value_current_period, value_last_period,
+ *           percentage_change: "+36%", description }, ... ],
+ *       // youtube also returns: total_subscribers, video_performance
+ *     } }
+ *
+ * Auth is the shared ONEUP_API_KEY plus the PER-ACCOUNT social_network_id
+ * (NOT the category id). Analytics requires OneUp's Intermediate plan or
+ * higher — on Basic the endpoints error, which surfaces here as null
+ * (rendered as "Awaiting first metrics" per platform, never a crash).
+ *
+ * LinkedIn and X are intentionally excluded — their OneUp account IDs are
+ * not yet provisioned for this client (see CLAUDE.md).
  */
 
 const ANALYTICS_BASE_URL = 'https://analyze.oneupapp.io/api'
@@ -48,81 +45,107 @@ export interface OneUpPlatformAnalytics {
 
 const PLATFORMS: OneUpPlatform[] = ['youtube', 'facebook', 'tiktok', 'instagram']
 
-function getApiKey(): string | null {
-  return process.env.ONEUP_API_KEY ?? null
+/** Per-platform OneUp social_network_id (set when each account was connected). */
+const ACCOUNT_ID_ENV: Record<OneUpPlatform, string | undefined> = {
+  facebook: process.env.ONEUP_FACEBOOK_ACCOUNT_ID,
+  instagram: process.env.ONEUP_INSTAGRAM_ACCOUNT_ID,
+  tiktok: process.env.ONEUP_TIKTOK_ACCOUNT_ID,
+  youtube: process.env.ONEUP_YOUTUBE_CHANNEL_ID,
 }
 
-function getCategoryId(): string | null {
-  return process.env.ONEUP_CATEGORY_ID ?? null
+/**
+ * The metric that best represents "reach" per platform, in preference order —
+ * confirmed against live responses (Facebook exposes page-level media views,
+ * TikTok/YouTube expose views, Instagram exposes reach).
+ */
+const REACH_METRIC_KEYS: Record<OneUpPlatform, string[]> = {
+  facebook: ['page_total_media_view_unique', 'page_media_view', 'page_views_total'],
+  instagram: ['reach', 'impressions', 'views'],
+  tiktok: ['views'],
+  youtube: ['views'],
 }
 
-// Loose shape — the actual response contract is unconfirmed (see file header).
-interface RawAnalyticsPost {
-  title?: string
-  caption?: string
-  content?: string
-  reach?: number | string
-  impressions?: number | string
+interface OverviewMetric {
+  key?: string
+  name?: string
+  value_current_period?: number | string
+  value_last_period?: number | string
+  percentage_change?: string | number
+  description?: string
 }
 
-interface RawAnalyticsResponse {
-  error?: boolean | string
+interface OverviewResponse {
+  success?: boolean
   message?: string
-  reach?: number | string
-  total_reach?: number | string
-  impressions?: number | string
-  change_percent?: number | string
-  reach_change_percent?: number | string
-  top_post?: RawAnalyticsPost
-  topPost?: RawAnalyticsPost
-  posts?: RawAnalyticsPost[]
+  data?: {
+    metrics?: OverviewMetric[]
+    video_performance?: {
+      most_viewed?: Array<{ title?: string; name?: string; views?: number | string; value?: number | string }>
+    }
+  }
 }
 
 function toNumber(value: number | string | undefined): number {
-  if (value === undefined) return 0
-  const n = Number(value)
+  if (value === undefined || value === null) return 0
+  const n = Number(String(value).replace(/[,%+]/g, ''))
   return Number.isFinite(n) ? n : 0
+}
+
+/** "+40,350%" → 40350, "-53%" → -53, "0%" → 0 */
+function parseChangePercent(value: string | number | undefined): number {
+  if (value === undefined || value === null) return 0
+  const n = Number(String(value).replace(/[,%\s]/g, ''))
+  return Number.isFinite(n) ? Math.round(n) : 0
 }
 
 async function fetchPlatformAnalytics(
   platform: OneUpPlatform,
   period: OneUpAnalyticsPeriod,
   apiKey: string,
-  categoryId: string
+  socialNetworkId: string
 ): Promise<OneUpPlatformAnalytics | null> {
   try {
-    const url = new URL(`${ANALYTICS_BASE_URL}/analytics/${platform}`)
+    const url = new URL(`${ANALYTICS_BASE_URL}/${platform}/overview`)
     url.searchParams.set('apiKey', apiKey)
-    url.searchParams.set('category_id', categoryId)
-    url.searchParams.set('period', period)
+    url.searchParams.set('social_network_id', socialNetworkId)
+    url.searchParams.set('preset', period)
 
-    const res = await fetch(url.toString())
+    const res = await fetch(url.toString(), { next: { revalidate: 900 } })
     if (!res.ok) {
       console.error(`[oneup-analytics] ${platform} HTTP ${res.status}`)
       return null
     }
 
-    const data = (await res.json().catch(() => null)) as RawAnalyticsResponse | null
-    if (!data || data.error) {
-      console.error(`[oneup-analytics] ${platform} returned an error`, data?.message)
+    const data = (await res.json().catch(() => null)) as OverviewResponse | null
+    if (!data?.success || !Array.isArray(data.data?.metrics)) {
+      console.error(`[oneup-analytics] ${platform} unexpected response`, data?.message ?? '')
       return null
     }
 
-    const reach = toNumber(data.reach ?? data.total_reach ?? data.impressions)
-    const changePercent = toNumber(data.change_percent ?? data.reach_change_percent)
+    const metrics = data.data.metrics
+    const byKey = new Map(metrics.map((m) => [m.key ?? '', m]))
 
-    const rawTopPost = data.top_post ?? data.topPost ?? data.posts?.[0]
-    const topPost: OneUpTopPost | undefined = rawTopPost
+    let reachMetric: OverviewMetric | undefined
+    for (const key of REACH_METRIC_KEYS[platform]) {
+      const m = byKey.get(key)
+      if (m && m.value_current_period !== undefined) { reachMetric = m; break }
+    }
+
+    // YouTube's overview includes a most-viewed video list when available.
+    const mostViewed = data.data.video_performance?.most_viewed?.[0]
+    const topPost: OneUpTopPost | undefined = mostViewed
       ? {
-          title: rawTopPost.title ?? rawTopPost.caption ?? rawTopPost.content ?? 'Untitled post',
-          reach: toNumber(rawTopPost.reach ?? rawTopPost.impressions),
+          title: mostViewed.title ?? mostViewed.name ?? 'Top video',
+          reach: toNumber(mostViewed.views ?? mostViewed.value),
         }
       : undefined
 
-    return { reach, changePercent, topPost }
+    return {
+      reach: toNumber(reachMetric?.value_current_period),
+      changePercent: parseChangePercent(reachMetric?.percentage_change),
+      topPost,
+    }
   } catch (err) {
-    // Covers: analytics not yet enabled for this category (a known,
-    // multi-hour manual OneUp step), network failure, malformed response.
     console.error(`[oneup-analytics] ${platform} threw`, err)
     return null
   }
@@ -131,27 +154,26 @@ async function fetchPlatformAnalytics(
 /**
  * Fetches unified analytics for all four OneUp-analytics-supported platforms
  * in parallel. Each platform is wrapped independently — one platform's
- * failure (most commonly: analytics not yet enabled on this OneUp category)
- * returns `null` for that platform only and never throws or blocks the
- * others.
+ * failure (missing account id, plan gate, transient API error) returns
+ * `null` for that platform only and never throws or blocks the others.
  */
 export async function getAllPlatformAnalytics(
   period: OneUpAnalyticsPeriod
 ): Promise<Record<OneUpPlatform, OneUpPlatformAnalytics | null>> {
-  const apiKey = getApiKey()
-  const categoryId = getCategoryId()
-
-  if (!apiKey || !categoryId) {
+  const apiKey = process.env.ONEUP_API_KEY
+  if (!apiKey) {
     return { youtube: null, facebook: null, tiktok: null, instagram: null }
   }
 
   const results = await Promise.all(
-    PLATFORMS.map((platform) =>
-      fetchPlatformAnalytics(platform, period, apiKey, categoryId).catch((err) => {
+    PLATFORMS.map((platform) => {
+      const accountId = ACCOUNT_ID_ENV[platform]
+      if (!accountId) return Promise.resolve(null)
+      return fetchPlatformAnalytics(platform, period, apiKey, accountId).catch((err) => {
         console.error(`[oneup-analytics] ${platform} rejected unexpectedly`, err)
         return null
       })
-    )
+    })
   )
 
   return {
