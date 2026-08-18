@@ -9,6 +9,8 @@ import CommunitySchoolsTabs from '@/components/CommunitySchoolsTabs'
 import CommunityLocationMap from '@/components/CommunityLocationMap'
 import { COMMUNITY_LOCATION_MAPS } from '@/lib/community-location-maps'
 import { PILLARS } from '@/lib/blog/pillars'
+import { client } from '@/lib/sanity/client'
+import ExpansionCommunityPage, { type ExpansionPageDoc } from './ExpansionCommunityPage'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -18,10 +20,35 @@ export async function generateStaticParams() {
   return getAllCommunitySlugs().map((slug) => ({ slug }))
 }
 
+const EXPANSION_PAGE_QUERY = `*[_type == "communityPage" && slug.current == $slug][0]{
+  title, name, pageType, heroTagline, heroDescription, stats, sections, quickFacts,
+  faqs, idxLocation, idxPropertyTypes, fallbackIdxLocation, nearby, publishedAt,
+  metaTitle, metaDescription, "slug": slug.current
+}`
+
+async function getExpansionPage(slug: string): Promise<(ExpansionPageDoc & { metaTitle?: string; metaDescription?: string }) | null> {
+  try {
+    return await client.fetch(EXPANSION_PAGE_QUERY, { slug }, { next: { revalidate: 3600 } })
+  } catch {
+    return null
+  }
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const c = getCommunityBySlug(slug)
-  if (!c) return { title: 'Community Not Found' }
+  if (!c) {
+    // Sanity-backed expansion page (cron-generated) fallback
+    const exp = await getExpansionPage(slug)
+    if (exp) {
+      return {
+        title: exp.metaTitle ?? exp.title,
+        description: exp.metaDescription ?? exp.heroDescription,
+        alternates: { canonical: `/communities/${slug}` },
+      }
+    }
+    return { title: 'Community Not Found' }
+  }
   return {
     title: `${c.name} Homes For Sale`,
     description: `Explore homes for sale in ${c.name}, CA. ${c.badge} living in San Diego County. Guided by Palisade Realty — local experts since 2008.`,
@@ -34,7 +61,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function CommunityPage({ params }: Props) {
   const { slug } = await params
   const c = getCommunityBySlug(slug)
-  if (!c) notFound()
+  if (!c) {
+    // Sanity-backed expansion page (cron-generated) fallback
+    const exp = await getExpansionPage(slug)
+    if (exp) return <ExpansionCommunityPage doc={exp} />
+    notFound()
+  }
 
   const mr: MelloRoosData = { ...DEFAULT_MELLO_ROOS, ...c.melloroos }
   const locationMap = c.locationMap ?? COMMUNITY_LOCATION_MAPS[slug]

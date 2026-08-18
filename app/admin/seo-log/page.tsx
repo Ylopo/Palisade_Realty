@@ -57,6 +57,12 @@ export default async function SeoLogPage({ searchParams }: Props) {
 
   const posts = await client.fetch<SanityPostRow[]>(ALL_POSTS_QUERY).catch(() => [] as SanityPostRow[])
 
+  // Cron-generated expansion pages (communities, condo buildings, hubs) live
+  // in Sanity — include them so the log tracks the daily rollout.
+  const expansionPages = await client.fetch<Array<{ title: string; slug: string; pageType?: string; publishedAt?: string }>>(
+    `*[_type == "communityPage"] | order(publishedAt desc){ title, "slug": slug.current, pageType, publishedAt }`
+  ).catch(() => [])
+
   const blogRows: Row[] = posts.slice(0, 500).map((p) => ({
     type: 'blog',
     title: p.title,
@@ -67,7 +73,17 @@ export default async function SeoLogPage({ searchParams }: Props) {
   blogRows.sort((a, b) => new Date(b.date ?? 0).getTime() - new Date(a.date ?? 0).getTime())
 
   const aeoRows: Row[]  = AEO_PAGES.map((p) => ({ type: 'aeo', title: p.title, url: p.url, detail: p.city }))
-  const commRows: Row[] = COMMUNITY_PAGES.map((p) => ({ type: 'community', title: p.title, url: p.url, detail: p.city }))
+  const expansionRows: Row[] = expansionPages.map((p) => ({
+    type: 'community',
+    title: p.title,
+    url: `/communities/${p.slug}`,
+    detail: (p.pageType ?? 'community').replace(/-/g, ' '),
+    date: p.publishedAt,
+  }))
+  const commRows: Row[] = [
+    ...expansionRows,
+    ...COMMUNITY_PAGES.map((p) => ({ type: 'community' as const, title: p.title, url: p.url, detail: p.city })),
+  ]
 
   // Blogs first (newest content), then the evergreen AEO + community pages.
   const rows: Row[] = [...blogRows, ...aeoRows, ...commRows]

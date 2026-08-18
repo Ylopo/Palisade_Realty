@@ -44,8 +44,19 @@ async function getBlogEntries(): Promise<{ slug: string; lastModified?: Date }[]
   return Array.from(bySlug.entries()).map(([slug, lastModified]) => ({ slug, lastModified }))
 }
 
+async function getExpansionEntries(): Promise<Array<{ slug: string; publishedAt?: string }>> {
+  try {
+    return await client.fetch(
+      `*[_type == "communityPage"]{ "slug": slug.current, publishedAt }`
+    )
+  } catch {
+    return []
+  }
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const blogEntries = await getBlogEntries()
+  const expansionEntries = await getExpansionEntries()
 
   const corePages: MetadataRoute.Sitemap = [
     { url: SITE_URL, changeFrequency: 'weekly', priority: 1.0 },
@@ -97,5 +108,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }))
 
-  return [...corePages, ...communityPages, ...neighborhoodPages, ...propertyPages, ...guidePages, ...teamPages, ...blogPages]
+  const expansionPages: MetadataRoute.Sitemap = expansionEntries.map((e) => ({
+    url: `${SITE_URL}/communities/${e.slug}`,
+    lastModified: e.publishedAt ? new Date(e.publishedAt) : undefined,
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+  }))
+
+  return [...corePages, ...communityPages, ...expansionPages, ...neighborhoodPages, ...propertyPages, ...guidePages, ...teamPages, ...blogPages]
 }
