@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import type { ReactNode } from 'react'
 import ExpansionListings from './ExpansionListings'
 
 /**
@@ -57,6 +58,33 @@ function PhotoFigure({ img }: { img: NonNullable<ExpansionPageDoc['images']>[num
 const BRAND = 'var(--brand,#58172a)'
 const ACCENT = 'var(--accent,#eeca00)'
 
+const INLINE_LINK_RE = /\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g
+
+/** Renders writer-produced [text](url) outbound links as real anchors. */
+function renderInline(text: string): ReactNode {
+  const parts: ReactNode[] = []
+  let last = 0
+  let key = 0
+  for (const m of text.matchAll(INLINE_LINK_RE)) {
+    const idx = m.index ?? 0
+    if (idx > last) parts.push(text.slice(last, idx))
+    parts.push(
+      <a key={key++} href={m[2]} target="_blank" rel="noopener noreferrer" style={{ color: BRAND, textDecoration: 'underline', textUnderlineOffset: '3px' }}>
+        {m[1]}
+      </a>
+    )
+    last = idx + m[0].length
+  }
+  if (parts.length === 0) return text
+  if (last < text.length) parts.push(text.slice(last))
+  return parts
+}
+
+/** Plain-text version for JSON-LD (structured data must not carry markdown). */
+function plainText(text: string): string {
+  return text.replace(INLINE_LINK_RE, '$1')
+}
+
 export default function ExpansionCommunityPage({ doc }: { doc: ExpansionPageDoc }) {
   const fallbackLabel = doc.fallbackIdxLocation?.neighborhood ?? doc.fallbackIdxLocation?.city ?? 'nearby communities'
   const faqJsonLd = (doc.faqs?.length ?? 0) > 0 ? {
@@ -65,7 +93,7 @@ export default function ExpansionCommunityPage({ doc }: { doc: ExpansionPageDoc 
     mainEntity: doc.faqs!.map((f) => ({
       '@type': 'Question',
       name: f.question,
-      acceptedAnswer: { '@type': 'Answer', text: f.answer },
+      acceptedAnswer: { '@type': 'Answer', text: plainText(f.answer) },
     })),
   } : null
 
@@ -127,7 +155,7 @@ export default function ExpansionCommunityPage({ doc }: { doc: ExpansionPageDoc 
                 {sec.heading}
               </h2>
               {sec.paragraphs?.map((p, j) => (
-                <p key={j} style={{ fontFamily: 'var(--font-body)', fontSize: '16px', color: '#444', lineHeight: 1.8, margin: '0 0 16px' }}>{p}</p>
+                <p key={j} style={{ fontFamily: 'var(--font-body)', fontSize: '16px', color: '#444', lineHeight: 1.8, margin: '0 0 16px' }}>{renderInline(p)}</p>
               ))}
               {i === 2 && doc.images && doc.images[1] && (
                 <div style={{ margin: '36px 0 0' }}>
@@ -187,7 +215,7 @@ export default function ExpansionCommunityPage({ doc }: { doc: ExpansionPageDoc 
             {doc.faqs!.map((f, i) => (
               <div key={i} style={{ borderBottom: '1px solid #eee5dd', padding: '20px 0' }}>
                 <h3 style={{ fontFamily: 'var(--font-body)', fontSize: '17px', fontWeight: 700, color: 'var(--near-black,#1a0a0a)', margin: '0 0 10px' }}>{f.question}</h3>
-                <p style={{ fontFamily: 'var(--font-body)', fontSize: '15px', color: '#555', lineHeight: 1.75, margin: 0 }}>{f.answer}</p>
+                <p style={{ fontFamily: 'var(--font-body)', fontSize: '15px', color: '#555', lineHeight: 1.75, margin: 0 }}>{renderInline(f.answer)}</p>
               </div>
             ))}
           </div>

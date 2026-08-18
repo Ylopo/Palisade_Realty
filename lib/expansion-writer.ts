@@ -70,6 +70,51 @@ function stripJsonFences(text: string): string {
   return text.replace(/^```(?:json)?\s*/i, '').replace(/```\s*$/i, '').trim()
 }
 
+const LINK_RE = /\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g
+
+/** True when the URL responds (2xx/3xx, or 401/403 bot-blocks — site exists). */
+async function urlResolves(url: string): Promise<boolean> {
+  try {
+    const res = await fetch(url, {
+      method: 'GET',
+      redirect: 'follow',
+      signal: AbortSignal.timeout(8000),
+      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; PalisadeRealty-LinkCheck/1.0)' },
+    })
+    return res.status < 400 || res.status === 401 || res.status === 403
+  } catch {
+    return false
+  }
+}
+
+/**
+ * Verifies every outbound link the writer produced and unwraps the ones that
+ * don't resolve — the entity name stays in the text, the dead link goes.
+ */
+async function verifyOutboundLinks(content: PageContent): Promise<PageContent> {
+  const texts: string[] = [
+    ...content.sections.flatMap((s) => s.paragraphs ?? []),
+    ...(content.faqs ?? []).map((f) => f.answer),
+  ]
+  const urls = new Set<string>()
+  for (const t of texts) {
+    for (const m of t.matchAll(LINK_RE)) urls.add(m[2])
+  }
+  if (urls.size === 0) return content
+
+  const checks = await Promise.all([...urls].map(async (u) => [u, await urlResolves(u)] as const))
+  const dead = new Set(checks.filter(([, ok]) => !ok).map(([u]) => u))
+  if (dead.size === 0) return content
+  console.warn('[expansion-writer] unwrapping dead outbound links:', [...dead])
+
+  const unwrap = (t: string) => t.replace(LINK_RE, (full, label: string, url: string) => (dead.has(url) ? label : full))
+  return {
+    ...content,
+    sections: content.sections.map((s) => ({ ...s, paragraphs: (s.paragraphs ?? []).map(unwrap) })),
+    faqs: (content.faqs ?? []).map((f) => ({ ...f, answer: unwrap(f.answer) })),
+  }
+}
+
 function buildPrompt(entry: ExpansionEntry, research: string): string {
   const typeGuidance: Record<ExpansionEntry['pageType'], string> = {
     'community': 'A definitive community guide: what the area is, who it suits, housing stock and architecture eras, micro-areas within it, schools, commute/access, lifestyle anchors (parks, trails, dining), and an honest market picture.',
@@ -91,7 +136,9 @@ ACCURACY (non-negotiable): ground every specific claim — prices, dates, names,
 FAIR HOUSING (must comply exactly):
 ${FAIR_HOUSING_RULES}
 
-FORMAT: plain text only — no markdown emphasis, no links (internal links are added by the template). Write 1,300-1,800 words total across sections.
+OUTBOUND LINK RULE: when a section mentions a specific named institution — a university, city government, school district, regional park or trail system, sports team, museum, hospital system, transit agency, or an iconic local landmark/attraction — link its FIRST mention inline as [Name](https://official-website) pointing to that entity's OFFICIAL site only (universities: .edu; cities/districts: their .gov or official .org; teams/attractions: their official domain). Aim for 4-8 outbound links per page, spread across sections. NEVER link real-estate portals (Zillow/Redfin/Realtor.com), competitor brokerages, or news articles. NEVER guess a URL — if you are not confident of the official domain, mention the entity without a link. Links are allowed in section paragraphs and FAQ answers only.
+
+FORMAT: plain text with the inline links described above — no other markdown (no bold/italics/headings inside paragraphs). Write 1,300-1,800 words total across sections.
 
 RESEARCH:
 ${research}
@@ -138,7 +185,7 @@ export async function buildExpansionPage(entry: ExpansionEntry): Promise<{ id: s
   const raw = message.content.find((b) => b.type === 'text')?.text ?? ''
   const jsonMatch = raw.match(/\{[\s\S]*\}/)
   if (!jsonMatch) throw new Error(`expansion-writer: no JSON in model response for ${entry.slug}`)
-  const content = JSON.parse(jsonMatch[0]) as PageContent
+  const content = await verifyOutboundLinks(JSON.parse(jsonMatch[0]) as PageContent)
 
   // 3. Publish to Sanity (idempotent on slug — re-running updates the page)
   const existingId = await writeClient.fetch<string | null>(
