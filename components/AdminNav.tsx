@@ -4,8 +4,9 @@ import { usePathname } from 'next/navigation'
 import { useUrlSecret } from '@/hooks/useUrlSecret'
 
 const TABS = [
-  { label: 'Blog Picker',    path: '/admin/idea-review' },
-  { label: 'Media Review',   path: '/admin/va-queue' },
+  // Blog Picker (/admin/idea-review) and Media Review (/admin/va-queue) are
+  // hidden from the nav by request — the pages themselves remain live and
+  // reachable by direct URL.
   { label: 'Analytics',      path: '/admin/blog-dashboard' },
   { label: 'SEO / AEO',      path: '/admin/seo-log' },
   { label: 'Refresh Queue',  path: '/admin/refresh-queue' },
