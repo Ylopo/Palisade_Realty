@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Playfair_Display, Manrope, Inter } from 'next/font/google'
 import Script from 'next/script'
-import OrganizationSchema from '@/components/OrganizationSchema'
+import RouteChrome from '@/components/RouteChrome'
 import './globals.css'
 
 const playfairDisplay = Playfair_Display({
@@ -44,43 +44,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${playfairDisplay.variable} ${manrope.variable} ${inter.variable}`}
     >
       <head>
-        {/* Ylopo widget config — must be set before the widget script loads */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `window.YLOPO_WIDGETS = {"domain":"search.palisaderealty.com"};`,
-          }}
-        />
         {/* Mapbox GL CSS — must be in <head> for map to render correctly */}
         <link
           rel="stylesheet"
           href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css"
         />
-        {/*
-          Mapbox GL JS (1.35MB) — loaded lazyOnload so it never blocks initial
-          render on pages that don't use it (every template except home/contact).
-          Both homepage-nextjs.js's initMapbox() and ContactHeroMap already poll
-          for `window.mapboxgl` and self-heal once this script finishes loading,
-          so deferring it here is safe. See findings/performance.md.
-        */}
-        <Script
-          src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"
-          strategy="lazyOnload"
-        />
-        {/* ADA Compliance Widget — UserWay config must be set before widget.js loads */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `window._userway_config={position:'5',size:'small',color:'#808080',mobile:false,account:'gWCTZli47p'};`,
-          }}
-        />
-        <Script
-          src="https://cdn.userway.org/widget.js"
-          data-account="gWCTZli47p"
-          strategy="afterInteractive"
-        />
-        {/* GA4 — renders nothing until NEXT_PUBLIC_GA_MEASUREMENT_ID is set.
-            Feeds the sessions/pageviews data the admin blog-dashboard reads
-            back through lib/ga4.ts (which needs GA4_PROPERTY_ID +
-            GOOGLE_SERVICE_ACCOUNT_JSON). */}
+        {/* GA4 — renders nothing until NEXT_PUBLIC_GA_MEASUREMENT_ID is set */}
         {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
           <>
             <Script
@@ -94,7 +63,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         )}
       </head>
       <body>
-        <OrganizationSchema />
+        {/* RouteChrome: renders Ylopo widget, Mapbox JS, UserWay, and OrganizationSchema
+            only on non-admin routes. Returns null on /config and /studio. */}
+        <RouteChrome />
         {children}
       </body>
     </html>
