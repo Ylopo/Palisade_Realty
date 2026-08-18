@@ -4,6 +4,7 @@ import { Redis } from '@upstash/redis'
 import { writeClient } from '@/lib/sanity/client'
 import { EXPANSION_QUEUE } from '@/lib/expansion-queue'
 import { buildExpansionPage } from '@/lib/expansion-writer'
+import { sourcePageImages } from '@/lib/expansion-images'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -113,6 +114,21 @@ export async function POST(request: NextRequest) {
       })
     }
 
+    if (body.action === 'images') {
+      // Backfill licensed local photos onto an existing page without
+      // rewriting its content.
+      if (!body.slug) return NextResponse.json({ error: 'slug is required' }, { status: 400 })
+      const doc = await writeClient.fetch<{ _id: string; name?: string; pageType?: string } | null>(
+        `*[_type == "communityPage" && slug.current == $slug][0]{ _id, name, pageType }`,
+        { slug: body.slug }
+      )
+      if (!doc) return NextResponse.json({ error: `No page for slug: ${body.slug}` }, { status: 404 })
+      const images = await sourcePageImages(doc.name ?? body.slug, doc.pageType ?? 'community', 2)
+      await writeClient.patch(doc._id).set({ images: images.map((img, i) => ({ _key: `img-${i}`, ...img })) }).commit()
+      revalidatePath(`/communities/${body.slug}`)
+      return NextResponse.json({ ok: true, slug: body.slug, images: images.map((i) => ({ alt: i.alt, credit: i.credit, license: i.license })) })
+    }
+
     if (body.action === 'run') {
       if (body.slug) {
         const entry = EXPANSION_QUEUE.find((e) => e.slug === body.slug)
@@ -124,7 +140,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(await runBatch(Math.min(body.count ?? 1, PAGES_PER_RUN)))
     }
 
-    return NextResponse.json({ error: 'action must be run | enable | disable | status' }, { status: 400 })
+    return NextResponse.json({ error: 'action must be run | images | enable | disable | status' }, { status: 400 })
   } catch (err) {
     console.error('[expansion-pages][admin]', err)
     return NextResponse.json({ error: err instanceof Error ? err.message : 'action failed' }, { status: 500 })

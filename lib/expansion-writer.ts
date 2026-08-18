@@ -1,6 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk'
 import { writeClient } from '@/lib/sanity/client'
 import { FAIR_HOUSING_RULES } from '@/lib/fair-housing'
+import { sourcePageImages } from '@/lib/expansion-images'
 import type { ExpansionEntry } from '@/lib/expansion-queue'
 
 /**
@@ -110,9 +111,12 @@ Respond with ONLY valid JSON:
 }
 
 export async function buildExpansionPage(entry: ExpansionEntry): Promise<{ id: string; slug: string }> {
-  // 1. Research
+  // 1. Research + licensed local photos, in parallel
   const queries = researchQueries(entry)
-  const resultsPerQuery = await Promise.all(queries.map((q) => tavilySearch(q)))
+  const [resultsPerQuery, images] = await Promise.all([
+    Promise.all(queries.map((q) => tavilySearch(q))),
+    sourcePageImages(entry.name, entry.pageType, 2).catch(() => []),
+  ])
   const seen = new Set<string>()
   const allResults = resultsPerQuery.flat().filter((r) => {
     if (!r.url || seen.has(r.url)) return false
@@ -161,6 +165,7 @@ export async function buildExpansionPage(entry: ExpansionEntry): Promise<{ id: s
     idxPropertyTypes: entry.idxPropertyTypes ?? ['house', 'condo', 'townhouse', 'multi_family'],
     fallbackIdxLocation: entry.fallbackIdx,
     nearby: entry.nearby.map((n, i) => ({ _key: `nb-${i}`, name: n.name, url: n.url })),
+    images: images.map((img, i) => ({ _key: `img-${i}`, ...img })),
     metaTitle: content.metaTitle,
     metaDescription: content.metaDescription,
     publishedAt: new Date().toISOString(),

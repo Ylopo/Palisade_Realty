@@ -22,8 +22,36 @@ export interface ExpansionPageDoc {
   idxPropertyTypes?: string[]
   fallbackIdxLocation?: { city?: string; state?: string; neighborhood?: string }
   nearby?: Array<{ name: string; url: string }>
+  images?: Array<{ url: string; alt?: string; credit?: string; creditUrl?: string; license?: string; licenseUrl?: string }>
   publishedAt?: string
   slug: string
+}
+
+function PhotoFigure({ img }: { img: NonNullable<ExpansionPageDoc['images']>[number] }) {
+  return (
+    <figure style={{ margin: 0 }}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={img.url}
+        alt={img.alt ?? ''}
+        loading="lazy"
+        style={{ width: '100%', maxHeight: '520px', objectFit: 'cover', borderRadius: '10px', display: 'block' }}
+      />
+      <figcaption style={{ fontFamily: 'var(--font-label)', fontSize: '11px', color: '#999', marginTop: '8px', textAlign: 'right' }}>
+        Photo:{' '}
+        <a href={img.creditUrl} target="_blank" rel="noopener noreferrer" style={{ color: '#999', textDecoration: 'underline' }}>
+          {img.credit ?? 'Wikimedia Commons'}
+        </a>
+        {img.license && <>
+          {' · '}
+          {img.licenseUrl
+            ? <a href={img.licenseUrl} target="_blank" rel="noopener noreferrer" style={{ color: '#999', textDecoration: 'underline' }}>{img.license}</a>
+            : img.license}
+        </>}
+        {' · via Wikimedia Commons'}
+      </figcaption>
+    </figure>
+  )
 }
 
 const BRAND = 'var(--brand,#58172a)'
@@ -81,6 +109,15 @@ export default function ExpansionCommunityPage({ doc }: { doc: ExpansionPageDoc 
         )}
       </section>
 
+      {/* ── FEATURE PHOTO ────────────────────────────────────── */}
+      {doc.images && doc.images[0] && (
+        <section style={{ background: 'var(--off-white,#faf7f2)', padding: '56px var(--pad-x,60px) 0' }}>
+          <div style={{ maxWidth: '980px', margin: '0 auto' }}>
+            <PhotoFigure img={doc.images[0]} />
+          </div>
+        </section>
+      )}
+
       {/* ── BODY SECTIONS ────────────────────────────────────── */}
       <section style={{ background: 'var(--off-white,#faf7f2)', padding: '72px var(--pad-x,60px)' }}>
         <div style={{ maxWidth: '760px', margin: '0 auto' }}>
@@ -92,6 +129,11 @@ export default function ExpansionCommunityPage({ doc }: { doc: ExpansionPageDoc 
               {sec.paragraphs?.map((p, j) => (
                 <p key={j} style={{ fontFamily: 'var(--font-body)', fontSize: '16px', color: '#444', lineHeight: 1.8, margin: '0 0 16px' }}>{p}</p>
               ))}
+              {i === 2 && doc.images && doc.images[1] && (
+                <div style={{ margin: '36px 0 0' }}>
+                  <PhotoFigure img={doc.images[1]} />
+                </div>
+              )}
             </div>
           ))}
         </div>

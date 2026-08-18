@@ -22,7 +22,7 @@ export async function generateStaticParams() {
 
 const EXPANSION_PAGE_QUERY = `*[_type == "communityPage" && slug.current == $slug][0]{
   title, name, pageType, heroTagline, heroDescription, stats, sections, quickFacts,
-  faqs, idxLocation, idxPropertyTypes, fallbackIdxLocation, nearby, publishedAt,
+  faqs, idxLocation, idxPropertyTypes, fallbackIdxLocation, nearby, images, publishedAt,
   metaTitle, metaDescription, "slug": slug.current
 }`
 
