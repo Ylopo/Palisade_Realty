@@ -4,7 +4,7 @@ import TeamGrid, { type TeamMemberCard } from './TeamGrid'
 import StatsBar from '@/components/StatsBar'
 import { LEADERSHIP, AGENTS } from '@/lib/agents'
 
-export const revalidate = 300
+export const dynamic = 'force-dynamic'
 
 async function fetchTeamFromSanity(): Promise<{ leadership: TeamMemberCard[]; agents: TeamMemberCard[] }> {
   const PROJECT_ID = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
@@ -14,7 +14,7 @@ async function fetchTeamFromSanity(): Promise<{ leadership: TeamMemberCard[]; ag
   try {
     const r = await fetch(
       `https://${PROJECT_ID}.api.sanity.io/v2024-01-01/data/query/${DATASET}?query=${encodeURIComponent(query)}`,
-      { headers: TOKEN ? { Authorization: `Bearer ${TOKEN}` } : {}, next: { revalidate: 300 } }
+      { headers: TOKEN ? { Authorization: `Bearer ${TOKEN}` } : {}, cache: 'no-store' }
     )
     const d = await r.json()
     const docs: Array<{ name: string; slug: string; role?: string; department?: string; imgSrc?: string }> = d.result ?? []

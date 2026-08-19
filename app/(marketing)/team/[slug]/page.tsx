@@ -19,7 +19,7 @@ async function fetchAgentFromSanity(slug: string): Promise<AgentEntry | null> {
   try {
     const r = await fetch(
       `https://${PROJECT_ID}.api.sanity.io/v2024-01-01/data/query/${DATASET}?query=${encodeURIComponent(query)}`,
-      { headers: TOKEN ? { Authorization: `Bearer ${TOKEN}` } : {}, next: { revalidate: 300 } }
+      { headers: TOKEN ? { Authorization: `Bearer ${TOKEN}` } : {}, cache: 'no-store' }
     )
     const d = await r.json()
     const doc = d.result
@@ -74,7 +74,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const RELATED_SLUGS = ['hedda-parashos', 'tom-parashos', 'britney-bartlett', 'melissa-maxwell', 'michael-divita', 'michael-guzman']
 
-export const revalidate = 300
+export const dynamic = 'force-dynamic'
 
 type FeaturedListing = {
   _id: string
