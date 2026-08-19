@@ -38,26 +38,6 @@ async function fetchAgentFromSanity(slug: string): Promise<AgentEntry | null> {
   } catch { return null }
 }
 
-async function getAllSanitySlugs(): Promise<string[]> {
-  const PROJECT_ID = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
-  const DATASET = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
-  const query = '*[_type == "teamMember" && active != false]{"slug":slug.current}'
-  try {
-    const r = await fetch(
-      `https://${PROJECT_ID}.api.sanity.io/v2024-01-01/data/query/${DATASET}?query=${encodeURIComponent(query)}`,
-      { next: { revalidate: 3600 } }
-    )
-    const d = await r.json()
-    return (d.result ?? []).map((x: { slug: string }) => x.slug).filter(Boolean)
-  } catch { return [] }
-}
-
-export async function generateStaticParams() {
-  const sanitySlugs = await getAllSanitySlugs()
-  const staticSlugs = ALL_AGENTS.map((a) => a.slug)
-  const all = Array.from(new Set([...sanitySlugs, ...staticSlugs]))
-  return all.map((slug) => ({ slug }))
-}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
