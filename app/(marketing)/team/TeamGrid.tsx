@@ -1,11 +1,17 @@
 'use client'
 
 import { useState } from 'react'
-import { LEADERSHIP, AGENTS, type AgentEntry } from '@/lib/agents'
+
+export type TeamMemberCard = {
+  name: string
+  slug: string
+  title: string
+  imgSrc: string
+}
 
 const FB_AGENT = 'https://placehold.co/300x400/58172a/ffffff?text=Palisade+Agent'
 
-function AgentCard({ agent, isLeader = false }: { agent: AgentEntry; isLeader?: boolean }) {
+function AgentCard({ agent, isLeader = false }: { agent: TeamMemberCard; isLeader?: boolean }) {
   return (
     <article className={`agent-card${isLeader ? ' agent-card--leader' : ''}`} data-name={agent.name.toLowerCase()}>
       <div className="agent-card-img-wrap">
@@ -34,13 +40,18 @@ function AgentCard({ agent, isLeader = false }: { agent: AgentEntry; isLeader?: 
   )
 }
 
-export default function TeamGrid() {
+interface TeamGridProps {
+  leadership: TeamMemberCard[]
+  agents: TeamMemberCard[]
+}
+
+export default function TeamGrid({ leadership, agents }: TeamGridProps) {
   const [query, setQuery] = useState('')
 
   const q = query.trim().toLowerCase()
   const filtered = q
-    ? AGENTS.filter((a) => a.name.toLowerCase().includes(q))
-    : AGENTS
+    ? agents.filter((a) => a.name.toLowerCase().includes(q))
+    : agents
 
   return (
     <>
@@ -52,7 +63,7 @@ export default function TeamGrid() {
             <h2 className="tp-sec-h2" id="leadership-heading">The <em>Leadership</em> Behind Palisade</h2>
           </div>
           <div className="tp-leadership-grid" role="list">
-            {LEADERSHIP.map((a) => (
+            {leadership.map((a) => (
               <div key={a.slug} role="listitem">
                 <AgentCard agent={a} isLeader />
               </div>

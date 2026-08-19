@@ -4,19 +4,64 @@ import Script from 'next/script'
 import { notFound } from 'next/navigation'
 import AgentContactForm from './AgentContactForm'
 import featuredPropertiesData from '../../../../data/featured-properties.json'
-import { ALL_AGENTS, SITE_PHONE, SITE_EMAIL_FALLBACK, toTelUrl } from '@/lib/agents'
+import { ALL_AGENTS, type AgentEntry, SITE_PHONE, SITE_EMAIL_FALLBACK, toTelUrl } from '@/lib/agents'
 
 interface Props {
   params: Promise<{ slug: string }>
 }
 
+// ── Sanity fetch (primary source of truth) ────────────────────────────────────
+async function fetchAgentFromSanity(slug: string): Promise<AgentEntry | null> {
+  const PROJECT_ID = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
+  const DATASET = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
+  const TOKEN = process.env.SANITY_API_TOKEN
+  const query = `*[_type == "teamMember" && slug.current == "${slug}" && active != false][0]{name,"slug":slug.current,role,department,photoUrl,phone,email,bio,fullBio}`
+  try {
+    const r = await fetch(
+      `https://${PROJECT_ID}.api.sanity.io/v2024-01-01/data/query/${DATASET}?query=${encodeURIComponent(query)}`,
+      { headers: TOKEN ? { Authorization: `Bearer ${TOKEN}` } : {}, next: { revalidate: 300 } }
+    )
+    const d = await r.json()
+    const doc = d.result
+    if (!doc) return null
+    const bioText: string = doc.fullBio || doc.bio || ''
+    return {
+      name: doc.name,
+      slug: doc.slug,
+      title: doc.role ?? 'REALTOR®',
+      imgSrc: doc.photoUrl ?? '',
+      isLeader: doc.department === 'leadership',
+      bio: bioText ? bioText.split('\n\n').filter(Boolean) : undefined,
+      phone: doc.phone || undefined,
+      email: doc.email || undefined,
+    }
+  } catch { return null }
+}
+
+async function getAllSanitySlugs(): Promise<string[]> {
+  const PROJECT_ID = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
+  const DATASET = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
+  const query = '*[_type == "teamMember" && active != false]{"slug":slug.current}'
+  try {
+    const r = await fetch(
+      `https://${PROJECT_ID}.api.sanity.io/v2024-01-01/data/query/${DATASET}?query=${encodeURIComponent(query)}`,
+      { next: { revalidate: 3600 } }
+    )
+    const d = await r.json()
+    return (d.result ?? []).map((x: { slug: string }) => x.slug).filter(Boolean)
+  } catch { return [] }
+}
+
 export async function generateStaticParams() {
-  return ALL_AGENTS.map((a) => ({ slug: a.slug }))
+  const sanitySlugs = await getAllSanitySlugs()
+  const staticSlugs = ALL_AGENTS.map((a) => a.slug)
+  const all = Array.from(new Set([...sanitySlugs, ...staticSlugs]))
+  return all.map((slug) => ({ slug }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const agent = ALL_AGENTS.find((a) => a.slug === slug)
+  const agent = (await fetchAgentFromSanity(slug)) ?? ALL_AGENTS.find((a) => a.slug === slug)
   if (!agent) return { title: 'Agent Not Found' }
   return {
     title: `${agent.name} — ${agent.title}`,
@@ -29,7 +74,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const RELATED_SLUGS = ['hedda-parashos', 'tom-parashos', 'britney-bartlett', 'melissa-maxwell', 'michael-divita', 'michael-guzman']
 
-export const revalidate = 3600
+export const revalidate = 300
 
 type FeaturedListing = {
   _id: string
@@ -85,7 +130,7 @@ function getAgentListings(): FeaturedListing[] {
 
 export default async function AgentPage({ params }: Props) {
   const { slug } = await params
-  const agent = ALL_AGENTS.find((a) => a.slug === slug)
+  const agent = (await fetchAgentFromSanity(slug)) ?? ALL_AGENTS.find((a) => a.slug === slug)
   if (!agent) notFound()
 
   const phone = agent.phone ?? SITE_PHONE

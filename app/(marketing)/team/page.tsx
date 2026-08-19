@@ -1,7 +1,40 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import TeamGrid from './TeamGrid'
+import TeamGrid, { type TeamMemberCard } from './TeamGrid'
 import StatsBar from '@/components/StatsBar'
+import { LEADERSHIP, AGENTS } from '@/lib/agents'
+
+export const revalidate = 300
+
+async function fetchTeamFromSanity(): Promise<{ leadership: TeamMemberCard[]; agents: TeamMemberCard[] }> {
+  const PROJECT_ID = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
+  const DATASET = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
+  const TOKEN = process.env.SANITY_API_TOKEN
+  const query = `*[_type == "teamMember" && active != false] | order(displayOrder asc, name asc){name,"slug":slug.current,role,department,"imgSrc":photoUrl}`
+  try {
+    const r = await fetch(
+      `https://${PROJECT_ID}.api.sanity.io/v2024-01-01/data/query/${DATASET}?query=${encodeURIComponent(query)}`,
+      { headers: TOKEN ? { Authorization: `Bearer ${TOKEN}` } : {}, next: { revalidate: 300 } }
+    )
+    const d = await r.json()
+    const docs: Array<{ name: string; slug: string; role?: string; department?: string; imgSrc?: string }> = d.result ?? []
+    const toCard = (doc: typeof docs[0]): TeamMemberCard => ({
+      name: doc.name,
+      slug: doc.slug,
+      title: doc.role ?? 'REALTOR®',
+      imgSrc: doc.imgSrc ?? '',
+    })
+    return {
+      leadership: docs.filter((d) => d.department === 'leadership').map(toCard),
+      agents: docs.filter((d) => d.department !== 'leadership').map(toCard),
+    }
+  } catch {
+    return {
+      leadership: LEADERSHIP.map((a) => ({ name: a.name, slug: a.slug, title: a.title, imgSrc: a.imgSrc })),
+      agents: AGENTS.map((a) => ({ name: a.name, slug: a.slug, title: a.title, imgSrc: a.imgSrc })),
+    }
+  }
+}
 
 export const metadata: Metadata = {
   title: 'Meet Our Team',
@@ -12,7 +45,8 @@ export const metadata: Metadata = {
   },
 }
 
-export default function TeamPage() {
+export default async function TeamPage() {
+  const { leadership, agents } = await fetchTeamFromSanity()
   return (
     <>
       {/* ── HERO ────────────────────────────────────────────── */}
@@ -109,7 +143,7 @@ export default function TeamPage() {
       </section>
 
       {/* ── LEADERSHIP + AGENTS GRIDS (client — searchable) ── */}
-      <TeamGrid />
+      <TeamGrid leadership={leadership} agents={agents} />
 
       {/* ── WHY PALISADE ────────────────────────────────────── */}
       <section className="tp-section tp-section--dark" aria-labelledby="why-heading">
