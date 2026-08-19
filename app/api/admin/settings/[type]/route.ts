@@ -6,10 +6,8 @@ import { splitSetUnset } from "@/lib/admin/patchFields"
 
 export const dynamic = "force-dynamic"
 
-const PROJECT_ID = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
-const DATASET = process.env.NEXT_PUBLIC_SANITY_DATASET || "production"
 const TOKEN = process.env.SANITY_API_TOKEN
-const SANITY_URL = `https://${PROJECT_ID}.api.sanity.io/v2024-01-01/data/query/${DATASET}`
+const SANITY_URL = `https://qjhzi2t2.api.sanity.io/v2024-01-01/data/query/production`
 
 export async function GET(_req: Request, { params }: { params: Promise<{ type: string }> }) {
   const { type } = await params

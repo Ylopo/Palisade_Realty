@@ -12,16 +12,15 @@ interface Props {
 
 // ── Sanity fetch (primary source of truth) ────────────────────────────────────
 async function fetchAgentFromSanity(slug: string): Promise<AgentEntry | null> {
-  const PROJECT_ID = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
-  const DATASET = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
   const TOKEN = process.env.SANITY_API_TOKEN
   const query = `*[_type == "teamMember" && slug.current == "${slug}" && active != false][0]{name,"slug":slug.current,role,department,photoUrl,phone,email,bio,fullBio}`
   try {
     const r = await fetch(
-      `https://${PROJECT_ID}.api.sanity.io/v2024-01-01/data/query/${DATASET}?query=${encodeURIComponent(query)}`,
+      `https://qjhzi2t2.api.sanity.io/v2024-01-01/data/query/production?query=${encodeURIComponent(query)}`,
       { headers: TOKEN ? { Authorization: `Bearer ${TOKEN}` } : {}, cache: 'no-store' }
     )
     const d = await r.json()
+    if (d.error) { console.error('[team/slug] Sanity error:', d.error); return null }
     const doc = d.result
     if (!doc) return null
     const bioText: string = doc.fullBio || doc.bio || ''
@@ -35,7 +34,7 @@ async function fetchAgentFromSanity(slug: string): Promise<AgentEntry | null> {
       phone: doc.phone || undefined,
       email: doc.email || undefined,
     }
-  } catch { return null }
+  } catch (e) { console.error('[team/slug] fetch error:', e); return null }
 }
 
 

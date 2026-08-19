@@ -7,13 +7,11 @@ import { LEADERSHIP, AGENTS } from '@/lib/agents'
 export const dynamic = 'force-dynamic'
 
 async function fetchTeamFromSanity(): Promise<{ leadership: TeamMemberCard[]; agents: TeamMemberCard[] }> {
-  const PROJECT_ID = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
-  const DATASET = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
   const TOKEN = process.env.SANITY_API_TOKEN
   const query = `*[_type == "teamMember" && active != false] | order(displayOrder asc, name asc){name,"slug":slug.current,role,department,"imgSrc":photoUrl}`
   try {
     const r = await fetch(
-      `https://${PROJECT_ID}.api.sanity.io/v2024-01-01/data/query/${DATASET}?query=${encodeURIComponent(query)}`,
+      `https://qjhzi2t2.api.sanity.io/v2024-01-01/data/query/production?query=${encodeURIComponent(query)}`,
       { headers: TOKEN ? { Authorization: `Bearer ${TOKEN}` } : {}, cache: 'no-store' }
     )
     const d = await r.json()
