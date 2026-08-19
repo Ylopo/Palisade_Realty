@@ -85,6 +85,7 @@ export const COLLECTIONS_CONFIG: Record<string, CollectionConfig> = {
     label: "Community Pages",
     singularLabel: "Community Page",
     sort: "name asc",
+    cardPhotoField: "heroBackgroundImage",
     cardTitleField: "title",
     cardSubtitleField: "pageType",
     fields: [
