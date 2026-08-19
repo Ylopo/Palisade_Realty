@@ -109,6 +109,50 @@ export const communityPage = defineType({
     defineField({ name: 'publishedAt', title: 'Published at', type: 'datetime' }),
     defineField({ name: 'aiGenerated', title: 'AI generated', type: 'boolean' }),
     defineField({ name: 'sourceUrls', title: 'Research sources', type: 'array', of: [{ type: 'url' }] }),
+
+    // ── Hero ─────────────────────────────────────────────────────────────────
+    defineField({
+      name: 'heroBackgroundImage',
+      title: 'Hero Background Image',
+      type: 'image',
+      options: { hotspot: true },
+      description: 'Replaces the default hero background image on the community page.',
+    }),
+    defineField({ name: 'heroBackgroundAlt', title: 'Hero Image Alt Text', type: 'string' }),
+
+    // ── About ─────────────────────────────────────────────────────────────────
+    defineField({ name: 'aboutHeading', title: 'About Heading', type: 'string', description: 'Replaces the default "About [Community]" heading.' }),
+    defineField({ name: 'aboutDescription', title: 'About Description', type: 'text', description: 'Replaces the overview paragraphs. Separate paragraphs with a blank line.' }),
+
+    // ── Description ───────────────────────────────────────────────────────────
+    defineField({ name: 'descriptionHeading', title: 'Description Heading', type: 'string' }),
+    defineField({ name: 'descriptionContent', title: 'Description Content', type: 'text', description: 'Optional editorial section shown below the About block. Separate paragraphs with a blank line.' }),
+
+    // ── Lifestyle ─────────────────────────────────────────────────────────────
+    defineField({ name: 'lifestyleHeading', title: 'Lifestyle Heading', type: 'string', description: 'Replaces the default lifestyle section heading.' }),
+    defineField({ name: 'lifestyleDescription', title: 'Lifestyle Description', type: 'text', description: 'Replaces the lifestyle body paragraphs. Separate paragraphs with a blank line.' }),
+    defineField({
+      name: 'lifestyleImage',
+      title: 'Lifestyle Image',
+      type: 'image',
+      options: { hotspot: true },
+      description: 'Replaces the right-side image in the Lifestyle section.',
+    }),
+    defineField({ name: 'lifestyleImageAlt', title: 'Lifestyle Image Alt Text', type: 'string' }),
+
+    // ── CTA ───────────────────────────────────────────────────────────────────
+    defineField({
+      name: 'ctaBackgroundImage',
+      title: 'CTA Background Image',
+      type: 'image',
+      options: { hotspot: true },
+      description: 'Replaces the default CTA section background image.',
+    }),
+    defineField({ name: 'ctaBackgroundAlt', title: 'CTA Background Alt Text', type: 'string' }),
+    defineField({ name: 'ctaHeading', title: 'CTA Heading', type: 'string', description: 'Replaces the default "Ready to Find Your … Home?" heading.' }),
+    defineField({ name: 'ctaDescription', title: 'CTA Description', type: 'text' }),
+    defineField({ name: 'ctaButtonText', title: 'CTA Button Text', type: 'string', description: 'Label for the primary CTA button. Defaults to the office phone number.' }),
+    defineField({ name: 'ctaButtonUrl', title: 'CTA Button URL', type: 'url', description: 'URL for the primary CTA button. Defaults to tel:+16197940218.' }),
   ],
   preview: {
     select: { title: 'title', subtitle: 'pageType' },

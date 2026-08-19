@@ -16,6 +16,10 @@ interface Props {
   params: Promise<{ slug: string }>
 }
 
+// Regenerate static community pages every 60 seconds so Sanity override edits
+// show on the live site without requiring a full redeploy.
+export const revalidate = 60
+
 export async function generateStaticParams() {
   return getAllCommunitySlugs().map((slug) => ({ slug }))
 }
@@ -25,6 +29,53 @@ const EXPANSION_PAGE_QUERY = `*[_type == "communityPage" && slug.current == $slu
   faqs, idxLocation, idxPropertyTypes, fallbackIdxLocation, nearby, images, publishedAt,
   metaTitle, metaDescription, "slug": slug.current
 }`
+
+// Fields editable from the admin panel — applied on top of the static community data.
+const COMMUNITY_OVERRIDE_QUERY = `*[_type == "communityPage" && slug.current == $slug][0]{
+  "heroBackgroundImageUrl": heroBackgroundImage.asset->url,
+  heroBackgroundAlt,
+  aboutHeading,
+  aboutDescription,
+  descriptionHeading,
+  descriptionContent,
+  lifestyleHeading,
+  lifestyleDescription,
+  "lifestyleImageUrl": lifestyleImage.asset->url,
+  lifestyleImageAlt,
+  "ctaBackgroundImageUrl": ctaBackgroundImage.asset->url,
+  ctaBackgroundAlt,
+  ctaHeading,
+  ctaDescription,
+  ctaButtonText,
+  ctaButtonUrl
+}`
+
+interface CommunityOverride {
+  heroBackgroundImageUrl?: string
+  heroBackgroundAlt?: string
+  aboutHeading?: string
+  aboutDescription?: string
+  descriptionHeading?: string
+  descriptionContent?: string
+  lifestyleHeading?: string
+  lifestyleDescription?: string
+  lifestyleImageUrl?: string
+  lifestyleImageAlt?: string
+  ctaBackgroundImageUrl?: string
+  ctaBackgroundAlt?: string
+  ctaHeading?: string
+  ctaDescription?: string
+  ctaButtonText?: string
+  ctaButtonUrl?: string
+}
+
+async function getCommunityOverride(slug: string): Promise<CommunityOverride | null> {
+  try {
+    return await client.fetch(COMMUNITY_OVERRIDE_QUERY, { slug }, { next: { revalidate: 60 } })
+  } catch {
+    return null
+  }
+}
 
 async function getExpansionPage(slug: string): Promise<(ExpansionPageDoc & { metaTitle?: string; metaDescription?: string }) | null> {
   try {
@@ -67,6 +118,11 @@ export default async function CommunityPage({ params }: Props) {
     if (exp) return <ExpansionCommunityPage doc={exp} />
     notFound()
   }
+
+  // Fetch admin-editable overrides from Sanity (fields are empty until edited in admin)
+  const override = await getCommunityOverride(slug)
+  // Convenience alias — safe to destructure with defaults so every usage is a simple ?? expression
+  const ov: CommunityOverride = override ?? {}
 
   const mr: MelloRoosData = { ...DEFAULT_MELLO_ROOS, ...c.melloroos }
   const locationMap = c.locationMap ?? COMMUNITY_LOCATION_MAPS[slug]
@@ -114,8 +170,8 @@ export default async function CommunityPage({ params }: Props) {
         <div style={{ position: 'absolute', inset: 0 }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={`/assets/images/${c.image}`}
-            alt={`${c.name}, San Diego`}
+            src={ov.heroBackgroundImageUrl ?? `/assets/images/${c.image}`}
+            alt={ov.heroBackgroundAlt ?? `${c.name}, San Diego`}
             style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
             loading="eager"
           />
@@ -206,10 +262,10 @@ export default async function CommunityPage({ params }: Props) {
           <div>
             <span className="section-eyebrow" style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>{c.badge}</span>
             <h2 className="section-title" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px,4.5vw,64px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.64px', lineHeight: 1.1, marginBottom: '24px' }}>
-              About <em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>{c.name}</em>
+              {ov.aboutHeading ?? <>About <em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>{c.name}</em></>}
             </h2>
             <div style={{ width: '40px', height: '2px', background: 'var(--brand,#58172a)', margin: '20px 0 28px' }} />
-            {c.overview.map((p, i) => (
+            {(ov.aboutDescription ? ov.aboutDescription.split('\n\n').filter(Boolean) : c.overview).map((p, i) => (
               <p key={i} className="overview-body" style={{ fontFamily: 'var(--font-body)', fontSize: '16px', lineHeight: 1.78, color: 'rgba(33,33,33,0.55)', marginBottom: '18px' }}>{p}</p>
             ))}
             <div style={{ display: 'flex', alignItems: 'center', gap: '20px', flexWrap: 'wrap', marginTop: '8px' }}>
@@ -232,6 +288,23 @@ export default async function CommunityPage({ params }: Props) {
           </div>
         </div>
       </section>
+
+      {/* ── 3b. DESCRIPTION (admin-editable, only renders when set) ─ */}
+      {ov.descriptionContent && (
+        <section id="description" style={{ background: '#faf7f2', padding: '100px var(--pad-x,56px)' }}>
+          <div style={{ maxWidth: '820px', margin: '0 auto' }}>
+            {ov.descriptionHeading && (
+              <>
+                <span className="section-eyebrow" style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>{ov.descriptionHeading}</span>
+                <div style={{ width: '40px', height: '2px', background: 'var(--brand,#58172a)', margin: '20px 0 28px' }} />
+              </>
+            )}
+            {ov.descriptionContent.split('\n\n').filter(Boolean).map((p, i) => (
+              <p key={i} style={{ fontFamily: 'var(--font-body)', fontSize: '16px', lineHeight: 1.78, color: 'rgba(33,33,33,0.55)', marginBottom: '18px' }}>{p}</p>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* ── 4. DEMOGRAPHICS ─────────────────────────────────────── */}
       {c.demographics && c.demographics.length > 0 && (
@@ -602,18 +675,21 @@ export default async function CommunityPage({ params }: Props) {
       )}
 
       {/* ── 14. LIFESTYLE ───────────────────────────────────────── */}
-      {c.lifestyleBody && c.lifestyleBody.length > 0 && (
+      {((c.lifestyleBody && c.lifestyleBody.length > 0) || ov.lifestyleDescription) && (
         <div id="lifestyle" style={{ background: '#ebebeb', padding: '90px var(--pad-x,56px)' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '72px', alignItems: 'center', maxWidth: '1400px', margin: '0 auto' }}>
             <div>
               <span className="section-eyebrow" style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>The {c.name} Lifestyle</span>
               <h2 className="section-title" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px,4.5vw,64px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.64px', lineHeight: 1.1, marginBottom: '24px' }}>
-                Central Living,<br /><em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>Effortlessly Connected</em>
+                {ov.lifestyleHeading ?? <>Central Living,<br /><em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>Effortlessly Connected</em></>}
               </h2>
-              {c.lifestyleBody.map((p, i) => (
+              {(ov.lifestyleDescription
+                ? ov.lifestyleDescription.split('\n\n').filter(Boolean)
+                : c.lifestyleBody ?? []
+              ).map((p, i) => (
                 <p key={i} className="lifestyle-body" style={{ fontFamily: 'var(--font-body)', fontSize: '16px', lineHeight: 1.78, color: 'rgba(33,33,33,0.55)', marginBottom: '18px' }}>{p}</p>
               ))}
-              {c.lifestyleBullets && c.lifestyleBullets.length > 0 && (
+              {!ov.lifestyleDescription && c.lifestyleBullets && c.lifestyleBullets.length > 0 && (
                 <ul className="lifestyle-bullets" style={{ fontFamily: 'var(--font-body)', fontSize: '14px', color: 'rgba(33,33,33,0.55)', lineHeight: 2, paddingLeft: '18px', marginTop: '12px' }}>
                   {c.lifestyleBullets.map((b, i) => (
                     <li key={i}>{b}</li>
@@ -624,8 +700,8 @@ export default async function CommunityPage({ params }: Props) {
             <div style={{ background: 'rgba(88,23,42,0.06)', borderRadius: '20px', height: '480px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={`/assets/images/${c.image}`}
-                alt={`${c.name} lifestyle`}
+                src={ov.lifestyleImageUrl ?? `/assets/images/${c.image}`}
+                alt={ov.lifestyleImageAlt ?? `${c.name} lifestyle`}
                 style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '20px' }}
               />
             </div>
@@ -658,18 +734,21 @@ export default async function CommunityPage({ params }: Props) {
         style={{ position: 'relative', padding: '120px var(--pad-x,56px)', textAlign: 'center', overflow: 'hidden' }}
         aria-labelledby="community-cta-heading"
       >
-        <div aria-hidden="true" style={{ position: 'absolute', inset: 0, backgroundImage: 'url(/images/hero-background/hero-2.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', filter: 'brightness(1.05) saturate(0.9)', zIndex: 0 }} />
+        <div aria-hidden="true" style={{ position: 'absolute', inset: 0, backgroundImage: `url(${ov.ctaBackgroundImageUrl ?? '/images/hero-background/hero-2.jpg'})`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'brightness(1.05) saturate(0.9)', zIndex: 0 }} />
         <div style={{ position: 'absolute', inset: 0, background: 'rgba(245,245,245,0.88)', zIndex: 1 }} aria-hidden="true" />
         <div style={{ position: 'relative', zIndex: 2, maxWidth: '680px', margin: '0 auto' }}>
           <span className="section-eyebrow" style={{ display: 'block', fontFamily: 'var(--font-label)', fontSize: '16px', fontWeight: 500, letterSpacing: '0.64px', textTransform: 'uppercase', color: 'var(--brand,#58172a)', marginBottom: '14px' }}>Your Guide to {c.name}</span>
           <h2 id="community-cta-heading" className="cta-title" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(40px,5vw,72px)', fontWeight: 400, color: 'var(--near-black,#1a0a0a)', letterSpacing: '-0.03em', lineHeight: 1.1, marginBottom: '24px' }}>
-            <em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>Ready to Find Your</em><br />{c.name} Home?
+            {ov.ctaHeading ?? <><em style={{ fontStyle: 'italic', color: 'var(--brand,#58172a)' }}>Ready to Find Your</em><br />{c.name} Home?</>}
           </h2>
           <p style={{ fontFamily: 'var(--font-body)', fontSize: '16px', lineHeight: 1.72, color: 'rgba(33,33,33,0.55)', marginBottom: '40px' }}>
-            Hedda Parashos has the market knowledge, the network, and the negotiating expertise to guide you to the right property at the right price — across every {c.name} neighborhood and price tier.
+            {ov.ctaDescription ?? `Hedda Parashos has the market knowledge, the network, and the negotiating expertise to guide you to the right property at the right price — across every ${c.name} neighborhood and price tier.`}
           </p>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px', flexWrap: 'wrap' }}>
-            <a href="tel:+16197940218" className="btn btn-brand">Call (619) 794-0218</a>
+            {ov.ctaButtonUrl
+              ? <a href={ov.ctaButtonUrl} className="btn btn-brand">{ov.ctaButtonText ?? 'Contact Us'}</a>
+              : <a href="tel:+16197940218" className="btn btn-brand">{ov.ctaButtonText ?? 'Call (619) 794-0218'}</a>
+            }
             <Link href="/contact" className="btn btn-outline-brand">Send a Message</Link>
           </div>
         </div>

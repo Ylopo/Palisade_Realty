@@ -109,6 +109,130 @@ export const COLLECTIONS_CONFIG: Record<string, CollectionConfig> = {
         type: "readonly",
         hint: "Edit complex sections (stats, FAQs, body) in Sanity Studio",
       },
+
+      // ── Hero ──────────────────────────────────────────────────────────────
+      {
+        key: "heroBackgroundImage",
+        label: "Hero — Background Image",
+        type: "image",
+        withAlt: false,
+        hint: "Replaces the default community hero background photo. Upload a high-resolution landscape image.",
+      },
+      {
+        key: "heroBackgroundAlt",
+        label: "Hero — Image Alt Text",
+        type: "text",
+        placeholder: "Aerial view of Downtown San Diego waterfront",
+        hint: "Screen-reader description of the hero image. Required for accessibility.",
+      },
+
+      // ── About ─────────────────────────────────────────────────────────────
+      {
+        key: "aboutHeading",
+        label: "About — Section Heading",
+        type: "text",
+        placeholder: "About Downtown San Diego",
+        hint: "Replaces the default 'About [Community Name]' heading.",
+      },
+      {
+        key: "aboutDescription",
+        label: "About — Description",
+        type: "textarea",
+        rows: 8,
+        placeholder: "Write your overview paragraphs here...",
+        hint: "Replaces the existing overview text. Separate paragraphs with a blank line.",
+      },
+
+      // ── Description ───────────────────────────────────────────────────────
+      {
+        key: "descriptionHeading",
+        label: "Description — Section Heading",
+        type: "text",
+        placeholder: "Life in Downtown San Diego",
+        hint: "Optional dedicated description section heading. Section only appears when Description Content is set.",
+      },
+      {
+        key: "descriptionContent",
+        label: "Description — Content",
+        type: "textarea",
+        rows: 10,
+        placeholder: "Write additional editorial content here...",
+        hint: "Optional extended description shown below the About section. Separate paragraphs with a blank line.",
+      },
+
+      // ── Lifestyle ─────────────────────────────────────────────────────────
+      {
+        key: "lifestyleHeading",
+        label: "Lifestyle — Section Heading",
+        type: "text",
+        placeholder: "Urban Living, Effortlessly Connected",
+        hint: "Replaces the default lifestyle section heading.",
+      },
+      {
+        key: "lifestyleDescription",
+        label: "Lifestyle — Description",
+        type: "textarea",
+        rows: 6,
+        placeholder: "Write about the lifestyle experience...",
+        hint: "Replaces the lifestyle body text. Separate paragraphs with a blank line.",
+      },
+      {
+        key: "lifestyleImage",
+        label: "Lifestyle — Section Image",
+        type: "image",
+        withAlt: false,
+        hint: "Replaces the right-side image in the Lifestyle section.",
+      },
+      {
+        key: "lifestyleImageAlt",
+        label: "Lifestyle — Image Alt Text",
+        type: "text",
+        placeholder: "Gaslamp Quarter at sunset, Downtown San Diego",
+      },
+
+      // ── CTA ───────────────────────────────────────────────────────────────
+      {
+        key: "ctaBackgroundImage",
+        label: "CTA — Background Image",
+        type: "image",
+        withAlt: false,
+        hint: "Replaces the default CTA section background. Use a wide, atmospheric photo.",
+      },
+      {
+        key: "ctaBackgroundAlt",
+        label: "CTA — Background Alt Text",
+        type: "text",
+        placeholder: "San Diego skyline at dusk",
+      },
+      {
+        key: "ctaHeading",
+        label: "CTA — Heading",
+        type: "text",
+        placeholder: "Ready to Find Your Downtown San Diego Home?",
+        hint: "Replaces the default 'Ready to Find Your … Home?' heading.",
+      },
+      {
+        key: "ctaDescription",
+        label: "CTA — Description",
+        type: "textarea",
+        rows: 3,
+        placeholder: "Our agents have deep local knowledge...",
+        hint: "Replaces the default CTA paragraph text.",
+      },
+      {
+        key: "ctaButtonText",
+        label: "CTA — Primary Button Text",
+        type: "text",
+        placeholder: "Call (619) 794-0218",
+        hint: "Label for the primary CTA button. Defaults to the office phone number.",
+      },
+      {
+        key: "ctaButtonUrl",
+        label: "CTA — Primary Button URL",
+        type: "text",
+        placeholder: "tel:+16197940218",
+        hint: "URL for the primary CTA button. Use tel:+1xxxxxxxxxx for phone links.",
+      },
     ],
   },
 }
