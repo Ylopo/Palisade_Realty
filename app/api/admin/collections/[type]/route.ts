@@ -18,7 +18,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ type: s
   const groq = `*[_type == "${cfg.type}"${filter}] | order(${cfg.sort})${projection}`
 
   console.log(`[admin/collections/${type}] query:`, groq)
-  console.log(`[admin/collections/${type}] project:`, PROJECT_ID, "dataset:", DATASET, "token set:", !!TOKEN)
+  console.log(`[admin/collections/${type}] token set:`, !!TOKEN)
 
   try {
     // Use raw Sanity HTTP API (same approach as /api/team) to avoid next-sanity client caching
