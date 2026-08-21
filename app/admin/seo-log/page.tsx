@@ -1,3 +1,4 @@
+import { Fragment } from 'react'
 import type { CSSProperties, ReactNode } from 'react'
 import { AdminNav } from '@/components/AdminNav'
 import { client } from '@/lib/sanity/client'
@@ -80,15 +81,27 @@ export default async function SeoLogPage({ searchParams }: Props) {
     detail: (p.pageType ?? 'community').replace(/-/g, ' '),
     date: p.publishedAt,
   }))
-  const commRows: Row[] = [
-    ...expansionRows,
-    ...COMMUNITY_PAGES.map((p) => ({ type: 'community' as const, title: p.title, url: p.url, detail: p.city })),
-  ]
+  const staticCommRows: Row[] = COMMUNITY_PAGES.map((p) => ({ type: 'community' as const, title: p.title, url: p.url, detail: p.city }))
+  const commRows: Row[] = [...expansionRows, ...staticCommRows]
 
-  // Blogs first (newest content), then the evergreen AEO + community pages.
-  const rows: Row[] = [...blogRows, ...aeoRows, ...commRows]
+  // Daily ledger: everything with a publish date — blog posts, expansion
+  // community/condo/hub pages alike — sorts newest-first and gets grouped
+  // under per-day headers at render time. Undated foundation pages (the
+  // original static community pages + manifest AEO pages) sit at the end.
+  const dated = [...blogRows, ...expansionRows]
+    .sort((a, b) => new Date(b.date ?? 0).getTime() - new Date(a.date ?? 0).getTime())
+  const undated = [...aeoRows, ...staticCommRows]
+  const rows: Row[] = [...dated, ...undated]
 
-  const latest = blogRows[0]?.date
+  // Per-day counts for the date group headers.
+  const dayKey = (r: Row) => (r.date ? new Date(r.date).toISOString().slice(0, 10) : 'foundation')
+  const dayCounts = new Map<string, number>()
+  for (const r of rows) dayCounts.set(dayKey(r), (dayCounts.get(dayKey(r)) ?? 0) + 1)
+  const dayLabel = (r: Row) => r.date
+    ? new Date(r.date).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })
+    : 'Site foundation — existing pages'
+
+  const latest = dated[0]?.date
   const stats = [
     { label: 'Total SEO/AEO pages', value: rows.length },
     { label: 'AEO landing pages',   value: aeoRows.length,  tag: 'aeo' as const },
@@ -143,19 +156,32 @@ export default async function SeoLogPage({ searchParams }: Props) {
                 </tr>
               </thead>
               <tbody>
-                {pageRows.map((r) => (
-                  <tr key={`${r.type}-${r.url}`} style={s.tr}>
-                    <td style={s.td}><span style={tagPill(r.type)}>{TAGS[r.type].label}</span></td>
-                    <td style={s.td}>
-                      <a href={`${BASE}${r.url}`} target="_blank" rel="noopener noreferrer" style={s.pageLink}>
-                        {r.title}
-                      </a>
-                      <div style={s.urlHint}>{r.url}</div>
-                    </td>
-                    <td style={{ ...s.td, color: '#64748b', textTransform: 'capitalize' }}>{r.detail}</td>
-                    <td style={{ ...s.td, color: '#94a3b8', fontVariantNumeric: 'tabular-nums' }}>{fmtDate(r.date)}</td>
-                  </tr>
-                ))}
+                {pageRows.map((r, i) => {
+                  const showDayHeader = i === 0 || dayKey(pageRows[i - 1]) !== dayKey(r)
+                  return (
+                    <Fragment key={`${r.type}-${r.url}`}>
+                      {showDayHeader && (
+                        <tr>
+                          <td colSpan={4} style={s.dayHeader}>
+                            {dayLabel(r)}
+                            <span style={s.dayCount}>{dayCounts.get(dayKey(r))} page{(dayCounts.get(dayKey(r)) ?? 0) === 1 ? '' : 's'}</span>
+                          </td>
+                        </tr>
+                      )}
+                      <tr style={s.tr}>
+                        <td style={s.td}><span style={tagPill(r.type)}>{TAGS[r.type].label}</span></td>
+                        <td style={s.td}>
+                          <a href={`${BASE}${r.url}`} target="_blank" rel="noopener noreferrer" style={s.pageLink}>
+                            {r.title}
+                          </a>
+                          <div style={s.urlHint}>{r.url}</div>
+                        </td>
+                        <td style={{ ...s.td, color: '#64748b', textTransform: 'capitalize' }}>{r.detail}</td>
+                        <td style={{ ...s.td, color: '#94a3b8', fontVariantNumeric: 'tabular-nums' }}>{fmtDate(r.date)}</td>
+                      </tr>
+                    </Fragment>
+                  )
+                })}
               </tbody>
             </table>
           </div>
@@ -229,6 +255,8 @@ const s: Record<string, CSSProperties> = {
   statValue: { fontSize: 30, fontWeight: 800, color: BRAND, lineHeight: 1, fontVariantNumeric: 'tabular-nums' },
   statLabel: { fontSize: 12, color: '#64748b', marginTop: 8, display: 'flex', alignItems: 'center', flexWrap: 'wrap' },
 
+  dayHeader: { padding: '14px 16px 8px', fontSize: 12, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: BRAND, background: '#faf8f5', borderBottom: '1px solid #e2e8f0', borderTop: '2px solid #e8dfd8' },
+  dayCount: { marginLeft: 10, fontWeight: 600, color: '#94a3b8', letterSpacing: '0.04em' },
   tableWrap: { background: '#fff', border: '1px solid #e2e8f0', borderRadius: 12, overflow: 'hidden', overflowX: 'auto' },
   table: { width: '100%', borderCollapse: 'collapse', fontSize: 13 },
   th: { textAlign: 'left', padding: '12px 16px', fontSize: 11, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#94a3b8', borderBottom: '1px solid #e2e8f0', whiteSpace: 'nowrap' },
