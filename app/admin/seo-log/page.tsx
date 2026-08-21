@@ -61,7 +61,7 @@ export default async function SeoLogPage({ searchParams }: Props) {
   // Cron-generated expansion pages (communities, condo buildings, hubs) live
   // in Sanity — include them so the log tracks the daily rollout.
   const expansionPages = await client.fetch<Array<{ title: string; slug: string; pageType?: string; publishedAt?: string }>>(
-    `*[_type == "communityPage"] | order(publishedAt desc){ title, "slug": slug.current, pageType, publishedAt }`
+    `*[_type == "communityPage" && defined(phase)] | order(publishedAt desc){ title, "slug": slug.current, pageType, publishedAt }`
   ).catch(() => [])
 
   const blogRows: Row[] = posts.slice(0, 500).map((p) => ({
