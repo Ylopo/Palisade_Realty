@@ -3,6 +3,7 @@ import { AdminNav } from '@/components/AdminNav'
 import { client } from '@/lib/sanity/client'
 import { fetchSiteGA4Overview } from '@/lib/ga4'
 import { getAllPlatformAnalytics, type OneUpPlatformAnalytics } from '@/lib/oneup-analytics'
+import { fetchAeoVisibility } from '@/lib/peec'
 
 type Props = { searchParams: Promise<{ secret?: string }> }
 
@@ -186,7 +187,7 @@ export default async function BlogDashboardPage({ searchParams }: Props) {
   // ── Fetch in parallel ──────────────────────────────────────────────────────
   // First load posts + the 30-day GA4 + OneUp, then issue a second GA4 call
   // that covers the entire project lifetime for the cumulative-growth chart.
-  const [posts, ga4, platforms] = await Promise.all([
+  const [posts, ga4, platforms, expansionDates, aeo] = await Promise.all([
     client.fetch<BlogPost[]>(
       `*[_type == "blogPost" && (workflowStatus == "published" || status == "published")]
        | order(publishedAt desc)[0...500]{
@@ -198,6 +199,12 @@ export default async function BlogDashboardPage({ searchParams }: Props) {
     ).catch(() => [] as BlogPost[]),
     fetchSiteGA4Overview(30).catch(() => null),
     getAllPlatformAnalytics('last_30_days').catch(() => null),
+    client.fetch<Array<{ publishedAt?: string }>>(
+      `*[_type == "communityPage" && defined(phase)]{ publishedAt }`,
+      {},
+      { next: { revalidate: 300 } },
+    ).catch(() => [] as Array<{ publishedAt?: string }>),
+    fetchAeoVisibility().catch(() => null),
   ])
 
   // Project start = the oldest post's publish date (or today, as fallback).
@@ -223,13 +230,15 @@ export default async function BlogDashboardPage({ searchParams }: Props) {
   const momentum = buildMomentum(posts)
   publishingStreak(posts) // kept for parity with source; streak isn't rendered directly here either
 
-  // Hours saved — 2 hours per post (research, draft, edit, schedule, publish).
-  // "This week" = last 7 calendar days.
-  const HOURS_PER_POST = 2
+  // Pages built — every page added to the site (blog posts + cron-built
+  // community/condo/hub pages), counted over the last 7 and 30 days.
   const sevenDaysAgo = new Date(now.getTime() - 7 * 86400 * 1000)
-  const postsThisWeek = posts.filter((p) => p.publishedAt && new Date(p.publishedAt) >= sevenDaysAgo).length
-  const hoursSavedThisWeek = postsThisWeek * HOURS_PER_POST
-  const hoursSavedAllTime = postsAllTime * HOURS_PER_POST
+  const allPageDates: Date[] = [
+    ...posts.map((p) => p.publishedAt).filter(Boolean).map((d) => new Date(d as string)),
+    ...expansionDates.map((e) => e.publishedAt).filter(Boolean).map((d) => new Date(d as string)),
+  ]
+  const pagesBuilt7 = allPageDates.filter((d) => d >= sevenDaysAgo).length
+  const pagesBuilt30 = allPageDates.filter((d) => d >= thirtyDaysAgo).length
 
   // Combined reach across all available platforms (skip unavailable/null entries).
   // `changePercent` is already a period-over-period percentage from OneUp, not a
@@ -300,16 +309,39 @@ export default async function BlogDashboardPage({ searchParams }: Props) {
             </div>
             <div style={{ ...s.kpiSub, color: '#58172a', marginTop: 14, fontWeight: 600 }}>views arriving soon</div>
           </div>
-          {/* Hours Saved */}
+          {/* Pages Built */}
           <div style={s.kpiCard}>
-            <div style={s.kpiLabel}>HOURS SAVED · THIS WEEK</div>
+            <div style={s.kpiLabel}>PAGES BUILT · LAST 7 DAYS</div>
             <div style={{ ...s.kpiNumber, display: 'flex', alignItems: 'baseline', gap: 12 }}>
-              {hoursSavedThisWeek}
-              <span style={{ fontSize: 18, color: '#888884', fontWeight: 500 }}>hour{hoursSavedThisWeek === 1 ? '' : 's'}</span>
+              {pagesBuilt7}
+              <span style={{ fontSize: 18, color: '#888884', fontWeight: 500 }}>page{pagesBuilt7 === 1 ? '' : 's'}</span>
             </div>
             <div style={s.kpiSub}>
-              <strong style={{ color: '#1a1a1a' }}>{fmtNum(hoursSavedAllTime)} hours</strong> saved all-time
+              <strong style={{ color: '#1a1a1a' }}>{fmtNum(pagesBuilt30)} pages</strong> in the last 30 days — blog posts + community &amp; niche pages
             </div>
+          </div>
+          {/* AEO Visibility (Peec AI) */}
+          <div style={s.kpiCard}>
+            <div style={s.kpiLabel}>AEO VISIBILITY · 30 DAYS</div>
+            {aeo ? (
+              <>
+                <div style={{ ...s.kpiNumber, display: 'flex', alignItems: 'baseline', gap: 12 }}>
+                  {aeo.currentPct.toFixed(1)}
+                  <span style={{ fontSize: 18, color: '#888884', fontWeight: 500 }}>%</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginTop: 14, fontSize: 12 }}>
+                  <span style={{ color: aeo.deltaPts > 0.05 ? '#4ade80' : aeo.deltaPts < -0.05 ? '#f87171' : '#a8a29e', fontWeight: 600 }}>
+                    {aeo.deltaPts > 0 ? '+' : ''}{aeo.deltaPts.toFixed(1)} pts
+                  </span>
+                  <span style={{ color: '#a8a29e' }}>vs prior 30 days · share of AI answers citing Palisade (Peec)</span>
+                </div>
+              </>
+            ) : (
+              <>
+                <div style={s.kpiNumber}>—</div>
+                <div style={s.kpiSub}>Set PEEC_API_TOKEN in Vercel to activate</div>
+              </>
+            )}
           </div>
         </div>
 
