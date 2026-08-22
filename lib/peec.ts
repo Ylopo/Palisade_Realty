@@ -5,11 +5,15 @@
  * (ChatGPT, Perplexity, AI Overviews, ...). "Visibility" is the share of
  * tracked AI answers that mention the brand (0-1 ratio; we display ×100).
  *
- * Auth: PEEC_API_TOKEN (company-scoped key) via the x-api-key header.
+ * Auth: PEEC_API_TOKEN env var, falling back to the hps:peec:token Redis key
+ * (set once by the operator) — so production works without a Vercel env edit.
+ * Sent via the x-api-key header.
  * The project id is pinned to the verified Palisade Realty project — it is
  * not a secret, and an env override caused a wrong-client mixup once
  * (or_d8ed84e0... is Legacy Home Team), so the constant is authoritative.
  */
+
+import { Redis } from '@upstash/redis'
 
 const PEEC_BASE = 'https://api.peec.ai/customer/v1'
 const PALISADE_PROJECT_ID = 'or_5ee73fcf-8fbb-42ec-8115-66a28059a2ca'
@@ -63,8 +67,26 @@ async function fetchWindowVisibility(
  * Returns null when Peec isn't configured or the API fails — the dashboard
  * renders that as an offline card, never a crash.
  */
+let cachedToken: string | null | undefined
+
+async function resolveApiKey(): Promise<string | null> {
+  if (process.env.PEEC_API_TOKEN) return process.env.PEEC_API_TOKEN
+  if (cachedToken !== undefined) return cachedToken
+  try {
+    const redis = new Redis({
+      url: process.env.UPSTASH_REDIS_REST_URL!,
+      token: process.env.UPSTASH_REDIS_REST_TOKEN!,
+    })
+    const raw = await redis.get('hps:peec:token')
+    cachedToken = typeof raw === 'string' && raw.length > 0 ? raw : null
+  } catch {
+    cachedToken = null
+  }
+  return cachedToken
+}
+
 export async function fetchAeoVisibility(): Promise<AeoVisibility | null> {
-  const apiKey = process.env.PEEC_API_TOKEN
+  const apiKey = await resolveApiKey()
   if (!apiKey) return null
 
   try {
